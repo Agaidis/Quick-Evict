@@ -1,4 +1,4 @@
-<title>Eviction Info</title>
+<title>About Us</title>
 @extends('layouts.app')
 @section('content')
 <meta name="csrf-token" id="token" content="{{ csrf_token() }}">

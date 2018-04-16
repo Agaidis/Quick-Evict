@@ -1,4 +1,4 @@
-<title>Admin Settings</title>
+<title>New Eviction</title>
 @extends('layouts.app')
 @section('content')
 <meta name="csrf-token" id="token" content="{{ csrf_token() }}">
@@ -6,7 +6,7 @@
     <div class="row justify-content-center">
         <div class="col-md-10">
            <div class="card">
-                <div class="card-header"><h2>Online Eviction</h2></div>
+                <div class="card-header"><h2>New Eviction</h2></div>
                 <div class="card-body">
                     <div class="row">
                         
@@ -22,7 +22,7 @@
                                         <input class="form-control" placeholder="Rental Street Address" type="text" id="street_address"/>
                                     </div>
                                      <div id="locationField">
-                                         <input id="autocomplete" placeholder="Enter your address" onFocus="geolocate()" type="text"></input>
+                                         <input id="autocomplete" placeholder="Enter your address" onFocus="geolocate()" type="text"/>
                                 
                                     </div>
                                 </div>
