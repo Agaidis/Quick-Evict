@@ -1,0 +1,18 @@
+
+form .form-bottom .input-error {
+    border-color: #d03e3e;
+    color: #d03e3e;
+}
+
+form.eviction_form fieldset {
+    display: none;
+}
+
+  #map {
+    height: 100%;
+  }
+  html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+  }
