@@ -142,7 +142,7 @@
     background: #eee;
     display: block;
     margin: 0.5em;
-    min-height: 35em;
+    min-height: 80em;
     overflow: hidden;
     position: relative;
     width: auto;
@@ -188,7 +188,6 @@
 
 .wizard > .content > .body input
 {
-    display: block;
     border: 1px solid #ccc;
 }
 

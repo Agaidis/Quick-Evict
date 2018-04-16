@@ -13,11 +13,10 @@
     <!-- Scripts -->
 
     <script src="{{ asset('js/app.js') }}" defer></script>
-   
     <script src="{{ asset('js/eviction.js') }}" defer></script>
     <script src="{{ asset('js/steps.js') }}" defer></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCq-TIavl4d7yFrm2Nv0fJuQQQf6JSSHos&libraries=places" defer></script>
 
-    
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="https://fonts.gstatic.com">
@@ -60,6 +59,7 @@
                             <li><a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a></li>
                             <li><a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a></li>
                         @else
+
                             <li class="nav-item dropdown">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                     {{ Auth::user()->name }} <span class="caret"></span>
@@ -77,6 +77,7 @@
                                     </form>
                                 </div>
                             </li>
+                            </ul>
                         @endguest
                     </ul>
                 </div>
@@ -88,6 +89,4 @@
         </main>
     </div>
 </body>
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCq-TIavl4d7yFrm2Nv0fJuQQQf6JSSHos&callback=initMap"></script>
-<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCq-TIavl4d7yFrm2Nv0fJuQQQf6JSSHos&libraries=places"></script>
 </html>
