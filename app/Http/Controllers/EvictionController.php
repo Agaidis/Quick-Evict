@@ -15,12 +15,12 @@ class EvictionController extends Controller
      */
     public function index()
     {
-        if (Auth::guest()) {
-            return view('/login');
-        } else {
+//        if (Auth::guest()) {
+//            return view('/login');
+//        } else {
 
             return view('eviction', compact('map'));
-        }
+     //   }
     }
     
     //When they click next step.. call this function to take their address and turn it into the maps view
