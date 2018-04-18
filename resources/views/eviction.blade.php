@@ -30,10 +30,10 @@
                                 <section>
 
                                     <h3 style="text-align:center;" class="fs-subtitle">Additional Info on Property where you want to evict tenant.</h3>
-                                    <div class="col-md-12 offset-4">
+                                    <div class="col-md-12 offset-3">
                                     <div class="form-group">
                                         <div class="row">
-                                            <div class="col-sm-5 form-inline">
+                                            <div class="col-sm-6">
                                                 <label>Property Address</label>
                                                 <input class="form-control" placeholder="Rental Street Address" type="text" id="property_address"/>
                                             </div>
@@ -41,7 +41,7 @@
                                     </div>
                                     <div class="form-group">
                                         <div class="row">
-                                            <div class="col-sm-3">
+                                            <div class="col-sm-6">
                                                 <label>Owner Name</label>
                                                 <input class="form-control" placeholder="Owner Name" type="text" id="owner_name"/>
                                             </div>
@@ -49,7 +49,7 @@
                                     </div>
                                     <div class="form-group">
                                         <div class="row">
-                                            <div class="col-sm-2">
+                                            <div class="col-sm-6">
                                                 <label>Owner Phone #</label>
                                                 <input class="form-control" placeholder="(ext)-000-0000" type="text" id="owner_number"/>
                                             </div>
@@ -80,7 +80,7 @@
                                                 <label for="rented_by_owner">Property is Rented by Owner</label><br>
                                                 <input type="radio" id="rented_by_other" name="rented_by" value="rentedByOwner">
                                                 <label for="rented_by_other">Property is Rented by Other</label>
-                                                <div class="col-sm-6">
+                                                <div class="col-sm-12">
                                                     <input class="form-control" placeholder="Name of Landlord" type="text" id="landlord" name="landlord" value="">
                                                 </div>
                                             </div>
@@ -88,7 +88,7 @@
                                     </div>
                                     <div class="form-group">
                                         <div class="row">
-                                            <div class="col-sm-6">
+                                            <div class="col-sm-10">
                                                 <input type="radio" id="no_notice_to_quit" name="quit_notice" value="no_quit_notice" checked>
                                                 <label for="no_notice_to_quit">No Notice to Quit was Needed with Accordance to Law</label><br>
                                                 <input type="radio" id="notice_to_quit" name="quit_notice" value="quit_notice_given">
@@ -99,7 +99,7 @@
                                     </div>
                                     <div class="form-group">
                                         <div class="row">
-                                            <div class="col-sm-6">
+                                            <div class="col-sm-10">
                                                 <input type="radio" id="term_lease_ended" name="term_lease" value="lease_ended" checked>
                                                 <label for="term_lease_ended">Term of lease has ended</label><br>
                                                 <input type="radio" id="breached_conditions_lease" name="term_lease" value="breached_conditions_lease">
@@ -110,13 +110,62 @@
                                         </div>
                                     </div>
                                     </div>
+                                    <div class="offset-4">
                                     <div class="form-group">
                                         <div class="row">
                                             <h3>Amount Due:</h3>
                                         </div>
                                     </div>
-
-
+                                    <div class="form-group">
+                                        <div class="row">
+                                            <div class="col-sm-10">
+                                                <label for="due_rent">Rent that is Due at Filing Date</label>
+                                                <input type="text" id="due_rent" name="term_lease" value="" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="row">
+                                            <div class="col-sm-10">
+                                                <label for="damage_amt">Damages for Injury to Property</label>
+                                                <input type="text" id="damage_amt" name="damage_amt" value="" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="row">
+                                            <div class="col-sm-12">
+                                                <label for="unjust_damages">Damages for Unjust Detention of Real Property</label>
+                                                <input type="text" id="unjust_damages" name="unjust_damages" value="" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="row">
+                                            <div class="col-sm-10">
+                                                <label for="attorney_fees">Attorney Fees</label>
+                                                <input type="text" id="attorney_fees" name="attorney_fees" value="" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="row">
+                                            <div class="col-sm-10">
+                                                <input type="radio" id="addit_rent" name="addit_rent" value="" />
+                                                <label for="addit_rent">Add additional rent due at hearing date</label><br>
+                                                <input type="radio" id="addit_rent" name="addit_rent" value="" />
+                                                <label for="addit_rent">Do Not add additional rent due at hearing date</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="row">
+                                            <div class="col-sm-10">
+                                                <textarea placeholder="Sign Here"></textarea>
+                                            </div>
+                                        </div>
+                                    </div>
+                                        </div>
                                 </section>
 
 
