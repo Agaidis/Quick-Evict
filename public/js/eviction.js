@@ -10,7 +10,7 @@ $(document).ready(function () {
 
         map = new google.maps.Map(document.getElementById('map'), {
             center: {lat: 40.144128, lng: -76.311420},
-            zoom: 14
+            zoom: 7
         });
 
 
