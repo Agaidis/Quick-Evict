@@ -33,7 +33,7 @@
                         <div>If you would like updates as more counties are rolled out, please submit your email here:</div><br><br>
                         <div>Email Address:____________</div>
                         <div>Area of interest:____________</div><br>
-                    <button class="btn-primary">Submit</button>
+                    <button class="btn btn-primary">Submit</button>
                     </div>
             </div>
         </div>
