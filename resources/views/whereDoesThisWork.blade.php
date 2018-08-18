@@ -8,7 +8,6 @@
            <div class="card">
                 <div class="card-header"><h2>Where does this work?</h2></div>
                 <div class="card-body">
-                    <div class="row">
                         <div>Thanks for your interest in QuickEvict.</div>
                         <div>The goal for Quick Evict is to eventually make evictions easier for owners and landlords in all communities in the United States.</div>
                         <div>Currently, QuickEvict is in beta and only works in Central Pennsylvania in the following counties:</div><br><br>
@@ -41,7 +40,6 @@
                         <div>Email Address:____________</div><br><br>
                         <div>Area of interest:____________</div>
                     </div>
-               </div>
             </div>
         </div>
     </div>
