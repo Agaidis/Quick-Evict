@@ -11,29 +11,23 @@
                         <div>Thanks for your interest in QuickEvict.</div>
                         <div>The goal for Quick Evict is to eventually make evictions easier for owners and landlords in all communities in the United States.</div>
                         <div>Currently, QuickEvict is in beta and only works in Central Pennsylvania in the following counties:</div>
-                        <div><br>
+                        <div>
                             <table class="table table-responsive table-hover">
                                 <tbody>
                                 <tr style="height: 18px;">
                                     <td style="width: 50%; height: 18px;">Lancaster</td>
-                                </tr>
-                                <tr style="height: 18px;">
                                     <td style="width: 50%; height: 18px;">Lebanon</td>
                                 </tr>
                                 <tr style="height: 18px;">
                                     <td style="width: 50%; height: 18px;">Dauphin</td>
-                                </tr>
-                                <tr>
                                     <td style="width: 50%;">Cumberland</td>
                                 </tr>
                                 <tr>
                                     <td style="width: 50%;">York</td>
-                                </tr>
-                                <tr>
                                     <td style="width: 50%;">Chester</td>
                                 </tr>
                                 </tbody>
-                            </table><br>
+                            </table>
                         </div>
                         <div>More counties will be rolling out shortly.</div>
                         <div>If you would like updates as more counties are rolled out, please submit your email here:</div><br><br>
