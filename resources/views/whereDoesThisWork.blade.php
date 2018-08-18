@@ -31,9 +31,15 @@
                         </div>
                         <div>More counties will be rolling out shortly.</div>
                         <div>If you would like updates as more counties are rolled out, please submit your email here:</div><br><br>
-                        <div>Email Address:____________</div>
-                        <div>Area of interest:____________</div><br>
-                    <button class="btn btn-primary">Submit</button>
+                    <div>
+                        <label for="email">Email Address:</label>
+                        <input placeholder="Email" class="form-control email"/>
+                    </div>
+                        <div>
+                            <label for="area_of_interest">Area of interest:</label>
+                            <input placeholder="Pittsburgh" class="form-control area_of_interest"/>
+                        </div>
+                    <button type="button" class="btn btn-primary">Submit</button>
                     </div>
             </div>
         </div>
