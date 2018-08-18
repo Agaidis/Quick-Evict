@@ -120,7 +120,7 @@
                                         <div class="row">
                                             <div class="col-sm-10">
                                                 <label for="due_rent">Rent that is Due at Filing Date</label>
-                                                <input type="text" id="due_rent" name="term_lease" value="" />
+                                                <input type="text" id="due_rent" name="term_lease" value="$" />
                                             </div>
                                         </div>
                                     </div>
@@ -128,7 +128,7 @@
                                         <div class="row">
                                             <div class="col-sm-10">
                                                 <label for="damage_amt">Damages for Injury to Property</label>
-                                                <input type="text" id="damage_amt" name="damage_amt" value="" />
+                                                <input type="text" id="damage_amt" name="damage_amt" value="$" />
                                             </div>
                                         </div>
                                     </div>
@@ -136,7 +136,7 @@
                                         <div class="row">
                                             <div class="col-sm-12">
                                                 <label for="unjust_damages">Damages for Unjust Detention of Real Property</label>
-                                                <input type="text" id="unjust_damages" name="unjust_damages" value="" />
+                                                <input type="text" id="unjust_damages" name="unjust_damages" value="$" />
                                             </div>
                                         </div>
                                     </div>
@@ -144,7 +144,7 @@
                                         <div class="row">
                                             <div class="col-sm-10">
                                                 <label for="attorney_fees">Attorney Fees</label>
-                                                <input type="text" id="attorney_fees" name="attorney_fees" value="" />
+                                                <input type="text" id="attorney_fees" name="attorney_fees" value="$" />
                                             </div>
                                         </div>
                                     </div>
@@ -155,13 +155,6 @@
                                                 <label for="addit_rent">Add additional rent due at hearing date</label><br>
                                                 <input type="radio" id="addit_rent" name="addit_rent" value="" />
                                                 <label for="addit_rent">Do Not add additional rent due at hearing date</label>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <div class="row">
-                                            <div class="col-sm-10">
-                                                <textarea placeholder="Sign Here"></textarea>
                                             </div>
                                         </div>
                                     </div>
