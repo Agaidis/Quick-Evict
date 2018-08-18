@@ -16,8 +16,15 @@
     <script src="{{ asset('js/eviction.js') }}" defer></script>
     <script src="{{ asset('js/steps.js') }}" defer></script>
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCq-TIavl4d7yFrm2Nv0fJuQQQf6JSSHos&libraries=places" defer></script>
+    <script src="https://js.stripe.com/v3/"></script>
+    {{--<script>--}}
+        {{--var stripe = Stripe('pk_test_6pRNASCoBOKtIshFeQd4XMUh');--}}
+        {{--var elements = stripe.elements();--}}
+        {{--var card = elements.create('card');--}}
 
-
+        {{--// Add an instance of the card UI component into the `card-element` <div>--}}
+        {{--card.mount('#card-element');--}}
+    {{--</script>--}}
     <!-- Fonts -->
     <link rel="dns-prefetch" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Raleway:300,400,600" rel="stylesheet" type="text/css">
