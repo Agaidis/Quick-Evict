@@ -15,7 +15,7 @@
     <script src="{{ asset('js/app.js') }}" defer></script>
     <script src="{{ asset('js/eviction.js') }}" defer></script>
     <script src="{{ asset('js/steps.js') }}" defer></script>
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCq-TIavl4d7yFrm2Nv0fJuQQQf6JSSHos&libraries=places" defer></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAfPLSbGAHZkEd-8DDB0FcGSlhrV9LQMGM&libraries=places" defer></script>
     <script src="https://js.stripe.com/v3/"></script>
     {{--<script>--}}
         {{--var stripe = Stripe('pk_test_6pRNASCoBOKtIshFeQd4XMUh');--}}
