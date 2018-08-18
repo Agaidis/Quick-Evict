@@ -57,7 +57,7 @@
                                     </div>
                                     <div class="form-group">
                                         <div class="row">
-                                            <div class="col-sm-3">
+                                            <div class="col-sm-6">
                                                 <label for="filing_date">Filing Date</label>
                                                 <input class="form-control" type="date" id="filing_date"/>
                                             </div>
