@@ -25,10 +25,10 @@
                             </div>
                                     <div id="map"></div>
                                     <h3 style="text-align:center;" class="fs-subtitle">Additional Info on Property where you want to evict tenant.</h3>
-                                    <div class="col-md-12 offset-2">
+                                    <div class="col-md-12 offset-1">
                                     <div class="form-group">
                                         <div class="row">
-                                            <div class="col-sm-6">
+                                            <div class="col-sm-8">
                                                 <label>Property Address Line 1</label>
                                                 <input class="form-control" placeholder="Rental Street Address" type="text" id="property_address_line_1"/>
                                             </div>
@@ -36,7 +36,7 @@
                                     </div>
                                         <div class="form-group">
                                             <div class="row">
-                                                <div class="col-sm-6">
+                                                <div class="col-sm-8">
                                                     <label>Property Address Line 2</label>
                                                     <input class="form-control" placeholder="City State, Zipcode" type="text" id="property_address_line_2"/>
                                                 </div>
@@ -57,14 +57,10 @@
                                                 <input class="form-control" placeholder="(ext)-000-0000" type="text" id="owner_number"/>
                                             </div>
                                         </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <div class="row">
                                             <div class="col-sm-6">
                                                 <label for="filing_date">Filing Date</label>
                                                 <input class="form-control" type="date" id="filing_date"/>
                                             </div>
-                                        </div>
                                     </div>
                                     <div class="form-group">
                                         <div class="row">
@@ -113,7 +109,7 @@
                                         </div>
                                     </div>
                                     </div>
-                                    <div class="offset-4">
+                                    <div class="offset-3">
                                     <div class="form-group">
                                         <div class="row">
                                             <h3>Amount Due:</h3>
