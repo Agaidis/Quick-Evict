@@ -81,18 +81,21 @@
                                                             <input class="form-control" type="date" id="filing_date"/>
                                                         </div>
                                                         <div class="col-sm-6">
+                                                            <label>Lease Type:</label>
                                                             <input type="radio" id="residential_lease" name="lease_type" value="isResidential" checked>
                                                             <label for="residential_lease">Lease is Residential</label><br>
                                                             <input type="radio" id="non_residential_lease" name="lease_type" value="isNotResidential">
                                                             <label for="non_residential_lease">Lease is Non-residential</label>
-                                                        </div>
+                                                        </div><br><br>
                                                         <div class="col-sm-10">
+                                                            <label>Notice Status:</label>
                                                             <input type="radio" id="no_notice_to_quit" name="quit_notice" value="no_quit_notice" checked>
                                                             <label for="no_notice_to_quit">No Notice to Quit was Needed with Accordance to Law</label><br>
                                                             <input type="radio" id="notice_to_quit" name="quit_notice" value="quit_notice_given">
                                                             <label for="notice_to_quit">Notice to Quit was Given</label>
-                                                        </div>
+                                                        </div><br><br>
                                                         <div class="col-sm-10">
+                                                            <label>Lease Status:</label>
                                                             <input type="radio" id="term_lease_ended" name="term_lease" value="lease_ended" checked>
                                                             <label for="term_lease_ended">Term of lease has ended</label><br>
                                                             <input type="radio" id="breached_conditions_lease" name="term_lease" value="breached_conditions_lease">
