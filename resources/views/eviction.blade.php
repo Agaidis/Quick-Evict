@@ -13,7 +13,6 @@
                         <div class="col-md-10 offset-md-1 offset-lg-1">
                             <div id="wizard">
                                 <h3>Eviction Location</h3>
-                                <section>
                                     <h2 style="text-align:center;" class="title">Eviction Location</h2>
                 <h3 style="text-align:center;" class="fs-subtitle">Enter the address you plan on evicting.</h3>
                             <div class="form-group">
@@ -25,20 +24,24 @@
                                 </div>
                             </div>
                                     <div id="map"></div>
-                                </section>
-                                <h3>Eviction Information</h3>
-                                <section>
-
                                     <h3 style="text-align:center;" class="fs-subtitle">Additional Info on Property where you want to evict tenant.</h3>
-                                    <div class="col-md-12 offset-3">
+                                    <div class="col-md-12 offset-2">
                                     <div class="form-group">
                                         <div class="row">
                                             <div class="col-sm-6">
-                                                <label>Property Address</label>
-                                                <input class="form-control" placeholder="Rental Street Address" type="text" id="property_address"/>
+                                                <label>Property Address Line 1</label>
+                                                <input class="form-control" placeholder="Rental Street Address" type="text" id="property_address_line_1"/>
                                             </div>
                                         </div>
                                     </div>
+                                        <div class="form-group">
+                                            <div class="row">
+                                                <div class="col-sm-6">
+                                                    <label>Property Address Line 2</label>
+                                                    <input class="form-control" placeholder="City State, Zipcode" type="text" id="property_address_line_2"/>
+                                                </div>
+                                            </div>
+                                        </div>
                                     <div class="form-group">
                                         <div class="row">
                                             <div class="col-sm-6">
@@ -159,13 +162,13 @@
                                         </div>
                                     </div>
                                         </div>
-                                </section>
+
+
 
 
 
 
                                 <h3>Signature/Payment</h3>
-                                <section>
                                     <script src="https://js.stripe.com/v3/"></script>
 
                                     <form action="/charge" method="post" id="payment-form">
@@ -180,10 +183,8 @@
                                             <!-- Used to display form errors. -->
                                             <div id="card-errors" role="alert"></div>
                                         </div>
-
                                         <button>Submit Payment</button>
                                     </form>
-                                </section>
                             </div>
                         </div>
                     </div>

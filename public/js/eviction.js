@@ -6,6 +6,7 @@ $(document).ready(function () {
     //     autoFocus: true
     // });
     $('#filing_date').val(new Date());
+    $('#landlord').css('hidden', true);
 
 
         map = new google.maps.Map(document.getElementById('map'), {
@@ -73,6 +74,15 @@ $(document).ready(function () {
         map.fitBounds(bounds);
     });
 
+
+    $('#rented_by_other').on('click', function() {
+       console.log('im checked!');
+       $('#landlord').css('hidden', false);
+    });
+
+    $('#rented_by_owner').on('click', function() {
+        $('#landlord').css('hidden', true);
+    });
 
     //On Submit gather variables and make ajax call to backend
 
