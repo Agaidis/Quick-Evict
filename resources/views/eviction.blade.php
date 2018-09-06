@@ -45,6 +45,10 @@
                                             </div>
                                         </div>
                                     </div>
+
+
+                                        <h4>Owner Information</h4>
+                                        <div id="owner_container">
                                     <div class="form-group">
                                         <div class="row">
                                             <div class="col-sm-6">
@@ -55,10 +59,7 @@
                                                 <label>Owner Phone #</label>
                                                 <input class="form-control" placeholder="(ext)-000-0000" type="text" id="owner_number"/>
                                             </div>
-                                            <div class="col-sm-6">
-                                                <label for="filing_date">Filing Date</label>
-                                                <input class="form-control" type="date" id="filing_date"/>
-                                            </div>
+
                                             <div class="col-sm-6">
                                                 <input type="radio" id="rented_by_owner" name="rented_by" value="rentedByOwner" checked>
                                                 <label for="rented_by_owner">Property is Rented by Owner</label><br>
@@ -70,92 +71,68 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="form-group">
-                                        <div class="row">
-                                            <div class="col-sm-6">
-                                                <input type="radio" id="residential_lease" name="lease_type" value="isResidential" checked>
-                                                <label for="residential_lease">Lease is Residential</label><br>
-                                                <input type="radio" id="non_residential_lease" name="lease_type" value="isNotResidential">
-                                                <label for="non_residential_lease">Lease is Non-residential</label>
+                                        </div>
+                                        <h4>General Information</h4>
+                                            <div id="general_information_container">
+                                                <div class="form-group">
+                                                    <div class="row">
+                                                        <div class="col-sm-6">
+                                                            <label for="filing_date">Filing Date</label>
+                                                            <input class="form-control" type="date" id="filing_date"/>
+                                                        </div>
+                                                        <div class="col-sm-6">
+                                                            <input type="radio" id="residential_lease" name="lease_type" value="isResidential" checked>
+                                                            <label for="residential_lease">Lease is Residential</label><br>
+                                                            <input type="radio" id="non_residential_lease" name="lease_type" value="isNotResidential">
+                                                            <label for="non_residential_lease">Lease is Non-residential</label>
+                                                        </div>
+                                                        <div class="col-sm-10">
+                                                            <input type="radio" id="no_notice_to_quit" name="quit_notice" value="no_quit_notice" checked>
+                                                            <label for="no_notice_to_quit">No Notice to Quit was Needed with Accordance to Law</label><br>
+                                                            <input type="radio" id="notice_to_quit" name="quit_notice" value="quit_notice_given">
+                                                            <label for="notice_to_quit">Notice to Quit was Given</label>
+                                                        </div>
+                                                        <div class="col-sm-10">
+                                                            <input type="radio" id="term_lease_ended" name="term_lease" value="lease_ended" checked>
+                                                            <label for="term_lease_ended">Term of lease has ended</label><br>
+                                                            <input type="radio" id="breached_conditions_lease" name="term_lease" value="breached_conditions_lease">
+                                                            <label for="breached_conditions_lease">Tenant Breached Conditions of Lease</label><br>
+                                                            <input type="radio" id="unsatisfied_lease" name="term_lease" value="unsatisfied_lease">
+                                                            <label for="unsatisfied_lease">Rent Reserved and due has, upon demand, remained unsatisfied</label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        <h4>Amount Due:</h4>
+                                        <div id="amount_due_container">
+                                            <div class="form-group">
+                                                <div class="row">
+                                                    <div class="col-sm-10">
+                                                        <label for="due_rent">Rent that is Due at Filing Date</label>
+                                                        <input type="text" id="due_rent" name="term_lease" value="$" />
+                                                    </div>
+                                                    <div class="col-sm-10">
+                                                        <label for="damage_amt">Damages for Injury to Property</label>
+                                                        <input type="text" id="damage_amt" name="damage_amt" value="$" />
+                                                    </div>
+                                                    <div class="col-sm-12">
+                                                        <label for="unjust_damages">Damages for Unjust Detention of Real Property</label>
+                                                        <input type="text" id="unjust_damages" name="unjust_damages" value="$" />
+                                                    </div>
+                                                    <div class="col-sm-10">
+                                                        <label for="attorney_fees">Attorney Fees</label>
+                                                        <input type="text" id="attorney_fees" name="attorney_fees" value="$" />
+                                                    </div>
+                                                    <div class="col-sm-10">
+                                                        <input type="radio" id="addit_rent" name="addit_rent" value="" />
+                                                        <label for="addit_rent">Add additional rent due at hearing date</label><br>
+                                                        <input type="radio" id="addit_rent" name="addit_rent" value="" />
+                                                        <label for="addit_rent">Do Not add additional rent due at hearing date</label>
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
-                                    </div>
 
-
-
-                                    <div class="form-group">
-                                        <div class="row">
-                                            <div class="col-sm-10">
-                                                <input type="radio" id="no_notice_to_quit" name="quit_notice" value="no_quit_notice" checked>
-                                                <label for="no_notice_to_quit">No Notice to Quit was Needed with Accordance to Law</label><br>
-                                                <input type="radio" id="notice_to_quit" name="quit_notice" value="quit_notice_given">
-                                                <label for="notice_to_quit">Notice to Quit was Given</label>
-
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <div class="row">
-                                            <div class="col-sm-10">
-                                                <input type="radio" id="term_lease_ended" name="term_lease" value="lease_ended" checked>
-                                                <label for="term_lease_ended">Term of lease has ended</label><br>
-                                                <input type="radio" id="breached_conditions_lease" name="term_lease" value="breached_conditions_lease">
-                                                <label for="breached_conditions_lease">Tenant Breached Conditions of Lease</label><br>
-                                                <input type="radio" id="unsatisfied_lease" name="term_lease" value="unsatisfied_lease">
-                                                <label for="unsatisfied_lease">Rent Reserved and due has, upon demand, remained unsatisfied</label>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    </div>
-                                    <div class="offset-3">
-                                    <div class="form-group">
-                                        <div class="row">
-                                            <h3>Amount Due:</h3>
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <div class="row">
-                                            <div class="col-sm-10">
-                                                <label for="due_rent">Rent that is Due at Filing Date</label>
-                                                <input type="text" id="due_rent" name="term_lease" value="$" />
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <div class="row">
-                                            <div class="col-sm-10">
-                                                <label for="damage_amt">Damages for Injury to Property</label>
-                                                <input type="text" id="damage_amt" name="damage_amt" value="$" />
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <div class="row">
-                                            <div class="col-sm-12">
-                                                <label for="unjust_damages">Damages for Unjust Detention of Real Property</label>
-                                                <input type="text" id="unjust_damages" name="unjust_damages" value="$" />
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <div class="row">
-                                            <div class="col-sm-10">
-                                                <label for="attorney_fees">Attorney Fees</label>
-                                                <input type="text" id="attorney_fees" name="attorney_fees" value="$" />
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <div class="row">
-                                            <div class="col-sm-10">
-                                                <input type="radio" id="addit_rent" name="addit_rent" value="" />
-                                                <label for="addit_rent">Add additional rent due at hearing date</label><br>
-                                                <input type="radio" id="addit_rent" name="addit_rent" value="" />
-                                                <label for="addit_rent">Do Not add additional rent due at hearing date</label>
-                                            </div>
-                                        </div>
-                                    </div>
-                                        </div>
 
 
 
@@ -179,6 +156,8 @@
                                         </div>
                                         <button>Submit Payment</button>
                                     </form>
+
+                                    </div>
                             </div>
                         </div>
                     </div>
