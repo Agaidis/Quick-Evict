@@ -27,3 +27,7 @@ form.eviction_form fieldset {
       border-radius: 10px;
       width:80%;
   }
+
+  #radio_labels {
+      font-weight: bold;
+  }
