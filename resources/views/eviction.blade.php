@@ -31,7 +31,7 @@
                                         <div class="form-group">
                                         <div class="row">
                                             <div class="col-sm-8">
-                                                <label>Address Line 1</label>
+                                                <label class="labels">Address Line 1</label>
                                                 <input class="form-control" placeholder="Rental Street Address" type="text" id="property_address_line_1"/>
                                             </div>
                                         </div>
@@ -39,7 +39,7 @@
                                         <div class="form-group">
                                             <div class="row">
                                                 <div class="col-sm-8">
-                                                    <label>Address Line 2</label>
+                                                    <label class="labels">Address Line 2</label>
                                                     <input class="form-control" placeholder="City State, Zipcode" type="text" id="property_address_line_2"/>
                                                 </div>
                                             </div>
@@ -52,15 +52,16 @@
                                     <div class="form-group">
                                         <div class="row">
                                             <div class="col-sm-6">
-                                                <label>Owner Name</label>
+                                                <label class="labels">Owner Name</label>
                                                 <input class="form-control" placeholder="Owner Name" type="text" id="owner_name"/>
                                             </div>
                                             <div class="col-sm-6">
-                                                <label>Owner Phone #</label>
+                                                <label class="labels">Owner Phone #</label>
                                                 <input class="form-control" placeholder="(ext)-000-0000" type="text" id="owner_number"/>
                                             </div>
 
                                             <div class="col-sm-6">
+                                                <label class="labels">Property Owner</label>
                                                 <input type="radio" id="rented_by_owner" name="rented_by" value="rentedByOwner" checked>
                                                 <label for="rented_by_owner">Property is Rented by Owner</label><br>
                                                 <input type="radio" id="rented_by_other" name="rented_by" value="rentedByOwner">
@@ -77,25 +78,25 @@
                                                 <div class="form-group">
                                                     <div class="row">
                                                         <div class="col-sm-6">
-                                                            <label for="filing_date">Filing Date</label>
+                                                            <label for="filing_date" class="labels">Filing Date</label>
                                                             <input class="form-control" type="date" id="filing_date"/>
                                                         </div>
                                                         <div class="col-sm-6">
-                                                            <div class="radio_labels">Lease Type:</div>
+                                                            <div class="labels">Lease Type:</div>
                                                             <input type="radio" id="residential_lease" name="lease_type" value="isResidential" checked>
                                                             <label for="residential_lease">Lease is Residential</label><br>
                                                             <input type="radio" id="non_residential_lease" name="lease_type" value="isNotResidential">
                                                             <label for="non_residential_lease">Lease is Non-residential</label>
                                                         </div><br><br>
                                                         <div class="col-sm-10">
-                                                            <div class="radio_labels">Notice Status:</div>
+                                                            <div class="labels">Notice Status:</div>
                                                             <input type="radio" id="no_notice_to_quit" name="quit_notice" value="no_quit_notice" checked>
                                                             <label for="no_notice_to_quit">No Notice to Quit was Needed with Accordance to Law</label><br>
                                                             <input type="radio" id="notice_to_quit" name="quit_notice" value="quit_notice_given">
                                                             <label for="notice_to_quit">Notice to Quit was Given</label>
                                                         </div><br><br>
                                                         <div class="col-sm-10">
-                                                            <div class="radio_labels">Lease Status:</div>
+                                                            <div class="labels">Lease Status:</div>
                                                             <input type="radio" id="term_lease_ended" name="term_lease" value="lease_ended" checked>
                                                             <label for="term_lease_ended">Term of lease has ended</label><br>
                                                             <input type="radio" id="breached_conditions_lease" name="term_lease" value="breached_conditions_lease">
@@ -135,6 +136,7 @@
                                                 </div>
                                             </div>
                                         </div>
+                                        <button type="button" class="btn btn-primary">Download PDF File</button>
 
 
 
@@ -147,9 +149,6 @@
 
                                     <form action="/charge" method="post" id="payment-form">
                                         <div class="form-row">
-                                            <label for="card-element">
-                                                Credit or debit card
-                                            </label>
                                             <div id="card-element">
                                                 <!-- A Stripe Element will be inserted here. -->
                                             </div>
@@ -157,7 +156,7 @@
                                             <!-- Used to display form errors. -->
                                             <div id="card-errors" role="alert"></div>
                                         </div>
-                                        <button>Submit Payment</button>
+                                        <button type="button" class="btn btn-primary">Submit Payment</button>
                                     </form>
 
                                     </div>
