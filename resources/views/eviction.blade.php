@@ -26,11 +26,12 @@
                                     <div id="map"></div>
                                     <h3 style="text-align:center;" class="fs-subtitle">Additional Info on Property where you want to evict tenant.</h3>
                                     <div class="col-md-12 offset-1">
-                                    <div id="address_container">
+                                    <h4>Property Address</h4>
+                                        <div id="address_container">
                                         <div class="form-group">
                                         <div class="row">
                                             <div class="col-sm-8">
-                                                <label>Property Address Line 1</label>
+                                                <label>Address Line 1</label>
                                                 <input class="form-control" placeholder="Rental Street Address" type="text" id="property_address_line_1"/>
                                             </div>
                                         </div>
@@ -38,7 +39,7 @@
                                         <div class="form-group">
                                             <div class="row">
                                                 <div class="col-sm-8">
-                                                    <label>Property Address Line 2</label>
+                                                    <label>Address Line 2</label>
                                                     <input class="form-control" placeholder="City State, Zipcode" type="text" id="property_address_line_2"/>
                                                 </div>
                                             </div>
@@ -58,6 +59,15 @@
                                                 <label for="filing_date">Filing Date</label>
                                                 <input class="form-control" type="date" id="filing_date"/>
                                             </div>
+                                            <div class="col-sm-6">
+                                                <input type="radio" id="rented_by_owner" name="rented_by" value="rentedByOwner" checked>
+                                                <label for="rented_by_owner">Property is Rented by Owner</label><br>
+                                                <input type="radio" id="rented_by_other" name="rented_by" value="rentedByOwner">
+                                                <label for="rented_by_other">Property is Rented by Other</label>
+                                                <div class="col-sm-12">
+                                                    <input class="form-control" placeholder="Name of Landlord" type="text" id="landlord" name="landlord" value="">
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                     <div class="form-group">
@@ -70,19 +80,9 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="form-group">
-                                        <div class="row">
-                                            <div class="col-sm-6">
-                                                <input type="radio" id="rented_by_owner" name="rented_by" value="rentedByOwner" checked>
-                                                <label for="rented_by_owner">Property is Rented by Owner</label><br>
-                                                <input type="radio" id="rented_by_other" name="rented_by" value="rentedByOwner">
-                                                <label for="rented_by_other">Property is Rented by Other</label>
-                                                <div class="col-sm-12">
-                                                    <input class="form-control" placeholder="Name of Landlord" type="text" id="landlord" name="landlord" value="">
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
+
+
+
                                     <div class="form-group">
                                         <div class="row">
                                             <div class="col-sm-10">

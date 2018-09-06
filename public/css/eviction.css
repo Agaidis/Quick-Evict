@@ -20,3 +20,10 @@ form.eviction_form fieldset {
   .current {
       overflow:scroll;
   }
+
+  #address_container {
+      border: 1px solid darkgrey;
+      padding: 10px;
+      border-radius: 10px;
+      width:80%;
+  }
