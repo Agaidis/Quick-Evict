@@ -26,8 +26,8 @@
                                     <div id="map"></div>
                                     <h3 style="text-align:center;">Additional Info on Property where you want to evict tenant.</h3>
                                     <div class="col-md-12 offset-1">
-                                    <h4>Property Address</h4>
-                                        <div id="address_container" class="major_labels">
+                                    <h4 class="major_labels">Property Address</h4>
+                                        <div id="address_container">
                                         <div class="form-group">
                                         <div class="row">
                                             <div class="col-sm-8">
@@ -47,8 +47,8 @@
                                     </div>
 
 
-                                        <h4>Owner Information</h4>
-                                        <div id="owner_container" class="major_labels">
+                                        <h4 class="major_labels">Owner Information</h4>
+                                        <div id="owner_container">
                                     <div class="form-group">
                                         <div class="row">
                                             <div class="col-sm-6">
@@ -72,7 +72,7 @@
                                         </div>
                                     </div>
                                         </div>
-                                        <h4>General Information</h4>
+                                        <h4 class="major_labels">General Information</h4>
                                             <div id="general_information_container" class="major_labels">
                                                 <div class="form-group">
                                                     <div class="row">
@@ -106,7 +106,7 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                        <h4>Amount Due:</h4>
+                                        <h4 class="major_labels">Amount Due:</h4>
                                         <div id="amount_due_container" class="major_labels">
                                             <div class="form-group">
                                                 <div class="row">
@@ -142,7 +142,7 @@
 
 
 
-                                <h3>Signature/Payment</h3>
+                                <h3 class="major_labels">Signature/Payment</h3>
                                     <script src="https://js.stripe.com/v3/"></script>
 
                                     <form action="/charge" method="post" id="payment-form">
