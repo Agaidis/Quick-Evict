@@ -48,10 +48,6 @@
                                                 <label>Owner Name</label>
                                                 <input class="form-control" placeholder="Owner Name" type="text" id="owner_name"/>
                                             </div>
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <div class="row">
                                             <div class="col-sm-6">
                                                 <label>Owner Phone #</label>
                                                 <input class="form-control" placeholder="(ext)-000-0000" type="text" id="owner_number"/>
