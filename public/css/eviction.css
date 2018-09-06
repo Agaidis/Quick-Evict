@@ -31,3 +31,7 @@ form.eviction_form fieldset {
   #radio_labels {
       font-weight: bold;
   }
+
+  #major_labels {
+      margin-top: 2%;
+  }
