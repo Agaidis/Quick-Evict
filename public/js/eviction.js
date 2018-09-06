@@ -1,10 +1,10 @@
 $(document).ready(function () {
-    $("#wizard").steps({
-        headerTag: "h3",
-        bodyTag: "section",
-        transitionEffect: "slideLeft",  
-        autoFocus: true
-    });
+    // $("#wizard").steps({
+    //     headerTag: "h3",
+    //     bodyTag: "section",
+    //     transitionEffect: "slideLeft",
+    //     autoFocus: true
+    // });
     $('#filing_date').val(new Date());
 
 
@@ -72,4 +72,8 @@ $(document).ready(function () {
         });
         map.fitBounds(bounds);
     });
+
+
+    //On Submit gather variables and make ajax call to backend
+
 });
