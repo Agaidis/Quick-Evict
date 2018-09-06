@@ -24,7 +24,7 @@
                                 </div>
                             </div>
                                     <div id="map"></div>
-                                    <h3 style="text-align:center;" class="fs-subtitle">Additional Info on Property where you want to evict tenant.</h3>
+                                    <h3 style="text-align:center;">Additional Info on Property where you want to evict tenant.</h3>
                                     <div class="col-md-12 offset-1">
                                     <h4>Property Address</h4>
                                         <div id="address_container" class="major_labels">
