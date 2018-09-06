@@ -56,11 +56,11 @@
                                                 <label>Owner Phone #</label>
                                                 <input class="form-control" placeholder="(ext)-000-0000" type="text" id="owner_number"/>
                                             </div>
-                                        </div>
                                             <div class="col-sm-6">
                                                 <label for="filing_date">Filing Date</label>
                                                 <input class="form-control" type="date" id="filing_date"/>
                                             </div>
+                                        </div>
                                     </div>
                                     <div class="form-group">
                                         <div class="row">
