@@ -32,6 +32,6 @@ form.eviction_form fieldset {
       font-weight: bold;
   }
 
-  #major_labels {
+  .major_labels {
       margin-top: 2%;
   }
