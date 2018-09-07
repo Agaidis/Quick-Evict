@@ -77,7 +77,11 @@ $(document).ready(function () {
 
     $('input[type=radio][name=rented_by]').change(function(){
        console.log($(this)[0].id);
-       $('#landlord').prop('hidden', false);
+       if (($this)[0].id == 'rented_by_other') {
+           $('#landlord').prop('hidden', false);
+       } else {
+           $('#landlord').prop('hidden', true);
+       }
     });
 
     //On Submit gather variables and make ajax call to backend
