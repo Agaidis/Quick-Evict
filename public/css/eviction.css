@@ -35,3 +35,7 @@ form.eviction_form fieldset {
   .major_labels {
       margin-top: 2%;
   }
+
+  #pdf_download_btn {
+      margin-top: 2%;
+  }
