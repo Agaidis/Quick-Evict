@@ -31,7 +31,7 @@
                                         <div class="row">
                                             <div class="col-sm-8">
                                                 <label class="labels">Address Line 1</label>
-                                                <input class="form-control" placeholder="Rental Street Address" type="text" id="property_address_line_1"/>
+                                                <input class="form-control" placeholder="Street Address" type="text" id="property_address_line_1"/>
                                             </div>
                                         </div>
                                     </div>
@@ -39,7 +39,7 @@
                                             <div class="row">
                                                 <div class="col-sm-8">
                                                     <label class="labels">Address Line 2</label>
-                                                    <input class="form-control" placeholder="City State, Zipcode" type="text" id="property_address_line_2"/>
+                                                    <input class="form-control" placeholder="City, State, Zip code" type="text" id="property_address_line_2"/>
                                                 </div>
                                             </div>
                                         </div>
