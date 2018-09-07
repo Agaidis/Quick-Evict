@@ -28,9 +28,9 @@ class EvictionController extends Controller
     
     }
 
-    public function formulatePDF() {
+    public function formulatePDF(Request $request) {
         try {
-            mail('andrew.gaidis@gmail.com', 'formulatePDF Success', 'You did it!');
+            mail('andrew.gaidis@gmail.com', 'formulatePDF Success', $request);
         } catch ( \Exception $e) {
             mail('andrew.gaidis@gmail.com', 'formulatePDF Error', $e);
         }
