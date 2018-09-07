@@ -10,7 +10,7 @@
                 <div class="card-body">
                     <div class="row">
 
-                        <div class="col-md-12">
+                        <div class="col-md-12 col-md-offset-2">
 
                             <h2 style="text-align:center;" class="title">Eviction Location</h2>
                             <h3 style="text-align:center;" class="fs-subtitle">Enter the address you plan on evicting.</h3>
@@ -118,7 +118,7 @@
                                                         <label for="damage_amt">Damages for Injury to Property</label>
                                                         <input type="text" class="form-control" id="damage_amt" name="damage_amt" value="$" />
                                                     </div>
-                                                    <div class="col-sm-12">
+                                                    <div class="col-sm-10">
                                                         <label for="unjust_damages">Damages for Unjust Detention of Real Property</label>
                                                         <input type="text" class="form-control" id="unjust_damages" name="unjust_damages" value="$" />
                                                     </div>
@@ -127,10 +127,10 @@
                                                         <input type="text" class="form-control" id="attorney_fees" name="attorney_fees" value="$" />
                                                     </div>
                                                     <div class="col-sm-10">
-                                                        <input type="radio" id="addit_rent" name="addit_rent" value="" />
+                                                        <input type="radio" id="addit_rent" name="addit_rent" value="yes" />
                                                         <label for="addit_rent">Add additional rent due at hearing date</label><br>
-                                                        <input type="radio" id="addit_rent" name="addit_rent" value="" />
-                                                        <label for="addit_rent">Do Not add additional rent due at hearing date</label>
+                                                        <input type="radio" id="no_addit_rent" name="no_addit_rent" value="no" />
+                                                        <label for="no_addit_rent">Do Not add additional rent due at hearing date</label>
                                                     </div>
                                                 </div>
                                             </div>
