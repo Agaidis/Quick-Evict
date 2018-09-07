@@ -16,3 +16,28 @@ form.eviction_form fieldset {
     margin: 0;
     padding: 0;
   }
+
+  .current {
+      overflow:scroll;
+  }
+
+  #address_container, #general_information_container, #amount_due_container, #owner_container {
+      border: 1px solid darkgrey;
+      padding: 10px;
+      border-radius: 10px;
+      width:80%;
+  }
+
+  .labels {
+      margin-top: 1%;
+      font-weight: bold;
+  }
+
+  .major_labels {
+      margin-top: 2%;
+  }
+
+  #pdf_download_btn {
+      margin-top: 2%;
+      margin-left: 30%;
+  }

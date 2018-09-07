@@ -13,12 +13,18 @@
     <!-- Scripts -->
 
     <script src="{{ asset('js/app.js') }}" defer></script>
-   
     <script src="{{ asset('js/eviction.js') }}" defer></script>
     <script src="{{ asset('js/steps.js') }}" defer></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAfPLSbGAHZkEd-8DDB0FcGSlhrV9LQMGM&libraries=places" defer></script>
+    <script src="https://js.stripe.com/v3/"></script>
+    {{--<script>--}}
+        {{--var stripe = Stripe('pk_test_6pRNASCoBOKtIshFeQd4XMUh');--}}
+        {{--var elements = stripe.elements();--}}
+        {{--var card = elements.create('card');--}}
 
-    
-
+        {{--// Add an instance of the card UI component into the `card-element` <div>--}}
+        {{--card.mount('#card-element');--}}
+    {{--</script>--}}
     <!-- Fonts -->
     <link rel="dns-prefetch" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Raleway:300,400,600" rel="stylesheet" type="text/css">
@@ -47,38 +53,40 @@
                     </ul>
                     <!-- Right Side Of Navbar -->
 
-                        @if (Auth::check())
+                        {{--@if (Auth::check())--}}
                         <ul class="nav navbar-nav navbar-right">
                         <li><a href="{{ url('online-eviction') }}" id="online_eviction_btn">Online Eviction</a></li>
                         <li><a href="{{ url('eviction-info') }}" id="eviction_info_btn">Eviction Info</a></li>
                         <li><a href="{{ url('FAQ') }}" id="faq_btn">FAQ</a></li>
                         <li><a href="{{ url('where-does-this-work') }}" id="where_work_btn">Where Does this Work?</a></li>
                         <li><a href="{{ url('about-us') }}" id="about_us_btn">About Us</a></li>
-                        @endif<!-- Authentication Links -->
-                        @guest
-                            <ul style="margin-left:60%;" class="nav navbar-nav navbar-right">
-                            <li><a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a></li>
-                            <li><a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a></li>
-                        @else
-                            <li class="nav-item dropdown">
-                                <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                    {{ Auth::user()->name }} <span class="caret"></span>
-                                </a>
+                        {{--@endif<!-- Authentication Links -->--}}
+                        {{--@guest--}}
+                            {{--<ul style="margin-left:60%;" class="nav navbar-nav navbar-right">--}}
+                            {{--<li><a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a></li>--}}
+                            {{--<li><a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a></li>--}}
+                        {{--@else--}}
 
-                                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item" href="{{ route('logout') }}"
-                                       onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
-                                        {{ __('Logout') }}
-                                    </a>
+                            {{--<li class="nav-item dropdown">--}}
+                                {{--<a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>--}}
+                                    {{--{{ Auth::user()->name }} <span class="caret"></span>--}}
+                                {{--</a>--}}
 
-                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                                        @csrf
-                                    </form>
-                                </div>
-                            </li>
-                        @endguest
-                    </ul>
+                                {{--<div class="dropdown-menu" aria-labelledby="navbarDropdown">--}}
+                                    {{--<a class="dropdown-item" href="{{ route('logout') }}"--}}
+                                       {{--onclick="event.preventDefault();--}}
+                                                     {{--document.getElementById('logout-form').submit();">--}}
+                                        {{--{{ __('Logout') }}--}}
+                                    {{--</a>--}}
+
+                                    {{--<form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">--}}
+                                        {{--@csrf--}}
+                                    {{--</form>--}}
+                                {{--</div>--}}
+                            {{--</li>--}}
+                            </ul>
+                        {{--@endguest--}}
+                    {{--</ul>--}}
                 </div>
             </div>
         </nav>
@@ -88,6 +96,4 @@
         </main>
     </div>
 </body>
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCq-TIavl4d7yFrm2Nv0fJuQQQf6JSSHos&callback=initMap"></script>
-<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCq-TIavl4d7yFrm2Nv0fJuQQQf6JSSHos&libraries=places"></script>
 </html>

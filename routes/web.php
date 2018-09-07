@@ -11,6 +11,9 @@
 |
 */
 
+
+
+
 Route::get('/', function () {
     return view('welcome');
 });
@@ -28,3 +31,12 @@ Route::get('/FAQ', 'FAQController@index');
 Route::get('/where-does-this-work', 'WhereDoesThisWorkController@index');
 
 Route::get('/about-us', 'AboutUsController@index');
+
+Route::post('/online-eviction/pdf-data', 'EvictionController@formulatePDF');
+
+Route::post('/online-eviction/add-file', 'EvictionController@addFile');
+
+Route::get('command/migrate', function () {
+    $exitCode = \Artisan::call('migrate');
+    dd("Done");
+});
