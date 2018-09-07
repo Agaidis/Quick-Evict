@@ -113,19 +113,19 @@
                                                 <div class="row">
                                                     <div class="col-sm-10">
                                                         <label for="due_rent">Rent that is Due at Filing Date</label>
-                                                        <input type="text" id="due_rent" name="term_lease" value="$" />
+                                                        <input type="text" class="form-control" id="due_rent" name="term_lease" value="$" />
                                                     </div>
                                                     <div class="col-sm-10">
                                                         <label for="damage_amt">Damages for Injury to Property</label>
-                                                        <input type="text" id="damage_amt" name="damage_amt" value="$" />
+                                                        <input type="text" class="form-control" id="damage_amt" name="damage_amt" value="$" />
                                                     </div>
                                                     <div class="col-sm-12">
                                                         <label for="unjust_damages">Damages for Unjust Detention of Real Property</label>
-                                                        <input type="text" id="unjust_damages" name="unjust_damages" value="$" />
+                                                        <input type="text" class="form-control" id="unjust_damages" name="unjust_damages" value="$" />
                                                     </div>
                                                     <div class="col-sm-10">
                                                         <label for="attorney_fees">Attorney Fees</label>
-                                                        <input type="text" id="attorney_fees" name="attorney_fees" value="$" />
+                                                        <input type="text" class="form-control" id="attorney_fees" name="attorney_fees" value="$" />
                                                     </div>
                                                     <div class="col-sm-10">
                                                         <input type="radio" id="addit_rent" name="addit_rent" value="" />
