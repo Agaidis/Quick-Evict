@@ -29,6 +29,7 @@ form.eviction_form fieldset {
   }
 
   .labels {
+      margin-top: 1%;
       font-weight: bold;
   }
 
