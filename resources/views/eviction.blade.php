@@ -79,7 +79,7 @@
                                                     <div class="row">
                                                         <div class="col-sm-6">
                                                             <label for="filing_date" class="labels">Filing Date</label>
-                                                            <input class="form-control" type="date" id="filing_date"/>
+                                                            <input class="form-control" type="date" id="filing_date" name="filing_date"/>
                                                         </div>
                                                         <div class="col-sm-10">
                                                             <div class="labels">Lease Type:</div>
