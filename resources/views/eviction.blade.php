@@ -24,7 +24,7 @@
                             </div>
                                     <div id="map"></div>
                                     <h3 class="major_labels" style="text-align:center;">Additional Info on Property where you want to evict tenant.</h3>
-                            <div class="col-md-12 offset-1">
+                            {{--<div class="col-md-12 offset-1">--}}
                                     <h4 class="major_labels">Property Address</h4>
                                         <div id="address_container">
                                         <div class="form-group">
@@ -143,27 +143,25 @@
 
 
 
-                                <h3 class="major_labels">Signature/Payment</h3>
-                                    <script src="https://js.stripe.com/v3/"></script>
+                                {{--<h3 class="major_labels">Signature/Payment</h3>--}}
+                                    {{--<script src="https://js.stripe.com/v3/"></script>--}}
 
-                                    <form action="/charge" method="post" id="payment-form">
-                                        <div class="form-row">
-                                            <div id="card-element">
-                                                <!-- A Stripe Element will be inserted here. -->
-                                            </div>
+                                    {{--<form action="/charge" method="post" id="payment-form">--}}
+                                        {{--<div class="form-row">--}}
+                                            {{--<div id="card-element">--}}
+                                                {{--<!-- A Stripe Element will be inserted here. -->--}}
+                                            {{--</div>--}}
 
-                                            <!-- Used to display form errors. -->
-                                            <div id="card-errors" role="alert"></div>
-                                        </div>
-                                        <button type="button" class="btn btn-primary">Submit Payment</button>
-                                    </form>
+                                            {{--<!-- Used to display form errors. -->--}}
+                                            {{--<div id="card-errors" role="alert"></div>--}}
+                                        {{--</div>--}}
+                                        {{--<button type="button" class="btn btn-primary">Submit Payment</button>--}}
+                                    {{--</form>--}}
 
-                                    </div>
-                            </div>
+                                    {{--</div>--}}
                         </div>
                     </div>
                 </div>
-               </div>
             </div>
         </div>
     </div>

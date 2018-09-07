@@ -6,7 +6,7 @@ $(document).ready(function () {
     //     autoFocus: true
     // });
     $('#filing_date').val(new Date());
-    $('#landlord').css('hidden', true);
+    $('#landlord').prop('hidden', true);
 
 
         map = new google.maps.Map(document.getElementById('map'), {
