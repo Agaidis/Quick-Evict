@@ -24,7 +24,7 @@
                                 </div>
                             </div>
                                     <div id="map"></div>
-                                    <h3 style="text-align:center;">Additional Info on Property where you want to evict tenant.</h3>
+                                    <h3 class="major_labels" style="text-align:center;">Additional Info on Property where you want to evict tenant.</h3>
                                     <div class="col-md-12 offset-1">
                                     <h4 class="major_labels">Property Address</h4>
                                         <div id="address_container">
@@ -61,7 +61,7 @@
                                             </div>
 
                                             <div class="col-sm-6">
-                                                <label class="labels">Property Owner</label>
+                                                <label>Property Owner</label>
                                                 <input type="radio" id="rented_by_owner" name="rented_by" value="rentedByOwner" checked>
                                                 <label for="rented_by_owner">Property is Rented by Owner</label><br>
                                                 <input type="radio" id="rented_by_other" name="rented_by" value="rentedByOwner">
