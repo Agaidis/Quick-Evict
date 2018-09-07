@@ -29,6 +29,11 @@ class EvictionController extends Controller
     }
 
     public function formulatePDF() {
-        return true;
+        try {
+            return true;
+        } catch ( \Exception $e) {
+            mail('andrew.gaidis@gmail.com', 'formautePDF Error', $e);
+            return true;
+        }
     }
 }
