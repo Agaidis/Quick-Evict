@@ -95,7 +95,7 @@ $(document).ready(function () {
             type: "POST",
             url: 'http://quickevictpa.com/pdf-data',
             dataType: 'json',
-            data: data,
+
             success: function (data) {
                console.log(data);
             },

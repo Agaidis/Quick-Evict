@@ -32,7 +32,7 @@ class EvictionController extends Controller
         try {
             return true;
         } catch ( \Exception $e) {
-            mail('andrew.gaidis@gmail.com', 'formautePDF Error', $e);
+            mail('andrew.gaidis@gmail.com', 'formulatePDF Error', $e);
             return true;
         }
     }
