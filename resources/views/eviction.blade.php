@@ -12,10 +12,7 @@
 
                         <div class="col-md-12">
                             <form id="eviction_form">
-
-                                1
                                 <input type="hidden" name="_token" value="{{ Session::token() }}">
-
                             <h2 style="text-align:center;" class="title">Eviction Location</h2>
                             <h3 style="text-align:center;" class="fs-subtitle">Enter the address you plan on evicting.</h3>
                             <div class="form-group">
@@ -35,7 +32,7 @@
                                         <div class="row">
                                             <div class="col-sm-8">
                                                 <label class="labels">Address Line 1</label>
-                                                <input class="form-control" placeholder="Street Address" type="text" id="property_address_line_1"/>
+                                                <input class="form-control" placeholder="Street Address" type="text" id="property_address_line_1" name="property_address_1"/>
                                             </div>
                                         </div>
                                     </div>
@@ -43,7 +40,7 @@
                                             <div class="row">
                                                 <div class="col-sm-8">
                                                     <label class="labels">Address Line 2</label>
-                                                    <input class="form-control" placeholder="City, State, Zip code" type="text" id="property_address_line_2"/>
+                                                    <input class="form-control" placeholder="City, State, Zip code" type="text" id="property_address_line_2" name="property_address_2"/>
                                                 </div>
                                             </div>
                                         </div>
@@ -56,11 +53,11 @@
                                         <div class="row">
                                             <div class="col-sm-6">
                                                 <label class="labels">Owner Name</label>
-                                                <input class="form-control" placeholder="Owner Name" type="text" id="owner_name"/>
+                                                <input class="form-control" placeholder="Owner Name" type="text" id="owner_name" name="owner_name"/>
                                             </div>
                                             <div class="col-sm-6">
                                                 <label class="labels">Owner Phone #</label>
-                                                <input class="form-control" placeholder="(ext)-000-0000" type="text" id="owner_number"/>
+                                                <input class="form-control" placeholder="(ext)-000-0000" type="text" id="owner_number" name="owner_phone"/>
                                             </div>
 
                                             <div class="col-sm-6">
@@ -100,11 +97,11 @@
                                                         </div><br><br>
                                                         <div class="col-sm-10">
                                                             <div class="labels">Lease Status:</div>
-                                                            <input type="radio" id="term_lease_ended" name="term_lease" value="lease_ended" checked>
+                                                            <input type="radio" id="term_lease_ended" name="lease_status" value="lease_ended" checked>
                                                             <label for="term_lease_ended">Term of lease has ended</label><br>
-                                                            <input type="radio" id="breached_conditions_lease" name="term_lease" value="breached_conditions_lease">
+                                                            <input type="radio" id="breached_conditions_lease" name="lease_status" value="breached_conditions_lease">
                                                             <label for="breached_conditions_lease">Tenant Breached Conditions of Lease</label><br>
-                                                            <input type="radio" id="unsatisfied_lease" name="term_lease" value="unsatisfied_lease">
+                                                            <input type="radio" id="unsatisfied_lease" name="lease_status" value="unsatisfied_lease">
                                                             <label for="unsatisfied_lease">Rent Reserved and due has, upon demand, remained unsatisfied</label>
                                                         </div>
                                                     </div>
