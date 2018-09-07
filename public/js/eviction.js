@@ -85,6 +85,12 @@ $(document).ready(function () {
     });
 
     //On Submit gather variables and make ajax call to backend
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
+
     $('#pdf_download_btn').on('click', function() {
        console.log("were clickin");
        var data = $('#eviction_form').serialize();
