@@ -10,7 +10,7 @@
                 <div class="card-body">
                     <div class="row">
 
-                        <div class="col-md-12 col-md-offset-2">
+                        <div class="col-md-12 offset-md-2">
 
                             <h2 style="text-align:center;" class="title">Eviction Location</h2>
                             <h3 style="text-align:center;" class="fs-subtitle">Enter the address you plan on evicting.</h3>
