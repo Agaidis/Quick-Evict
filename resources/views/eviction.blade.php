@@ -162,11 +162,11 @@
 
                             </div>
                             </form>
-                            <form class="form-horizontal" role="form" method="POST" id="request-form" enctype="multipart/form-data" action={{ url('/add-file') }} >
-                                <input type="hidden" name="_token" value="{{ Session::token() }}">
-                                <input type="file" name="pdf"/>
-                                <button id="add_file_btn" type="button" class="btn btn-success">Submit File</button>
-                            </form>
+                            {{--<form class="form-horizontal" role="form" method="POST" id="request-form" enctype="multipart/form-data" action={{ url('/add-file') }} >--}}
+                                {{--<input type="hidden" name="_token" value="{{ Session::token() }}">--}}
+                                {{--<input type="file" name="pdf"/>--}}
+                                {{--<button id="add_file_btn" type="button" class="btn btn-success">Submit File</button>--}}
+                            {{--</form>--}}
                         </div>
 
                     </div>
