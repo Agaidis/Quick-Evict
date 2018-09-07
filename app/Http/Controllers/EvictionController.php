@@ -27,4 +27,8 @@ class EvictionController extends Controller
     public function getMapLocation() {
     
     }
+
+    public function formulatePDF() {
+        return true;
+    }
 }

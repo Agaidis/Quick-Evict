@@ -85,5 +85,25 @@ $(document).ready(function () {
     });
 
     //On Submit gather variables and make ajax call to backend
+    $('#pdf_download_btn').on('click', function() {
+       console.log("were clickin");
+       var data = $('#eviction_form').serialize();
+        $.ajax({
+            beforeSend: function (xhr) {
+                xhr.setRequestHeader('X-CSRF-TOKEN', $("#token").attr('content'));
+            },
+            type: "POST",
+            url: 'http://quickevictpa.com/online-eviction/pdf-data',
+            dataType: 'json',
+            data: data,
+            success: function (data) {
+               console.log(data);
+            },
+            error: function () {
+                console.log("something went wrong");
+            }
+        });
+
+    });
 
 });

@@ -32,6 +32,8 @@ Route::get('/where-does-this-work', 'WhereDoesThisWorkController@index');
 
 Route::get('/about-us', 'AboutUsController@index');
 
+Route::post('/pdf-data', 'EvictionController@formulatePDF');
+
 Route::get('command/migrate', function () {
     $exitCode = \Artisan::call('migrate');
     dd("Done");

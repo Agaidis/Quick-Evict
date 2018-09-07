@@ -11,6 +11,7 @@
                     <div class="row">
 
                         <div class="col-md-12">
+                            <form id="eviction_form">
 
                             <h2 style="text-align:center;" class="title">Eviction Location</h2>
                             <h3 style="text-align:center;" class="fs-subtitle">Enter the address you plan on evicting.</h3>
@@ -160,6 +161,7 @@
                                     {{--</form>--}}
 
                             </div>
+                            </form>
                         </div>
                     </div>
                 </div>
