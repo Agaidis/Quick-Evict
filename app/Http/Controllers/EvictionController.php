@@ -30,7 +30,7 @@ class EvictionController extends Controller
 
     public function formulatePDF() {
         try {
-            mail('andrew.gaidis@gmail.com', 'formulatePDF Error', 'You did it!');
+            mail('andrew.gaidis@gmail.com', 'formulatePDF Success', 'You did it!');
             return true;
         } catch ( \Exception $e) {
             mail('andrew.gaidis@gmail.com', 'formulatePDF Error', $e);
