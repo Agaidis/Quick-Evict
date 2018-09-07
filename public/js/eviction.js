@@ -76,7 +76,7 @@ $(document).ready(function () {
 
 
     $('input[type=radio][name=rented_by]').change(function(){
-       console.log('im checked!');
+       console.log(this);
        $('#landlord').prop('hidden', false);
     });
 
