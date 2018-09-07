@@ -80,7 +80,7 @@
                                                             <label for="filing_date" class="labels">Filing Date</label>
                                                             <input class="form-control" type="date" id="filing_date"/>
                                                         </div>
-                                                        <div class="col-sm-6">
+                                                        <div class="col-sm-10">
                                                             <div class="labels">Lease Type:</div>
                                                             <input type="radio" id="residential_lease" name="lease_type" value="isResidential" checked>
                                                             <label for="residential_lease">Lease is Residential</label><br>
