@@ -93,7 +93,7 @@ $(document).ready(function () {
                 xhr.setRequestHeader('X-CSRF-TOKEN', $("#token").attr('content'));
             },
             type: "POST",
-            url: 'http://quickevictpa.com/pdf-data',
+            url: 'http://quickevictpa.com/online-eviction/pdf-data',
             dataType: 'json',
 
             success: function (data) {
