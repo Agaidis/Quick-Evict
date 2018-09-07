@@ -23,9 +23,10 @@
 
                                 </div>
                             </div>
+                                <div class="col-md-12 offset-1">
                                     <div id="map"></div>
                                     <h3 class="major_labels" style="text-align:center;">Additional Info on Property where you want to evict tenant.</h3>
-                            <div class="col-md-12 offset-1">
+
                                     <h4 class="major_labels">Property Address</h4>
                                         <div id="address_container">
                                         <div class="form-group">
