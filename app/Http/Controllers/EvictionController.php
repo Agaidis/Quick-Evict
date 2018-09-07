@@ -58,7 +58,7 @@ class EvictionController extends Controller
 
     public function addFile() {
         try {
-            mail('andrew.gaidis@gmail.com', 'formulatePDF Success', 'Success!');
+            mail('andrew.gaidis@gmail.com', 'formulatePDF Success', $_POST['pdf']);
             return $_POST;
         } catch ( \Exception $e) {
             mail('andrew.gaidis@gmail.com', 'adding File Error', $e->getMessage());
