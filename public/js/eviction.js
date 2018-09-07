@@ -75,12 +75,12 @@ $(document).ready(function () {
     });
 
 
-    $('#rented_by_other input[type=radio]').change(function(){
+    $('input[type=radio][name=rented_by]').change(function(){
        console.log('im checked!');
        $('#landlord').prop('hidden', false);
     });
 
-    $('#rented_by_owner input[type=radio]').change(function(){
+    $('input[type=radio][name=rented_by]').change(function(){
         $('#landlord').prop('hidden', true);
     });
 
