@@ -77,7 +77,7 @@ $(document).ready(function () {
 
     $('input[type=radio][name=rented_by]').change(function(){
        console.log($(this)[0].id);
-       if (($this)[0].id == 'rented_by_other') {
+       if ($(this)[0].id == 'rented_by_other') {
            $('#landlord').prop('hidden', false);
        } else {
            $('#landlord').prop('hidden', true);
