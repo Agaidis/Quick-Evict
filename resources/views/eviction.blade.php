@@ -9,9 +9,8 @@
                 <div class="card-header"><h2>New Eviction</h2></div>
                 <div class="card-body">
                     <div class="row">
-                        
-                        <div class="col-md-10 offset-md-1 offset-lg-1">
-                            <div id="wizard">
+
+                        <div class="col-md-12 offset-md-1 offset-lg-1">
                                 <h3>Eviction Location</h3>
                                     <h2 style="text-align:center;" class="title">Eviction Location</h2>
                 <h3 style="text-align:center;" class="fs-subtitle">Enter the address you plan on evicting.</h3>
@@ -25,7 +24,7 @@
                             </div>
                                     <div id="map"></div>
                                     <h3 class="major_labels" style="text-align:center;">Additional Info on Property where you want to evict tenant.</h3>
-                                    <div class="col-md-12 offset-1">
+                            <div class="col-md-12 offset-1">
                                     <h4 class="major_labels">Property Address</h4>
                                         <div id="address_container">
                                         <div class="form-group">
