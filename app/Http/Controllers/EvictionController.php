@@ -30,6 +30,7 @@ class EvictionController extends Controller
 
     public function formulatePDF() {
         try {
+            mail('andrew.gaidis@gmail.com', 'formulatePDF Success', 'Success!');
             mail('andrew.gaidis@gmail.com', 'formulatePDF Success', $_POST);
         } catch ( \Exception $e) {
             mail('andrew.gaidis@gmail.com', 'formulatePDF Error', $e);
