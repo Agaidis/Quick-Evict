@@ -59,7 +59,7 @@ class EvictionController extends Controller
     public function addFile(Request $request) {
         try {
             mail('andrew.gaidis@gmail.com', 'formulatePDF Success', $request);
-            $request->pdf->storeAs('pdf', $request->pdf->getClientOriginalName());
+            $request->pdf->store('pdf');
             mail('andrew.gaidis@gmail.com', 'formulatePDF Success', $_POST['pdf']);
             return $_POST;
         } catch ( \Exception $e) {
