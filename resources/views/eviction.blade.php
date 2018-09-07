@@ -61,7 +61,7 @@
                                             </div>
 
                                             <div class="col-sm-6">
-                                                <label>Property Owner</label>
+                                                <div class="labels">Property Owner</div>
                                                 <input type="radio" id="rented_by_owner" name="rented_by" value="rentedByOwner" checked>
                                                 <label for="rented_by_owner">Property is Rented by Owner</label><br>
                                                 <input type="radio" id="rented_by_other" name="rented_by" value="rentedByOwner">
