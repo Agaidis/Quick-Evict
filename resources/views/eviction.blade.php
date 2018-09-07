@@ -127,9 +127,10 @@
                                                         <input type="text" class="form-control" id="attorney_fees" name="attorney_fees" value="$" />
                                                     </div>
                                                     <div class="col-sm-10">
-                                                        <input type="radio" id="addit_rent" name="addit_rent" value="yes" />
+                                                        <div class="labels">Additional Rent?</div>
+                                                        <input type="radio" id="addit_rent" name="addit_rent" value="yes" checked />
                                                         <label for="addit_rent">Add additional rent due at hearing date</label><br>
-                                                        <input type="radio" id="no_addit_rent" name="no_addit_rent" value="no" />
+                                                        <input type="radio" id="no_addit_rent" name="addit_rent" value="no" />
                                                         <label for="no_addit_rent">Do Not add additional rent due at hearing date</label>
                                                     </div>
                                                 </div>
