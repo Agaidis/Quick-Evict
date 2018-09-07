@@ -95,6 +95,7 @@ $(document).ready(function () {
             type: "POST",
             url: 'quickevictpa.com/online-eviction/pdf-data',
             dataType: 'json',
+            data: data,
 
             success: function (data) {
                console.log(data);
