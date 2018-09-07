@@ -13,6 +13,9 @@
                         <div class="col-md-12">
                             <form id="eviction_form">
 
+                                1
+                                <input type="hidden" name="_token" value="{{ Session::token() }}">
+
                             <h2 style="text-align:center;" class="title">Eviction Location</h2>
                             <h3 style="text-align:center;" class="fs-subtitle">Enter the address you plan on evicting.</h3>
                             <div class="form-group">

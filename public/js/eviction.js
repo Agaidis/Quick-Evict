@@ -94,6 +94,12 @@ $(document).ready(function () {
     $('#pdf_download_btn').on('click', function() {
        console.log("were clickin");
        var data = $('#eviction_form').serialize();
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+
         $.ajax({
             beforeSend: function (xhr) {
                 xhr.setRequestHeader('X-CSRF-TOKEN', $("#token").attr('content'));
