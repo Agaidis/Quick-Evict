@@ -11,6 +11,7 @@ form.eviction_form fieldset {
   #map {
     height: 80%;
       width:80%;
+      margin-left: 5%;
   }
   html, body {
     height: 100%;
