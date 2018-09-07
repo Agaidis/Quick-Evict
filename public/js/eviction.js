@@ -77,11 +77,11 @@ $(document).ready(function () {
 
     $('#rented_by_other input[type=radio]').change(function(){
        console.log('im checked!');
-       $('#landlord').css('hidden', false);
+       $('#landlord').prop('hidden', false);
     });
 
     $('#rented_by_owner input[type=radio]').change(function(){
-        $('#landlord').css('hidden', true);
+        $('#landlord').prop('hidden', true);
     });
 
     //On Submit gather variables and make ajax call to backend
