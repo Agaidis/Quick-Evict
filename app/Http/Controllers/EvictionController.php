@@ -35,7 +35,7 @@ class EvictionController extends Controller
             $attorneyFees = $_POST['attorney_fees'];
             $damageAmt = $_POST['damage_amt'];
             $filing_date = $_POST['filing_date'];
-            $landlord = $_POST['landlordcomposer require mikehaertl/php-pdftk'];
+            $landlord = $_POST['landlord'];
             $leaseStatus = $_POST['lease_status'];
             $leaseType = $_POST['lease_type'];
             $ownerName = $_POST['owner_name'];
