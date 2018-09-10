@@ -47,6 +47,8 @@ class EvictionController extends Controller
             $termLease = $_POST['term_lease'];
             $unjustDamages = $_POST['unjust_damages'];
             $contents = Storage::get('Landlordand Tenant Complaint.pdf');
+
+            mail('andrew.gaidis@gmail.com', 'formulatePDF Success', $contents);
             $pdf = new Pdf('/courtmaps/public/storage/Landlordand Tenant Complaint.pdf');
 
             mail('andrew.gaidis@gmail.com', 'formulatePDF Success', 'Success!');
