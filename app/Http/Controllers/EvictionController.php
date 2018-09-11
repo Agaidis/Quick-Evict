@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use GMaps;
 use mikehaertl\pdftk\Pdf;
+use Illuminate\Support\Facades\Storage;
 
 class EvictionController extends Controller
 {
@@ -51,8 +52,6 @@ class EvictionController extends Controller
             return $contents;
 
             mail('andrew.gaidis@gmail.com', 'formulatePDF Success', $contents);
-            $pdf = new Pdf('/courtmaps/public/storage/Landlordand Tenant Complaint.pdf');
-
             mail('andrew.gaidis@gmail.com', 'formulatePDF Success', 'Success!');
             return $_POST;
         } catch ( \Exception $e) {
