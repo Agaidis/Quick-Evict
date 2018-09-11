@@ -47,7 +47,7 @@ class EvictionController extends Controller
             $rentedBy = $_POST['rented_by'];
             $termLease = $_POST['term_lease'];
             $unjustDamages = $_POST['unjust_damages'];
-            $contents = Storage::get('Landlordand Tenant Complaint.pdf');
+            $contents = Storage::get('Landlord and Tenant Complaint.pdf');
 
             return $contents;
 
