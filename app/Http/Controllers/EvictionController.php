@@ -8,6 +8,7 @@ use GMaps;
 use mikehaertl\pdftk\Pdf;
 use Illuminate\Support\Facades\Storage;
 
+
 class EvictionController extends Controller
 {
     /**
@@ -47,8 +48,11 @@ class EvictionController extends Controller
             $rentedBy = $_POST['rented_by'];
             $termLease = $_POST['term_lease'];
             $unjustDamages = $_POST['unjust_damages'];
-            $contents = Storage::get('Landlordand Tenant Complaint.pdf');
 
+            $contents = asset('storage/Landlordand Tenant Complaint.pdf');
+            return $contents;
+
+            $contents = Storage::get('Landlordand Tenant Complaint.pdf');
             return $contents;
 
             mail('andrew.gaidis@gmail.com', 'formulatePDF Success', $contents);
