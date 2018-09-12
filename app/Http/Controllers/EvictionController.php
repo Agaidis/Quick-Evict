@@ -54,37 +54,37 @@ class EvictionController extends Controller
             $storagePath  = Storage::disk('public')->getDriver()->getAdapter()->getPathPrefix();
             mail('andrew.gaidis@gmail.com', 'formulatePDF Success', $storagePath);
             $pdf = new Pdf($storagePath .'/Landlordand Tenant Complaint.pdf');
-
-            $pdf->allow('AllFeatures')->fillForm([
-                'Plantiff1' => 'SlateHouse Group Property Management LLC on behalf of "Owner or Owner LLC Name"',
-                'Plantiff Address 1' => 'PO Box 5304',
-                'Plantiff Address 2' => 'Lancaster, PA 17606',
-                'Defendant1' => 'Andrew Gaidis',
-                'Defendant Address 1' => $propertyAddressLine1,
-                'Defendant Address 2' => $propertyAddressLine2,
-                'County' => 'Monmouth County',
-                'MDJ Number' => '',
-                'MDJ Name' => '',
-                'MDJ Address' => '',
-                'MDJ Phone' => '',
-                'Postage' => '',
-                'Postage Date' => '',
-                'Service' => '',
-                'Service Date' => '',
-                'CETA' => '',
-                'CETA Date' => '',
-                'Total' => '500',
-                'Total Date' => '600',
-                'Docket No' => '',
-                'Date Filed' => '8/9/1989'
-            ])->flatten()->saveAs($storagePath . 'pdf/Landlordand2 Tenant Complaint.pdf');
-
-         //  $pdf->send($storagePath .'/Landlordand Tenant Complaint.pdf', false);
-
-            if ($pdf->send($storagePath .'/Landlordand Tenant Complaint.pdf')===false) {
-                $error = $pdf->getError();
-                return $error;
-            }
+return 'hahaha';
+//            $pdf->allow('AllFeatures')->fillForm([
+//                'Plantiff1' => 'SlateHouse Group Property Management LLC on behalf of "Owner or Owner LLC Name"',
+//                'Plantiff Address 1' => 'PO Box 5304',
+//                'Plantiff Address 2' => 'Lancaster, PA 17606',
+//                'Defendant1' => 'Andrew Gaidis',
+//                'Defendant Address 1' => $propertyAddressLine1,
+//                'Defendant Address 2' => $propertyAddressLine2,
+//                'County' => 'Monmouth County',
+//                'MDJ Number' => '',
+//                'MDJ Name' => '',
+//                'MDJ Address' => '',
+//                'MDJ Phone' => '',
+//                'Postage' => '',
+//                'Postage Date' => '',
+//                'Service' => '',
+//                'Service Date' => '',
+//                'CETA' => '',
+//                'CETA Date' => '',
+//                'Total' => '500',
+//                'Total Date' => '600',
+//                'Docket No' => '',
+//                'Date Filed' => '8/9/1989'
+//            ])->flatten()->saveAs($storagePath . 'pdf/Landlordand2 Tenant Complaint.pdf');
+//
+//           $pdf->send($storagePath .'/Landlordand Tenant Complaint.pdf', false);
+//
+//            if ($pdf->send($storagePath .'/Landlordand Tenant Complaint.pdf')===false) {
+//                $error = $pdf->getError();
+//                return $error;
+//            }
 
            // return Storage::download('Landlordand2 Tenant Complaint.pdf');
 
