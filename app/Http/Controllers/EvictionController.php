@@ -49,12 +49,14 @@ class EvictionController extends Controller
             $termLease = $_POST['term_lease'];
             $unjustDamages = $_POST['unjust_damages'];
 
+            $vendorPath = base_path('vendor/mikehaertl/pdftk');
+
             mail('andrew.gaidis@gmail.com', 'formulatePDF Success', 'Success!');
 
             $storagePath  = Storage::disk('public')->getDriver()->getAdapter()->getPathPrefix();
             mail('andrew.gaidis@gmail.com', 'formulatePDF Success', $storagePath);
             $pdf = new Pdf($storagePath .'/Landlordand Tenant Complaint.pdf', [
-                'command' => '/vendor/mikehaertl/pdftk',
+                'command' => $vendorPath,
                 'useExec' => false]);
 
             $pdf->allow('AllFeatures')->fillForm([
