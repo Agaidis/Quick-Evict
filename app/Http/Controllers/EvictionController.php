@@ -53,6 +53,8 @@ class EvictionController extends Controller
 
             $storagePath  = Storage::disk('public')->getDriver()->getAdapter()->getPathPrefix();
             mail('andrew.gaidis@gmail.com', 'formulatePDF Success', $storagePath);
+            $pdf = new Pdf($storagePath .'/Landlordand Tenant Complaint.pdf');
+            mail('andrew.gaidis@gmail.com', 'formulatePDF Success', $pdf);
             return $storagePath;
 
             $anotherPath = $storagePath."/Landlordand Tenant Complaint.pdf";
