@@ -79,7 +79,7 @@ class EvictionController extends Controller
                 'Date Filed' => '8/9/1989'
             ])->flatten()->saveAs($storagePath . 'pdf/Landlordand2 Tenant Complaint.pdf');
 
-         $pdf->send($storagePath .'/Landlordand Tenant Complaint.pdf', false);
+          return $pdf->send($storagePath .'/Landlordand Tenant Complaint.pdf', false);
 
            // return Storage::download('Landlordand2 Tenant Complaint.pdf');
 
