@@ -80,10 +80,15 @@ class EvictionController extends Controller
             ])->flatten()->saveAs('Landlordand2 Tenant Complaint.pdf');
 
             // Check for errors
-            if (!$pdf->saveAs('Landlordand2 Tenant Complaint.pdf')) {
+            if (!$pdf->allow('AllFeatures')) {
                 $error = $pdf->getError();
                 return $error;
             }
+
+//            if (!$pdf->saveAs('Landlordand2 Tenant Complaint.pdf')) {
+//                $error = $pdf->getError();
+//                return $error;
+//            }
 
            $pdf->send($storagePath .'pdf/Landlordand Tenant Complaint.pdf', true);
 return 'whatever';
