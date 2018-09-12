@@ -53,7 +53,9 @@ class EvictionController extends Controller
 
             $storagePath  = Storage::disk('public')->getDriver()->getAdapter()->getPathPrefix();
             mail('andrew.gaidis@gmail.com', 'formulatePDF Success', $storagePath);
-            $pdf = new Pdf($storagePath .'/Landlordand Tenant Complaint.pdf');
+            $pdf = new Pdf($storagePath .'/Landlordand Tenant Complaint.pdf', [
+                'command' => '/vendor/mikehaertl/pdftk',
+                'useExec' => false]);
 
             $pdf->allow('AllFeatures')->fillForm([
                 'Plantiff1' => 'SlateHouse Group Property Management LLC on behalf of "Owner or Owner LLC Name"',
