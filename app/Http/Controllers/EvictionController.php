@@ -48,17 +48,22 @@ class EvictionController extends Controller
             $rentedBy = $_POST['rented_by'];
             $termLease = $_POST['term_lease'];
             $unjustDamages = $_POST['unjust_damages'];
+
             mail('andrew.gaidis@gmail.com', 'formulatePDF Success', 'Success!');
-            $contents = asset('storage/Landlordand Tenant Complaint.pdf');
-            return $contents;
-            mail('andrew.gaidis@gmail.com', 'formulatePDF Success', $contents);
 
-            $contents = Storage::get('Landlordand Tenant Complaint.pdf');
-            return $contents;
+            $storagePath  = Storage::disk('local')->getDriver()->getAdapter()->getPathPrefix();
+            mail('andrew.gaidis@gmail.com', 'formulatePDF Success', $storagePath);
+
+            $anotherPath = $storagePath."/Landlordand Tenant Complaint.pdf";
+            mail('andrew.gaidis@gmail.com', 'formulatePDF Success', $anotherPath);
+
+            $path = Storage::disk('public')->path("Landlordand Tenant Complaint.pdf");
+            mail('andrew.gaidis@gmail.com', 'formulatePDF Success', $path);
+
+            return $storagePath;
 
 
 
-            return $_POST;
         } catch ( \Exception $e) {
             mail('andrew.gaidis@gmail.com', 'formulatePDF Error', $e->getMessage());
         }
