@@ -148,7 +148,7 @@ return [
         Illuminate\View\ViewServiceProvider::class,
         FarhanWazir\GoogleMaps\GMapsServiceProvider::class,
         GoogleMaps\ServiceProvider\GoogleMapsServiceProvider::class,
-        Barryvdh\DomPDF\ServiceProvider::class,
+
 
         /*
          * Package Service Providers...
