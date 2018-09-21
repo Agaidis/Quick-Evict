@@ -53,8 +53,8 @@ class EvictionController extends Controller
 
             mail('andrew.gaidis@gmail.com', 'formulatePDF Success', 'Success!');
 
-            $storagePath  = Storage::disk('public')->getDriver()->getAdapter()->getPathPrefix();
-            mail('andrew.gaidis@gmail.com', 'formulatePDF Success', $storagePath);
+            $storagePath  = Storage::disk('spaces')->;
+          //  mail('andrew.gaidis@gmail.com', 'formulatePDF Success', $storagePath);
             $pdf = new Pdf($storagePath .'/Landlordand Tenant Complaint.pdf', [
                 'command' => $vendorPath,
                 'useExec' => false]);
@@ -81,8 +81,9 @@ class EvictionController extends Controller
                 'Total Date' => '600',
                 'Docket No' => '',
                 'Date Filed' => '8/9/1989'
-            ])->flatten()->saveAs('Landlordand2 Tenant Complaint.pdf');
-
+            ])    ->execute();
+            $content = file_get_contents( (string) $pdf->getTmpFile() );//->flatten()->saveAs('Landlordand2 Tenant Complaint.pdf');
+            return $content;
             // Check for errors
             if (!$pdf->allow('AllFeatures')) {
                 $error = $pdf->getError();
@@ -93,7 +94,7 @@ class EvictionController extends Controller
                 $error = $pdf->getError();
                 return $error;
             }
-
+            Storage::disk('spaces')->putFile('uploads', request()->file, 'public');
            $pdf->send($storagePath .'pdf/Landlordand Tenant Complaint.pdf', true);
 
             return 'whatever';
