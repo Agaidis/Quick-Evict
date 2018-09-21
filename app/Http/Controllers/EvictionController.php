@@ -49,7 +49,7 @@ class EvictionController extends Controller
             $termLease = $_POST['term_lease'];
             $unjustDamages = $_POST['unjust_damages'];
 
-            $vendorPath = public_path('mikehaertl/php-pdftk');
+            $vendorPath = base_path('mikehaertl/php-pdftk');
 
             $storagePath  = Storage::disk('spaces')->getDriver()->getAdapter()->getPathPrefix();
 
