@@ -142,7 +142,7 @@ p.cls_010{font-family:Arial,serif;font-size:8.1px;color:rgb(0,0,0);font-weight:n
 </p></body></html>');
 
 // (Optional) Setup the paper size and orientation
-        $dompdf->setPaper('A4', 'landscape');
+        $dompdf->setPaper('A4', 'portrait');
 
 // Render the HTML as PDF
         $dompdf->render();
