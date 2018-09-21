@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Auth;
 use GMaps;
-use Barryvdh\DomPDF\PDF;
+use Barryvdh\DomPDF\Facade as PDF;
 
 
 class EvictionController extends Controller
@@ -50,7 +50,7 @@ class EvictionController extends Controller
             $unjustDamages = $_POST['unjust_damages'];
 
 
-            $pdf = App::make('dompdf.wrapper');
+            $pdf = PDF::make('dompdf.wrapper');
             $pdf->loadHTML('<h1>Test</h1>');
             return $pdf->stream();
 
