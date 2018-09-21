@@ -92,13 +92,12 @@ class EvictionController extends Controller
                 return $error;
             }
 
-          // $pdf->send($storagePath .'pdf/Landlordand Tenant Complaint.pdf', true);
+           $pdf->send($storagePath .'pdf/Landlordand Tenant Complaint.pdf', true);
 
-            return 'whatever';
-//            if ($pdf->send($storagePath .'/Landlordand Tenant Complaint.pdf')===false) {
-//                $error = $pdf->getError();
-//                return $error;
-//            }
+            if ($pdf->send($storagePath .'/Landlordand Tenant Complaint.pdf')===false) {
+                $error = $pdf->getError();
+                return $error;
+            }
 
            // return Storage::download('Landlordand2 Tenant Complaint.pdf');
 
