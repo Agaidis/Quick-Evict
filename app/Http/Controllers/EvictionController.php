@@ -22,7 +22,18 @@ class EvictionController extends Controller
 //        if (Auth::guest()) {
 //            return view('/login');
 //        } else {
+// instantiate and use the dompdf class
+        $dompdf = new Dompdf();
+        $dompdf->loadHtml('<h1>Fuck off</h1>');
 
+// (Optional) Setup the paper size and orientation
+        $dompdf->setPaper('A4', 'landscape');
+
+// Render the HTML as PDF
+        $dompdf->render();
+
+// Output the generated PDF to Browser
+        $dompdf->stream();
             return view('eviction', compact('map'));
      //   }
     }
@@ -52,7 +63,7 @@ class EvictionController extends Controller
 
 // instantiate and use the dompdf class
 $dompdf = new Dompdf();
-$dompdf->loadHtml('<div>Fuck off</div>');
+$dompdf->loadHtml('<span>Fuck off</span>');
 
 // (Optional) Setup the paper size and orientation
 $dompdf->setPaper('A4', 'landscape');
