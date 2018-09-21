@@ -138,12 +138,6 @@
                                         </div>
                                         <button type="button" id="pdf_download_btn" class="btn btn-primary">Download PDF File</button>
 
-
-
-
-
-
-
                                 {{--<h3 class="major_labels">Signature/Payment</h3>--}}
                                     {{--<script src="https://js.stripe.com/v3/"></script>--}}
 
@@ -158,16 +152,9 @@
                                         {{--</div>--}}
                                         {{--<button type="button" class="btn btn-primary">Submit Payment</button>--}}
                                     {{--</form>--}}
-
                             </div>
                             </form>
-                            <form class="form-horizontal" role="form" method="POST" id="request-form" enctype="multipart/form-data" action={{ url('/online-eviction/add-file') }} >
-                                <input type="hidden" name="_token" value="{{ Session::token() }}">
-                                <input type="file" name="pdf"/>
-                                <button id="add_file_btn" type="submit" class="btn btn-success">Submit File</button>
-                            </form>
                         </div>
-
                     </div>
                 </div>
             </div>
