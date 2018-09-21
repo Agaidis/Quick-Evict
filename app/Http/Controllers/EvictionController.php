@@ -3,10 +3,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Auth;
 use GMaps;
-use mikehaertl\pdftk\Pdf;
-use Illuminate\Support\Facades\Storage;
+use Barryvdh\DomPDF\PDF;
 
 
 class EvictionController extends Controller
@@ -49,93 +49,10 @@ class EvictionController extends Controller
             $termLease = $_POST['term_lease'];
             $unjustDamages = $_POST['unjust_damages'];
 
-            $vendorPath = public_path('mikehaertl/php-pdftk');
-            mail('andrew.gaidis@gmail.com', 'forge', $vendorPath);
-            $storagePath  = Storage::disk('spaces')->getDriver()->getAdapter()->getPathPrefix();
 
-            $pdf = new Pdf($storagePath .'/Landlordand Tenant Complaint.pdf', [
-                'command' => $vendorPath,
-                'useExec' => false]);
-
-            $pdf->allow('AllFeatures')->fillForm([
-                'Plantiff1' => 'SlateHouse Group Property Management LLC on behalf of "Owner or Owner LLC Name"',
-                'Plantiff Address 1' => 'PO Box 5304',
-                'Plantiff Address 2' => 'Lancaster, PA 17606',
-                'Defendant1' => 'Andrew Gaidis',
-                'Defendant Address 1' => $propertyAddressLine1,
-                'Defendant Address 2' => $propertyAddressLine2,
-                'County' => 'Monmouth County',
-                'MDJ Number' => '',
-                'MDJ Name' => '',
-                'MDJ Address' => '',
-                'MDJ Phone' => '',
-                'Postage' => '',
-                'Postage Date' => '',
-                'Service' => '',
-                'Service Date' => '',
-                'CETA' => '',
-                'CETA Date' => '',
-                'Total' => '500',
-                'Total Date' => '600',
-                'Docket No' => '',
-                'Date Filed' => '8/9/1989'
-            ])->flatten()->saveAs('Landlordand2 Tenant Complaint.pdf');
-
-            // Check for errors
-            if (!$pdf->allow('AllFeatures')) {
-                $error = $pdf->getError();
-                $responseBody['line'] = '87';
-                $responseBody['error'] = $error;
-                return $responseBody;
-            }
-
-//            if (!$pdf->saveAs('Landlordand2 Tenant Complaint.pdf')) {
-//                $error = $pdf->getError();
-//                $responseBody['line'] = '94';
-//                $responseBody['error'] = $error;
-//                return $responseBody;
-//            }
-
-           $pdf->send($storagePath .'pdf/Landlordand Tenant Complaint.pdf', true);
-
-            if ($pdf->send($storagePath .'/Landlordand Tenant Complaint.pdf')===false) {
-                $error = $pdf->getError();
-                $responseBody['line'] = '103';
-                $responseBody['error'] = $error;
-                return $responseBody;
-            }
-
-           // return Storage::download('Landlordand2 Tenant Complaint.pdf');
-
-
-         //   return $storagePath;
-
-//                '' => '',
-//                '' => '',
-//                '' => '',
-//                '' => '',
-//                '' => '',
-//                '' => '',
-//                '' => '',
-//                '' => '',
-//                '' => '',
-//                '' => '',
-//                '' => '',
-//                '' => '',
-//                '' => '',
-//                '' => '',
-//                '' => '',
-//                '' => '',
-//                '' => '',
-//            $anotherPath = $storagePath."/Landlordand Tenant Complaint.pdf";
-//            mail('andrew.gaidis@gmail.com', 'formulatePDF Success', $anotherPath);
-//            return $anotherPath;
-//
-//            $path = Storage::disk('public')->path("Landlordand Tenant Complaint.pdf");
-//            mail('andrew.gaidis@gmail.com', 'formulatePDF Success', $path);
-//            return $path;
-
-
+            $pdf = App::make('dompdf.wrapper');
+            $pdf->loadHTML('<h1>Test</h1>');
+            return $pdf->stream();
 
         } catch ( \Exception $e) {
             mail('andrew.gaidis@gmail.com', 'formulatePDF Error', $e->getMessage());

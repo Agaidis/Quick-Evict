@@ -148,6 +148,7 @@ return [
         Illuminate\View\ViewServiceProvider::class,
         FarhanWazir\GoogleMaps\GMapsServiceProvider::class,
         GoogleMaps\ServiceProvider\GoogleMapsServiceProvider::class,
+        Barryvdh\DomPDF\ServiceProvider::class,
 
         /*
          * Package Service Providers...
@@ -210,7 +211,8 @@ return [
         'URL' => Illuminate\Support\Facades\URL::class,
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
-        'GMaps' => FarhanWazir\GoogleMaps\Facades\GMapsFacade::class
+        'GMaps' => FarhanWazir\GoogleMaps\Facades\GMapsFacade::class,
+        'PDF' => Barryvdh\DomPDF\Facade::class,
 
     ],
 
