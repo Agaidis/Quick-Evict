@@ -54,7 +54,7 @@ class EvictionController extends Controller
             $storagePath  = Storage::disk('spaces')->getDriver()->getAdapter()->getPathPrefix();
 
             $pdf = new Pdf($storagePath .'/Landlordand Tenant Complaint.pdf', [
-                'command' => $vendorPath,
+               // 'command' => $vendorPath,
                 'useExec' => false]);
 
             $pdf->allow('AllFeatures')->fillForm([
