@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Auth;
 use GMaps;
 use Barryvdh\DomPDF\Facade as PDF;
+use Dompdf\Dompdf;
 
 
 class EvictionController extends Controller
@@ -21,7 +22,17 @@ class EvictionController extends Controller
 //        if (Auth::guest()) {
 //            return view('/login');
 //        } else {
+        $dompdf = new Dompdf();
+        $dompdf->loadHtml('hello world');
 
+// (Optional) Setup the paper size and orientation
+        $dompdf->setPaper('A4', 'landscape');
+
+// Render the HTML as PDF
+        $dompdf->render();
+
+// Output the generated PDF to Browser
+        $dompdf->stream();
             return view('eviction', compact('map'));
      //   }
     }
@@ -49,8 +60,22 @@ class EvictionController extends Controller
             $termLease = $_POST['term_lease'];
             $unjustDamages = $_POST['unjust_damages'];
 
+// instantiate and use the dompdf class
+$dompdf = new Dompdf();
+$dompdf->loadHtml('hello world');
+
+// (Optional) Setup the paper size and orientation
+$dompdf->setPaper('A4', 'landscape');
+
+// Render the HTML as PDF
+$dompdf->render();
+
+// Output the generated PDF to Browser
+$dompdf->stream();
+
             $pdf = App::make('dompdf.wrapper');
             $pdf->loadHTML('<h1>Test</h1>');
+            $pdf->download();
             return $pdf->stream();
 
         } catch ( \Exception $e) {

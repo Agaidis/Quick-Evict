@@ -136,7 +136,7 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <button type="submit" id="pdf_download_btn" class="btn btn-primary">Download PDF File</button>
+                                        <button type="button" id="pdf_download_btn" class="btn btn-primary">Download PDF File</button>
 
 
 
