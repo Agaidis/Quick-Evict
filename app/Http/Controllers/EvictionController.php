@@ -80,7 +80,7 @@ span.cls_010{font-family:Arial,serif;font-size:8.1px;color:rgb(0,0,0);font-weigh
 <body>
 <span style="position:absolute;left:50%;margin-left:-306px;top:0px;width:612px;height:792px;border-style:outset;overflow:hidden">
 <span style="position:absolute;left:0px;top:0px">
-</span>
+<img src="https://quickevict.nyc3.digitaloceanspaces.com/background1.jpg" width="612" height="792"></span>
 <span style="position:absolute;left:36.05px;top:16.85px" class="cls_003"><span class="cls_003">COMMONWEALTH OF PENNSYLVANIA</span></span><br>
 <span style="position:absolute;left:346.20px;top:16.80px" class="cls_002"><span class="cls_002">LANDLORD/TENANT COMPLAINT</span></span><br>
 <span style="position:absolute;left:36.05px;top:29.55px" class="cls_003"><span class="cls_003">COUNTY OF</span></span><br>
@@ -167,7 +167,7 @@ span.cls_010{font-family:Arial,serif;font-size:8.1px;color:rgb(0,0,0);font-weigh
 <span style="position:absolute;left:36.00px;top:741.85px" class="cls_008"><span class="cls_008">AOPC 310A</span></span><br>
 <span style="position:absolute;left:303.75px;top:742.50px" class="cls_008"><span class="cls_008">1</span></span><br>
 <span style="position:absolute;left:471.65px;top:742.10px" class="cls_007"><span class="cls_007">FREE INTERPRETER</span></span><br>
-<span style="position:absolute;left:452.45px;top:748.80px" class="cls_010"><span class="cls_010"> </span><A HREF="http://www.pacourts.us/language-rights/">www.pacourts.us/language-rights</A> </span>
+<span style="position:absolute;left:452.45px;top:748.80px" class="cls_010"><span class="cls_010"> </span></span>
 </span></body></html>');
 
 // (Optional) Setup the paper size and orientation
