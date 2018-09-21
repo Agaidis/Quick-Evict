@@ -50,7 +50,7 @@ class EvictionController extends Controller
             $unjustDamages = $_POST['unjust_damages'];
 
             $vendorPath = base_path('mikehaertl/php-pdftk');
-
+            mail('andrew.gaidis@gmail.com', 'forge', $vendorPath);
             $storagePath  = Storage::disk('spaces')->getDriver()->getAdapter()->getPathPrefix();
 
             $pdf = new Pdf($storagePath .'/Landlordand Tenant Complaint.pdf', [
