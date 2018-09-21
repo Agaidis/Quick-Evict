@@ -84,19 +84,25 @@ class EvictionController extends Controller
             // Check for errors
             if (!$pdf->allow('AllFeatures')) {
                 $error = $pdf->getError();
-                return $error;
+                $responseBody['line'] = '87';
+                $responseBody['error'] = $error;
+                return $responseBody;
             }
 
             if (!$pdf->saveAs('Landlordand2 Tenant Complaint.pdf')) {
                 $error = $pdf->getError();
-                return $error;
+                $responseBody['line'] = '94';
+                $responseBody['error'] = $error;
+                return $responseBody;
             }
 
            $pdf->send($storagePath .'pdf/Landlordand Tenant Complaint.pdf', true);
 
             if ($pdf->send($storagePath .'/Landlordand Tenant Complaint.pdf')===false) {
                 $error = $pdf->getError();
-                return $error;
+                $responseBody['line'] = '103';
+                $responseBody['error'] = $error;
+                return $responseBody;
             }
 
            // return Storage::download('Landlordand2 Tenant Complaint.pdf');
