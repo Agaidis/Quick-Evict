@@ -49,8 +49,7 @@ class EvictionController extends Controller
             $termLease = $_POST['term_lease'];
             $unjustDamages = $_POST['unjust_damages'];
 
-
-            $pdf = PDF::make('dompdf.wrapper');
+            $pdf = App::make('dompdf.wrapper');
             $pdf->loadHTML('<h1>Test</h1>');
             return $pdf->stream();
 
