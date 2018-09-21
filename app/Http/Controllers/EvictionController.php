@@ -24,7 +24,7 @@ class EvictionController extends Controller
 //        } else {
 // instantiate and use the dompdf class
         $dompdf = new Dompdf();
-        $dompdf->loadHtml('<h1>Fuck off</h1>');
+        $dompdf->loadHtml('<p>Fuck off</p>');
 
 // (Optional) Setup the paper size and orientation
         $dompdf->setPaper('A4', 'landscape');
