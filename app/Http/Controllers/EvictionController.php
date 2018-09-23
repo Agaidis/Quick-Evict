@@ -19,34 +19,12 @@ class EvictionController extends Controller
      */
     public function index()
     {
-        $dompdf = new Dompdf();
-        $dompdf->loadHtml('<h1>tag</h1>');
-
-// (Optional) Setup the paper size and orientation
-        $dompdf->setPaper('A4', 'portrait');
-
-// Render the HTML as PDF
-        $dompdf->render();
-
-// Output the generated PDF to Browser
-        $dompdf->stream();
-
             return view('eviction', compact('map'));
 
     }
 
     public function formulatePDF() {
-        $dompdf = new Dompdf();
-        $dompdf->loadHtml('<h1>tag</h1>');
 
-// (Optional) Setup the paper size and orientation
-        $dompdf->setPaper('A4', 'portrait');
-
-// Render the HTML as PDF
-        $dompdf->render();
-
-// Output the generated PDF to Browser
-        $dompdf->stream();
         try {
             $additionalRent = $_POST['addit_rent'];
             $attorneyFees = $_POST['attorney_fees'];
@@ -65,13 +43,13 @@ class EvictionController extends Controller
             $dompdf = new Dompdf();
             $dompdf->loadHtml('<h1>tag</h1>');
 
-// (Optional) Setup the paper size and orientation
+            // (Optional) Setup the paper size and orientation
             $dompdf->setPaper('A4', 'portrait');
 
-// Render the HTML as PDF
+            // Render the HTML as PDF
             $dompdf->render();
 
-// Output the generated PDF to Browser
+            // Output the generated PDF to Browser
             $dompdf->stream();
 
 
