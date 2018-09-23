@@ -130,7 +130,7 @@ $(document).ready(function () {
             geodesic: true,
             strokeColor: '#A7A4A3',
             strokeOpacity: 1.0,
-            strokeWeight: 4,
+            strokeWeight: 2,
             fillColor: '#B1AAA9',
             fillOpacity: 0.35
         });
@@ -140,7 +140,7 @@ $(document).ready(function () {
             geodesic: true,
             strokeColor: '#A7A4A3',
             strokeOpacity: 1.0,
-            strokeWeight: 4,
+            strokeWeight: 2,
             fillColor: '#B1AAA9',
             fillOpacity: 0.35
         });
