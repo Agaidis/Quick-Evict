@@ -8,7 +8,7 @@ $(document).ready(function () {
     $('#filing_date').val(new Date());
     $('#landlord').prop('hidden', true);
 
-    $('#modal').modal('show');
+    $('.modal').modal('show');
 
 
 
