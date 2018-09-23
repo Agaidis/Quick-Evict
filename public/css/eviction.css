@@ -44,23 +44,6 @@ form.eviction_form fieldset {
       margin-left: 30%;
   }
 
-
-
-
-
-
-
-
-
-
-html, body {
-    height: 100%;
-    margin: 0;
-    padding: 0;
-}
-#map {
-    height: 100%;
-}
 .controls {
     margin-top: 10px;
     border: 1px solid transparent;
