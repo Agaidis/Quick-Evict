@@ -103,7 +103,7 @@ $(document).ready(function () {
     function initMap() {
         map = new google.maps.Map(document.getElementById('map'), {
             center: {lat: 40.144128, lng: -76.311420},
-            zoom: 7,
+            zoom: 12,
             scaleControl: true
         });
         bounds = new google.maps.LatLngBounds();
@@ -116,10 +116,10 @@ $(document).ready(function () {
         polygon = new google.maps.Polygon({
             path: area,
             geodesic: true,
-            strokeColor: '#FFd000',
+            strokeColor: '#A7A4A3',
             strokeOpacity: 1.0,
             strokeWeight: 4,
-            fillColor: '#FFd000',
+            fillColor: '#B1AAA9',
             fillOpacity: 0.35
         });
 
