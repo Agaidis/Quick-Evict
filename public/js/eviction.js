@@ -148,7 +148,7 @@ $(document).ready(function () {
             newBounds.extend(place.geometry.location);
             map.fitBounds(newBounds);
             if (google.maps.geometry.poly.containsLocation(place.geometry.location, polygon)){
-                $('.modal-body').html('<span>County: Lancaster</span><br>' +
+                $('.modal-body').html('<b>County: Lancaster</b><br>' +
                     '<b>Court #</b>: 02-2-08<br>' +
                     '<b>Court Mailing Address</b>: 690 Furnace Hills Pike, Lititz, PA 17543<br>' +
                     '<b>Court Phone #</b>: 717-626-0258<br>' +
