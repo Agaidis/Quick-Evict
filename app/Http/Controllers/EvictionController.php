@@ -64,6 +64,7 @@ class EvictionController extends Controller
         } catch ( \Exception $e) {
             mail('andrew.gaidis@gmail.com', 'formulatePDF Error', $e->getMessage());
         }
+        return 'ok';
     }
 
 //    public function addFile(Request $request) {
