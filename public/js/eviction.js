@@ -8,8 +8,27 @@ $(document).ready(function () {
     var magistrate02208;
     var magistrate02102;
     var bounds;
-    window.onload = initMap;
-    function initMap() {
+    var center = new google.maps.LatLng(40.149660, -76.306370);
+    //Create the areas for magistrates
+    var magistrate02102Area= [
+        {lat: 40.125878 , lng: -76.378521},
+        {lat: 40.095704 , lng: -76.362540},
+        {lat: 40.097141 , lng: -76.277911},
+        {lat: 40.119835 , lng: -76.279963},
+        {lat: 40.125878 , lng: -76.378521},
+    ];
+
+    var magistrate02208Area= [
+        {lat: 40.224045 , lng: -76.299618},
+        {lat: 40.205594 , lng: -76.397723},
+        {lat: 40.168318 , lng: -76.375707},
+        {lat: 40.126021 , lng: -76.3785013},
+        {lat: 40.119901 , lng: -76.280041},
+        {lat: 40.160385 , lng: -76.228435},
+        {lat: 40.208843 , lng: -76.228908},
+        {lat: 40.224045 , lng: -76.299618}
+    ];
+
         map = new google.maps.Map(document.getElementById('map'), {
             center: {lat: 40.144128, lng: -76.311420},
             zoom: 9,
@@ -87,29 +106,10 @@ $(document).ready(function () {
                 alert('The address is outside of all areas.');
             }
         });
-    }
 
-     var center = new google.maps.LatLng(40.149660, -76.306370);
 
-    //Create the areas for magistrates
-    var magistrate02102Area= [
-        {lat: 40.125878 , lng: -76.378521},
-        {lat: 40.095704 , lng: -76.362540},
-        {lat: 40.097141 , lng: -76.277911},
-        {lat: 40.119835 , lng: -76.279963},
-        {lat: 40.125878 , lng: -76.378521},
-    ];
 
-    var magistrate02208Area= [
-         {lat: 40.224045 , lng: -76.299618},
-         {lat: 40.205594 , lng: -76.397723},
-         {lat: 40.168318 , lng: -76.375707},
-         {lat: 40.126021 , lng: -76.3785013},
-         {lat: 40.119901 , lng: -76.280041},
-         {lat: 40.160385 , lng: -76.228435},
-         {lat: 40.208843 , lng: -76.228908},
-         {lat: 40.224045 , lng: -76.299618}
-     ];
+
 
     $('input[type=radio][name=rented_by]').change(function(){
        console.log($(this)[0].id);
