@@ -100,6 +100,7 @@ $(document).ready(function () {
     var map;
     var marker;
     var magistrate02208;
+    var magistrate02102;
     var bounds;
     window.onload = initMap;
     function initMap() {
@@ -115,8 +116,17 @@ $(document).ready(function () {
         marker = new google.maps.Marker({
             position: center
         });
-        magistrate02208 = new google.maps.Polygon({
-            path: area,
+        var input = /** @type {!HTMLInputElement} */(
+            document.getElementById('pac-input'));
+        var types = document.getElementById('type-selector');
+        map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
+        map.controls[google.maps.ControlPosition.TOP_LEFT].push(types);
+
+        var autocomplete = new google.maps.places.Autocomplete(input);
+
+        //Create the polygons
+        magistrate02102 = new google.maps.Polygon({
+            path: magistrate02102Area,
             geodesic: true,
             strokeColor: '#A7A4A3',
             strokeOpacity: 1.0,
@@ -125,21 +135,26 @@ $(document).ready(function () {
             fillOpacity: 0.35
         });
 
-        polygon.setMap(map);
+        magistrate02208 = new google.maps.Polygon({
+            path: magistrate02208Area,
+            geodesic: true,
+            strokeColor: '#A7A4A3',
+            strokeOpacity: 1.0,
+            strokeWeight: 4,
+            fillColor: '#B1AAA9',
+            fillOpacity: 0.35
+        });
 
-        var input = /** @type {!HTMLInputElement} */(
-            document.getElementById('pac-input'));
-        var types = document.getElementById('type-selector');
-        map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
-        map.controls[google.maps.ControlPosition.TOP_LEFT].push(types);
+        magistrate02102.setMap(map);
+        magistrate02208.setMap(map);
 
-        var autocomplete = new google.maps.places.Autocomplete(input);
+
         autocomplete.addListener('place_changed', function() {
             marker.setMap(null);
             var place = autocomplete.getPlace();
             newBounds = bounds;
             if (!place.geometry) {
-                window.alert("Autocomplete's returned place contains no geometry");
+                window.alert("Returned place contains no geometry");
                 return;
             };
             marker.setPosition(place.geometry.location);
@@ -161,7 +176,17 @@ $(document).ready(function () {
     }
 
      var center = new google.maps.LatLng(40.149660, -76.306370);
-     var area= [
+
+    //Create the areas for magistrates
+    var magistrate02102Area= [
+        {lat: 40.125293 , lng: -76.374191},
+        {lat: 40.095704 , lng: -76.362540},
+        {lat: 40.097141 , lng: -76.277911},
+        {lat: 40.118574 , lng: -76.281472},
+        {lat: 40.125293 , lng: -76.374191},
+    ];
+
+    var magistrate02208Area= [
          {lat: 40.224045 , lng: -76.299618},
          {lat: 40.205594 , lng: -76.397723},
          {lat: 40.168318 , lng: -76.375707},
