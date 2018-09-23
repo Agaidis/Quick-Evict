@@ -12,7 +12,8 @@ $(document).ready(function () {
     function initMap() {
         map = new google.maps.Map(document.getElementById('map'), {
             center: {lat: 40.144128, lng: -76.311420},
-            zoom: 10
+            zoom: 14,
+            scaleControl: true
         });
         bounds = new google.maps.LatLngBounds();
         google.maps.event.addListenerOnce(map, 'tilesloaded', function(evt) {
@@ -21,7 +22,8 @@ $(document).ready(function () {
         marker = new google.maps.Marker({
             position: center
         });
-        var input = (document.getElementById('pac-input'));
+        var input = /** @type {!HTMLInputElement} */(
+            document.getElementById('pac-input'));
         var types = document.getElementById('type-selector');
         map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
         map.controls[google.maps.ControlPosition.TOP_LEFT].push(types);
@@ -54,7 +56,7 @@ $(document).ready(function () {
 
 
         autocomplete.addListener('place_changed', function() {
-            //marker.setMap(null);
+            marker.setMap(null);
             var place = autocomplete.getPlace();
             newBounds = bounds;
             if (!place.geometry) {
@@ -86,6 +88,8 @@ $(document).ready(function () {
             }
         });
     }
+
+     var center = new google.maps.LatLng(40.149660, -76.306370);
 
     //Create the areas for magistrates
     var magistrate02102Area= [
