@@ -29,24 +29,6 @@
                                 <div class="col-md-12 offset-1">
                                     <h4 class="major_labels">Property Address</h4>
 
-                                    <div id="address_container">
-                                        <div class="form-group">
-                                            <div class="row">
-                                                <div class="col-sm-8">
-                                                    <label class="labels">Address Line 1</label>
-                                                    <input class="form-control" placeholder="Street Address" type="text" id="property_address_line_1" name="property_address_1"/>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="form-group">
-                                            <div class="row">
-                                                <div class="col-sm-8">
-                                                    <label class="labels">Address Line 2</label>
-                                                    <input class="form-control" placeholder="City, State, Zip code" type="text" id="property_address_line_2" name="property_address_2"/>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
                                         <h4 class="major_labels">Owner Information</h4>
                                     <div id="owner_container">
                                         <div class="form-group">

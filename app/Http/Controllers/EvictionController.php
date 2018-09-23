@@ -39,8 +39,6 @@ class EvictionController extends Controller
 //            $leaseType = $_POST['lease_type'];
 //            $ownerName = $_POST['owner_name'];
 //            $ownerPhone = $_POST['owner_phone'];
-//            $propertyAddressLine1 = $_POST['property_address_1'];
-//            $propertyAddressLine2 = $_POST['property_address_2'];
 //            $quitNotice = $_POST['quit_notice'];
 //            $rentedBy = $_POST['rented_by'];
 //            $termLease = $_POST['term_lease'];
