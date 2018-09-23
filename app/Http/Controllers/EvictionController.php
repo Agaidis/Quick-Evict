@@ -53,13 +53,13 @@ class EvictionController extends Controller
             // Output the generated PDF to Browser
             $dompdf->stream();
 
-            return redirect()->back();
+            return back();
 
         } catch ( \Exception $e) {
-            return redirect()->back();
+            return back();
             mail('andrew.gaidis@gmail.com', 'formulatePDF Error', $e->getMessage());
         }
-        return redirect()->back();
+        return back();
     }
 
 //    public function addFile(Request $request) {
