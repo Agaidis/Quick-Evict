@@ -92,7 +92,6 @@ $(document).ready(function () {
     });
 
     $('#pdf_download_btn').on('click', function() {
-       console.log("were clickin");
        var data = $('#eviction_form').serialize();
         $.ajaxSetup({
             headers: {
