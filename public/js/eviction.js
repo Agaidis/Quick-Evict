@@ -109,7 +109,7 @@ $(document).ready(function () {
             data: data,
 
             success: function (data) {
-               console.log(data);
+                location.reload();
             },
             error: function (data) {
                 console.log(data);
