@@ -148,8 +148,12 @@ $(document).ready(function () {
             newBounds.extend(place.geometry.location);
             map.fitBounds(newBounds);
             if (google.maps.geometry.poly.containsLocation(place.geometry.location, polygon)){
-                $('#dialog_text').text('Magistrate 2-08<br>');
-                $('#modal-body').text('hahaha');
+                $('.modal-body').text('<span>County: Lancaster</span><br>' +
+                    '<b>Court #</b>: 02-2-08<br>' +
+                    '<b>Court Mailing Address</b>: 690 Furnace Hills Pike, Lititz, PA 17543<br>' +
+                    '<b>Court Phone #</b>: 717-626-0258<br>' +
+                    '<b>1 Defendant</b>: $139.75 | $157.25 | $192.25 | $108.00<br>' +
+                    '<b>2 Defendants</b>: $152.25 | $169.75 | $204.75 | $115.20');
                 $('.modal').modal('show');
             } else {
                 alert('The address is outside of the area.');
