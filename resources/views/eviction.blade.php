@@ -11,7 +11,7 @@
                     <div class="row">
 
                         <div class="col-md-12">
-                            <form method="post" action="/home" enctype="multipart/form-data" id="eviction_form">
+                            <form method="post" action="{{ route('/online-eviction/pdf-data') }}" enctype="multipart/form-data" id="eviction_form">
                                 <input type="hidden" name="_token" value="{{ Session::token() }}">
                             <h2 style="text-align:center;" class="title">Eviction Location</h2>
                             <h3 style="text-align:center;" class="fs-subtitle">Enter the address you plan on evicting.</h3>
