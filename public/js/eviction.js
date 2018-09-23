@@ -151,6 +151,7 @@ $(document).ready(function () {
             map.fitBounds(newBounds);
             if (google.maps.geometry.poly.containsLocation(place.geometry.location, polygon)){
                 $('#dialog_text').text('Magistrate 2-08<br>');
+                $( "#dialog" ).dialog( "open" );
             } else {
                 alert('The address is outside of the area.');
             };
