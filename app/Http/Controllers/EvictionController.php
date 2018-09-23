@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Auth;
 use GMaps;
 use Barryvdh\DomPDF\Facade as PDF;
 use Dompdf\Dompdf;
+use Illuminate\Support\Facades\Storage;
 
 
 class EvictionController extends Controller
@@ -50,9 +51,8 @@ class EvictionController extends Controller
             $dompdf->render();
 
             // Output the generated PDF to Browser
-            $dompdf->stream();
-            file_put_contents('Brochure.pdf', $dompdf->output());
-
+      //      $dompdf->stream();
+            Storage::disk('spaces')->putFile('uploads', $dompdf->output(), 'public');
 
         } catch ( \Exception $e) {
             mail('andrew.gaidis@gmail.com', 'formulatePDF Error', $e->getMessage());
