@@ -58,8 +58,6 @@ class EvictionController extends Controller
 // Output the generated PDF to Browser
             $dompdf->stream();
 
-            exit;
-
 
         } catch ( \Exception $e) {
             mail('andrew.gaidis@gmail.com', 'formulatePDF Error', $e->getMessage());

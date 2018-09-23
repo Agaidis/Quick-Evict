@@ -9,10 +9,7 @@ $(document).ready(function () {
     $('#landlord').prop('hidden', true);
 
 
-        map = new google.maps.Map(document.getElementById('map'), {
-            center: {lat: 40.144128, lng: -76.311420},
-            zoom: 7
-        });
+
 
 
     // Create the search box and link it to the UI element.
@@ -20,59 +17,97 @@ $(document).ready(function () {
     var searchBox = new google.maps.places.SearchBox(input);
 
 
-    // Bias the SearchBox results towards current map's viewport.
-    map.addListener('bounds_changed', function() {
-        searchBox.setBounds(map.getBounds());
-    });
 
-    var markers = [];
-    // Listen for the event fired when the user selects a prediction and retrieve
-    // more details for that place.
-    searchBox.addListener('places_changed', function() {
-        var places = searchBox.getPlaces();
 
-        if (places.length == 0) {
-            return;
-        }
+    var map;
+    var marker;
+    var polygon;
+    var bounds;
+    window.onload = initMap;
+    function initMap() {
+        map = new google.maps.Map(document.getElementById('map'), {
+            center: {lat: 40.144128, lng: -76.311420},
+            zoom: 7
+        });
+        bounds = new google.maps.LatLngBounds();
+        google.maps.event.addListenerOnce(map, 'tilesloaded', function(evt) {
+            bounds = map.getBounds();
+        });
+        marker = new google.maps.Marker({
+            position: center
+        });
+        polygon = new google.maps.Polygon({
+            path: area,
+            geodesic: true,
+            strokeColor: '#FFd000',
+            strokeOpacity: 1.0,
+            strokeWeight: 4,
+            fillColor: '#FFd000',
+            fillOpacity: 0.35
+        });
 
-        // Clear out the old markers.
-        markers.forEach(function(marker) {
+        polygon.setMap(map);
+
+      //  var input = /** @type {!HTMLInputElement} */(
+      //      document.getElementById('pac-input'));
+       // var types = document.getElementById('type-selector');
+    //    map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
+    //    map.controls[google.maps.ControlPosition.TOP_LEFT].push(types);
+
+        var autocomplete = new google.maps.places.Autocomplete(input);
+        autocomplete.addListener('place_changed', function() {
             marker.setMap(null);
-        });
-        markers = [];
-
-        // For each place, get the icon, name and location.
-        var bounds = new google.maps.LatLngBounds();
-        places.forEach(function(place) {
+            var place = autocomplete.getPlace();
+            var newBounds = new google.maps.LatLngBounds();
+            newBounds = bounds;
             if (!place.geometry) {
-                console.log("Returned place contains no geometry");
+                window.alert("Autocomplete's returned place contains no geometry");
                 return;
-            }
-            var icon = {
-                url: place.icon,
-                size: new google.maps.Size(71, 150),
-                origin: new google.maps.Point(0, 0),
-                anchor: new google.maps.Point(17, 34),
-                scaledSize: new google.maps.Size(25, 25)
             };
-
-            // Create a marker for each place.
-            markers.push(new google.maps.Marker({
-                map: map,
-                icon: icon,
-                title: place.name,
-                position: place.geometry.location
-            }));
-
-            if (place.geometry.viewport) {
-                // Only geocodes have viewport.
-                bounds.union(place.geometry.viewport);
+            marker.setPosition(place.geometry.location);
+            marker.setMap(map);
+            newBounds.extend(place.geometry.location);
+            map.fitBounds(newBounds);
+            if (google.maps.geometry.poly.containsLocation(place.geometry.location, polygon)){
+                alert('The area contains the address');
             } else {
-                bounds.extend(place.geometry.location);
-            }
+                alert('The address is outside of the area.');
+            };
         });
-        map.fitBounds(bounds);
-    });
+    }
+
+    var center = new google.maps.LatLng(40.149660, -76.306370);
+    var area= [
+        {lat: 40.224045 , lng: -76.299618},
+        {lat: 40.205594 , lng: -76.397723},
+        {lat: 40.168318 , lng: -76.375707},
+        {lat: 40.126021 , lng: -76.3785013},
+        {lat: 40.119901 , lng: -76.280041},
+        {lat: 40.160385 , lng: -76.228435},
+        {lat: 40.208843 , lng: -76.228908}
+    ];
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
     $('input[type=radio][name=rented_by]').change(function(){
