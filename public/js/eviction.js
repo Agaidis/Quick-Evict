@@ -151,7 +151,6 @@ $(document).ready(function () {
                 $('#dialog_text').text('Magistrate 2-08<br>');
                 $('#modal-body').text('hahaha');
                 $('.modal').modal('show');
-                $( "#dialog" ).dialog( "open" );
             } else {
                 alert('The address is outside of the area.');
             };
