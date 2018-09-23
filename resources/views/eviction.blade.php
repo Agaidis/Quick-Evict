@@ -22,6 +22,9 @@
                                     </div>
                                 </div>
                             </div>
+                                <div id="dialog" title="Magistrate Info">
+                                    <span id="dialog_text"></span>
+                                </div>
                                 <div class="offset-1">
                                     <div id="map"></div>
                                 </div>

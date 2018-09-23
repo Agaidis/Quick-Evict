@@ -8,6 +8,10 @@ $(document).ready(function () {
     $('#filing_date').val(new Date());
     $('#landlord').prop('hidden', true);
 
+    $( function() {
+        $( "#dialog" ).dialog();
+    } );
+
 
 
 
@@ -146,7 +150,7 @@ $(document).ready(function () {
             newBounds.extend(place.geometry.location);
             map.fitBounds(newBounds);
             if (google.maps.geometry.poly.containsLocation(place.geometry.location, polygon)){
-                alert('The area contains the address');
+                $('#dialog_text').text('Magistrate 2-08<br>');
             } else {
                 alert('The address is outside of the area.');
             };
