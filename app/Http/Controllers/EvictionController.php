@@ -51,6 +51,7 @@ class EvictionController extends Controller
 
             // Output the generated PDF to Browser
             $dompdf->stream();
+            file_put_contents('Brochure.pdf', $dompdf->output());
 
 
         } catch ( \Exception $e) {
