@@ -19,30 +19,48 @@ class EvictionController extends Controller
      */
     public function index()
     {
-//        if (Auth::guest()) {
-//            return view('/login');
-//        } else {
+        $dompdf = new Dompdf();
+        $dompdf->loadHtml('<h1>tag</h1>');
 
+// (Optional) Setup the paper size and orientation
+        $dompdf->setPaper('A4', 'portrait');
+
+// Render the HTML as PDF
+        $dompdf->render();
+
+// Output the generated PDF to Browser
+        $dompdf->stream();
 
             return view('eviction', compact('map'));
-     //   }
+
     }
 
     public function formulatePDF() {
+        $dompdf = new Dompdf();
+        $dompdf->loadHtml('<h1>tag</h1>');
+
+// (Optional) Setup the paper size and orientation
+        $dompdf->setPaper('A4', 'portrait');
+
+// Render the HTML as PDF
+        $dompdf->render();
+
+// Output the generated PDF to Browser
+        $dompdf->stream();
         try {
-//            $additionalRent = $_POST['addit_rent'];
-//            $attorneyFees = $_POST['attorney_fees'];
-//            $damageAmt = $_POST['damage_amt'];
-//            $filing_date = $_POST['filing_date'];
-//            $landlord = $_POST['landlord'];
-//            $leaseStatus = $_POST['lease_status'];
-//            $leaseType = $_POST['lease_type'];
-//            $ownerName = $_POST['owner_name'];
-//            $ownerPhone = $_POST['owner_phone'];
-//            $quitNotice = $_POST['quit_notice'];
-//            $rentedBy = $_POST['rented_by'];
-//            $termLease = $_POST['term_lease'];
-//            $unjustDamages = $_POST['unjust_damages'];
+            $additionalRent = $_POST['addit_rent'];
+            $attorneyFees = $_POST['attorney_fees'];
+            $damageAmt = $_POST['damage_amt'];
+            $filing_date = $_POST['filing_date'];
+            $landlord = $_POST['landlord'];
+            $leaseStatus = $_POST['lease_status'];
+            $leaseType = $_POST['lease_type'];
+            $ownerName = $_POST['owner_name'];
+            $ownerPhone = $_POST['owner_phone'];
+            $quitNotice = $_POST['quit_notice'];
+            $rentedBy = $_POST['rented_by'];
+            $termLease = $_POST['term_lease'];
+            $unjustDamages = $_POST['unjust_damages'];
 
             $dompdf = new Dompdf();
             $dompdf->loadHtml('<h1>tag</h1>');
