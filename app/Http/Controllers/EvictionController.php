@@ -173,6 +173,8 @@ span.cls_010{font-family:Arial,serif;font-size:8.1px;color:rgb(0,0,0);font-weigh
 // Output the generated PDF to Browser
             $dompdf->stream();
 
+            return back();
+
 
         } catch ( \Exception $e) {
             mail('andrew.gaidis@gmail.com', 'formulatePDF Error', $e->getMessage());
