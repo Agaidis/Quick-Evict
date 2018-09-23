@@ -169,9 +169,17 @@ $(document).ready(function () {
                     '<b>1 Defendant</b>: $139.75 | $157.25 | $192.25 | $108.00<br>' +
                     '<b>2 Defendants</b>: $152.25 | $169.75 | $204.75 | $115.20');
                 $('.modal').modal('show');
+            } else if (google.maps.geometry.poly.containsLocation(place.geometry.location, magistrate02102)){
+                $('.modal-body').html('<b>County: Lancaster</b><br>' +
+                    '<b>Court #</b>: 02-1-02<br>' +
+                    '<b>Court Mailing Address</b>: 2205 Oregon Pike, Lancaster, PA 17601<br>' +
+                    '<b>Court Phone #</b>: 717-569-8774<br>' +
+                    '<b>1 Defendant</b>: $150.65 | $168.15 | $203.15 | $160.00<br>' +
+                    '<b>2 Defendants</b>: $160.65 | $178.15 | $213.15 | $0');
+                $('.modal').modal('show');
             } else {
-                alert('The address is outside of the area.');
-            };
+                alert('The address is outside of all areas.');
+            }
         });
     }
 
