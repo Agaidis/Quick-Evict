@@ -27,11 +27,6 @@ class EvictionController extends Controller
             return view('eviction', compact('map'));
      //   }
     }
-    
-    //When they click next step.. call this function to take their address and turn it into the maps view
-    public function getMapLocation() {
-    
-    }
 
     public function formulatePDF() {
         try {
@@ -52,7 +47,7 @@ class EvictionController extends Controller
             $unjustDamages = $_POST['unjust_damages'];
 
             $dompdf = new Dompdf();
-            $dompdf->loadHtml('<h1>tag</h1>');
+            $dompdf->loadHtml('<span>tag</span>');
 
 // (Optional) Setup the paper size and orientation
             $dompdf->setPaper('A4', 'portrait');
@@ -71,14 +66,14 @@ class EvictionController extends Controller
         }
     }
 
-    public function addFile(Request $request) {
-        try {
-            mail('andrew.gaidis@gmail.com', 'formulatePDF Success', $request);
-            $request->pdf->storeAs('pdf', $request->pdf->getClientOriginalName());
-            mail('andrew.gaidis@gmail.com', 'formulatePDF Success', $_POST['pdf']);
-            return $_POST;
-        } catch ( \Exception $e) {
-            mail('andrew.gaidis@gmail.com', 'adding File Error', $e->getMessage());
-        }
-    }
+//    public function addFile(Request $request) {
+//        try {
+//            mail('andrew.gaidis@gmail.com', 'formulatePDF Success', $request);
+//            $request->pdf->storeAs('pdf', $request->pdf->getClientOriginalName());
+//            mail('andrew.gaidis@gmail.com', 'formulatePDF Success', $_POST['pdf']);
+//            return $_POST;
+//        } catch ( \Exception $e) {
+//            mail('andrew.gaidis@gmail.com', 'adding File Error', $e->getMessage());
+//        }
+//    }
 }
