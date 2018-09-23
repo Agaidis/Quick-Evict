@@ -22,8 +22,7 @@ $(document).ready(function () {
         marker = new google.maps.Marker({
             position: center
         });
-        var input = /** @type {!HTMLInputElement} */(
-            document.getElementById('pac-input'));
+        var input = (document.getElementById('pac-input'));
         var types = document.getElementById('type-selector');
         map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
         map.controls[google.maps.ControlPosition.TOP_LEFT].push(types);
