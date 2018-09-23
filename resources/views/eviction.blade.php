@@ -136,7 +136,7 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <button type="button" id="pdf_download_btn" class="btn btn-primary">Download PDF File</button>
+                                        <button type="submit" id="pdf_download_btn" class="btn btn-primary">Download PDF File</button>
 
                                 {{--<h3 class="major_labels">Signature/Payment</h3>--}}
                                     {{--<script src="https://js.stripe.com/v3/"></script>--}}
