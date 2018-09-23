@@ -8,9 +8,7 @@ $(document).ready(function () {
     $('#filing_date').val(new Date());
     $('#landlord').prop('hidden', true);
 
-    $( function() {
-        $( "#dialog" ).dialog();
-    } );
+    $('#modal').modal('show');
 
 
 

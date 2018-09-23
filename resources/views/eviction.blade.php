@@ -22,9 +22,6 @@
                                     </div>
                                 </div>
                             </div>
-                                <div id="dialog" title="Magistrate Info">
-                                    <span id="dialog_text"></span>
-                                </div>
                                 <div class="offset-1">
                                     <div id="map"></div>
                                 </div>
@@ -140,6 +137,34 @@
                                             </div>
                                         </div>
                                         <button type="button" id="pdf_download_btn" class="btn btn-primary">Download PDF File</button>
+
+
+
+
+
+                                    <!--MODAL -->
+                                    <div class="modal" tabindex="-1" role="dialog">
+                                        <div class="modal-dialog" role="document">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title">Modal title</h5>
+                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                        <span aria-hidden="true">&times;</span>
+                                                    </button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <p>Modal body text goes here.</p>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-primary">Save changes</button>
+                                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+
 
                                 {{--<h3 class="major_labels">Signature/Payment</h3>--}}
                                     {{--<script src="https://js.stripe.com/v3/"></script>--}}
