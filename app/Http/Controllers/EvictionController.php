@@ -53,7 +53,7 @@ class EvictionController extends Controller
             // Output the generated PDF to Browser
             $dompdf->stream();
 
-            return back();
+            return view('eviction', compact('map'));
 
         } catch ( \Exception $e) {
             return back();
