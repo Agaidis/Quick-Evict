@@ -179,11 +179,11 @@ $(document).ready(function () {
 
     //Create the areas for magistrates
     var magistrate02102Area= [
-        {lat: 40.125293 , lng: -76.374191},
+        {lat: 40.125878 , lng: -76.378521},
         {lat: 40.095704 , lng: -76.362540},
         {lat: 40.097141 , lng: -76.277911},
-        {lat: 40.118574 , lng: -76.281472},
-        {lat: 40.125293 , lng: -76.374191},
+        {lat: 40.119835 , lng: -76.279963},
+        {lat: 40.125878 , lng: -76.378521},
     ];
 
     var magistrate02208Area= [
