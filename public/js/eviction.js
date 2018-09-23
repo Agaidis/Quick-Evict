@@ -99,7 +99,7 @@ $(document).ready(function () {
 
     var map;
     var marker;
-    var polygon;
+    var magistrate02208;
     var bounds;
     window.onload = initMap;
     function initMap() {
@@ -115,7 +115,7 @@ $(document).ready(function () {
         marker = new google.maps.Marker({
             position: center
         });
-        polygon = new google.maps.Polygon({
+        magistrate02208 = new google.maps.Polygon({
             path: area,
             geodesic: true,
             strokeColor: '#A7A4A3',
@@ -137,7 +137,6 @@ $(document).ready(function () {
         autocomplete.addListener('place_changed', function() {
             marker.setMap(null);
             var place = autocomplete.getPlace();
-            var newBounds = new google.maps.LatLngBounds();
             newBounds = bounds;
             if (!place.geometry) {
                 window.alert("Autocomplete's returned place contains no geometry");
@@ -147,7 +146,7 @@ $(document).ready(function () {
             marker.setMap(map);
             newBounds.extend(place.geometry.location);
             map.fitBounds(newBounds);
-            if (google.maps.geometry.poly.containsLocation(place.geometry.location, polygon)){
+            if (google.maps.geometry.poly.containsLocation(place.geometry.location, magistrate02208)){
                 $('.modal-body').html('<b>County: Lancaster</b><br>' +
                     '<b>Court #</b>: 02-2-08<br>' +
                     '<b>Court Mailing Address</b>: 690 Furnace Hills Pike, Lititz, PA 17543<br>' +
