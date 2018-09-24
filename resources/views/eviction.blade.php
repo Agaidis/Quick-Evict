@@ -9,7 +9,6 @@
                 <div class="card-header"><h2>New Eviction</h2></div>
                 <div class="card-body">
                     <div class="row">
-
                         <div class="col-md-12">
                             <form method="post" action="{{ action('EvictionController@formulatePDF') }}" enctype="multipart/form-data" id="eviction_form">
                                 <input type="hidden" name="_token" value="{{ Session::token() }}">
@@ -119,8 +118,12 @@
                                         <button type="submit" id="pdf_download_btn" class="btn btn-primary">Download PDF File</button>
 
 
-
-
+                                    <input type="hidden" id="state" name="state"/>
+                                    <input type="hidden" id="zipcode" name="zipcode"/>
+                                    <input type="hidden" id="county" name="county"/>
+                                    <input type="hidden" id="house_num" name="houseNum"/>
+                                    <input type="hidden" id="street_name" name="streetName"/>
+                                    <input type="hidden" id="town" name="town"/>
 
                                     <!--MODAL -->
                                     <div class="modal" tabindex="-1" role="dialog">

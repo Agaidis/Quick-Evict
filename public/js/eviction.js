@@ -8,6 +8,12 @@ $(document).ready(function () {
     var magistrate02208;
     var magistrate02102;
     var bounds;
+    var houseNum;
+    var streetName;
+    var town;
+    var county;
+    var zipcode;
+    var state;
     var center = new google.maps.LatLng(40.149660, -76.306370);
     //Create the areas for magistrates
     var magistrate02102Area= [
@@ -83,11 +89,21 @@ $(document).ready(function () {
                 window.alert("Returned place contains no geometry");
                 return;
             };
-            alert(place.address_components[0].long_name);
-            alert(place.address_components[1].long_name);
-            alert(place.address_components[2].long_name);
-            alert(place.address_components[3].long_name);
-            console.log(place.address_components);
+
+            houseNum =  place.address_components[0].long_name;
+            streetName = place.address_components[1].long_name;
+            town = place.address_components[2].long_name;
+            county = place.address_components[3].long_name;
+            state = place.address_components[4].short_name;
+            zipcode = place.address_components[6].long_name;
+
+            $('#state').val(state);
+            $('#zipcode').val(zipcode);
+            $('#county').val(county);
+            $('#house_num').val(houseNum);
+            $('#street_name').val(streetName);
+            $('#town').val(town);
+
             marker.setPosition(place.geometry.location);
             marker.setMap(map);
             newBounds.extend(place.geometry.location);
