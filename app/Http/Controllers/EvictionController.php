@@ -88,7 +88,7 @@ span.cls_010{font-family:Arial,serif;font-size:8.1px;color:rgb(0,0,0);font-weigh
 <span style="position:absolute;left:40.90px;top:144.45px" class="cls_004"><span class="cls_004">Telephone:</span></span><br>
 <span style="position:absolute;left:142.45px;top:160.95px" class="cls_004"><span class="cls_004">AMOUNT</span></span><br>
 <span style="position:absolute;left:229.35px;top:160.95px" class="cls_004"><span class="cls_004">DATE PAID</span></span><br>
-<span style="position:absolute;left:38.80px;top:174.00px" class="cls_004"><span class="cls_004">FILING COSTS</span></span><br>
+<span style="position:absolute;left:38.80px;top:174.00px" style="text-decoration: underline;" class="cls_004"><span class="cls_004">FILING COSTS'.'  '.'______'.$unjustDamages.'______</span></span></span><br>
 <span style="position:absolute;left:120.00px;top:174.00px" class="cls_004"><span class="cls_004">$</span></span><br>
 <span style="position:absolute;left:38.80px;top:187.55px" class="cls_004"><span class="cls_004">POSTAGE</span></span><br>
 <span style="position:absolute;left:120.00px;top:187.55px" class="cls_004"><span class="cls_004">$</span></span><br>
