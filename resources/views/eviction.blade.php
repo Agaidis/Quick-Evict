@@ -124,7 +124,7 @@
                                     <input type="hidden" id="house_num" name="houseNum"/>
                                     <input type="hidden" id="street_name" name="streetName"/>
                                     <input type="hidden" id="town" name="town"/>
-                                    <span style="text-decoration: underline;" class="cls_004">'.$unjustDamages.'</span>
+
                                     <!--MODAL -->
                                     <div class="modal" tabindex="-1" role="dialog">
                                         <div class="modal-dialog" role="document">

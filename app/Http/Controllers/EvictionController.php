@@ -112,19 +112,19 @@ span.cls_010{font-family:Arial,serif;font-size:8.1px;color:rgb(0,0,0);font-weigh
 <span style="position:absolute;left:61.30px;top:332.71px" class="cls_004"><span class="cls_004">Damages for injury to the real property, to wit: __________________________________________________________________</span></span><br>
 <span style="position:absolute;left:60.87px;top:348.21px" class="cls_004"><span class="cls_004">______________________________________________________________  in the amount of:</span></span><br>
 <span style="position:absolute;left:457.40px;top:348.45px" class="cls_004"><span class="cls_004">$</span></span><br>
-<span style="position:absolute;left:466.55px;top:348.21px" class="cls_004"><span class="cls_004">______________________</span></span><br>
+<span style="position:absolute;left:466.55px;top:348.21px" class="cls_004"><span style="text-decoration: underline;" class="cls_004">______'.$damageAmt.'________</span></span><br>
 <span style="position:absolute;left:60.50px;top:363.95px" class="cls_004"><span class="cls_004">Damages for the unjust detention of the real property in the amount of</span></span><br>
 <span style="position:absolute;left:457.40px;top:363.95px" class="cls_004"><span class="cls_004">$</span></span><br>
 <span style="position:absolute;left:465.42px;top:363.95px" class="cls_004"><span style="text-decoration: underline;" class="cls_004">______'.$unjustDamages.'______</span></span><br>
 <span style="position:absolute;left:60.50px;top:379.45px" class="cls_004"><span class="cls_004">Rent remaining due and unpaid on filing date in the amount of</span></span><br>
 <span style="position:absolute;left:457.40px;top:379.45px" class="cls_004"><span class="cls_004">$</span></span><br>
-<span style="position:absolute;left:465.42px;top:379.45px" class="cls_004"><span class="cls_004">______________________</span></span><br>
+<span style="position:absolute;left:465.42px;top:379.45px" class="cls_004"><span style="text-decoration: underline;" class="cls_004">_________'.term_lease.'__________</span></span><br>
 <span style="position:absolute;left:60.50px;top:395.95px" class="cls_004"><span class="cls_004">And additional rent remaining due and unpaid on hearing date</span></span><br>
 <span style="position:absolute;left:457.40px;top:395.95px" class="cls_004"><span class="cls_004">$</span></span><br>
 <span style="position:absolute;left:465.42px;top:395.95px" class="cls_004"><span class="cls_004">______________________</span></span><br>
 <span style="position:absolute;left:60.50px;top:410.45px" class="cls_004"><span class="cls_004">Attorney fees in the amount of</span></span><br>
 <span style="position:absolute;left:457.40px;top:410.45px" class="cls_004"><span class="cls_004">$</span></span><br>
-<span style="position:absolute;left:465.42px;top:410.45px" class="cls_004"><span class="cls_004">______________________</span></span><br>
+<span style="position:absolute;left:465.42px;top:410.45px" class="cls_004"><span style="text-decoration: underline;" class="cls_004">__________'.$attorneyFees.'_________</span></span><br>
 <span style="position:absolute;left:42.30px;top:427.20px" class="cls_004"><span class="cls_004">THE PLAINTIFF FURTHER ALLEGES THAT:</span></span><br>
 <span style="position:absolute;left:423.80px;top:427.20px" class="cls_004"><span class="cls_004">Total:</span></span><br>
 <span style="position:absolute;left:457.40px;top:427.20px" class="cls_004"><span class="cls_004">$</span></span><br>
