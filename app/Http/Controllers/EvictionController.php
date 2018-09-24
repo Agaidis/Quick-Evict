@@ -40,6 +40,7 @@ class EvictionController extends Controller
             $rentedBy = $_POST['rented_by'];
             $termLease = $_POST['term_lease'];
             $unjustDamages = $_POST['unjust_damages'];
+            $unjustDamages = str_replace('$', '', $unjustDamages);
             $defendantState = $_POST['state'];
             $defendantZipcode = $_POST['zipcode'];
             $defendantCounty = $_POST['county'];
@@ -76,13 +77,13 @@ span.cls_010{font-family:Arial,serif;font-size:8.1px;color:rgb(0,0,0);font-weigh
 <span style="position:absolute;left:36.05px;top:16.85px" class="cls_003"><span class="cls_003">COMMONWEALTH OF PENNSYLVANIA</span></span><br>
 <span style="position:absolute;left:346.20px;top:16.80px" class="cls_002"><span class="cls_002">LANDLORD/TENANT COMPLAINT</span></span><br>
 <span style="position:absolute;left:36.05px;top:29.55px" class="cls_003"><span class="cls_003">COUNTY OF</span></span><br>
-<span style="position:absolute;left:336.30px;top:67.80px" class="cls_005"><span class="cls_005">PLAINTIFF:</span><br><p style="margin-left:6px";>SlateHouse Group Property Management LLC on behalf of "Owner Name"<br><br>PO Box 5304<br><br>Lancaster, PA 17606</p></span><br>
+<span style="position:absolute;left:336.30px;top:67.80px" class="cls_005"><span class="cls_005">PLAINTIFF:</span><br><p style="margin-left:6px";>SlateHouse Group Property Management LLC on behalf of "Owner Name"<br>PO Box 5304<br>Lancaster, PA 17606</p></span><br>
 <span style="position:absolute;left:463.70px;top:68.50px" class="cls_005"><span class="cls_005">NAME and ADDRESS</span></span>
 <span style="position:absolute;left:40.80px;top:69.36px" class="cls_004"><span class="cls_004">Mag. Dist. No:</span></span><br>
 <span style="position:absolute;left:40.90px;top:82.85px" class="cls_004"><span class="cls_004">MDJ Name:</span></span><br>
 <span style="position:absolute;left:40.90px;top:101.05px" class="cls_004"><span class="cls_004">Address:</span></span><br>
 <span style="position:absolute;left:437.10px;top:130.90px" class="cls_006"><span class="cls_006">V.</span></span><br>
-<span style="position:absolute;left:336.30px;top:133.60px" class="cls_009"><span class="cls_009">DEFENDANT:</span><br><p style="margin-left:6px";>'.$defendanthouseNum.' '.$defendantStreetName.'<br><br>'.$defendantCounty.', '.$defendantState.' '.$defendantZipcode.'</p></span><br>
+<span style="position:absolute;left:336.30px;top:133.60px" class="cls_009"><span class="cls_009">DEFENDANT:</span><br><p style="margin-left:6px";>'.$defendanthouseNum.' '.$defendantStreetName.'<br>'.$defendantCounty.', '.$defendantState.' '.$defendantZipcode.'</p></span><br>
 <span style="position:absolute;left:466.50px;top:135.00px" class="cls_005"><span class="cls_005">NAME and ADDRESS</span></span><br>
 <span style="position:absolute;left:40.90px;top:144.45px" class="cls_004"><span class="cls_004">Telephone:</span></span><br>
 <span style="position:absolute;left:142.45px;top:160.95px" class="cls_004"><span class="cls_004">AMOUNT</span></span><br>
@@ -114,7 +115,7 @@ span.cls_010{font-family:Arial,serif;font-size:8.1px;color:rgb(0,0,0);font-weigh
 <span style="position:absolute;left:466.55px;top:348.21px" class="cls_004"><span class="cls_004">______________________</span></span><br>
 <span style="position:absolute;left:60.50px;top:363.95px" class="cls_004"><span class="cls_004">Damages for the unjust detention of the real property in the amount of</span></span><br>
 <span style="position:absolute;left:457.40px;top:363.95px" class="cls_004"><span class="cls_004">$</span></span><br>
-<span style="position:absolute;left:465.42px;top:363.95px" class="cls_004"><span class="cls_004">______________________</span></span><br>
+<span style="position:absolute;left:465.42px;top:363.95px" class="cls_004"><span style="text-decoration: underline;" class="cls_004">'.$unjustDamages.'</span></span><br>
 <span style="position:absolute;left:60.50px;top:379.45px" class="cls_004"><span class="cls_004">Rent remaining due and unpaid on filing date in the amount of</span></span><br>
 <span style="position:absolute;left:457.40px;top:379.45px" class="cls_004"><span class="cls_004">$</span></span><br>
 <span style="position:absolute;left:465.42px;top:379.45px" class="cls_004"><span class="cls_004">______________________</span></span><br>
