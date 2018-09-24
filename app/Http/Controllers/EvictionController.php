@@ -27,19 +27,19 @@ class EvictionController extends Controller
     public function formulatePDF() {
 
         try {
-//            $additionalRent = $_POST['addit_rent'];
-//            $attorneyFees = $_POST['attorney_fees'];
-//            $damageAmt = $_POST['damage_amt'];
-//            $filing_date = $_POST['filing_date'];
-//            $landlord = $_POST['landlord'];
-//            $leaseStatus = $_POST['lease_status'];
-//            $leaseType = $_POST['lease_type'];
-//            $ownerName = $_POST['owner_name'];
-//            $ownerPhone = $_POST['owner_phone'];
-//            $quitNotice = $_POST['quit_notice'];
-//            $rentedBy = $_POST['rented_by'];
-//            $termLease = $_POST['term_lease'];
-//            $unjustDamages = $_POST['unjust_damages'];
+            $additionalRent = $_POST['addit_rent'];
+            $attorneyFees = $_POST['attorney_fees'];
+            $damageAmt = $_POST['damage_amt'];
+            $filing_date = $_POST['filing_date'];
+            $landlord = $_POST['landlord'];
+            $leaseStatus = $_POST['lease_status'];
+            $leaseType = $_POST['lease_type'];
+            $ownerName = $_POST['owner_name'];
+            $ownerPhone = $_POST['owner_phone'];
+            $quitNotice = $_POST['quit_notice'];
+            $rentedBy = $_POST['rented_by'];
+            $termLease = $_POST['term_lease'];
+            $unjustDamages = $_POST['unjust_damages'];
 
             $dompdf = new Dompdf();
             $dompdf->loadHtml('<html>
@@ -70,8 +70,8 @@ span.cls_010{font-family:Arial,serif;font-size:8.1px;color:rgb(0,0,0);font-weigh
 <span style="position:absolute;left:36.05px;top:16.85px" class="cls_003"><span class="cls_003">COMMONWEALTH OF PENNSYLVANIA</span></span><br>
 <span style="position:absolute;left:346.20px;top:16.80px" class="cls_002"><span class="cls_002">LANDLORD/TENANT COMPLAINT</span></span><br>
 <span style="position:absolute;left:36.05px;top:29.55px" class="cls_003"><span class="cls_003">COUNTY OF</span></span><br>
-<span style="position:absolute;left:336.30px;top:67.80px" class="cls_005"><span class="cls_005">PLAINTIFF:</span></span><br>
-<span style="position:absolute;left:463.70px;top:68.50px" class="cls_005"><span class="cls_005">NAME and ADDRESS</span></span><br>
+<span style="position:absolute;left:336.30px;top:67.80px" class="cls_005"><span class="cls_005">PLAINTIFF:</span><br><p style="margin-left:6px";>SlateHouse Group Property Management LLC on behalf of "Owner Name"<br><br>PO Box 5304<br><br>Lancaster, PA 17606</p></span><br>
+<span style="position:absolute;left:463.70px;top:68.50px" class="cls_005"><span class="cls_005">NAME and ADDRESS</span></span>
 <span style="position:absolute;left:40.80px;top:69.36px" class="cls_004"><span class="cls_004">Mag. Dist. No:</span></span><br>
 <span style="position:absolute;left:40.90px;top:82.85px" class="cls_004"><span class="cls_004">MDJ Name:</span></span><br>
 <span style="position:absolute;left:40.90px;top:101.05px" class="cls_004"><span class="cls_004">Address:</span></span><br>
@@ -85,7 +85,7 @@ span.cls_010{font-family:Arial,serif;font-size:8.1px;color:rgb(0,0,0);font-weigh
 <span style="position:absolute;left:120.00px;top:174.00px" class="cls_004"><span class="cls_004">$</span></span><br>
 <span style="position:absolute;left:38.80px;top:187.55px" class="cls_004"><span class="cls_004">POSTAGE</span></span><br>
 <span style="position:absolute;left:120.00px;top:187.55px" class="cls_004"><span class="cls_004">$</span></span><br>
-<span style="position:absolute;left:382.55px;top:195.45px" class="cls_004"><span class="cls_004">Docket No:</span></span><br>
+<span style="position:absolute;left:382.55px;top:195.45px" class="cls_004"><span class="cls_004">Docket No: </span></span><br>
 <span style="position:absolute;left:38.80px;top:201.10px" class="cls_004"><span class="cls_004">SERVICE COSTS</span></span><br>
 <span style="position:absolute;left:120.00px;top:201.10px" class="cls_004"><span class="cls_004">$</span></span><br>
 <span style="position:absolute;left:381.45px;top:208.85px" class="cls_004"><span class="cls_004">Case Filed:</span></span><br>

@@ -36,6 +36,12 @@ $(document).ready(function () {
         });
         bounds = new google.maps.LatLngBounds();
         google.maps.event.addListenerOnce(map, 'tilesloaded', function(evt) {
+            var place = autocomplete.getPlace();
+
+            alert(place.address_components[0].long_name);
+            alert(place.address_components[1].long_name);
+            alert(place.address_components[2].long_name);
+            alert(place.address_components[2].long_name);
             bounds = map.getBounds();
         });
         marker = new google.maps.Marker({
