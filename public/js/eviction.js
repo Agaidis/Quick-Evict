@@ -128,7 +128,12 @@ $(document).ready(function () {
 
 
 
-
+    $(window).keydown(function(event){
+        if(event.keyCode == 13) {
+            event.preventDefault();
+            return false;
+        }
+    });
 
     $('input[type=radio][name=rented_by]').change(function(){
        console.log($(this)[0].id);
