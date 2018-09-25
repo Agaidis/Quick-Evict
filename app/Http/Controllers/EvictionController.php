@@ -66,6 +66,7 @@ class EvictionController extends Controller
 <head><meta http-equiv=Content-Type content="text/html; charset=UTF-8">
 <style type="text/css">
 <!--
+input[type=checkbox] { display: inline!important; }
 span.cls_003{font-family:Arial,serif;font-size:10.0px;color:rgb(0,0,0);font-weight:normal;font-style:normal;text-decoration: none}
 span.cls_003{font-family:Arial,serif;font-size:10.0px;color:rgb(0,0,0);font-weight:normal;font-style:normal;text-decoration: none}
 span.cls_002{font-family:Arial,serif;font-size:14.1px;color:rgb(0,0,0);font-weight:bold;font-style:normal;text-decoration: none}
