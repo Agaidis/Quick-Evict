@@ -188,13 +188,13 @@ span.cls_010{font-family:Arial,serif;font-size:8.1px;color:rgb(0,0,0);font-weigh
             // Output the generated PDF to Browser
             $dompdf->stream();
 
-            return view('eviction', compact('map'));
+            return $_POST; //view('eviction', compact('map'));
 
         } catch ( \Exception $e) {
             return back();
             mail('andrew.gaidis@gmail.com', 'formulatePDF Error', $e->getMessage());
         }
-        return back();
+        return $_POST; //back();
     }
 
 //    public function addFile(Request $request) {
