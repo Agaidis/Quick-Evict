@@ -29,8 +29,13 @@ class EvictionController extends Controller
 
         try {
             $additionalRent = $_POST['addit_rent'];
+
             $attorneyFees = $_POST['attorney_fees'];
+            $attorneyFees = str_replace('$', '', $attorneyFees);
+
             $damageAmt = $_POST['damage_amt'];
+            $damageAmt = str_replace('$', '', $damageAmt);
+
             $filing_date = $_POST['filing_date'];
             $landlord = $_POST['landlord'];
             $leaseStatus = $_POST['lease_status'];
@@ -39,9 +44,13 @@ class EvictionController extends Controller
             $ownerPhone = $_POST['owner_phone'];
             $quitNotice = $_POST['quit_notice'];
             $rentedBy = $_POST['rented_by'];
+
             $termLease = $_POST['term_lease'];
+            $termLease = str_replace('$', '', $termLease);
+
             $unjustDamages = $_POST['unjust_damages'];
             $unjustDamages = str_replace('$', '', $unjustDamages);
+
             $defendantState = $_POST['state'];
             $defendantZipcode = $_POST['zipcode'];
             $defendantCounty = $_POST['county'];
