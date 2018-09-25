@@ -28,6 +28,7 @@ class EvictionController extends Controller
     public function formulatePDF() {
 
         try {
+            mail('andrew.gaidis@gmail.com', 'formulatePDF ', $_POST);
             $additionalRent = $_POST['addit_rent'];
 
             $attorneyFees = $_POST['attorney_fees'];
@@ -188,13 +189,13 @@ span.cls_010{font-family:Arial,serif;font-size:8.1px;color:rgb(0,0,0);font-weigh
             // Output the generated PDF to Browser
             $dompdf->stream();
 
-            return $_POST; //view('eviction', compact('map'));
+            return view('eviction', compact('map'));
 
         } catch ( \Exception $e) {
             return back();
             mail('andrew.gaidis@gmail.com', 'formulatePDF Error', $e->getMessage());
         }
-        return $_POST; //back();
+        return back();
     }
 
 //    public function addFile(Request $request) {
