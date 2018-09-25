@@ -66,7 +66,7 @@ class EvictionController extends Controller
 <head><meta http-equiv=Content-Type content="text/html; charset=UTF-8">
 <style type="text/css">
 <!--
-input[type=checkbox] { display: inline!important; }
+input[type=checkbox] { display: inline!important; font-size: 8pt; }
 span.cls_003{font-family:Arial,serif;font-size:10.0px;color:rgb(0,0,0);font-weight:normal;font-style:normal;text-decoration: none}
 span.cls_003{font-family:Arial,serif;font-size:10.0px;color:rgb(0,0,0);font-weight:normal;font-style:normal;text-decoration: none}
 span.cls_002{font-family:Arial,serif;font-size:14.1px;color:rgb(0,0,0);font-weight:bold;font-style:normal;text-decoration: none}
@@ -118,25 +118,25 @@ span.cls_010{font-family:Arial,serif;font-size:8.1px;color:rgb(0,0,0);font-weigh
 <span style="position:absolute;left:42.00px;top:267.85px" class="cls_004"><span class="cls_004">TO THE DEFENDANT: The above named plaintiff(s) asks judgment together with costs against you for the possession of real</span></span><br>
 <span style="position:absolute;left:62.77px;top:279.51px" class="cls_004"><span class="cls_004">property and for:</span></span><br>
 <span style="position:absolute;left:60.87px;top:292.21px" class="cls_004"><span class="cls_004">Lease is</span></span><br>
-<span style="position:absolute;left:120.25px;top:292.21px" class="cls_004"><span class="cls_004"><input style="font-size: 10pt;" type="checkbox" checked />Residential</span></span><br>
-<span style="position:absolute;left:198.23px;top:292.21px" class="cls_004"><span class="cls_004"><input style="font-size: 2pt;" type="checkbox" checked />Nonresidential     Monthly Rent  $</span></span><br>
+<span style="position:absolute;left:120.25px;top:292.21px" class="cls_004"><span class="cls_004"><input type="checkbox" checked />Residential</span></span><br>
+<span style="position:absolute;left:198.23px;top:292.21px" class="cls_004"><span class="cls_004"><input type="checkbox" checked />Nonresidential     Monthly Rent  $</span></span><br>
 <span style="position:absolute;left:415.98px;top:292.21px" class="cls_004"><span class="cls_004">Security Deposit $</span></span><br>
-<span style="position:absolute;left:60.87px;top:304.91px" class="cls_004"><span class="cls_004"><input style="font-size: 8pt;" type="checkbox" checked />A determination that the manufactured home and property have been abandoned.</span></span><br>
-<span style="position:absolute;left:60.87px;top:317.61px" class="cls_004"><span class="cls_004"><input style="font-size: 6pt;" type="checkbox" checked />A Request for Determination of Abandonment (Form MDJS 334) must be completed and submitted with this complaint.</span></span><br>
-<span style="position:absolute;left:61.30px;top:332.71px" class="cls_004"><span class="cls_004"><input style="font-size: 4pt;" type="checkbox" checked />Damages for injury to the real property, to wit: __________________________________________________________________</span></span><br>
+<span style="position:absolute;left:60.87px;top:304.91px" class="cls_004"><span class="cls_004"><input type="checkbox" checked />A determination that the manufactured home and property have been abandoned.</span></span><br>
+<span style="position:absolute;left:60.87px;top:317.61px" class="cls_004"><span class="cls_004"><input type="checkbox" checked />A Request for Determination of Abandonment (Form MDJS 334) must be completed and submitted with this complaint.</span></span><br>
+<span style="position:absolute;left:61.30px;top:332.71px" class="cls_004"><span class="cls_004"><input type="checkbox" checked />Damages for injury to the real property, to wit: __________________________________________________________________</span></span><br>
 <span style="position:absolute;left:60.87px;top:348.21px" class="cls_004"><span class="cls_004">______________________________________________________________  in the amount of:</span></span><br>
 <span style="position:absolute;left:457.40px;top:348.45px" class="cls_004"><span class="cls_004">$</span></span><br>
 <span style="position:absolute;left:466.55px;top:348.21px" class="cls_004"><span style="text-decoration: underline;" class="cls_004">__________'.$damageAmt.'_________</span></span><br>
-<span style="position:absolute;left:60.50px;top:363.95px" class="cls_004"><span class="cls_004"><input style="width:10px; height:10px;" type="checkbox" checked />Damages for the unjust detention of the real property in the amount of</span></span><br>
+<span style="position:absolute;left:60.50px;top:363.95px" class="cls_004"><span class="cls_004"><input type="checkbox" checked />Damages for the unjust detention of the real property in the amount of</span></span><br>
 <span style="position:absolute;left:457.40px;top:363.95px" class="cls_004"><span class="cls_004">$</span></span><br>
 <span style="position:absolute;left:465.42px;top:363.95px" class="cls_004"><span style="text-decoration: underline;" class="cls_004">__________'.$unjustDamages.'_________</span></span><br>
-<span style="position:absolute;left:60.50px;top:379.45px" class="cls_004"><span class="cls_004"><input style="width:10px; height:10px;" type="checkbox" checked />Rent remaining due and unpaid on filing date in the amount of</span></span><br>
+<span style="position:absolute;left:60.50px;top:379.45px" class="cls_004"><span class="cls_004"><input type="checkbox" checked />Rent remaining due and unpaid on filing date in the amount of</span></span><br>
 <span style="position:absolute;left:457.40px;top:379.45px" class="cls_004"><span class="cls_004">$</span></span><br>
 <span style="position:absolute;left:465.42px;top:379.45px" class="cls_004"><span style="text-decoration: underline;" class="cls_004">__________'.$termLease.'_________</span></span><br>
-<span style="position:absolute;left:60.50px;top:395.95px" class="cls_004"><span class="cls_004"><input style="width:10px; height:10px;" type="checkbox" checked />And additional rent remaining due and unpaid on hearing date</span></span><br>
+<span style="position:absolute;left:60.50px;top:395.95px" class="cls_004"><span class="cls_004"><input type="checkbox" checked />And additional rent remaining due and unpaid on hearing date</span></span><br>
 <span style="position:absolute;left:457.40px;top:395.95px" class="cls_004"><span class="cls_004">$</span></span><br>
 <span style="position:absolute;left:465.42px;top:395.95px" class="cls_004"><span class="cls_004">______________________</span></span><br>
-<span style="position:absolute;left:60.50px;top:410.45px" class="cls_004"><span class="cls_004"><input style="width:10px; height:10px;" type="checkbox" checked />Attorney fees in the amount of</span></span><br>
+<span style="position:absolute;left:60.50px;top:410.45px" class="cls_004"><span class="cls_004"><input type="checkbox" checked />Attorney fees in the amount of</span></span><br>
 <span style="position:absolute;left:457.40px;top:410.45px" class="cls_004"><span class="cls_004">$</span></span><br>
 <span style="position:absolute;left:465.42px;top:410.45px" class="cls_004"><span style="text-decoration: underline;" class="cls_004">__________'.$attorneyFees.'_________</span></span><br>
 <span style="position:absolute;left:42.30px;top:427.20px" class="cls_004"><span class="cls_004">THE PLAINTIFF FURTHER ALLEGES THAT:</span></span><br>
@@ -148,8 +148,8 @@ span.cls_010{font-family:Arial,serif;font-size:8.1px;color:rgb(0,0,0);font-weigh
 <span style="position:absolute;left:42.30px;top:454.05px" class="cls_004"><span class="cls_004">2. The plaintiff is the landlord of that property.</span></span><br>
 <span style="position:absolute;left:42.30px;top:464.55px" class="cls_004"><span class="cls_004">3. The plaintiff leased or rented the property to you or to ___________________________________________under whom you claim</span></span><br>
 <span style="position:absolute;left:42.30px;top:478.65px" class="cls_004"><span class="cls_004">4.</span></span><br>
-<span style="position:absolute;left:76.60px;top:478.65px" class="cls_004"><span class="cls_004"><input style="width:10px; height:10px;" type="checkbox" checked />Notice to quit was given in accordance with law, or</span></span><br>
-<span style="position:absolute;left:76.60px;top:494.15px" class="cls_004"><span class="cls_004"><input style="width:10px; height:10px;" type="checkbox" checked />No notice is required under the terms of the lease.</span></span><br>
+<span style="position:absolute;left:76.60px;top:478.65px" class="cls_004"><span class="cls_004"><input style="font-size: 8pt;" type="checkbox" checked />Notice to quit was given in accordance with law, or</span></span><br>
+<span style="position:absolute;left:76.60px;top:494.15px" class="cls_004"><span class="cls_004"><input style="font-size: 8pt;" type="checkbox" checked />No notice is required under the terms of the lease.</span></span><br>
 <span style="position:absolute;left:42.30px;top:513.45px" class="cls_004"><span class="cls_004">5.</span></span><br>
 <span style="position:absolute;left:77.30px;top:513.45px" class="cls_004"><span class="cls_004"><input style="width:10px; height:10px;" type="checkbox" checked />The term for which the property was leased or rented is fully ended, or</span></span><br>
 <span style="position:absolute;left:77.30px;top:531.35px" class="cls_004"><span class="cls_004"><input style="width:10px; height:10px;" type="checkbox" checked />A forfeiture has resulted by reason of a breach of the conditions of the lease, to wit:</span></span><br>
