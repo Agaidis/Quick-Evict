@@ -28,7 +28,7 @@ class EvictionController extends Controller
     public function formulatePDF() {
 
         try {
-            mail('andrew.gaidis@gmail.com', 'formulatePDF ', $_POST);
+
             $additionalRent = $_POST['addit_rent'];
 
             $attorneyFees = $_POST['attorney_fees'];
@@ -41,6 +41,7 @@ class EvictionController extends Controller
             $landlord = $_POST['landlord'];
             $leaseStatus = $_POST['lease_status'];
             $leaseType = $_POST['lease_type'];
+            mail('andrew.gaidis@gmail.com', 'formulatePDF ', $leaseType);
             $ownerName = $_POST['owner_name'];
             $ownerPhone = $_POST['owner_phone'];
             $quitNotice = $_POST['quit_notice'];
