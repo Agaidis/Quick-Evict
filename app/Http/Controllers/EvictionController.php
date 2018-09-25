@@ -116,26 +116,26 @@ span.cls_010{font-family:Arial,serif;font-size:8.1px;color:rgb(0,0,0);font-weigh
 <span style="position:absolute;left:36.00px;top:252.35px" class="cls_003"><span class="cls_003">Pa.R.C.P.M.D.J. No. 206 sets forth those costs recoverable by the prevailing party.</span></span><br>
 <span style="position:absolute;left:42.00px;top:267.85px" class="cls_004"><span class="cls_004">TO THE DEFENDANT: The above named plaintiff(s) asks judgment together with costs against you for the possession of real</span></span><br>
 <span style="position:absolute;left:62.77px;top:279.51px" class="cls_004"><span class="cls_004">property and for:</span></span><br>
-<span style="position:absolute;left:60.87px;top:292.21px" class="cls_004"><span class="cls_004">Lease is </span><input style="width:10px; height:10px;" type="checkbox" checked /> </span><br>
-<span style="position:absolute;left:120.25px;top:292.21px" class="cls_004"><span class="cls_004">Residential</span></span><br>
-<span style="position:absolute;left:198.23px;top:292.21px" class="cls_004"><span class="cls_004">Nonresidential    Monthly Rent  $</span></span><br>
+<span style="position:absolute;left:60.87px;top:292.21px" class="cls_004"><span class="cls_004">Lease is</span></span><br>
+<span style="position:absolute;left:120.25px;top:292.21px" class="cls_004"><span class="cls_004"><input style="width:10px; height:10px;" type="checkbox" checked />Residential</span></span><br>
+<span style="position:absolute;left:198.23px;top:292.21px" class="cls_004"><span class="cls_004"><input style="width:10px; height:10px;" type="checkbox" checked />Nonresidential     Monthly Rent  $</span></span><br>
 <span style="position:absolute;left:415.98px;top:292.21px" class="cls_004"><span class="cls_004">Security Deposit $</span></span><br>
-<span style="position:absolute;left:60.87px;top:304.91px" class="cls_004"><span class="cls_004">A determination that the manufactured home and property have been abandoned.</span></span><br>
-<span style="position:absolute;left:60.87px;top:317.61px" class="cls_004"><span class="cls_004">A Request for Determination of Abandonment (Form MDJS 334) must be completed and submitted with this complaint.</span></span><br>
-<span style="position:absolute;left:61.30px;top:332.71px" class="cls_004"><span class="cls_004">Damages for injury to the real property, to wit: __________________________________________________________________</span></span><br>
+<span style="position:absolute;left:60.87px;top:304.91px" class="cls_004"><span class="cls_004"><input style="width:10px; height:10px;" type="checkbox" checked />A determination that the manufactured home and property have been abandoned.</span></span><br>
+<span style="position:absolute;left:60.87px;top:317.61px" class="cls_004"><span class="cls_004"><input style="width:10px; height:10px;" type="checkbox" checked />A Request for Determination of Abandonment (Form MDJS 334) must be completed and submitted with this complaint.</span></span><br>
+<span style="position:absolute;left:61.30px;top:332.71px" class="cls_004"><span class="cls_004"><input style="width:10px; height:10px;" type="checkbox" checked />Damages for injury to the real property, to wit: __________________________________________________________________</span></span><br>
 <span style="position:absolute;left:60.87px;top:348.21px" class="cls_004"><span class="cls_004">______________________________________________________________  in the amount of:</span></span><br>
 <span style="position:absolute;left:457.40px;top:348.45px" class="cls_004"><span class="cls_004">$</span></span><br>
 <span style="position:absolute;left:466.55px;top:348.21px" class="cls_004"><span style="text-decoration: underline;" class="cls_004">__________'.$damageAmt.'_________</span></span><br>
-<span style="position:absolute;left:60.50px;top:363.95px" class="cls_004"><span class="cls_004">Damages for the unjust detention of the real property in the amount of</span></span><br>
+<span style="position:absolute;left:60.50px;top:363.95px" class="cls_004"><span class="cls_004"><input style="width:10px; height:10px;" type="checkbox" checked />Damages for the unjust detention of the real property in the amount of</span></span><br>
 <span style="position:absolute;left:457.40px;top:363.95px" class="cls_004"><span class="cls_004">$</span></span><br>
 <span style="position:absolute;left:465.42px;top:363.95px" class="cls_004"><span style="text-decoration: underline;" class="cls_004">__________'.$unjustDamages.'_________</span></span><br>
-<span style="position:absolute;left:60.50px;top:379.45px" class="cls_004"><span class="cls_004">Rent remaining due and unpaid on filing date in the amount of</span></span><br>
+<span style="position:absolute;left:60.50px;top:379.45px" class="cls_004"><span class="cls_004"><input style="width:10px; height:10px;" type="checkbox" checked />Rent remaining due and unpaid on filing date in the amount of</span></span><br>
 <span style="position:absolute;left:457.40px;top:379.45px" class="cls_004"><span class="cls_004">$</span></span><br>
 <span style="position:absolute;left:465.42px;top:379.45px" class="cls_004"><span style="text-decoration: underline;" class="cls_004">__________'.$termLease.'_________</span></span><br>
-<span style="position:absolute;left:60.50px;top:395.95px" class="cls_004"><span class="cls_004">And additional rent remaining due and unpaid on hearing date</span></span><br>
+<span style="position:absolute;left:60.50px;top:395.95px" class="cls_004"><span class="cls_004"><input style="width:10px; height:10px;" type="checkbox" checked />And additional rent remaining due and unpaid on hearing date</span></span><br>
 <span style="position:absolute;left:457.40px;top:395.95px" class="cls_004"><span class="cls_004">$</span></span><br>
 <span style="position:absolute;left:465.42px;top:395.95px" class="cls_004"><span class="cls_004">______________________</span></span><br>
-<span style="position:absolute;left:60.50px;top:410.45px" class="cls_004"><span class="cls_004">Attorney fees in the amount of</span></span><br>
+<span style="position:absolute;left:60.50px;top:410.45px" class="cls_004"><span class="cls_004"><input style="width:10px; height:10px;" type="checkbox" checked />Attorney fees in the amount of</span></span><br>
 <span style="position:absolute;left:457.40px;top:410.45px" class="cls_004"><span class="cls_004">$</span></span><br>
 <span style="position:absolute;left:465.42px;top:410.45px" class="cls_004"><span style="text-decoration: underline;" class="cls_004">__________'.$attorneyFees.'_________</span></span><br>
 <span style="position:absolute;left:42.30px;top:427.20px" class="cls_004"><span class="cls_004">THE PLAINTIFF FURTHER ALLEGES THAT:</span></span><br>
@@ -147,15 +147,15 @@ span.cls_010{font-family:Arial,serif;font-size:8.1px;color:rgb(0,0,0);font-weigh
 <span style="position:absolute;left:42.30px;top:454.05px" class="cls_004"><span class="cls_004">2. The plaintiff is the landlord of that property.</span></span><br>
 <span style="position:absolute;left:42.30px;top:464.55px" class="cls_004"><span class="cls_004">3. The plaintiff leased or rented the property to you or to ___________________________________________under whom you claim</span></span><br>
 <span style="position:absolute;left:42.30px;top:478.65px" class="cls_004"><span class="cls_004">4.</span></span><br>
-<span style="position:absolute;left:76.60px;top:478.65px" class="cls_004"><span class="cls_004">Notice to quit was given in accordance with law, or</span></span><br>
-<span style="position:absolute;left:76.60px;top:494.15px" class="cls_004"><span class="cls_004">No notice is required under the terms of the lease.</span></span><br>
+<span style="position:absolute;left:76.60px;top:478.65px" class="cls_004"><span class="cls_004"><input style="width:10px; height:10px;" type="checkbox" checked />Notice to quit was given in accordance with law, or</span></span><br>
+<span style="position:absolute;left:76.60px;top:494.15px" class="cls_004"><span class="cls_004"><input style="width:10px; height:10px;" type="checkbox" checked />No notice is required under the terms of the lease.</span></span><br>
 <span style="position:absolute;left:42.30px;top:513.45px" class="cls_004"><span class="cls_004">5.</span></span><br>
-<span style="position:absolute;left:77.30px;top:513.45px" class="cls_004"><span class="cls_004">The term for which the property was leased or rented is fully ended, or</span></span><br>
-<span style="position:absolute;left:77.30px;top:531.35px" class="cls_004"><span class="cls_004">A forfeiture has resulted by reason of a breach of the conditions of the lease, to wit:</span></span><br>
+<span style="position:absolute;left:77.30px;top:513.45px" class="cls_004"><span class="cls_004"><input style="width:10px; height:10px;" type="checkbox" checked />The term for which the property was leased or rented is fully ended, or</span></span><br>
+<span style="position:absolute;left:77.30px;top:531.35px" class="cls_004"><span class="cls_004"><input style="width:10px; height:10px;" type="checkbox" checked />A forfeiture has resulted by reason of a breach of the conditions of the lease, to wit:</span></span><br>
 <span style="position:absolute;left:414.74px;top:531.35px" class="cls_004"><span class="cls_004">________________________________</span></span><br>
 <span style="position:absolute;left:77.30px;top:541.35px" class="cls_004"><span class="cls_004">________________________________________________________________________________________________or,</span></span><br>
 <span style="position:absolute;left:77.30px;top:554.15px" class="cls_004"><span class="cls_004">___________________________________________________________________________________________________</span></span><br>
-<span style="position:absolute;left:77.30px;top:569.55px" class="cls_004"><span class="cls_004">Rent reserved and due has, upon demand, remained unsatisfied.</span></span><br>
+<span style="position:absolute;left:77.30px;top:569.55px" class="cls_004"><span class="cls_004"><input style="width:10px; height:10px;" type="checkbox" checked />Rent reserved and due has, upon demand, remained unsatisfied.</span></span><br>
 <span style="position:absolute;left:42.30px;top:582.15px" class="cls_004"><span class="cls_004">6.</span></span><br>
 <span style="position:absolute;left:60.50px;top:582.15px" class="cls_004"><span class="cls_004">You retain the real property and refuse to give up to its possession.</span></span><br>
 <span style="position:absolute;left:42.00px;top:595.65px" class="cls_004"><span class="cls_004">I, ________________________________________________________________ verify that the facts set forth in this complaint are</span></span><br>
