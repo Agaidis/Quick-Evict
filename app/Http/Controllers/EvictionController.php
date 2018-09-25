@@ -118,8 +118,8 @@ span.cls_010{font-family:Arial,serif;font-size:8.1px;color:rgb(0,0,0);font-weigh
 <span style="position:absolute;left:42.00px;top:267.85px" class="cls_004"><span class="cls_004">TO THE DEFENDANT: The above named plaintiff(s) asks judgment together with costs against you for the possession of real</span></span><br>
 <span style="position:absolute;left:62.77px;top:279.51px" class="cls_004"><span class="cls_004">property and for:</span></span><br>
 <span style="position:absolute;left:60.87px;top:292.21px" class="cls_004"><span class="cls_004">Lease is</span></span><br>
-<span style="position:absolute;left:120.25px;top:292.21px" class="cls_004"><span class="cls_004"><input style="width:10px; height:10px;" type="checkbox" checked />Residential</span></span><br>
-<span style="position:absolute;left:198.23px;top:292.21px" class="cls_004"><span class="cls_004"><input style="width:10px; height:10px;" type="checkbox" checked />Nonresidential     Monthly Rent  $</span></span><br>
+<span style="position:absolute;left:120.25px;top:292.21px" class="cls_004"><span class="cls_004"><input type="checkbox" checked />Residential</span></span><br>
+<span style="position:absolute;left:198.23px;top:292.21px" class="cls_004"><span class="cls_004"><input style="width:5px; height:5px;" type="checkbox" checked />Nonresidential     Monthly Rent  $</span></span><br>
 <span style="position:absolute;left:415.98px;top:292.21px" class="cls_004"><span class="cls_004">Security Deposit $</span></span><br>
 <span style="position:absolute;left:60.87px;top:304.91px" class="cls_004"><span class="cls_004"><input style="width:10px; height:10px;" type="checkbox" checked />A determination that the manufactured home and property have been abandoned.</span></span><br>
 <span style="position:absolute;left:60.87px;top:317.61px" class="cls_004"><span class="cls_004"><input style="width:10px; height:10px;" type="checkbox" checked />A Request for Determination of Abandonment (Form MDJS 334) must be completed and submitted with this complaint.</span></span><br>
