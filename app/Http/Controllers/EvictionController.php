@@ -30,6 +30,10 @@ class EvictionController extends Controller
         try {
 
             $additionalRent = $_POST['addit_rent'];
+            $courtNumber = $_POST['court_number'];
+            $courtPhone = $_POST['court_phone_number'];
+            $courtAddressLine1 = $_POST['court_address1'];
+            $courtAddressLine2 = $_POST['court_address2'];
 
             $attorneyFees = $_POST['attorney_fees'];
             $attorneyFees = str_replace('$', '', $attorneyFees);
@@ -131,13 +135,13 @@ span.cls_010{font-family:Arial,serif;font-size:8.1px;color:rgb(0,0,0);font-weigh
 <span style="position:absolute;left:36.05px;top:29.55px" class="cls_003"><span class="cls_003">COUNTY OF</span></span><br>
 <span style="position:absolute;left:336.30px;top:67.80px" class="cls_005"><span class="cls_005">PLAINTIFF:</span><br><p style="margin-left:6px;">SlateHouse Group Property Management LLC on behalf of "Owner Name"<br>PO Box 5304<br>Lancaster, PA 17606</p></span><br>
 <span style="position:absolute;left:463.70px;top:68.50px" class="cls_005"><span class="cls_005">NAME and ADDRESS</span></span>
-<span style="position:absolute;left:40.80px;top:69.36px" class="cls_004"><span class="cls_004">Mag. Dist. No:</span></span><br>
+<span style="position:absolute;left:40.80px;top:69.36px" class="cls_004"><span class="cls_004">Mag. Dist. No: '.$courtNumber.'</span></span><br>
 <span style="position:absolute;left:40.90px;top:82.85px" class="cls_004"><span class="cls_004">MDJ Name:</span></span><br>
-<span style="position:absolute;left:40.90px;top:101.05px" class="cls_004"><span class="cls_004">Address:</span></span><br>
+<span style="position:absolute;left:40.90px;top:101.05px" class="cls_004"><span class="cls_004">Address: '.$courtAddressLine1.'<br>'.$courtAddressLine2.'</span></span><br>
 <span style="position:absolute;left:437.10px;top:130.90px" class="cls_006"><span class="cls_006">V.</span></span><br>
 <span style="position:absolute;left:336.30px;top:133.60px" class="cls_009"><span class="cls_009">DEFENDANT:</span><br><p style="margin-left:6px;">'.$defendanthouseNum.' '.$defendantStreetName.'<br>'.$defendantCounty.', '.$defendantState.' '.$defendantZipcode.'</p></span><br>
 <span style="position:absolute;left:466.50px;top:135.00px" class="cls_005"><span class="cls_005">NAME and ADDRESS</span></span><br>
-<span style="position:absolute;left:40.90px;top:144.45px" class="cls_004"><span class="cls_004">Telephone:</span></span><br>
+<span style="position:absolute;left:40.90px;top:144.45px" class="cls_004"><span class="cls_004">Telephone: '.$courtPhone.'</span></span><br>
 <span style="position:absolute;left:142.45px;top:160.95px" class="cls_004"><span class="cls_004">AMOUNT</span></span><br>
 <span style="position:absolute;left:229.35px;top:160.95px" class="cls_004"><span class="cls_004">DATE PAID</span></span><br>
 <span style="position:absolute;left:38.80px;top:174.00px" class="cls_004"><span class="cls_004">FILING COSTS:</span></span><br>

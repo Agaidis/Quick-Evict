@@ -124,28 +124,10 @@
                                     <input type="hidden" id="house_num" name="houseNum"/>
                                     <input type="hidden" id="street_name" name="streetName"/>
                                     <input type="hidden" id="town" name="town"/>
-
-                                    <!--MODAL -->
-                                    <div class="modal" tabindex="-1" role="dialog">
-                                        <div class="modal-dialog" role="document">
-                                            <div class="modal-content">
-                                                <div class="modal-header">
-                                                    <h5 class="modal-title">Magistrate 2-08 Infomartion</h5>
-                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                        <span aria-hidden="true">&times;</span>
-                                                    </button>
-                                                </div>
-                                                <div class="modal-body">
-                                                </div>
-                                                <div class="modal-footer">
-                                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-
-
-
+                                    <input type="hidden" id="court_number" name="court_number"/>
+                                    <input type="hidden" id="court_phone_number" name="court_phone_number"/>
+                                    <input type="hidden" id="court_address1" name="court_address1"/>
+                                    <input type="hidden" id="court_address2" name="court_address2"/>
 
                                 {{--<h3 class="major_labels">Signature/Payment</h3>--}}
                                     {{--<script src="https://js.stripe.com/v3/"></script>--}}
@@ -161,7 +143,8 @@
                                         {{--</div>--}}
                                         {{--<button type="button" class="btn btn-primary">Submit Payment</button>--}}
                                     {{--</form>--}}
-                            </div>
+
+                                </div>
                             </form>
                         </div>
                     </div>

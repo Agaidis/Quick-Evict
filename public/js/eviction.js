@@ -14,6 +14,7 @@ $(document).ready(function () {
     var county;
     var zipcode;
     var state;
+
     var center = new google.maps.LatLng(40.149660, -76.306370);
     //Create the areas for magistrates
     var magistrate02102Area= [
@@ -109,20 +110,16 @@ $(document).ready(function () {
             newBounds.extend(place.geometry.location);
             map.fitBounds(newBounds);
             if (google.maps.geometry.poly.containsLocation(place.geometry.location, magistrate02208)){
-                $('.modal-body').html('<b>County: Lancaster</b><br>' +
-                    '<b>Court #</b>: 02-2-08<br>' +
-                    '<b>Court Mailing Address</b>: 690 Furnace Hills Pike, Lititz, PA 17543<br>' +
-                    '<b>Court Phone #</b>: 717-626-0258<br>' +
-                    '<b>1 Defendant</b>: $139.75 | $157.25 | $192.25 | $108.00<br>' +
-                    '<b>2 Defendants</b>: $152.25 | $169.75 | $204.75 | $115.20');
+                $('#court_number').val('02-2-08');
+                $('#court_phone_number').val('717-626-0258');
+                $('#court_address1').val('690 Furnace Hills Pike');
+                $('#court_address2').val('Lititz, PA 17543');
 
             } else if (google.maps.geometry.poly.containsLocation(place.geometry.location, magistrate02102)){
-                $('.modal-body').html('<b>County: Lancaster</b><br>' +
-                    '<b>Court #</b>: 02-1-02<br>' +
-                    '<b>Court Mailing Address</b>: 2205 Oregon Pike, Lancaster, PA 17601<br>' +
-                    '<b>Court Phone #</b>: 717-569-8774<br>' +
-                    '<b>1 Defendant</b>: $150.65 | $168.15 | $203.15 | $160.00<br>' +
-                    '<b>2 Defendants</b>: $160.65 | $178.15 | $213.15 | $0');
+                $('#court_number').val('02-1-02');
+                $('#court_phone_number').val('717-569-8774');
+                $('#court_address1').val('2205 Oregon Pike');
+                $('#court_address2').val('Lancaster, PA 17601');
 
             } else {
                 alert('The address is outside of all areas.');
