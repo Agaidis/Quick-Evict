@@ -116,7 +116,7 @@ span.cls_010{font-family:Arial,serif;font-size:8.1px;color:rgb(0,0,0);font-weigh
 <span style="position:absolute;left:36.00px;top:252.35px" class="cls_003"><span class="cls_003">Pa.R.C.P.M.D.J. No. 206 sets forth those costs recoverable by the prevailing party.</span></span><br>
 <span style="position:absolute;left:42.00px;top:267.85px" class="cls_004"><span class="cls_004">TO THE DEFENDANT: The above named plaintiff(s) asks judgment together with costs against you for the possession of real</span></span><br>
 <span style="position:absolute;left:62.77px;top:279.51px" class="cls_004"><span class="cls_004">property and for:</span></span><br>
-<span style="position:absolute;left:60.87px;top:292.21px" class="cls_004"><span class="cls_004">Lease is <input type="checkbox" checked /> </span></span><br>
+<span style="position:absolute;left:60.87px;top:292.21px" class="cls_004"><span class="cls_004">Lease is </span><input type="checkbox" checked /> </span><br>
 <span style="position:absolute;left:120.25px;top:292.21px" class="cls_004"><span class="cls_004">Residential</span></span><br>
 <span style="position:absolute;left:198.23px;top:292.21px" class="cls_004"><span class="cls_004">Nonresidential    Monthly Rent  $</span></span><br>
 <span style="position:absolute;left:415.98px;top:292.21px" class="cls_004"><span class="cls_004">Security Deposit $</span></span><br>
