@@ -3,11 +3,7 @@
 namespace App\Http\Controllers;
 
 use Dompdf\Options;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\App;
-use Illuminate\Support\Facades\Auth;
 use GMaps;
-use Barryvdh\DomPDF\Facade as PDF;
 use Dompdf\Dompdf;
 
 
@@ -21,40 +17,7 @@ class EvictionController extends Controller
      */
     public function index()
     {
-        $table->string('county');
-        $table->string('court_number');
-        $table->string('1_defendant_up_to_2000')->nullable();
-        $table->string('2_defendant_up_to_2000')->nullable();
-        $table->string('1_defendant_between_2001_4000')->nullable();
-        $table->string('2_defendant_between_2001_4000')->nullable();
-        $table->string('1_defendant_greater_than_4000')->nullable();
-        $table->string('2_defendant_greater_than_4000')->nullable();
-        $table->string('out_of_pocket')->nullable();
-        $table->string('mailing_address')->nullable();
-        $table->string('phone_number')->nullable();
-        $table->boolean('accept_e_signature'
-        DB::table('court_details')->insert([
-            [
-                'county' => 'Lancaster'
-                , 'court_number' => '02-1-01'
-                , '1_defendant_up_to_2000' => '157.25'
-                , '2_defendant_up_to_2000' => '169.75'
-                , '1_defendant_between_2001_4000' => '192.25'
-                , '2_defendant_between_2001_4000' => '204.75'
-                , '1_defendant_greater_than_4000' => 0
-                , '2_defendant_greater_than_4000' => 0
-                , 'out_of_pocket' => 0
-                , 'mailing_address' => 0
-                , 'phone_number' => 0
-                , 'accept_e_signature' => 0
-            ],
-
-
-
-        ]);
-
-            return view('eviction', compact('map'));
-
+        return view('eviction', compact('map'));
     }
 
     public function formulatePDF() {
