@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Dompdf\Options;
 use GMaps;
 use Dompdf\Dompdf;
+use App\CourtDetails;
 
 
 
@@ -17,37 +18,6 @@ class EvictionController extends Controller
      */
     public function index()
     {
-        DB::table('court_details')->insert([
-            [
-                'county' => 'Lancaster'
-                , 'court_number' => '02-2-08'
-                , '1_defendant_up_to_2000' => '139.75'
-                , '2_defendant_up_to_2000' => '152.25'
-                , '1_defendant_between_2001_4000' => '157.25'
-                , '2_defendant_between_2001_4000' => '169.75'
-                , '1_defendant_greater_than_4000' => '192.25'
-                , '2_defendant_greater_than_4000' => '204.75'
-                , '1_defendant_out_of_pocket' => '108.00'
-                , '2_defendant_out_of_pocket' => '115.20'
-                , 'mailing_address' => '690 Furnace Hills Pike, Lititz, PA 17543'
-                , 'phone_number' => '717-626-0258'
-                , 'accept_e_signature' => false
-            ],
-            [
-                'county' => 'Lancaster'
-                , 'court_number' => '02-1-02'
-                , '1_defendant_up_to_2000' => '150.65'
-                , '2_defendant_up_to_2000' => '160.65'
-                , '1_defendant_between_2001_4000' => '168.15'
-                , '2_defendant_between_2001_4000' => '178.15'
-                , '1_defendant_greater_than_4000' => '203.15'
-                , '2_defendant_greater_than_4000' => '213.15'
-                , '1_defendant_out_of_pocket' => '160.00'
-                , '2_defendant_out_of_pocket' => '0'
-                , 'mailing_address' => '2205 Oregon Pike, Lancaster, PA 17601'
-                , 'phone_number' => '717-569-8774'
-                , 'accept_e_signature' => false
-            ]]);
         return view('eviction', compact('map'));
     }
 
@@ -57,6 +27,9 @@ class EvictionController extends Controller
 
             $additionalRent = $_POST['addit_rent'];
             $courtNumber = $_POST['court_number'];
+
+            $courtDetails = CourtDetails::where('court_number', $courtNumber)->get();
+
             $courtPhone = $_POST['court_phone_number'];
             $courtAddressLine1 = $_POST['court_address1'];
             $courtAddressLine2 = $_POST['court_address2'];
@@ -163,7 +136,7 @@ span.cls_010{font-family:Arial,serif;font-size:8.1px;color:rgb(0,0,0);font-weigh
 <span style="position:absolute;left:36.05px;top:29.55px" class="cls_003"><span class="cls_003">COUNTY OF</span></span><br>
 <span style="position:absolute;left:336.30px;top:67.80px" class="cls_005"><span class="cls_005">PLAINTIFF:</span><br><p style="margin-left:6px;">SlateHouse Group Property Management LLC on behalf of '.$ownerName.'<br>PO Box 5304<br>Lancaster, PA 17606</p></span><br>
 <span style="position:absolute;left:463.70px;top:68.50px" class="cls_005"><span class="cls_005">NAME and ADDRESS</span></span>
-<span style="position:absolute;left:40.80px;top:69.36px" class="cls_004"><span class="cls_004">Mag. Dist. No: '.$courtNumber.'</span></span><br>
+<span style="position:absolute;left:40.80px;top:69.36px" class="cls_004"><span class="cls_004">Mag. Dist. No: '.$courtDetails->court_number.'</span></span><br>
 <span style="position:absolute;left:40.90px;top:82.85px" class="cls_004"><span class="cls_004">MDJ Name:</span></span><br>
 <span style="position:absolute;left:40.90px;top:101.05px" class="cls_004"><span class="cls_004">Address: '.$courtAddressLine1.'<br><span style="margin-left:34px;">'.$courtAddressLine2.'</span></span></span><br>
 <span style="position:absolute;left:437.10px;top:130.90px" class="cls_006"><span class="cls_006">V.</span></span><br>
