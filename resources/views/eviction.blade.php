@@ -59,6 +59,10 @@
                                                             <label class="labels">Tenant(s) Name</label>
                                                             <input class="form-control" placeholder="Tenant(s) Name" type="text" id="tenant_name" name="tenant_name"/>
                                                         </div>
+                                                        <div class="col-sm-6">
+                                                            <label class="labels">2 or more Tenants on Lease</label>
+                                                            <input class="form-control" type="checkbox" id="tenant_num" name="tenant_num"/>
+                                                        </div>
                                                         <div class="col-sm-4">
                                                             <label for="filing_date" class="labels">Filing Date</label>
                                                             <input class="form-control" type="date" id="filing_date" name="filing_date"/>

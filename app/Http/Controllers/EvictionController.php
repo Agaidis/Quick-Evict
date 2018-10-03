@@ -17,6 +17,37 @@ class EvictionController extends Controller
      */
     public function index()
     {
+        DB::table('court_details')->insert([
+            [
+                'county' => 'Lancaster'
+                , 'court_number' => '02-2-08'
+                , '1_defendant_up_to_2000' => '139.75'
+                , '2_defendant_up_to_2000' => '152.25'
+                , '1_defendant_between_2001_4000' => '157.25'
+                , '2_defendant_between_2001_4000' => '169.75'
+                , '1_defendant_greater_than_4000' => '192.25'
+                , '2_defendant_greater_than_4000' => '204.75'
+                , '1_defendant_out_of_pocket' => '108.00'
+                , '2_defendant_out_of_pocket' => '115.20'
+                , 'mailing_address' => '690 Furnace Hills Pike, Lititz, PA 17543'
+                , 'phone_number' => '717-626-0258'
+                , 'accept_e_signature' => false
+            ],
+            [
+                'county' => 'Lancaster'
+                , 'court_number' => '02-1-02'
+                , '1_defendant_up_to_2000' => '150.65'
+                , '2_defendant_up_to_2000' => '160.65'
+                , '1_defendant_between_2001_4000' => '168.15'
+                , '2_defendant_between_2001_4000' => '178.15'
+                , '1_defendant_greater_than_4000' => '203.15'
+                , '2_defendant_greater_than_4000' => '213.15'
+                , '1_defendant_out_of_pocket' => '160.00'
+                , '2_defendant_out_of_pocket' => '0'
+                , 'mailing_address' => '2205 Oregon Pike, Lancaster, PA 17601'
+                , 'phone_number' => '717-569-8774'
+                , 'accept_e_signature' => false
+            ]]);
         return view('eviction', compact('map'));
     }
 
@@ -36,6 +67,8 @@ class EvictionController extends Controller
             $damageAmt = $_POST['damage_amt'];
             $damageAmt = str_replace('$', '', $damageAmt);
 
+            $tenantName = $_POST['tenant_name'];
+            $tenantNum = $_POST['tenant_num'];
             $filing_date = $_POST['filing_date'];
             $landlord = $_POST['landlord'];
 
@@ -134,7 +167,7 @@ span.cls_010{font-family:Arial,serif;font-size:8.1px;color:rgb(0,0,0);font-weigh
 <span style="position:absolute;left:40.90px;top:82.85px" class="cls_004"><span class="cls_004">MDJ Name:</span></span><br>
 <span style="position:absolute;left:40.90px;top:101.05px" class="cls_004"><span class="cls_004">Address: '.$courtAddressLine1.'<br><span style="margin-left:34px;">'.$courtAddressLine2.'</span></span></span><br>
 <span style="position:absolute;left:437.10px;top:130.90px" class="cls_006"><span class="cls_006">V.</span></span><br>
-<span style="position:absolute;left:336.30px;top:133.60px" class="cls_009"><span class="cls_009">DEFENDANT:</span><br><p style="margin-left:6px;">'.$defendanthouseNum.' '.$defendantStreetName.'<br>'.$defendantCounty.', '.$defendantState.' '.$defendantZipcode.'</p></span><br>
+<span style="position:absolute;left:336.30px;top:133.60px" class="cls_009"><span class="cls_009">DEFENDANT:</span><br><p style="margin-left:6px;">'.$tenantName.'<br>'.$defendanthouseNum.' '.$defendantStreetName.'<br>'.$defendantCounty.', '.$defendantState.' '.$defendantZipcode.'</p></span><br>
 <span style="position:absolute;left:466.50px;top:135.00px" class="cls_005"><span class="cls_005">NAME and ADDRESS</span></span><br>
 <span style="position:absolute;left:40.90px;top:144.45px" class="cls_004"><span class="cls_004">Telephone: '.$courtPhone.'</span></span><br>
 <span style="position:absolute;left:142.45px;top:160.95px" class="cls_004"><span class="cls_004">AMOUNT</span></span><br>
@@ -181,7 +214,7 @@ span.cls_010{font-family:Arial,serif;font-size:8.1px;color:rgb(0,0,0);font-weigh
 <span style="position:absolute;left:457.40px;top:427.20px" class="cls_004"><span class="cls_004">$</span></span><br>
 <span style="position:absolute;left:465.42px;top:427.20px" class="cls_004"><span class="cls_004">___________________</span></span><br>
 <span style="position:absolute;left:42.30px;top:442.15px" class="cls_004"><span class="cls_004">1. The location and the address, if any, of the real property is:</span></span><br>
-<span style="position:absolute;left:293.85px;top:442.15px" class="cls_004"><span class="cls_004">________________________________________________________</span></span><br>
+<span style="position:absolute;left:293.85px;top:442.15px" class="cls_004"><span style="text-decoration: underline;" class="cls_004">________________________'.$defendanthouseNum.' '.$defendantStreetName.' '.$defendantCounty.', '.$defendantState.' '.$defendantZipcode.'________________________________</span></span><br>
 <span style="position:absolute;left:42.30px;top:454.05px" class="cls_004"><span class="cls_004">2. The plaintiff is the landlord of that property.</span></span><br>
 <span style="position:absolute;left:42.30px;top:464.55px" class="cls_004"><span class="cls_004">3. The plaintiff leased or rented the property to you or to ___________________________________________under whom you claim</span></span><br>
 <span style="position:absolute;left:42.30px;top:478.65px" class="cls_004"><span class="cls_004">4.</span></span><br>
