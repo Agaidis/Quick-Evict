@@ -6,6 +6,7 @@ use Dompdf\Options;
 use GMaps;
 use Dompdf\Dompdf;
 use App\CourtDetails;
+use Illuminate\Support\Facades\DB;
 
 
 
