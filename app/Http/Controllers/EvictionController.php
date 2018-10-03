@@ -21,7 +21,7 @@ class EvictionController extends Controller
     {
 
         $courtDetails = CourtDetails::where('court_number', '02-2-08')->first();
-        mail('agaidis@moneymappress.com', 'hey', $courtDetails->court_number);
+        mail('andrew.gaidis@gmail.com', 'hey', $courtDetails->court_number);
 
         return view('eviction', compact('map'));
     }
