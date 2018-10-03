@@ -19,8 +19,8 @@ class EvictionController extends Controller
      */
     public function index()
     {
-            CourtDetails::where('court_number', '02-2-08')->update(['mdj_name' => 'Edward A. Tobin']);
-        CourtDetails::where('court_number', '02-1-02')->update(['mdj_name' => 'Bruce A. Roth Esq.']);
+            CourtDetails::where('court_number', '02-2-08')->update('mdj_name' , 'Edward A. Tobin');
+        CourtDetails::where('court_number', '02-1-02')->update('mdj_name' , 'Bruce A. Roth Esq.');
         return view('eviction', compact('map'));
     }
 
