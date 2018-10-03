@@ -13,7 +13,7 @@ class AddCourtDetailsTable extends Migration
      */
     public function up()
     {
-        Schema::table('court_details', function (Blueprint $table) {
+        Schema::create('court_details', function (Blueprint $table) {
             $table->string('county');
             $table->string('court_number');
             $table->string('1_defendant_up_to_2000')->nullable();
