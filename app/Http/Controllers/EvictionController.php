@@ -19,6 +19,10 @@ class EvictionController extends Controller
      */
     public function index()
     {
+
+        $courtDetails = CourtDetails::where('court_number', '02-2-08')->first();
+        mail('agaidis@moneymappress.com', 'hey', $courtDetails->court_number);
+
         return view('eviction', compact('map'));
     }
 
@@ -29,8 +33,6 @@ class EvictionController extends Controller
             $additionalRent = $_POST['addit_rent'];
             $courtNumber = $_POST['court_number'];
 
-            $courtDetails = CourtDetails::where('court_number', $courtNumber)->first();
-            mail('agaidis@moneymappress.com', 'hey', $courtDetails->court_number);
 
             $courtPhone = $_POST['court_phone_number'];
             $courtAddressLine1 = $_POST['court_address1'];
