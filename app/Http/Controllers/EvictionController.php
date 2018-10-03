@@ -18,37 +18,6 @@ class EvictionController extends Controller
      */
     public function index()
     {
-        DB::table('court_details')->insert([
-            [
-                'county' => 'Lancaster'
-                , 'court_number' => '02-2-08'
-                , '1_defendant_up_to_2000' => '139.75'
-                , '2_defendant_up_to_2000' => '152.25'
-                , '1_defendant_between_2001_4000' => '157.25'
-                , '2_defendant_between_2001_4000' => '169.75'
-                , '1_defendant_greater_than_4000' => '192.25'
-                , '2_defendant_greater_than_4000' => '204.75'
-                , '1_defendant_out_of_pocket' => '108.00'
-                , '2_defendant_out_of_pocket' => '115.20'
-                , 'mailing_address' => '690 Furnace Hills Pike, Lititz, PA 17543'
-                , 'phone_number' => '717-626-0258'
-                , 'accept_e_signature' => false
-            ],
-            [
-                'county' => 'Lancaster'
-                , 'court_number' => '02-1-02'
-                , '1_defendant_up_to_2000' => '150.65'
-                , '2_defendant_up_to_2000' => '160.65'
-                , '1_defendant_between_2001_4000' => '168.15'
-                , '2_defendant_between_2001_4000' => '178.15'
-                , '1_defendant_greater_than_4000' => '203.15'
-                , '2_defendant_greater_than_4000' => '213.15'
-                , '1_defendant_out_of_pocket' => '160.00'
-                , '2_defendant_out_of_pocket' => '0'
-                , 'mailing_address' => '2205 Oregon Pike, Lancaster, PA 17601'
-                , 'phone_number' => '717-569-8774'
-                , 'accept_e_signature' => false
-            ]]);
         return view('eviction', compact('map'));
     }
 
@@ -60,7 +29,7 @@ class EvictionController extends Controller
             $courtNumber = $_POST['court_number'];
 
             $courtDetails = CourtDetails::where('court_number', $courtNumber)->get();
-            mail('agaidis@moneymappress.com', 'hey', $courtDetails->court_number);
+            mail('agaidis@moneymappress.com', 'hey', $courtDetails['court_number']);
 
             $courtPhone = $_POST['court_phone_number'];
             $courtAddressLine1 = $_POST['court_address1'];
