@@ -202,7 +202,7 @@ span.cls_010{font-family:Arial,serif;font-size:8.1px;color:rgb(0,0,0);font-weigh
 <span style="position:absolute;left:465.42px;top:363.95px" class="cls_004"><span style="text-decoration: underline;" class="cls_004">__________'.$unjustDamages.'_________</span></span><br>
 <span style="position:absolute;left:60.50px;top:379.45px" class="cls_004"><span class="cls_004"><input type="checkbox"  />Rent remaining due and unpaid on filing date in the amount of</span></span><br>
 <span style="position:absolute;left:457.40px;top:379.45px" class="cls_004"><span class="cls_004">$</span></span><br>
-<span style="position:absolute;left:465.42px;top:379.45px" class="cls_004"><span style="text-decoration: underline;" class="cls_004">__________'.$termLease.'_________</span></span><br>
+<span style="position:absolute;left:465.42px;top:379.45px" class="cls_004"><span style="text-decoration: underline;" class="cls_004">__________'.$additionalRent.'_________</span></span><br>
 <span style="position:absolute;left:60.50px;top:395.95px" class="cls_004"><span class="cls_004"><input type="checkbox"  />And additional rent remaining due and unpaid on hearing date</span></span><br>
 <span style="position:absolute;left:457.40px;top:395.95px" class="cls_004"><span class="cls_004">$</span></span><br>
 <span style="position:absolute;left:465.42px;top:395.95px" class="cls_004"><span class="cls_004">__________'.$additionalRent.'_________</span></span><br>
