@@ -91,7 +91,7 @@
                                                         </div><br><br>
                                                         <div class="col-sm-10">
                                                             <div class="labels">Lease Status:</div>
-                                                            <input type="checkbox" id="term_lease_ended" name="term_lease_ended" value="lease_ended">
+                                                            <input type="checkbox" id="term_lease_ended" name="term_lease_ended">
                                                             <label for="term_lease_ended">Term of lease has ended</label><br>
                                                             <input type="checkbox" id="breached_conditions_lease" name="breached_conditions_lease">
                                                             <label for="breached_conditions_lease">Tenant Breached Conditions of Lease</label><br>
