@@ -66,7 +66,7 @@
                                                         <div class="col-sm-6">
                                                             <label class="labels">Tenant(s) Name</label>
                                                             <input class="form-control" placeholder="Tenant(s) Name" type="text" id="tenant_name" name="tenant_name"/>
-                                                        </div>
+                                                        </div><br>
                                                         <div class="col-sm-10">
                                                             <input type="checkbox" id="tenant_num" name="tenant_num"/>
                                                             <label for="tenant_num">2 or more Tenants?</label>
@@ -91,11 +91,11 @@
                                                         </div><br><br>
                                                         <div class="col-sm-10">
                                                             <div class="labels">Lease Status:</div>
-                                                            <input type="checkbox" id="term_lease_ended" name="term_lease_ended" value="lease_ended" checked>
+                                                            <input type="checkbox" id="term_lease_ended" name="term_lease_ended" value="lease_ended">
                                                             <label for="term_lease_ended">Term of lease has ended</label><br>
-                                                            <input type="checkbox" id="breached_conditions_lease" name="breached_conditions_lease" value="breached_conditions_lease">
+                                                            <input type="checkbox" id="breached_conditions_lease" name="breached_conditions_lease">
                                                             <label for="breached_conditions_lease">Tenant Breached Conditions of Lease</label><br>
-                                                            <input type="checkbox" id="unsatisfied_lease" name="unsatisfied_lease" value="unsatisfied_lease">
+                                                            <input type="checkbox" id="unsatisfied_lease" name="unsatisfied_lease">
                                                             <label for="unsatisfied_lease">Rent Reserved and due has, upon demand, remained unsatisfied</label>
                                                         </div>
                                                     </div>
