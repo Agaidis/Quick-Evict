@@ -55,11 +55,11 @@
                                             <div id="general_information_container" class="major_labels">
                                                 <div class="form-group">
                                                     <div class="row">
-                                                        <div class="col-sm-2">
+                                                        <div class="col-sm-4">
                                                             <label for="monthly_rent">Security Deposit</label>
                                                             <input type="text" class="form-control" id="security_deposit" name="security_deposit" value="$" />
                                                         </div>
-                                                        <div class="col-sm-2">
+                                                        <div class="col-sm-4">
                                                             <label for="monthly_rent">Monthly Rent</label>
                                                             <input type="text" class="form-control" id="monthly_rent" name="monthly_rent" value="$" />
                                                         </div>
