@@ -89,9 +89,6 @@ class EvictionController extends Controller
                 $quitNoticeGiven = '<input type="checkbox" checked/>';
             }
 
-            mail('andrew.gaidis@gmail.com', 'hey', $_POST['unsatisfied_lease']);
-            mail('andrew.gaidis@gmail.com', 'hey', $_POST['breached_conditions_lease']);
-            mail('andrew.gaidis@gmail.com', 'hey', $_POST['term_lease_ended']);
             //Lease Status
             if (isset($_POST['unsatisfied_lease'])) {
                 $unsatisfiedLease = '<input type="checkbox" checked/>';
