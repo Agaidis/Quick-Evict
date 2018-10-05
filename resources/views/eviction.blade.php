@@ -55,11 +55,11 @@
                                             <div id="general_information_container" class="major_labels">
                                                 <div class="form-group">
                                                     <div class="row">
-                                                        <div class="col-sm-10">
+                                                        <div class="col-sm-2">
                                                             <label for="monthly_rent">Security Deposit</label>
                                                             <input type="text" class="form-control" id="security_deposit" name="security_deposit" value="$" />
                                                         </div>
-                                                        <div class="col-sm-10">
+                                                        <div class="col-sm-2">
                                                             <label for="monthly_rent">Monthly Rent</label>
                                                             <input type="text" class="form-control" id="monthly_rent" name="monthly_rent" value="$" />
                                                         </div>
@@ -68,8 +68,8 @@
                                                             <input class="form-control" placeholder="Tenant(s) Name" type="text" id="tenant_name" name="tenant_name"/>
                                                         </div>
                                                         <div class="col-sm-4">
-                                                            <label for="tenant_num" class="labels">2 or more Tenants on Lease</label>
                                                             <input class="form-control" type="checkbox" id="tenant_num" name="tenant_num"/>
+                                                            <label for="tenant_num" class="labels">2 or more Tenants on Lease</label>
                                                         </div>
                                                         <div class="col-sm-4">
                                                             <label for="filing_date" class="labels">Filing Date</label>
