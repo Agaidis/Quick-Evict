@@ -55,6 +55,14 @@
                                             <div id="general_information_container" class="major_labels">
                                                 <div class="form-group">
                                                     <div class="row">
+                                                        <div class="col-sm-10">
+                                                            <label for="monthly_rent">Security Deposit</label>
+                                                            <input type="text" class="form-control" id="security_deposit" name="security_deposit" value="$" />
+                                                        </div>
+                                                        <div class="col-sm-10">
+                                                            <label for="monthly_rent">Monthly Rent</label>
+                                                            <input type="text" class="form-control" id="monthly_rent" name="monthly_rent" value="$" />
+                                                        </div>
                                                         <div class="col-sm-6">
                                                             <label class="labels">Tenant(s) Name</label>
                                                             <input class="form-control" placeholder="Tenant(s) Name" type="text" id="tenant_name" name="tenant_name"/>
@@ -97,14 +105,6 @@
                                         <div id="amount_due_container" class="major_labels">
                                             <div class="form-group">
                                                 <div class="row">
-                                                    <div class="col-sm-10">
-                                                        <label for="monthly_rent">Security Deposit</label>
-                                                        <input type="text" class="form-control" id="security_deposit" name="security_deposit" value="$" />
-                                                    </div>
-                                                    <div class="col-sm-10">
-                                                        <label for="monthly_rent">Monthly Rent</label>
-                                                        <input type="text" class="form-control" id="monthly_rent" name="monthly_rent" value="$" />
-                                                    </div>
                                                     <div class="col-sm-10">
                                                         <label for="due_rent">Rent that is Due at Filing Date</label>
                                                         <input type="text" class="form-control" id="due_rent" name="due_rent" value="$" />
