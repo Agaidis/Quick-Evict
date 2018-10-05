@@ -67,8 +67,9 @@
                                                             <label class="labels">Tenant(s) Name</label>
                                                             <input class="form-control" placeholder="Tenant(s) Name" type="text" id="tenant_name" name="tenant_name"/>
                                                         </div>
-                                                        <div class="col-sm-4">
-                                                            <input class="form-control" type="checkbox" id="tenant_num" name="tenant_num"/>
+                                                        <div class="col-sm-10">
+                                                            <div class="labels">Lease Type:</div>
+                                                            <input type="checkbox" id="tenant_num" name="tenant_num"/>
                                                             <label for="tenant_num">2 or more Tenants?</label>
                                                         </div>
                                                         <div class="col-sm-4">
