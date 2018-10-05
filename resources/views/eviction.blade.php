@@ -68,8 +68,8 @@
                                                             <input class="form-control" placeholder="Tenant(s) Name" type="text" id="tenant_name" name="tenant_name"/>
                                                         </div>
                                                         <div class="col-sm-4">
+                                                            <div class="labels">2 or more Tenants on Lease</div>
                                                             <input class="form-control" type="checkbox" id="tenant_num" name="tenant_num"/>
-                                                            <label for="tenant_num" class="labels">2 or more Tenants on Lease</label>
                                                         </div>
                                                         <div class="col-sm-4">
                                                             <label for="filing_date" class="labels">Filing Date</label>

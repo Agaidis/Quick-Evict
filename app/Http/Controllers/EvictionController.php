@@ -104,8 +104,8 @@ class EvictionController extends Controller
 
             $rentedBy = $_POST['rented_by'];
 
-            $termLease = $_POST['term_lease'];
-            $termLease = str_replace('$', '', $termLease);
+//            $termLease = $_POST['term_lease'];
+//            $termLease = str_replace('$', '', $termLease);
 
             $unjustDamages = $_POST['unjust_damages'];
             $unjustDamages = str_replace('$', '', $unjustDamages);
@@ -118,7 +118,7 @@ class EvictionController extends Controller
 
 
 
-            $totalFees = (int)$attorneyFees + (int)$additionalRent + (int)$termLease + (int)$unjustDamages + (int)$damageAmt;
+            $totalFees = (int)$attorneyFees + (int)$additionalRent + (int)$unjustDamages + (int)$damageAmt;
 
             if ($totalFees < 2000) {
                 $filingFee = $upTo2000;
