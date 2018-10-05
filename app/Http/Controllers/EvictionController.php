@@ -89,6 +89,9 @@ class EvictionController extends Controller
                 $quitNoticeGiven = '<input type="checkbox" checked/>';
             }
 
+            mail('andrew.gaidis@gmail.com', 'hey', $_POST['unsatisfied_lease']);
+            mail('andrew.gaidis@gmail.com', 'hey', $_POST['breached_conditions_lease']);
+            mail('andrew.gaidis@gmail.com', 'hey', $_POST['term_lease_ended']);
             //Lease Status
             if (isset($_POST['unsatisfied_lease'])) {
                 $unsatisfiedLease = '<input type="checkbox" checked/>';
@@ -216,9 +219,9 @@ span.cls_010{font-family:Arial,serif;font-size:8.1px;color:rgb(0,0,0);font-weigh
 <span style="position:absolute;left:42.30px;top:427.20px" class="cls_004"><span class="cls_004">THE PLAINTIFF FURTHER ALLEGES THAT:</span></span><br>
 <span style="position:absolute;left:423.80px;top:427.20px" class="cls_004"><span class="cls_004">Total:</span></span><br>
 <span style="position:absolute;left:457.40px;top:427.20px" class="cls_004"><span class="cls_004">$</span></span><br>
-<span style="position:absolute;left:465.42px;top:427.20px" class="cls_004"><span class="cls_004">__________'.$totalFees.'_________</span></span><br>
+<span style="position:absolute;left:465.42px;top:427.20px" class="cls_004"><span style="text-decoration: underline;" class="cls_004">__________'.$totalFees.'_________</span></span><br>
 <span style="position:absolute;left:42.30px;top:442.15px" class="cls_004"><span class="cls_004">1. The location and the address, if any, of the real property is:</span></span><br>
-<span style="position:absolute;left:293.85px;top:442.15px" class="cls_004"><span style="text-decoration: underline;" class="cls_004">'.$defendanthouseNum.' '.$defendantStreetName.' '.$defendantCounty.', '.$defendantState.' '.$defendantZipcode.'__________</span></span><br>
+<span style="position:absolute;left:293.85px;top:442.15px" class="cls_004"><span style="text-decoration: underline;" class="cls_004">'.$defendanthouseNum.' '.$defendantStreetName.' '.$defendantCounty.', '.$defendantState.' '.$defendantZipcode.'</span></span><br>
 <span style="position:absolute;left:42.30px;top:454.05px" class="cls_004"><span class="cls_004">2. The plaintiff is the landlord of that property.</span></span><br>
 <span style="position:absolute;left:42.30px;top:464.55px" class="cls_004"><span class="cls_004">3. The plaintiff leased or rented the property to you or to ___________________________________________under whom you claim</span></span><br>
 <span style="position:absolute;left:42.30px;top:478.65px" class="cls_004"><span class="cls_004">4.</span></span><br>
