@@ -25,8 +25,6 @@ class EvictionController extends Controller
     public function formulatePDF() {
 
         try {
-
-            $additionalRent = $_POST['addit_rent'];
             $courtNumber = $_POST['court_number'];
             $courtDetails = CourtDetails::where('court_number', $courtNumber)->first();
 
@@ -40,10 +38,28 @@ class EvictionController extends Controller
             $damageAmt = $_POST['damage_amt'];
             $damageAmt = str_replace('$', '', $damageAmt);
 
-            $tenantName = $_POST['tenant_name'];
-            $tenantNum = $_POST['tenant_num'];
+            $securityDeposit = $_POST['security_deposit'];
+            $monthlyRent = $_POST['monthly_rent'];
+            $additionalRent = $_POST['addit_rent'];
             $filing_date = $_POST['filing_date'];
+
+            $tenantName = $_POST['tenant_name'];
             $landlord = $_POST['landlord'];
+
+            if (isset($_POST['tenant_num'])) {
+                $upTo2000 = $courtDetails->one_defendant_up_to_2000;
+                $btn20014000 = $courtDetails->one_defendant_between_2001_4000;
+                $greaterThan4000 = $courtDetails->one_defendant_greater_than_4000;
+                $oop = $courtDetails->one_defendant_out_of_pocket;
+            } else {
+                $upTo2000 = $courtDetails->two_defendant_up_to_2000;
+                $btn20014000 = $courtDetails->two_defendant_between_2001_4000;
+                $greaterThan4000 = $courtDetails->two_defendant_greater_than_4000;
+                $oop = $courtDetails->two_defendant_out_of_pocket;
+            }
+
+
+
 
 
             //Lease Type
@@ -67,19 +83,20 @@ class EvictionController extends Controller
             }
 
             //Lease Status
-            $leaseStatus = $_POST['lease_status'];
-            if ($leaseStatus == 'lease_ended') {
-                $lease_ended = '<input type="checkbox" checked/>';
-                $breachedConditionsLease = '<input type="checkbox"/>';
-                $unsatisfied_lease = '<input type="checkbox"/>';
-            } else if ($leaseStatus == 'breached_conditions_lease') {
-                $breachedConditionsLease = '<input type="checkbox" checked/>';
-                $lease_ended = '<input type="checkbox"/>';
-                $unsatisfied_lease = '<input type="checkbox"/>';
+            if (isset($_POST['unsatisfied_lease'])) {
+                $unsatisfiedLease = '<input type="checkbox" checked/>';
             } else {
-                $unsatisfied_lease = '<input type="checkbox" checked/>';
-                $lease_ended = '<input type="checkbox"/>';
+                $unsatisfiedLease = '<input type="checkbox"/>';
+            }
+            if (isset($_POST['breached_conditions_lease'])) {
+                $breachedConditionsLease = '<input type="checkbox" checked/>';
+            } else {
                 $breachedConditionsLease = '<input type="checkbox"/>';
+            }
+            if (isset($_POST['term_lease_ended'])) {
+                $leaseEnded = '<input type="checkbox" checked/>';
+            } else {
+                $leaseEnded = '<input type="checkbox" checked/>';
             }
 
             $ownerName = $_POST['owner_name'];
@@ -100,6 +117,16 @@ class EvictionController extends Controller
             $defendantStreetName= $_POST['streetName'];
 
 
+
+            $totalFees = (int)$attorneyFees + (int)$additionalRent + (int)$termLease + (int)$unjustDamages + (int)$damageAmt;
+
+            if ($totalFees < 2000) {
+                $filingFee = $upTo2000;
+            } else if ($totalFees >= 2000 && $totalFees <= 4000) {
+                $filingFee = $btn20014000;
+            } else if ($totalFees > 4000) {
+                $filingFee = $greaterThan4000;
+            }
 
             $dompdf = new Dompdf();
             $options = new Options();
@@ -162,8 +189,8 @@ span.cls_010{font-family:Arial,serif;font-size:8.1px;color:rgb(0,0,0);font-weigh
 <span style="position:absolute;left:62.77px;top:279.51px" class="cls_004"><span class="cls_004">property and for:</span></span><br>
 <span style="position:absolute;left:60.87px;top:292.21px" class="cls_004"><span class="cls_004">Lease is</span></span><br>
 <span style="position:absolute;left:120.25px;top:292.21px" class="cls_004"><span class="cls_004">'. $isResidential .'Residential</span></span><br>
-<span style="position:absolute;left:198.23px;top:292.21px" class="cls_004"><span class="cls_004">'. $isNotResidential .'Nonresidential     Monthly Rent  $</span></span><br>
-<span style="position:absolute;left:415.98px;top:292.21px" class="cls_004"><span class="cls_004">Security Deposit $</span></span><br>
+<span style="position:absolute;left:198.23px;top:292.21px" class="cls_004"><span class="cls_004">'. $isNotResidential .'Nonresidential     Monthly Rent  $'.$monthlyRent.'</span></span><br>
+<span style="position:absolute;left:415.98px;top:292.21px" class="cls_004"><span class="cls_004">Security Deposit $'.$securityDeposit.'</span></span><br>
 <span style="position:absolute;left:60.87px;top:304.91px" class="cls_004"><span class="cls_004"><input type="checkbox"  />A determination that the manufactured home and property have been abandoned.</span></span><br>
 <span style="position:absolute;left:60.87px;top:317.61px" class="cls_004"><span class="cls_004"><input type="checkbox"  />A Request for Determination of Abandonment (Form MDJS 334) must be completed and submitted with this complaint.</span></span><br>
 <span style="position:absolute;left:61.30px;top:332.71px" class="cls_004"><span class="cls_004"><input type="checkbox"  />Damages for injury to the real property, to wit: __________________________________________________________________</span></span><br>
@@ -178,28 +205,28 @@ span.cls_010{font-family:Arial,serif;font-size:8.1px;color:rgb(0,0,0);font-weigh
 <span style="position:absolute;left:465.42px;top:379.45px" class="cls_004"><span style="text-decoration: underline;" class="cls_004">__________'.$termLease.'_________</span></span><br>
 <span style="position:absolute;left:60.50px;top:395.95px" class="cls_004"><span class="cls_004"><input type="checkbox"  />And additional rent remaining due and unpaid on hearing date</span></span><br>
 <span style="position:absolute;left:457.40px;top:395.95px" class="cls_004"><span class="cls_004">$</span></span><br>
-<span style="position:absolute;left:465.42px;top:395.95px" class="cls_004"><span class="cls_004">___________________</span></span><br>
+<span style="position:absolute;left:465.42px;top:395.95px" class="cls_004"><span class="cls_004">__________'.$additionalRent.'_________</span></span><br>
 <span style="position:absolute;left:60.50px;top:410.45px" class="cls_004"><span class="cls_004"><input type="checkbox"  />Attorney fees in the amount of</span></span><br>
 <span style="position:absolute;left:457.40px;top:410.45px" class="cls_004"><span class="cls_004">$</span></span><br>
 <span style="position:absolute;left:465.42px;top:410.45px" class="cls_004"><span style="text-decoration: underline;" class="cls_004">__________'.$attorneyFees.'_________</span></span><br>
 <span style="position:absolute;left:42.30px;top:427.20px" class="cls_004"><span class="cls_004">THE PLAINTIFF FURTHER ALLEGES THAT:</span></span><br>
 <span style="position:absolute;left:423.80px;top:427.20px" class="cls_004"><span class="cls_004">Total:</span></span><br>
 <span style="position:absolute;left:457.40px;top:427.20px" class="cls_004"><span class="cls_004">$</span></span><br>
-<span style="position:absolute;left:465.42px;top:427.20px" class="cls_004"><span class="cls_004">___________________</span></span><br>
+<span style="position:absolute;left:465.42px;top:427.20px" class="cls_004"><span class="cls_004">__________'.$totalFees.'_________</span></span><br>
 <span style="position:absolute;left:42.30px;top:442.15px" class="cls_004"><span class="cls_004">1. The location and the address, if any, of the real property is:</span></span><br>
-<span style="position:absolute;left:293.85px;top:442.15px" class="cls_004"><span style="text-decoration: underline;" class="cls_004">________________________'.$defendanthouseNum.' '.$defendantStreetName.' '.$defendantCounty.', '.$defendantState.' '.$defendantZipcode.'________________________________</span></span><br>
+<span style="position:absolute;left:293.85px;top:442.15px" class="cls_004"><span style="text-decoration: underline;" class="cls_004">'.$defendanthouseNum.' '.$defendantStreetName.' '.$defendantCounty.', '.$defendantState.' '.$defendantZipcode.'__________</span></span><br>
 <span style="position:absolute;left:42.30px;top:454.05px" class="cls_004"><span class="cls_004">2. The plaintiff is the landlord of that property.</span></span><br>
 <span style="position:absolute;left:42.30px;top:464.55px" class="cls_004"><span class="cls_004">3. The plaintiff leased or rented the property to you or to ___________________________________________under whom you claim</span></span><br>
 <span style="position:absolute;left:42.30px;top:478.65px" class="cls_004"><span class="cls_004">4.</span></span><br>
 <span style="position:absolute;left:76.60px;top:478.65px" class="cls_004"><span class="cls_004">'.$quitNoticeGiven.'Notice to quit was given in accordance with law, or</span></span><br>
 <span style="position:absolute;left:76.60px;top:494.15px" class="cls_004"><span class="cls_004">'.$noQuitNotice.'No notice is required under the terms of the lease.</span></span><br>
 <span style="position:absolute;left:42.30px;top:513.45px" class="cls_004"><span class="cls_004">5.</span></span><br>  
-<span style="position:absolute;left:77.30px;top:513.45px" class="cls_004"><span class="cls_004">'.$lease_ended.'The term for which the property was leased or rented is fully ended, or</span></span><br>
+<span style="position:absolute;left:77.30px;top:513.45px" class="cls_004"><span class="cls_004">'.$leaseEnded.'The term for which the property was leased or rented is fully ended, or</span></span><br>
 <span style="position:absolute;left:77.30px;top:531.35px" class="cls_004"><span class="cls_004">'.$breachedConditionsLease.'A forfeiture has resulted by reason of a breach of the conditions of the lease, to wit:</span></span><br>
 <span style="position:absolute;left:414.74px;top:531.35px" class="cls_004"><span class="cls_004">________________________________</span></span><br>
 <span style="position:absolute;left:77.30px;top:541.35px" class="cls_004"><span class="cls_004">________________________________________________________________________________________________or,</span></span><br>
 <span style="position:absolute;left:77.30px;top:554.15px" class="cls_004"><span class="cls_004">___________________________________________________________________________________________________</span></span><br>
-<span style="position:absolute;left:77.30px;top:569.55px" class="cls_004"><span class="cls_004">'.$unsatisfied_lease.'Rent reserved and due has, upon demand, remained unsatisfied.</span></span><br>
+<span style="position:absolute;left:77.30px;top:569.55px" class="cls_004"><span class="cls_004">'.$unsatisfiedLease.'Rent reserved and due has, upon demand, remained unsatisfied.</span></span><br>
 <span style="position:absolute;left:42.30px;top:582.15px" class="cls_004"><span class="cls_004">6.</span></span><br>
 <span style="position:absolute;left:60.50px;top:582.15px" class="cls_004"><span class="cls_004">You retain the real property and refuse to give up to its possession.</span></span><br>
 <span style="position:absolute;left:42.00px;top:595.65px" class="cls_004"><span class="cls_004">I, ________________________________________________________________ verify that the facts set forth in this complaint are</span></span><br>
@@ -216,7 +243,7 @@ span.cls_010{font-family:Arial,serif;font-size:8.1px;color:rgb(0,0,0);font-weigh
 <span style = "position:absolute;left:47.90px;top:727.35px" class="cls_007" ><span class="cls_007" > contact the Magisterial District Court at the above address or telephone number . We are unable to provide transportation .</span ></span ><br >
 <span style = "position:absolute;left:36.00px;top:741.85px" class="cls_008" ><span class="cls_008" > AOPC 310A </span ></span ><br >
 <span style = "position:absolute;left:303.75px;top:742.50px" class="cls_008" ><span class="cls_008" > 1</span ></span ><br >
-<span style = "position:absolute;left:471.65px;top:742.10px" class="cls_007" ><span class="cls_007" > </span ></span ><br >
+<span style = "position:absolute;left:471.65px;top:742.10px" class="cls_007" ><span class="cls_007" > </span >Filing Fee: $'.$filingFee.'</span ><br >
 <span style = "position:absolute;left:452.45px;top:748.80px" class="cls_010" ><span class="cls_010" > </span ></span >
 </span ></body ></html>');
 

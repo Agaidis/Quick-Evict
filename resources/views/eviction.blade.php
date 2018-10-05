@@ -83,11 +83,11 @@
                                                         </div><br><br>
                                                         <div class="col-sm-10">
                                                             <div class="labels">Lease Status:</div>
-                                                            <input type="radio" id="term_lease_ended" name="lease_status" value="lease_ended" checked>
+                                                            <input type="checkbox" id="term_lease_ended" name="term_lease_ended" value="lease_ended" checked>
                                                             <label for="term_lease_ended">Term of lease has ended</label><br>
-                                                            <input type="radio" id="breached_conditions_lease" name="lease_status" value="breached_conditions_lease">
+                                                            <input type="checkbox" id="breached_conditions_lease" name="breached_conditions_lease" value="breached_conditions_lease">
                                                             <label for="breached_conditions_lease">Tenant Breached Conditions of Lease</label><br>
-                                                            <input type="radio" id="unsatisfied_lease" name="lease_status" value="unsatisfied_lease">
+                                                            <input type="checkbox" id="unsatisfied_lease" name="unsatisfied_lease" value="unsatisfied_lease">
                                                             <label for="unsatisfied_lease">Rent Reserved and due has, upon demand, remained unsatisfied</label>
                                                         </div>
                                                     </div>
@@ -98,8 +98,16 @@
                                             <div class="form-group">
                                                 <div class="row">
                                                     <div class="col-sm-10">
+                                                        <label for="monthly_rent">Security Deposit</label>
+                                                        <input type="text" class="form-control" id="security_deposit" name="security_deposit" value="$" />
+                                                    </div>
+                                                    <div class="col-sm-10">
+                                                        <label for="monthly_rent">Monthly Rent</label>
+                                                        <input type="text" class="form-control" id="monthly_rent" name="monthly_rent" value="$" />
+                                                    </div>
+                                                    <div class="col-sm-10">
                                                         <label for="due_rent">Rent that is Due at Filing Date</label>
-                                                        <input type="text" class="form-control" id="due_rent" name="term_lease" value="$" />
+                                                        <input type="text" class="form-control" id="due_rent" name="due_rent" value="$" />
                                                     </div>
                                                     <div class="col-sm-10">
                                                         <label for="damage_amt">Damages for Injury to Property</label>
