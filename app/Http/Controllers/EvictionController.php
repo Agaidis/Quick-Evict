@@ -38,6 +38,9 @@ class EvictionController extends Controller
             $damageAmt = $_POST['damage_amt'];
             $damageAmt = str_replace('$', '', $damageAmt);
 
+            $dueRent = $_POST['due_rent'];
+            $dueRent = str_replace('$', '', $dueRent);
+
             $securityDeposit = $_POST['security_deposit'];
             $monthlyRent = $_POST['monthly_rent'];
             $additionalRent = $_POST['addit_rent'];
@@ -118,7 +121,7 @@ class EvictionController extends Controller
 
 
 
-            $totalFees = (int)$attorneyFees + (int)$additionalRent + (int)$unjustDamages + (int)$damageAmt;
+            $totalFees = (int)$attorneyFees + (int)$dueRent + (int)$unjustDamages + (int)$damageAmt;
 
             if ($totalFees < 2000) {
                 $filingFee = $upTo2000;
@@ -202,10 +205,10 @@ span.cls_010{font-family:Arial,serif;font-size:8.1px;color:rgb(0,0,0);font-weigh
 <span style="position:absolute;left:465.42px;top:363.95px" class="cls_004"><span style="text-decoration: underline;" class="cls_004">__________'.$unjustDamages.'_________</span></span><br>
 <span style="position:absolute;left:60.50px;top:379.45px" class="cls_004"><span class="cls_004"><input type="checkbox"  />Rent remaining due and unpaid on filing date in the amount of</span></span><br>
 <span style="position:absolute;left:457.40px;top:379.45px" class="cls_004"><span class="cls_004">$</span></span><br>
-<span style="position:absolute;left:465.42px;top:379.45px" class="cls_004"><span style="text-decoration: underline;" class="cls_004">__________'.$additionalRent.'_________</span></span><br>
+<span style="position:absolute;left:465.42px;top:379.45px" class="cls_004"><span style="text-decoration: underline;" class="cls_004">__________'.$dueRent.'_________</span></span><br>
 <span style="position:absolute;left:60.50px;top:395.95px" class="cls_004"><span class="cls_004"><input type="checkbox"  />And additional rent remaining due and unpaid on hearing date</span></span><br>
 <span style="position:absolute;left:457.40px;top:395.95px" class="cls_004"><span class="cls_004">$</span></span><br>
-<span style="position:absolute;left:465.42px;top:395.95px" class="cls_004"><span class="cls_004">__________'.$additionalRent.'_________</span></span><br>
+<span style="position:absolute;left:465.42px;top:395.95px" class="cls_004"><span class="cls_004">___________________</span></span><br>
 <span style="position:absolute;left:60.50px;top:410.45px" class="cls_004"><span class="cls_004"><input type="checkbox"  />Attorney fees in the amount of</span></span><br>
 <span style="position:absolute;left:457.40px;top:410.45px" class="cls_004"><span class="cls_004">$</span></span><br>
 <span style="position:absolute;left:465.42px;top:410.45px" class="cls_004"><span style="text-decoration: underline;" class="cls_004">__________'.$attorneyFees.'_________</span></span><br>
