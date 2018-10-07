@@ -11,9 +11,11 @@
                         <div class="row">
                             <div class="col-sm-12">
                             <form>
-                                        <div class="col-sm-12">
+                                        <div class="col-sm-6">
                                             <label for="county">County:</label>
                                             <input type="text" class="form-control" id="county" name="county" value="" />
+                                        </div>
+                                        <div class="col-sm-6">
                                             <label for="court_id">Court Id:</label>
                                             <input type="text" class="form-control" id="court_id" name="court_id" value="" />
                                         </div>
