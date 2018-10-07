@@ -9,7 +9,7 @@
                     <div class="card-header"><h2>Create Magistrate</h2></div>
                     <div class="card-body">
                         <div class="row">
-                                        <form>
+                            <form>
                                         <div class="col-sm-12">
                                             <label for="county">County:</label>
                                             <input type="text" class="form-control" id="county" name="county" value="" />
@@ -71,10 +71,8 @@
                                             <textarea style="width:150%; height:10%" placeholder="Longitudes" type="text" class="form-control" id="longitudes" name="longitudes"></textarea>
                                         </div>
                                         <input class="btn btn-primary" type="submit" value="Submit Magistrate" name="submit_btn"/>
-                                    </form>
-                                    </div>
-                            </div>
-
+                            </form>
+                        </div>
                     </div>
                 </div>
             </div>
