@@ -9,8 +9,6 @@
                     <div class="card-header"><h2>Create Magistrate</h2></div>
                     <div class="card-body">
                         <div class="row">
-                            <div class="col-md-12">
-                                    <div class="row">
                                         <form>
                                         <div class="col-sm-12">
                                             <label for="county">County:</label>
@@ -76,7 +74,7 @@
                                     </form>
                                     </div>
                             </div>
-                        </div>
+
                     </div>
                 </div>
             </div>
