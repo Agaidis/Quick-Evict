@@ -10,14 +10,13 @@
                     <div class="card-body">
                         <div class="row">
                             <div class="col-md-12">
-                                <div class="form-group">
                                     <div class="row">
                                         <form>
-                                        <div class="col-sm-6">
+                                        <div class="col-sm-12">
                                             <label for="county">County:</label>
                                             <input type="text" class="form-control" id="county" name="county" value="" />
                                         </div>
-                                        <div class="col-sm-6">
+                                        <div class="col-sm-12">
                                             <label for="court_id">Court Id:</label>
                                             <input type="text" class="form-control" id="court_id" name="court_id" value="" />
                                         </div>
@@ -76,7 +75,6 @@
                                         <input class="btn btn-primary" type="submit" value="Submit Magistrate" name="submit_btn"/>
                                     </form>
                                     </div>
-                                </div>
                             </div>
                         </div>
                     </div>
