@@ -100,6 +100,8 @@ class EvictionController extends Controller
             } else {
                 $breachedConditionsLease = '<input type="checkbox"/>';
             }
+            $breachedDetails = $_POST['breached_details'];
+
             if (isset($_POST['term_lease_ended'])) {
                 $leaseEnded = '<input type="checkbox" checked/>';
             } else {
@@ -227,7 +229,7 @@ span.cls_010{font-family:Arial,serif;font-size:8.1px;color:rgb(0,0,0);font-weigh
 <span style="position:absolute;left:42.30px;top:513.45px" class="cls_004"><span class="cls_004">5.</span></span><br>  
 <span style="position:absolute;left:77.30px;top:513.45px" class="cls_004"><span class="cls_004">'.$leaseEnded.'The term for which the property was leased or rented is fully ended, or</span></span><br>
 <span style="position:absolute;left:77.30px;top:531.35px" class="cls_004"><span class="cls_004">'.$breachedConditionsLease.'A forfeiture has resulted by reason of a breach of the conditions of the lease, to wit:</span></span><br>
-<span style="position:absolute;left:414.74px;top:531.35px" class="cls_004"><span class="cls_004">________________________________</span></span><br>
+<span style="position:absolute;left:414.74px;top:531.35px" class="cls_004"><span style="text-decoration: underline;" class="cls_004">_______________'.$breachedDetails.'_________________</span></span><br>
 <span style="position:absolute;left:77.30px;top:541.35px" class="cls_004"><span class="cls_004">________________________________________________________________________________________________or,</span></span><br>
 <span style="position:absolute;left:77.30px;top:554.15px" class="cls_004"><span class="cls_004">___________________________________________________________________________________________________</span></span><br>
 <span style="position:absolute;left:77.30px;top:569.55px" class="cls_004"><span class="cls_004">'.$unsatisfiedLease.'Rent reserved and due has, upon demand, remained unsatisfied.</span></span><br>
