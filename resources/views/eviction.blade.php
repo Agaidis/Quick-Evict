@@ -95,7 +95,7 @@
                                                             <label for="term_lease_ended">Term of lease has ended</label><br>
                                                             <input type="checkbox" id="breached_conditions_lease" name="breached_conditions_lease">
                                                             <label for="breached_conditions_lease">Tenant Breached Conditions of Lease</label>
-                                                            <div id="details"></div><b>Details:</b><input class="form-control" type="text" id="breached_details" name="breached_details" /><br>
+                                                            <div class="details"></div><b>Tenant Breached Details:</b><input class="form-control" type="text" id="breached_details" name="breached_details" /><br>
                                                             <input type="checkbox" id="unsatisfied_lease" name="unsatisfied_lease">
                                                             <label for="unsatisfied_lease">Rent Reserved and due has, upon demand, remained unsatisfied</label>
                                                         </div>
@@ -114,6 +114,7 @@
                                                         <label for="damage_amt">Damages for Injury to Property</label>
                                                         <input type="text" class="form-control" id="damage_amt" name="damage_amt" value="$" />
                                                     </div>
+                                                    <div class="details"></div><b>Property Damages Details:</b><input class="form-control" type="text" id="damages_details" name="damages_details" /><br>
                                                     <div class="col-sm-10">
                                                         <label for="unjust_damages">Damages for Unjust Detention of Real Property</label>
                                                         <input type="text" class="form-control" id="unjust_damages" name="unjust_damages" value="$" />
