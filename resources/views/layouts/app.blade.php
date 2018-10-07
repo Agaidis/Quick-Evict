@@ -60,6 +60,7 @@
                         <li><a href="{{ url('FAQ') }}" id="faq_btn">FAQ</a></li>
                         <li><a href="{{ url('where-does-this-work') }}" id="where_work_btn">Where Does this Work?</a></li>
                         <li><a href="{{ url('about-us') }}" id="about_us_btn">About Us</a></li>
+                            <li><a href="{{ url('magistrateCreator') }}" id="magistrate_btn">Magistrate Creator</a></li>
                         {{--@endif<!-- Authentication Links -->--}}
                         {{--@guest--}}
                             {{--<ul style="margin-left:60%;" class="nav navbar-nav navbar-right">--}}
