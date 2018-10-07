@@ -94,7 +94,7 @@
                                                             <input type="checkbox" id="term_lease_ended" name="term_lease_ended">
                                                             <label for="term_lease_ended">Term of lease has ended</label><br>
                                                             <input type="checkbox" id="breached_conditions_lease" name="breached_conditions_lease">
-                                                            <label for="breached_conditions_lease">Tenant Breached Conditions of Lease</label> <h5>Details:</h5><textarea type="text" id="breached_details" name="breached_details"></textarea><br>
+                                                            <label for="breached_conditions_lease">Tenant Breached Conditions of Lease</label> <span>Details:</span><textarea type="text" id="breached_details" name="breached_details"></textarea><br>
                                                             <input type="checkbox" id="unsatisfied_lease" name="unsatisfied_lease">
                                                             <label for="unsatisfied_lease">Rent Reserved and due has, upon demand, remained unsatisfied</label>
                                                         </div>
