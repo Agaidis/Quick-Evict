@@ -67,11 +67,11 @@
                                         </div>
                                         <div class="col-sm-12">
                                             <label for="mdj_name">Latitudes</label>
-                                            <textarea placeholder="Latitudes" type="text" class="form-control" id="latitudes" name="latitudes"></textarea>
+                                            <textarea style="width:150%; height:10%" placeholder="Latitudes" type="text" class="form-control" id="latitudes" name="latitudes"></textarea>
                                         </div>
                                         <div class="col-sm-12">
                                             <label for="mdj_name">Longitudes</label>
-                                            <textarea placeholder="Longitudes" type="text" class="form-control" id="longitudes" name="longitudes"></textarea>
+                                            <textarea style="width:150%; height:10%" placeholder="Longitudes" type="text" class="form-control" id="longitudes" name="longitudes"></textarea>
                                         </div>
                                         <input class="btn btn-primary" type="submit" value="Submit Magistrate" name="submit_btn"/>
                                     </form>
