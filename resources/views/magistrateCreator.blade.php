@@ -16,10 +16,11 @@
                                         <div class="col-sm-12">
                                             <label for="county">County:</label>
                                             <input type="text" class="form-control" id="county" name="county" value="" />
-                                        </div>
-                                        <div class="col-sm-12">
                                             <label for="court_id">Court Id:</label>
                                             <input type="text" class="form-control" id="court_id" name="court_id" value="" />
+                                        </div>
+                                        <div class="col-sm-12">
+
                                         </div>
                                         <div class="col-sm-12">
                                             <label for="one_under_2000">One Defendant under 2,000</label>
