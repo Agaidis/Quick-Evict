@@ -11,6 +11,7 @@
         "dompdf/dompdf": "0.8.0 as 0.6.2",
         "farhanwazir/laravelgooglemaps": "^2.3",
         "fideloper/proxy": "^4.0",
+        "laracasts/utilities": "^3.0",
         "laravel/cashier": "~7.0",
         "laravel/framework": "5.6.*",
         "laravel/tinker": "^1.0",

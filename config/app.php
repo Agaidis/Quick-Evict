@@ -149,6 +149,7 @@ return [
         FarhanWazir\GoogleMaps\GMapsServiceProvider::class,
         GoogleMaps\ServiceProvider\GoogleMapsServiceProvider::class,
         Barryvdh\DomPDF\ServiceProvider::class,
+        'Laracasts\Utilities\JavaScript\JavaScriptServiceProvider',
 
         /*
          * Package Service Providers...
