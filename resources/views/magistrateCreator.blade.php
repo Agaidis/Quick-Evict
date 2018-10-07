@@ -67,11 +67,11 @@
                                         </div>
                                         <div class="col-sm-10">
                                             <label for="mdj_name">Latitudes</label>
-                                            <input type="text" class="form-control" id="latitudes" name="latitudes" value="" />
+                                            <textarea placeholder="Latitudes" type="text" class="form-control" id="latitudes" name="latitudes"></textarea>
                                         </div>
                                         <div class="col-sm-10">
                                             <label for="mdj_name">Longitudes</label>
-                                            <input type="text" class="form-control" id="longitudes" name="longitudes" value="" />
+                                            <textarea placeholder="Longitudes" type="text" class="form-control" id="longitudes" name="longitudes"></textarea>
                                         </div>
                                         <input class="btn btn-primary" type="submit" value="Submit Magistrate" name="submit_btn"/>
                                     </form>
