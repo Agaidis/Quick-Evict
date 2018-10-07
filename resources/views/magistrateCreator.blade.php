@@ -4,7 +4,7 @@
     <meta name="csrf-token" id="token" content="{{ csrf_token() }}">
     <div class="container-fluid">
         <div class="row justify-content-center">
-            <div class="col-md-10">
+            <div class="col-md-12">
                 <div class="card">
                     <div class="card-header"><h2>Create Magistrate</h2></div>
                     <div class="card-body">
@@ -13,14 +13,13 @@
                                 <div class="form-group">
                                     <div class="row">
                                         <form>
-                                        <div class="col-sm-12">
+                                        <div class="col-sm-6">
                                             <label for="county">County:</label>
                                             <input type="text" class="form-control" id="county" name="county" value="" />
+                                        </div>
+                                        <div class="col-sm-6">
                                             <label for="court_id">Court Id:</label>
                                             <input type="text" class="form-control" id="court_id" name="court_id" value="" />
-                                        </div>
-                                        <div class="col-sm-12">
-
                                         </div>
                                         <div class="col-sm-12">
                                             <label for="one_under_2000">One Defendant under 2,000</label>
