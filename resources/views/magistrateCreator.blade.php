@@ -9,7 +9,7 @@
                     <div class="card-header"><h2>Create Magistrate</h2></div>
                     <div class="card-body">
                         <div class="row">
-                            <div class="col-sm-12">
+                            <div class="col-sm-10">
                             <form>
                                         <div class="col-sm-6">
                                             <label for="county">County:</label>
