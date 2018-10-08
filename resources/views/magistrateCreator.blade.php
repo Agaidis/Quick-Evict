@@ -13,11 +13,20 @@
                                 <table class="table table-hover">
                                     <thead>
                                     <tr>
-                                        <th>#</th>
-                                        <th>Name</th>
-                                        <th>Acronym</th>
-                                        <th>Type</th>
-                                        <th>Website</th>
+                                        <th>Id</th>
+                                        <th>Magistrate #</th>
+                                        <th>County</th>
+                                        <th>MDJ Name</th>
+                                        <th>Address</th>
+                                        <th>Phone #</th>
+                                        <th>(1) Under 2,000</th>
+                                        <th>(1) Btn 2,001 - 4,000</th>
+                                        <th>(1) Over 4,000</th>
+                                        <th>(1) OOP</th>
+                                        <th>(2) Under 2,000</th>
+                                        <th>(2) Btn 2,001 - 4,000</th>
+                                        <th>(2) Over 4,000</th>
+                                        <th>(2) OOP</th>
                                         <th class="text-center">Remove</th>
                                     </tr>
                                     </thead>
@@ -25,10 +34,19 @@
                                     @foreach ($courtDetails as $courtDetail)
                                     <tr>
                                         <td>{{$courtDetail->id}}</td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
+                                        <td>{{$courtDetail->court_number}}</td>
+                                        <td>{{$courtDetail->county}}</td>
+                                        <td>{{$courtDetail->mdj_name}}</td>
+                                        <td>{{$courtDetail->mailing_address}}</td>
+                                        <td>{{$courtDetail->phone_number}}</td>
+                                        <td>{{$courtDetail->one_defendant_up_to_2000}}</td>
+                                        <td>{{$courtDetail->one_defendant_between_2001_4000}}</td>
+                                        <td>{{$courtDetail->one_defendant_greater_than_4000}}</td>
+                                        <td>{{$courtDetail->one_defendant_out_of_pocket}}</td>
+                                        <td>{{$courtDetail->two_defendant_up_to_2000}}</td>
+                                        <td>{{$courtDetail->two_defendant_between_2001_4000}}</td>
+                                        <td>{{$courtDetail->two_defendant_greater_than_4000}}</td>
+                                        <td>{{$courtDetail->two_defendant_out_of_pocket}}</td>
                                         <td class="text-center"><a href="javascript:void(0)" class="text-danger magistrate-remove"><span class="glyphicon glyphicon-remove-circle" aria-hidden="true"></span></a></td>
                                     </tr>
                                     @endforeach
