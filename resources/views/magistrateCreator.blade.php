@@ -11,16 +11,37 @@
                         <div class="row">
                             <div class="col-sm-10">
                             <form>
-                                <div class="row">
-                                    <div class="col-md-2">
-                                        <label for="court_id">Court Id:</label>
-                                        <input placeholder="Court Id" type="text" class="form-control" id="court_id" name="court_id" value="" />
+                                <div class="col-md-4">
+                                    <h4 class="major_labels">Court Information</h4>
+                                    <div class="court_information_container">
+                                        <div class="col-md-2">
+                                            <label for="court_id">Court Id:</label>
+                                            <input placeholder="Court Id" type="text" class="form-control" id="court_id" name="court_id" value="" />
+                                        </div>
+                                        <div class="col-sm-4">
+                                            <label for="county">County:</label>
+                                            <input placeholder="County" type="text" class="form-control" id="county" name="county" value="" />
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-sm-5">
+                                                <label for="mdj_name">MDJ Name</label>
+                                                <input placeholder="Tom Pietro" type="text" class="form-control" id="mdj_name" name="mdj_name" value="" />
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-sm-6">
+                                                <label for="court_address">Court Mailing Address</label>
+                                                <input placeholder="123 Muholland Drive, Lancaster PA 17349" type="text" class="form-control" id="court_address" name="court_address" value="" />
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-sm-3">
+                                                <label for="mdj_name">Court Phone Number</label>
+                                                <input placeholder="(000)-000-0000" type="text" class="form-control" id="court_number" name="court_number" value="" />
+                                            </div>
+                                        </div>
                                     </div>
-                                    <div class="col-sm-4">
-                                        <label for="county">County:</label>
-                                        <input placeholder="County" type="text" class="form-control" id="county" name="county" value="" />
-                                    </div>
-                                </div><br><br>
+                                </div><br>
                                 <div class="row">
                                     <div class="col-md-4">
                                         <h4 class="major_labels">One Defendant Amts</h4>
@@ -80,27 +101,9 @@
                                         </div>
                                     </div>
                                     </div>
-                                </div>
-
-
-                                <div class="row">
-                                    <div class="col-sm-5">
-                                        <label for="mdj_name">MDJ Name</label>
-                                        <input placeholder="Tom Pietro" type="text" class="form-control" id="mdj_name" name="mdj_name" value="" />
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-sm-6">
-                                        <label for="court_address">Court Mailing Address</label>
-                                        <input placeholder="123 Muholland Drive, Lancaster PA 17349" type="text" class="form-control" id="court_address" name="court_address" value="" />
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-sm-3">
-                                        <label for="mdj_name">Court Phone Number</label>
-                                        <input placeholder="(000)-000-0000" type="text" class="form-control" id="court_number" name="court_number" value="" />
-                                    </div>
                                 </div><br><br>
+
+
                                 <input class="btn btn-primary" type="submit" value="Submit Magistrate" name="submit_btn"/>
                             </form>
                             </div>
