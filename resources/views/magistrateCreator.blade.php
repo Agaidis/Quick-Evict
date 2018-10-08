@@ -11,10 +11,10 @@
                         <div class="row">
                             <div class="col-sm-10">
                             <form>
-                                <div class="col-md-6">
+                                <div class="col-md-10">
                                     <h4 class="major_labels">Court Information</h4>
                                     <div class="court_information_container">
-                                        <div class="col-md-4">
+                                        <div class="col-md-6">
                                             <label for="court_id">Court Id:</label>
                                             <input placeholder="Court Id" type="text" class="form-control" id="court_id" name="court_id" value="" />
                                         </div>
