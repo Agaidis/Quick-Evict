@@ -114,8 +114,12 @@
                                                         <label for="damage_amt">Damages for Injury to Property</label>
                                                         <input type="text" class="form-control" id="damage_amt" name="damage_amt" value="$" />
                                                     </div>
-                                                    <div class="details"></div><b>Property Damages Details:</b><input class="form-control" type="text" id="damages_details" name="damages_details" /><br>
                                                     <div class="col-sm-10">
+                                                        <div class="details"></div>
+                                                        <b>Property Damages Details:</b>
+                                                        <input class="form-control" type="text" id="damages_details" name="damages_details" /><br>
+                                                    </div>
+                                                        <div class="col-sm-10">
                                                         <label for="unjust_damages">Damages for Unjust Detention of Real Property</label>
                                                         <input type="text" class="form-control" id="unjust_damages" name="unjust_damages" value="$" />
                                                     </div>
