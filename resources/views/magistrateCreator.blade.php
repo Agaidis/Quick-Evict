@@ -65,7 +65,7 @@
                                         </div>
                                         <div class="col-sm-6">
                                             <label for="mdj_name">Latitudes</label>
-                                            <textarea style=height:10%;" placeholder="Latitudes" type="text" class="form-control" id="latitudes" name="latitudes"></textarea>
+                                            <textarea style="height:10%;" placeholder="Latitudes" type="text" class="form-control" id="latitudes" name="latitudes"></textarea>
                                         </div>
                                         <div class="col-sm-6">
                                             <label for="mdj_name">Longitudes</label>
