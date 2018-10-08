@@ -196,7 +196,7 @@ span.cls_010{font-family:Arial,serif;font-size:8.1px;color:rgb(0,0,0);font-weigh
 <span style="position:absolute;left:62.77px;top:279.51px" class="cls_004"><span class="cls_004">property and for:</span></span><br>
 <span style="position:absolute;left:60.87px;top:292.21px" class="cls_004"><span class="cls_004">Lease is</span></span><br>
 <span style="position:absolute;left:120.25px;top:292.21px" class="cls_004"><span class="cls_004">'. $isResidential .'Residential</span></span><br>
-<span style="position:absolute;left:198.23px;top:292.21px" class="cls_004"><span class="cls_004">'. $isNotResidential .'Nonresidential     Monthly Rent  $</span><span style="margin-left:20px;">'.$monthlyRent.'</span></span><br>
+<span style="position:absolute;left:198.23px;top:292.21px" class="cls_004"><span class="cls_004">'. $isNotResidential .'Nonresidential     Monthly Rent  $</span><span style="margin-bottom:50px; margin-left:50px;">'.$monthlyRent.'</span></span><br>
 <span style="position:absolute;left:415.98px;top:292.21px" class="cls_004"><span class="cls_004">Security Deposit $</span>'.$securityDeposit.'</span><br>
 <span style="position:absolute;left:60.87px;top:304.91px" class="cls_004"><span class="cls_004"><input type="checkbox"  />A determination that the manufactured home and property have been abandoned.</span></span><br>
 <span style="position:absolute;left:60.87px;top:317.61px" class="cls_004"><span class="cls_004"><input type="checkbox"  />A Request for Determination of Abandonment (Form MDJS 334) must be completed and submitted with this complaint.</span></span><br>
