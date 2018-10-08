@@ -186,9 +186,5 @@ $(document).ready(function () {
         });
     });
 
-    $('.magistrate-remove').on('click', function() {
-        var id = $(this)[0].id;
-        console.log($(this)[0].id);
-       confirm('Are you sure you want to Delete ' + id);
-    });
+
 });
