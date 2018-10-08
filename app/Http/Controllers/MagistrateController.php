@@ -31,6 +31,8 @@ class MagistrateController extends Controller
                 $courtDetails->mdj_name = $request->mdj_name;
                 $courtDetails->phone_number = $request->court_number;
                 $courtDetails->save();
+
+            $request->session()->flash('alert-success', 'Magistrate Successfully Added!');
         } catch ( \Exception $e ) {
             $errorDetails = 'MagistrateController - error in store() method when attempting to store magistrate';
             $errorDetails .= PHP_EOL . 'File: ' . $e->getFile();

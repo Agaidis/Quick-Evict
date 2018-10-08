@@ -10,6 +10,11 @@
                     <div class="card-body">
                         <div class="panel panel-default">
                             <div class="panel-body">
+                                <div class="flash-message">
+                                    @if(Session::has('alert-success'))
+                                        <p class="alert alert-success">{{ Session::get('alert-success') }} <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a></p>
+                                    @endif
+                                </div> <!-- end .flash-message -->
                                 <table class="table table-hover table-responsive-lg table-bordered">
                                     <thead>
                                     <tr>
