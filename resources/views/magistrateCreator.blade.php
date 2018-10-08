@@ -9,6 +9,7 @@
                     <div class="card-header"><h2>Create Magistrate</h2></div>
                     <div class="card-body">
                         <div class="row">
+                            <form id="magistrate_form">
                             <div class="col-sm-12">
                                 <div class="row">
                                 <div class="col-md-10">
@@ -83,6 +84,7 @@
                                 <br><br>
                                 <button class="btn btn-primary" id="submit_magistrate" type="button">Submit Magistrate</button>
                             </div>
+                        </form>
                         </div>
                     </div>
                 </div>

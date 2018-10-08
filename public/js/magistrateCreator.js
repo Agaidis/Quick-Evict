@@ -2,7 +2,7 @@
  * Created by andrew on 10/8/18.
  */
 $('#submit_magistrate').on('click', function() {
-    var data = $('#eviction_form').serialize();
+    var data = $('#magistrate_form').serialize();
     $.ajaxSetup({
         headers: {
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
