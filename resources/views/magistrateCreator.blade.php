@@ -10,7 +10,6 @@
                     <div class="card-body">
                         <div class="row">
                             <div class="col-sm-12">
-                            <form>
                                 <div class="row">
                                 <div class="col-md-10">
                                     <h4 class="major_labels">Court Information</h4>
@@ -82,8 +81,7 @@
                                     </div>
                                 </div>
                                 <br><br>
-                                <input class="btn btn-primary" type="submit" value="Submit Magistrate" name="submit_btn"/>
-                            </form>
+                                <button class="btn btn-primary" id="submit_magistrate" type="button">Submit Magistrate</button>
                             </div>
                         </div>
                     </div>

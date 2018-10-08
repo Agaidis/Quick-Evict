@@ -34,6 +34,8 @@ Route::get('/about-us', 'AboutUsController@index');
 
 Route::get('/magistrateCreator', 'MagistrateController@index');
 
+Route::post('/magistrateCreator', 'MagistrateController@store');
+
 Route::post('/online-eviction/pdf-data', 'EvictionController@formulatePDF');
 
 Route::post('/online-eviction/add-file', 'EvictionController@addFile');
