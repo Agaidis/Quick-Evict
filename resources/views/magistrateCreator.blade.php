@@ -40,25 +40,18 @@
                                     <div class="col-md-4">
                                         <h4 class="major_labels">One Defendant Amts</h4>
                                 <div class="one_defendant_container">
-                                    <div class="row">
                                         <div class="col-sm-10">
                                             <label for="one_under_2000">Under 2,000</label>
                                             <input placeholder="$" type="text" class="form-control" id="one_under_2000" name="one_under_2000" value="" />
                                         </div>
-                                    </div>
-                                    <div class="row">
                                         <div class="col-sm-10">
                                             <label for="one_btn_2000_4001">Between 2,001 and 4,000</label>
                                             <input placeholder="$" type="text" class="form-control" id="one_btn_2000_4001" name="one_btn_2000_4001" value="" />
                                         </div>
-                                    </div>
-                                    <div class="row">
                                         <div class="col-sm-10">
                                             <label for="one_over_4000">Over 4,000</label>
                                             <input placeholder="$" type="text" class="form-control" id="one_over_4000" name="one_over_4000" value="" />
                                         </div>
-                                    </div>
-                                    <div class="row">
                                         <div class="col-sm-10">
                                             <label for="one_oop">OOP</label>
                                             <input placeholder="$" type="text" class="form-control" id="one_oop" name="one_oop" value="" />
@@ -69,35 +62,24 @@
                                     <div class="col-md-4">
                                         <h4 class="major_labels">Two Defendant Amts</h4>
                                     <div class="two_defendant_container">
-                                        <div class="row">
-                                            <div class="col-sm-10">
-                                                <label for="two_under_2000">Under 2,000</label>
-                                                <input placeholder="$" type="text" class="form-control" id="two_under_2000" name="two_under_2000" value="" />
-                                            </div>
+                                        <div class="col-sm-10">
+                                            <label for="two_under_2000">Under 2,000</label>
+                                            <input placeholder="$" type="text" class="form-control" id="two_under_2000" name="two_under_2000" value="" />
                                         </div>
-                                        <div class="row">
-                                            <div class="col-sm-10">
-                                                <label for="two_btn_2000_4001">Between 2,001 and 4,000</label>
-                                                <input placeholder="$" type="text" class="form-control" id="two_btn_2000_4001" name="two_btn_2000_4001" value="" />
-                                            </div>
+                                        <div class="col-sm-10">
+                                            <label for="two_btn_2000_4001">Between 2,001 and 4,000</label>
+                                            <input placeholder="$" type="text" class="form-control" id="two_btn_2000_4001" name="two_btn_2000_4001" value="" />
                                         </div>
-                                        <div class="row">
-                                            <div class="col-sm-10">
-                                                <label for="two_over_4000">Over 4,000</label>
-                                                <input placeholder="$" type="text" class="form-control" id="two_over_4000" name="two_over_4000" value="" />
-                                            </div>
+                                        <div class="col-sm-10">
+                                            <label for="two_over_4000">Over 4,000</label>
+                                            <input placeholder="$" type="text" class="form-control" id="two_over_4000" name="two_over_4000" value="" />
                                         </div>
-                                        <div class="row">
-                                            <div class="col-sm-10">
-                                                <label for="two_oop">OOP</label>
-                                                <input placeholder="$" type="text" class="form-control" id="two_oop" name="two_oop" value="" />
-                                            </div>
+                                        <div class="col-sm-10">
+                                            <label for="two_oop">OOP</label>
+                                            <input placeholder="$" type="text" class="form-control" id="two_oop" name="two_oop" value="" /></div>
                                         </div>
                                     </div>
-                                    </div>
-                                </div><br><br>
-
-
+                                <br><br>
                                 <input class="btn btn-primary" type="submit" value="Submit Magistrate" name="submit_btn"/>
                             </form>
                             </div>
