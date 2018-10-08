@@ -15,7 +15,6 @@ class FixProblems extends Migration
     {
         Schema::table('court_details', function (Blueprint $table) {
             $table->dropColumn('court_id');
-            $table->string('court_number')->unique()->change();
         });
     }
 
