@@ -23,6 +23,7 @@
                                 </div><br><br>
                                 <div class="row">
                                     <div class="col-md-4">
+                                        <h4 class="major_labels">One Defendant Amounts</h4>
                                 <div class="one_defendant_container">
                                     <div class="row">
                                         <div class="col-sm-8">
@@ -51,6 +52,7 @@
                                 </div>
                                     </div>
                                     <div class="col-md-4">
+                                        <h4 class="major_labels">Two Defendant Amounts</h4>
                                     <div class="two_defendant_container">
                                         <div class="row">
                                             <div class="col-sm-8">
