@@ -8,9 +8,36 @@
                 <div class="card">
                     <div class="card-header"><h2>Create Magistrate</h2></div>
                     <div class="card-body">
+                        <div class="panel panel-default">
+                            <div class="panel-body">
+                                <table class="table table-hover">
+                                    <thead>
+                                    <tr>
+                                        <th>#</th>
+                                        <th>Name</th>
+                                        <th>Acronym</th>
+                                        <th>Type</th>
+                                        <th>Website</th>
+                                        <th class="text-center">Remove</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    @foreach ($courtDetails as $courtDetail)
+                                    <tr>
+                                        <td>{{$courtDetail->id}}</td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td class="text-center"><a href="javascript:void(0)" class="text-danger magistrate-remove"><span class="glyphicon glyphicon-remove-circle" aria-hidden="true"></span></a></td>
+                                    </tr>
+                                    @endforeach
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
                         <form id="magistrate_form">
                         <div class="row">
-
                             <div class="col-sm-12">
                                 <div class="row">
                                 <div class="col-md-10">
