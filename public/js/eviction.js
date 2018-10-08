@@ -132,6 +132,8 @@ $(document).ready(function () {
             map.fitBounds(newBounds);
             if (google.maps.geometry.poly.containsLocation(place.geometry.location, magistrate02204)){
                 $('#court_number').val('02-2-04');
+                $('#court_address1').val('796-A New Holland Ave');
+                $('#court_address2').val('Lancaster, PA 17602');
             } else {
                 alert('The address is outside of all areas.');
             }
