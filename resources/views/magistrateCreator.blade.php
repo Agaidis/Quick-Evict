@@ -88,10 +88,14 @@
                                         <label for="mdj_name">MDJ Name</label>
                                         <input placeholder="Tom Pietro" type="text" class="form-control" id="mdj_name" name="mdj_name" value="" />
                                     </div>
+                                </div>
+                                <div class="row">
                                     <div class="col-sm-6">
                                         <label for="court_address">Court Mailing Address</label>
                                         <input placeholder="123 Muholland Drive, Lancaster PA 17349" type="text" class="form-control" id="court_address" name="court_address" value="" />
                                     </div>
+                                </div>
+                                <div class="row">
                                     <div class="col-sm-3">
                                         <label for="mdj_name">Court Phone Number</label>
                                         <input placeholder="(000)-000-0000" type="text" class="form-control" id="court_number" name="court_number" value="" />
