@@ -17,7 +17,7 @@ class MagistrateController extends Controller
     public function store(Request $request) {
         try {
             mail('agaidis@moneymappress.com', 'im in the store function', 'haha');
-                $courtDetails = new CourtDetails();
+                $courtDetails = new CourtDetails;
                 $courtDetails->county = $request->county;
                 $courtDetails->court_number = $request->court_id;
                 $courtDetails->one_defendant_up_to_2000 = $request->one_under_2000;
