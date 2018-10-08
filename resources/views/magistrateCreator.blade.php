@@ -10,7 +10,7 @@
                     <div class="card-body">
                         <div class="panel panel-default">
                             <div class="panel-body">
-                                <table class="table table-hover">
+                                <table class="table table-hover table-responsive-lg table-bordered">
                                     <thead>
                                     <tr>
                                         <th>Id</th>
@@ -19,13 +19,13 @@
                                         <th>MDJ Name</th>
                                         <th>Address</th>
                                         <th>Phone #</th>
-                                        <th>(1) Under 2,000</th>
-                                        <th>(1) Btn 2,001 - 4,000</th>
-                                        <th>(1) Over 4,000</th>
+                                        <th>(1) Under 2k</th>
+                                        <th>(1) Btn 2k - 4k</th>
+                                        <th>(1) Over 4k</th>
                                         <th>(1) OOP</th>
-                                        <th>(2) Under 2,000</th>
-                                        <th>(2) Btn 2,001 - 4,000</th>
-                                        <th>(2) Over 4,000</th>
+                                        <th>(2) Under 2k</th>
+                                        <th>(2) Btn 2k - 4k</th>
+                                        <th>(2) Over 4k</th>
                                         <th>(2) OOP</th>
                                         <th class="text-center">Remove</th>
                                     </tr>
