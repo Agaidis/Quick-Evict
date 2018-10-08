@@ -48,7 +48,7 @@
                                         <td>{{$courtDetail->two_defendant_between_2001_4000}}</td>
                                         <td>{{$courtDetail->two_defendant_greater_than_4000}}</td>
                                         <td>{{$courtDetail->two_defendant_out_of_pocket}}</td>
-                                        <td class="text-center"><a href="javascript:void(0)" class="text-danger magistrate-remove"><span style="border: 1px solid grey; border-radius:10em;" class="glyphicon glyphicon-remove-circle" aria-hidden="true"></span><b>X</b></a></td>
+                                        <td class="text-center"><a href="javascript:void(0)" id="id_{{$courtDetail->id}}"  class="text-danger magistrate-remove"><span style="border: 1px solid grey; border-radius:10em;" class="glyphicon glyphicon-remove-circle" aria-hidden="true"></span><b>X</b></a></td>
                                     </tr>
                                     @endforeach
                                     </tbody>
