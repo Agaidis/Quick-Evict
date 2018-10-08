@@ -20,30 +20,30 @@
                                         <label for="county">County:</label>
                                         <input placeholder="County" type="text" class="form-control" id="county" name="county" value="" />
                                     </div>
-                                </div>
+                                </div><br><br>
                                 <div class="row">
-                                    <div class="col-md-6">
+                                    <div class="col-md-4">
                                 <div class="one_defendant_container">
                                     <div class="row">
-                                        <div class="col-sm-5">
+                                        <div class="col-sm-8">
                                             <label for="one_under_2000">One Defendant under 2,000</label>
                                             <input placeholder="$" type="text" class="form-control" id="one_under_2000" name="one_under_2000" value="" />
                                         </div>
                                     </div>
                                     <div class="row">
-                                        <div class="col-sm-5">
+                                        <div class="col-sm-8">
                                             <label for="one_btn_2000_4001">One Defendant between 2,001 and 4,000</label>
                                             <input placeholder="$" type="text" class="form-control" id="one_btn_2000_4001" name="one_btn_2000_4001" value="" />
                                         </div>
                                     </div>
                                     <div class="row">
-                                        <div class="col-sm-5">
+                                        <div class="col-sm-8">
                                             <label for="one_over_4000">One Defendant over 4,000</label>
                                             <input placeholder="$" type="text" class="form-control" id="one_over_4000" name="one_over_4000" value="" />
                                         </div>
                                     </div>
                                     <div class="row">
-                                        <div class="col-sm-5">
+                                        <div class="col-sm-8">
                                             <label for="one_oop">One Defendant OOP</label>
                                             <input placeholder="$" type="text" class="form-control" id="one_oop" name="one_oop" value="" />
                                         </div>
@@ -53,25 +53,25 @@
                                     <div class="col-md-4">
                                     <div class="two_defendant_container">
                                         <div class="row">
-                                            <div class="col-sm-5">
+                                            <div class="col-sm-8">
                                                 <label for="two_under_2000">Two Defendant under 2,000</label>
                                                 <input placeholder="$" type="text" class="form-control" id="two_under_2000" name="two_under_2000" value="" />
                                             </div>
                                         </div>
                                         <div class="row">
-                                            <div class="col-sm-5">
+                                            <div class="col-sm-8">
                                                 <label for="two_btn_2000_4001">Two Defendants between 2,001 and 4,000</label>
                                                 <input placeholder="$" type="text" class="form-control" id="two_btn_2000_4001" name="two_btn_2000_4001" value="" />
                                             </div>
                                         </div>
                                         <div class="row">
-                                            <div class="col-sm-5">
+                                            <div class="col-sm-8">
                                                 <label for="two_over_4000">Two Defendants over 4,000</label>
                                                 <input placeholder="$" type="text" class="form-control" id="two_over_4000" name="two_over_4000" value="" />
                                             </div>
                                         </div>
                                         <div class="row">
-                                            <div class="col-sm-5">
+                                            <div class="col-sm-8">
                                                 <label for="two_oop">Two Defendants OOP</label>
                                                 <input placeholder="$" type="text" class="form-control" id="two_oop" name="two_oop" value="" />
                                             </div>
