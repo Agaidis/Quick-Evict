@@ -41,7 +41,7 @@ class MagistrateController extends Controller
 
             $returnArray['responseMessage'] = 'Bad Request';
             $returnArray['responseCode'] = 400;
-            $returnArray['messageDetails'] = 'Tag could not be added to the database, please try again later';
+            $returnArray['messageDetails'] = '' . $e->getLine() . 'Tag could not be added to the database, please try again later';
             return response()->json($returnArray);
         }
         $response['responseMessage'] = 'Adding Magistrate Successful!';
