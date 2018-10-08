@@ -26,7 +26,7 @@
                                                 <label for="mdj_name">MDJ Name</label>
                                                 <input placeholder="Tom Pietro" type="text" class="form-control" id="mdj_name" name="mdj_name" value="" />
                                             </div>
-                                            <div class="col-sm-12">
+                                            <div class="col-sm-10">
                                                 <label for="court_address">Court Mailing Address</label>
                                                 <input placeholder="123 Muholland Drive, Lancaster PA 17349" type="text" class="form-control" id="court_address" name="court_address" value="" />
                                             </div>
@@ -58,7 +58,6 @@
                                         </div>
                                     </div>
                                 </div>
-                                    </div>
                                     <div class="col-md-4">
                                         <h4 class="major_labels">Two Defendant Amts</h4>
                                     <div class="two_defendant_container">
@@ -79,6 +78,7 @@
                                             <input placeholder="$" type="text" class="form-control" id="two_oop" name="two_oop" value="" /></div>
                                         </div>
                                     </div>
+                                </div>
                                 <br><br>
                                 <input class="btn btn-primary" type="submit" value="Submit Magistrate" name="submit_btn"/>
                             </form>
