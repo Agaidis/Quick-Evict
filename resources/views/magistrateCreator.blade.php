@@ -22,6 +22,7 @@
                                     </div>
                                 </div>
                                 <div class="row">
+                                    <div class="col-md-6">
                                 <div class="one_defendant_container">
                                     <div class="row">
                                         <div class="col-sm-5">
@@ -48,6 +49,8 @@
                                         </div>
                                     </div>
                                 </div>
+                                    </div>
+                                    <div class="col-md-4">
                                     <div class="two_defendant_container">
                                         <div class="row">
                                             <div class="col-sm-5">
@@ -73,6 +76,7 @@
                                                 <input placeholder="$" type="text" class="form-control" id="two_oop" name="two_oop" value="" />
                                             </div>
                                         </div>
+                                    </div>
                                     </div>
                                 </div>
 
