@@ -16,18 +16,6 @@ class MagistrateController extends Controller
 
     public function store(Request $request) {
         try {
-            $tagArray = array();
-            $courtDetails = CourtDetails::all();
-            foreach ($courtDetails as $courtDetail ) {
-                $tagArray[$courtDetail->court_id] = $courtDetail->court_id;
-
-            }
-            $isDuplicate = array_search($request->court_id, $tagArray);
-
-            if ( $isDuplicate == $request->court_id ) {
-                $returnArray['responseMessage'] = 'Duplicate Tag';
-                $returnArray['messageDetails'] = 'Duplicate Tag name AND value combination';
-            } else {
                 $courtDetails = new CourtDetails();
                 $courtDetails->county = $request->county;
                 $courtDetails->court_number = $request->court_id;
@@ -43,7 +31,6 @@ class MagistrateController extends Controller
                 $courtDetails->mdj_name = $request->mdj_name;
                 $courtDetails->phone_number = $request->court_number;
                 $courtDetails->save();
-            }
         } catch ( \Exception $e ) {
             $errorDetails = 'MagistrateController - error in store() method when attempting to store magistrate';
             $errorDetails .= PHP_EOL . 'File: ' . $e->getFile();

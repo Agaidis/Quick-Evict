@@ -175,7 +175,8 @@ $(document).ready(function () {
             data: data,
 
             success: function (data) {
-                location.reload();
+                console.log(data);
+                //location.reload();
             },
             error: function (data) {
                 console.log(data);
