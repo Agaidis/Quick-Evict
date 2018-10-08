@@ -130,6 +130,11 @@ $(document).ready(function () {
             marker.setMap(map);
             newBounds.extend(place.geometry.location);
             map.fitBounds(newBounds);
+            if (google.maps.geometry.poly.containsLocation(place.geometry.location, magistrate02204)){
+                $('#court_number').val('02-2-04');
+            } else {
+                alert('The address is outside of all areas.');
+            }
         });
 
 
@@ -151,11 +156,6 @@ $(document).ready(function () {
     });
 
     //On Submit gather variables and make ajax call to backend
-    $.ajaxSetup({
-        headers: {
-            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-        }
-    });
 
     $('#pdf_download_btn').on('click', function() {
        var data = $('#eviction_form').serialize();

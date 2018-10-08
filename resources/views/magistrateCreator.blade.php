@@ -13,7 +13,6 @@
                                 <table class="table table-hover table-responsive-lg table-bordered">
                                     <thead>
                                     <tr>
-                                        <th>Id</th>
                                         <th>Magistrate #</th>
                                         <th>County</th>
                                         <th>MDJ Name</th>
@@ -33,7 +32,6 @@
                                     <tbody>
                                     @foreach ($courtDetails as $courtDetail)
                                     <tr>
-                                        <td>{{$courtDetail->id}}</td>
                                         <td>{{$courtDetail->court_number}}</td>
                                         <td>{{$courtDetail->county}}</td>
                                         <td>{{$courtDetail->mdj_name}}</td>
