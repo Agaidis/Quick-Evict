@@ -9,7 +9,7 @@
                     <div class="card-header"><h2>Create Magistrate</h2></div>
                     <div class="card-body">
                         <div class="row">
-                            <div class="col-sm-10">
+                            <div class="col-sm-12">
                             <form>
                                 <div class="row">
                                 <div class="col-md-10">
@@ -39,7 +39,7 @@
                                 </div>
                                 </div><br>
                                 <div class="row">
-                                    <div class="col-md-4">
+                                    <div class="col-md-6">
                                         <h4 class="major_labels">One Defendant Amts</h4>
                                 <div class="one_defendant_container">
                                         <div class="col-sm-12">
@@ -60,7 +60,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                    <div class="col-md-4">
+                                    <div class="col-md-6">
                                         <h4 class="major_labels">Two Defendant Amts</h4>
                                     <div class="two_defendant_container">
                                         <div class="col-sm-12">
