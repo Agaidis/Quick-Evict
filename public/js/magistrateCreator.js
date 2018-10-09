@@ -32,6 +32,30 @@ $(document).ready(function () {
         var id = $(this)[0].id;
         var splitId = id.split('_');
 
-        confirm('Are you sure you want to Delete ' + splitId[2]);
+       var conf = confirm('Are you sure you want to Delete ' + splitId[2]);
+
+       if (conf == true) {
+
+           var magistrateId = splitId[2];
+           $.ajax({
+               beforeSend: function (xhr) {
+                   xhr.setRequestHeader('X-CSRF-TOKEN', $("#token").attr('content'));
+               },
+               type: "POST",
+               url: '/magistrateCreator/delete',
+               dataType: 'json',
+               data: {id: magistrateId},
+
+               success: function (data) {
+                   console.log(data);
+                   location.reload();
+               },
+               error: function (data) {
+                   console.log(data);
+               }
+           });
+       } else {
+
+       }
     });
 });

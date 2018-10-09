@@ -50,4 +50,13 @@ class MagistrateController extends Controller
 
         return $response;
     }
+
+    public function delete(Request $request) {
+        try {
+            CourtDetails::destroy($request->id);
+            return $request->dbId;
+        } catch (\Exception $e) {
+            return 'failed';
+        }
+    }
 }
