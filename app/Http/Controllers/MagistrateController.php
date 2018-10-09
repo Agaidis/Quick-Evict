@@ -54,8 +54,9 @@ class MagistrateController extends Controller
     public function delete(Request $request) {
         try {
             mail('andrew.gaidis@gmail.com', 'asdf', $request->id);
-            CourtDetails::destroy($request->id);
-            return $request->id;
+            $dbId = CourtDetails::where('court_number', $request->id)->value('id');
+            CourtDetails::destroy($dbId);
+            return $dbId;
         } catch (\Exception $e) {
             return 'failed';
         }
