@@ -35,19 +35,19 @@
                                     <tbody>
                                     @foreach ($courtDetails as $courtDetail)
                                     <tr>
-                                        {{--<td>{{$courtDetail->court_number}}</td>--}}
-                                        {{--<td>{{$courtDetail->county}}</td>--}}
-                                        {{--<td>{{$courtDetail->mdj_name}}</td>--}}
-                                        {{--<td>{{$courtDetail->mailing_address}}</td>--}}
-                                        {{--<td>{{$courtDetail->phone_number}}</td>--}}
-                                        {{--<td>{{$courtDetail->one_defendant_up_to_2000}}</td>--}}
-                                        {{--<td>{{$courtDetail->one_defendant_between_2001_4000}}</td>--}}
-                                        {{--<td>{{$courtDetail->one_defendant_greater_than_4000}}</td>--}}
-                                        {{--<td>{{$courtDetail->one_defendant_out_of_pocket}}</td>--}}
-                                        {{--<td>{{$courtDetail->two_defendant_up_to_2000}}</td>--}}
-                                        {{--<td>{{$courtDetail->two_defendant_between_2001_4000}}</td>--}}
-                                        {{--<td>{{$courtDetail->two_defendant_greater_than_4000}}</td>--}}
-                                        {{--<td>{{$courtDetail->two_defendant_out_of_pocket}}</td>--}}
+                                        <td>{{$courtDetail->court_number}}</td>
+                                        <td>{{$courtDetail->county}}</td>
+                                        <td>{{$courtDetail->mdj_name}}</td>
+                                        <td>{{$courtDetail->mailing_address}}</td>
+                                        <td>{{$courtDetail->phone_number}}</td>
+                                        <td>{{$courtDetail->one_defendant_up_to_2000}}</td>
+                                        <td>{{$courtDetail->one_defendant_between_2001_4000}}</td>
+                                        <td>{{$courtDetail->one_defendant_greater_than_4000}}</td>
+                                        <td>{{$courtDetail->one_defendant_out_of_pocket}}</td>
+                                        <td>{{$courtDetail->two_defendant_up_to_2000}}</td>
+                                        <td>{{$courtDetail->two_defendant_between_2001_4000}}</td>
+                                        <td>{{$courtDetail->two_defendant_greater_than_4000}}</td>
+                                        <td>{{$courtDetail->two_defendant_out_of_pocket}}</td>
                                         {{--<td class="text-center magistrate-remove"><a href="javascript:void(0)" id="id_{{$courtDetail->id}}_{{$creatorDetail->court_number}}"  class="text-danger magistrate-remove"><span style="border: 1px solid grey; border-radius:10em;" class="glyphicon glyphicon-remove-circle" aria-hidden="true"></span><b>X</b></a></td>--}}
                                     </tr>
                                     @endforeach
