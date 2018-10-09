@@ -293,7 +293,7 @@ $(document).ready(function () {
     magistrate02303 = new google.maps.Polygon({
         path: magistrate02203Area,
         geodesic: true,
-        strokeColor: '#FF7243',
+        strokeColor: '#CB006F',
         strokeOpacity: 1.0,
         strokeWeight: 2,
         fillColor: '#B1AAA9',
