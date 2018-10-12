@@ -168,7 +168,7 @@ $(document).ready(function () {
                 $('#court_number').val('02-2-03');
                 $('#court_address1').val('1351 Elm Ave');
                 $('#court_address2').val('Lancaster, PA 17603');
-            } else if (google.maps.geometry.poly.containsLocation(place.geometry.location, magistrate02201)){
+            } else if (google.maps.geometry.poly.containsLocation(place.geometry.location, magistrate02204)){
                 $('#court_number').val('02-2-04');
                 $('#court_address1').val('796-A New Holland Ave');
                 $('#court_address2').val('Lancaster, PA 17602');
