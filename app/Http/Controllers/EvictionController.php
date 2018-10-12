@@ -53,11 +53,13 @@ class EvictionController extends Controller
             $landlord = $_POST['landlord'];
 
             if (isset($_POST['tenant_num'])) {
+                mail('andrew.gaidis@gmail.com', 'test', $_POST['tenant_num']);
                 $upTo2000 = $courtDetails->one_defendant_up_to_2000;
                 $btn20014000 = $courtDetails->one_defendant_between_2001_4000;
                 $greaterThan4000 = $courtDetails->one_defendant_greater_than_4000;
                 $oop = $courtDetails->one_defendant_out_of_pocket;
             } else {
+                mail('andrew.gaidis@gmail.com', 'test', $_POST['tenant_num']);
                 $upTo2000 = $courtDetails->two_defendant_up_to_2000;
                 $btn20014000 = $courtDetails->two_defendant_between_2001_4000;
                 $greaterThan4000 = $courtDetails->two_defendant_greater_than_4000;
@@ -193,7 +195,7 @@ span.cls_010{font-family:Arial,serif;font-size:8.1px;color:rgb(0,0,0);font-weigh
 <span style="position:absolute;left:36.00px;top:252.35px" class="cls_003"><span class="cls_003">Pa.R.C.P.M.D.J. No. 206 sets forth those costs recoverable by the prevailing party.</span></span><br>
 <span style="position:absolute;left:42.00px;top:267.85px" class="cls_004"><span class="cls_004">TO THE DEFENDANT: The above named plaintiff(s) asks judgment together with costs against you for the possession of real</span></span><br>
 <span style="position:absolute;left:62.77px;top:279.51px" class="cls_004"><span class="cls_004">property and for:</span></span><br>
-<span style="position:absolute;left:60.87px;top:292.21px" class="cls_004"><span class="cls_004">Lease is</span><span style="margin-left:250px;">'.$monthlyRent.'</span></span><br>
+<span style="position:absolute;left:60.87px;top:292.21px" class="cls_004"><span class="cls_004">Lease is</span><span style="margin-left:260px;">'.$monthlyRent.'</span></span><br>
 <span style="position:absolute;left:120.25px;top:292.21px" class="cls_004"><span class="cls_004">'. $isResidential .'Residential</span></span><br>
 <span style="position:absolute;left:198.23px;top:292.21px" class="cls_004"><span class="cls_004">'. $isNotResidential .'Nonresidential     Monthly Rent  $</span></span><br>
 <span style="position:absolute;left:415.98px;top:292.21px" class="cls_004"><span class="cls_004">Security Deposit $</span><span style="margin-left:30px;">'.$securityDeposit.'</span></span><br>
