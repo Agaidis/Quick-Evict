@@ -109,17 +109,17 @@ class EvictionController extends Controller
                 $leaseEnded = '<input type="checkbox" checked/>';
             }
 
-            $ownerName = $_POST['owner_name'];
-            $ownerPhone = $_POST['owner_phone'];
-
-            $rentedBy = $_POST['rented_by'];
-
+            if ($_POST['landlord'] != '' && $_POST['landlord'] != null) {
+                $ownerName = $_POST['landlord'];
+            } else {
+                $ownerName = $_POST['owner_name'];
+            }
             $unjustDamages = $_POST['unjust_damages'];
             $unjustDamages = str_replace('$', '', $unjustDamages);
 
             $defendantState = $_POST['state'];
             $defendantZipcode = $_POST['zipcode'];
-            $defendantCounty = $_POST['county'];
+            $defendantCounty = str_replace('county', '', $_POST['county']);
             $defendanthouseNum = $_POST['houseNum'];
             $defendantStreetName= $_POST['streetName'];
 
