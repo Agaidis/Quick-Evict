@@ -129,6 +129,8 @@ $(document).ready(function () {
                 return;
             };
 
+            console.log(place.address_components);
+
             houseNum =  place.address_components[0].long_name;
             streetName = place.address_components[1].long_name;
             town = place.address_components[2].long_name;
