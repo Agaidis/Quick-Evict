@@ -54,7 +54,6 @@ class EvictionController extends Controller
             $landlord = $_POST['landlord'];
 
             if (isset($_POST['tenant_num'])) {
-                mail('andrew.gaidis@gmail.com', 'test', $_POST['tenant_num']);
                 $upTo2000 = $courtDetails->one_defendant_up_to_2000;
                 $btn20014000 = $courtDetails->one_defendant_between_2001_4000;
                 $greaterThan4000 = $courtDetails->one_defendant_greater_than_4000;
