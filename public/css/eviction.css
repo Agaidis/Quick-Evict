@@ -97,3 +97,7 @@ form.eviction_form fieldset {
 #breached_details {
     width:60%;
 }
+
+.magistrate_table {
+    font-size:12px;
+}
