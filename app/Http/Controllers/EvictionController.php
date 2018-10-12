@@ -59,7 +59,6 @@ class EvictionController extends Controller
                 $greaterThan4000 = $courtDetails->one_defendant_greater_than_4000;
                 $oop = $courtDetails->one_defendant_out_of_pocket;
             } else {
-                mail('andrew.gaidis@gmail.com', 'test', $_POST['tenant_num']);
                 $upTo2000 = $courtDetails->two_defendant_up_to_2000;
                 $btn20014000 = $courtDetails->two_defendant_between_2001_4000;
                 $greaterThan4000 = $courtDetails->two_defendant_greater_than_4000;
