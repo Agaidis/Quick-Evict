@@ -26,8 +26,8 @@ class EvictionController extends Controller
 
         try {
             $courtNumber = $_POST['court_number'];
-            mail('andrew.gaidis@gmail.com', 'test', $courtNumber);
             $courtDetails = CourtDetails::where('court_number', $courtNumber)->first();
+            $managementCompany = $_POST['management_company'];
 
             $courtAddressLine1 = $_POST['court_address1'];
             $courtAddressLine2 = $_POST['court_address2'];
@@ -51,7 +51,12 @@ class EvictionController extends Controller
             $filing_date = $_POST['filing_date'];
 
             $tenantName = $_POST['tenant_name'];
-            $landlord = $_POST['landlord'];
+            $ownerName = $_POST['owner_name'];
+
+            if ($_POST['other_name'] != '') {
+                $ownerName = $_POST['other_name'];
+            }
+
 
             if (isset($_POST['tenant_num'])) {
                 $upTo2000 = $courtDetails->two_defendant_up_to_2000;
@@ -106,14 +111,9 @@ class EvictionController extends Controller
             if (isset($_POST['term_lease_ended'])) {
                 $leaseEnded = '<input type="checkbox" checked/>';
             } else {
-                $leaseEnded = '<input type="checkbox" checked/>';
+                $leaseEnded = '<input type="checkbox"/>';
             }
 
-            if ($_POST['landlord'] != '' && $_POST['landlord'] != null) {
-                $ownerName = $_POST['landlord'];
-            } else {
-                $ownerName = $_POST['owner_name'];
-            }
             $unjustDamages = $_POST['unjust_damages'];
             $unjustDamages = str_replace('$', '', $unjustDamages);
 
@@ -125,7 +125,7 @@ class EvictionController extends Controller
 
 
 
-            $totalFees = (int)$attorneyFees + (int)$dueRent + (int)$unjustDamages + (int)$damageAmt;
+            $totalFees = (float)$attorneyFees + (float)$dueRent + (float)$unjustDamages + (float)$damageAmt;
 
             if ($totalFees < 2000) {
                 $filingFee = $upTo2000;
@@ -133,6 +133,12 @@ class EvictionController extends Controller
                 $filingFee = $btn20014000;
             } else if ($totalFees > 4000) {
                 $filingFee = $greaterThan4000;
+            }
+
+            if ($totalFees > 0) {
+                $amtGreaterThanZeroCheckbox = '<input type="checkbox" checked/>';
+            } else {
+                $amtGreaterThanZeroCheckbox = '<input type="checkbox"/>';
             }
 
             $dompdf = new Dompdf();
@@ -168,7 +174,7 @@ span.cls_010{font-family:Arial,serif;font-size:8.1px;color:rgb(0,0,0);font-weigh
 <span style="position:absolute;left:36.05px;top:16.85px" class="cls_003"><span class="cls_003">COMMONWEALTH OF PENNSYLVANIA</span></span><br>
 <span style="position:absolute;left:346.20px;top:16.80px" class="cls_002"><span class="cls_002">LANDLORD/TENANT COMPLAINT</span></span><br>
 <span style="position:absolute;left:36.05px;top:29.55px" class="cls_003"><span class="cls_003">COUNTY OF ' . strtoupper($courtDetails->county) .'</span></span><br>
-<span style="position:absolute;left:336.30px;top:67.80px" class="cls_005"><span class="cls_005">PLAINTIFF:</span><br><p style="margin-left:6px;">SlateHouse Group Property Management LLC on behalf of '.$ownerName.'<br>PO Box 5304<br>Lancaster, PA 17606</p></span><br>
+<span style="position:absolute;left:336.30px;top:67.80px" class="cls_005"><span class="cls_005">PLAINTIFF:</span><br><p style="margin-left:6px;">' . $managementCompany . ' on behalf of '.$ownerName.'<br>PO Box 5304<br>Lancaster, PA 17606</p></span><br>
 <span style="position:absolute;left:463.70px;top:68.50px" class="cls_005"><span class="cls_005">NAME and ADDRESS</span></span>
 <span style="position:absolute;left:40.80px;top:69.36px" class="cls_004"><span class="cls_004">Mag. Dist. No: '. $courtDetails->court_number.'</span></span><br>
 <span style="position:absolute;left:40.90px;top:82.85px" class="cls_004"><span class="cls_004">MDJ Name: '. $courtDetails->mdj_name .'</span></span><br>
@@ -207,7 +213,7 @@ span.cls_010{font-family:Arial,serif;font-size:8.1px;color:rgb(0,0,0);font-weigh
 <span style="position:absolute;left:60.50px;top:363.95px" class="cls_004"><span class="cls_004"><input type="checkbox"  />Damages for the unjust detention of the real property in the amount of</span></span><br>
 <span style="position:absolute;left:457.40px;top:363.95px" class="cls_004"><span class="cls_004">$</span></span><br>
 <span style="position:absolute;left:465.42px;top:363.95px" class="cls_004"><span style="text-decoration: underline;" class="cls_004">__________'.$unjustDamages.'_________</span></span><br>
-<span style="position:absolute;left:60.50px;top:379.45px" class="cls_004"><span class="cls_004"><input type="checkbox"  />Rent remaining due and unpaid on filing date in the amount of</span></span><br>
+<span style="position:absolute;left:60.50px;top:379.45px" class="cls_004"><span class="cls_004">'. $amtGreaterThanZeroCheckbox .' Rent remaining due and unpaid on filing date in the amount of</span></span><br>
 <span style="position:absolute;left:457.40px;top:379.45px" class="cls_004"><span class="cls_004">$</span></span><br>
 <span style="position:absolute;left:465.42px;top:379.45px" class="cls_004"><span style="text-decoration: underline;" class="cls_004">__________'.$dueRent.'_________</span></span><br>
 <span style="position:absolute;left:60.50px;top:395.95px" class="cls_004"><span class="cls_004"><input type="checkbox"  />And additional rent remaining due and unpaid on hearing date</span></span><br>
