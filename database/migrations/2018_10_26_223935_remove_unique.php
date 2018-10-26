@@ -15,6 +15,7 @@ class RemoveUnique extends Migration
     {
         Schema::table('court_details', function (Blueprint $table) {
             $table->dropUnique('court_number');
+            $table->string('magistrate_id')->unique();
         });
     }
 
