@@ -1,7 +1,7 @@
 /**
  * Created by andrew on 10/8/18.
  */
-if (document.location.href.split('/')[3] == 'online-eviction') {
+
     $(document).ready(function () {
 
         $('#magistrate_table').DataTable();
@@ -152,10 +152,3 @@ if (document.location.href.split('/')[3] == 'online-eviction') {
             location.reload();
         });
     });
-}
-
-
-
-
-
-
