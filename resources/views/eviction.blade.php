@@ -30,10 +30,6 @@
                                     <div id="owner_container">
                                         <div class="form-group">
                                             <div class="row">
-                                                <div class="col-sm-10">
-                                                    <label class="labels">Management Company</label>
-                                                    <input class="form-control" placeholder="Management Company" type="text" id="management_company" name="management_company"/>
-                                                </div>
                                                 <div class="col-sm-6">
                                                     <label class="labels">Owner Name</label>
                                                     <input class="form-control" placeholder="Owner Name" type="text" id="owner_name" name="owner_name"/>

@@ -51,10 +51,13 @@ class EvictionController extends Controller
             $filing_date = $_POST['filing_date'];
 
             $tenantName = $_POST['tenant_name'];
+
+
+            mail('andrew.gaidis@gmail.com', 'test', $_POST['rentedByOwner'] );
             $ownerName = $_POST['owner_name'];
 
             if ($_POST['other_name'] != '') {
-                $ownerName = $_POST['other_name'];
+                $landlordName = $_POST['other_name'];
             }
 
 
