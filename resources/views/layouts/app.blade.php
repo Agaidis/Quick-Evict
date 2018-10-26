@@ -18,7 +18,9 @@
     <script src="{{ asset('js/magistrateCreator.js') }}" defer></script>
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAfPLSbGAHZkEd-8DDB0FcGSlhrV9LQMGM&libraries=places" defer></script>
     <script src="https://js.stripe.com/v3/"></script>
-    {{--<script>--}}
+    <script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.10.18/datatables.min.js"></script>
+
+{{--<script>--}}
         {{--var stripe = Stripe('pk_test_6pRNASCoBOKtIshFeQd4XMUh');--}}
         {{--var elements = stripe.elements();--}}
         {{--var card = elements.create('card');--}}
@@ -35,6 +37,7 @@
     <link href="{{ asset('css/dashboard.css') }}" rel="stylesheet">
     <link href="{{ asset('css/eviction.css') }}" rel="stylesheet">
     <link href="{{ asset('css/steps.css') }}" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/dt-1.10.18/datatables.min.css"/>
 </head>
 <body>
     <div id="app">

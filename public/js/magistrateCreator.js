@@ -2,6 +2,9 @@
  * Created by andrew on 10/8/18.
  */
 $(document).ready(function () {
+
+    $('#magistrate_table').DataTable();
+
     $('#submit_magistrate').on('click', function () {
         var data = $('#magistrate_form').serialize();
         $.ajaxSetup({
