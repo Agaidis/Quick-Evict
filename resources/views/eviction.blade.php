@@ -42,7 +42,7 @@
                                                     <div class="labels">Property Owner</div>
                                                     <input type="radio" id="rented_by_owner" name="rented_by" value="rentedByOwner" checked>
                                                     <label for="rented_by_owner">Property is Rented by Owner</label><br>
-                                                    <input type="radio" id="rented_by_other" name="rented_by" value="rentedByOwner">
+                                                    <input type="radio" id="rented_by_other" name="rented_by" value="rentedByOther">
                                                     <label for="rented_by_other">Property is Rented by Other</label>
                                                         <div class="col-sm-12">
                                                             <input class="form-control" placeholder="Name of Landlord" type="text" id="other_name" name="other_name" value="">
