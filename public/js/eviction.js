@@ -64920,6 +64920,7 @@ $(document).ready(function () {
     //On Submit gather variables and make ajax call to backend
 
     $('#pdf_download_btn').on('click', function() {
+        $('#rented_by_val').val($('input[name=rented_by]:checked').val());
        var data = $('#eviction_form').serialize();
         $.ajaxSetup({
             headers: {

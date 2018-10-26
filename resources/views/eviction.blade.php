@@ -47,6 +47,7 @@
                                                         <div class="col-sm-12">
                                                             <input class="form-control" placeholder="Name of Landlord" type="text" id="other_name" name="other_name" value="">
                                                         </div>
+                                                    <input type="hidden" id="rented_by_val" name="rented_by_val"/>
                                                 </div>
                                             </div>
                                         </div>

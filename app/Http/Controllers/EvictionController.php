@@ -54,9 +54,9 @@ class EvictionController extends Controller
 
             $ownerName = $_POST['owner_name'];
 
-            if ($_POST['rented_by'] == 'rentedByOwner') {
+            if ($_POST['rented_by_val'] == 'rentedByOwner') {
                 $plaintiffLine = $ownerName;
-            } else if ($_POST['rented_by'] == 'rentedByOther') {
+            } else if ($_POST['rented_by_val'] == 'rentedByOther') {
                 $plaintiffLine = $_POST['other_name'] . ' on behalf of ' . $ownerName;
             }
 
