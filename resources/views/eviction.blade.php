@@ -40,9 +40,9 @@
                                                 </div>
                                                 <div class="col-sm-6">
                                                     <div class="labels">Property Owner</div>
-                                                    <input type="radio" id="rented_by_owner" name="rented_by" value="rentedByOwner" checked>
+                                                    <input type="radio" id="rented_by_owner" value="rentedByOwner" name="rented_by">
                                                     <label for="rented_by_owner">Property is Rented by Owner</label><br>
-                                                    <input type="radio" id="rented_by_other" name="rented_by" value="rentedByOther">
+                                                    <input type="radio" id="rented_by_other" value="rentedByOther" name="rented_by">
                                                     <label for="rented_by_other">Property is Rented by Other</label>
                                                         <div class="col-sm-12">
                                                             <input class="form-control" placeholder="Name of Landlord" type="text" id="other_name" name="other_name" value="">
