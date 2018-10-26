@@ -59,7 +59,10 @@ form.eviction_form fieldset {
     outline: none;
     box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
 }
-
+#geo_locations {
+    width:1000px;
+    height:1000px;
+}
 #pac-input {
     background-color: #fff;
     font-family: Roboto;

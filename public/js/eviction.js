@@ -64697,7 +64697,6 @@ $(document).ready(function () {
     magistrate023046.setMap(map);
     magistrate022081.setMap(map);
     magistrate022082.setMap(map);
-
     magistrate02102.setMap(map);
 
         autocomplete.addListener('place_changed', function() {

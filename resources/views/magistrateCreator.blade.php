@@ -69,17 +69,31 @@
                                             <label for="court_id">Court Id:</label>
                                             <input placeholder="Court Id" type="text" class="form-control" id="court_id" name="court_id" value="" />
                                         </div>
+                                        <div class="col-md-6">
+                                            <label for="magistrate_id">Unique Magistrate Id:</label>
+                                            <input placeholder="Magistrate Id" type="text" class="form-control" id="magistrate_id" name="magistrate_id" value="" />
+                                        </div>
                                         <div class="col-sm-6">
                                             <label for="county">County:</label>
                                             <input placeholder="County" type="text" class="form-control" id="county" name="county" value="" />
                                         </div>
+                                        <div class="col-md-6">
+                                            <h4 class="major_labels">Court Address</h4>
+                                            <div class="two_defendant_container">
+                                                <div class="col-sm-8">
+                                                    <label for="court_address_line_1">Court Mailing Address 1</label>
+                                                    <input placeholder="123 Muholland Drive," type="text" class="form-control" id="court_address_one" name="court_address_one" value="" />
+                                                </div>
+                                                <div class="col-sm-8">
+                                                    <label for="court_address_line_2">Court Mailing Address 2</label>
+                                                    <input placeholder="Lancaster PA 17349" type="text" class="form-control" id="court_address_two" name="court_address_two" value="" />
+                                                </div>
+
+                                            </div>
+                                        </div>
                                             <div class="col-sm-8">
                                                 <label for="mdj_name">MDJ Name</label>
                                                 <input placeholder="Tom Pietro" type="text" class="form-control" id="mdj_name" name="mdj_name" value="" />
-                                            </div>
-                                            <div class="col-sm-10">
-                                                <label for="court_address">Court Mailing Address</label>
-                                                <input placeholder="123 Muholland Drive, Lancaster PA 17349" type="text" class="form-control" id="court_address" name="court_address" value="" />
                                             </div>
                                             <div class="col-sm-6">
                                                 <label for="mdj_name">Court Phone Number</label>
@@ -128,6 +142,17 @@
                                         <div class="col-sm-12">
                                             <label for="two_oop">OOP</label>
                                             <input placeholder="$" type="text" class="form-control" id="two_oop" name="two_oop" value="" /></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <h4 class="major_labels">Geo Locations</h4>
+                                        <div class="geo_locations">
+                                            <div class="col-sm-12">
+                                                <label for="geo_locations">Geo Locations</label>
+                                                <textarea placeholder="{lng: -76.104555, lat: 39.917556},{lng: -76.103088, lat: 39.9189}," type="text" class="form-control" id="geo_locations" name="geo_locations"></textarea>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
