@@ -9,6 +9,7 @@ class CourtDetails extends Model
     protected $fillable = [
         'county',
         'court_number',
+        'magistrate_id',
         '1_defendant_up_to_2000',
         '2_defendant_up_to_2000',
         '1_defendant_between_2001_4000',

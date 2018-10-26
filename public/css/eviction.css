@@ -60,8 +60,17 @@ form.eviction_form fieldset {
     box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
 }
 #geo_locations {
-    width:1000px;
-    height:1000px;
+    width:1200px;
+    height:800px;
+}
+
+#edit_geo_locations {
+    width:100%;
+    height:800px;
+}
+.edit_magistrate_modal {
+    width:150%;
+    margin-left:-116px;
 }
 #pac-input {
     background-color: #fff;

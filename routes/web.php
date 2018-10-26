@@ -34,6 +34,10 @@ Route::get('/about-us', 'AboutUsController@index');
 
 Route::get('/magistrateCreator', 'MagistrateController@index');
 
+Route::get('/magistrateCreator/getMagistrate', 'MagistrateController@getMagistrate');
+
+Route::post('/magistrateCreator/editMagistrate', 'MagistrateController@editMagistrate');
+
 Route::post('/magistrateCreator', 'MagistrateController@store');
 
 Route::post('/magistrateCreator/delete', 'MagistrateController@delete');
