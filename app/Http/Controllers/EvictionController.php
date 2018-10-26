@@ -53,7 +53,6 @@ class EvictionController extends Controller
             $tenantName = $_POST['tenant_name'];
 
 
-            mail('andrew.gaidis@gmail.com', 'test', $_POST['rentedByOwner'] );
             $ownerName = $_POST['owner_name'];
 
             if ($_POST['other_name'] != '') {
@@ -129,6 +128,8 @@ class EvictionController extends Controller
 
 
             $totalFees = (float)$attorneyFees + (float)$dueRent + (float)$unjustDamages + (float)$damageAmt;
+
+            number_format($totalFees, 2);
 
             if ($totalFees < 2000) {
                 $filingFee = $upTo2000;
