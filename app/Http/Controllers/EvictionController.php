@@ -27,7 +27,6 @@ class EvictionController extends Controller
         try {
             $courtNumber = $_POST['court_number'];
             $courtDetails = CourtDetails::where('court_number', $courtNumber)->first();
-            $managementCompany = $_POST['management_company'];
 
             $courtAddressLine1 = $_POST['court_address1'];
             $courtAddressLine2 = $_POST['court_address2'];
