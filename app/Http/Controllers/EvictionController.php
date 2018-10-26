@@ -56,7 +56,7 @@ class EvictionController extends Controller
             $ownerName = $_POST['owner_name'];
 
             if ($_POST['other_name'] != '') {
-                $landlordName = $_POST['other_name'];
+                $ownerName = $_POST['other_name'];
             }
 
 
