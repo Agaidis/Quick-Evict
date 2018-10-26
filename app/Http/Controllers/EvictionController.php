@@ -58,6 +58,9 @@ class EvictionController extends Controller
                 $ownerName = $_POST['other_name'];
             }
 
+            $upTo2000 = '';
+            $btn20014000 = '';
+            $greaterThan4000 = '';
 
             if (isset($_POST['tenant_num'])) {
                 $upTo2000 = $courtDetails->two_defendant_up_to_2000;
