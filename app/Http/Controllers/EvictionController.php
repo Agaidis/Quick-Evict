@@ -26,6 +26,7 @@ class EvictionController extends Controller
 
         try {
             $courtNumber = $_POST['court_number'];
+            mail('andrew.gaidis@gmail.com', 'court number', 'Court Number: ' . $courtNumber);
             $courtDetails = CourtDetails::where('court_number', $courtNumber)->first();
 
             $courtAddressLine1 = $_POST['court_address1'];
