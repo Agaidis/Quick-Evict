@@ -14,7 +14,7 @@ class AlterCourtDetails extends Migration
     public function up()
     {
         Schema::table('court_details', function (Blueprint $table) {
-            $table->dropColumn('mailing_address');
+          //  $table->dropColumn('mailing_address');
         });
     }
 
