@@ -64628,7 +64628,7 @@ if (document.location.href.split('/')[3] == 'online-eviction') {
 
         //Create the polygons
         Magistratetest = new google.maps.Polygon({
-            path: test,
+            path: test2,
             geodesic: true,
             strokeColor: 'black',
             strokeOpacity: 1.0,
