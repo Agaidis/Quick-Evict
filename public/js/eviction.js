@@ -40,7 +40,8 @@ if (document.location.href.split('/')[3] == 'online-eviction') {
 
 
         var test = quickEvict.geoData['geo_locations'].replace(/\s/g, '');
-        console.log(test.split('},'));
+        test = test.replace(/},/g, '},dd');
+        console.log(test.split('dd'));
         // var test = JSON.parse(quickEvict.geoData['geo_locations']);
         //
         // console.log(test);
