@@ -5,7 +5,7 @@
     $(document).ready(function () {
 
         $('#magistrate_table').DataTable( {
-            "pagingType": "full_numbers"
+            "pagingType": "simple"
         } );
 
         $('#submit_magistrate').on('click', function () {
