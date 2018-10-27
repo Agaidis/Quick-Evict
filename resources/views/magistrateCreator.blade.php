@@ -13,7 +13,7 @@
                                 <p class="alert alert-success">{{ Session::get('alert-success') }} <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a></p>
                             @endif
                         </div> <!-- end .flash-message -->
-                        <table class="table-responsive-lg magistrate_table" id="magistrate_table">
+                        <table class="magistrate_table" id="magistrate_table">
                                     <thead>
                                     <tr>
                                         <th>Magistrate Unique Id</th>
