@@ -4,7 +4,9 @@
 
     $(document).ready(function () {
 
-        $('#magistrate_table').DataTable();
+        $('#magistrate_table').DataTable( {
+            "pagingType": "full_numbers"
+        } );
 
         $('#submit_magistrate').on('click', function () {
             var data = $('#magistrate_form').serialize();
