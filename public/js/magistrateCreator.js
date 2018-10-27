@@ -6,35 +6,7 @@
 
         $('#magistrate_table').DataTable( {
             "pagingType": "simple"
-        } );
-
-        $('#submit_magistrate').on('click', function () {
-            var data = $('#magistrate_form').serialize();
-            $.ajaxSetup({
-                headers: {
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                }
-            });
-
-            $.ajax({
-                beforeSend: function (xhr) {
-                    xhr.setRequestHeader('X-CSRF-TOKEN', $("#token").attr('content'));
-                },
-                type: "POST",
-                url: '/magistrateCreator',
-                dataType: 'json',
-                data: data,
-
-                success: function (data) {
-                    console.log(data);
-                    location.reload();
-                },
-                error: function (data) {
-                    console.log(data);
-                }
-            });
-        });
-        $('#magistrate_table').on('click', '.magistrate-remove', function () {
+        }).on('click', '.magistrate-remove', function () {
             var id = $(this)[0].id;
             console.log(id);
             var splitId = id.split('_');
@@ -64,9 +36,7 @@
             } else {
 
             }
-        });
-
-        $('.magistrate-edit').on('click', function () {
+        }).on('click', '.magistrate-edit', function () {
             var id = $(this)[0].id;
             var splitId = id.split('_');
             var magistrateId = splitId[2];
@@ -109,6 +79,33 @@
                 error: function (data) {
                     console.log(data);
 
+                }
+            });
+        });
+
+        $('#submit_magistrate').on('click', function () {
+            var data = $('#magistrate_form').serialize();
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+
+            $.ajax({
+                beforeSend: function (xhr) {
+                    xhr.setRequestHeader('X-CSRF-TOKEN', $("#token").attr('content'));
+                },
+                type: "POST",
+                url: '/magistrateCreator',
+                dataType: 'json',
+                data: data,
+
+                success: function (data) {
+                    console.log(data);
+                    location.reload();
+                },
+                error: function (data) {
+                    console.log(data);
                 }
             });
         });
