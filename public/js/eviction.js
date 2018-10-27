@@ -64598,6 +64598,8 @@ if (document.location.href.split('/')[3] == 'online-eviction') {
             {lng: -76.348879, lat: 40.233521},
             {lng: -76.349277, lat: 40.237712}
         ];
+
+        console.log(quickEvict.geoData['geo_locations']);
         var test = JSON.parse(quickEvict.geoData['geo_locations']);
         
         console.log(test);
