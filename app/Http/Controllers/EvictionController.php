@@ -19,6 +19,12 @@ class EvictionController extends Controller
      */
     public function index()
     {
+        $courtDetails = CourtDetails::where('court_number', '09-9-09')->first();
+
+        JavaScript::put([
+            'magistrate' => $courtDetails
+        ]);
+
         return view('eviction', compact('map'));
     }
 

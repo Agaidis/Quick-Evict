@@ -65034,6 +65034,12 @@ if (document.location.href.split('/')[3] == 'online-eviction') {
         magistrate022082.setMap(map);
         magistrate02102.setMap(map);
 
+        console.log(quickEvict.magistrate);
+
+
+
+
+
         autocomplete.addListener('place_changed', function () {
             marker.setMap(null);
             var place = autocomplete.getPlace();
