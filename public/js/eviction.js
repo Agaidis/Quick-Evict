@@ -65037,6 +65037,14 @@ if (document.location.href.split('/')[3] == 'online-eviction') {
         console.log(quickEvict.magistrate['magistrate_id']);
         console.log(quickEvict.geoData);
 
+        $.each(quickEvict.magistrate, function (key, value ) {
+            console.log(value);
+        });
+
+        $.each(quickEvict.geoData, function (key, value ) {
+            console.log(value);
+        });
+
 
 
 
