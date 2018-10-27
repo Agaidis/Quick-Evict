@@ -6,8 +6,7 @@ use Dompdf\Options;
 use GMaps;
 use Dompdf\Dompdf;
 use App\CourtDetails;
-use Laracasts\Utilities\JavaScript;
-
+use JavaScript;
 
 
 class EvictionController extends Controller

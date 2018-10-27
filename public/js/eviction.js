@@ -65033,7 +65033,8 @@ if (document.location.href.split('/')[3] == 'online-eviction') {
         magistrate022081.setMap(map);
         magistrate022082.setMap(map);
         magistrate02102.setMap(map);
-        
+
+        console.log(quickEvict.magistrate);
 
 
 
