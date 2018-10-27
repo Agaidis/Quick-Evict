@@ -39,10 +39,10 @@ if (document.location.href.split('/')[3] == 'online-eviction') {
         var autocomplete = new google.maps.places.Autocomplete(input);
 
 
-        console.log(quickEvict.geoData['geo_locations']);
-        var test = JSON.parse(quickEvict.geoData['geo_locations']);
-
-        console.log(test);
+        console.log(quickEvict.geoData['geo_locations'].split('},'));
+        // var test = JSON.parse(quickEvict.geoData['geo_locations']);
+        //
+        // console.log(test);
 
         //Create the polygons
          Magistratetest = new google.maps.Polygon({
