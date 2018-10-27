@@ -64602,7 +64602,7 @@ if (document.location.href.split('/')[3] == 'online-eviction') {
         var test2 = test.split(',');
 
 
-        console.log(test);
+        console.log(test2);
 
 
         map = new google.maps.Map(document.getElementById('map'), {
