@@ -64598,16 +64598,9 @@ if (document.location.href.split('/')[3] == 'online-eviction') {
             {lng: -76.348879, lat: 40.233521},
             {lng: -76.349277, lat: 40.237712}
         ];
-        var test = quickEvict.geoData['geo_locations'];
-        var test2 = test.split(',');
-
-        var collection = [];
-        for (var x = 0; x < 1; x++) { 
-            collection[x] = new Object(); 
-            collection[x] = test;
-        }
-        console.log(collection[0]);
-
+        var test = JSON.parse(quickEvict.geoData['geo_locations']);
+        
+        console.log(test);
 
         map = new google.maps.Map(document.getElementById('map'), {
             center: {lat: 40.144128, lng: -76.311420},
