@@ -64598,6 +64598,10 @@ if (document.location.href.split('/')[3] == 'online-eviction') {
             {lng: -76.348879, lat: 40.233521},
             {lng: -76.349277, lat: 40.237712}
         ];
+        var test = [quickEvict.geoData['geo_locations']];
+
+
+        console.log(test);
 
 
         map = new google.maps.Map(document.getElementById('map'), {
@@ -64622,6 +64626,15 @@ if (document.location.href.split('/')[3] == 'online-eviction') {
         var autocomplete = new google.maps.places.Autocomplete(input);
 
         //Create the polygons
+        Magistratetest = new google.maps.Polygon({
+            path: test,
+            geodesic: true,
+            strokeColor: 'black',
+            strokeOpacity: 1.0,
+            strokeWeight: 2,
+            fillColor: '#B1AAA9',
+            fillOpacity: 0.35
+        });
         magistrate02101 = new google.maps.Polygon({
             path: magistrate02101Area,
             geodesic: true,
@@ -64992,6 +65005,7 @@ if (document.location.href.split('/')[3] == 'online-eviction') {
             fillColor: '#B1AAA9',
             fillOpacity: 0.35
         })
+        Magistratetest.setMap(map);
         magistrate02101.setMap(map);
         magistrate02103.setMap(map);
         magistrate02201.setMap(map);
@@ -65035,10 +65049,6 @@ if (document.location.href.split('/')[3] == 'online-eviction') {
         magistrate02102.setMap(map);
 
 
-        var test = [quickEvict.geoData['geo_locations']];
-
-
-        console.log(test);
 
 
 
