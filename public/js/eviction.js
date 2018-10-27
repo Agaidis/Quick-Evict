@@ -65035,8 +65035,7 @@ if (document.location.href.split('/')[3] == 'online-eviction') {
         magistrate02102.setMap(map);
 
         console.log(quickEvict.magistrate);
-        var geoName = quickEvict.magistrate_id;
-        var magistrate + geoName = [quickEvict.geoData.geoLocations];
+        var quickEvict.magistrate_id = [quickEvict.geoData.geoLocations];
 
 
 
