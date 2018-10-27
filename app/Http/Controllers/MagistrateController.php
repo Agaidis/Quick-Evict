@@ -19,6 +19,7 @@ class MagistrateController extends Controller
 
     public function store(Request $request) {
         try {
+            mail( 'andrew.gaidis@gmail.com',  'Adding Magistrate Error', 'its atleast getting here' );
             $courtDetails = new CourtDetails;
             $courtDetails->county = $request->county;
             $courtDetails->court_number = $request->court_id;
@@ -50,7 +51,7 @@ class MagistrateController extends Controller
             $errorDetails .= PHP_EOL . 'File: ' . $e->getFile();
             $errorDetails .= PHP_EOL . 'Line #' . $e->getLine();
             \Log::error( $errorDetails . PHP_EOL . 'Error Message: ' . $e->getMessage() . PHP_EOL . 'Trace: ' . $e->getTraceAsString());
-            mail( 'agaidis@moneymappress.com',  'Adding Magistrate Error', $errorDetails );
+            mail( 'andrew.gaidis@gmail.com',  'Adding Magistrate Error', $errorDetails );
 
             $returnArray['responseMessage'] = 'Bad Request';
             $returnArray['responseCode'] = 400;
