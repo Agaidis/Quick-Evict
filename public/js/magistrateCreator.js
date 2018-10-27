@@ -36,8 +36,9 @@
         });
         $('.magistrate-remove').on('click', function () {
             var id = $(this)[0].id;
+            console.log(id);
             var splitId = id.split('_');
-
+            console.log(splitId);
             var conf = confirm('Are you sure you want to Delete ' + splitId[2]);
 
             if (conf == true) {
