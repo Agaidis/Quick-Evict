@@ -64866,15 +64866,15 @@ if (document.location.href.split('/')[3] == 'online-eviction') {
             fillColor: '#B1AAA9',
             fillOpacity: 0.35
         });
-        magistrate023053 = new google.maps.Polygon({
-            path: magistrate023053Area,
-            geodesic: true,
-            strokeColor: '#81CFFF',
-            strokeOpacity: 1.0,
-            strokeWeight: 2,
-            fillColor: '#B1AAA9',
-            fillOpacity: 0.35
-        });
+        // magistrate023053 = new google.maps.Polygon({
+        //     path: magistrate023053Area,
+        //     geodesic: true,
+        //     strokeColor: '#81CFFF',
+        //     strokeOpacity: 1.0,
+        //     strokeWeight: 2,
+        //     fillColor: '#B1AAA9',
+        //     fillOpacity: 0.35
+        // });
         magistrate02304 = new google.maps.Polygon({
             path: magistrate02304Area,
             geodesic: true,
@@ -65022,7 +65022,7 @@ if (document.location.href.split('/')[3] == 'online-eviction') {
         magistrate02305.setMap(map);
         magistrate023051.setMap(map);
         magistrate023052.setMap(map);
-        magistrate023053.setMap(map);
+      //  magistrate023053.setMap(map);
         magistrate02304.setMap(map);
         magistrate023041.setMap(map);
         magistrate023042.setMap(map);
@@ -65182,10 +65182,6 @@ if (document.location.href.split('/')[3] == 'online-eviction') {
                 $('#court_address1').val('14 Center Street, P.O. Box 618');
                 $('#court_address2').val('Intercourse, PA 17534');
             } else if (google.maps.geometry.poly.containsLocation(place.geometry.location, magistrate023052)) {
-                $('#court_number').val('02-3-05');
-                $('#court_address1').val('14 Center Street, P.O. Box 618');
-                $('#court_address2').val('Intercourse, PA 17534');
-            } else if (google.maps.geometry.poly.containsLocation(place.geometry.location, magistrate023053)) {
                 $('#court_number').val('02-3-05');
                 $('#court_address1').val('14 Center Street, P.O. Box 618');
                 $('#court_address2').val('Intercourse, PA 17534');
