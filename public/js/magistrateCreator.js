@@ -34,7 +34,7 @@
                 }
             });
         });
-        $('.magistrate-remove').on('click', function () {
+        $('#magistrate_table').on('click', '.magistrate-remove', function () {
             var id = $(this)[0].id;
             console.log(id);
             var splitId = id.split('_');
