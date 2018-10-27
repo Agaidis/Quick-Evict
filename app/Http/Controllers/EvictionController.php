@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\GeoLocation;
 use Dompdf\Options;
 use GMaps;
 use Dompdf\Dompdf;
@@ -18,10 +19,12 @@ class EvictionController extends Controller
      */
     public function index()
     {
-        $courtDetails = CourtDetails::where('court_number', '09-9-09')->first();
+        $courtDetails = CourtDetails::where('magistrate_id', '09-9-09-1')->first();
+        $geoData = GeoLocation::where('magistrate_id', '09-9-09-1')->first();
 
         JavaScript::put([
-            'magistrate' => $courtDetails
+            'magistrate' => $courtDetails,
+            'geoData' => $geoData
         ]);
 
         return view('eviction', compact('map'));
