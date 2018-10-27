@@ -39,7 +39,8 @@ if (document.location.href.split('/')[3] == 'online-eviction') {
         var autocomplete = new google.maps.places.Autocomplete(input);
 
 
-        console.log(quickEvict.geoData['geo_locations'].split('},'));
+        var test = quickEvict.geoData['geo_locations'].replace(/\s/g, '');
+        console.log(test.split('},'));
         // var test = JSON.parse(quickEvict.geoData['geo_locations']);
         //
         // console.log(test);
