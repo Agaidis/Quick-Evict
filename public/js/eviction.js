@@ -96,6 +96,7 @@ if (document.location.href.split('/')[3] == 'online-eviction') {
             map.fitBounds(newBounds);
 
             $.each(magArray, function(key, value) {
+                console.log(value);
                 if (google.maps.geometry.poly.containsLocation(place.geometry.location, value)) {
                     $('#court_number').val(value);
                 }
