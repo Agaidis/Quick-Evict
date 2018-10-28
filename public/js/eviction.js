@@ -59,7 +59,7 @@ var obj = [];
 
         //Create the polygons
          Magistratetest = new google.maps.Polygon({
-             path: test,
+             path: obj,
              geodesic: true,
              strokeColor: 'black',
              strokeOpacity: 1.0,
