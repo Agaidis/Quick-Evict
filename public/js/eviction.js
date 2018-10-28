@@ -47,19 +47,12 @@ if (document.location.href.split('/')[3] == 'online-eviction') {
 
         console.log(magistrate023046Area);
 
-        var test = quickEvict.geoData['geo_locations'].replace(/\s/g, '');
-        test = test.replace(/},/g, '},dd');
-
-        var resultArray = JSON.parse(quickEvict.geoData['geo_locations'].replace(/\s/g, ''));
-        console.log(resultArray);
-        var triangleCoordsLS12 = [];
-        for (var i=0; i<resultArray.length; i++) {
-            triangleCoordsLS12[i] = new google.maps.LatLng(resultArray[i].lat, resultArray[i].lng);
-        }
+        var test = [quickEvict.geoData['geo_locations'].replace(/\s/g, '')];
+        console.log(test);
 
         //Create the polygons
          Magistratetest = new google.maps.Polygon({
-             path: triangleCoordsLS12,
+             path: test,
              geodesic: true,
              strokeColor: 'black',
              strokeOpacity: 1.0,
