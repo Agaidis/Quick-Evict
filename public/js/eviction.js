@@ -40,6 +40,10 @@ if (document.location.href.split('/')[3] == 'online-eviction') {
 
         console.log(quickEvict.geoData);
 
+        $.each(quickEvict.geoData, function(key, value) {
+           var magId = 'magistrate_' + value.magistrate_id.replace('-', '');
+           console.log(magId);
+        });
         var test = quickEvict.geoData['geo_locations'].replace(/\s/g, '').replace(/},/g,'},dd').split(',dd');
 var obj = [];
         for (var i in test) {
