@@ -37,19 +37,19 @@ if (document.location.href.split('/')[3] == 'online-eviction') {
         map.controls[google.maps.ControlPosition.TOP_LEFT].push(types);
 
         var autocomplete = new google.maps.places.Autocomplete(input);
-
-        console.log(quickEvict.geoData);
+        var magArray = [];
 
         $.each(quickEvict.geoData, function(key, value) {
-           var magId = 'magistrate_' + value.magistrate_id.replace('-', '');
 
-           var geoPoints = value.geo_locations.replace(/\s/g, '').replace(/},/g,'},dd').split(',dd');
-
+            magId = 'magistrate_' + value.magistrate_id.replace('-', '');
+            var geoPoints = value.geo_locations.replace(/\s/g, '').replace(/},/g,'},dd').split(',dd');
             var obj = [];
+
             for (var i in geoPoints) {
                 obj.push(JSON.parse(geoPoints[i]));
             }
 
+            magArray.push(magId);
             //Create the polygons
             magId = new google.maps.Polygon({
                 path: obj,
@@ -66,7 +66,7 @@ if (document.location.href.split('/')[3] == 'online-eviction') {
 
 
 
-
+        console.log(magArray);
 
         autocomplete.addListener('place_changed', function () {
             marker.setMap(null);
@@ -75,10 +75,7 @@ if (document.location.href.split('/')[3] == 'online-eviction') {
             if (!place.geometry) {
                 window.alert("Returned place contains no geometry");
                 return;
-            }
-            ;
-
-            console.log(place.address_components);
+            };
 
             houseNum = place.address_components[0].long_name;
             streetName = place.address_components[1].long_name;
@@ -101,8 +98,6 @@ if (document.location.href.split('/')[3] == 'online-eviction') {
 
             if (google.maps.geometry.poly.containsLocation(place.geometry.location, Magistratetest)) {
                 $('#court_number').val('02-1-01');
-                $('#court_address1').val('641 Union Street');
-                $('#court_address2').val('Lancaster, PA 17603');
             } else {
                 alert('The address is outside of all areas.');
             }
