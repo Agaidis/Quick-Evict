@@ -63,7 +63,7 @@
                     $('#edit_magistrate_id').val(data[1][0].magistrate_id);
                     $('#edit_county').val(data[1][0].county);
                     $('#edit_mdj_name').val(data[1][0].mdj_name);
-                    $('#edit_court_number').val(data[0][0].phone_number);
+                    $('#edit_court_number').val(data[1][0].phone_number);
                     $('#edit_court_address_one').val(data[0][0].address_line_one);
                     $('#edit_court_address_two').val(data[0][0].address_line_two);
                     $('#edit_one_under_2000').val(data[1][0].one_defendant_up_to_2000);
