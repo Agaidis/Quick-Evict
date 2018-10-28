@@ -92,7 +92,7 @@ if (document.location.href.split('/')[3] == 'online-eviction') {
             newBounds.extend(place.geometry.location);
             map.fitBounds(newBounds);
 
-            if (google.maps.geometry.poly.containsLocation(place.geometry.location, 'magistrate_01-1-01-1')) {
+            if (google.maps.geometry.poly.containsLocation(place.geometry.location, magId)) {
                 $('#court_number').val(magArray[0]);
             }
         });
