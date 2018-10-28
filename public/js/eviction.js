@@ -62,7 +62,7 @@ if (document.location.href.split('/')[3] == 'online-eviction') {
             magId.setMap(map);
         });
 
-        autocomplete.addListener(map, 'place_changed', function () {
+        autocomplete.addListener('place_changed', function () {
             marker.setMap(null);
             var place = autocomplete.getPlace();
             newBounds = bounds;
