@@ -62,6 +62,8 @@ if (document.location.href.split('/')[3] == 'online-eviction') {
             magId.setMap(map);
         });
 
+        console.log(magArray);
+
         autocomplete.addListener('place_changed', function () {
             marker.setMap(null);
             var place = autocomplete.getPlace();
@@ -90,7 +92,7 @@ if (document.location.href.split('/')[3] == 'online-eviction') {
             newBounds.extend(place.geometry.location);
             map.fitBounds(newBounds);
 
-            if (google.maps.geometry.poly.containsLocation(place.geometry.location, magArray[0])) {
+            if (google.maps.geometry.poly.containsLocation(place.geometry.location, 'magistrate_')) {
                 $('#court_number').val(magArray[0]);
             }
         });
