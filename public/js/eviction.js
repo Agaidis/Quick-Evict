@@ -42,7 +42,6 @@ if (document.location.href.split('/')[3] == 'online-eviction') {
 
         $.each(quickEvict.geoData, function(key, value) {
            var magId = 'magistrate_' + value.magistrate_id.replace('-', '');
-           console.log(magId);
 
            var geoPoints = value.geo_locations.replace(/\s/g, '').replace(/},/g,'},dd').split(',dd');
 
@@ -55,7 +54,7 @@ if (document.location.href.split('/')[3] == 'online-eviction') {
             magId = new google.maps.Polygon({
                 path: obj,
                 geodesic: true,
-                strokeColor: 'black',
+                strokeColor: '#D4CEFA',
                 strokeOpacity: 1.0,
                 strokeWeight: 2,
                 fillColor: '#B1AAA9',
