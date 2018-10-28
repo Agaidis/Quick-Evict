@@ -50,7 +50,7 @@
                                         <td>{{$courtDetail->two_defendant_greater_than_4000}}</td>
                                         <td>{{$courtDetail->two_defendant_out_of_pocket}}</td>
                                         <td class="text-center"><button type="button" data-target="#modal_edit_magistrate" data-toggle="modal" id="id_{{$courtDetail->id}}_{{$courtDetail->magistrate_id}}" class=" magistrate-edit">Edit</button></td>
-                                        <td class="text-center"><button type="button" id="id_{{$courtDetail->id}}_{{$courtDetail->court_number}}" class="text-danger magistrate-remove">Delete</button></td>
+                                        <td class="text-center"><button type="button" id="id_{{$courtDetail->id}}_{{$courtDetail->magistrate_id}}" class="text-danger magistrate-remove">Delete</button></td>
                                     </tr>
                                     @endforeach
                                     </tbody>
@@ -96,11 +96,11 @@
                                         <div class="two_defendant_container">
                                             <div class="col-sm-8">
                                                 <label for="court_address_line_1">Court Mailing Address 1</label>
-                                                <input placeholder="123 Muholland Drive," type="text" class="form-control" id="court_address_one" name="court_address_one" value="" />
+                                                <input placeholder="123 Muholland Drive," type="text" class="form-control" id="address_line_one" name="address_line_one" value="" />
                                             </div>
                                             <div class="col-sm-8">
                                                 <label for="court_address_line_2">Court Mailing Address 2</label>
-                                                <input placeholder="Lancaster PA 17349" type="text" class="form-control" id="court_address_two" name="court_address_two" value="" />
+                                                <input placeholder="Lancaster PA 17349" type="text" class="form-control" id="address_line_two" name="address_line_two" value="" />
                                             </div>
 
                                         </div>

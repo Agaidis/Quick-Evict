@@ -19,7 +19,6 @@ class MagistrateController extends Controller
 
     public function store(Request $request) {
         try {
-            mail( 'andrew.gaidis@gmail.com',  'Adding Magistrate Error', 'its atleast getting here' );
             $courtDetails = new CourtDetails;
             $courtDetails->county = $request->county;
             $courtDetails->court_number = $request->court_id;
@@ -135,9 +134,10 @@ class MagistrateController extends Controller
 
     public function delete(Request $request) {
         try {
-            mail('andrew.gaidis@gmail.com', 'asdf', $request->id);
-            $dbId = CourtDetails::where('court_number', $request->id)->value('id');
+            $dbId = CourtDetails::where('magistrate_id', $request->id)->value('id');
             CourtDetails::destroy($dbId);
+            $dbId = GeoLocation::where('magistrate_id', $request->id)->value('id');
+            GeoLocation::destroy($dbId);
             return $dbId;
         } catch (\Exception $e) {
             return 'failed';

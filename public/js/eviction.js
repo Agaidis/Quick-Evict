@@ -37,16 +37,7 @@ if (document.location.href.split('/')[3] == 'online-eviction') {
         map.controls[google.maps.ControlPosition.TOP_LEFT].push(types);
 
         var autocomplete = new google.maps.places.Autocomplete(input);
-        var magistrate023046Area = [
-            {lng: -76.123703, lat: 39.730795},
-            {lng: -76.124028, lat: 39.731334},
-            {lng: -76.124073, lat: 39.731411},
-            {lng: -76.124107, lat: 39.731497},
-            {lng: -76.124145, lat: 39.73158}
-            ];
 
-        console.log(magistrate023046Area);
-        console.log(quickEvict.geoData['geo_locations']);
         var test = quickEvict.geoData['geo_locations'].replace(/\s/g, '').replace(/},/g,'},dd').split(',dd');
 var obj = [];
         for (var i in test) {
