@@ -42,7 +42,7 @@ if (document.location.href.split('/')[3] == 'online-eviction') {
         var test = quickEvict.geoData['geo_locations'].replace(/\s/g, '');
         test = test.replace(/},/g, '},dd');
         console.log(test.split('dd'));
-        var resultArray = JSON.parse(quickEvict.geoData['geo_locations'].replace(/\s/g, '');
+        var resultArray = JSON.parse(quickEvict.geoData['geo_locations'].replace(/\s/g, ''));
         var triangleCoordsLS12 = [];
         for (var i=0; i<resultArray.length; i++) {
             triangleCoordsLS12[i] = new google.maps.LatLng(resultArray[i].lat, resultArray[i].lng);
