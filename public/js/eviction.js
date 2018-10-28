@@ -48,10 +48,10 @@ if (document.location.href.split('/')[3] == 'online-eviction') {
         console.log(magistrate023046Area);
         console.log(quickEvict.geoData['geo_locations']);
         var test = quickEvict.geoData['geo_locations'].replace(/\s/g, '').replace(/},/g,'},dd').split(',dd');
-
+var obj = [];
         for (var i in test) {
             console.log(test[i]);
-            var obj = obj.push(JSON.parse(test[i]));
+            obj.push(JSON.parse(test[i]));
 
         }
     console.log(obj);
