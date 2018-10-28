@@ -38,6 +38,7 @@ if (document.location.href.split('/')[3] == 'online-eviction') {
 
         var autocomplete = new google.maps.places.Autocomplete(input);
         var magArray = [];
+        var objArray = [];
 
         $.each(quickEvict.geoData, function(key, value) {
             magId = 'magistrate_' + value.magistrate_id;
@@ -47,12 +48,13 @@ if (document.location.href.split('/')[3] == 'online-eviction') {
             for (var i in geoPoints) {
                 obj.push(JSON.parse(geoPoints[i]));
             }
+            objArray.push(obj);
             magArray.push(magId);
         });
         //Create the polygons
         for (var k = 0; k < 0; k++) {
             magArray[k] = new google.maps.Polygon({
-                path: obj,
+                path: objArray[k],
                 geodesic: true,
                 strokeColor: '#D4CEFA',
                 strokeOpacity: 1.0,
