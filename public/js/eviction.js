@@ -61,9 +61,6 @@ if (document.location.href.split('/')[3] == 'online-eviction') {
             });
             magId.setMap(map);
         });
-        google.maps.event.addListener(map,'bounds_changed', function() {
-            autocomplete.bindTo(map, 'place_changed');
-        });
 
         autocomplete.addListener('place_changed', function () {
             marker.setMap(null);
