@@ -34,7 +34,7 @@ class EvictionController extends Controller
 
         try {
             $magistrateId = str_replace('magistrate_' , '', $_POST['court_number']);
-            mail('andrew.gaidis@gmail.com', test, $magistrateId);
+            mail('andrew.gaidis@gmail.com', 'test', $magistrateId);
             $courtDetails = CourtDetails::where('court_number', $magistrateId)->first();
             $geoDetails = GeoLocation::where('magistrate_id', $magistrateId)->first();
 
