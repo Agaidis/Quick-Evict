@@ -47,10 +47,11 @@ if (document.location.href.split('/')[3] == 'online-eviction') {
             for (var i in geoPoints) {
                 obj.push(JSON.parse(geoPoints[i]));
             }
-
             magArray.push(magId);
-            //Create the polygons
-            magId = new google.maps.Polygon({
+        });
+        //Create the polygons
+        for (var k = 0; k < 0; k++) {
+            magArray[k] = new google.maps.Polygon({
                 path: obj,
                 geodesic: true,
                 strokeColor: '#D4CEFA',
@@ -59,8 +60,9 @@ if (document.location.href.split('/')[3] == 'online-eviction') {
                 fillColor: '#B1AAA9',
                 fillOpacity: 0.35
             });
-            magId.setMap(map);
-        });
+
+            magArray[k].setMap(map);
+        }
 
         console.log(magArray);
 
@@ -91,9 +93,15 @@ if (document.location.href.split('/')[3] == 'online-eviction') {
             marker.setMap(map);
             newBounds.extend(place.geometry.location);
             map.fitBounds(newBounds);
-
-            if (google.maps.geometry.poly.containsLocation(place.geometry.location, magId)) {
-                $('#court_number').val(magArray[0]);
+            var isFound = false;
+            for (var k = 0; k < 0; k++) {
+                if (google.maps.geometry.poly.containsLocation(place.geometry.location, magArray[k])) {
+                    $('#court_number').val(magArray[k]);
+                    isFound = true;
+                }
+            }
+            if (isFound == false) {
+                alert('Location outside all Zones');
             }
         });
 
