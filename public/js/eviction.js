@@ -44,11 +44,11 @@ if (document.location.href.split('/')[3] == 'online-eviction') {
            var magId = 'magistrate_' + value.magistrate_id.replace('-', '');
            console.log(magId);
 
-           magId = value.geoLocations.replace(/\s/g, '').replace(/},/g,'},dd').split(',dd');
+           var geoPoints = value.geoLocations.replace(/\s/g, '').replace(/},/g,'},dd').split(',dd');
 
             var obj = [];
-            for (var i in magId) {
-                obj.push(JSON.parse(magId[i]));
+            for (var i in geoPoints) {
+                obj.push(JSON.parse(geoPoints[i]));
             }
 
             //Create the polygons
