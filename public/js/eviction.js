@@ -54,7 +54,7 @@ if (document.location.href.split('/')[3] == 'online-eviction') {
         });
         console.log(objArray);
         //Create the polygons
-        for (var k = 0; k < 0; k++) {
+        for (var k = 0; k < objArray.length; k++) {
             console.log(objArray[k]);
             magArray[k] = new google.maps.Polygon({
                 path: objArray[k],
