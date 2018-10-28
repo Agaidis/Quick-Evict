@@ -48,11 +48,14 @@ if (document.location.href.split('/')[3] == 'online-eviction') {
             for (var i in geoPoints) {
                 obj.push(JSON.parse(geoPoints[i]));
             }
+            console.log(obj);
             objArray.push(obj);
             magArray.push(magId);
         });
+        console.log(objArray);
         //Create the polygons
         for (var k = 0; k < 0; k++) {
+            console.log(objArray[k]);
             magArray[k] = new google.maps.Polygon({
                 path: objArray[k],
                 geodesic: true,
