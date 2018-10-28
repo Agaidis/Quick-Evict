@@ -19,8 +19,8 @@ class EvictionController extends Controller
      */
     public function index()
     {
-        $courtDetails = CourtDetails::where('magistrate_id', '01-1-01-1')->first();
-        $geoData = GeoLocation::where('magistrate_id', '01-1-01-1')->first();
+        $courtDetails = CourtDetails::where('magistrate_id', '09-9-09-1')->first();
+        $geoData = GeoLocation::where('magistrate_id', '09-9-09-1')->first();
 
         $geoData->magistrateId = str_replace('-', '', $geoData->magistrateId);
         $geoData->magistrateId = 'magistrate' . $geoData->magistrateId;
