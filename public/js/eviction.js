@@ -39,6 +39,7 @@ if (document.location.href.split('/')[3] == 'online-eviction') {
         var autocomplete = new google.maps.places.Autocomplete(input);
         var magArray = [];
         var objArray = [];
+        var magNamesArray = [];
 
         $.each(quickEvict.geoData, function(key, value) {
             magId = 'magistrate_' + value.magistrate_id;
@@ -48,6 +49,7 @@ if (document.location.href.split('/')[3] == 'online-eviction') {
             for (var i in geoPoints) {
                 obj.push(JSON.parse(geoPoints[i]));
             }
+            magNamesArray.push(magId);
             objArray.push(obj);
             magArray.push(magId);
         });
@@ -61,7 +63,8 @@ if (document.location.href.split('/')[3] == 'online-eviction') {
                 strokeOpacity: 1.0,
                 strokeWeight: 2,
                 fillColor: '#B1AAA9',
-                fillOpacity: 0.35
+                fillOpacity: 0.35,
+                areaName: magNamesArray[k]
             });
 
             magArray[k].setMap(map);
