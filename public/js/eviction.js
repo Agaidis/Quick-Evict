@@ -95,9 +95,9 @@ if (document.location.href.split('/')[3] == 'online-eviction') {
             newBounds.extend(place.geometry.location);
             map.fitBounds(newBounds);
 
-            $.each(magArray, function(key, value) {
-                console.log(value);
-                if (google.maps.geometry.poly.containsLocation(place.geometry.location, value)) {
+            $.each(quickEvict.geoData, function(key, value) {
+                magId = 'magistrate_' + value.magistrate_id;
+                if (google.maps.geometry.poly.containsLocation(place.geometry.location, magId)) {
                     $('#court_number').val(value);
                 }
             });
