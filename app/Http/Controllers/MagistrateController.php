@@ -113,8 +113,8 @@ class MagistrateController extends Controller
             $geoLocation->geo_locations = $request->geoLocations;
             $geoLocation->county = $request->county;
             $geoLocation->court_number = $request->courtId;
-            $geoLocation->address_line_one = $request->address_line_one;
-            $geoLocation->address_line_two = $request->address_line_two;
+            $geoLocation->address_line_one = $request->addressOne;
+            $geoLocation->address_line_two = $request->addressTwo;
             $geoLocation->save();
             return 'success';
         } catch (\Exception $e) {
