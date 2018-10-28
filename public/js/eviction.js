@@ -48,6 +48,7 @@ if (document.location.href.split('/')[3] == 'online-eviction') {
         console.log(magistrate023046Area);
 
         var test = [quickEvict.geoData['geo_locations'].replace(/\s/g, '')];
+        test = JSON.parse(test);
         console.log(test);
 
         //Create the polygons
