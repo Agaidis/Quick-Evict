@@ -22,9 +22,6 @@ class EvictionController extends Controller
         $courtDetails = CourtDetails::all();
         $geoData = GeoLocation::all();
 
-        $geoData->magistrateId = str_replace('-', '', $geoData->magistrateId);
-        $geoData->magistrateId = 'magistrate' . $geoData->magistrateId;
-
         JavaScript::put([
             'magistrate' => $courtDetails,
             'geoData' => $geoData
