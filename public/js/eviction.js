@@ -40,8 +40,7 @@ if (document.location.href.split('/')[3] == 'online-eviction') {
         var magArray = [];
 
         $.each(quickEvict.geoData, function(key, value) {
-
-            magId = 'magistrate_' + value.magistrate_id.replace('-', '');
+            magId = 'magistrate_' + value.magistrate_id;
             var geoPoints = value.geo_locations.replace(/\s/g, '').replace(/},/g,'},dd').split(',dd');
             var obj = [];
 
@@ -96,11 +95,11 @@ if (document.location.href.split('/')[3] == 'online-eviction') {
             newBounds.extend(place.geometry.location);
             map.fitBounds(newBounds);
 
-            if (google.maps.geometry.poly.containsLocation(place.geometry.location, Magistratetest)) {
-                $('#court_number').val('02-1-01');
-            } else {
-                alert('The address is outside of all areas.');
-            }
+            $.each(magArray, function(key, value) {
+                if (google.maps.geometry.poly.containsLocation(place.geometry.location, value)) {
+                    $('#court_number').val(value);
+                }
+            });
         });
 
 
