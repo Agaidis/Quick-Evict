@@ -48,14 +48,12 @@ if (document.location.href.split('/')[3] == 'online-eviction') {
             for (var i in geoPoints) {
                 obj.push(JSON.parse(geoPoints[i]));
             }
-            console.log(obj);
             objArray.push(obj);
             magArray.push(magId);
         });
-        console.log(objArray);
+
         //Create the polygons
         for (var k = 0; k < objArray.length; k++) {
-            console.log(objArray[k]);
             magArray[k] = new google.maps.Polygon({
                 path: objArray[k],
                 geodesic: true,
@@ -69,8 +67,6 @@ if (document.location.href.split('/')[3] == 'online-eviction') {
             magArray[k].setMap(map);
         }
 
-        console.log(magArray);
-
         autocomplete.addListener('place_changed', function () {
             marker.setMap(null);
             var place = autocomplete.getPlace();
@@ -78,7 +74,7 @@ if (document.location.href.split('/')[3] == 'online-eviction') {
             if (!place.geometry) {
                 window.alert("Returned place contains no geometry");
                 return;
-            };
+            }
 
             houseNum = place.address_components[0].long_name;
             streetName = place.address_components[1].long_name;
