@@ -93,7 +93,7 @@ class MagistrateController extends Controller
         try {
             $courtDetails = CourtDetails::find($request->dbCourtId);
             $courtDetails->court_number = $request->courtId;
-            $courtDetails->phone_number = $request->court_number;
+            $courtDetails->phone_number = $request->courtNumber;
             $courtDetails->magistrate_id = $request->magistrateId;
             $courtDetails->county = $request->county;
             $courtDetails->mdj_name = $request->mdjName;
