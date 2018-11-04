@@ -142,6 +142,10 @@
                     twoBtn20004001: $('#edit_two_btn_2000_4001').val(),
                     twoOver4000: $('#edit_two_over_4000').val(),
                     twoOOP: $('#edit_two_oop').val(),
+                    threeUnder2000: $('#edit_three_under_2000').val(),
+                    threeBtn20004001: $('#edit_three_btn_2000_4001').val(),
+                    threeOver4000: $('#edit_three_over_4000').val(),
+                    threeOOP: $('#edit_three_oop').val(),
                     geoLocations: $('#edit_geo_locations').val()
                 },
                 success: function (data) {

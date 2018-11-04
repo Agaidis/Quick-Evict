@@ -31,6 +31,12 @@ class MagistrateController extends Controller
             $courtDetails->two_defendant_greater_than_4000 = $request->two_over_4000;
             $courtDetails->one_defendant_out_of_pocket = $request->one_oop;
             $courtDetails->two_defendant_out_of_pocket = $request->two_oop;
+            $courtDetails->three_defendant_up_to_2000 = $request->three_under_2000;
+            $courtDetails->three_defendant_between_2001_4000 = $request->three_btn_2000_4001;
+            $courtDetails->three_defendant_greater_than_4000 = $request->three_over_4000;
+            $courtDetails->three_defendant_out_of_pocket = $request->three_oop;
+            $courtDetails->additional_tenant = $request->additional_tenant;
+
             $courtDetails->mdj_name = $request->mdj_name;
             $courtDetails->phone_number = $request->court_number;
             $courtDetails->save();
@@ -105,6 +111,11 @@ class MagistrateController extends Controller
             $courtDetails->two_defendant_between_2001_4000 = $request->twoBtn20004001;
             $courtDetails->two_defendant_greater_than_4000 = $request->twoOver4000;
             $courtDetails->two_defendant_out_of_pocket = $request->twoOOP;
+            $courtDetails->three_defendant_up_to_2000 = $request->threeUnder2000;
+            $courtDetails->three_defendant_between_2001_4000 = $request->threeBtn20004001;
+            $courtDetails->three_defendant_greater_than_4000 = $request->threeOver4000;
+            $courtDetails->three_defendant_out_of_pocket = $request->threeOOP;
+            $courtDetails->additional_tenant = $request->additional_tenant;
             $courtDetails->save();
 
 
