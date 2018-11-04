@@ -283,7 +283,7 @@
                                                         </div>
                                                     </div>
                                                     <div class="col-md-10">
-                                                        <h4 class="major_labels">Three Defendant Amts</h4>
+                                                        <h4 class="major_labels">Additional Info</h4>
                                                         <div class="three_defendant_container">
                                                             <div class="col-sm-12">
                                                                 <label for="additional_tenants">Additional Tenant $</label>
