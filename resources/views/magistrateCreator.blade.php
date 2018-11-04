@@ -293,7 +293,7 @@
                                                 </div>
                                                 <div class="row">
                                                     <div class="col-md-12">
-                                                        <h4 class="major_labels">Geo Locations</h4>
+                                                        <h4 class="major_labels">Geo Locations 2.0</h4>
                                                         <div class="geo_locations">
                                                             <div class="col-sm-12">
                                                                 <textarea placeholder="{lng: -76.104555, lat: 39.917556},{lng: -76.103088, lat: 39.9189}," type="text" class="form-control" id="edit_geo_locations" name="edit_geo_locations"></textarea>
