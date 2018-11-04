@@ -9,9 +9,8 @@
                 <div class="card-header"><h2>New Eviction</h2></div>
                 <div class="card-body">
                     <div class="row">
-
                         <div class="col-md-12">
-                            <form id="eviction_form">
+                            <form method="post" action="{{ action('EvictionController@formulatePDF') }}" enctype="multipart/form-data" id="eviction_form">
                                 <input type="hidden" name="_token" value="{{ Session::token() }}">
                             <h2 style="text-align:center;" class="title">Eviction Location</h2>
                             <h3 style="text-align:center;" class="fs-subtitle">Enter the address you plan on evicting.</h3>
@@ -20,64 +19,60 @@
                                     <div class="col-sm-6 col-md-8 col-lg-8 col-xl-8">   
                                         <input style="margin-left: 25%;" class="form-control" placeholder="Rental Street Address" type="text" id="pac-input"/>
                                     </div>
-
                                 </div>
                             </div>
+                                <div class="offset-1">
                                     <div id="map"></div>
+                                </div>
                                     <h3 class="major_labels" style="text-align:center;">Additional Info on Property where you want to evict tenant.</h3>
-                            <div class="col-md-12 offset-1">
-                                    <h4 class="major_labels">Property Address</h4>
-                                        <div id="address_container">
-                                        <div class="form-group">
-                                        <div class="row">
-                                            <div class="col-sm-8">
-                                                <label class="labels">Address Line 1</label>
-                                                <input class="form-control" placeholder="Street Address" type="text" id="property_address_line_1" name="property_address_1"/>
-                                            </div>
-                                        </div>
-                                    </div>
+                                <div class="col-md-12 offset-1">
+                                        <h4 class="major_labels">Owner Information</h4>
+                                    <div id="owner_container">
                                         <div class="form-group">
                                             <div class="row">
-                                                <div class="col-sm-8">
-                                                    <label class="labels">Address Line 2</label>
-                                                    <input class="form-control" placeholder="City, State, Zip code" type="text" id="property_address_line_2" name="property_address_2"/>
+                                                <div class="col-sm-6">
+                                                    <label class="labels">Owner Name</label>
+                                                    <input class="form-control" placeholder="Owner Name" type="text" id="owner_name" name="owner_name"/>
+                                                </div>
+                                                <div class="col-sm-6">
+                                                    <label class="labels">Owner Phone #</label>
+                                                    <input class="form-control" placeholder="(ext)-000-0000" type="text" id="owner_number" name="owner_phone"/>
+                                                </div>
+                                                <div class="col-sm-6">
+                                                    <div class="labels">Property Owner</div>
+                                                    <input type="radio" id="rented_by_owner" value="rentedByOwner" name="rented_by">
+                                                    <label for="rented_by_owner">Property is Rented by Owner</label><br>
+                                                    <input type="radio" id="rented_by_other" value="rentedByOther" name="rented_by">
+                                                    <label for="rented_by_other">Property is Rented by Other</label>
+                                                        <div class="col-sm-12">
+                                                            <input class="form-control" placeholder="Name of Landlord" type="text" id="other_name" name="other_name" value="">
+                                                        </div>
+                                                    <input type="hidden" id="rented_by_val" name="rented_by_val"/>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
-
-
-                                        <h4 class="major_labels">Owner Information</h4>
-                                        <div id="owner_container">
-                                    <div class="form-group">
-                                        <div class="row">
-                                            <div class="col-sm-6">
-                                                <label class="labels">Owner Name</label>
-                                                <input class="form-control" placeholder="Owner Name" type="text" id="owner_name" name="owner_name"/>
-                                            </div>
-                                            <div class="col-sm-6">
-                                                <label class="labels">Owner Phone #</label>
-                                                <input class="form-control" placeholder="(ext)-000-0000" type="text" id="owner_number" name="owner_phone"/>
-                                            </div>
-
-                                            <div class="col-sm-6">
-                                                <div class="labels">Property Owner</div>
-                                                <input type="radio" id="rented_by_owner" name="rented_by" value="rentedByOwner" checked>
-                                                <label for="rented_by_owner">Property is Rented by Owner</label><br>
-                                                <input type="radio" id="rented_by_other" name="rented_by" value="rentedByOwner">
-                                                <label for="rented_by_other">Property is Rented by Other</label>
-                                                <div class="col-sm-12">
-                                                    <input class="form-control" placeholder="Name of Landlord" type="text" id="landlord" name="landlord" value="">
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                        </div>
                                         <h4 class="major_labels">General Information</h4>
                                             <div id="general_information_container" class="major_labels">
                                                 <div class="form-group">
                                                     <div class="row">
+                                                        <div class="col-sm-4">
+                                                            <label for="monthly_rent">Security Deposit</label>
+                                                            <input type="text" class="form-control" id="security_deposit" name="security_deposit" value="$" />
+                                                        </div>
+                                                        <div class="col-sm-4">
+                                                            <label for="monthly_rent">Monthly Rent</label>
+                                                            <input type="text" class="form-control" id="monthly_rent" name="monthly_rent" value="$" />
+                                                        </div>
                                                         <div class="col-sm-6">
+                                                            <label class="labels">Tenant(s) Name</label>
+                                                            <input class="form-control" placeholder="Tenant(s) Name" type="text" id="tenant_name" name="tenant_name"/>
+                                                        </div><br>
+                                                        <div class="col-sm-10">
+                                                            <input type="checkbox" id="tenant_num" name="tenant_num"/>
+                                                            <label for="tenant_num">2 or more Tenants?</label>
+                                                        </div>
+                                                        <div class="col-sm-4">
                                                             <label for="filing_date" class="labels">Filing Date</label>
                                                             <input class="form-control" type="date" id="filing_date" name="filing_date"/>
                                                         </div>
@@ -97,11 +92,12 @@
                                                         </div><br><br>
                                                         <div class="col-sm-10">
                                                             <div class="labels">Lease Status:</div>
-                                                            <input type="radio" id="term_lease_ended" name="lease_status" value="lease_ended" checked>
+                                                            <input type="checkbox" id="term_lease_ended" name="term_lease_ended">
                                                             <label for="term_lease_ended">Term of lease has ended</label><br>
-                                                            <input type="radio" id="breached_conditions_lease" name="lease_status" value="breached_conditions_lease">
-                                                            <label for="breached_conditions_lease">Tenant Breached Conditions of Lease</label><br>
-                                                            <input type="radio" id="unsatisfied_lease" name="lease_status" value="unsatisfied_lease">
+                                                            <input type="checkbox" id="breached_conditions_lease" name="breached_conditions_lease">
+                                                            <label for="breached_conditions_lease">Tenant Breached Conditions of Lease</label>
+                                                            <div class="details"></div><b>Tenant Breached Details:</b><input class="form-control" type="text" id="breached_details" name="breached_details" /><br>
+                                                            <input type="checkbox" id="unsatisfied_lease" name="unsatisfied_lease">
                                                             <label for="unsatisfied_lease">Rent Reserved and due has, upon demand, remained unsatisfied</label>
                                                         </div>
                                                     </div>
@@ -113,13 +109,18 @@
                                                 <div class="row">
                                                     <div class="col-sm-10">
                                                         <label for="due_rent">Rent that is Due at Filing Date</label>
-                                                        <input type="text" class="form-control" id="due_rent" name="term_lease" value="$" />
+                                                        <input type="text" class="form-control" id="due_rent" name="due_rent" value="$" />
                                                     </div>
                                                     <div class="col-sm-10">
                                                         <label for="damage_amt">Damages for Injury to Property</label>
                                                         <input type="text" class="form-control" id="damage_amt" name="damage_amt" value="$" />
                                                     </div>
                                                     <div class="col-sm-10">
+                                                        <div class="details"></div>
+                                                        <b>Property Damages Details:</b>
+                                                        <input class="form-control" type="text" id="damages_details" name="damages_details" /><br>
+                                                    </div>
+                                                        <div class="col-sm-10">
                                                         <label for="unjust_damages">Damages for Unjust Detention of Real Property</label>
                                                         <input type="text" class="form-control" id="unjust_damages" name="unjust_damages" value="$" />
                                                     </div>
@@ -137,13 +138,19 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <button type="button" id="pdf_download_btn" class="btn btn-primary">Download PDF File</button>
+                                        <button type="submit" id="pdf_download_btn" class="btn btn-primary">Download PDF File</button>
 
 
-
-
-
-
+                                    <input type="hidden" id="state" name="state"/>
+                                    <input type="hidden" id="zipcode" name="zipcode"/>
+                                    <input type="hidden" id="county" name="county"/>
+                                    <input type="hidden" id="house_num" name="houseNum"/>
+                                    <input type="hidden" id="street_name" name="streetName"/>
+                                    <input type="hidden" id="town" name="town"/>
+                                    <input type="hidden" id="court_number" name="court_number"/>
+                                    <input type="hidden" id="court_phone_number" name="court_phone_number"/>
+                                    <input type="hidden" id="court_address1" name="court_address1"/>
+                                    <input type="hidden" id="court_address2" name="court_address2"/>
 
                                 {{--<h3 class="major_labels">Signature/Payment</h3>--}}
                                     {{--<script src="https://js.stripe.com/v3/"></script>--}}
@@ -160,15 +167,9 @@
                                         {{--<button type="button" class="btn btn-primary">Submit Payment</button>--}}
                                     {{--</form>--}}
 
-                            </div>
-                            </form>
-                            <form class="form-horizontal" role="form" method="POST" id="request-form" enctype="multipart/form-data" action={{ url('/online-eviction/add-file') }} >
-                                <input type="hidden" name="_token" value="{{ Session::token() }}">
-                                <input type="file" name="pdf"/>
-                                <button id="add_file_btn" type="submit" class="btn btn-success">Submit File</button>
+                                </div>
                             </form>
                         </div>
-
                     </div>
                 </div>
             </div>

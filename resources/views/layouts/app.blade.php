@@ -15,9 +15,13 @@
     <script src="{{ asset('js/app.js') }}" defer></script>
     <script src="{{ asset('js/eviction.js') }}" defer></script>
     <script src="{{ asset('js/steps.js') }}" defer></script>
+    <script src="{{ asset('js/datatables.min.js') }}" defer></script>
+    <script src="{{ asset('js/magistrateCreator.js') }}" defer></script>
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAfPLSbGAHZkEd-8DDB0FcGSlhrV9LQMGM&libraries=places" defer></script>
     <script src="https://js.stripe.com/v3/"></script>
-    {{--<script>--}}
+
+
+{{--<script>--}}
         {{--var stripe = Stripe('pk_test_6pRNASCoBOKtIshFeQd4XMUh');--}}
         {{--var elements = stripe.elements();--}}
         {{--var card = elements.create('card');--}}
@@ -32,8 +36,10 @@
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <link href="{{ asset('css/dashboard.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/datatables.min.css') }}" rel="stylesheet"/>
     <link href="{{ asset('css/eviction.css') }}" rel="stylesheet">
     <link href="{{ asset('css/steps.css') }}" rel="stylesheet">
+
 </head>
 <body>
     <div id="app">
@@ -60,6 +66,7 @@
                         <li><a href="{{ url('FAQ') }}" id="faq_btn">FAQ</a></li>
                         <li><a href="{{ url('where-does-this-work') }}" id="where_work_btn">Where Does this Work?</a></li>
                         <li><a href="{{ url('about-us') }}" id="about_us_btn">About Us</a></li>
+                            <li><a href="{{ url('magistrateCreator') }}" id="magistrate_btn">Magistrate Creator</a></li>
                         {{--@endif<!-- Authentication Links -->--}}
                         {{--@guest--}}
                             {{--<ul style="margin-left:60%;" class="nav navbar-nav navbar-right">--}}

@@ -15,7 +15,7 @@
 
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('home');
 });
 
 Auth::routes();
@@ -31,6 +31,16 @@ Route::get('/FAQ', 'FAQController@index');
 Route::get('/where-does-this-work', 'WhereDoesThisWorkController@index');
 
 Route::get('/about-us', 'AboutUsController@index');
+
+Route::get('/magistrateCreator', 'MagistrateController@index');
+
+Route::get('/magistrateCreator/getMagistrate', 'MagistrateController@getMagistrate');
+
+Route::post('/magistrateCreator/editMagistrate', 'MagistrateController@editMagistrate');
+
+Route::post('/magistrateCreator', 'MagistrateController@store');
+
+Route::post('/magistrateCreator/delete', 'MagistrateController@delete');
 
 Route::post('/online-eviction/pdf-data', 'EvictionController@formulatePDF');
 

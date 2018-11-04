@@ -1,120 +1,161 @@
-$(document).ready(function () {
-    // $("#wizard").steps({
-    //     headerTag: "h3",
-    //     bodyTag: "section",
-    //     transitionEffect: "slideLeft",
-    //     autoFocus: true
-    // });
-    $('#filing_date').val(new Date());
-    $('#landlord').prop('hidden', true);
+if (document.location.href.split('/')[3] == 'online-eviction') {
+    $(document).ready(function () {
 
+        $('#filing_date').val(new Date());
+        $('#landlord').prop('hidden', true);
+
+        var map;
+        var marker;
+        var bounds;
+        var houseNum;
+        var streetName;
+        var town;
+        var county;
+        var zipcode;
+        var state;
+
+        var center = new google.maps.LatLng(40.149660, -76.306370);
+        //Create the areas for magistrates
 
         map = new google.maps.Map(document.getElementById('map'), {
             center: {lat: 40.144128, lng: -76.311420},
-            zoom: 7
+            zoom: 9,
+            scaleControl: true
+        });
+        bounds = new google.maps.LatLngBounds();
+        google.maps.event.addListenerOnce(map, 'tilesloaded', function (evt) {
+
+            bounds = map.getBounds();
+        });
+        marker = new google.maps.Marker({
+            position: center
+        });
+        var input = /** @type {!HTMLInputElement} */(
+            document.getElementById('pac-input'));
+        var types = document.getElementById('type-selector');
+        map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
+        map.controls[google.maps.ControlPosition.TOP_LEFT].push(types);
+
+        var autocomplete = new google.maps.places.Autocomplete(input);
+        var magArray = [];
+        var objArray = [];
+        var magNamesArray = [];
+
+        $.each(quickEvict.geoData, function(key, value) {
+            magId = 'magistrate_' + value.magistrate_id;
+            var geoPoints = value.geo_locations.replace(/\s/g, '').replace(/},/g,'},dd').split(',dd');
+            var obj = [];
+
+            for (var i in geoPoints) {
+                obj.push(JSON.parse(geoPoints[i]));
+            }
+            magNamesArray.push(magId);
+            objArray.push(obj);
+            magArray.push(magId);
         });
 
+        //Create the polygons
+        for (var k = 0; k < objArray.length; k++) {
+            magArray[k] = new google.maps.Polygon({
+                path: objArray[k],
+                geodesic: true,
+                strokeColor: '#D4CEFA',
+                strokeOpacity: 1.0,
+                strokeWeight: 2,
+                fillColor: '#B1AAA9',
+                fillOpacity: 0.35,
+                areaName: magNamesArray[k]
+            });
 
-    // Create the search box and link it to the UI element.
-    var input = document.getElementById('pac-input');
-    var searchBox = new google.maps.places.SearchBox(input);
-
-
-    // Bias the SearchBox results towards current map's viewport.
-    map.addListener('bounds_changed', function() {
-        searchBox.setBounds(map.getBounds());
-    });
-
-    var markers = [];
-    // Listen for the event fired when the user selects a prediction and retrieve
-    // more details for that place.
-    searchBox.addListener('places_changed', function() {
-        var places = searchBox.getPlaces();
-
-        if (places.length == 0) {
-            return;
+            magArray[k].setMap(map);
         }
 
-        // Clear out the old markers.
-        markers.forEach(function(marker) {
+        autocomplete.addListener('place_changed', function () {
             marker.setMap(null);
-        });
-        markers = [];
-
-        // For each place, get the icon, name and location.
-        var bounds = new google.maps.LatLngBounds();
-        places.forEach(function(place) {
+            var place = autocomplete.getPlace();
+            newBounds = bounds;
             if (!place.geometry) {
-                console.log("Returned place contains no geometry");
+                window.alert("Returned place contains no geometry");
                 return;
             }
-            var icon = {
-                url: place.icon,
-                size: new google.maps.Size(71, 150),
-                origin: new google.maps.Point(0, 0),
-                anchor: new google.maps.Point(17, 34),
-                scaledSize: new google.maps.Size(25, 25)
-            };
 
-            // Create a marker for each place.
-            markers.push(new google.maps.Marker({
-                map: map,
-                icon: icon,
-                title: place.name,
-                position: place.geometry.location
-            }));
+            houseNum = place.address_components[0].long_name;
+            streetName = place.address_components[1].long_name;
+            town = place.address_components[2].long_name;
+            county = place.address_components[3].long_name;
+            state = place.address_components[4].short_name;
+            zipcode = place.address_components[6].long_name;
 
-            if (place.geometry.viewport) {
-                // Only geocodes have viewport.
-                bounds.union(place.geometry.viewport);
+            $('#state').val(state);
+            $('#zipcode').val(zipcode);
+            $('#county').val(county);
+            $('#house_num').val(houseNum);
+            $('#street_name').val(streetName);
+            $('#town').val(town);
+
+            marker.setPosition(place.geometry.location);
+            marker.setMap(map);
+            newBounds.extend(place.geometry.location);
+            map.fitBounds(newBounds);
+            var isFound = false;
+            for (var k = 0; k < magArray.length; k++) {
+                if (google.maps.geometry.poly.containsLocation(place.geometry.location, magArray[k])) {
+                    $('#court_number').val(magArray[k].areaName);
+                    isFound = true;
+                }
+            }
+            if (isFound == false) {
+                alert('Location outside all Zones');
+            }
+        });
+
+
+        $(window).keydown(function (event) {
+            if (event.keyCode == 13) {
+                event.preventDefault();
+                return false;
+            }
+        });
+
+        $('input[type=radio][name=rented_by]').change(function () {
+            console.log($(this)[0].id);
+            if ($(this)[0].id == 'rented_by_other') {
+                $('#landlord').prop('hidden', false);
             } else {
-                bounds.extend(place.geometry.location);
-            }
-        });
-        map.fitBounds(bounds);
-    });
-
-
-    $('input[type=radio][name=rented_by]').change(function(){
-       console.log($(this)[0].id);
-       if ($(this)[0].id == 'rented_by_other') {
-           $('#landlord').prop('hidden', false);
-       } else {
-           $('#landlord').prop('hidden', true);
-       }
-    });
-
-    //On Submit gather variables and make ajax call to backend
-    $.ajaxSetup({
-        headers: {
-            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-        }
-    });
-
-    $('#pdf_download_btn').on('click', function() {
-       console.log("were clickin");
-       var data = $('#eviction_form').serialize();
-        $.ajaxSetup({
-            headers: {
-                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                $('#landlord').prop('hidden', true);
             }
         });
 
-        $.ajax({
-            beforeSend: function (xhr) {
-                xhr.setRequestHeader('X-CSRF-TOKEN', $("#token").attr('content'));
-            },
-            type: "POST",
-            url: '/online-eviction/pdf-data',
-            dataType: 'json',
-            data: data,
+        //On Submit gather variables and make ajax call to backend
 
-            success: function (data) {
-               console.log(data);
-            },
-            error: function () {
-                console.log("something went wrong");
-            }
+        $('#pdf_download_btn').on('click', function () {
+            $('#rented_by_val').val($('input[name=rented_by]:checked').val());
+            var data = $('#eviction_form').serialize();
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+
+            $.ajax({
+                beforeSend: function (xhr) {
+                    xhr.setRequestHeader('X-CSRF-TOKEN', $("#token").attr('content'));
+                },
+                type: "POST",
+                url: '/online-eviction/pdf-data',
+                dataType: 'json',
+                data: data,
+
+                success: function (data) {
+                    console.log(data);
+                    //location.reload();
+                },
+                error: function (data) {
+                    console.log(data);
+                }
+            });
         });
+
+
     });
-});
+}
