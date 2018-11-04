@@ -148,6 +148,34 @@
                                             <input placeholder="$" type="text" class="form-control" id="two_oop" name="two_oop" value="" /></div>
                                         </div>
                                     </div>
+                                    <div class="col-md-6">
+                                        <h4 class="major_labels">Three Defendant Amts</h4>
+                                        <div class="three_defendant_container">
+                                            <div class="col-sm-12">
+                                                <label for="three_under_2000">Under 2,000</label>
+                                                <input placeholder="$" type="text" class="form-control" id="three_under_2000" name="three_under_2000" value="" />
+                                            </div>
+                                            <div class="col-sm-12">
+                                                <label for="three_btn_2000_4001">Between 2,001 and 4,000</label>
+                                                <input placeholder="$" type="text" class="form-control" id="three_btn_2000_4001" name="three_btn_2000_4001" value="" />
+                                            </div>
+                                            <div class="col-sm-12">
+                                                <label for="three_over_4000">Over 4,000</label>
+                                                <input placeholder="$" type="text" class="form-control" id="three_over_4000" name="three_over_4000" value="" />
+                                            </div>
+                                            <div class="col-sm-12">
+                                                <label for="three_oop">OOP</label>
+                                                <input placeholder="$" type="text" class="form-control" id="three_oop" name="three_oop" value="" /></div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-10">
+                                        <h4 class="major_labels">Additional Info</h4>
+                                        <div class="three_defendant_container">
+                                            <div class="col-sm-12">
+                                                <label for="additional_tenants">Additional Tenant $</label>
+                                                <input placeholder="$" type="text" class="form-control" id="additional_tenants" name="additional_tenants" value="" /></div>
+                                        </div>
+                                    </div>
                                 </div>
                                 <div class="row">
                                     <div class="col-md-12">
@@ -287,7 +315,7 @@
                                                         <div class="three_defendant_container">
                                                             <div class="col-sm-12">
                                                                 <label for="additional_tenants">Additional Tenant $</label>
-                                                                <input placeholder="$" type="text" class="form-control" id="additional_tenants" name="additional_tenants" value="" /></div>
+                                                                <input placeholder="$" type="text" class="form-control" id="edit_additional_tenants" name="edit_additional_tenants" value="" /></div>
                                                         </div>
                                                     </div>
                                                 </div>
