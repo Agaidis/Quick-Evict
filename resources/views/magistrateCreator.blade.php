@@ -21,14 +21,11 @@
                                         <th>County</th>
                                         <th>MDJ Name</th>
                                         <th>Phone #</th>
-                                        <th>(1) Under 2k</th>
-                                        <th>(1) Btn 2k - 4k</th>
-                                        <th>(1) Over 4k</th>
-                                        <th>(1) OOP</th>
-                                        <th>(2) Under 2k</th>
-                                        <th>(2) Btn 2k - 4k</th>
-                                        <th>(2) Over 4k</th>
-                                        <th>(2) OOP</th>
+                                        <th>(1) Under 2k<br>(2) Under 2k<br>(3) Under 2k</th>
+                                        <th>(1) Btn 2k - 4k<br>(2) Btn 2k - 4k<br>(3) Btn 2k - 4k</th>
+                                        <th>(1) Over 4k<br>(2) Over 4k<br>(3) Over 4k</th>
+                                        <th>(1) OOP<br>(2) OOP<br>(3) OOP</th>
+                                        <th>Additional Tenant $</th>
                                         <th class="text-center">Edit</th>
                                         <th class="text-center">Remove</th>
                                     </tr>
@@ -41,14 +38,12 @@
                                         <td>{{$courtDetail->county}}</td>
                                         <td>{{$courtDetail->mdj_name}}</td>
                                         <td>{{$courtDetail->phone_number}}</td>
-                                        <td>{{$courtDetail->one_defendant_up_to_2000}}</td>
-                                        <td>{{$courtDetail->one_defendant_between_2001_4000}}</td>
-                                        <td>{{$courtDetail->one_defendant_greater_than_4000}}</td>
-                                        <td>{{$courtDetail->one_defendant_out_of_pocket}}</td>
-                                        <td>{{$courtDetail->two_defendant_up_to_2000}}</td>
-                                        <td>{{$courtDetail->two_defendant_between_2001_4000}}</td>
-                                        <td>{{$courtDetail->two_defendant_greater_than_4000}}</td>
-                                        <td>{{$courtDetail->two_defendant_out_of_pocket}}</td>
+                                        <td>{{$courtDetail->one_defendant_up_to_2000}}<br>{{$courtDetail->two_defendant_up_to_2000}}<br>{{$courtDetail->three_defendant_up_to_2000}}</td>
+                                        <td>{{$courtDetail->one_defendant_between_2001_4000}}<br>{{$courtDetail->two_defendant_between_2001_4000}}<br>{{$courtDetail->three_defendant_between_2001_4000}}</td>
+                                        <td>{{$courtDetail->one_defendant_greater_than_4000}}<br>{{$courtDetail->two_defendant_greater_than_4000}}<br>{{$courtDetail->three_defendant_greater_than_4000}}</td>
+                                        <td>{{$courtDetail->one_defendant_out_of_pocket}}<br>{{$courtDetail->two_defendant_out_of_pocket}}<br>{{$courtDetail->three_defendant_out_of_pocket}}</td>
+                                        <td>{{$courtDetail->additional_tenant}}</td>
+
                                         <td class="text-center"><button type="button" data-target="#modal_edit_magistrate" data-toggle="modal" id="id_{{$courtDetail->id}}_{{$courtDetail->magistrate_id}}" class=" magistrate-edit">Edit</button></td>
                                         <td class="text-center"><button type="button" id="id_{{$courtDetail->id}}_{{$courtDetail->magistrate_id}}" class="text-danger magistrate-remove">Delete</button></td>
                                     </tr>
