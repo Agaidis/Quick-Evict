@@ -69,7 +69,7 @@
                                                             <input class="form-control" placeholder="Tenant(s) Name" type="text" id="tenant_name" name="tenant_name"/>
                                                         </div><br>
                                                         <div class="col-sm-10">
-                                                            <select class="form-contgrol" id="tenant_num" name="tenant_num">
+                                                            <select class="form-control" id="tenant_num" name="tenant_num">
                                                                 <option value="" selected disabled># of Tenants</option>
                                                                 <option value="1">1</option>
                                                                 <option value="2">2</option>
