@@ -68,7 +68,7 @@
                                                             <label class="labels">Tenant(s) Name</label>
                                                             <input class="form-control" placeholder="Tenant(s) Name" type="text" id="tenant_name" name="tenant_name"/>
                                                         </div><br><br>
-                                                        <div class="col-sm-4">
+                                                        <div class="col-sm-3">
                                                             <label for="tenant_num" class="labels"># of Tenants on Lease</label>
                                                             <select class="form-control" id="tenant_num" name="tenant_num">
                                                                 <option value="" selected disabled># of Tenants</option>
