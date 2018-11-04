@@ -30,7 +30,7 @@ form.eviction_form fieldset {
       width:80%;
   }
 
-.two_defendant_container, .one_defendant_container, .court_information_container {
+.two_defendant_container, .one_defendant_container, .three_defendant_container, .court_information_container {
     border: 1px solid darkgrey;
     padding: 10px;
     border-radius: 10px;
