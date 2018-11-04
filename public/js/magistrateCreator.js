@@ -151,7 +151,7 @@
                     threeBtn20004001: $('#edit_three_btn_2000_4001').val(),
                     threeOver4000: $('#edit_three_over_4000').val(),
                     threeOOP: $('#edit_three_oop').val(),
-                    additionalTenant: $('#edit_additional_tenants'),
+                    additionalTenant: $('#edit_additional_tenants').val(),
                     geoLocations: $('#edit_geo_locations').val()
                 },
                 success: function (data) {
