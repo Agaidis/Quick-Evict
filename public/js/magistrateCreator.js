@@ -74,6 +74,11 @@
                     $('#edit_two_btn_2000_4001').val(data[1][0].two_defendant_between_2001_4000);
                     $('#edit_two_over_4000').val(data[1][0].two_defendant_greater_than_4000);
                     $('#edit_two_oop').val(data[1][0].two_defendant_out_of_pocket);
+                    $('#edit_three_under_2000').val(data[1][0].three_defendant_up_to_2000);
+                    $('#edit_three_btn_2000_4001').val(data[1][0].three_defendant_between_2001_4000);
+                    $('#edit_three_over_4000').val(data[1][0].three_defendant_greater_than_4000);
+                    $('#edit_three_oop').val(data[1][0].three_defendant_out_of_pocket);
+                    $('#edit_additional_tenants').val(data[1][0].additional_tenant);
                     $('#edit_geo_locations').val(data[0][0].geo_locations);
                 },
                 error: function (data) {
