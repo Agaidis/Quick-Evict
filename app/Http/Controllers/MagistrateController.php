@@ -115,7 +115,7 @@ class MagistrateController extends Controller
             $courtDetails->three_defendant_between_2001_4000 = $request->threeBtn20004001;
             $courtDetails->three_defendant_greater_than_4000 = $request->threeOver4000;
             $courtDetails->three_defendant_out_of_pocket = $request->threeOOP;
-            $courtDetails->additional_tenant = $request->additional_tenant;
+            $courtDetails->additional_tenant = $request->additionalTenant;
             $courtDetails->save();
 
 
