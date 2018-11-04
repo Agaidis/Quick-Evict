@@ -103,7 +103,9 @@ class EvictionController extends Controller
             if ($tenantNum > 3) {
                 $multiplyBy = $tenantNum - 3;
                 $additionalTenantFee = $additionalTenantAmt * $multiplyBy;
+                mail('andrew.gaidis@gmail.com', 'Inside If Statement', $multiplyBy);
             }
+            mail('andrew.gaidis@gmail.com', 'After tenantNum Check', $additionalTenantFee);
 
 
             //Lease Type
