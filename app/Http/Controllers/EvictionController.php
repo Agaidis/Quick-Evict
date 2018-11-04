@@ -90,7 +90,7 @@ class EvictionController extends Controller
                 $btn20014000 = $courtDetails->one_defendant_between_2001_4000;
                 $greaterThan4000 = $courtDetails->one_defendant_greater_than_4000;
                 $oop = $courtDetails->one_defendant_out_of_pocket;
-            } else if ($_POST['tenant_num'] == "3") {
+            } else {
                 $upTo2000 = $courtDetails->three_defendant_up_to_2000;
                 $btn20014000 = $courtDetails->three_defendant_between_2001_4000;
                 $greaterThan4000 = $courtDetails->three_defendant_greater_than_4000;
@@ -98,6 +98,7 @@ class EvictionController extends Controller
                 $additionalTenantAmt = $courtDetails->additional_tenant;
             }
 
+            mail('andrew.gaidis@gmail.com', 'Additional Tenant Amt', $additionalTenantAmt);
             $tenantNum = (int)$_POST['tenant_num'];
 
             if ($tenantNum > 3) {
