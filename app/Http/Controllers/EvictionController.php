@@ -78,6 +78,8 @@ class EvictionController extends Controller
             $additionalTenantAmt = 0;
             $additionalTenantFee = 0;
 
+            mail('andrew.gaidis@gmail.com', 'test', $_POST['tenant_num']);
+
             if ($_POST['tenant_num'] == "2") {
                 $upTo2000 = $courtDetails->two_defendant_up_to_2000;
                 $btn20014000 = $courtDetails->two_defendant_between_2001_4000;
