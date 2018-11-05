@@ -160,9 +160,6 @@
                                     <input type="hidden" id="street_name" name="streetName"/>
                                     <input type="hidden" id="town" name="town"/>
                                     <input type="hidden" id="court_number" name="court_number"/>
-                                    <input type="hidden" id="court_phone_number" name="court_phone_number"/>
-                                    <input type="hidden" id="court_address1" name="court_address1"/>
-                                    <input type="hidden" id="court_address2" name="court_address2"/>
 
                                 {{--<h3 class="major_labels">Signature/Payment</h3>--}}
                                     {{--<script src="https://js.stripe.com/v3/"></script>--}}

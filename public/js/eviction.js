@@ -40,6 +40,7 @@ if (document.location.href.split('/')[3] == 'online-eviction') {
         var magArray = [];
         var objArray = [];
         var magNamesArray = [];
+        var count = 0;
 
         $.each(quickEvict.geoData, function(key, value) {
             magId = 'magistrate_' + value.magistrate_id;
@@ -52,7 +53,7 @@ if (document.location.href.split('/')[3] == 'online-eviction') {
             magNamesArray.push(magId);
             objArray.push(obj);
             magArray.push(magId);
-            magId = new google.maps.Polygon({
+            magArray[count] = new google.maps.Polygon({
                 path: obj,
                 geodesic: true,
                 strokeColor: '#D4CEFA',
@@ -62,7 +63,8 @@ if (document.location.href.split('/')[3] == 'online-eviction') {
                 fillOpacity: 0.35,
                 areaName: magId
             });
-            magId.setMap(map);
+            magArray[count].setMap(map);
+            count++;
         });
         autocomplete.addListener('place_changed', function () {
             marker.setMap(null);
