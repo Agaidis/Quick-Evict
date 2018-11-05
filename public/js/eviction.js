@@ -43,7 +43,7 @@ if (document.location.href.split('/')[3] == 'online-eviction') {
 
         $.each(quickEvict.geoData, function(key, value) {
             magId = 'magistrate_' + value.magistrate_id;
-            var geoPoints = value.geo_locations.replace(/\s/g, '').replace(/},/g,'},dd').split(',dd');
+            var geoPoints = value.geo_locations.replace(/\s/g, '').replace(/},/g, '},dd').split(',dd');
             var obj = [];
 
             for (var i in geoPoints) {
@@ -52,24 +52,18 @@ if (document.location.href.split('/')[3] == 'online-eviction') {
             magNamesArray.push(magId);
             objArray.push(obj);
             magArray.push(magId);
-        });
-
-        //Create the polygons
-        for (var k = 0; k < objArray.length; k++) {
-            magArray[k] = new google.maps.Polygon({
-                path: objArray[k],
+            magId = new google.maps.Polygon({
+                path: obj,
                 geodesic: true,
                 strokeColor: '#D4CEFA',
                 strokeOpacity: 1.0,
                 strokeWeight: 2,
                 fillColor: '#B1AAA9',
                 fillOpacity: 0.35,
-                areaName: magNamesArray[k]
+                areaName: magId
             });
-
-            magArray[k].setMap(map);
-        }
-
+            magId.setMap(map);
+        });
         autocomplete.addListener('place_changed', function () {
             marker.setMap(null);
             var place = autocomplete.getPlace();
