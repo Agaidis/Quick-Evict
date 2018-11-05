@@ -42,7 +42,7 @@
                                         <td>{{$courtDetail->one_defendant_between_2001_4000}}<br>{{$courtDetail->two_defendant_between_2001_4000}}<br>{{$courtDetail->three_defendant_between_2001_4000}}</td>
                                         <td>{{$courtDetail->one_defendant_greater_than_4000}}<br>{{$courtDetail->two_defendant_greater_than_4000}}<br>{{$courtDetail->three_defendant_greater_than_4000}}</td>
                                         <td>{{$courtDetail->one_defendant_out_of_pocket}}<br>{{$courtDetail->two_defendant_out_of_pocket}}<br>{{$courtDetail->three_defendant_out_of_pocket}}</td>
-                                        <td>{{$courtDetail->additional_tenant}}</td>
+                                        <td>{{(float)$courtDetail->additional_tenant}}</td>
 
                                         <td class="text-center"><button type="button" data-target="#modal_edit_magistrate" data-toggle="modal" id="id_{{$courtDetail->id}}_{{$courtDetail->magistrate_id}}" class=" magistrate-edit">Edit</button></td>
                                         <td class="text-center"><button type="button" id="id_{{$courtDetail->id}}_{{$courtDetail->magistrate_id}}" class="text-danger magistrate-remove">Delete</button></td>
