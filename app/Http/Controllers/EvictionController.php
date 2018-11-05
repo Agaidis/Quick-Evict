@@ -34,7 +34,6 @@ class EvictionController extends Controller
 
         try {
             $magistrateId = str_replace('magistrate_' , '', $_POST['court_number']);
-            mail('andrew.gaidis@gmail.com', 'test', $magistrateId);
             $courtDetails = CourtDetails::where('magistrate_id', $magistrateId)->first();
             $geoDetails = GeoLocation::where('magistrate_id', $magistrateId)->first();
 
@@ -98,16 +97,12 @@ class EvictionController extends Controller
                 $additionalTenantAmt = $courtDetails->additional_tenant;
             }
 
-            mail('andrew.gaidis@gmail.com', 'Additional Tenant Amt', $additionalTenantAmt);
             $tenantNum = (int)$_POST['tenant_num'];
 
             if ($tenantNum > 3) {
                 $multiplyBy = $tenantNum - 3;
-                $additionalTenantFee = $additionalTenantAmt * $multiplyBy;
-                mail('andrew.gaidis@gmail.com', 'Inside If Statement', $multiplyBy);
+                $additionalTenantFee = (float)$additionalTenantAmt * $multiplyBy;
             }
-            mail('andrew.gaidis@gmail.com', 'After tenantNum Check', $additionalTenantFee);
-
 
             //Lease Type
             $leaseType = $_POST['lease_type'];
