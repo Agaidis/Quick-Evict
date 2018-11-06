@@ -56,7 +56,7 @@ if (document.location.href.split('/')[3] == 'online-eviction') {
             magArray[count] = new google.maps.Polygon({
                 path: obj,
                 geodesic: true,
-                strokeColor: '#D4CEFA',
+                strokeColor: '#091096',
                 strokeOpacity: 1.0,
                 strokeWeight: 2,
                 fillColor: '#B1AAA9',
