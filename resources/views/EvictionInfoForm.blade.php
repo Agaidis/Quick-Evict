@@ -15,6 +15,8 @@
                         <div class="col-sm-6 col-md-8 col-lg-8 col-xl-8">            
                             <label for="street_address">Rental Street Address</label>
                             <input class="form-control" type="text" id="street_address"/>
+                            dgdfgd
+                            as
                         </div>
                     </div>
                </div>
