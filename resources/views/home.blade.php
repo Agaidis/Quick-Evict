@@ -14,7 +14,7 @@
                         </div>
                     @endif
 
-                    <h2 style="align-content:center">Welcome to Quick Evict!</h2>
+                    <h2 style="align-content:center">Welcome to EvictionTech!</h2>
                 </div>
             </div>
         </div>
