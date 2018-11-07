@@ -18,6 +18,7 @@
                                     <tr>
                                         <th>Magistrate Unique Id</th>
                                         <th>Court Id</th>
+                                        <th>Township</th>
                                         <th>County</th>
                                         <th>MDJ Name</th>
                                         <th>Phone #</th>
@@ -35,6 +36,7 @@
                                     <tr>
                                         <td>{{$courtDetail->magistrate_id}}</td>
                                         <td>{{$courtDetail->court_number}}</td>
+                                        <td>{{$courtDetails->township}}</td>
                                         <td>{{$courtDetail->county}}</td>
                                         <td>{{$courtDetail->mdj_name}}</td>
                                         <td>{{$courtDetail->phone_number}}</td>
@@ -69,6 +71,10 @@
                                         <div class="col-md-6">
                                             <label for="magistrate_id">Unique Magistrate Id:</label>
                                             <input placeholder="02-1-01-1" type="text" class="form-control" id="magistrate_id" name="magistrate_id" value="" />
+                                        </div>
+                                        <div class="col-md-6">
+                                            <label for="township">Township:</label>
+                                            <input placeholder="Township" type="text" class="form-control" id="township" name="township" value="" />
                                         </div>
                                         <div class="col-sm-6">
                                             <label for="county">County:</label>
@@ -211,6 +217,10 @@
                                                             <div class="col-md-6">
                                                                 <label for="magistrate_id">Unique Magistrate Id:</label>
                                                                 <input placeholder="02-1-01-1" type="text" class="form-control" id="edit_magistrate_id" name="edit_magistrate_id" value="" />
+                                                            </div>
+                                                            <div class="col-md-6">
+                                                                <label for="township">Township:</label>
+                                                                <input placeholder="Township" type="text" class="form-control" id="edit_township" name="edit_township" value="" />
                                                             </div>
                                                             <div class="col-sm-6">
                                                                 <label for="county">County:</label>

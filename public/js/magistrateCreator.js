@@ -59,6 +59,7 @@
                     $('#db_court_id').val(data[1][0].id);
                     $('#edit_court_id').val(data[1][0].court_number);
                     $('#edit_magistrate_id').val(data[1][0].magistrate_id);
+                    $('#edit_township').val(data[1][0].township);
                     $('#edit_county').val(data[1][0].county);
                     $('#edit_mdj_name').val(data[1][0].mdj_name);
                     $('#edit_court_number').val(data[1][0].phone_number);
@@ -131,6 +132,7 @@
                     dbCourtId: $('#db_court_id').val(),
                     dbGeoId: $('#db_geo_id').val(),
                     magistrateId: $('#edit_magistrate_id').val(),
+                    township: $('#township').val(),
                     courtId: $('#edit_court_id').val(),
                     county: $('#edit_county').val(),
                     mdjName: $('#edit_mdj_name').val(),

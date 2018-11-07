@@ -23,6 +23,7 @@ class MagistrateController extends Controller
             $courtDetails->county = $request->county;
             $courtDetails->court_number = $request->court_id;
             $courtDetails->magistrate_id = $request->magistrate_id;
+            $courtDetails->township = $request->township;
             $courtDetails->one_defendant_up_to_2000 = $request->one_under_2000;
             $courtDetails->two_defendant_up_to_2000 = $request->two_under_2000;
             $courtDetails->one_defendant_between_2001_4000 = $request->one_btn_2000_4001;
@@ -101,6 +102,7 @@ class MagistrateController extends Controller
             $courtDetails->court_number = $request->courtId;
             $courtDetails->phone_number = $request->courtNumber;
             $courtDetails->magistrate_id = $request->magistrateId;
+            $courtDetails->township = $request->township;
             $courtDetails->county = $request->county;
             $courtDetails->mdj_name = $request->mdjName;
             $courtDetails->one_defendant_up_to_2000 = $request->oneUnder2000;
