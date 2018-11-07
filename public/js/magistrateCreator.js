@@ -132,7 +132,7 @@
                     dbCourtId: $('#db_court_id').val(),
                     dbGeoId: $('#db_geo_id').val(),
                     magistrateId: $('#edit_magistrate_id').val(),
-                    township: $('#township').val(),
+                    township: $('#edit_township').val(),
                     courtId: $('#edit_court_id').val(),
                     county: $('#edit_county').val(),
                     mdjName: $('#edit_mdj_name').val(),
