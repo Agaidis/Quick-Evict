@@ -36,7 +36,7 @@
                                     <tr>
                                         <td>{{$courtDetail->magistrate_id}}</td>
                                         <td>{{$courtDetail->court_number}}</td>
-                                        <td>{{$courtDetails->township}}</td>
+                                        <td>{{$courtDetail->township}}</td>
                                         <td>{{$courtDetail->county}}</td>
                                         <td>{{$courtDetail->mdj_name}}</td>
                                         <td>{{$courtDetail->phone_number}}</td>
