@@ -46,6 +46,7 @@ if (document.location.href.split('/')[3] == 'online-eviction') {
             magId = 'magistrate_' + value.magistrate_id;
             var geoPoints = value.geo_locations.replace(/\s/g, '').replace(/},/g, '},dd').split(',dd');
             var obj = [];
+            console.log(magId);
 
             for (var i in geoPoints) {
                 obj.push(JSON.parse(geoPoints[i]));
