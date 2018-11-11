@@ -32,9 +32,10 @@
                             </thead>
                             <tbody>
                             @foreach ($evictions as $eviction)
+                                <?php $propertyAddressArray = explode('-1', $eviction->property_address);?>
                                 <tr>
                                     <td>{{$eviction->id}}</td>
-                                    <td>{{$eviction->property_address}}</td>
+                                    <td>{{$propertyAddressArray[0]}} <br> {{$propertyAddressArray[1]}}</td>
                                     <td>{{$eviction->owner_name}}</td>
                                     <td>{{$eviction->tenant_name}}</td>
                                     <td>{{$eviction->status}}</td>
