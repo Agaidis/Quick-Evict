@@ -8,6 +8,7 @@ use GMaps;
 use Dompdf\Dompdf;
 use App\CourtDetails;
 use JavaScript;
+use App\Evictions;
 
 
 class EvictionController extends Controller
@@ -76,8 +77,6 @@ class EvictionController extends Controller
             $greaterThan4000 = '0';
             $additionalTenantAmt = 0;
             $additionalTenantFee = 0;
-
-            mail('andrew.gaidis@gmail.com', 'test', $_POST['tenant_num']);
 
             if ($_POST['tenant_num'] == "2") {
                 $upTo2000 = $courtDetails->two_defendant_up_to_2000;
@@ -150,7 +149,7 @@ class EvictionController extends Controller
             $defendantState = $_POST['state'];
             $defendantZipcode = $_POST['zipcode'];
             $defendanthouseNum = $_POST['houseNum'];
-            $defendantStreetName= $_POST['streetName'];
+            $defendantStreetName = $_POST['streetName'];
             $defendantTown = $_POST['town'];
 
 
@@ -300,6 +299,16 @@ span.cls_010{font-family:Arial,serif;font-size:8.1px;color:rgb(0,0,0);font-weigh
 
             // Output the generated PDF to Browser
             $dompdf->stream();
+
+            $eviction = new Evictions();
+            $eviction->status = 'Created LTC';
+            $eviction->total_judgement = $totalFees;
+            $eviction->property_address = $defendanthouseNum.' '.$defendantStreetName.'-1'.$defendantTown .',' . $defendantState.' '.$defendantZipcode;
+            $eviction->owner_name = $ownerName;
+            $eviction->tenant_name = $tenantName;
+            $eviction->court_filing_fee = $filingFee;
+            $eviction->pdf_download = '';
+            $eviction->save();
 
             return view('eviction', compact('map'));
 
