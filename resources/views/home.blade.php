@@ -35,7 +35,7 @@
                                 <?php $propertyAddressArray = explode('-1', $eviction->property_address);?>
                                 <tr>
                                     <td>{{$eviction->id}}</td>
-                                    <td>{{$propertyAddressArray[0]}} <br> {{$propertyAddressArray[1]}}</td>
+                                    <td>{{$propertyAddressArray[0]}} <br> {{str_replace('United States', '', $propertyAddressArray[1])}}</td>
                                     <td>{{$eviction->owner_name}}</td>
                                     <td>{{$eviction->tenant_name}}</td>
                                     <td>{{$eviction->status}}</td>
