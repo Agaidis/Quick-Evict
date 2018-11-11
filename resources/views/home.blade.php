@@ -15,7 +15,7 @@
                     @endif
 
                     <h2 style="align-content:center">Welcome to EvictionTech!</h2>
-                        <table class="table table-hover table-responsive-lg table-bordered magistrate_table" id="magistrate_table">
+                        <table class="table table-hover table-responsive-lg table-bordered eviction_table" id="eviction_table">
                             <thead>
                             <tr>
                                 <th>Eviction Id</th>
