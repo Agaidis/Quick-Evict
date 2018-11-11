@@ -26,7 +26,7 @@ class HomeController extends Controller
     {
         try {
             $evictions = Evictions::all();
-            return view('home', compact('evictions'));
+            return view('home');
         } catch ( \Exception $e ) {
             $errorDetails = 'HomeController - error in store() method when attempting to store magistrate';
             $errorDetails .= PHP_EOL . 'File: ' . $e->getFile();
