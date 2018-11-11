@@ -304,6 +304,15 @@ span.cls_010{font-family:Arial,serif;font-size:8.1px;color:rgb(0,0,0);font-weigh
             // Output the generated PDF to Browser
             $dompdf->stream();
 
+
+
+        } catch ( \Exception $e) {
+            mail('andrew.gaidis@gmail.com', 'formulatePDF Error', $e->getMessage());
+            return back();
+
+        }
+
+        try {
             $eviction = new Evictions();
             $eviction->status = 'Created LTC';
             $eviction->total_judgement = $totalFees;
@@ -315,10 +324,7 @@ span.cls_010{font-family:Arial,serif;font-size:8.1px;color:rgb(0,0,0);font-weigh
             $eviction->save();
 
             return view('eviction', compact('map'));
-
         } catch ( \Exception $e) {
-            mail('andrew.gaidis@gmail.com', 'formulatePDF Error', $e->getMessage());
-            return back();
 
         }
     }

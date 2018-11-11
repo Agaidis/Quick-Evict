@@ -19,8 +19,12 @@
                             <thead>
                             <tr>
                                 <th>Eviction Id</th>
+                                <th>Property Address</th>
+                                <th>Owner Name</th>
+                                <th>Tenant Name</th>
                                 <th>Status</th>
                                 <th>LTC Total Judgement</th>
+                                <th>Court Filing Fee</th>
                                 <th>Completion Date</th>
                                 <th>Download PDF</th>
                                 <th class="text-center">Remove</th>
@@ -30,8 +34,12 @@
                             @foreach ($evictions as $eviction)
                                 <tr>
                                     <td>{{$eviction->id}}</td>
+                                    <td>{{$eviction->property_address}}</td>
+                                    <td>{{$eviction->owner_name}}</td>
+                                    <td>{{$eviction->tenant_name}}</td>
                                     <td>{{$eviction->status}}</td>
                                     <td>{{$eviction->total_judgement}}</td>
+                                    <td>{{$eviction->court_filing_fee}}</td>
                                     <td>{{$eviction->created_at}}</td>
                                     <td>{{$eviction->pdf_download}}</td>
                                     <td class="text-center"><button type="button" id="id_{{$eviction->id}}" class="text-danger eviction-remove">Delete</button></td>
