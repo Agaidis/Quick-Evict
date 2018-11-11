@@ -27,18 +27,16 @@
                             </tr>
                             </thead>
                             <tbody>
-                            {{--@if (isset($evictions))--}}
-                            {{--@foreach ($evictions as $eviction)--}}
-                                {{--<tr>--}}
-                                    {{--<td>{{$eviction->id}}</td>--}}
-                                    {{--<td>{{$eviction->status}}</td>--}}
-                                    {{--<td>{{$eviction->total_judgement}}</td>--}}
-                                    {{--<td>{{$eviction->created_at}}</td>--}}
-                                    {{--<td>{{$eviction->pdf_download}}</td>--}}
-                                    {{--<td class="text-center"><button type="button" id="id_{{$eviction->id}}" class="text-danger eviction-remove">Delete</button></td>--}}
-                                {{--</tr>--}}
-                            {{--@endforeach--}}
-                                {{--@endif--}}
+                            @foreach ($evictions as $eviction)
+                                <tr>
+                                    <td>{{$eviction->id}}</td>
+                                    <td>{{$eviction->status}}</td>
+                                    <td>{{$eviction->total_judgement}}</td>
+                                    <td>{{$eviction->created_at}}</td>
+                                    <td>{{$eviction->pdf_download}}</td>
+                                    <td class="text-center"><button type="button" id="id_{{$eviction->id}}" class="text-danger eviction-remove">Delete</button></td>
+                                </tr>
+                            @endforeach
                             </tbody>
                         </table>
                 </div>

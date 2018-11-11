@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use app\Evictions;
+use App\Evictions;
 
 class HomeController extends Controller
 {
@@ -26,7 +26,7 @@ class HomeController extends Controller
     {
         try {
             $evictions = Evictions::all();
-            return view('home');
+            return view('home', compact('evictions'));
         } catch ( \Exception $e ) {
             $errorDetails = 'HomeController - error in store() method when attempting to store magistrate';
             $errorDetails .= PHP_EOL . 'File: ' . $e->getFile();
