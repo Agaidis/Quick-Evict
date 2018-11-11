@@ -27,6 +27,7 @@
                             </tr>
                             </thead>
                             <tbody>
+                            @if (isset($evictions))
                             @foreach ($evictions as $eviction)
                                 <tr>
                                     <td>{{$eviction->id}}</td>
@@ -37,6 +38,7 @@
                                     <td class="text-center"><button type="button" id="id_{{$eviction->id}}" class="text-danger eviction-remove">Delete</button></td>
                                 </tr>
                             @endforeach
+                                @endif
                             </tbody>
                         </table>
                 </div>
