@@ -81,7 +81,7 @@ class EvictionController extends Controller
             $upTo2000 = '0';
             $btn20014000 = '0';
             $greaterThan4000 = '0';
-            $additionalTenantAmt = 0;
+            $additionalTenantAmt = 1;
             $additionalTenantFee = 0;
 
             if ($_POST['tenant_num'] == "2") {
@@ -99,7 +99,9 @@ class EvictionController extends Controller
                 $btn20014000 = $courtDetails->three_defendant_between_2001_4000;
                 $greaterThan4000 = $courtDetails->three_defendant_greater_than_4000;
                 $oop = $courtDetails->three_defendant_out_of_pocket;
-                $additionalTenantAmt = $courtDetails->additional_tenant;
+                if ($courtDetails->additional_tenant != '' && $courtDetails->additional_tenant != 0 ) {
+                    $additionalTenantAmt = $courtDetails->additional_tenant;
+                }
             }
 
             $tenantNum = (int)$_POST['tenant_num'];
