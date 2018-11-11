@@ -25,7 +25,7 @@ class HomeController extends Controller
     public function index()
     {
         try {
-           // $evictions = Evictions::all();
+            $evictions = Evictions::all();
             return view('home');
         } catch ( \Exception $e ) {
             $errorDetails = 'HomeController - error in store() method when attempting to store magistrate';
