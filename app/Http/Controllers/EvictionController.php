@@ -70,6 +70,8 @@ class EvictionController extends Controller
                 $plaintiffLine = $ownerName;
             } else if ($_POST['rented_by_val'] == 'rentedByOther') {
                 $plaintiffLine = $_POST['other_name'] . ' on behalf of ' . $ownerName;
+            } else {
+                $plaintiffLine = $ownerName;
             }
 
             $upTo2000 = '0';
@@ -164,6 +166,8 @@ class EvictionController extends Controller
                 $filingFee = $btn20014000 + $additionalTenantFee;
             } else if ($totalFees > 4000) {
                 $filingFee = $greaterThan4000 + $additionalTenantFee;
+            } else {
+                $filingFee = 'Didnt Work';
             }
 
             if ($totalFees > 0) {
