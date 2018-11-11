@@ -34,6 +34,7 @@ class EvictionController extends Controller
     public function formulatePDF() {
 
         try {
+            $removeValues = ['$', ','];
             $magistrateId = str_replace('magistrate_' , '', $_POST['court_number']);
             $courtDetails = CourtDetails::where('magistrate_id', $magistrateId)->first();
             $geoDetails = GeoLocation::where('magistrate_id', $magistrateId)->first();
@@ -44,19 +45,22 @@ class EvictionController extends Controller
             $courtAddressLine2 = $geoDetails->address_line_two;
 
             $attorneyFees = $_POST['attorney_fees'];
-            $attorneyFees = str_replace('$', '', $attorneyFees);
+            $attorneyFees = str_replace($removeValues, '', $attorneyFees);
 
             $damageAmt = $_POST['damage_amt'];
-            $damageAmt = str_replace('$', '', $damageAmt);
+            $damageAmt = str_replace($removeValues, '', $damageAmt);
 
             $dueRent = $_POST['due_rent'];
-            $dueRent = str_replace('$', '', $dueRent);
+            $dueRent = str_replace($removeValues, '', $dueRent);
 
             $securityDeposit = $_POST['security_deposit'];
-            $securityDeposit = str_replace('$', '', $securityDeposit);
+            $securityDeposit = str_replace($removeValues, '', $securityDeposit);
 
             $monthlyRent = $_POST['monthly_rent'];
-            $monthlyRent = str_replace('$', '', $monthlyRent);
+            $monthlyRent = str_replace($removeValues, '', $monthlyRent);
+
+            $unjustDamages = $_POST['unjust_damages'];
+            $unjustDamages = str_replace($removeValues, '', $unjustDamages);
 
             $additionalRent = $_POST['addit_rent'];
             $filing_date = $_POST['filing_date'];
@@ -145,8 +149,7 @@ class EvictionController extends Controller
                 $leaseEnded = '<input type="checkbox"/>';
             }
 
-            $unjustDamages = $_POST['unjust_damages'];
-            $unjustDamages = str_replace('$', '', $unjustDamages);
+
 
             $defendantState = $_POST['state'];
             $defendantZipcode = $_POST['zipcode'];
