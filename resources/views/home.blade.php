@@ -22,17 +22,11 @@
                                 <th>Status</th>
                                 <th>LTC Total Judgement</th>
                                 <th>Completion Date</th>
+                                <th>Download PDF</th>
                                 <th class="text-center">Remove</th>
                             </tr>
                             </thead>
                             <tbody>
-                            $eviction->status = 'Created LTC';
-                            $eviction->total_judgement = $totalFees;
-                            $eviction->property_address = $defendanthouseNum.' '.$defendantStreetName.'-1'.$defendantTown .',' . $defendantState.' '.$defendantZipcode;
-                            $eviction->owner_name = $ownerName;
-                            $eviction->tenant_name = $tenantName;
-                            $eviction->court_filing_fee = $filingFee;
-                            $eviction->pdf_download = '';
                             @foreach ($evictions as $eviction)
                                 <tr>
                                     <td>{{$eviction->id}}</td>
