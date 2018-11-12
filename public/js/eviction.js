@@ -127,30 +127,30 @@ if (document.location.href.split('/')[3] == 'online-eviction') {
 
         $('#pdf_download_btn').on('click', function () {
             $('#rented_by_val').val($('input[name=rented_by]:checked').val());
-            var data = $('#eviction_form').serialize();
-            $.ajaxSetup({
-                headers: {
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                }
-            });
-
-            $.ajax({
-                beforeSend: function (xhr) {
-                    xhr.setRequestHeader('X-CSRF-TOKEN', $("#token").attr('content'));
-                },
-                type: "POST",
-                url: '/online-eviction/pdf-data',
-                dataType: 'json',
-                data: data,
-
-                success: function (data) {
-                    console.log(data);
-                    //location.reload();
-                },
-                error: function (data) {
-                    console.log(data);
-                }
-            });
+            // var data = $('#eviction_form').serialize();
+            // $.ajaxSetup({
+            //     headers: {
+            //         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            //     }
+            // });
+            //
+            // $.ajax({
+            //     beforeSend: function (xhr) {
+            //         xhr.setRequestHeader('X-CSRF-TOKEN', $("#token").attr('content'));
+            //     },
+            //     type: "POST",
+            //     url: '/online-eviction/pdf-data',
+            //     dataType: 'json',
+            //     data: data,
+            //
+            //     success: function (data) {
+            //         console.log(data);
+            //         //location.reload();
+            //     },
+            //     error: function (data) {
+            //         console.log(data);
+            //     }
+            // });
         });
 
 
