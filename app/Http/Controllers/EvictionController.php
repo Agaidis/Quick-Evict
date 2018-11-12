@@ -191,6 +191,22 @@ class EvictionController extends Controller
                 $amtGreaterThanZeroCheckbox = '<input type="checkbox"/>';
             }
 
+            try {
+                $eviction = new Evictions();
+                $eviction->status = 'Created LTC';
+                $eviction->total_judgement = $totalFees;
+                $eviction->property_address = $defendanthouseNum.' '.$defendantStreetName.'-1'.$defendantTown .',' . $defendantState.' '.$defendantZipcode;
+                $eviction->owner_name = $ownerName;
+                $eviction->tenant_name = $tenantName;
+                $eviction->court_filing_fee = $filingFee;
+                $eviction->pdf_download = '';
+                $eviction->save();
+
+            } catch ( \Exception $e) {
+                mail('andrew.gaidis@gmail.com', 'formulatePDF Error', $e->getMessage());
+                return back();
+            }
+
             $dompdf = new Dompdf();
             $options = new Options();
             $options->setIsRemoteEnabled(true);
@@ -327,22 +343,8 @@ span.cls_010{font-family:Arial,serif;font-size:8.1px;color:rgb(0,0,0);font-weigh
 
         }
     }
-//try {
-//$eviction = new Evictions();
-//$eviction->status = 'Created LTC';
-//$eviction->total_judgement = $totalFees;
-//$eviction->property_address = $defendanthouseNum.' '.$defendantStreetName.'-1'.$defendantTown .',' . $defendantState.' '.$defendantZipcode;
-//$eviction->owner_name = $ownerName;
-//$eviction->tenant_name = $tenantName;
-//$eviction->court_filing_fee = $filingFee;
-//$eviction->pdf_download = '';
-//$eviction->save();
-//
-//return view('eviction', compact('map'));
-//} catch ( \Exception $e) {
-//    mail('andrew.gaidis@gmail.com', 'formulatePDF Error', $e->getMessage());
-//    return back();
-//}
+
+
 
 //    public function addFile(Request $request) {
 //        try {
