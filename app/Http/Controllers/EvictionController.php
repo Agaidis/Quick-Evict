@@ -88,9 +88,6 @@ class EvictionController extends Controller
                 $plaintiffLine = $ownerName;
             }
 
-            $upTo2000 = '0';
-            $btn20014000 = '0';
-            $greaterThan4000 = '0';
             $additionalTenantAmt = 1;
             $additionalTenantFee = 0;
 
@@ -184,6 +181,8 @@ class EvictionController extends Controller
             } else {
                 $filingFee = 'Didnt Work';
             }
+
+            mail('andrew.gaidis@gmail.com', 'filing fee', $filingFee);
 
             if ($totalFees > 0) {
                 $amtGreaterThanZeroCheckbox = '<input type="checkbox" checked/>';
