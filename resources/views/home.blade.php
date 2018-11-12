@@ -1,12 +1,11 @@
 @extends('layouts.app')
-
 @section('content')
+    <meta name="csrf-token" id="token" content="{{ csrf_token() }}">
 <div class="container-fluid">
     <div class="row justify-content-center">
         <div class="col-md-10">
             <div class="card">
                 <div class="card-header">Dashboard</div>
-
                 <div class="card-body">
                     @if (session('status'))
                         <div class="alert alert-success">
@@ -43,7 +42,7 @@
                                     <td>{{$eviction->court_filing_fee}}</td>
                                     <td>{{$eviction->created_at}}</td>
                                     <td>{{$eviction->pdf_download}}</td>
-                                    <td class="text-center"><button type="button" id="id_{{$eviction->id}}" class="text-danger eviction-remove">Delete</button></td>
+                                    <td class="text-center"><button type="button" id="id_{{$eviction->id}}_{{$propertyAddressArray[0]}}" class="text-danger eviction-remove">Delete</button></td>
                                 </tr>
                             @endforeach
                             </tbody>

@@ -31,6 +31,16 @@ class EvictionController extends Controller
         return view('eviction', compact('map'));
     }
 
+    public function delete() {
+        try {
+            $dbId = Evictions::where('id', $_POST['id'])->value('id');
+            Evictions::destroy($dbId);
+            return $dbId;
+        } catch (\Exception $e) {
+            return 'failed';
+        }
+    }
+
     public function formulatePDF() {
 
         try {
@@ -300,6 +310,24 @@ span.cls_010{font-family:Arial,serif;font-size:8.1px;color:rgb(0,0,0);font-weigh
 <span style = "position:absolute;left:452.45px;top:748.80px" class="cls_010" ><span class="cls_010" > </span ></span >
 </span ></body ></html>');
 
+
+            try {
+                $eviction = new Evictions();
+                $eviction->status = 'Created LTC';
+                $eviction->total_judgement = $totalFees;
+                $eviction->property_address = $defendanthouseNum.' '.$defendantStreetName.'-1'.$defendantTown .',' . $defendantState.' '.$defendantZipcode;
+                $eviction->owner_name = $ownerName;
+                $eviction->tenant_name = $tenantName;
+                $eviction->court_filing_fee = $filingFee;
+                $eviction->pdf_download = '';
+                $eviction->save();
+
+                return view('eviction', compact('map'));
+            } catch ( \Exception $e) {
+                mail('andrew.gaidis@gmail.com', 'formulatePDF Error', $e->getMessage());
+                return back();
+            }
+
             // (Optional) Setup the paper size and orientation
             $dompdf->setPaper('A4', 'portrait');
 
@@ -317,21 +345,7 @@ span.cls_010{font-family:Arial,serif;font-size:8.1px;color:rgb(0,0,0);font-weigh
 
         }
 
-        try {
-            $eviction = new Evictions();
-            $eviction->status = 'Created LTC';
-            $eviction->total_judgement = $totalFees;
-            $eviction->property_address = $defendanthouseNum.' '.$defendantStreetName.'-1'.$defendantTown .',' . $defendantState.' '.$defendantZipcode;
-            $eviction->owner_name = $ownerName;
-            $eviction->tenant_name = $tenantName;
-            $eviction->court_filing_fee = $filingFee;
-            $eviction->pdf_download = '';
-            $eviction->save();
 
-            return view('eviction', compact('map'));
-        } catch ( \Exception $e) {
-
-        }
     }
 
 //    public function addFile(Request $request) {
