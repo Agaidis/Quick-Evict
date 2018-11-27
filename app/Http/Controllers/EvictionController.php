@@ -21,15 +21,8 @@ class EvictionController extends Controller
     public function index()
     {
 
-        $courtDetails = CourtDetails::orderBy('magistrate_id', 'ASC')->get();
-        $courtDetailsArray = array();
-
-        foreach ($courtDetails as $courtDetail) {
-            $strippedMagistrateId = str_replace('-', '', $courtDetail->magistrate_id);
-            $courtDetail->magistrate_order = $strippedMagistrateId;
-        }
-
-        $geoData = GeoLocation::all();
+        $courtDetails = CourtDetails::all();
+        $geoData = GeoLocation::orderBy('magistrate_id', 'ASC')->get();
 
         JavaScript::put([
             'magistrate' => $courtDetails,
