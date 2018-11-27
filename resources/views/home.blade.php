@@ -12,7 +12,8 @@
                             {{ session('status') }}
                         </div>
                     @endif
-
+                        <form method="post" action="{{ action('HomeController@downloadPDF') }}" enctype="multipart/form-data" id="home_form">
+                            <input type="hidden" name="_token" value="{{ Session::token() }}">
                     <h2 style="align-content:center">Welcome to EvictionTech!</h2>
                         <table class="table table-hover table-responsive-lg table-bordered eviction_table" id="eviction_table">
                             <thead>
@@ -41,13 +42,15 @@
                                     <td>{{$eviction->total_judgement}}</td>
                                     <td>{{$eviction->court_filing_fee}}</td>
                                     <td>{{$eviction->created_at}}</td>
-                                    <td class="text-center"><button type="button" id="download_id_{{$eviction->id}}" class="pdf_download_btn_dashboard btn btn-success">Download</button></td>
+                                    <td class="text-center"><button type="submit" id="download_id_{{$eviction->id}}" class="pdf_download_btn_dashboard btn btn-success">Download</button></td>
                                     <td class="text-center"><button type="button" id="id_{{$eviction->id}}_{{$propertyAddressArray[0]}}" class="btn btn-danger eviction-remove">Delete</button></td>
 
                                 </tr>
                             @endforeach
                             </tbody>
                         </table>
+                            <input type="hidden" name="id" id="download_id"/>
+                            </form>
                 </div>
             </div>
         </div>

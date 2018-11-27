@@ -39,28 +39,29 @@ $(document).ready(function () {
         var splitId = id.split('_');
 
         console.log(splitId[2]);
-        $.ajaxSetup({
-            headers: {
-                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-            }
-        });
-
-        $.ajax({
-            beforeSend: function (xhr) {
-                xhr.setRequestHeader('X-CSRF-TOKEN', $("#token").attr('content'));
-            },
-            type: "POST",
-            url: '/home/download',
-            dataType: 'json',
-            data: {id: splitId[2]},
-
-            success: function (data) {
-                console.log(data);
-                //location.reload();
-            },
-            error: function (data) {
-                console.log(data);
-            }
-        });
+        $('#download_id').val(splitId[2]);
+        //$.ajaxSetup({
+        //    headers: {
+        //        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        //    }
+        //});
+        //
+        //$.ajax({
+        //    beforeSend: function (xhr) {
+        //        xhr.setRequestHeader('X-CSRF-TOKEN', $("#token").attr('content'));
+        //    },
+        //    type: "POST",
+        //    url: '/home/download',
+        //    dataType: 'json',
+        //    data: {id: splitId[2]},
+        //
+        //    success: function (data) {
+        //        console.log(data);
+        //        //location.reload();
+        //    },
+        //    error: function (data) {
+        //        console.log(data);
+        //    }
+        //});
     });
 });

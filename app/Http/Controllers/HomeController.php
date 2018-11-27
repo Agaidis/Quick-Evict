@@ -40,7 +40,7 @@ class HomeController extends Controller
 
     }
 
-    public function downloadPdf(Request $request)
+    public function downloadPDF(Request $request)
     {
         try {
             $evictionData = Evictions::where('id', $request->id)->first();
