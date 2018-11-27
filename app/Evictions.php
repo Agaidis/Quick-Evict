@@ -18,6 +18,7 @@ class Evictions extends Model
         'court_number',
         'court_address_line_1',
         'court_address_line_2',
+        'magistrate_id',
         'attorney_fees',
         'damage_amt',
         'due_rent',
