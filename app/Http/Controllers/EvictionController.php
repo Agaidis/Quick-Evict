@@ -29,10 +29,6 @@ class EvictionController extends Controller
             $courtDetail->magistrate_order = $strippedMagistrateId;
         }
 
-        usort($courtDetails, function($a, $b)
-        {
-            return strcmp($a->magistrate_order, $b->magistrate_order);
-        });
         $geoData = GeoLocation::all();
 
         JavaScript::put([
