@@ -22,6 +22,17 @@ class EvictionController extends Controller
     {
 
         $courtDetails = CourtDetails::orderBy('magistrate_id', 'ASC')->get();
+        $courtDetailsArray = array();
+
+        foreach ($courtDetails as $courtDetail) {
+            $strippedMagistrateId = str_replace('-', '', $courtDetail->magistrate_id);
+            $courtDetail->magistrate_order = $strippedMagistrateId;
+        }
+
+        usort($courtDetails, function($a, $b)
+        {
+            return strcmp($a->magistrate_order, $b->magistrate_order);
+        });
         $geoData = GeoLocation::all();
 
         JavaScript::put([
