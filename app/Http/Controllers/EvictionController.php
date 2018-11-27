@@ -31,6 +31,16 @@ class EvictionController extends Controller
         return view('eviction', compact('map'));
     }
 
+    public function delete() {
+        try {
+            $dbId = Evictions::where('id', $_POST['id'])->value('id');
+            Evictions::destroy($dbId);
+            return $dbId;
+        } catch (\Exception $e) {
+            return 'failed';
+        }
+    }
+
     public function formulatePDF() {
 
         try {
@@ -78,10 +88,11 @@ class EvictionController extends Controller
                 $plaintiffLine = $ownerName;
             }
 
+
             $upTo2000 = '0';
             $btn20014000 = '0';
             $greaterThan4000 = '0';
-            $additionalTenantAmt = 0;
+            $additionalTenantAmt = 1;
             $additionalTenantFee = 0;
 
             if ($_POST['tenant_num'] == "2") {
@@ -175,10 +186,28 @@ class EvictionController extends Controller
                 $filingFee = 'Didnt Work';
             }
 
+            mail('andrew.gaidis@gmail.com', 'filing fee', $filingFee);
+
             if ($totalFees > 0) {
                 $amtGreaterThanZeroCheckbox = '<input type="checkbox" checked/>';
             } else {
                 $amtGreaterThanZeroCheckbox = '<input type="checkbox"/>';
+            }
+
+            try {
+                $eviction = new Evictions();
+                $eviction->status = 'Created LTC';
+                $eviction->total_judgement = $totalFees;
+                $eviction->property_address = $defendanthouseNum.' '.$defendantStreetName.'-1'.$defendantTown .',' . $defendantState.' '.$defendantZipcode;
+                $eviction->owner_name = $ownerName;
+                $eviction->tenant_name = $tenantName;
+                $eviction->court_filing_fee = $filingFee;
+                $eviction->pdf_download = '';
+                $eviction->save();
+
+            } catch ( \Exception $e) {
+                mail('andrew.gaidis@gmail.com', 'formulatePDF Error', $e->getMessage());
+                return back();
             }
 
             $dompdf = new Dompdf();
@@ -310,29 +339,15 @@ span.cls_010{font-family:Arial,serif;font-size:8.1px;color:rgb(0,0,0);font-weigh
             $dompdf->stream();
 
 
-
+            return view('eviction', compact('map'));
         } catch ( \Exception $e) {
             mail('andrew.gaidis@gmail.com', 'formulatePDF Error', $e->getMessage());
             return back();
 
         }
-
-        try {
-            $eviction = new Evictions();
-            $eviction->status = 'Created LTC';
-            $eviction->total_judgement = $totalFees;
-            $eviction->property_address = $defendanthouseNum.' '.$defendantStreetName.'-1'.$defendantTown .',' . $defendantState.' '.$defendantZipcode;
-            $eviction->owner_name = $ownerName;
-            $eviction->tenant_name = $tenantName;
-            $eviction->court_filing_fee = $filingFee;
-            $eviction->pdf_download = '';
-            $eviction->save();
-
-            return view('eviction', compact('map'));
-        } catch ( \Exception $e) {
-
-        }
     }
+
+
 
 //    public function addFile(Request $request) {
 //        try {
