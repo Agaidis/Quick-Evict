@@ -219,6 +219,7 @@ class EvictionController extends Controller
                 $eviction->court_number = $courtNumber;
                 $eviction->court_address_line_1 = $courtAddressLine1;
                 $eviction->court_address_line_2 = $courtAddressLine2;
+                $eviction->magistrate_id = $magistrateId;
                 $eviction->attorney_fees = $attorneyFees;
                 $eviction->damage_amt = $damageAmt;
                 $eviction->due_rent = $dueRent;
