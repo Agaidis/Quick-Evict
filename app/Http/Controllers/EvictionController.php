@@ -122,7 +122,7 @@ class EvictionController extends Controller
                 $additionalTenantFee = (float)$additionalTenantAmt * $multiplyBy;
             }
 
-            $isResidential = false;
+            $isIsResidential = false;
             $isNoQuitNotice = false;
             $isUnsatisfiedLease = false;
             $isBreachedConditionsLease = false;
@@ -132,7 +132,7 @@ class EvictionController extends Controller
             //Lease Type
             $leaseType = $_POST['lease_type'];
             if ($leaseType == 'isResidential') {
-                $isResidential = true;
+                $isIsResidential = true;
                 $isResidential = '<input type="checkbox" checked/>';
                 $isNotResidential = '<input type="checkbox"/>';
             } else {
@@ -228,7 +228,7 @@ class EvictionController extends Controller
                 $eviction->breached_details = $breachedDetails;
                 $eviction->property_damage_details = $propertyDamageDetails;
                 $eviction->plaintiff_line = $plaintiffLine;
-                $eviction->is_residential = $isResidential;
+                $eviction->is_residential = $isIsResidential;
                 $eviction->no_quit_notice = $isNoQuitNotice;
                 $eviction->unsatisfied_lease = $isUnsatisfiedLease;
                 $eviction->breached_conditions_lease = $isBreachedConditionsLease;

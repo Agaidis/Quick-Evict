@@ -41,8 +41,8 @@
                                     <td>{{$eviction->total_judgement}}</td>
                                     <td>{{$eviction->court_filing_fee}}</td>
                                     <td>{{$eviction->created_at}}</td>
-                                    <td><button type="button" class="pdf_download_btn_dashboard">{{$eviction->pdf_download}}</button></td>
-                                    <td class="text-center"><button type="button" id="id_{{$eviction->id}}" class="text-danger eviction-remove">Delete</button></td>
+                                    <td class="text-center"><button type="button" id="download_id_{{$eviction->id}}" class="pdf_download_btn_dashboard btn btn-success">Download</button></td>
+                                    <td class="text-center"><button type="button" id="id_{{$eviction->id}}_{{$propertyAddressArray[0]}}" class="btn btn-danger eviction-remove">Delete</button></td>
 
                                 </tr>
                             @endforeach

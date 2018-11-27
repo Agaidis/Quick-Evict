@@ -8,7 +8,7 @@ $(document).ready(function () {
     }).on('click', '.eviction-remove', function () {
         var id = $(this)[0].id;
         var splitId = id.split('_');
-        var conf = confirm('Are you sure you want to Delete ' + splitId[2]);
+        var conf = confirm('Are you sure you want to Delete ' + splitId[2] + ' ?');
 
         if (conf == true) {
             console.log(splitId[1]);
@@ -37,6 +37,10 @@ $(document).ready(function () {
     });
 
     $('.pdf_download_btn_dashboard').on('click', function () {
+        var id = $(this)[0].id;
+        var splitId = id.split('_');
+
+        console.log(splitId[2]);
         $.ajaxSetup({
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -48,9 +52,9 @@ $(document).ready(function () {
                 xhr.setRequestHeader('X-CSRF-TOKEN', $("#token").attr('content'));
             },
             type: "POST",
-            url: '/online-eviction/pdf-data',
+            url: '/home/download',
             dataType: 'json',
-            data: data,
+            data: {id: splitId[2]},
 
             success: function (data) {
                 console.log(data);

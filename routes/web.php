@@ -17,6 +17,8 @@ Route::get('/', 'HomeController@index')->name('home');
 
 Route::get('/home', 'HomeController@index')->name('home');
 
+Route::post('/home/download', 'HomeController@downloadPdf');
+
 Route::get('/online-eviction', 'EvictionController@index');
 
 Route::post('/home/delete', 'EvictionController@delete');
