@@ -34,9 +34,7 @@ $(document).ready(function () {
         } else {
 
         }
-    });
-
-    $('.pdf_download_btn_dashboard').on('click', function () {
+    }).on('click', '.pdf_download_btn_dashboard', function () {
         var id = $(this)[0].id;
         var splitId = id.split('_');
 
