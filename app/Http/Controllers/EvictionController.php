@@ -122,9 +122,17 @@ class EvictionController extends Controller
                 $additionalTenantFee = (float)$additionalTenantAmt * $multiplyBy;
             }
 
+            $isResidential = false;
+            $isNoQuitNotice = false;
+            $isUnsatisfiedLease = false;
+            $isBreachedConditionsLease = false;
+            $isAmtGreaterThanZero = false;
+            $isLeaseEnded = false;
+
             //Lease Type
             $leaseType = $_POST['lease_type'];
             if ($leaseType == 'isResidential') {
+                $isResidential = true;
                 $isResidential = '<input type="checkbox" checked/>';
                 $isNotResidential = '<input type="checkbox"/>';
             } else {
@@ -135,6 +143,7 @@ class EvictionController extends Controller
             //Notice Status
             $quitNotice = $_POST['quit_notice'];
             if ($quitNotice == 'no_quit_notice') {
+                $isNoQuitNotice = true;
                 $noQuitNotice = '<input type="checkbox" checked/>';
                 $quitNoticeGiven = '<input type="checkbox"/>';
             } else {
@@ -144,11 +153,13 @@ class EvictionController extends Controller
 
             //Lease Status
             if (isset($_POST['unsatisfied_lease'])) {
+                $isUnsatisfiedLease = true;
                 $unsatisfiedLease = '<input type="checkbox" checked/>';
             } else {
                 $unsatisfiedLease = '<input type="checkbox"/>';
             }
             if (isset($_POST['breached_conditions_lease'])) {
+                $isBreachedConditionsLease = true;
                 $breachedConditionsLease = '<input type="checkbox" checked/>';
             } else {
                 $breachedConditionsLease = '<input type="checkbox"/>';
@@ -157,6 +168,7 @@ class EvictionController extends Controller
             $propertyDamageDetails = $_POST['damages_details'];
 
             if (isset($_POST['term_lease_ended'])) {
+                $isLeaseEnded = true;
                 $leaseEnded = '<input type="checkbox" checked/>';
             } else {
                 $leaseEnded = '<input type="checkbox"/>';
@@ -189,6 +201,7 @@ class EvictionController extends Controller
             mail('andrew.gaidis@gmail.com', 'filing fee', $filingFee);
 
             if ($totalFees > 0) {
+                $isAmtGreaterThanZero = true;
                 $amtGreaterThanZeroCheckbox = '<input type="checkbox" checked/>';
             } else {
                 $amtGreaterThanZeroCheckbox = '<input type="checkbox"/>';
@@ -202,7 +215,31 @@ class EvictionController extends Controller
                 $eviction->owner_name = $ownerName;
                 $eviction->tenant_name = $tenantName;
                 $eviction->court_filing_fee = $filingFee;
-                $eviction->pdf_download = '';
+                $eviction->pdf_download = 'true';
+                $eviction->court_number = $courtNumber;
+                $eviction->court_address_line_1 = $courtAddressLine1;
+                $eviction->court_address_line_2 = $courtAddressLine2;
+                $eviction->attorney_fees = $attorneyFees;
+                $eviction->damage_amt = $damageAmt;
+                $eviction->due_rent = $dueRent;
+                $eviction->security_deposit = $securityDeposit;
+                $eviction->monthly_rent = $monthlyRent;
+                $eviction->unjust_damages = $unjustDamages;
+                $eviction->breached_details = $breachedDetails;
+                $eviction->property_damage_details = $propertyDamageDetails;
+                $eviction->plaintiff_line = $plaintiffLine;
+                $eviction->is_residential = $isResidential;
+                $eviction->no_quit_notice = $isNoQuitNotice;
+                $eviction->unsatisfied_lease = $isUnsatisfiedLease;
+                $eviction->breached_conditions_lease = $isBreachedConditionsLease;
+                $eviction->amt_greater_than_zero = $isAmtGreaterThanZero;
+                $eviction->lease_ended = $isLeaseEnded;
+                $eviction->defendant_state = $defendantState;
+                $eviction->defendant_zipcode = $defendantZipcode;
+                $eviction->defendant_house_num = $defendanthouseNum;
+                $eviction->defendant_street_name = $defendantStreetName;
+                $eviction->defendant_town = $defendantTown;
+                $eviction->filing_fee = $filingFee;
                 $eviction->save();
 
             } catch ( \Exception $e) {
