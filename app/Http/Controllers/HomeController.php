@@ -246,13 +246,14 @@ span.cls_010{font-family:Arial,serif;font-size:8.1px;color:rgb(0,0,0);font-weigh
             // Output the generated PDF to Browser
             $dompdf->stream();
 
-
+            return view('home');
         } catch (\Exception $e) {
             $errorDetails = 'HomeController - error in downloadpdf() method when attempting to download previous eviction';
             $errorDetails .= PHP_EOL . 'File: ' . $e->getFile();
             $errorDetails .= PHP_EOL . 'Line #' . $e->getLine();
             \Log::error($errorDetails . PHP_EOL . 'Error Message: ' . $e->getMessage() . PHP_EOL . 'Trace: ' . $e->getTraceAsString());
             mail('andrew.gaidis@gmail.com', 'Showing Home Page', $errorDetails);
+            return view('home');
         }
     }
 }
