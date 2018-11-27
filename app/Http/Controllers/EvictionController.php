@@ -81,7 +81,7 @@ class EvictionController extends Controller
             $upTo2000 = '0';
             $btn20014000 = '0';
             $greaterThan4000 = '0';
-            $additionalTenantAmt = 1;
+            $additionalTenantAmt = 0;
             $additionalTenantFee = 0;
 
             if ($_POST['tenant_num'] == "2") {
