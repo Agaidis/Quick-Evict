@@ -20,7 +20,7 @@ class EvictionController extends Controller
      */
     public function index()
     {
-        $courtDetails = CourtDetails::all();
+        $courtDetails = CourtDetails::orderBy('magistrate_id', 'ASC');
         $geoData = GeoLocation::all();
 
         JavaScript::put([
