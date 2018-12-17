@@ -25,7 +25,12 @@
                                     <div id="map"></div>
                                 </div>
                                     <h3 class="major_labels" style="text-align:center;">Additional Info on Property where you want to evict tenant.</h3>
-                                <div class="col-md-12 offset-1">
+                                <h4 class="address_display_div">Address: <span id="display_address"></span></h4>
+                                <div class="unit_number_div"><label for="unit_number">Unit #</label>
+                                <input type="text" placeholder="Optional" id="unit_number" name="unit_number"/>
+                                </div>
+                                <div class="col-md-12 offset-1 eviction_form_div">
+
                                         <h4 class="major_labels">Owner Information</h4>
                                     <div id="owner_container">
                                         <div class="form-group">
@@ -40,14 +45,25 @@
                                                 </div>
                                                 <div class="col-sm-6">
                                                     <div class="labels">Property Owner</div>
-                                                    <input type="radio" id="rented_by_owner" value="rentedByOwner" name="rented_by">
+                                                    <input checked type="radio" id="rented_by_owner" value="rentedByOwner" name="rented_by">
                                                     <label for="rented_by_owner">Property is Rented by Owner</label><br>
                                                     <input type="radio" id="rented_by_other" value="rentedByOther" name="rented_by">
                                                     <label for="rented_by_other">Property is Rented by Other</label>
+                                                    <div id="rented_by_other_div">
                                                         <div class="col-sm-12">
+                                                            <label class="labels" for="other_name">Landlord Name</label>
                                                             <input class="form-control" placeholder="Name of Landlord" type="text" id="other_name" name="other_name" value="">
                                                         </div>
-                                                    <input type="hidden" id="rented_by_val" name="rented_by_val"/>
+                                                        <div class="col-sm-12">
+                                                            <label class="labels" for="pm_name">Property Manager Name</label>
+                                                            <input class="form-control" placeholder="Property Manager Name" type="text" id="pm_name" name="pm_name" value="">
+                                                        </div>
+                                                        <div class="col-sm-8">
+                                                            <label class="labels" for="pm_phone">Property Manager Phone #</label>
+                                                            <input class="form-control" placeholder="(ext)-000-0000" type="text" id="pm_phone" name="pm_phone" value="">
+                                                        </div>
+                                                        <input type="hidden" id="rented_by_val" name="rented_by_val"/>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
@@ -57,12 +73,12 @@
                                                 <div class="form-group">
                                                     <div class="row">
                                                         <div class="col-sm-4">
-                                                            <label for="monthly_rent">Security Deposit</label>
-                                                            <input type="text" class="form-control" id="security_deposit" name="security_deposit" value="$" />
+                                                            <label class="labels" for="monthly_rent">Security Deposit</label>
+                                                            <input type="text" class="form-control" id="security_deposit" name="security_deposit" placeholder="$" value="" />
                                                         </div>
                                                         <div class="col-sm-4">
-                                                            <label for="monthly_rent">Monthly Rent</label>
-                                                            <input type="text" class="form-control" id="monthly_rent" name="monthly_rent" value="$" />
+                                                            <label class="labels" for="monthly_rent">Monthly Rent</label>
+                                                            <input type="text" class="form-control" id="monthly_rent" name="monthly_rent" placeholder="$" value="" />
                                                         </div>
                                                         <div class="col-sm-6">
                                                             <label class="labels">Tenant(s) Name</label>
@@ -121,11 +137,11 @@
                                                 <div class="row">
                                                     <div class="col-sm-10">
                                                         <label for="due_rent">Rent that is Due at Filing Date</label>
-                                                        <input type="text" class="form-control" id="due_rent" name="due_rent" value="$" />
+                                                        <input type="text" class="form-control" id="due_rent" name="due_rent" placeholder="$" value="" />
                                                     </div>
                                                     <div class="col-sm-10">
                                                         <label for="damage_amt">Damages for Injury to Property</label>
-                                                        <input type="text" class="form-control" id="damage_amt" name="damage_amt" value="$" />
+                                                        <input type="text" class="form-control" id="damage_amt" name="damage_amt" placeholder="$" value="" />
                                                     </div>
                                                     <div class="col-sm-10">
                                                         <div class="details"></div>
@@ -134,11 +150,11 @@
                                                     </div>
                                                         <div class="col-sm-10">
                                                         <label for="unjust_damages">Damages for Unjust Detention of Real Property</label>
-                                                        <input type="text" class="form-control" id="unjust_damages" name="unjust_damages" value="$" />
+                                                        <input type="text" class="form-control" id="unjust_damages" name="unjust_damages" placeholder="$" value="" />
                                                     </div>
                                                     <div class="col-sm-10">
                                                         <label for="attorney_fees">Attorney Fees</label>
-                                                        <input type="text" class="form-control" id="attorney_fees" name="attorney_fees" value="$" />
+                                                        <input type="text" class="form-control" id="attorney_fees" name="attorney_fees" placeholder="$" value="" />
                                                     </div>
                                                     <div class="col-sm-10">
                                                         <div class="labels">Additional Rent?</div>
@@ -148,6 +164,10 @@
                                                         <label for="no_addit_rent">Do Not add additional rent due at hearing date</label>
                                                     </div>
                                                 </div>
+                                                <input type="checkbox" id="is_abandoned" name="is_abandoned">
+                                                <label for="is_abandoned">A determination that the manufactured home and property have been abandoned.</label>
+                                                <input type="checkbox" id="is_determination_request" name="determination_request">
+                                                <label for="determination_request">A Request for Determination of Abandonment (Form MDJS 334) must be completed and submitted with this complaint</label>
                                             </div>
                                         </div>
                                         <button type="submit" id="pdf_download_btn" class="btn btn-primary">Download PDF File</button>

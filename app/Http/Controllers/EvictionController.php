@@ -55,11 +55,25 @@ class EvictionController extends Controller
             $courtAddressLine1 = $geoDetails->address_line_one;
             $courtAddressLine2 = $geoDetails->address_line_two;
 
+            //Attorney Fees
             $attorneyFees = $_POST['attorney_fees'];
             $attorneyFees = str_replace($removeValues, '', $attorneyFees);
 
+            if ($_POST['attorney_fees'] != '') {
+                $attorneyFeesCheckbox = '<input type="checkbox" checked/>';
+            } else {
+                $attorneyFeesCheckbox = '<input type="checkbox"/>';
+            }
+
+
             $damageAmt = $_POST['damage_amt'];
             $damageAmt = str_replace($removeValues, '', $damageAmt);
+
+            if ($damageAmt != '') {
+                $damageAmtCheckbox = '<input type="checkbox" checked/>';
+            } else {
+                $damageAmtCheckbox = '<input type="checkbox"/>';
+            }
 
             $dueRent = $_POST['due_rent'];
             $dueRent = str_replace($removeValues, '', $dueRent);
@@ -73,7 +87,7 @@ class EvictionController extends Controller
             $unjustDamages = $_POST['unjust_damages'];
             $unjustDamages = str_replace($removeValues, '', $unjustDamages);
 
-            $additionalRent = $_POST['addit_rent'];
+
             $filing_date = $_POST['filing_date'];
 
             $tenantName = $_POST['tenant_name'];
@@ -81,18 +95,21 @@ class EvictionController extends Controller
 
             $ownerName = $_POST['owner_name'];
 
+            $pmName = $_POST['pm_name'];
+            $pmPhone = $_POST['pm_phone'];
+
+
             if ($_POST['rented_by_val'] == 'rentedByOwner') {
                 $plaintiffLine = $ownerName;
+                $ownerPMName = $ownerName;
             } else if ($_POST['rented_by_val'] == 'rentedByOther') {
+                $ownerPMName = $pmName;
                 $plaintiffLine = $_POST['other_name'] . ' on behalf of ' . $ownerName;
             } else {
+                $ownerPMName = $ownerName;
                 $plaintiffLine = $ownerName;
             }
 
-
-            $upTo2000 = '0';
-            $btn20014000 = '0';
-            $greaterThan4000 = '0';
             $additionalTenantAmt = 1;
             $additionalTenantFee = 0;
 
@@ -175,6 +192,33 @@ class EvictionController extends Controller
                 $leaseEnded = '<input type="checkbox"/>';
             }
 
+            if ($_POST['addit_rent'] == 'yes') {
+                $additionalRent = '<input type="checkbox" checked/>';
+            } else {
+                $additionalRent = '<input type="checkbox"/>';
+            }
+
+            if ($_POST['unjust_damages'] != '') {
+                $unjustDamagesCheckbox = '<input type="checkbox" checked/>';
+            } else {
+                $unjustDamagesCheckbox = '<input type="checkbox"/>';
+            }
+
+            if ($_POST['is_determination_request'] == 'on') {
+                $isDeterminationRequest = true;
+                $determinationRequestCheckbox = '<input type="checkbox" checked/>';
+            } else {
+                $isDeterminationRequest = false;
+                $determinationRequestCheckbox = '<input type="checkbox"/>';
+            }
+
+            if ($_POST['is_abandoned'] == 'on') {
+                $isAbandoned = true;
+                $abandonedCheckbox = '<input type="checkbox" checked/>';
+            } else {
+                $isAbandoned = false;
+                $abandonedCheckbox = '<input type="checkbox"/>';
+            }
 
 
             $defendantState = $_POST['state'];
@@ -242,6 +286,12 @@ class EvictionController extends Controller
                 $eviction->defendant_street_name = $defendantStreetName;
                 $eviction->defendant_town = $defendantTown;
                 $eviction->filing_fee = $filingFee;
+                $eviction->pm_name = $pmName;
+                $eviction->pm_phone = $pmPhone;
+                $eviction->is_abandoned = $isAbandoned;
+                $eviction->is_determination_request = $isDeterminationRequest;
+                $eviction->unit_num = $_POST['unit_number'];
+
                 $eviction->save();
 
             } catch ( \Exception $e) {
@@ -288,7 +338,7 @@ span.cls_010{font-family:Arial,serif;font-size:8.1px;color:rgb(0,0,0);font-weigh
 <span style="position:absolute;left:40.90px;top:82.85px" class="cls_004"><span class="cls_004">MDJ Name: '. $courtDetails->mdj_name .'</span></span><br>
 <span style="position:absolute;left:40.90px;top:101.05px" class="cls_004"><span class="cls_004">Address: '.$courtAddressLine1.'<br><span style="margin-left:34px;">'.$courtAddressLine2.'</span></span></span><br>
 <span style="position:absolute;left:437.10px;top:130.90px" class="cls_006"><span class="cls_006">V.</span></span><br>
-<span style="position:absolute;left:336.30px;top:133.60px" class="cls_009"><span class="cls_009">DEFENDANT:</span><br><p style="margin-left:6px;">'.$tenantName.'<br>'.$defendanthouseNum.' '.$defendantStreetName.'<br>'.$defendantTown .',' . $defendantState.' '.$defendantZipcode.'</p></span><br>
+<span style="position:absolute;left:336.30px;top:133.60px" class="cls_009"><span class="cls_009">DEFENDANT:</span><br><p style="margin-left:6px;">'.$tenantName.'<br>'.$defendanthouseNum.' '.$defendantStreetName.'<br>'.$defendantTown .',' . $defendantState.' '.$defendantZipcode.' '. $_POST['unit_number'] .'<br>'.$pmPhone.'</p></span><br>
 <span style="position:absolute;left:466.50px;top:135.00px" class="cls_005"><span class="cls_005">NAME and ADDRESS</span></span><br>
 <span style="position:absolute;left:40.90px;top:144.45px" class="cls_004"><span class="cls_004">Telephone: '.$courtDetails->phone_number.'</span></span><br>
 <span style="position:absolute;left:142.45px;top:160.95px" class="cls_004"><span class="cls_004">AMOUNT</span></span><br>
@@ -312,22 +362,22 @@ span.cls_010{font-family:Arial,serif;font-size:8.1px;color:rgb(0,0,0);font-weigh
 <span style="position:absolute;left:120.25px;top:292.21px" class="cls_004"><span class="cls_004">'. $isResidential .'Residential</span></span><br>
 <span style="position:absolute;left:198.23px;top:292.21px" class="cls_004"><span class="cls_004">'. $isNotResidential .'Nonresidential     Monthly Rent  $</span></span><br>
 <span style="position:absolute;left:415.98px;top:292.21px" class="cls_004"><span class="cls_004">Security Deposit $</span><span style="margin-left:30px;">'.$securityDeposit.'</span></span><br>
-<span style="position:absolute;left:60.87px;top:304.91px" class="cls_004"><span class="cls_004"><input type="checkbox"  />A determination that the manufactured home and property have been abandoned.</span></span><br>
-<span style="position:absolute;left:60.87px;top:317.61px" class="cls_004"><span class="cls_004"><input type="checkbox"  />A Request for Determination of Abandonment (Form MDJS 334) must be completed and submitted with this complaint.</span></span><br>
-<span style="position:absolute;left:61.30px;top:332.71px" class="cls_004"><span class="cls_004"><input type="checkbox"  />Damages for injury to the real property, to wit: ___<span style="text-decoration:underline;">'.$propertyDamageDetails.'</span></span></span><br>
+<span style="position:absolute;left:60.87px;top:304.91px" class="cls_004"><span class="cls_004">'. $abandonedCheckbox . ' A determination that the manufactured home and property have been abandoned.</span></span><br>
+<span style="position:absolute;left:60.87px;top:317.61px" class="cls_004"><span class="cls_004">'. $determinationRequestCheckbox . ' A Request for Determination of Abandonment (Form MDJS 334) must be completed and submitted with this complaint.</span></span><br>
+<span style="position:absolute;left:61.30px;top:332.71px" class="cls_004"><span class="cls_004">'. $damageAmtCheckbox . ' Damages for injury to the real property, to wit: ___<span style="text-decoration:underline;">'.$propertyDamageDetails.'</span></span></span><br>
 <span style="position:absolute;left:60.87px;top:348.21px" class="cls_004"><span class="cls_004">______________________________________________________________  in the amount of:</span></span><br>
 <span style="position:absolute;left:457.40px;top:348.45px" class="cls_004"><span class="cls_004">$</span></span><br>
 <span style="position:absolute;left:466.55px;top:348.21px" class="cls_004"><span style="text-decoration: underline;" class="cls_004">__________'.$damageAmt.'_________</span></span><br>
-<span style="position:absolute;left:60.50px;top:363.95px" class="cls_004"><span class="cls_004"><input type="checkbox"  />Damages for the unjust detention of the real property in the amount of</span></span><br>
+<span style="position:absolute;left:60.50px;top:363.95px" class="cls_004"><span class="cls_004">'. $unjustDamagesCheckbox . 'Damages for the unjust detention of the real property in the amount of</span></span><br>
 <span style="position:absolute;left:457.40px;top:363.95px" class="cls_004"><span class="cls_004">$</span></span><br>
 <span style="position:absolute;left:465.42px;top:363.95px" class="cls_004"><span style="text-decoration: underline;" class="cls_004">__________'.$unjustDamages.'_________</span></span><br>
 <span style="position:absolute;left:60.50px;top:379.45px" class="cls_004"><span class="cls_004">'. $amtGreaterThanZeroCheckbox .' Rent remaining due and unpaid on filing date in the amount of</span></span><br>
 <span style="position:absolute;left:457.40px;top:379.45px" class="cls_004"><span class="cls_004">$</span></span><br>
 <span style="position:absolute;left:465.42px;top:379.45px" class="cls_004"><span style="text-decoration: underline;" class="cls_004">__________'.$dueRent.'_________</span></span><br>
-<span style="position:absolute;left:60.50px;top:395.95px" class="cls_004"><span class="cls_004"><input type="checkbox"  />And additional rent remaining due and unpaid on hearing date</span></span><br>
+<span style="position:absolute;left:60.50px;top:395.95px" class="cls_004"><span class="cls_004">'. $additionalRent .' And additional rent remaining due and unpaid on hearing date</span></span><br>
 <span style="position:absolute;left:457.40px;top:395.95px" class="cls_004"><span class="cls_004">$</span></span><br>
 <span style="position:absolute;left:465.42px;top:395.95px" class="cls_004"><span class="cls_004">___________________</span></span><br>
-<span style="position:absolute;left:60.50px;top:410.45px" class="cls_004"><span class="cls_004"><input type="checkbox"  />Attorney fees in the amount of</span></span><br>
+<span style="position:absolute;left:60.50px;top:410.45px" class="cls_004"><span class="cls_004">' . $attorneyFeesCheckbox . ' Attorney fees in the amount of</span></span><br>
 <span style="position:absolute;left:457.40px;top:410.45px" class="cls_004"><span class="cls_004">$</span></span><br>
 <span style="position:absolute;left:465.42px;top:410.45px" class="cls_004"><span style="text-decoration: underline;" class="cls_004">__________'.$attorneyFees.'_________</span></span><br>
 <span style="position:absolute;left:42.30px;top:427.20px" class="cls_004"><span class="cls_004">THE PLAINTIFF FURTHER ALLEGES THAT:</span></span><br>
@@ -350,7 +400,7 @@ span.cls_010{font-family:Arial,serif;font-size:8.1px;color:rgb(0,0,0);font-weigh
 <span style="position:absolute;left:77.30px;top:569.55px" class="cls_004"><span class="cls_004">'.$unsatisfiedLease.'Rent reserved and due has, upon demand, remained unsatisfied.</span></span><br>
 <span style="position:absolute;left:42.30px;top:582.15px" class="cls_004"><span class="cls_004">6.</span></span><br>
 <span style="position:absolute;left:60.50px;top:582.15px" class="cls_004"><span class="cls_004">You retain the real property and refuse to give up to its possession.</span></span><br>
-<span style="position:absolute;left:42.00px;top:595.65px" class="cls_004"><span class="cls_004">I, ________________________________________________________________ verify that the facts set forth in this complaint are</span></span><br>
+<span style="position:absolute;left:42.00px;top:595.65px" class="cls_004"><span class="cls_004">I,<p style="text-decoration:underline;"> ' . $ownerPMName . ' </p> verify that the facts set forth in this complaint are</span></span><br>
 <span style="position:absolute;left:42.00px;top:605.85px" class="cls_004"><span class="cls_004">true and correct to the best of my knowledge, information and belief. This statement is made subject to the penalties of Section 4904</span></span><br>
 <span style="position:absolute;left:42.00px;top:616.05px" class="cls_004"><span class="cls_004">of the Crimes Code (18 PA. C.S. § 4904) relating to unsworn falsification to authorities.</span></span><br>
 <span style="position:absolute;left:42.30px;top:630.90px" class="cls_004"><span class="cls_004">I certify this filing complies with the UJS Case Records Public Access Policy.</span></span><br>

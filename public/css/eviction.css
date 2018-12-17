@@ -113,3 +113,15 @@ form.eviction_form fieldset {
 .magistrate_table {
     font-size:12px;
 }
+
+#rented_by_other_div {
+    display:none;
+}
+
+.eviction_form_div, .unit_number_div {
+    display:none;
+}
+
+.address_display_div, .unit_number_div {
+    text-align:center;
+}

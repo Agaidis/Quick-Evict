@@ -89,6 +89,7 @@ if (document.location.href.split('/')[3] == 'online-eviction') {
             $('#house_num').val(houseNum);
             $('#street_name').val(streetName);
             $('#town').val(town);
+            $('#display_address').text(houseNum + ' ' + streetName + ' ' + town + ' ' + state);
 
             marker.setPosition(place.geometry.location);
             marker.setMap(map);
@@ -103,6 +104,11 @@ if (document.location.href.split('/')[3] == 'online-eviction') {
             }
             if (isFound == false) {
                 alert('Location outside all Zones');
+                $('.unit_number_div').css('display', 'none');
+                $('.eviction_form_div').css('display', 'none');
+            } else {
+                $('.unit_number_div').css('display', 'block');
+                $('.eviction_form_div').css('display', 'block');
             }
         });
 
@@ -115,13 +121,16 @@ if (document.location.href.split('/')[3] == 'online-eviction') {
         });
 
         $('input[type=radio][name=rented_by]').change(function () {
-            console.log($(this)[0].id);
+
             if ($(this)[0].id == 'rented_by_other') {
                 $('#landlord').prop('hidden', false);
+                $('#rented_by_other_div').css('display', 'block');
             } else {
                 $('#landlord').prop('hidden', true);
+                $('#rented_by_other_div').css('display', 'none');
             }
         });
+
 
         //On Submit gather variables and make ajax call to backend
 

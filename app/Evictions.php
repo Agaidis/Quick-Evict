@@ -40,6 +40,11 @@ class Evictions extends Model
         'defendant_street_name',
         'defendant_town',
         'filing_fee',
+        'pm_name',
+        'pm_phone',
+        'is_abandoned',
+        'is_determination_request',
+        'unit_num'
     ];
 
     protected $table = 'evictions';
