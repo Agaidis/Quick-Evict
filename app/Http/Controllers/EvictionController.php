@@ -91,8 +91,6 @@ class EvictionController extends Controller
             $filing_date = $_POST['filing_date'];
 
             $tenantName = $_POST['tenant_name'];
-
-
             $ownerName = $_POST['owner_name'];
 
             $pmName = $_POST['pm_name'];
@@ -204,7 +202,7 @@ class EvictionController extends Controller
                 $unjustDamagesCheckbox = '<input type="checkbox"/>';
             }
 
-            if ($_POST['is_determination_request'] == 'on') {
+            if (isset($_POST['is_determination_request'])) {
                 $isDeterminationRequest = true;
                 $determinationRequestCheckbox = '<input type="checkbox" checked/>';
             } else {
@@ -212,7 +210,7 @@ class EvictionController extends Controller
                 $determinationRequestCheckbox = '<input type="checkbox"/>';
             }
 
-            if ($_POST['is_abandoned'] == 'on') {
+            if (isset($_POST['is_abandoned'])) {
                 $isAbandoned = true;
                 $abandonedCheckbox = '<input type="checkbox" checked/>';
             } else {
