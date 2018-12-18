@@ -27,7 +27,7 @@
                                     <h3 class="major_labels" style="text-align:center;">Additional Info on Property where you want to evict tenant.</h3>
                                 <h4 class="address_display_div">Address: <span id="display_address"></span></h4>
                                 <div class="unit_number_div"><label for="unit_number">Additional Address Detail</label>
-                                <input type="text" placeholder="Example: Unit: 3" id="unit_number" name="unit_number"/>
+                                <input type="text" placeholder="Example: Unit 3" id="unit_number" name="unit_number"/>
                                 </div>
                                 <div class="col-md-12 offset-1 eviction_form_div">
 
