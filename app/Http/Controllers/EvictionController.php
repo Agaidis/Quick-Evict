@@ -286,11 +286,11 @@ class EvictionController extends Controller
                 $eviction->defendant_street_name = $defendantStreetName;
                 $eviction->defendant_town = $defendantTown;
                 $eviction->filing_fee = $filingFee;
-//                $eviction->pm_name = $pmName;
-//                $eviction->pm_phone = $pmPhone;
-//                $eviction->is_abandoned = $isAbandoned;
-//                $eviction->is_determination_request = $isDeterminationRequest;
-//                $eviction->unit_num = $_POST['unit_number'];
+                $eviction->pm_name = $pmName;
+                $eviction->pm_phone = $pmPhone;
+                $eviction->is_abandoned = $isAbandoned;
+                $eviction->is_determination_request = $isDeterminationRequest;
+                $eviction->unit_num = $_POST['unit_number'];
 
                 $eviction->save();
 
