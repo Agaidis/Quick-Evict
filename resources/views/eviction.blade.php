@@ -166,8 +166,8 @@
                                                 </div>
                                                 <input type="checkbox" id="is_abandoned" name="is_abandoned">
                                                 <label for="is_abandoned">A determination that the manufactured home and property have been abandoned.</label><br>
-                                                <input type="checkbox" id="determination_request" name="determination_request">
-                                                <label for="determination_request">A Request for Determination of Abandonment (Form MDJS 334) must be completed and submitted with this complaint</label>
+                                                <input type="checkbox" id="is_determination_request" name="is_determination_request">
+                                                <label for="is_determination_request">A Request for Determination of Abandonment (Form MDJS 334) must be completed and submitted with this complaint</label>
                                             </div>
                                         </div>
                                         <button type="submit" id="pdf_download_btn" class="btn btn-primary">Download PDF File</button>
