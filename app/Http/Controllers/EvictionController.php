@@ -400,7 +400,7 @@ span.cls_010{font-family:Arial,serif;font-size:8.1px;color:rgb(0,0,0);font-weigh
 <span style="position:absolute;left:77.30px;top:569.55px" class="cls_004"><span class="cls_004">'.$unsatisfiedLease.'Rent reserved and due has, upon demand, remained unsatisfied.</span></span><br>
 <span style="position:absolute;left:42.30px;top:582.15px" class="cls_004"><span class="cls_004">6.</span></span><br>
 <span style="position:absolute;left:60.50px;top:582.15px" class="cls_004"><span class="cls_004">You retain the real property and refuse to give up to its possession.</span></span><br>
-<span style="position:absolute;left:42.00px;top:595.65px" class="cls_004"><span class="cls_004">I,<p style="text-decoration:underline;"> ' . $ownerPMName . ' </p> verify that the facts set forth in this complaint are</span></span><br>
+<span style="position:absolute;left:42.00px;top:595.65px" class="cls_004"><span class="cls_004">I, <span style="text-decoration:underline;"> ' . $ownerPMName . ' </span> verify that the facts set forth in this complaint are</span></span><br>
 <span style="position:absolute;left:42.00px;top:605.85px" class="cls_004"><span class="cls_004">true and correct to the best of my knowledge, information and belief. This statement is made subject to the penalties of Section 4904</span></span><br>
 <span style="position:absolute;left:42.00px;top:616.05px" class="cls_004"><span class="cls_004">of the Crimes Code (18 PA. C.S. § 4904) relating to unsworn falsification to authorities.</span></span><br>
 <span style="position:absolute;left:42.30px;top:630.90px" class="cls_004"><span class="cls_004">I certify this filing complies with the UJS Case Records Public Access Policy.</span></span><br>
