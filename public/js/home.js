@@ -41,7 +41,7 @@ $(document).ready(function () {
         $('#download_id').val(splitId[2]);
 
     }).on('change', '.status_select', function() {
-        var id = $(this[0].id);
+        var id = $(this)[0].id;
         var splitId = id.split('_');
 
         console.log(splitId);
