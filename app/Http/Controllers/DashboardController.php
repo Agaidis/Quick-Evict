@@ -31,7 +31,7 @@ class DashboardController extends Controller
             $evictions = Evictions::all();
             return view('dashboard', compact('evictions'));
         } catch (\Exception $e) {
-            $errorDetails = 'HomeController - error in store() method when attempting to store magistrate';
+            $errorDetails = 'DashboardController - error in store() method when attempting to store magistrate';
             $errorDetails .= PHP_EOL . 'File: ' . $e->getFile();
             $errorDetails .= PHP_EOL . 'Line #' . $e->getLine();
             \Log::error($errorDetails . PHP_EOL . 'Error Message: ' . $e->getMessage() . PHP_EOL . 'Trace: ' . $e->getTraceAsString());
@@ -253,7 +253,7 @@ span.cls_010{font-family:Arial,serif;font-size:8.1px;color:rgb(0,0,0);font-weigh
             $errorDetails .= PHP_EOL . 'Line #' . $e->getLine();
             \Log::error($errorDetails . PHP_EOL . 'Error Message: ' . $e->getMessage() . PHP_EOL . 'Trace: ' . $e->getTraceAsString());
             mail('andrew.gaidis@gmail.com', 'Showing Dashboard Page', $errorDetails);
-            return view('home');
+            return view('dashboard');
         }
     }
 }
