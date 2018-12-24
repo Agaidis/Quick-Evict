@@ -333,8 +333,8 @@ span.cls_010{font-family:Arial,serif;font-size:10.77px;color:rgb(0,0,0);font-wei
 <span style="position:absolute;left:460.45px;top:16.80px" class="cls_002"><span class="cls_002">LANDLORD/TENANT COMPLAINT</span></span><br>
 <span style="position:absolute;left:47.95px;top:29.55px" class="cls_003"><span class="cls_003">COUNTY OF ' . strtoupper($courtDetails->county) .'</span></span><br>
 <span style="position:absolute;left:447.28px;top:67.80px" class="cls_005"><span class="cls_005">PLAINTIFF:</span><br><p style="margin-left:6px;">'. $plaintiffLine .'<br>PO Box 5304<br>Lancaster, PA 17606<br>'.$pmPhone.'</p></span><br>
-<span style="position:absolute;left:616.72px;top:68.50px" class="cls_005"><span class="cls_005">NAME and ADDRESS</span></span>
-<span style="position:absolute;left:54.26px;top:69.36px" class="cls_004"><span class="cls_004">Mag. Dist. No: '. $courtNumber .'</span></span><br>
+<span style="position:absolute;left:590.72px;top:66.50px" class="cls_005"><span class="cls_005">NAME and ADDRESS</span></span>
+<span style="position:absolute;left:84.26px;top:69.36px" class="cls_004"><span class="cls_004">Mag. Dist. No: '. $courtNumber .'</span></span><br>
 <span style="position:absolute;left:54.40px;top:82.85px" class="cls_004"><span class="cls_004">MDJ Name: '. $courtDetails->mdj_name .'</span></span><br>
 <span style="position:absolute;left:54.40px;top:101.05px" class="cls_004"><span class="cls_004">Address: '.$courtAddressLine1.'<br><span style="margin-left:34px;">'.$courtAddressLine2.'</span></span></span><br>
 <span style="position:absolute;left:581.34px;top:130.90px" class="cls_006"><span class="cls_006">V.</span></span><br>
