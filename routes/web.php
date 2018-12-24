@@ -12,16 +12,15 @@
 */
 
 Auth::routes();
-////
+
 Route::get('/', 'HomeController@index')->name('home');
 Route::get('/home', 'HomeController@index')->name('home');
 
-Route::get('/dashboard-panel', 'DashboardController@index');
-Route::post('/dashboard-panel/download', 'DashboardController@downloadPDF');
+Route::get('/dashboard', 'DashboardController@index');
+Route::post('/dashboard/download', 'DashboardController@downloadPDF');
+Route::post('/dashboard/delete', 'EvictionController@delete');
 
 Route::get('/online-eviction', 'EvictionController@index');
-
-Route::post('/dashboard-panel/delete', 'EvictionController@delete');
 
 Route::get('/eviction-info', 'EvictionInfoController@index');
 
