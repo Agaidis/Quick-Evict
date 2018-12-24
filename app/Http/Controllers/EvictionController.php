@@ -9,6 +9,7 @@ use Dompdf\Dompdf;
 use App\CourtDetails;
 use JavaScript;
 use App\Evictions;
+use Illuminate\Support\Facades\Storage;
 
 
 class EvictionController extends Controller
@@ -438,20 +439,18 @@ span.cls_010{font-family:Arial,serif;font-size:8.1px;color:rgb(0,0,0);font-weigh
     public function saveSignature() {
 
         try {
-            $result = array();
             $imagedata = base64_decode($_POST['img_data']);
-            mail('andrew.gaidis@gmail.com', 'hey', $imagedata);
+
             $filename = md5(date("dmYhisA"));
             //Location to where you want to created sign image
             $file_name = './doc_signs/'.$filename.'.png';
-            file_put_contents($file_name,$imagedata);
-            $result['status'] = 1;
-            $result['file_name'] = $file_name;
-            echo json_encode($result);
+           // file_put_contents($file_name,$imagedata);
+            Storage::put('signature.png', $file_name);
+
+
 
         } catch ( \Exception $e ) {
             mail('andrew.gaidis@gmail.com', 'save Signature Error', $e->getMessage());
-            return back();
         }
     }
 
