@@ -170,6 +170,17 @@
                                                 <label for="is_determination_request">A Request for Determination of Abandonment (Form MDJS 334) must be completed and submitted with this complaint</label>
                                             </div>
                                         </div>
+                                    <div class="row">
+                                        <div class="col-md-offset-3 col-md-6">
+                                            <div id="signArea" >
+                                                <h2 class="tag-ingo">Put signature below,</h2>
+                                                <div class="sig sigWrapper" style="height:auto;">
+                                                    <div class="typed"></div>
+                                                    <canvas class="sign-pad" id="sign-pad" width="300" height="100"></canvas>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
                                         <button type="submit" id="pdf_download_btn" class="btn btn-primary">Download PDF File</button>
 
 
