@@ -7,10 +7,11 @@ if (document.location.href.split('/')[3] == 'online-eviction') {
             html2canvas([document.getElementById('sign-pad')], {
                 onrendered: function (canvas) {
                     var canvas_img_data = canvas.toDataURL('image/png');
+                    console.log(canvas_img_data);
                     var img_data = canvas_img_data.replace(/^data:image\/(png|jpg);base64,/, "");
                     //ajax call to save image inside folder
                     $.ajax({
-                        url: 'save_sign.php',
+                        url: 'online-eviction/saveSignature',
                         data: {img_data: img_data},
                         type: 'post',
                         dataType: 'json',
