@@ -59,10 +59,10 @@ $(document).ready(function () {
                     xhr.setRequestHeader('X-CSRF-TOKEN', $("#token").attr('content'));
                 },
                 type: "POST",
-                url: '/home/download',
+                url: '/dashboard/statusChange',
                 dataType: 'json',
                 data: {
-                    id: splitId[2],
+                    id: splitId[1],
                     status: status
                 },
 

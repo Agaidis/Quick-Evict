@@ -18,6 +18,7 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 Route::get('/dashboard', 'DashboardController@index');
 Route::post('/dashboard/download', 'DashboardController@downloadPDF');
+Route::post('/dashboard/statusChange', 'DashboardController@statusChange');
 Route::post('/dashboard/delete', 'EvictionController@delete');
 
 Route::get('/online-eviction', 'EvictionController@index');

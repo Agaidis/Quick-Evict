@@ -41,6 +41,19 @@ class DashboardController extends Controller
 
     }
 
+    public function statusChange(Request $request) {
+        try {
+            $id = $request->id;
+            return $id;
+        } catch (\Exception $e) {
+            $errorDetails = 'DashboardController - error in store() method when attempting to store magistrate';
+            $errorDetails .= PHP_EOL . 'File: ' . $e->getFile();
+            $errorDetails .= PHP_EOL . 'Line #' . $e->getLine();
+            \Log::error($errorDetails . PHP_EOL . 'Error Message: ' . $e->getMessage() . PHP_EOL . 'Trace: ' . $e->getTraceAsString());
+            mail('andrew.gaidis@gmail.com', 'Changing Status', $errorDetails);
+        }
+    }
+
     public function downloadPDF(Request $request)
     {
         try {
