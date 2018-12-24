@@ -109,6 +109,11 @@ if (document.location.href.split('/')[3] == 'online-eviction') {
                 areaName: magId
             });
             magArray[count].setMap(map);
+
+            google.maps.event.addListener(magArray[count], 'mouseover', function (e) {
+                injectTooltip(e, magArray[count].strokeColor);
+            });
+
             count++;
         });
         autocomplete.addListener('place_changed', function () {
@@ -119,10 +124,6 @@ if (document.location.href.split('/')[3] == 'online-eviction') {
                 window.alert("Returned place contains no geometry");
                 return;
             }
-
-            google.maps.event.addListener(polygon, 'mouseover', function (e) {
-                injectTooltip(e, polygon.strokeColor);
-            });
 
             houseNum = place.address_components[0].long_name;
             streetName = place.address_components[1].long_name;
