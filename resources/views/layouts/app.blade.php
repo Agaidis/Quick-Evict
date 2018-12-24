@@ -20,6 +20,7 @@
     <script src="{{ asset('js/home.js') }}" defer></script>
     <script src="{{ asset('js/numeric-1.2.6.min.js') }}" defer></script>
     <script src="{{ asset('js/bezier.js') }}" defer></script>
+    <script type='text/javascript' src="https://github.com/niklasvh/html2canvas/releases/download/0.4.1/html2canvas.js"></script>
     <script src="{{ asset('js/json2.min.js') }}" defer></script>
     <script src="{{ asset('js/signaturepad.js') }}" defer></script>
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAfPLSbGAHZkEd-8DDB0FcGSlhrV9LQMGM&libraries=places" defer></script>
