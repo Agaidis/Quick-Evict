@@ -38,7 +38,7 @@
                                         <td>{{$propertyAddressArray[0]}} <br> {{str_replace('United States', '', $propertyAddressArray[1])}}</td>
                                         <td>{{$eviction->owner_name}}</td>
                                         <td>{{$eviction->tenant_name}}</td>
-                                        <td>
+                                        <td style="width:150px;">
                                             <select title="status" class="form-control" id="status_{{$eviction->id}}">
                                             @foreach ($statusArray as $status)
                                                 @if ($status == $eviction->status)
