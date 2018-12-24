@@ -32,14 +32,25 @@
                                 <tbody>
                                 @foreach ($evictions as $eviction)
                                     <?php $propertyAddressArray = explode('-1', $eviction->property_address);
-                                        $statusArray = array('Created LTC', 'Sent to MDJ', 'Court Date Set', 'Won at Court');?>
+                                        $statusArray = array('Created LTC',
+                                            'LTC Mailed',
+                                            'LTC Submitted Online',
+                                            'Court Hearing Scheduled',
+                                            'Court Hearing Extended',
+                                            'Judgement Issued in Favor of Owner',
+                                            'Judgement Denied by Court',
+                                            'Tenant Filed Appeal',
+                                            'OOP Mailed',
+                                            'OOP Submitted Online',
+                                            'Paid Judgement',
+                                            'Locked Out Tenant');?>
                                     <tr>
                                         <td>{{$eviction->id}}</td>
                                         <td>{{$propertyAddressArray[0]}} <br> {{str_replace('United States', '', $propertyAddressArray[1])}}</td>
                                         <td>{{$eviction->owner_name}}</td>
                                         <td>{{$eviction->tenant_name}}</td>
                                         <td style="width:150px;">
-                                            <select title="status" class="form-control" id="status_{{$eviction->id}}">
+                                            <select title="status" class="form-control status_select" id="status_{{$eviction->id}}">
                                             @foreach ($statusArray as $status)
                                                 @if ($status == $eviction->status)
                                                         <option value="{{$status}}" selected>{{$status}}</option>
