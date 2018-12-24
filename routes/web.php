@@ -14,14 +14,14 @@
 Auth::routes();
 
 Route::get('/', 'HomeController@index')->name('home');
-
 Route::get('/home', 'HomeController@index')->name('home');
 
-Route::post('/home/download', 'HomeController@downloadPDF');
+Route::get('/dashboard', 'DashboardController@index');
+Route::post('/dashboard/download', 'DashboardController@downloadPDF');
 
 Route::get('/online-eviction', 'EvictionController@index');
 
-Route::post('/home/delete', 'EvictionController@delete');
+Route::post('/dashboard/delete', 'EvictionController@delete');
 
 Route::get('/eviction-info', 'EvictionInfoController@index');
 

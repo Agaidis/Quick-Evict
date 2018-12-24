@@ -48,11 +48,11 @@
                                                     <input checked type="radio" id="rented_by_owner" value="rentedByOwner" name="rented_by">
                                                     <label for="rented_by_owner">Property is Rented by Owner</label><br>
                                                     <input type="radio" id="rented_by_other" value="rentedByOther" name="rented_by">
-                                                    <label for="rented_by_other">Property is Rented by Other</label>
+                                                    <label for="rented_by_other">Property Rented by 3rd Party</label>
                                                     <div id="rented_by_other_div">
                                                         <div class="col-sm-12">
-                                                            <label class="labels" for="other_name">Landlord Name</label>
-                                                            <input class="form-control" placeholder="Name of Landlord" type="text" id="other_name" name="other_name" value="">
+                                                            <label class="labels" for="other_name">Property Management Company Name</label>
+                                                            <input class="form-control" placeholder="PM Company Name" type="text" id="other_name" name="other_name" value="">
                                                         </div>
                                                         <div class="col-sm-12">
                                                             <label class="labels" for="pm_name">Property Manager Name</label>
