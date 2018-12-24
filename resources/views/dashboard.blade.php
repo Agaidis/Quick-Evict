@@ -31,13 +31,24 @@
                                 </thead>
                                 <tbody>
                                 @foreach ($evictions as $eviction)
-                                    <?php $propertyAddressArray = explode('-1', $eviction->property_address);?>
+                                    <?php $propertyAddressArray = explode('-1', $eviction->property_address);
+                                        $statusArray = array('Created LTC', 'Sent to MDJ', 'Court Date Set', 'Won at Court');?>
                                     <tr>
                                         <td>{{$eviction->id}}</td>
                                         <td>{{$propertyAddressArray[0]}} <br> {{str_replace('United States', '', $propertyAddressArray[1])}}</td>
                                         <td>{{$eviction->owner_name}}</td>
                                         <td>{{$eviction->tenant_name}}</td>
-                                        <td>{{$eviction->status}}</td>
+                                        <td>
+                                            <select title="status" class="form-control" id="status_{{$eviction->id}}">
+                                            @foreach ($statusArray as $status)
+                                                @if ($status == $eviction->status)
+                                                        <option value="{{$status}}" selected>{{$status}}</option>
+                                                    @else
+                                                        <option value="{{$status}}">{{$status}}</option>
+                                                    @endif
+                                                @endforeach
+                                            </select>
+                                        </td>
                                         <td>{{$eviction->total_judgement}}</td>
                                         <td>{{$eviction->court_filing_fee}}</td>
                                         <td>{{$eviction->created_at}}</td>
