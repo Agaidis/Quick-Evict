@@ -8,7 +8,7 @@
                     <div class="card-header">Home</div>
                     <div class="card-body">
                         <h2 style="align-content:center">Welcome to EvictionTech!</h2>
-                        <div>Welcome to EvictionTech, the leader in using technology and eviction expertise to improve the eviction process for real estate owners, property managers, and magistrate district courts.</div>
+                        <div>EvictionTech is the leader in using technology and eviction expertise to improve the eviction process for real estate owners, property managers, and magistrate district courts.</div>
 
                         <div>Prior to EvictionTech, the eviction process was dramatically outdated. Filing evictions caused a lot of extra manual work and delays for everyone involved. EvictionTech brought together a collaboration between cutting edge MDJs, property managers, real estate owners, and web developers to create a better solution.</div>
 
