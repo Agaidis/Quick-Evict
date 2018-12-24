@@ -16,7 +16,6 @@ if (document.location.href.split('/')[3] == 'online-eviction') {
                         type: 'post',
                         dataType: 'json',
                         success: function (response) {
-                            window.location.reload();
                         }
                     });
                 }

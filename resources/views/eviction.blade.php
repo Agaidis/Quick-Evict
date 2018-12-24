@@ -182,7 +182,7 @@
                                         </div>
                                     </div>
 
-                                    <button id="btnSaveSign">Save Signature</button>
+                                    <button type="button" id="btnSaveSign">Save Signature</button>
 
                                     <div class="sign-container">
                                     </div>
