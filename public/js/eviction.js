@@ -53,9 +53,7 @@ if (document.location.href.split('/')[3] == 'online-eviction') {
         });
 
         map.data.addListener('mouseover', function(event) {
-            var title = event.feature.getProperty('title');
-            $info.html(title).show();
-
+            console.log($(this));
         });
 
         var input = /** @type {!HTMLInputElement} */(
