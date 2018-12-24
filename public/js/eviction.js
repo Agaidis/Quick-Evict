@@ -1,5 +1,27 @@
 if (document.location.href.split('/')[3] == 'online-eviction') {
     $(document).ready(function () {
+        function injectTooltip(event, data) {
+            if (!tipObj && event) {
+                //create the tooltip object
+                tipObj = document.createElement("div");
+                tipObj.style.width = '100px';
+                tipObj.style.height = '40px';
+                tipObj.style.background = "white";
+                tipObj.style.borderRadius = "5px";
+                tipObj.style.padding = "10px";
+                tipObj.style.fontFamily = "Arial,Helvetica";
+                tipObj.style.textAlign = "center";
+                tipObj.innerHTML = data;
+
+                //position it
+                tipObj.style.position = "fixed";
+                tipObj.style.top = event.Ba.clientY + window.scrollY + offset.y + "px";
+                tipObj.style.left = event.Ba.clientX + window.scrollX + offset.x + "px";
+
+                //add it to the body
+                document.body.appendChild(tipObj);
+            }
+        }
 
         $('#signArea').signaturePad({drawOnly:true, drawBezierCurves:true, lineTop:90});
 
@@ -98,8 +120,8 @@ if (document.location.href.split('/')[3] == 'online-eviction') {
                 return;
             }
 
-            map.data.addListener('mouseover', function(event) {
-                console.log('this');
+            google.maps.event.addListener(polygon, 'mouseover', function (e) {
+                injectTooltip(e, polygon.strokeColor);
             });
 
             houseNum = place.address_components[0].long_name;
