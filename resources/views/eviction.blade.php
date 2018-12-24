@@ -181,6 +181,11 @@
                                             </div>
                                         </div>
                                     </div>
+
+                                    <button id="btnSaveSign">Save Signature</button>
+
+                                    <div class="sign-container">
+                                    </div>
                                         <button type="submit" id="pdf_download_btn" class="btn btn-primary">Download PDF File</button>
 
 

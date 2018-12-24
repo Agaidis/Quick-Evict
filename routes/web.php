@@ -22,6 +22,7 @@ Route::post('/dashboard/statusChange', 'DashboardController@statusChange');
 Route::post('/dashboard/delete', 'EvictionController@delete');
 
 Route::get('/online-eviction', 'EvictionController@index');
+Route::post('/online-eviction', 'EvictionController@saveSignature');
 
 Route::get('/eviction-info', 'EvictionInfoController@index');
 

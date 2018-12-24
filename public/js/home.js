@@ -43,10 +43,7 @@ $(document).ready(function () {
     }).on('change', '.status_select', function() {
         var id = $(this)[0].id;
         var splitId = id.split('_');
-
-        console.log(splitId);
         var status = $('#status_' + splitId[1]).val();
-        console.log(status);
 
         $.ajaxSetup({
                 headers: {
