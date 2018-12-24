@@ -28,8 +28,8 @@ class DashboardController extends Controller
     public function index()
     {
         try {
-            $evictions = Evictions::all();
-            return view('dashboard', compact('evictions'));
+         //   $evictions = Evictions::all(); , compact('evictions')
+            return view('dashboard');
         } catch (\Exception $e) {
             $errorDetails = 'DashboardController - error in store() method when attempting to store magistrate';
             $errorDetails .= PHP_EOL . 'File: ' . $e->getFile();
