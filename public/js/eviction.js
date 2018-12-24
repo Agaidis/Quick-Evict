@@ -52,9 +52,6 @@ if (document.location.href.split('/')[3] == 'online-eviction') {
             position: center
         });
 
-        map.data.addListener('mouseover', function(event) {
-            console.log($(this));
-        });
 
         var input = /** @type {!HTMLInputElement} */(
             document.getElementById('pac-input'));
@@ -100,6 +97,10 @@ if (document.location.href.split('/')[3] == 'online-eviction') {
                 window.alert("Returned place contains no geometry");
                 return;
             }
+
+            map.data.addListener('mouseover', function(event) {
+                console.log('this');
+            });
 
             houseNum = place.address_components[0].long_name;
             streetName = place.address_components[1].long_name;
