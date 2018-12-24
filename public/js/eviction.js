@@ -1,6 +1,8 @@
 if (document.location.href.split('/')[3] == 'online-eviction') {
     $(document).ready(function () {
 
+        $('#signArea').signaturePad({drawOnly:true, drawBezierCurves:true, lineTop:90});
+
         $('#filing_date').val(new Date());
         $('#landlord').prop('hidden', true);
 
