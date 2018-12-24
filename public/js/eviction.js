@@ -51,6 +51,14 @@ if (document.location.href.split('/')[3] == 'online-eviction') {
         marker = new google.maps.Marker({
             position: center
         });
+
+        map.data.addListener('mouseover', function(event) {
+            var title = event.feature.getProperty('title');
+            $info.html(title).show();
+            // save state
+            state = {area: title, over: true};
+        });
+
         var input = /** @type {!HTMLInputElement} */(
             document.getElementById('pac-input'));
         var types = document.getElementById('type-selector');

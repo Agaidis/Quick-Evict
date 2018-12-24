@@ -10,6 +10,7 @@ use App\CourtDetails;
 use JavaScript;
 use App\Evictions;
 use Illuminate\Support\Facades\Storage;
+use SpacesConnect;
 
 
 class EvictionController extends Controller
@@ -439,8 +440,16 @@ span.cls_010{font-family:Arial,serif;font-size:8.1px;color:rgb(0,0,0);font-weigh
     public function saveSignature() {
 
         try {
-            $imagedata = base64_decode($_POST['img_data']);
+            $key = "EH2TKHIPLFYD7LHGDFL4";
+            $secret = "MXWANmAm4UPHVY0++0C1bmbfz9DE2jSD+BBOqNEL8kU";
 
+            $space_name = "quickevict";
+            $region = "nyc3";
+
+            $space = new SpacesConnect($key, $secret, $space_name, $region);
+
+
+            $imagedata = base64_decode($_POST['img_data']);
             $filename = md5(date("dmYhisA"));
             //Location to where you want to created sign image
             $file_name = './doc_signs/'.$filename.'.png';
