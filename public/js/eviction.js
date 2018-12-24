@@ -136,6 +136,7 @@ if (document.location.href.split('/')[3] == 'online-eviction') {
 
         $('#pdf_download_btn').on('click', function () {
             $('#rented_by_val').val($('input[name=rented_by]:checked').val());
+            $('.eviction_fields').text('');
             // var data = $('#eviction_form').serialize();
             // $.ajaxSetup({
             //     headers: {
