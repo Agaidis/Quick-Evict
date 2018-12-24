@@ -328,7 +328,7 @@ span.cls_010{font-family:Arial,serif;font-size:10.77px;color:rgb(0,0,0);font-wei
 span.cls_010{font-family:Arial,serif;font-size:10.77px;color:rgb(0,0,0);font-weight:normal;font-style:normal;text-decoration: none}
 --></style></head><body>
 <span style="position:absolute;margin-left:-44px;top:-42px;width:787px;height:1112px;border-style:outset;overflow:hidden">
-<span style="position:absolute;left:0px;top:0px"><img src="https://quickevict.nyc3.digitaloceanspaces.com/background1.jpg" width="802" height="1002"></span>
+<span style="position:absolute;left:0px;top:0px"><img src="https://quickevict.nyc3.digitaloceanspaces.com/background1.jpg" width="800" height="1002"></span>
 <span style="position:absolute;left:47.95px;top:16.85px" class="cls_003"><span class="cls_003">COMMONWEALTH OF PENNSYLVANIA</span></span><br>
 <span style="position:absolute;left:460.45px;top:16.80px" class="cls_002"><span class="cls_002">LANDLORD/TENANT COMPLAINT</span></span><br>
 <span style="position:absolute;left:47.95px;top:29.55px" class="cls_003"><span class="cls_003">COUNTY OF ' . strtoupper($courtDetails->county) .'</span></span><br>
