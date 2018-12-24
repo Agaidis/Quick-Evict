@@ -43,8 +43,12 @@ class DashboardController extends Controller
 
     public function statusChange(Request $request) {
         try {
-            $id = $request->id;
-            return $id;
+            $eviction = Evictions::find($request->id);
+            $eviction->status = $request->status;
+
+            $eviction->save();
+
+            return 'success';
         } catch (\Exception $e) {
             $errorDetails = 'DashboardController - error in store() method when attempting to store magistrate';
             $errorDetails .= PHP_EOL . 'File: ' . $e->getFile();
