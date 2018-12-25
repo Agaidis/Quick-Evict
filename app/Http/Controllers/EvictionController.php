@@ -341,31 +341,31 @@ span.cls_010{font-family:Arial,serif;font-size:10.77px;color:rgb(0,0,0);font-wei
 <span style="position:absolute;left:447.28px;top:180.90px" class="cls_009"><span class="cls_009">DEFENDANT:</span><br><p style="margin-left:6px;">'.$tenantName.'<br>'.$defendanthouseNum.' '.$defendantStreetName.' '. $_POST['unit_number'] . '<br>'.$defendantTown .',' . $defendantState.' '.$defendantZipcode.'  </p></span><br>
 <span style="position:absolute;left:600.50px;top:180.00px" class="cls_005"><span class="cls_005">NAME and ADDRESS</span></span><br>
 <span style="position:absolute;left:55.40px;top:188.45px" class="cls_004"><span class="cls_004">Telephone: '.$courtDetails->phone_number.'</span></span><br>
-<span style="position:absolute;left:202.45px;top:214.95px" class="cls_004"><span class="cls_004">AMOUNT</span></span><br>
-<span style="position:absolute;left:289.35px;top:214.95px" class="cls_004"><span class="cls_004">DATE PAID</span></span><br>
+<span style="position:absolute;left:195.45px;top:214.95px" class="cls_004"><span class="cls_004">AMOUNT</span></span><br>
+<span style="position:absolute;left:293.35px;top:214.95px" class="cls_004"><span class="cls_004">DATE PAID</span></span><br>
 <span style="position:absolute;left:55.40px;top:234.95px" class="cls_004"><span class="cls_004">FILING COSTS:</span></span><br>
-<span style="position:absolute;left:150.00px;top:234.95px" class="cls_004"><span class="cls_004">$</span></span><br>
-<span style="position:absolute;left:55.40px;top:250.95px" class="cls_004"><span class="cls_004">POSTAGE</span></span><br>
-<span style="position:absolute;left:150.00px;top:250.95px" class="cls_004"><span class="cls_004">$</span></span><br>
+<span style="position:absolute;left:152.00px;top:234.95px" class="cls_004"><span class="cls_004">$</span></span><br>
+<span style="position:absolute;left:55.40px;top:252.95px" class="cls_004"><span class="cls_004">POSTAGE</span></span><br>
+<span style="position:absolute;left:152.00px;top:252.95px" class="cls_004"><span class="cls_004">$</span></span><br>
 <span style="position:absolute;left:480.55px;top:262.45px" class="cls_004"><span class="cls_004">Docket No: </span></span><br>
-<span style="position:absolute;left:55.40px;top:275.95px" class="cls_004"><span class="cls_004">SERVICE COSTS</span></span><br>
-<span style="position:absolute;left:150.00px;top:275.95px" class="cls_004"><span class="cls_004">$</span></span><br>
+<span style="position:absolute;left:55.40px;top:270.95px" class="cls_004"><span class="cls_004">SERVICE COSTS</span></span><br>
+<span style="position:absolute;left:152.00px;top:270.95px" class="cls_004"><span class="cls_004">$</span></span><br>
 <span style="position:absolute;left:480.55px;top:272.95px" class="cls_004"><span class="cls_004">Case Filed:</span></span><br>
-<span style="position:absolute;left:55.40px;top:284.95px" class="cls_004"><span class="cls_004">CONSTABLE ED.</span></span><br>
-<span style="position:absolute;left:150.00px;top:284.95px" class="cls_004"><span class="cls_004">$</span></span><br>
-<span style="position:absolute;left:55.40px;top:300.95px" class="cls_004"><span class="cls_004">TOTAL</span></span><br>
-<span style="position:absolute;left:150.00px;top:300.95px" class="cls_004"><span class="cls_004">$</span></span><br>
+<span style="position:absolute;left:55.40px;top:290.95px" class="cls_004"><span class="cls_004">CONSTABLE ED.</span></span><br>
+<span style="position:absolute;left:152.00px;top:290.95px" class="cls_004"><span class="cls_004">$</span></span><br>
+<span style="position:absolute;left:55.40px;top:305.95px" class="cls_004"><span class="cls_004">TOTAL</span></span><br>
+<span style="position:absolute;left:152.00px;top:305.95px" class="cls_004"><span class="cls_004">$</span></span><br>
 <span style="position:absolute;left:55.40px;top:305.95px" class="cls_003"><span class="cls_003">Pa.R.C.P.M.D.J. No. 206 sets forth those costs recoverable by the prevailing party.</span></span><br>
 <span style="position:absolute;left:60.40px;top:320.95px" class="cls_004"><span class="cls_004">TO THE DEFENDANT: The above named plaintiff(s) asks judgment together with costs against you for the possession of real</span></span><br>
-<span style="position:absolute;left:82.77px;top:279.51px" class="cls_004"><span class="cls_004">property and for:</span></span><br>
-<span style="position:absolute;left:60.87px;top:292.21px" class="cls_004"><span class="cls_004">Lease is</span><span style="margin-left:260px;">'.$monthlyRent.'</span></span><br>
-<span style="position:absolute;left:120.25px;top:292.21px" class="cls_004"><span class="cls_004">'. $isResidential .'Residential</span></span><br>
-<span style="position:absolute;left:198.23px;top:292.21px" class="cls_004"><span class="cls_004">'. $isNotResidential .'Nonresidential     Monthly Rent  $</span></span><br>
-<span style="position:absolute;left:415.98px;top:292.21px" class="cls_004"><span class="cls_004">Security Deposit $</span><span style="margin-left:30px;">'.$securityDeposit.'</span></span><br>
-<span style="position:absolute;left:60.87px;top:304.91px" class="cls_004"><span class="cls_004">'. $abandonedCheckbox . ' A determination that the manufactured home and property have been abandoned.</span></span><br>
-<span style="position:absolute;left:60.87px;top:317.61px" class="cls_004"><span class="cls_004">'. $determinationRequestCheckbox . ' A Request for Determination of Abandonment (Form MDJS 334) must be completed and submitted with this complaint.</span></span><br>
-<span style="position:absolute;left:61.30px;top:332.71px" class="cls_004"><span class="cls_004">'. $damageAmtCheckbox . ' Damages for injury to the real property, to wit: ___<span style="text-decoration:underline;">'.$propertyDamageDetails.'</span></span></span><br>
-<span style="position:absolute;left:60.87px;top:348.21px" class="cls_004"><span class="cls_004">______________________________________________________________  in the amount of:</span></span><br>
+<span style="position:absolute;left:82.77px;top:330.51px" class="cls_004"><span class="cls_004">property and for:</span></span><br>
+<span style="position:absolute;left:80.87px;top:340.21px" class="cls_004"><span class="cls_004">Lease is</span><span style="margin-left:260px;">'.$monthlyRent.'</span></span><br>
+<span style="position:absolute;left:120.25px;top:340.21px" class="cls_004"><span class="cls_004">'. $isResidential .'Residential</span></span><br>
+<span style="position:absolute;left:198.23px;top:340.21px" class="cls_004"><span class="cls_004">'. $isNotResidential .'Nonresidential     Monthly Rent  $</span></span><br>
+<span style="position:absolute;left:415.98px;top:340.21px" class="cls_004"><span class="cls_004">Security Deposit $</span><span style="margin-left:30px;">'.$securityDeposit.'</span></span><br>
+<span style="position:absolute;left:55.40px;top:364.91px" class="cls_004"><span class="cls_004">'. $abandonedCheckbox . ' A determination that the manufactured home and property have been abandoned.</span></span><br>
+<span style="position:absolute;left:55.40px;top:374.61px" class="cls_004"><span class="cls_004">'. $determinationRequestCheckbox . ' A Request for Determination of Abandonment (Form MDJS 334) must be completed and submitted with this complaint.</span></span><br>
+<span style="position:absolute;left:55.40px;top:384.71px" class="cls_004"><span class="cls_004">'. $damageAmtCheckbox . ' Damages for injury to the real property, to wit: ___<span style="text-decoration:underline;">'.$propertyDamageDetails.'</span></span></span><br>
+<span style="position:absolute;left:55.40px;top:348.21px" class="cls_004"><span class="cls_004">______________________________________________________________  in the amount of:</span></span><br>
 <span style="position:absolute;left:457.40px;top:348.45px" class="cls_004"><span class="cls_004">$</span></span><br>
 <span style="position:absolute;left:466.55px;top:348.21px" class="cls_004"><span style="text-decoration: underline;" class="cls_004">__________'.$damageAmt.'_________</span></span><br>
 <span style="position:absolute;left:60.50px;top:363.95px" class="cls_004"><span class="cls_004">'. $unjustDamagesCheckbox . 'Damages for the unjust detention of the real property in the amount of</span></span><br>
