@@ -337,12 +337,12 @@ span.cls_010{font-family:Arial,serif;font-size:10.77px;color:rgb(0,0,0);font-wei
 <span style="position:absolute;left:55.40px;top:92.36px" class="cls_004"><span class="cls_004">Mag. Dist. No: '. $courtNumber .'</span></span><br>
 <span style="position:absolute;left:55.40px;top:105.85px" class="cls_004"><span class="cls_004">MDJ Name: '. $courtDetails->mdj_name .'</span></span><br>
 <span style="position:absolute;left:55.40px;top:120.05px" class="cls_004"><span class="cls_004">Address: '.$courtAddressLine1.'<br><span style="margin-left:45px;">'.$courtAddressLine2.'</span></span></span><br>
-<span style="position:absolute;left:581.34px;top:130.90px" class="cls_006"><span class="cls_006">V.</span></span><br>
-<span style="position:absolute;left:447.28px;top:133.60px" class="cls_009"><span class="cls_009">DEFENDANT:</span><br><p style="margin-left:6px;">'.$tenantName.'<br>'.$defendanthouseNum.' '.$defendantStreetName.' '. $_POST['unit_number'] . '<br>'.$defendantTown .',' . $defendantState.' '.$defendantZipcode.'  </p></span><br>
+<span style="position:absolute;left:581.34px;top:163.90px" class="cls_006"><span class="cls_006">V.</span></span><br>
+<span style="position:absolute;left:447.28px;top:163.60px" class="cls_009"><span class="cls_009">DEFENDANT:</span><br><p style="margin-left:6px;">'.$tenantName.'<br>'.$defendanthouseNum.' '.$defendantStreetName.' '. $_POST['unit_number'] . '<br>'.$defendantTown .',' . $defendantState.' '.$defendantZipcode.'  </p></span><br>
 <span style="position:absolute;left:550.50px;top:135.00px" class="cls_005"><span class="cls_005">NAME and ADDRESS</span></span><br>
-<span style="position:absolute;left:55.40px;top:148.45px" class="cls_004"><span class="cls_004">Telephone: '.$courtDetails->phone_number.'</span></span><br>
-<span style="position:absolute;left:172.45px;top:214.95px" class="cls_004"><span class="cls_004">AMOUNT</span></span><br>
-<span style="position:absolute;left:259.35px;top:214.95px" class="cls_004"><span class="cls_004">DATE PAID</span></span><br>
+<span style="position:absolute;left:55.40px;top:188.45px" class="cls_004"><span class="cls_004">Telephone: '.$courtDetails->phone_number.'</span></span><br>
+<span style="position:absolute;left:192.45px;top:214.95px" class="cls_004"><span class="cls_004">AMOUNT</span></span><br>
+<span style="position:absolute;left:279.35px;top:214.95px" class="cls_004"><span class="cls_004">DATE PAID</span></span><br>
 <span style="position:absolute;left:55.40px;top:224.95px" class="cls_004"><span class="cls_004">FILING COSTS:</span></span><br>
 <span style="position:absolute;left:120.00px;top:224.95px" class="cls_004"><span class="cls_004">$</span></span><br>
 <span style="position:absolute;left:55.40px;top:234.95px" class="cls_004"><span class="cls_004">POSTAGE</span></span><br>
