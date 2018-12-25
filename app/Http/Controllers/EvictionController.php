@@ -414,8 +414,8 @@ span.cls_010{font-family:Arial,serif;font-size:10.77px;color:rgb(0,0,0);font-wei
 <span style = "position:absolute;left:60.90px;top:955.35px" class="cls_007" ><span class="cls_007" > contact the Magisterial District Court at the above address or telephone number . We are unable to provide transportation .</span ></span ><br >
 <span style = "position:absolute;left:55.40px;top:965.85px" class="cls_008" ><span class="cls_008" > AOPC 310A </span ></span ><br >
 <span style = "position:absolute;left:303.75px;top:972.50px" class="cls_008" ><span class="cls_008" > 1</span ></span ><br >
-<span style = "position:absolute;left:471.65px;top:1100.10px" class="cls_007" ><span class="cls_007" > </span >Filing Fee: $'.$filingFee.'</span ><br >
-<span style = "position:absolute;left:452.45px;top:1100.80px" class="cls_010" ><span class="cls_010" > </span ></span >
+<span style = "position:absolute;left:471.65px;top:1050px" class="cls_007" ><span class="cls_007" > </span >Filing Fee: $'.$filingFee.'</span ><br >
+<span style = "position:absolute;left:452.45px;top:1050px" class="cls_010" ><span class="cls_010" > </span ></span >
 </span ></body ></html>');
 
             // (Optional) Setup the paper size and orientation
