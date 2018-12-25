@@ -365,21 +365,21 @@ span.cls_010{font-family:Arial,serif;font-size:10.77px;color:rgb(0,0,0);font-wei
 <span style="position:absolute;left:55.40px;top:404.91px" class="cls_004"><span class="cls_004">'. $abandonedCheckbox . ' A determination that the manufactured home and property have been abandoned.</span></span><br>
 <span style="position:absolute;left:55.40px;top:420.61px" class="cls_004"><span class="cls_004">'. $determinationRequestCheckbox . ' A Request for Determination of Abandonment (Form MDJS 334) must be completed and submitted with this complaint.</span></span><br>
 <span style="position:absolute;left:55.40px;top:435.71px" class="cls_004"><span class="cls_004">'. $damageAmtCheckbox . ' Damages for injury to the real property, to wit: ___<span style="text-decoration:underline;">'.$propertyDamageDetails.'</span></span></span><br>
-<span style="position:absolute;left:75.40px;top:464.21px" class="cls_004"><span class="cls_004">______________________________________________________________  in the amount of:</span></span><br>
-<span style="position:absolute;left:600.40px;top:464.45px" class="cls_004"><span class="cls_004">$</span></span><br>
-<span style="position:absolute;left:600.40px;top:464.21px" class="cls_004"><span style="text-decoration: underline;" class="cls_004">__________'.$damageAmt.'_________</span></span><br>
-<span style="position:absolute;left:60.50px;top:504.95px" class="cls_004"><span class="cls_004">'. $unjustDamagesCheckbox . 'Damages for the unjust detention of the real property in the amount of</span></span><br>
-<span style="position:absolute;left:600.40px;top:504.95px" class="cls_004"><span class="cls_004">$</span></span><br>
-<span style="position:absolute;left:600.42px;top:504.95px" class="cls_004"><span style="text-decoration: underline;" class="cls_004">__________'.$unjustDamages.'_________</span></span><br>
-<span style="position:absolute;left:60.50px;top:524.45px" class="cls_004"><span class="cls_004">'. $amtGreaterThanZeroCheckbox .' Rent remaining due and unpaid on filing date in the amount of</span></span><br>
-<span style="position:absolute;left:600.40px;top:524.45px" class="cls_004"><span class="cls_004">$</span></span><br>
-<span style="position:absolute;left:600.40px;top:524.45px" class="cls_004"><span style="text-decoration: underline;" class="cls_004">__________'.$dueRent.'_________</span></span><br>
-<span style="position:absolute;left:60.50px;top:544.95px" class="cls_004"><span class="cls_004">'. $additionalRent .' And additional rent remaining due and unpaid on hearing date</span></span><br>
-<span style="position:absolute;left:600.40px;top:544.95px" class="cls_004"><span class="cls_004">$</span></span><br>
-<span style="position:absolute;left:600.40px;top:544.95px" class="cls_004"><span class="cls_004">___________________</span></span><br>
-<span style="position:absolute;left:60.50px;top:564.45px" class="cls_004"><span class="cls_004">' . $attorneyFeesCheckbox . ' Attorney fees in the amount of</span></span><br>
-<span style="position:absolute;left:600.40px;top:584.45px" class="cls_004"><span class="cls_004">$</span></span><br>
-<span style="position:absolute;left:600.40px;top:584.45px" class="cls_004"><span style="text-decoration: underline;" class="cls_004">__________'.$attorneyFees.'_________</span></span><br>
+<span style="position:absolute;left:75.40px;top:454.21px" class="cls_004"><span class="cls_004">______________________________________________________________  in the amount of:</span></span><br>
+<span style="position:absolute;left:600.40px;top:454.45px" class="cls_004"><span class="cls_004">$</span></span><br>
+<span style="position:absolute;left:600.40px;top:454.21px" class="cls_004"><span style="text-decoration: underline;" class="cls_004">__________'.$damageAmt.'_________</span></span><br>
+<span style="position:absolute;left:60.50px;top:474.95px" class="cls_004"><span class="cls_004">'. $unjustDamagesCheckbox . 'Damages for the unjust detention of the real property in the amount of</span></span><br>
+<span style="position:absolute;left:600.40px;top:474.95px" class="cls_004"><span class="cls_004">$</span></span><br>
+<span style="position:absolute;left:600.42px;top:474.95px" class="cls_004"><span style="text-decoration: underline;" class="cls_004">__________'.$unjustDamages.'_________</span></span><br>
+<span style="position:absolute;left:60.50px;top:494.45px" class="cls_004"><span class="cls_004">'. $amtGreaterThanZeroCheckbox .' Rent remaining due and unpaid on filing date in the amount of</span></span><br>
+<span style="position:absolute;left:600.40px;top:494.45px" class="cls_004"><span class="cls_004">$</span></span><br>
+<span style="position:absolute;left:600.40px;top:494.45px" class="cls_004"><span style="text-decoration: underline;" class="cls_004">__________'.$dueRent.'_________</span></span><br>
+<span style="position:absolute;left:60.50px;top:514.95px" class="cls_004"><span class="cls_004">'. $additionalRent .' And additional rent remaining due and unpaid on hearing date</span></span><br>
+<span style="position:absolute;left:600.40px;top:514.95px" class="cls_004"><span class="cls_004">$</span></span><br>
+<span style="position:absolute;left:600.40px;top:514.95px" class="cls_004"><span class="cls_004">___________________</span></span><br>
+<span style="position:absolute;left:60.50px;top:534.45px" class="cls_004"><span class="cls_004">' . $attorneyFeesCheckbox . ' Attorney fees in the amount of</span></span><br>
+<span style="position:absolute;left:600.40px;top:534.45px" class="cls_004"><span class="cls_004">$</span></span><br>
+<span style="position:absolute;left:600.40px;top:534.45px" class="cls_004"><span style="text-decoration: underline;" class="cls_004">__________'.$attorneyFees.'_________</span></span><br>
 <span style="position:absolute;left:42.30px;top:607.20px" class="cls_004"><span class="cls_004">THE PLAINTIFF FURTHER ALLEGES THAT:</span></span><br>
 <span style="position:absolute;left:580.40px;top:607.20px" class="cls_004"><span class="cls_004">Total:</span></span><br>
 <span style="position:absolute;left:600.40px;top:612.20px" class="cls_004"><span class="cls_004">$</span></span><br>
