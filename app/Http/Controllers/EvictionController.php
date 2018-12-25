@@ -383,26 +383,26 @@ span.cls_010{font-family:Arial,serif;font-size:10.77px;color:rgb(0,0,0);font-wei
 <span style="position:absolute;left:42.30px;top:607.20px" class="cls_004"><span class="cls_004">THE PLAINTIFF FURTHER ALLEGES THAT:</span></span><br>
 <span style="position:absolute;left:600.40px;top:607.20px" class="cls_004"><span class="cls_004">Total:</span></span><br>
 <span style="position:absolute;left:600.40px;top:607.20px" class="cls_004"><span class="cls_004">$</span></span><br>
-<span style="position:absolute;left:600.40px;top:427.20px" class="cls_004"><span style="text-decoration: underline;" class="cls_004">__________'.$totalFees.'_________</span></span><br>
-<span style="position:absolute;left:55.40px;top:442.15px" class="cls_004"><span class="cls_004">1. The location and the address, if any, of the real property is:</span></span><br>
-<span style="position:absolute;left:293.85px;top:442.15px" class="cls_004"><span style="text-decoration: underline;" class="cls_004">'.$defendanthouseNum.' '.$defendantStreetName . ', ' .$_POST['unit_number'].', ' . $defendantTown .','.$defendantState.' '.$defendantZipcode . '</span></span><br>
-<span style="position:absolute;left:55.40px;top:454.05px" class="cls_004"><span class="cls_004">2. The plaintiff is the landlord of that property.</span></span><br>
-<span style="position:absolute;left:55.40px;top:464.55px" class="cls_004"><span class="cls_004">3. The plaintiff leased or rented the property to you or to ___________________________________________under whom you claim</span></span><br>
-<span style="position:absolute;left:55.40px;top:478.65px" class="cls_004"><span class="cls_004">4.</span></span><br>
-<span style="position:absolute;left:65.60px;top:478.65px" class="cls_004"><span class="cls_004">'.$quitNoticeGiven.'Notice to quit was given in accordance with law, or</span></span><br>
-<span style="position:absolute;left:65.60px;top:494.15px" class="cls_004"><span class="cls_004">'.$noQuitNotice.'No notice is required under the terms of the lease.</span></span><br>
-<span style="position:absolute;left:55.40px;top:513.45px" class="cls_004"><span class="cls_004">5.</span></span><br>
-<span style="position:absolute;left:77.30px;top:513.45px" class="cls_004"><span class="cls_004">'.$leaseEnded.'The term for which the property was leased or rented is fully ended, or</span></span><br>
-<span style="position:absolute;left:77.30px;top:531.35px" class="cls_004"><span class="cls_004">'.$breachedConditionsLease.'A forfeiture has resulted by reason of a breach of the conditions of the lease, to wit:</span></span><br>
-<span style="position:absolute;left:414.74px;top:531.35px" class="cls_004"><span style="text-decoration: underline;" class="cls_004">'.$breachedDetails.'_____</span></span>
-<span style="position:absolute;left:77.30px;top:541.35px" class="cls_004"><span class="cls_004">________________________________________________________________________________________________or,</span></span><br>
-<span style="position:absolute;left:77.30px;top:554.15px" class="cls_004"><span class="cls_004">___________________________________________________________________________________________________</span></span><br>
-<span style="position:absolute;left:77.30px;top:569.55px" class="cls_004"><span class="cls_004">'.$unsatisfiedLease.'Rent reserved and due has, upon demand, remained unsatisfied.</span></span><br>
-<span style="position:absolute;left:42.30px;top:582.15px" class="cls_004"><span class="cls_004">6.</span></span><br>
-<span style="position:absolute;left:60.50px;top:582.15px" class="cls_004"><span class="cls_004">You retain the real property and refuse to give up to its possession.</span></span><br>
-<span style="position:absolute;left:42.00px;top:645.65px" class="cls_004"><span class="cls_004">I, <span style="text-decoration:underline;"> ' . $ownerPMName . ' </span> verify that the facts set forth in this complaint are</span></span><br>
-<span style="position:absolute;left:42.00px;top:665.85px" class="cls_004"><span class="cls_004">true and correct to the best of my knowledge, information and belief. This statement is made subject to the penalties of Section 4904</span></span><br>
-<span style="position:absolute;left:42.00px;top:676.05px" class="cls_004"><span class="cls_004">of the Crimes Code (18 PA. C.S. § 4904) relating to unsworn falsification to authorities.</span></span><br>
+<span style="position:absolute;left:600.40px;top:615.20px" class="cls_004"><span style="text-decoration: underline;" class="cls_004">__________'.$totalFees.'_________</span></span><br>
+<span style="position:absolute;left:55.40px;top:620.15px" class="cls_004"><span class="cls_004">1. The location and the address, if any, of the real property is:</span></span><br>
+<span style="position:absolute;left:293.85px;top:630.15px" class="cls_004"><span style="text-decoration: underline;" class="cls_004">'.$defendanthouseNum.' '.$defendantStreetName . ', ' .$_POST['unit_number'].', ' . $defendantTown .','.$defendantState.' '.$defendantZipcode . '</span></span><br>
+<span style="position:absolute;left:55.40px;top:640.05px" class="cls_004"><span class="cls_004">2. The plaintiff is the landlord of that property.</span></span><br>
+<span style="position:absolute;left:55.40px;top:650.55px" class="cls_004"><span class="cls_004">3. The plaintiff leased or rented the property to you or to ___________________________________________under whom you claim</span></span><br>
+<span style="position:absolute;left:55.40px;top:660.65px" class="cls_004"><span class="cls_004">4.</span></span><br>
+<span style="position:absolute;left:65.60px;top:670.65px" class="cls_004"><span class="cls_004">'.$quitNoticeGiven.'Notice to quit was given in accordance with law, or</span></span><br>
+<span style="position:absolute;left:65.60px;top:680.15px" class="cls_004"><span class="cls_004">'.$noQuitNotice.'No notice is required under the terms of the lease.</span></span><br>
+<span style="position:absolute;left:55.40px;top:690.45px" class="cls_004"><span class="cls_004">5.</span></span><br>
+<span style="position:absolute;left:77.30px;top:700.45px" class="cls_004"><span class="cls_004">'.$leaseEnded.'The term for which the property was leased or rented is fully ended, or</span></span><br>
+<span style="position:absolute;left:77.30px;top:710.35px" class="cls_004"><span class="cls_004">'.$breachedConditionsLease.'A forfeiture has resulted by reason of a breach of the conditions of the lease, to wit:</span></span><br>
+<span style="position:absolute;left:414.74px;top:720.35px" class="cls_004"><span style="text-decoration: underline;" class="cls_004">'.$breachedDetails.'_____</span></span>
+<span style="position:absolute;left:77.30px;top:730.35px" class="cls_004"><span class="cls_004">________________________________________________________________________________________________or,</span></span><br>
+<span style="position:absolute;left:77.30px;top:740.15px" class="cls_004"><span class="cls_004">___________________________________________________________________________________________________</span></span><br>
+<span style="position:absolute;left:77.30px;top:750.55px" class="cls_004"><span class="cls_004">'.$unsatisfiedLease.'Rent reserved and due has, upon demand, remained unsatisfied.</span></span><br>
+<span style="position:absolute;left:42.30px;top:760.15px" class="cls_004"><span class="cls_004">6.</span></span><br>
+<span style="position:absolute;left:60.50px;top:760.15px" class="cls_004"><span class="cls_004">You retain the real property and refuse to give up to its possession.</span></span><br>
+<span style="position:absolute;left:42.00px;top:770.65px" class="cls_004"><span class="cls_004">I, <span style="text-decoration:underline;"> ' . $ownerPMName . ' </span> verify that the facts set forth in this complaint are</span></span><br>
+<span style="position:absolute;left:42.00px;top:780.85px" class="cls_004"><span class="cls_004">true and correct to the best of my knowledge, information and belief. This statement is made subject to the penalties of Section 4904</span></span><br>
+<span style="position:absolute;left:42.00px;top:790.05px" class="cls_004"><span class="cls_004">of the Crimes Code (18 PA. C.S. § 4904) relating to unsworn falsification to authorities.</span></span><br>
 <span style="position:absolute;left:42.30px;top:800.90px" class="cls_004"><span class="cls_004">I certify this filing complies with the UJS Case Records Public Access Policy.</span></span><br>
 <span style="position:absolute;left:560.00px;top:876.80px" class="cls_004"><span class="cls_004">(Signature of Plaintiff)</span></span><br>
 <span style="position:absolute;left:60.00px;top:900.40px" class="cls_004"><span class="cls_004">The plaintiff\'s attorney shall file an entry of appearance with the magisterial district court pursuant to Pa . R . C . P . M . D . J . 207.1 </span ></span ><br >
