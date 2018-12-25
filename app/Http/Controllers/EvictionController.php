@@ -396,14 +396,14 @@ span.cls_010{font-family:Arial,serif;font-size:10.77px;color:rgb(0,0,0);font-wei
 <span style="position:absolute;left:77.30px;top:700.35px" class="cls_004"><span class="cls_004">'.$breachedConditionsLease.'A forfeiture has resulted by reason of a breach of the conditions of the lease, to wit:</span></span><br>
 <span style="position:absolute;left:504.74px;top:700.35px" class="cls_004"><span style="text-decoration: underline;" class="cls_004">'.$breachedDetails.'_____</span></span>
 <span style="position:absolute;left:77.30px;top:710.35px" class="cls_004"><span class="cls_004">________________________________________________________________________________________________or,</span></span><br>
-<span style="position:absolute;left:77.30px;top:720.15px" class="cls_004"><span class="cls_004">___________________________________________________________________________________________________</span></span><br>
+<span style="position:absolute;left:77.30px;top:725.15px" class="cls_004"><span class="cls_004">___________________________________________________________________________________________________</span></span><br>
 <span style="position:absolute;left:77.30px;top:740.55px" class="cls_004"><span class="cls_004">'.$unsatisfiedLease.'Rent reserved and due has, upon demand, remained unsatisfied.</span></span><br>
 <span style="position:absolute;left:55.40px;top:760.15px" class="cls_004"><span class="cls_004">6.</span></span><br>
 <span style="position:absolute;left:65.50px;top:760.15px" class="cls_004"><span class="cls_004">You retain the real property and refuse to give up to its possession.</span></span><br>
 <span style="position:absolute;left:55.40px;top:780.65px" class="cls_004"><span class="cls_004">I, <span style="text-decoration:underline;"> ' . $ownerPMName . ' </span> verify that the facts set forth in this complaint are</span></span><br>
-<span style="position:absolute;left:55.40px;top:795.85px" class="cls_004"><span class="cls_004">true and correct to the best of my knowledge, information and belief. This statement is made subject to the penalties of Section 4904</span></span><br>
-<span style="position:absolute;left:55.40px;top:815.05px" class="cls_004"><span class="cls_004">of the Crimes Code (18 PA. C.S. § 4904) relating to unsworn falsification to authorities.</span></span><br>
-<span style="position:absolute;left:55.40px;top:830.90px" class="cls_004"><span class="cls_004">I certify this filing complies with the UJS Case Records Public Access Policy.</span></span><br>
+<span style="position:absolute;left:55.40px;top:780.85px" class="cls_004"><span class="cls_004">true and correct to the best of my knowledge, information and belief. This statement is made subject to the penalties of Section 4904</span></span><br>
+<span style="position:absolute;left:55.40px;top:795.05px" class="cls_004"><span class="cls_004">of the Crimes Code (18 PA. C.S. § 4904) relating to unsworn falsification to authorities.</span></span><br>
+<span style="position:absolute;left:55.40px;top:810.90px" class="cls_004"><span class="cls_004">I certify this filing complies with the UJS Case Records Public Access Policy.</span></span><br>
 <span style="position:absolute;left:560.00px;top:870.80px" class="cls_004"><span class="cls_004">(Signature of Plaintiff)</span></span><br>
 <span style="position:absolute;left:60.00px;top:890.40px" class="cls_004"><span class="cls_004">The plaintiff\'s attorney shall file an entry of appearance with the magisterial district court pursuant to Pa . R . C . P . M . D . J . 207.1 </span ></span ><br >
 <span style = "position:absolute;left:60.90px;top:905.15px" class="cls_005" ><span class="cls_005" >IF YOU HAVE A DEFENSE to this complaint you may present it at the hearing . IF YOU HAVE A CLAIM against the plaintiff arising out of the occupancy of the premises,</span ></span ><br >
@@ -412,10 +412,10 @@ span.cls_010{font-family:Arial,serif;font-size:10.77px;color:rgb(0,0,0);font-wei
 <span style = "position:absolute;left:60.90px;top:935.60px" class="cls_005" ><span class="cls_005" > against you . A judgment against you for possession may result in your EVICTION from the premises .</span ></span ><br >
 <span style = "position:absolute;left:60.90px;top:945.75px" class="cls_007" ><span class="cls_007" >If you are disabled and require a reasonable accommodation to gain access to the Magisterial District Court and its services, please </span ></span ><br >
 <span style = "position:absolute;left:60.90px;top:955.35px" class="cls_007" ><span class="cls_007" > contact the Magisterial District Court at the above address or telephone number . We are unable to provide transportation .</span ></span ><br >
-<span style = "position:absolute;left:55.40px;top:965.85px" class="cls_008" ><span class="cls_008" > AOPC 310A </span ></span ><br >
-<span style = "position:absolute;left:303.75px;top:975.50px" class="cls_008" ><span class="cls_008" > 1</span ></span ><br >
-<span style = "position:absolute;left:471.65px;top:1050px" class="cls_007" ><span class="cls_007" > </span >Filing Fee: $'.$filingFee.'</span ><br >
-<span style = "position:absolute;left:452.45px;top:1050px" class="cls_010" ><span class="cls_010" > </span ></span >
+<span style = "position:absolute;left:55.40px;top:980.85px" class="cls_008" ><span class="cls_008" > AOPC 310A </span ></span ><br >
+<span style = "position:absolute;left:303.75px;top:980.50px" class="cls_008" ><span class="cls_008" > 1</span ></span ><br >
+<span style = "position:absolute;left:471.65px;top:1000px" class="cls_007" ><span class="cls_007" > </span >Filing Fee: $'.$filingFee.'</span ><br >
+<span style = "position:absolute;left:452.45px;top:1000px" class="cls_010" ><span class="cls_010" > </span ></span >
 </span ></body ></html>');
 
             // (Optional) Setup the paper size and orientation
