@@ -351,17 +351,17 @@ span.cls_010{font-family:Arial,serif;font-size:10.77px;color:rgb(0,0,0);font-wei
 <span style="position:absolute;left:55.40px;top:270.95px" class="cls_004"><span class="cls_004">SERVICE COSTS</span></span><br>
 <span style="position:absolute;left:152.00px;top:270.95px" class="cls_004"><span class="cls_004">$</span></span><br>
 <span style="position:absolute;left:480.55px;top:272.95px" class="cls_004"><span class="cls_004">Case Filed:</span></span><br>
-<span style="position:absolute;left:55.40px;top:290.95px" class="cls_004"><span class="cls_004">CONSTABLE ED.</span></span><br>
-<span style="position:absolute;left:152.00px;top:290.95px" class="cls_004"><span class="cls_004">$</span></span><br>
-<span style="position:absolute;left:55.40px;top:305.95px" class="cls_004"><span class="cls_004">TOTAL</span></span><br>
-<span style="position:absolute;left:152.00px;top:305.95px" class="cls_004"><span class="cls_004">$</span></span><br>
-<span style="position:absolute;left:55.40px;top:325.95px" class="cls_003"><span class="cls_003">Pa.R.C.P.M.D.J. No. 206 sets forth those costs recoverable by the prevailing party.</span></span><br>
-<span style="position:absolute;left:60.40px;top:330.95px" class="cls_004"><span class="cls_004">TO THE DEFENDANT: The above named plaintiff(s) asks judgment together with costs against you for the possession of real</span></span><br>
-<span style="position:absolute;left:82.77px;top:340.51px" class="cls_004"><span class="cls_004">property and for:</span></span><br>
-<span style="position:absolute;left:80.87px;top:350.21px" class="cls_004"><span class="cls_004">Lease is</span><span style="margin-left:260px;">'.$monthlyRent.'</span></span><br>
-<span style="position:absolute;left:120.25px;top:350.21px" class="cls_004"><span class="cls_004">'. $isResidential .'Residential</span></span><br>
-<span style="position:absolute;left:198.23px;top:350.21px" class="cls_004"><span class="cls_004">'. $isNotResidential .'Nonresidential     Monthly Rent  $</span></span><br>
-<span style="position:absolute;left:415.98px;top:350.21px" class="cls_004"><span class="cls_004">Security Deposit $</span><span style="margin-left:30px;">'.$securityDeposit.'</span></span><br>
+<span style="position:absolute;left:55.40px;top:288.95px" class="cls_004"><span class="cls_004">CONSTABLE ED.</span></span><br>
+<span style="position:absolute;left:152.00px;top:288.95px" class="cls_004"><span class="cls_004">$</span></span><br>
+<span style="position:absolute;left:55.40px;top:310.95px" class="cls_004"><span class="cls_004">TOTAL</span></span><br>
+<span style="position:absolute;left:152.00px;top:310.95px" class="cls_004"><span class="cls_004">$</span></span><br>
+<span style="position:absolute;left:55.40px;top:330.95px" class="cls_003"><span class="cls_003">Pa.R.C.P.M.D.J. No. 206 sets forth those costs recoverable by the prevailing party.</span></span><br>
+<span style="position:absolute;left:60.40px;top:340.95px" class="cls_004"><span class="cls_004">TO THE DEFENDANT: The above named plaintiff(s) asks judgment together with costs against you for the possession of real</span></span><br>
+<span style="position:absolute;left:82.77px;top:350.51px" class="cls_004"><span class="cls_004">property and for:</span></span><br>
+<span style="position:absolute;left:80.87px;top:360.21px" class="cls_004"><span class="cls_004">Lease is</span><span style="margin-left:260px;">'.$monthlyRent.'</span></span><br>
+<span style="position:absolute;left:120.25px;top:360.21px" class="cls_004"><span class="cls_004">'. $isResidential .'Residential</span></span><br>
+<span style="position:absolute;left:198.23px;top:360.21px" class="cls_004"><span class="cls_004">'. $isNotResidential .'Nonresidential     Monthly Rent  $</span></span><br>
+<span style="position:absolute;left:415.98px;top:360.21px" class="cls_004"><span class="cls_004">Security Deposit $</span><span style="margin-left:30px;">'.$securityDeposit.'</span></span><br>
 <span style="position:absolute;left:55.40px;top:374.91px" class="cls_004"><span class="cls_004">'. $abandonedCheckbox . ' A determination that the manufactured home and property have been abandoned.</span></span><br>
 <span style="position:absolute;left:55.40px;top:384.61px" class="cls_004"><span class="cls_004">'. $determinationRequestCheckbox . ' A Request for Determination of Abandonment (Form MDJS 334) must be completed and submitted with this complaint.</span></span><br>
 <span style="position:absolute;left:55.40px;top:394.71px" class="cls_004"><span class="cls_004">'. $damageAmtCheckbox . ' Damages for injury to the real property, to wit: ___<span style="text-decoration:underline;">'.$propertyDamageDetails.'</span></span></span><br>
