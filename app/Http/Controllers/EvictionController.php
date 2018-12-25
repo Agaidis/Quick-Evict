@@ -381,11 +381,11 @@ span.cls_010{font-family:Arial,serif;font-size:10.77px;color:rgb(0,0,0);font-wei
 <span style="position:absolute;left:600.40px;top:584.45px" class="cls_004"><span class="cls_004">$</span></span><br>
 <span style="position:absolute;left:600.40px;top:584.45px" class="cls_004"><span style="text-decoration: underline;" class="cls_004">__________'.$attorneyFees.'_________</span></span><br>
 <span style="position:absolute;left:42.30px;top:607.20px" class="cls_004"><span class="cls_004">THE PLAINTIFF FURTHER ALLEGES THAT:</span></span><br>
-<span style="position:absolute;left:600.40px;top:607.20px" class="cls_004"><span class="cls_004">Total:</span></span><br>
-<span style="position:absolute;left:600.40px;top:607.20px" class="cls_004"><span class="cls_004">$</span></span><br>
+<span style="position:absolute;left:580.40px;top:607.20px" class="cls_004"><span class="cls_004">Total:</span></span><br>
+<span style="position:absolute;left:600.40px;top:612.20px" class="cls_004"><span class="cls_004">$</span></span><br>
 <span style="position:absolute;left:600.40px;top:615.20px" class="cls_004"><span style="text-decoration: underline;" class="cls_004">__________'.$totalFees.'_________</span></span><br>
-<span style="position:absolute;left:55.40px;top:620.15px" class="cls_004"><span class="cls_004">1. The location and the address, if any, of the real property is:</span></span><br>
-<span style="position:absolute;left:293.85px;top:630.15px" class="cls_004"><span style="text-decoration: underline;" class="cls_004">'.$defendanthouseNum.' '.$defendantStreetName . ', ' .$_POST['unit_number'].', ' . $defendantTown .','.$defendantState.' '.$defendantZipcode . '</span></span><br>
+<span style="position:absolute;left:55.40px;top:630.15px" class="cls_004"><span class="cls_004">1. The location and the address, if any, of the real property is:</span></span><br>
+<span style="position:absolute;left:393.85px;top:630.15px" class="cls_004"><span style="text-decoration: underline;" class="cls_004">'.$defendanthouseNum.' '.$defendantStreetName . ', ' .$_POST['unit_number'].', ' . $defendantTown .','.$defendantState.' '.$defendantZipcode . '</span></span><br>
 <span style="position:absolute;left:55.40px;top:640.05px" class="cls_004"><span class="cls_004">2. The plaintiff is the landlord of that property.</span></span><br>
 <span style="position:absolute;left:55.40px;top:650.55px" class="cls_004"><span class="cls_004">3. The plaintiff leased or rented the property to you or to ___________________________________________under whom you claim</span></span><br>
 <span style="position:absolute;left:55.40px;top:660.65px" class="cls_004"><span class="cls_004">4.</span></span><br>
