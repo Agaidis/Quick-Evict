@@ -380,25 +380,25 @@ span.cls_010{font-family:Arial,serif;font-size:10.77px;color:rgb(0,0,0);font-wei
 <span style="position:absolute;left:60.50px;top:534.45px" class="cls_004"><span class="cls_004">' . $attorneyFeesCheckbox . ' Attorney fees in the amount of</span></span><br>
 <span style="position:absolute;left:600.40px;top:534.45px" class="cls_004"><span class="cls_004">$</span></span><br>
 <span style="position:absolute;left:600.40px;top:534.45px" class="cls_004"><span style="text-decoration: underline;" class="cls_004">__________'.$attorneyFees.'_________</span></span><br>
-<span style="position:absolute;left:42.30px;top:607.20px" class="cls_004"><span class="cls_004">THE PLAINTIFF FURTHER ALLEGES THAT:</span></span><br>
-<span style="position:absolute;left:580.40px;top:607.20px" class="cls_004"><span class="cls_004">Total:</span></span><br>
-<span style="position:absolute;left:600.40px;top:612.20px" class="cls_004"><span class="cls_004">$</span></span><br>
-<span style="position:absolute;left:600.40px;top:615.20px" class="cls_004"><span style="text-decoration: underline;" class="cls_004">__________'.$totalFees.'_________</span></span><br>
-<span style="position:absolute;left:55.40px;top:630.15px" class="cls_004"><span class="cls_004">1. The location and the address, if any, of the real property is:</span></span><br>
-<span style="position:absolute;left:393.85px;top:630.15px" class="cls_004"><span style="text-decoration: underline;" class="cls_004">'.$defendanthouseNum.' '.$defendantStreetName . ', ' .$_POST['unit_number'].', ' . $defendantTown .','.$defendantState.' '.$defendantZipcode . '</span></span><br>
-<span style="position:absolute;left:55.40px;top:640.05px" class="cls_004"><span class="cls_004">2. The plaintiff is the landlord of that property.</span></span><br>
-<span style="position:absolute;left:55.40px;top:650.55px" class="cls_004"><span class="cls_004">3. The plaintiff leased or rented the property to you or to ___________________________________________under whom you claim</span></span><br>
-<span style="position:absolute;left:55.40px;top:660.65px" class="cls_004"><span class="cls_004">4.</span></span><br>
-<span style="position:absolute;left:65.60px;top:670.65px" class="cls_004"><span class="cls_004">'.$quitNoticeGiven.'Notice to quit was given in accordance with law, or</span></span><br>
-<span style="position:absolute;left:65.60px;top:680.15px" class="cls_004"><span class="cls_004">'.$noQuitNotice.'No notice is required under the terms of the lease.</span></span><br>
-<span style="position:absolute;left:55.40px;top:690.45px" class="cls_004"><span class="cls_004">5.</span></span><br>
-<span style="position:absolute;left:77.30px;top:700.45px" class="cls_004"><span class="cls_004">'.$leaseEnded.'The term for which the property was leased or rented is fully ended, or</span></span><br>
-<span style="position:absolute;left:77.30px;top:710.35px" class="cls_004"><span class="cls_004">'.$breachedConditionsLease.'A forfeiture has resulted by reason of a breach of the conditions of the lease, to wit:</span></span><br>
-<span style="position:absolute;left:414.74px;top:720.35px" class="cls_004"><span style="text-decoration: underline;" class="cls_004">'.$breachedDetails.'_____</span></span>
-<span style="position:absolute;left:77.30px;top:730.35px" class="cls_004"><span class="cls_004">________________________________________________________________________________________________or,</span></span><br>
-<span style="position:absolute;left:77.30px;top:740.15px" class="cls_004"><span class="cls_004">___________________________________________________________________________________________________</span></span><br>
-<span style="position:absolute;left:77.30px;top:750.55px" class="cls_004"><span class="cls_004">'.$unsatisfiedLease.'Rent reserved and due has, upon demand, remained unsatisfied.</span></span><br>
-<span style="position:absolute;left:42.30px;top:760.15px" class="cls_004"><span class="cls_004">6.</span></span><br>
+<span style="position:absolute;left:42.30px;top:567.20px" class="cls_004"><span class="cls_004">THE PLAINTIFF FURTHER ALLEGES THAT:</span></span><br>
+<span style="position:absolute;left:580.40px;top:567.20px" class="cls_004"><span class="cls_004">Total:</span></span><br>
+<span style="position:absolute;left:600.40px;top:567.20px" class="cls_004"><span class="cls_004">$</span></span><br>
+<span style="position:absolute;left:600.40px;top:587.20px" class="cls_004"><span style="text-decoration: underline;" class="cls_004">__________'.$totalFees.'_________</span></span><br>
+<span style="position:absolute;left:55.40px;top:600.15px" class="cls_004"><span class="cls_004">1. The location and the address, if any, of the real property is:</span></span><br>
+<span style="position:absolute;left:393.85px;top:600.15px" class="cls_004"><span style="text-decoration: underline;" class="cls_004">'.$defendanthouseNum.' '.$defendantStreetName . ', ' .$_POST['unit_number'].', ' . $defendantTown .','.$defendantState.' '.$defendantZipcode . '</span></span><br>
+<span style="position:absolute;left:55.40px;top:610.05px" class="cls_004"><span class="cls_004">2. The plaintiff is the landlord of that property.</span></span><br>
+<span style="position:absolute;left:55.40px;top:620.55px" class="cls_004"><span class="cls_004">3. The plaintiff leased or rented the property to you or to ___________________________________________under whom you claim</span></span><br>
+<span style="position:absolute;left:55.40px;top:630.65px" class="cls_004"><span class="cls_004">4.</span></span><br>
+<span style="position:absolute;left:65.60px;top:640.65px" class="cls_004"><span class="cls_004">'.$quitNoticeGiven.'Notice to quit was given in accordance with law, or</span></span><br>
+<span style="position:absolute;left:65.60px;top:650.15px" class="cls_004"><span class="cls_004">'.$noQuitNotice.'No notice is required under the terms of the lease.</span></span><br>
+<span style="position:absolute;left:55.40px;top:660.45px" class="cls_004"><span class="cls_004">5.</span></span><br>
+<span style="position:absolute;left:77.30px;top:670.45px" class="cls_004"><span class="cls_004">'.$leaseEnded.'The term for which the property was leased or rented is fully ended, or</span></span><br>
+<span style="position:absolute;left:77.30px;top:680.35px" class="cls_004"><span class="cls_004">'.$breachedConditionsLease.'A forfeiture has resulted by reason of a breach of the conditions of the lease, to wit:</span></span><br>
+<span style="position:absolute;left:414.74px;top:690.35px" class="cls_004"><span style="text-decoration: underline;" class="cls_004">'.$breachedDetails.'_____</span></span>
+<span style="position:absolute;left:77.30px;top:700.35px" class="cls_004"><span class="cls_004">________________________________________________________________________________________________or,</span></span><br>
+<span style="position:absolute;left:77.30px;top:710.15px" class="cls_004"><span class="cls_004">___________________________________________________________________________________________________</span></span><br>
+<span style="position:absolute;left:77.30px;top:720.55px" class="cls_004"><span class="cls_004">'.$unsatisfiedLease.'Rent reserved and due has, upon demand, remained unsatisfied.</span></span><br>
+<span style="position:absolute;left:42.30px;top:730.15px" class="cls_004"><span class="cls_004">6.</span></span><br>
 <span style="position:absolute;left:60.50px;top:760.15px" class="cls_004"><span class="cls_004">You retain the real property and refuse to give up to its possession.</span></span><br>
 <span style="position:absolute;left:42.00px;top:770.65px" class="cls_004"><span class="cls_004">I, <span style="text-decoration:underline;"> ' . $ownerPMName . ' </span> verify that the facts set forth in this complaint are</span></span><br>
 <span style="position:absolute;left:42.00px;top:780.85px" class="cls_004"><span class="cls_004">true and correct to the best of my knowledge, information and belief. This statement is made subject to the penalties of Section 4904</span></span><br>
