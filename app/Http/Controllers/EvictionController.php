@@ -338,22 +338,22 @@ span.cls_010{font-family:Arial,serif;font-size:10.77px;color:rgb(0,0,0);font-wei
 <span style="position:absolute;left:55.40px;top:105.85px" class="cls_004"><span class="cls_004">MDJ Name: '. $courtDetails->mdj_name .'</span></span><br>
 <span style="position:absolute;left:55.40px;top:120.05px" class="cls_004"><span class="cls_004">Address: '.$courtAddressLine1.'<br><span style="margin-left:45px;">'.$courtAddressLine2.'</span></span></span><br>
 <span style="position:absolute;left:581.34px;top:183.90px" class="cls_006"><span class="cls_006">V.</span></span><br>
-<span style="position:absolute;left:447.28px;top:183.90px" class="cls_009"><span class="cls_009">DEFENDANT:</span><br><p style="margin-left:6px;">'.$tenantName.'<br>'.$defendanthouseNum.' '.$defendantStreetName.' '. $_POST['unit_number'] . '<br>'.$defendantTown .',' . $defendantState.' '.$defendantZipcode.'  </p></span><br>
-<span style="position:absolute;left:600.50px;top:135.00px" class="cls_005"><span class="cls_005">NAME and ADDRESS</span></span><br>
+<span style="position:absolute;left:447.28px;top:180.90px" class="cls_009"><span class="cls_009">DEFENDANT:</span><br><p style="margin-left:6px;">'.$tenantName.'<br>'.$defendanthouseNum.' '.$defendantStreetName.' '. $_POST['unit_number'] . '<br>'.$defendantTown .',' . $defendantState.' '.$defendantZipcode.'  </p></span><br>
+<span style="position:absolute;left:600.50px;top:180.00px" class="cls_005"><span class="cls_005">NAME and ADDRESS</span></span><br>
 <span style="position:absolute;left:55.40px;top:188.45px" class="cls_004"><span class="cls_004">Telephone: '.$courtDetails->phone_number.'</span></span><br>
-<span style="position:absolute;left:192.45px;top:214.95px" class="cls_004"><span class="cls_004">AMOUNT</span></span><br>
-<span style="position:absolute;left:279.35px;top:214.95px" class="cls_004"><span class="cls_004">DATE PAID</span></span><br>
+<span style="position:absolute;left:202.45px;top:214.95px" class="cls_004"><span class="cls_004">AMOUNT</span></span><br>
+<span style="position:absolute;left:289.35px;top:214.95px" class="cls_004"><span class="cls_004">DATE PAID</span></span><br>
 <span style="position:absolute;left:55.40px;top:224.95px" class="cls_004"><span class="cls_004">FILING COSTS:</span></span><br>
 <span style="position:absolute;left:120.00px;top:224.95px" class="cls_004"><span class="cls_004">$</span></span><br>
 <span style="position:absolute;left:55.40px;top:234.95px" class="cls_004"><span class="cls_004">POSTAGE</span></span><br>
 <span style="position:absolute;left:120.00px;top:234.95px" class="cls_004"><span class="cls_004">$</span></span><br>
-<span style="position:absolute;left:382.55px;top:252.45px" class="cls_004"><span class="cls_004">Docket No: </span></span><br>
-<span style="position:absolute;left:38.80px;top:201.10px" class="cls_004"><span class="cls_004">SERVICE COSTS</span></span><br>
+<span style="position:absolute;left:480.55px;top:252.45px" class="cls_004"><span class="cls_004">Docket No: </span></span><br>
+<span style="position:absolute;left:55.40px;top:201.10px" class="cls_004"><span class="cls_004">SERVICE COSTS</span></span><br>
 <span style="position:absolute;left:120.00px;top:201.10px" class="cls_004"><span class="cls_004">$</span></span><br>
-<span style="position:absolute;left:381.45px;top:208.85px" class="cls_004"><span class="cls_004">Case Filed:</span></span><br>
-<span style="position:absolute;left:38.80px;top:214.65px" class="cls_004"><span class="cls_004">CONSTABLE ED.</span></span><br>
+<span style="position:absolute;left:480.55px;top:208.85px" class="cls_004"><span class="cls_004">Case Filed:</span></span><br>
+<span style="position:absolute;left:55.40px;top:214.65px" class="cls_004"><span class="cls_004">CONSTABLE ED.</span></span><br>
 <span style="position:absolute;left:120.00px;top:214.65px" class="cls_004"><span class="cls_004">$</span></span><br>
-<span style="position:absolute;left:38.80px;top:233.15px" class="cls_004"><span class="cls_004">TOTAL</span></span><br>
+<span style="position:absolute;left:55.40px;top:233.15px" class="cls_004"><span class="cls_004">TOTAL</span></span><br>
 <span style="position:absolute;left:120.25px;top:233.15px" class="cls_004"><span class="cls_004">$</span></span><br>
 <span style="position:absolute;left:36.00px;top:252.35px" class="cls_003"><span class="cls_003">Pa.R.C.P.M.D.J. No. 206 sets forth those costs recoverable by the prevailing party.</span></span><br>
 <span style="position:absolute;left:42.00px;top:267.85px" class="cls_004"><span class="cls_004">TO THE DEFENDANT: The above named plaintiff(s) asks judgment together with costs against you for the possession of real</span></span><br>
