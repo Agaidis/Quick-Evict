@@ -405,17 +405,17 @@ span.cls_010{font-family:Arial,serif;font-size:10.77px;color:rgb(0,0,0);font-wei
 <span style="position:absolute;left:42.00px;top:676.05px" class="cls_004"><span class="cls_004">of the Crimes Code (18 PA. C.S. § 4904) relating to unsworn falsification to authorities.</span></span><br>
 <span style="position:absolute;left:42.30px;top:690.90px" class="cls_004"><span class="cls_004">I certify this filing complies with the UJS Case Records Public Access Policy.</span></span><br>
 <span style="position:absolute;left:440.00px;top:746.80px" class="cls_004"><span class="cls_004">(Signature of Plaintiff)</span></span><br>
-<span style="position:absolute;left:60.00px;top:769.40px" class="cls_004"><span class="cls_004">The plaintiff\'s attorney shall file an entry of appearance with the magisterial district court pursuant to Pa . R . C . P . M . D . J . 207.1 </span ></span ><br >
-<span style = "position:absolute;left:60.90px;top:785.15px" class="cls_005" ><span class="cls_005" >IF YOU HAVE A DEFENSE to this complaint you may present it at the hearing . IF YOU HAVE A CLAIM against the plaintiff arising out of the occupancy of the premises,</span ></span ><br >
-<span style = "position:absolute;left:60.90px;top:795.30px" class="cls_005" ><span class="cls_005" > which is in the magisterial district judge jurisdiction and which you intend to assert at the hearing, YOU MUST FILE it on the complaint form at the office BEFORE THE TIME </span ></span ><br >
-<span style = "position:absolute;left:60.90px;top:805.45px" class="cls_005" ><span class="cls_005" > set for the hearing . IF YOU DO NOT APPEAR AT THE HEARING, a judgment for possession and costs, and for damages and rent if claimed, may nevertheless be entered </span ></span ><br >
-<span style = "position:absolute;left:60.90px;top:815.60px" class="cls_005" ><span class="cls_005" > against you . A judgment against you for possession may result in your EVICTION from the premises .</span ></span ><br >
-<span style = "position:absolute;left:60.90px;top:825.75px" class="cls_007" ><span class="cls_007" >If you are disabled and require a reasonable accommodation to gain access to the Magisterial District Court and its services, please </span ></span ><br >
-<span style = "position:absolute;left:60.90px;top:835.35px" class="cls_007" ><span class="cls_007" > contact the Magisterial District Court at the above address or telephone number . We are unable to provide transportation .</span ></span ><br >
-<span style = "position:absolute;left:55.40px;top:845.85px" class="cls_008" ><span class="cls_008" > AOPC 310A </span ></span ><br >
-<span style = "position:absolute;left:303.75px;top:852.50px" class="cls_008" ><span class="cls_008" > 1</span ></span ><br >
-<span style = "position:absolute;left:471.65px;top:852.10px" class="cls_007" ><span class="cls_007" > </span >Filing Fee: $'.$filingFee.'</span ><br >
-<span style = "position:absolute;left:452.45px;top:858.80px" class="cls_010" ><span class="cls_010" > </span ></span >
+<span style="position:absolute;left:60.00px;top:869.40px" class="cls_004"><span class="cls_004">The plaintiff\'s attorney shall file an entry of appearance with the magisterial district court pursuant to Pa . R . C . P . M . D . J . 207.1 </span ></span ><br >
+<span style = "position:absolute;left:60.90px;top:885.15px" class="cls_005" ><span class="cls_005" >IF YOU HAVE A DEFENSE to this complaint you may present it at the hearing . IF YOU HAVE A CLAIM against the plaintiff arising out of the occupancy of the premises,</span ></span ><br >
+<span style = "position:absolute;left:60.90px;top:905.30px" class="cls_005" ><span class="cls_005" > which is in the magisterial district judge jurisdiction and which you intend to assert at the hearing, YOU MUST FILE it on the complaint form at the office BEFORE THE TIME </span ></span ><br >
+<span style = "position:absolute;left:60.90px;top:925.45px" class="cls_005" ><span class="cls_005" > set for the hearing . IF YOU DO NOT APPEAR AT THE HEARING, a judgment for possession and costs, and for damages and rent if claimed, may nevertheless be entered </span ></span ><br >
+<span style = "position:absolute;left:60.90px;top:935.60px" class="cls_005" ><span class="cls_005" > against you . A judgment against you for possession may result in your EVICTION from the premises .</span ></span ><br >
+<span style = "position:absolute;left:60.90px;top:945.75px" class="cls_007" ><span class="cls_007" >If you are disabled and require a reasonable accommodation to gain access to the Magisterial District Court and its services, please </span ></span ><br >
+<span style = "position:absolute;left:60.90px;top:955.35px" class="cls_007" ><span class="cls_007" > contact the Magisterial District Court at the above address or telephone number . We are unable to provide transportation .</span ></span ><br >
+<span style = "position:absolute;left:55.40px;top:965.85px" class="cls_008" ><span class="cls_008" > AOPC 310A </span ></span ><br >
+<span style = "position:absolute;left:303.75px;top:972.50px" class="cls_008" ><span class="cls_008" > 1</span ></span ><br >
+<span style = "position:absolute;left:471.65px;top:982.10px" class="cls_007" ><span class="cls_007" > </span >Filing Fee: $'.$filingFee.'</span ><br >
+<span style = "position:absolute;left:452.45px;top:998.80px" class="cls_010" ><span class="cls_010" > </span ></span >
 </span ></body ></html>');
 
             // (Optional) Setup the paper size and orientation
