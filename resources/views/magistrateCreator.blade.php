@@ -52,11 +52,6 @@
                                     @endforeach
                                     </tbody>
                                 </table>
-                        <div class="flash-message">
-                            @if(Session::has('alert-success'))
-                                <p class="alert alert-success">{{ Session::get('alert-success') }} <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a></p>
-                            @endif
-                        </div> <!-- end .flash-message -->
                         <form id="magistrate_form">
                         <div class="row">
                             <div class="col-sm-12">
@@ -187,7 +182,8 @@
                                             </div>
                                         </div>
                                     </div>
-                                </div>
+                                </div><br><br>
+                                <div id="flash-msg"></div>
                                 <br><br>
                                 <button class="btn btn-primary" id="submit_magistrate" type="button">Submit Magistrate</button>
                             </div>

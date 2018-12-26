@@ -19,39 +19,52 @@ class MagistrateController extends Controller
 
     public function store(Request $request) {
         try {
-            $courtDetails = new CourtDetails;
-            $courtDetails->county = $request->county;
-            $courtDetails->court_number = $request->court_id;
-            $courtDetails->magistrate_id = $request->magistrate_id;
-            $courtDetails->township = $request->township;
-            $courtDetails->one_defendant_up_to_2000 = $request->one_under_2000;
-            $courtDetails->two_defendant_up_to_2000 = $request->two_under_2000;
-            $courtDetails->one_defendant_between_2001_4000 = $request->one_btn_2000_4001;
-            $courtDetails->two_defendant_between_2001_4000 = $request->two_btn_2000_4001;
-            $courtDetails->one_defendant_greater_than_4000 = $request->one_over_4000;
-            $courtDetails->two_defendant_greater_than_4000 = $request->two_over_4000;
-            $courtDetails->one_defendant_out_of_pocket = $request->one_oop;
-            $courtDetails->two_defendant_out_of_pocket = $request->two_oop;
-            $courtDetails->three_defendant_up_to_2000 = $request->three_under_2000;
-            $courtDetails->three_defendant_between_2001_4000 = $request->three_btn_2000_4001;
-            $courtDetails->three_defendant_greater_than_4000 = $request->three_over_4000;
-            $courtDetails->three_defendant_out_of_pocket = $request->three_oop;
-            $courtDetails->additional_tenant = $request->additional_tenants;
+            $isUnique = CourtDetails::where('magistrate_id', $request->magistrate_id)->first();
 
-            $courtDetails->mdj_name = $request->mdj_name;
-            $courtDetails->phone_number = $request->court_number;
-            $courtDetails->save();
+            if ($isUnique === null) {
+                $courtDetails = new CourtDetails;
+                $courtDetails->county = $request->county;
+                $courtDetails->court_number = $request->court_id;
+                $courtDetails->magistrate_id = $request->magistrate_id;
+                $courtDetails->township = $request->township;
+                $courtDetails->one_defendant_up_to_2000 = $request->one_under_2000;
+                $courtDetails->two_defendant_up_to_2000 = $request->two_under_2000;
+                $courtDetails->one_defendant_between_2001_4000 = $request->one_btn_2000_4001;
+                $courtDetails->two_defendant_between_2001_4000 = $request->two_btn_2000_4001;
+                $courtDetails->one_defendant_greater_than_4000 = $request->one_over_4000;
+                $courtDetails->two_defendant_greater_than_4000 = $request->two_over_4000;
+                $courtDetails->one_defendant_out_of_pocket = $request->one_oop;
+                $courtDetails->two_defendant_out_of_pocket = $request->two_oop;
+                $courtDetails->three_defendant_up_to_2000 = $request->three_under_2000;
+                $courtDetails->three_defendant_between_2001_4000 = $request->three_btn_2000_4001;
+                $courtDetails->three_defendant_greater_than_4000 = $request->three_over_4000;
+                $courtDetails->three_defendant_out_of_pocket = $request->three_oop;
+                $courtDetails->additional_tenant = $request->additional_tenants;
 
-            $geoLocation = new GeoLocation();
-            $geoLocation->magistrate_id = $request->magistrate_id;
-            $geoLocation->geo_locations = $request->geo_locations;
-            $geoLocation->county = $request->county;
-            $geoLocation->court_number = $request->court_number;
-            $geoLocation->address_line_one = $request->address_line_one;
-            $geoLocation->address_line_two = $request->address_line_two;
-            $geoLocation->save();
+                $courtDetails->mdj_name = $request->mdj_name;
+                $courtDetails->phone_number = $request->court_number;
+                $courtDetails->save();
 
-            $request->session()->flash('alert-success', 'Magistrate Successfully Added!');
+                $geoLocation = new GeoLocation();
+                $geoLocation->magistrate_id = $request->magistrate_id;
+                $geoLocation->geo_locations = $request->geo_locations;
+                $geoLocation->county = $request->county;
+                $geoLocation->court_number = $request->court_number;
+                $geoLocation->address_line_one = $request->address_line_one;
+                $geoLocation->address_line_two = $request->address_line_two;
+                $geoLocation->save();
+
+                $request->session()->flash('alert-success', 'Magistrate Successfully Added!');
+                $response['responseMessage'] = 'Adding Magistrate Successful!';
+                $response['messageDetails'] = 'All Good';
+                return $response;
+            } else {
+                $request->session()->flash('alert-danger', 'Magistrate Already Exists!');
+                $response['responseMessage'] = 'Magistrate Already Exists!';
+                $response['messageDetails'] = 'Try Again';
+                return $response;
+            }
+
         } catch ( \Exception $e ) {
             $errorDetails = 'MagistrateController - error in store() method when attempting to store magistrate';
             $errorDetails .= PHP_EOL . 'File: ' . $e->getFile();
@@ -64,10 +77,7 @@ class MagistrateController extends Controller
             $returnArray['messageDetails'] = '' . $e->getMessage() . 'Tag could not be added to the database, please try again later';
             return response()->json($returnArray);
         }
-        $response['responseMessage'] = 'Adding Magistrate Successful!';
-        $response['messageDetails'] = 'All Good';
 
-        return $response;
     }
 
     public function getMagistrate(Request $request) {

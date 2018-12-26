@@ -26,6 +26,9 @@
                                 </div>
                                     <h3 class="major_labels" style="text-align:center;">Additional Info on Property where you want to evict tenant.</h3>
                                 <h4 class="address_display_div">Address: <span id="display_address"></span></h4>
+                                <div class="zipcode_div"><label for="zipcode">Verify Zipcode: </label>
+                                    <input type="text" class="eviction_fields" placeholder="07753" id="zipcode" name="zipcode"/>
+                                </div>
                                 <div class="unit_number_div"><label for="unit_number">Additional Address Detail</label>
                                 <input type="text" class="eviction_fields" placeholder="Example: Unit 3" id="unit_number" name="unit_number"/>
                                 </div>
@@ -190,7 +193,6 @@
 
 
                                     <input type="hidden" id="state" name="state"/>
-                                    <input type="hidden" id="zipcode" name="zipcode"/>
                                     <input type="hidden" id="county" name="county"/>
                                     <input type="hidden" id="house_num" name="houseNum"/>
                                     <input type="hidden" id="street_name" name="streetName"/>

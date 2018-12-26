@@ -146,6 +146,7 @@ class EvictionController extends Controller
             $isBreachedConditionsLease = false;
             $isAmtGreaterThanZero = false;
             $isLeaseEnded = false;
+            $isAdditionalRent = false;
 
             //Lease Type
             $leaseType = $_POST['lease_type'];
@@ -193,6 +194,7 @@ class EvictionController extends Controller
             }
 
             if ($_POST['addit_rent'] == 'yes') {
+                $isAdditionalRent = true;
                 $additionalRent = '<input type="checkbox" checked/>';
             } else {
                 $additionalRent = '<input type="checkbox"/>';
@@ -280,6 +282,7 @@ class EvictionController extends Controller
                 $eviction->breached_conditions_lease = $isBreachedConditionsLease;
                 $eviction->amt_greater_than_zero = $isAmtGreaterThanZero;
                 $eviction->lease_ended = $isLeaseEnded;
+                $eviction->additionalRent = $isAdditionalRent;
                 $eviction->defendant_state = $defendantState;
                 $eviction->defendant_zipcode = $defendantZipcode;
                 $eviction->defendant_house_num = $defendanthouseNum;
@@ -293,6 +296,8 @@ class EvictionController extends Controller
                 $eviction->unit_num = $_POST['unit_number'];
 
                 $eviction->save();
+
+                $evictionId = $eviction->id;
 
             } catch ( \Exception $e) {
                 mail('andrew.gaidis@gmail.com', 'formulatePDF Error', $e->getMessage());
@@ -415,7 +420,7 @@ span.cls_010{font-family:Arial,serif;font-size:10.77px;color:rgb(0,0,0);font-wei
 <span style = "position:absolute;left:55.40px;top:985.85px" class="cls_008" ><span class="cls_008" > AOPC 310A </span ></span ><br >
 <span style = "position:absolute;left:605.75px;top:985.50px" class="cls_008" ><span class="cls_008" > FREE INTERPRETER</span ></span ><br >
 <span style = "position:absolute;left:590.75px;top:1000.50px" class="cls_008" ><span class="cls_008" > www.pacourts.us/language-rights</span ></span ><br >
-<span style = "position:absolute;left:303.75px;top:985.50px" class="cls_008" ><span class="cls_008" > 1</span ></span ><br >
+<span style = "position:absolute;left:303.75px;top:985.50px" class="cls_008" ><span class="cls_008" > '.$evictionId .'</span ></span ><br >
 <span style = "position:absolute;left:120.65px;top:985.85px" class="cls_007" ><span class="cls_007" > </span >Filing Fee: $'.$filingFee.'</span ><br >
 <span style = "position:absolute;left:452.45px;top:1000px" class="cls_010" ><span class="cls_010" > </span ></span >
 </span ></body ></html>');

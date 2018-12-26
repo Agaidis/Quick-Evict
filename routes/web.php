@@ -29,6 +29,7 @@ Route::get('/eviction-info', 'EvictionInfoController@index');
 Route::get('/FAQ', 'FAQController@index');
 
 Route::get('/where-does-this-work', 'WhereDoesThisWorkController@index');
+Route::post('/where-does-this-work', 'WhereDoesThisWorkController@store');
 
 Route::get('/about-us', 'AboutUsController@index');
 

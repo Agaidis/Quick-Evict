@@ -105,8 +105,13 @@
                 data: data,
 
                 success: function (data) {
-                    console.log(data);
-                    location.reload();
+                    if (data.messageDetails == 'All Good') {
+                        alertMsgCreate(true, data.responseMessage);
+                        location.reload();
+                    } else {
+                        alertMsgCreate(false, data.responseMessage);
+                    }
+
                 },
                 error: function (data) {
                     console.log(data);
@@ -165,4 +170,21 @@
             setTimeout(function() { location.reload(); }, 1000);
 
         });
+        //Creates a message when user performs an action using ajax i.e add, edit, delete
+        function alertMsgCreate(isSuccess, msg) {
+            var result = '';
+            if (isSuccess) {
+                result = $('<div class="alert alert-success">' + msg + '</div>');
+                $('#flash-msg').append(result);
+                setTimeout(function () {
+                    $(".alert").alert('close');
+                }, 4000);
+            } else {
+                result = $('<div class="alert alert-danger">' + msg + '</div>');
+                $('#flash-msg').append(result);
+                setTimeout(function () {
+                    $(".alert").alert('close');
+                }, 6000);
+            }
+        }
     });

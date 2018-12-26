@@ -1,27 +1,5 @@
 if (document.location.href.split('/')[3] == 'online-eviction') {
     $(document).ready(function () {
-        function injectTooltip(event, data) {
-            if (!tipObj && event) {
-                //create the tooltip object
-                tipObj = document.createElement("div");
-                tipObj.style.width = '100px';
-                tipObj.style.height = '40px';
-                tipObj.style.background = "white";
-                tipObj.style.borderRadius = "5px";
-                tipObj.style.padding = "10px";
-                tipObj.style.fontFamily = "Arial,Helvetica";
-                tipObj.style.textAlign = "center";
-                tipObj.innerHTML = data;
-
-                //position it
-                tipObj.style.position = "fixed";
-                tipObj.style.top = event.Ba.clientY + window.scrollY + offset.y + "px";
-                tipObj.style.left = event.Ba.clientX + window.scrollX + offset.x + "px";
-
-                //add it to the body
-                document.body.appendChild(tipObj);
-            }
-        }
 
         $('#signArea').signaturePad({drawOnly:true, drawBezierCurves:true, lineTop:90});
 
@@ -106,12 +84,23 @@ if (document.location.href.split('/')[3] == 'online-eviction') {
                 strokeWeight: 2,
                 fillColor: '#B1AAA9',
                 fillOpacity: 0.35,
-                areaName: magId
+                areaName: magId,
+                courtId: value.court_number,
+                county: value.county
             });
             magArray[count].setMap(map);
 
             google.maps.event.addListener(magArray[count], 'mouseover', function (e) {
-                injectTooltip(e, magArray[count].strokeColor);
+                var magistrateId = $(this)[0].areaName.split('magistrate_');
+                injectTooltip(e, magistrateId[1] + '<br>' + $(this)[0].county);
+            });
+
+            google.maps.event.addListener(magArray[count], 'mousemove', function (e) {
+                moveTooltip(e);
+            });
+
+            google.maps.event.addListener(magArray[count], 'mouseout', function (e) {
+                deleteTooltip(e);
             });
 
             count++;
@@ -153,9 +142,11 @@ if (document.location.href.split('/')[3] == 'online-eviction') {
             }
             if (isFound == false) {
                 alert('Location outside all Zones');
+                $('.zipcode_div').css('display', 'none');
                 $('.unit_number_div').css('display', 'none');
                 $('.eviction_form_div').css('display', 'none');
             } else {
+                $('.zipcode_div').css('display', 'block');
                 $('.unit_number_div').css('display', 'block');
                 $('.eviction_form_div').css('display', 'block');
             }
@@ -181,11 +172,86 @@ if (document.location.href.split('/')[3] == 'online-eviction') {
         });
 
 
+
+
+
+        //create a global variable that will point to the tooltip in the DOM
+        var tipObj = null;
+
+//offset along x and y in px
+        var offset = {
+            x: 6,
+            y: -300
+        };
+
+        var coordPropName = null;
+
+        function injectTooltip(event, data) {
+            if (!tipObj && event) {
+                //create the tooltip object
+                tipObj = document.createElement("div");
+                tipObj.style.width = '100px';
+                tipObj.style.height = '60px';
+                tipObj.style.background = "lightgrey";
+                tipObj.style.borderRadius = "3px";
+                tipObj.style.padding = "8px";
+                tipObj.style.fontFamily = "Arial,Helvetica";
+                tipObj.style.textAlign = "center";
+                tipObj.innerHTML = data;
+
+                //fix for the version issue
+                eventPropNames = Object.keys(event);
+                if(!coordPropName){
+                    //discover the name of the prop with MouseEvent
+                    for(var i in eventPropNames){
+                        var name = eventPropNames[i];
+                        if(event[name] instanceof MouseEvent){
+                            coordPropName = name;
+                            break;
+                        }
+                    }
+                }
+
+                if(coordPropName) {
+                    //position it
+                    tipObj.style.position = "fixed";
+                    tipObj.style.top = event[coordPropName].clientY + window.scrollY + offset.y + "px";
+                    tipObj.style.left = event[coordPropName].clientX + window.scrollX + offset.x + "px";
+
+                    //add it to the body
+                    document.body.appendChild(tipObj);
+                }
+            }
+        }
+
+        /********************************************************************
+         * moveTooltip(e)
+         * update the position of the tooltip based on the event data
+         ********************************************************************/
+        function moveTooltip(event) {
+            if (tipObj && event) {
+                //position it
+                tipObj.style.top = event.Ba.clientY + window.scrollY + offset.y + "px";
+                tipObj.style.left = event.Ba.clientX + window.scrollX + offset.x + "px";
+            }
+        }
+
+        /********************************************************************
+         * deleteTooltip(e)
+         * delete the tooltip if it exists in the DOM
+         ********************************************************************/
+        function deleteTooltip(event) {
+            if (tipObj) {
+                //delete the tooltip if it exists in the DOM
+                document.body.removeChild(tipObj);
+                tipObj = null;
+            }
+        }
         //On Submit gather variables and make ajax call to backend
 
         $('#pdf_download_btn').on('click', function () {
             $('#rented_by_val').val($('input[name=rented_by]:checked').val());
-            $('.eviction_fields').text('');
+            $('.eviction_fields').val('').text('');
             // var data = $('#eviction_form').serialize();
             // $.ajaxSetup({
             //     headers: {

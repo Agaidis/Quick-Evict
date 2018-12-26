@@ -18,7 +18,6 @@ class Evictions extends Model
         'court_number',
         'court_address_line_1',
         'court_address_line_2',
-        'magistrate_id',
         'attorney_fees',
         'damage_amt',
         'due_rent',
@@ -44,6 +43,7 @@ class Evictions extends Model
         'pm_phone',
         'is_abandoned',
         'is_determination_request',
+        'is_additional_rent',
         'unit_num'
     ];
 

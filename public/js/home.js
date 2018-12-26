@@ -4,7 +4,8 @@
 $(document).ready(function () {
 
     $('#eviction_table').DataTable( {
-        "pagingType": "simple"
+        "pagingType": "simple",
+        "aaSorting": []
     }).on('click', '.eviction-remove', function () {
         var id = $(this)[0].id;
         var splitId = id.split('_');
