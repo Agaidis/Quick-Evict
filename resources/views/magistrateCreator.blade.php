@@ -12,6 +12,9 @@
                             @if(Session::has('alert-success'))
                                 <p class="alert alert-success">{{ Session::get('alert-success') }} <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a></p>
                             @endif
+                                @if(Session::has('alert-danger'))
+                                    <p class="alert alert-danger">{{ Session::get('alert-danger') }} <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a></p>
+                                @endif
                         </div> <!-- end .flash-message -->
                         <table class="table table-hover table-responsive-lg table-bordered magistrate_table" id="magistrate_table">
                                     <thead>
