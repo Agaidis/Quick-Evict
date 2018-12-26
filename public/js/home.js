@@ -20,7 +20,7 @@ $(document).ready(function () {
                     xhr.setRequestHeader('X-CSRF-TOKEN', $("#token").attr('content'));
                 },
                 type: "POST",
-                url: '/home/delete',
+                url: '/dashboard/delete',
                 dataType: 'json',
                 data: {id: evictionId},
 
