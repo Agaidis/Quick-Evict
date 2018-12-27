@@ -86,13 +86,14 @@ if (document.location.href.split('/')[3] == 'online-eviction') {
                 fillOpacity: 0.35,
                 areaName: magId,
                 courtId: value.court_number,
-                county: value.county
+                county: value.county,
+                township: value.township
             });
             magArray[count].setMap(map);
 
             google.maps.event.addListener(magArray[count], 'mouseover', function (e) {
                 var magistrateId = $(this)[0].areaName.split('magistrate_');
-                injectTooltip(e, magistrateId[1] + '<br>' + $(this)[0].county);
+                injectTooltip(e, magistrateId[1] + '<br>' + $(this)[0].county + '<br>' + $(this)[0].township);
             });
 
             google.maps.event.addListener(magArray[count], 'mousemove', function (e) {
@@ -191,7 +192,7 @@ if (document.location.href.split('/')[3] == 'online-eviction') {
                 //create the tooltip object
                 tipObj = document.createElement("div");
                 tipObj.style.width = '100px';
-                tipObj.style.height = '60px';
+                tipObj.style.height = '75px';
                 tipObj.style.background = "lightgrey";
                 tipObj.style.borderRadius = "3px";
                 tipObj.style.padding = "8px";
