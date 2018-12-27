@@ -191,14 +191,14 @@ if (document.location.href.split('/')[3] == 'online-eviction') {
             if (!tipObj && event) {
                 //create the tooltip object
                 tipObj = document.createElement("div");
-                tipObj.style.width = '130px';
-                tipObj.style.height = '100px';
+                tipObj.style.width = '80px';
+                tipObj.style.height = '40px';
                 tipObj.style.background = "lightgrey";
                 tipObj.style.borderRadius = "3px";
-                tipObj.style.padding = "2px";
+                tipObj.style.padding = "6px";
                 tipObj.style.fontFamily = "Arial,Helvetica";
                 tipObj.style.textAlign = "center";
-                tipObj.style.fontSize = "8";
+                tipObj.style.fontSize = "10";
                 tipObj.innerHTML = data;
 
                 //fix for the version issue
