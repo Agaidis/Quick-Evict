@@ -192,7 +192,7 @@ if (document.location.href.split('/')[3] == 'online-eviction') {
                 //create the tooltip object
                 tipObj = document.createElement("div");
                 tipObj.style.width = '80px';
-                tipObj.style.height = '40px';
+                tipObj.style.height = '80px';
                 tipObj.style.background = "lightgrey";
                 tipObj.style.borderRadius = "3px";
                 tipObj.style.padding = "6px";
