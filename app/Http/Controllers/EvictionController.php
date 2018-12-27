@@ -282,7 +282,7 @@ class EvictionController extends Controller
                 $eviction->breached_conditions_lease = $isBreachedConditionsLease;
                 $eviction->amt_greater_than_zero = $isAmtGreaterThanZero;
                 $eviction->lease_ended = $isLeaseEnded;
-                $eviction->additionalRent = $isAdditionalRent;
+                $eviction->is_additional_rent = $isAdditionalRent;
                 $eviction->defendant_state = $defendantState;
                 $eviction->defendant_zipcode = $defendantZipcode;
                 $eviction->defendant_house_num = $defendanthouseNum;
