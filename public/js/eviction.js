@@ -4,20 +4,18 @@ if (document.location.href.split('/')[3] == 'online-eviction') {
         $('#signArea').signaturePad({drawOnly:true, drawBezierCurves:true, lineTop:90});
 
         $("#btnSaveSign").click(function(e) {
-            html2canvas([document.getElementById('sign-pad')], {
-                onrendered: function (canvas) {
-                    var canvas_img_data = canvas.toDataURL('image/png');
-                    console.log(canvas_img_data);
-                    var img_data = canvas_img_data.replace(/^data:image\/(png|jpg);base64,/, "");
-                    //ajax call to save image inside folder
-                    $.ajax({
-                        url: 'online-eviction/saveSignature',
-                        data: {img_data: img_data},
-                        type: 'post',
-                        dataType: 'json',
-                        success: function (response) {
-                        }
-                    });
+            var canvas = document.getElementById('sign-pad');
+            var canvas_img_data = canvas.toDataURL();
+
+            $.ajax({
+                beforeSend: function (xhr) {
+                    xhr.setRequestHeader('X-CSRF-TOKEN', $("#token").attr('content'))
+                },
+                url: 'online-eviction/saveSignature',
+                data: {img_data: canvas_img_data},
+                type: 'post',
+                dataType: 'json',
+                success: function (response) {
                 }
             });
         });
@@ -70,6 +68,8 @@ if (document.location.href.split('/')[3] == 'online-eviction') {
             var geoPoints = value.geo_locations.replace(/\s/g, '').replace(/},/g, '},dd').split(',dd');
             var obj = [];
 
+            console.log(magId);
+
             for (var i in geoPoints) {
                 obj.push(JSON.parse(geoPoints[i]));
             }
@@ -90,6 +90,7 @@ if (document.location.href.split('/')[3] == 'online-eviction') {
                 township: value.township
             });
             magArray[count].setMap(map);
+
 
             google.maps.event.addListener(magArray[count], 'mouseover', function (e) {
                 var magistrateId = $(this)[0].areaName.split('magistrate_');
