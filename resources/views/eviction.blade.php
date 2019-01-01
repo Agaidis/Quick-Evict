@@ -103,10 +103,6 @@
                                                                 <option value="10">10</option>
                                                             </select>
                                                         </div>
-                                                        <div class="col-sm-4">
-                                                            <label for="filing_date" class="labels">Filing Date</label>
-                                                            <input class="form-control eviction_fields" type="date" id="filing_date" name="filing_date"/>
-                                                        </div>
                                                         <div class="col-sm-10">
                                                             <div class="labels">Lease Type:</div>
                                                             <input type="radio" id="residential_lease" name="lease_type" value="isResidential" checked>

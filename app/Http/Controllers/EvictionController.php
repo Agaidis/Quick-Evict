@@ -94,9 +94,6 @@ class EvictionController extends Controller
             $unjustDamages = $_POST['unjust_damages'];
             $unjustDamages = str_replace($removeValues, '', $unjustDamages);
 
-
-            $filing_date = $_POST['filing_date'];
-
             $tenantName = $_POST['tenant_name'];
             $ownerName = $_POST['owner_name'];
 

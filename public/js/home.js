@@ -3,6 +3,36 @@
  */
 $(document).ready(function () {
 
+    $('#court_date').datepicker();
+    $('#court_time').timepicker();
+
+    $('.court_calendar').on('click', function() {
+        var id =
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+
+        $.ajax({
+            beforeSend: function (xhr) {
+                xhr.setRequestHeader('X-CSRF-TOKEN', $("#token").attr('content'));
+            },
+            type: "GET",
+            url: '/dashboard/getDate',
+            dataType: 'json',
+            data: {id: id},
+
+            success: function (data) {
+                console.log(data);
+            },
+            error: function (data) {
+                console.log(data);
+            }
+        });
+    });
+
+
     $('#eviction_table').DataTable( {
         "pagingType": "simple",
         "aaSorting": []
@@ -12,7 +42,6 @@ $(document).ready(function () {
         var conf = confirm('Are you sure you want to Delete ' + splitId[2] + ' ?');
 
         if (conf == true) {
-            console.log(splitId[1]);
 
             var evictionId = splitId[1];
             $.ajax({

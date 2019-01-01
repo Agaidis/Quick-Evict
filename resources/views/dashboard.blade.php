@@ -22,6 +22,7 @@
                                     <th>Owner Name</th>
                                     <th>Tenant Name</th>
                                     <th>Status</th>
+                                    <th>Court Date</th>
                                     <th>LTC Total Judgement</th>
                                     <th>Court Filing Fee</th>
                                     <th>Completion Date</th>
@@ -60,6 +61,9 @@
                                                 @endforeach
                                             </select>
                                         </td>
+                                        <td class="text-center">
+                                            <span id="court_date_{{$eviction->id}}_btn" data-target="#modal_set_court_date" data-toggle="modal" class="court_calendar oi oi-calendar"></span>
+                                        </td>
                                         <td>{{$eviction->total_judgement}}</td>
                                         <td>{{$eviction->court_filing_fee}}</td>
                                         <td>{{$eviction->created_at}}</td>
@@ -72,6 +76,31 @@
                             </table>
                             <input type="hidden" name="id" id="download_id"/>
                         </form>
+                            <div class="modal fade" id="modal_set_court_date">
+                                <div class="modal-dialog" role="document">
+                                    <div class="set_court_date_modal modal-content">
+                                        <div class="modal-header">
+                                            <h4 class="set_court_date_title">Court Date: </h4>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <div class="row">
+                                                <div class="col-sm-12">
+                                                    <span>Date: <input type="text" id="court_date"></span>
+                                                    <span>Time: <input type="text" id="court_time"></span>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="modal-footer">
+                                            <button type="button" id="submit_date" class="approve-btn btn btn-success" data-dismiss="modal">Set Date</button>
+                                            <button type="button" id="cancel_date" class="approve-btn btn btn-primary" data-dismiss="modal" >Cancel</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                     </div>
                 </div>
             </div>
