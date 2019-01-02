@@ -30,7 +30,7 @@ $(document).ready(function () {
                 console.log(data);
             }
         });
-    }).css( 'cursor', 'pointer' );
+    }).css( 'cursor', 'pointer' ).tooltip();
 
 
     $('#eviction_table').DataTable( {
