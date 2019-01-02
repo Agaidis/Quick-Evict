@@ -27,7 +27,7 @@
     display: block;
     padding: 10px 15px;
 }
-@media (min-width: 768px)
+@media (min-width: 768px) {
 .navbar-right {
     float: right !important;
     margin-right: -15px;
@@ -45,4 +45,5 @@
 
 #navbarSupportedContent {
     margin-left:22%;   
+}
 }

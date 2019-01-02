@@ -6,6 +6,8 @@ $(document).ready(function () {
     $('#court_date').datepicker();
     $('#court_time').timepicker();
 
+    $('.court_calendar').css( 'cursor', 'pointer' );
+
     $('.court_calendar').on('click', function() {
         var id =
         $.ajaxSetup({
