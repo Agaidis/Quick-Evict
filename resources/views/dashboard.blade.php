@@ -62,7 +62,7 @@
                                             </select>
                                         </td>
                                         <td class="text-center">
-                                            <span id="court_date_{{$eviction->id}}_btn" data-target="#modal_set_court_date" data-toggle="modal" class="court_calendar oi oi-calendar"></span>
+                                            <span id="court_date_{{$eviction->id}}_btn" data-target="#modal_set_court_date" data-toggle="modal" class="court_calendar glyphicon glyphicon-calendar"></span>
                                         </td>
                                         <td>{{$eviction->total_judgement}}</td>
                                         <td>{{$eviction->court_filing_fee}}</td>
