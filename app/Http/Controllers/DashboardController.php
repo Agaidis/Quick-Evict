@@ -60,6 +60,29 @@ class DashboardController extends Controller
         }
     }
 
+    public function storeCourtDate(Request $request) {
+
+        try {
+            $courtDateTime = $request->courtDate . ' ' . $request->courtTime;
+
+            $eviction = Evictions::find($request->id);
+            $eviction->court_date = $courtDateTime;
+            $eviction->save();
+
+            $request->session()->flash('alert-success', 'Date has been successfully set!');
+
+            return 'success';
+
+        } catch (\Exception $e) {
+            $errorDetails = 'DashboardController - error in store() method when attempting to store court date';
+            $errorDetails .= PHP_EOL . 'File: ' . $e->getFile();
+            $errorDetails .= PHP_EOL . 'Line #' . $e->getLine();
+            \Log::error($errorDetails . PHP_EOL . 'Error Message: ' . $e->getMessage() . PHP_EOL . 'Trace: ' . $e->getTraceAsString());
+            mail('andrew.gaidis@gmail.com', 'store court date', $errorDetails);
+        }
+        return 'success';
+    }
+
     public function downloadPDF(Request $request)
     {
         try {

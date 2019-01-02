@@ -62,7 +62,12 @@
                                             </select>
                                         </td>
                                         <td class="text-center">
-                                            <p data-toggle="tooltip" data-placement="right" title="Set Court Date" class="calendar_tooltip"><span id="court_date_{{$eviction->id}}_btn" data-target="#modal_set_court_date" data-toggle="modal" class="court_calendar"><i class="fas fa-calendar-alt"></i></span></p>
+                                            <span data-toggle="tooltip" data-placement="right" title="Set Court Date" class="calendar_tooltip">
+                                                <span id="court_date_{{$eviction->id}}_btn" data-target="#modal_set_court_date" data-toggle="modal" class="court_calendar">
+                                                    <i class="fas fa-calendar-alt"></i>
+                                                </span>
+                                            </span><br>
+                                            <span id="court_date_{{$eviction->id}}">{{$eviction->court_date}}</span>
                                         </td>
                                         <td>{{$eviction->total_judgement}}</td>
                                         <td>{{$eviction->court_filing_fee}}</td>
@@ -87,11 +92,12 @@
                                         </div>
                                         <div class="modal-body">
                                             <div class="row">
-                                                <div class="col-sm-12">
-                                                    <span>Date: <input type="text" id="court_date"></span>
-                                                    <span>Time: <input type="text" id="court_time"></span>
+                                                <div class="col-md-offset-3 col-sm-8">
+                                                    <label for="court_date">Date: <input class="form-control" name="court_date" id="court_date"></label>
+                                                    <label for="court_time">Time: <input class="form-control" name="court_time" id="court_time" /></label>
                                                 </div>
                                             </div>
+                                            <input type="hidden" id="id_court_date" name="id"/>
                                         </div>
 
                                         <div class="modal-footer">

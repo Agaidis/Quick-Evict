@@ -27,6 +27,7 @@
     <script src="https://js.stripe.com/v3/"></script>
     <script src="{{ asset('js/timepicker.min.js') }}" defer></script>
     <script src="{{ asset ('js/datepicker-ui.min.js') }}" defer></script>
+    <script src="{{ asset('js/bootstrap-timepicker.min.js') }}" defer></script>
 
 
 
@@ -53,6 +54,7 @@
     <link href="{{ asset('css/datepicker.structure.min.css') }}" rel="stylesheet">
     <link href="{{ asset('css/datepicker.theme.min.css') }}" rel="stylesheet">
     <link href="{{ asset('css/datepicker-ui.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/bootstrap-timepicker.min.css') }}" rel="stylesheet">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
 
 </head>

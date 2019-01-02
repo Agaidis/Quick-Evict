@@ -21,6 +21,9 @@ Route::post('/dashboard/download', 'DashboardController@downloadPDF');
 Route::post('/dashboard/statusChange', 'DashboardController@statusChange');
 Route::post('/dashboard/delete', 'EvictionController@delete');
 
+Route::get('/dashboard/getCourtDate', 'DashboardController@getCourtDate');
+Route::post('/dashboard/storeCourtDate', 'DashboardController@storeCourtDate');
+
 Route::get('/online-eviction', 'EvictionController@index');
 Route::post('/online-eviction/saveSignature', 'EvictionController@saveSignature');
 

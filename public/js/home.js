@@ -6,8 +6,20 @@ $(document).ready(function () {
     $('#court_date').datepicker();
     $('#court_time').timepicker();
 
+    $('.calendar_tooltip').tooltip();
+
     $('.court_calendar').on('click', function() {
-        var id =
+        var id = $(this)[0].id.split('_');
+        $('#id_court_date').val(id[2]);
+
+        var splitCourtDate = $('#court_date_' + id[2]).text().split(' ');
+
+        $('#court_date').val('').datepicker('setDate', new Date(splitCourtDate[0]));
+        $('#court_time').val('').timepicker('setTime', splitCourtDate[1] + splitCourtDate[2]);
+    }).css( 'cursor', 'pointer' );
+
+
+    $('#submit_date').on('click', function () {
         $.ajaxSetup({
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -18,20 +30,26 @@ $(document).ready(function () {
             beforeSend: function (xhr) {
                 xhr.setRequestHeader('X-CSRF-TOKEN', $("#token").attr('content'));
             },
-            type: "GET",
-            url: '/dashboard/getDate',
+            type: "POST",
+            url: '/dashboard/storeCourtDate',
             dataType: 'json',
-            data: {id: id},
+            data: {
+                id: $('#id_court_date').val(),
+                courtDate: $('#court_date').val(),
+                courtTime: $('#court_time').val()
+            },
 
             success: function (data) {
                 console.log(data);
+                location.reload();
             },
             error: function (data) {
                 console.log(data);
+                location.reload();
             }
         });
-    }).css( 'cursor', 'pointer' );
-    $('.calendar_tooltip').tooltip();
+    });
+
 
     $('#eviction_table').DataTable( {
         "pagingType": "simple",
