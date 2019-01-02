@@ -26,6 +26,7 @@
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAfPLSbGAHZkEd-8DDB0FcGSlhrV9LQMGM&libraries=places" defer></script>
     <script src="https://js.stripe.com/v3/"></script>
     <script src="{{ asset('js/timepicker.min.js') }}" defer></script>
+    <script src="{{ asset ('js/datepicker-ui.min.js') }}" defer></script>
 
 
 {{--<script>--}}
@@ -47,7 +48,10 @@
     <link href="{{ asset('css/eviction.css') }}" rel="stylesheet">
     <link href="{{ asset('css/steps.css') }}" rel="stylesheet">
     <link href="{{ asset('css/signaturepad.css') }}" rel="stylesheet">
-    <link href="{{ asset('css/timepicker.min.css') }}" rel="stylesheet>"
+    <link href="{{ asset('css/timepicker.min.css') }}" rel="stylesheet>">
+    <link href="{{ asset('css/datepicker.structure.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/datepicker.theme.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/datepicker-ui.min.css') }}" rel="stylesheet">
 
 </head>
 <body>
