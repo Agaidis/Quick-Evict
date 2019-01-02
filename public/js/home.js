@@ -30,8 +30,8 @@ $(document).ready(function () {
                 console.log(data);
             }
         });
-    }).css( 'cursor', 'pointer' ).tooltip();
-
+    }).css( 'cursor', 'pointer' );
+    $('.calendar_tooltip').tooltip();
 
     $('#eviction_table').DataTable( {
         "pagingType": "simple",

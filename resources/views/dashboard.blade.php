@@ -62,7 +62,7 @@
                                             </select>
                                         </td>
                                         <td class="text-center">
-                                            <p class="" data-toggle="tooltip" data-placement="right" title="Tooltip on right"><span id="court_date_{{$eviction->id}}_btn" data-target="#modal_set_court_date" data-toggle="modal" class="court_calendar"><i class="fas fa-calendar-alt"></i></span></p>
+                                            <p data-toggle="tooltip" data-placement="right" title="Tooltip on right" class="calendar_tooltip"><span id="court_date_{{$eviction->id}}_btn" data-target="#modal_set_court_date" data-toggle="modal" class="court_calendar"><i class="fas fa-calendar-alt"></i></span></p>
                                         </td>
                                         <td>{{$eviction->total_judgement}}</td>
                                         <td>{{$eviction->court_filing_fee}}</td>
