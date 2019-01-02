@@ -7,6 +7,7 @@
                 <div class="card">
                     <div class="card-header">Dashboard</div>
                     <div class="card-body">
+                        <span id="court_date_{{$eviction->id}}_btn" data-target="#modal_set_court_date" data-toggle="modal" class="court_calendar glyphicon glyphicon-calendar"></span>
                         @if (session('status'))
                             <div class="alert alert-success">
                                 {{ session('status') }}
