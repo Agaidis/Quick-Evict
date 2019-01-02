@@ -6,8 +6,6 @@ $(document).ready(function () {
     $('#court_date').datepicker();
     $('#court_time').timepicker();
 
-    $('.court_calendar').css( 'cursor', 'pointer' );
-
     $('.court_calendar').on('click', function() {
         var id =
         $.ajaxSetup({
@@ -32,7 +30,7 @@ $(document).ready(function () {
                 console.log(data);
             }
         });
-    });
+    }).css( 'cursor', 'pointer' );
 
 
     $('#eviction_table').DataTable( {
