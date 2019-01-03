@@ -9,6 +9,7 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <title>{{ config('app.name', 'Eviction Tech') }}</title>
+    <link rel="icon" href="https://quickevict.nyc3.digitaloceanspaces.com/EvictionTech%20logo.jpg"/>
 
     <!-- Scripts -->
 
