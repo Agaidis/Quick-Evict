@@ -169,22 +169,24 @@
                                                 <label for="is_determination_request">A Request for Determination of Abandonment (Form MDJS 334) must be completed and submitted with this complaint</label>
                                             </div>
                                         </div>
-                                    {{--<div class="row">--}}
-                                        {{--<div class="col-md-offset-3 col-md-6">--}}
-                                            {{--<div id="signArea" >--}}
-                                                {{--<h2 class="tag-ingo">Put signature below,</h2>--}}
-                                                {{--<div class="sig sigWrapper" style="height:auto;">--}}
-                                                    {{--<div class="typed"></div>--}}
-                                                    {{--<canvas class="sign-pad" id="sign-pad" width="300" height="100"></canvas>--}}
-                                                {{--</div>--}}
-                                            {{--</div>--}}
-                                        {{--</div>--}}
-                                    {{--</div>--}}
+                                        <div class="form-group">
+                                            <div class="row">
+                                                <div class="offset-2 col-sm-6">
+                                                    <canvas id="signature_pad" width="700" height="270" style="touch-action: none;"></canvas>
+                                                    <div class="signature_pad_footer">
+                                                        <div class="description">Sign above</div>
+                                                        <div class="signature_pad_actions">
+                                                            <button type="button" class="btn btn-default clear_signature" data-action="clear">Clear</button>
+                                                            <button type="button" class="btn btn-primary save_signature" data-action="save-png">Use Signature</button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    <input type="hidden" id="signature_source" name="signature_source"/>
 
-                                    {{--<button type="button" id="btnSaveSign">Save Signature</button>--}}
 
-                                    {{--<div class="sign-container">--}}
-                                    {{--</div>--}}
+
                                         <button type="submit" id="pdf_download_btn" class="btn btn-primary">Download PDF File</button>
 
 

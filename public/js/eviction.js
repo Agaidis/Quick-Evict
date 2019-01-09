@@ -20,6 +20,31 @@ if (document.location.href.split('/')[3] == 'online-eviction') {
             });
         });
 
+        var canvas = document.querySelector("canvas");
+        var signaturePad = new SignaturePad(canvas, {});
+
+
+        $('.clear_signature').on('click', function() {
+            // Clears the canvas
+            signaturePad.clear();
+        });
+
+        $('.save_signature').on('click', function() {
+            var dataURL = signaturePad.toDataURL(); // save image as PNG
+            console.log(dataURL);
+            $('#ok').attr('src', dataURL);
+            $('#signature_source').val(dataURL);
+        });
+
+
+
+
+
+
+
+
+
+
         $('#filing_date').val(new Date());
         $('#landlord').prop('hidden', true);
 

@@ -156,3 +156,19 @@ form.eviction_form fieldset {
     text-align: left;
     font-style: oblique;
 }
+
+#signature_pad {
+    margin-top:5%;
+    border: 1px solid grey;
+    border-radius:1em;
+}
+
+.clear_signature {
+    margin-left:35%;
+}
+.save_signature {
+    margin-left: 30px;
+}
+.description {
+    margin-left: 41%;
+}
