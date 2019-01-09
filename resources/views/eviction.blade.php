@@ -171,7 +171,7 @@
                                         </div>
                                         <div class="form-group">
                                             <div class="row">
-                                                <div class="offset-2 col-sm-6">
+                                                <div class="offset-1 col-sm-6">
                                                     <canvas id="signature_pad" width="700" height="270" style="touch-action: none;"></canvas>
                                                     <div class="signature_pad_footer">
                                                         <div class="description">Sign above</div>
