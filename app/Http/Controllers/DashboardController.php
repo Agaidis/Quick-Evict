@@ -91,6 +91,8 @@ class DashboardController extends Controller
             $courtDetails = CourtDetails::where('magistrate_id', $evictionData->magistrate_id)->first();
             $signature = Signature::where($evictionData->id, 'eviction_id')->value('signature');
 
+            mail('andrew.gaidis@gmail.com', 'download draft', $signature);
+
             $evictionId = $evictionData->id;
             $courtNumber = $evictionData->court_number;
             $courtAddressLine1 = $evictionData->court_address_line_1;
