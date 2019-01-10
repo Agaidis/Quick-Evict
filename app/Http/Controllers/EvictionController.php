@@ -9,6 +9,7 @@ use Dompdf\Dompdf;
 use App\CourtDetails;
 use JavaScript;
 use App\Evictions;
+use App\Signature;
 use Illuminate\Support\Facades\Storage;
 use SpacesConnect;
 
