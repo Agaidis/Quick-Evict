@@ -90,7 +90,7 @@
                                                         <div class="col-sm-3">
                                                             <label for="tenant_num" class="labels"># of Tenants on Lease</label>
                                                             <select class="form-control" id="tenant_num" name="tenant_num">
-                                                                <option value="0" selected>0</option>
+                                                                <option value="0">0</option>
                                                                 <option value="1">1</option>
                                                                 <option value="2">2</option>
                                                                 <option value="3">3</option>
