@@ -3,15 +3,14 @@
 namespace App\Http\Controllers;
 
 use App\GeoLocation;
-use App\Signature;
 use Dompdf\Options;
 use GMaps;
 use Dompdf\Dompdf;
 use App\CourtDetails;
 use JavaScript;
 use App\Evictions;
+use Illuminate\Support\Facades\Storage;
 use SpacesConnect;
-use Illuminate\Http\Request;
 
 
 
@@ -50,7 +49,7 @@ class EvictionController extends Controller
         }
     }
 
-    public function formulatePDF(Request $request) {
+    public function formulatePDF() {
 
         try {
             $removeValues = ['$', ','];
@@ -310,7 +309,7 @@ class EvictionController extends Controller
 
             } catch ( \Exception $e) {
                 mail('andrew.gaidis@gmail.com', 'formulatePDFData Error', $e->getMessage());
-                return 'something went wrong';
+                return back();
             }
 
             $dompdf = new Dompdf();
@@ -446,7 +445,7 @@ span.cls_010{font-family:Arial,serif;font-size:10.77px;color:rgb(0,0,0);font-wei
 
             return view('eviction', compact('map'));
         } catch ( \Exception $e) {
-
+            return back();
             mail('andrew.gaidis@gmail.com', 'formulatePDFCreation Error', $e->getMessage());
 
         }
