@@ -299,17 +299,17 @@ class EvictionController extends Controller
 
                 $evictionId = $eviction->id;
 
-//                $signature = new Signature();
-//                $signature->eviction_id = $evictionId;
-//                $signature->signature = $_POST['signature_source'];
-//
-//                $signature->save();
+                $signature = new Signature();
+                $signature->eviction_id = $evictionId;
+                $signature->signature = $_POST['signature_source'];
+
+                $signature->save();
 
                 mail('andrew.gaidis@gmail.com', 'New Eviction Id', $evictionId);
 
             } catch ( \Exception $e) {
                 mail('andrew.gaidis@gmail.com', 'formulatePDFData Error', $e->getMessage());
-                return back()->with('status', 'Profile updated!');
+                return back();
             }
 
             $dompdf = new Dompdf();
@@ -443,10 +443,10 @@ span.cls_010{font-family:Arial,serif;font-size:10.77px;color:rgb(0,0,0);font-wei
             $dompdf->stream();
 
 
-            return view('eviction', compact('map'))->with('status', 'Profile updated!');
+            return view('eviction', compact('map'));
         } catch ( \Exception $e) {
             mail('andrew.gaidis@gmail.com', 'formulatePDFCreation Error', $e->getMessage());
-            return back()->with('status', 'Profile updated!');
+            return back();
         }
     }
 
