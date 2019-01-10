@@ -183,7 +183,11 @@
                                                 </div>
                                             </div>
                                         </div>
-                                    <div id="flash-msg"></div> <!-- end .flash-message -->
+                                    @if (session('status'))
+                                        <div class="alert alert-success">
+                                            {{ session('status') }}
+                                        </div>
+                                    @endif
                                     <button type="submit" id="pdf_download_btn" class="btn btn-primary">Download PDF File</button>
 
                                     <input type="hidden" id="signature_source" name="signature_source"/>

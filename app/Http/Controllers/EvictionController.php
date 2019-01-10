@@ -309,7 +309,7 @@ class EvictionController extends Controller
 
             } catch ( \Exception $e) {
                 mail('andrew.gaidis@gmail.com', 'formulatePDFData Error', $e->getMessage());
-                return back();
+                return back()->with('status', 'Profile updated!');
             }
 
             $dompdf = new Dompdf();
@@ -443,11 +443,10 @@ span.cls_010{font-family:Arial,serif;font-size:10.77px;color:rgb(0,0,0);font-wei
             $dompdf->stream();
 
 
-            return view('eviction', compact('map'));
+            return view('eviction', compact('map'))->with('status', 'Profile updated!');
         } catch ( \Exception $e) {
-            return back();
             mail('andrew.gaidis@gmail.com', 'formulatePDFCreation Error', $e->getMessage());
-
+            return back()->with('status', 'Profile updated!');
         }
     }
 
