@@ -90,7 +90,7 @@
                                                         <div class="col-sm-3">
                                                             <label for="tenant_num" class="labels"># of Tenants on Lease</label>
                                                             <select class="form-control" id="tenant_num" name="tenant_num">
-                                                                <option value="" selected disabled># of Tenants</option>
+                                                                <option value="0" selected disabled>0</option>
                                                                 <option value="1">1</option>
                                                                 <option value="2">2</option>
                                                                 <option value="3">3</option>
@@ -183,13 +183,10 @@
                                                 </div>
                                             </div>
                                         </div>
+                                    <div id="flash-msg"></div> <!-- end .flash-message -->
+                                    <button type="submit" id="pdf_download_btn" class="btn btn-primary">Download PDF File</button>
+
                                     <input type="hidden" id="signature_source" name="signature_source"/>
-
-
-
-                                        <button type="submit" id="pdf_download_btn" class="btn btn-primary">Download PDF File</button>
-
-
                                     <input type="hidden" id="state" name="state"/>
                                     <input type="hidden" id="county" name="county"/>
                                     <input type="hidden" id="house_num" name="houseNum"/>

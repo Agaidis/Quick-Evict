@@ -3,14 +3,15 @@
 namespace App\Http\Controllers;
 
 use App\GeoLocation;
+use App\Signature;
 use Dompdf\Options;
 use GMaps;
 use Dompdf\Dompdf;
 use App\CourtDetails;
 use JavaScript;
 use App\Evictions;
-use Illuminate\Support\Facades\Storage;
 use SpacesConnect;
+use Illuminate\Http\Request;
 
 
 
@@ -49,7 +50,7 @@ class EvictionController extends Controller
         }
     }
 
-    public function formulatePDF() {
+    public function formulatePDF(Request $request) {
 
         try {
             $removeValues = ['$', ','];
@@ -247,8 +248,6 @@ class EvictionController extends Controller
                 $filingFee = 'Didnt Work';
             }
 
-            mail('andrew.gaidis@gmail.com', 'filing fee', $filingFee);
-
             if ($totalFees > 0) {
                 $isAmtGreaterThanZero = true;
                 $amtGreaterThanZeroCheckbox = '<input type="checkbox" checked/>';
@@ -301,9 +300,17 @@ class EvictionController extends Controller
 
                 $evictionId = $eviction->id;
 
+//                $signature = new Signature();
+//                $signature->eviction_id = $evictionId;
+//                $signature->signature = $_POST['signature_source'];
+//
+//                $signature->save();
+
+                mail('andrew.gaidis@gmail.com', 'New Eviction Id', $evictionId);
+
             } catch ( \Exception $e) {
-                mail('andrew.gaidis@gmail.com', 'formulatePDF Error', $e->getMessage());
-                return back();
+                mail('andrew.gaidis@gmail.com', 'formulatePDFData Error', $e->getMessage());
+                return 'something went wrong';
             }
 
             $dompdf = new Dompdf();
@@ -439,8 +446,8 @@ span.cls_010{font-family:Arial,serif;font-size:10.77px;color:rgb(0,0,0);font-wei
 
             return view('eviction', compact('map'));
         } catch ( \Exception $e) {
-            mail('andrew.gaidis@gmail.com', 'formulatePDF Error', $e->getMessage());
-            return back();
+
+            mail('andrew.gaidis@gmail.com', 'formulatePDFCreation Error', $e->getMessage());
 
         }
     }

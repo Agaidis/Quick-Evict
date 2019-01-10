@@ -31,18 +31,8 @@ if (document.location.href.split('/')[3] == 'online-eviction') {
 
         $('.save_signature').on('click', function() {
             var dataURL = signaturePad.toDataURL(); // save image as PNG
-            console.log(dataURL);
             $('#signature_source').val(dataURL);
         });
-
-
-
-
-
-
-
-
-
 
         $('#filing_date').val(new Date());
         $('#landlord').prop('hidden', true);
