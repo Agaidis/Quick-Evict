@@ -450,40 +450,4 @@ span.cls_010{font-family:Arial,serif;font-size:10.77px;color:rgb(0,0,0);font-wei
             return back();
         }
     }
-
-    public function saveSignature() {
-
-        try {
-            $data = $_POST['img_data'];
-
-            if (preg_match('/data:image\/(gif|jpeg|png);base64,(.*)/i', $data, $matches)) {
-                $imageType = $matches[1];
-                $imageData = base64_decode($matches[2]);
-                $image = imagecreatefromstring($imageData);
-                $filename = 'test' . '.png';
-
-                if (imagepng($image, public_path().'/images/' . $filename)) {
-                    echo json_encode(array('filename' => '/images/' . $filename));
-
-                    $key = "EH2TKHIPLFYD7LHGDFL4";
-                    $secret = "MXWANmAm4UPHVY0++0C1bmbfz9DE2jSD+BBOqNEL8kU";
-
-                    $space_name = "quickevict";
-                    $region = "nyc3";
-
-                    $space = new SpacesConnect($key, $secret, $space_name, $region);
-                    $space->UploadFile(public_path().'/images/' . $filename, "public");
-                } else {
-                    throw new \Exception('Could not save the file.');
-                }
-            } else {
-                throw new \Exception('Invalid data URL.');
-            }
-            return 'success';
-
-        } catch ( \Exception $e ) {
-            mail('andrew.gaidis@gmail.com', 'save Signature Error', $e->getMessage());
-            return 'failure';
-        }
-    }
 }
