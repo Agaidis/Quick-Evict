@@ -64,7 +64,7 @@ return [
             'url' => env('AWS_URL'),
         ],
 
-        'spaces' => [
+        'do' => [
             'driver' => 's3',
             'key' => env('DO_SPACES_KEY'),
             'secret' => env('DO_SPACES_SECRET'),

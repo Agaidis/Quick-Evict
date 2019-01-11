@@ -8,9 +8,7 @@
             "pagingType": "simple"
         }).on('click', '.magistrate-remove', function () {
             var id = $(this)[0].id;
-            console.log(id);
             var splitId = id.split('_');
-            console.log(splitId);
             var conf = confirm('Are you sure you want to Delete ' + splitId[2]);
 
             if (conf == true) {
@@ -61,6 +59,7 @@
                     $('#db_court_id').val(data[1][0].id);
                     $('#edit_court_id').val(data[1][0].court_number);
                     $('#edit_magistrate_id').val(data[1][0].magistrate_id);
+                    $('#edit_township').val(data[1][0].township);
                     $('#edit_county').val(data[1][0].county);
                     $('#edit_mdj_name').val(data[1][0].mdj_name);
                     $('#edit_court_number').val(data[1][0].phone_number);
@@ -74,6 +73,11 @@
                     $('#edit_two_btn_2000_4001').val(data[1][0].two_defendant_between_2001_4000);
                     $('#edit_two_over_4000').val(data[1][0].two_defendant_greater_than_4000);
                     $('#edit_two_oop').val(data[1][0].two_defendant_out_of_pocket);
+                    $('#edit_three_under_2000').val(data[1][0].three_defendant_up_to_2000);
+                    $('#edit_three_btn_2000_4001').val(data[1][0].three_defendant_between_2001_4000);
+                    $('#edit_three_over_4000').val(data[1][0].three_defendant_greater_than_4000);
+                    $('#edit_three_oop').val(data[1][0].three_defendant_out_of_pocket);
+                    $('#edit_additional_tenants').val(data[1][0].additional_tenant);
                     $('#edit_geo_locations').val(data[0][0].geo_locations);
                 },
                 error: function (data) {
@@ -101,8 +105,13 @@
                 data: data,
 
                 success: function (data) {
-                    console.log(data);
-                    location.reload();
+                    if (data.messageDetails == 'All Good') {
+                        alertMsgCreate(true, data.responseMessage);
+                        location.reload();
+                    } else {
+                        alertMsgCreate(false, data.responseMessage);
+                    }
+
                 },
                 error: function (data) {
                     console.log(data);
@@ -128,6 +137,7 @@
                     dbCourtId: $('#db_court_id').val(),
                     dbGeoId: $('#db_geo_id').val(),
                     magistrateId: $('#edit_magistrate_id').val(),
+                    township: $('#edit_township').val(),
                     courtId: $('#edit_court_id').val(),
                     county: $('#edit_county').val(),
                     mdjName: $('#edit_mdj_name').val(),
@@ -146,7 +156,7 @@
                     threeBtn20004001: $('#edit_three_btn_2000_4001').val(),
                     threeOver4000: $('#edit_three_over_4000').val(),
                     threeOOP: $('#edit_three_oop').val(),
-                    additionalTenant: $('#additional_tenants'),
+                    additionalTenant: $('#edit_additional_tenants').val(),
                     geoLocations: $('#edit_geo_locations').val()
                 },
                 success: function (data) {
@@ -160,4 +170,21 @@
             setTimeout(function() { location.reload(); }, 1000);
 
         });
+        //Creates a message when user performs an action using ajax i.e add, edit, delete
+        function alertMsgCreate(isSuccess, msg) {
+            var result = '';
+            if (isSuccess) {
+                result = $('<div class="alert alert-success">' + msg + '</div>');
+                $('#flash-msg').append(result);
+                setTimeout(function () {
+                    $(".alert").alert('close');
+                }, 4000);
+            } else {
+                result = $('<div class="alert alert-danger">' + msg + '</div>');
+                $('#flash-msg').append(result);
+                setTimeout(function () {
+                    $(".alert").alert('close');
+                }, 6000);
+            }
+        }
     });

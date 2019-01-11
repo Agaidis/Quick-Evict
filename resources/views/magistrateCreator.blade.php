@@ -12,23 +12,24 @@
                             @if(Session::has('alert-success'))
                                 <p class="alert alert-success">{{ Session::get('alert-success') }} <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a></p>
                             @endif
+                                @if(Session::has('alert-danger'))
+                                    <p class="alert alert-danger">{{ Session::get('alert-danger') }} <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a></p>
+                                @endif
                         </div> <!-- end .flash-message -->
                         <table class="table table-hover table-responsive-lg table-bordered magistrate_table" id="magistrate_table">
                                     <thead>
                                     <tr>
                                         <th>Magistrate Unique Id</th>
                                         <th>Court Id</th>
+                                        <th>Township</th>
                                         <th>County</th>
                                         <th>MDJ Name</th>
                                         <th>Phone #</th>
-                                        <th>(1) Under 2k</th>
-                                        <th>(1) Btn 2k - 4k</th>
-                                        <th>(1) Over 4k</th>
-                                        <th>(1) OOP</th>
-                                        <th>(2) Under 2k</th>
-                                        <th>(2) Btn 2k - 4k</th>
-                                        <th>(2) Over 4k</th>
-                                        <th>(2) OOP</th>
+                                        <th>(1) Under 2k<br>(2) Under 2k<br>(3) Under 2k</th>
+                                        <th>(1) Btn 2k - 4k<br>(2) Btn 2k - 4k<br>(3) Btn 2k - 4k</th>
+                                        <th>(1) Over 4k<br>(2) Over 4k<br>(3) Over 4k</th>
+                                        <th>(1) OOP<br>(2) OOP<br>(3) OOP</th>
+                                        <th>Additional Tenant $</th>
                                         <th class="text-center">Edit</th>
                                         <th class="text-center">Remove</th>
                                     </tr>
@@ -38,28 +39,22 @@
                                     <tr>
                                         <td>{{$courtDetail->magistrate_id}}</td>
                                         <td>{{$courtDetail->court_number}}</td>
+                                        <td>{{$courtDetail->township}}</td>
                                         <td>{{$courtDetail->county}}</td>
                                         <td>{{$courtDetail->mdj_name}}</td>
                                         <td>{{$courtDetail->phone_number}}</td>
-                                        <td>{{$courtDetail->one_defendant_up_to_2000}}</td>
-                                        <td>{{$courtDetail->one_defendant_between_2001_4000}}</td>
-                                        <td>{{$courtDetail->one_defendant_greater_than_4000}}</td>
-                                        <td>{{$courtDetail->one_defendant_out_of_pocket}}</td>
-                                        <td>{{$courtDetail->two_defendant_up_to_2000}}</td>
-                                        <td>{{$courtDetail->two_defendant_between_2001_4000}}</td>
-                                        <td>{{$courtDetail->two_defendant_greater_than_4000}}</td>
-                                        <td>{{$courtDetail->two_defendant_out_of_pocket}}</td>
+                                        <td>{{$courtDetail->one_defendant_up_to_2000}}<br>{{$courtDetail->two_defendant_up_to_2000}}<br>{{$courtDetail->three_defendant_up_to_2000}}</td>
+                                        <td>{{$courtDetail->one_defendant_between_2001_4000}}<br>{{$courtDetail->two_defendant_between_2001_4000}}<br>{{$courtDetail->three_defendant_between_2001_4000}}</td>
+                                        <td>{{$courtDetail->one_defendant_greater_than_4000}}<br>{{$courtDetail->two_defendant_greater_than_4000}}<br>{{$courtDetail->three_defendant_greater_than_4000}}</td>
+                                        <td>{{$courtDetail->one_defendant_out_of_pocket}}<br>{{$courtDetail->two_defendant_out_of_pocket}}<br>{{$courtDetail->three_defendant_out_of_pocket}}</td>
+                                        <td>{{$courtDetail->additional_tenant}}</td>
+
                                         <td class="text-center"><button type="button" data-target="#modal_edit_magistrate" data-toggle="modal" id="id_{{$courtDetail->id}}_{{$courtDetail->magistrate_id}}" class=" magistrate-edit">Edit</button></td>
                                         <td class="text-center"><button type="button" id="id_{{$courtDetail->id}}_{{$courtDetail->magistrate_id}}" class="text-danger magistrate-remove">Delete</button></td>
                                     </tr>
                                     @endforeach
                                     </tbody>
                                 </table>
-                        <div class="flash-message">
-                            @if(Session::has('alert-success'))
-                                <p class="alert alert-success">{{ Session::get('alert-success') }} <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a></p>
-                            @endif
-                        </div> <!-- end .flash-message -->
                         <form id="magistrate_form">
                         <div class="row">
                             <div class="col-sm-12">
@@ -74,6 +69,10 @@
                                         <div class="col-md-6">
                                             <label for="magistrate_id">Unique Magistrate Id:</label>
                                             <input placeholder="02-1-01-1" type="text" class="form-control" id="magistrate_id" name="magistrate_id" value="" />
+                                        </div>
+                                        <div class="col-md-6">
+                                            <label for="township">Township:</label>
+                                            <input placeholder="Township" type="text" class="form-control" id="township" name="township" value="" />
                                         </div>
                                         <div class="col-sm-6">
                                             <label for="county">County:</label>
@@ -148,6 +147,34 @@
                                             <input placeholder="$" type="text" class="form-control" id="two_oop" name="two_oop" value="" /></div>
                                         </div>
                                     </div>
+                                    <div class="col-md-6">
+                                        <h4 class="major_labels">Three Defendant Amts</h4>
+                                        <div class="three_defendant_container">
+                                            <div class="col-sm-12">
+                                                <label for="three_under_2000">Under 2,000</label>
+                                                <input placeholder="$" type="text" class="form-control" id="three_under_2000" name="three_under_2000" value="" />
+                                            </div>
+                                            <div class="col-sm-12">
+                                                <label for="three_btn_2000_4001">Between 2,001 and 4,000</label>
+                                                <input placeholder="$" type="text" class="form-control" id="three_btn_2000_4001" name="three_btn_2000_4001" value="" />
+                                            </div>
+                                            <div class="col-sm-12">
+                                                <label for="three_over_4000">Over 4,000</label>
+                                                <input placeholder="$" type="text" class="form-control" id="three_over_4000" name="three_over_4000" value="" />
+                                            </div>
+                                            <div class="col-sm-12">
+                                                <label for="three_oop">OOP</label>
+                                                <input placeholder="$" type="text" class="form-control" id="three_oop" name="three_oop" value="" /></div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-10">
+                                        <h4 class="major_labels">Additional Info</h4>
+                                        <div class="three_defendant_container">
+                                            <div class="col-sm-12">
+                                                <label for="additional_tenants">Additional Tenant $</label>
+                                                <input placeholder="$" type="text" class="form-control" id="additional_tenants" name="additional_tenants" value="" /></div>
+                                        </div>
+                                    </div>
                                 </div>
                                 <div class="row">
                                     <div class="col-md-12">
@@ -158,7 +185,8 @@
                                             </div>
                                         </div>
                                     </div>
-                                </div>
+                                </div><br><br>
+                                <div id="flash-msg"></div>
                                 <br><br>
                                 <button class="btn btn-primary" id="submit_magistrate" type="button">Submit Magistrate</button>
                             </div>
@@ -188,6 +216,10 @@
                                                             <div class="col-md-6">
                                                                 <label for="magistrate_id">Unique Magistrate Id:</label>
                                                                 <input placeholder="02-1-01-1" type="text" class="form-control" id="edit_magistrate_id" name="edit_magistrate_id" value="" />
+                                                            </div>
+                                                            <div class="col-md-6">
+                                                                <label for="township">Township:</label>
+                                                                <input placeholder="Township" type="text" class="form-control" id="edit_township" name="edit_township" value="" />
                                                             </div>
                                                             <div class="col-sm-6">
                                                                 <label for="county">County:</label>
@@ -287,7 +319,7 @@
                                                         <div class="three_defendant_container">
                                                             <div class="col-sm-12">
                                                                 <label for="additional_tenants">Additional Tenant $</label>
-                                                                <input placeholder="$" type="text" class="form-control" id="additional_tenants" name="additional_tenants" value="" /></div>
+                                                                <input placeholder="$" type="text" class="form-control" id="edit_additional_tenants" name="edit_additional_tenants" value="" /></div>
                                                         </div>
                                                     </div>
                                                 </div>

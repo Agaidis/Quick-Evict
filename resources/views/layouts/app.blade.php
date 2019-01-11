@@ -8,7 +8,8 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'Laravel') }}</title>
+    <title>{{ config('app.name', 'Eviction Tech') }}</title>
+    <link rel="icon" href="https://quickevict.nyc3.digitaloceanspaces.com/evictionTechlogo.png"/>
 
     <!-- Scripts -->
 
@@ -17,8 +18,18 @@
     <script src="{{ asset('js/steps.js') }}" defer></script>
     <script src="{{ asset('js/datatables.min.js') }}" defer></script>
     <script src="{{ asset('js/magistrateCreator.js') }}" defer></script>
+    <script src="{{ asset('js/home.js') }}" defer></script>
+    <script src="{{ asset('js/numeric-1.2.6.min.js') }}" defer></script>
+    <script src="{{ asset('js/bezier.js') }}" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/signature_pad@2.3.2/dist/signature_pad.min.js"></script>
+    <script src="{{ asset('js/json2.min.js') }}" defer></script>
+    <script src="{{ asset('js/signaturepad.js') }}" defer></script>
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAfPLSbGAHZkEd-8DDB0FcGSlhrV9LQMGM&libraries=places" defer></script>
     <script src="https://js.stripe.com/v3/"></script>
+    <script src="{{ asset('js/timepicker.min.js') }}" defer></script>
+    <script src="{{ asset ('js/datepicker-ui.min.js') }}" defer></script>
+    <script src="{{ asset('js/bootstrap-timepicker.min.js') }}" defer></script>
+
 
 
 {{--<script>--}}
@@ -39,6 +50,13 @@
     <link href="{{ asset('css/datatables.min.css') }}" rel="stylesheet"/>
     <link href="{{ asset('css/eviction.css') }}" rel="stylesheet">
     <link href="{{ asset('css/steps.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/signaturepad.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/timepicker.min.css') }}" rel="stylesheet>">
+    <link href="{{ asset('css/datepicker.structure.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/datepicker.theme.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/datepicker-ui.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/bootstrap-timepicker.min.css') }}" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
 
 </head>
 <body>
@@ -46,7 +64,7 @@
         <nav class="navbar navbar-expand-md navbar-light navbar-laravel">
             <div class="container">
                 <a class="navbar-brand" href="{{ url('/home') }}">
-                    Quick Evict
+                    <img src="https://quickevict.nyc3.digitaloceanspaces.com/EvictionTech%20logo.jpg" width="150" height="30">
                 </a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
@@ -61,13 +79,14 @@
 
                         {{--@if (Auth::check())--}}
                         <ul class="nav navbar-nav navbar-right">
-                        <li><a href="{{ url('online-eviction') }}" id="online_eviction_btn">Online Eviction</a></li>
-                        <li><a href="{{ url('eviction-info') }}" id="eviction_info_btn">Eviction Info</a></li>
-                        <li><a href="{{ url('FAQ') }}" id="faq_btn">FAQ</a></li>
-                        <li><a href="{{ url('where-does-this-work') }}" id="where_work_btn">Where Does this Work?</a></li>
-                        <li><a href="{{ url('about-us') }}" id="about_us_btn">About Us</a></li>
+                            <li><a href="{{ url('dashboard') }}" id="dashboard_btn">Dashboard</a></li>
+                            <li><a href="{{ url('online-eviction') }}" id="online_eviction_btn">Online Eviction</a></li>
+                            <li><a href="{{ url('eviction-info') }}" id="eviction_info_btn">Eviction Info</a></li>
+                            <li><a href="{{ url('FAQ') }}" id="faq_btn">FAQ</a></li>
+                            <li><a href="{{ url('where-does-this-work') }}" id="where_work_btn">Where Does this Work?</a></li>
+                            <li><a href="{{ url('about-us') }}" id="about_us_btn">About Us</a></li>
                             <li><a href="{{ url('magistrateCreator') }}" id="magistrate_btn">Magistrate Creator</a></li>
-                        {{--@endif<!-- Authentication Links -->--}}
+                        {{--@endif<!-- Authentication Links today -->--}}
                         {{--@guest--}}
                             {{--<ul style="margin-left:60%;" class="nav navbar-nav navbar-right">--}}
                             {{--<li><a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a></li>--}}

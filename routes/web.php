@@ -11,24 +11,28 @@
 |
 */
 
-
-
-
-Route::get('/', function () {
-    return view('home');
-});
-
 Auth::routes();
 
+Route::get('/', 'HomeController@index')->name('home');
 Route::get('/home', 'HomeController@index')->name('home');
 
+Route::get('/dashboard', 'DashboardController@index');
+Route::post('/dashboard/download', 'DashboardController@downloadPDF');
+Route::post('/dashboard/statusChange', 'DashboardController@statusChange');
+Route::post('/dashboard/delete', 'EvictionController@delete');
+
+Route::get('/dashboard/getCourtDate', 'DashboardController@getCourtDate');
+Route::post('/dashboard/storeCourtDate', 'DashboardController@storeCourtDate');
+
 Route::get('/online-eviction', 'EvictionController@index');
+Route::post('/online-eviction/saveSignature', 'EvictionController@saveSignature');
 
 Route::get('/eviction-info', 'EvictionInfoController@index');
 
 Route::get('/FAQ', 'FAQController@index');
 
 Route::get('/where-does-this-work', 'WhereDoesThisWorkController@index');
+Route::post('/where-does-this-work', 'WhereDoesThisWorkController@store');
 
 Route::get('/about-us', 'AboutUsController@index');
 
