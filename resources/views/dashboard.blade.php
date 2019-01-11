@@ -14,19 +14,19 @@
                         @endif
                         <form method="post" action="{{ action('DashboardController@downloadPDF') }}" enctype="multipart/form-data" id="dashboard_form">
                             <input type="hidden" name="_token" value="{{ Session::token() }}">
-                            <table class="table table-hover table-responsive-lg table-bordered eviction_table" id="eviction_table">
+                            <table class="table table-hover table-responsive-md table-bordered eviction_table" id="eviction_table">
                                 <thead>
                                 <tr>
-                                    <th class="text-center">Id</th>
-                                    <th class="text-center">Property Address</th>
-                                    <th class="text-center">Owner</th>
-                                    <th class="text-center">Tenant</th>
-                                    <th class="text-center">Status</th>
-                                    <th class="text-center">Court Date</th>
-                                    <th class="text-center">LTC<br> Total<br> Judgement</th>
-                                    <th class="text-center">Court Filing $</th>
-                                    <th class="text-center">Completion Date</th>
-                                    <th class="text-center">Actions</th>
+                                    <th style="width: 1%" class="text-center">Id</th>
+                                    <th style="width: 14%" class="text-center">Property Address</th>
+                                    <th style="width: 9%" class="text-center">Owner</th>
+                                    <th style="width: 9%" class="text-center">Tenant</th>
+                                    <th style="width: 15%" class="text-center">Status</th>
+                                    <th style="width: 16%" class="text-center">Court Date</th>
+                                    <th style="width: 8%" class="text-center">LTC<br> Total<br> Judgement</th>
+                                    <th style="width: 10%" class="text-center">Court Filing $</th>
+                                    <th style="width: 10%" class="text-center">Completion Date</th>
+                                    <th style="width: 10%" class="text-center">Actions</th>
                                 </tr>
                                 </thead>
                                 <tbody>
@@ -66,7 +66,7 @@
                                                     <i class="fas fa-calendar-alt"></i>
                                                 </span>
                                             </span><br>
-                                            <span class="text-center"id="court_date_{{$eviction->id}}">
+                                            <span class="text-center" id="court_date_{{$eviction->id}}">
                                                 {{date('M j, Y', strtotime($eviction->court_date))}}<br>
                                                 {{date('h:i A', strtotime($eviction->court_date))}}</span>
                                         </td>
