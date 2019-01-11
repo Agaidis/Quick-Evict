@@ -1,35 +1,19 @@
 if (document.location.href.split('/')[3] == 'online-eviction') {
     $(document).ready(function () {
 
-        $('#signArea').signaturePad({drawOnly:true, drawBezierCurves:true, lineTop:90});
-
-        $("#btnSaveSign").click(function(e) {
-            var canvas = document.getElementById('sign-pad');
-            var canvas_img_data = canvas.toDataURL();
-
-            $.ajax({
-                beforeSend: function (xhr) {
-                    xhr.setRequestHeader('X-CSRF-TOKEN', $("#token").attr('content'))
-                },
-                url: 'online-eviction/saveSignature',
-                data: {img_data: canvas_img_data},
-                type: 'post',
-                dataType: 'json',
-                success: function (response) {
-                }
-            });
-        });
-
         var canvas = document.querySelector("canvas");
         var signaturePad = new SignaturePad(canvas, {});
 
-
+        //Clear button to remove signature drawing
         $('.clear_signature').on('click', function() {
+           // $('#pdf_download_btn').prop('disabled', true);
             // Clears the canvas
             signaturePad.clear();
         });
 
+        //Save and use Signature
         $('.save_signature').on('click', function() {
+         //   $('#pdf_download_btn').prop('disabled', false);
             var dataURL = signaturePad.toDataURL(); // save image as PNG
             $('#signature_source').val(dataURL);
         });
@@ -264,37 +248,10 @@ if (document.location.href.split('/')[3] == 'online-eviction') {
                 tipObj = null;
             }
         }
-        //On Submit gather variables and make ajax call to backend
 
+        //On Submit
         $('#pdf_download_btn').on('click', function () {
             $('#rented_by_val').val($('input[name=rented_by]:checked').val());
-          //  $('.eviction_fields').val('').text('');
-            // var data = $('#eviction_form').serialize();
-            // $.ajaxSetup({
-            //     headers: {
-            //         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-            //     }
-            // });
-            //
-            // $.ajax({
-            //     beforeSend: function (xhr) {
-            //         xhr.setRequestHeader('X-CSRF-TOKEN', $("#token").attr('content'));
-            //     },
-            //     type: "POST",
-            //     url: '/online-eviction/pdf-data',
-            //     dataType: 'json',
-            //     data: data,
-            //
-            //     success: function (data) {
-            //         console.log(data);
-            //         //location.reload();
-            //     },
-            //     error: function (data) {
-            //         console.log(data);
-            //     }
-            // });
         });
-
-
     });
 }

@@ -17,17 +17,16 @@
                             <table class="table table-hover table-responsive-lg table-bordered eviction_table" id="eviction_table">
                                 <thead>
                                 <tr>
-                                    <th>Eviction Id</th>
-                                    <th>Property Address</th>
-                                    <th>Owner Name</th>
-                                    <th>Tenant Name</th>
-                                    <th>Status</th>
-                                    <th>Court Date</th>
-                                    <th>LTC Total Judgement</th>
-                                    <th>Court Filing Fee</th>
-                                    <th>Completion Date</th>
-                                    <th>Download PDF</th>
-                                    <th class="text-center">Remove</th>
+                                    <th class="text-center">Id</th>
+                                    <th class="text-center">Property Address</th>
+                                    <th class="text-center">Owner</th>
+                                    <th class="text-center">Tenant</th>
+                                    <th class="text-center">Status</th>
+                                    <th class="text-center">Court Date</th>
+                                    <th class="text-center">LTC<br> Total<br> Judgement</th>
+                                    <th class="text-center">Court Filing $</th>
+                                    <th class="text-center">Completion Date</th>
+                                    <th class="text-center">Actions</th>
                                 </tr>
                                 </thead>
                                 <tbody>
@@ -46,10 +45,10 @@
                                             'Paid Judgement',
                                             'Locked Out Tenant');?>
                                     <tr>
-                                        <td>{{$eviction->id}}</td>
-                                        <td>{{$propertyAddressArray[0]}} <br> {{str_replace('United States', '', $propertyAddressArray[1])}}</td>
-                                        <td>{{$eviction->owner_name}}</td>
-                                        <td>{{$eviction->tenant_name}}</td>
+                                        <td class="text-center">{{$eviction->id}}</td>
+                                        <td class="text-center">{{$propertyAddressArray[0]}} <br> {{str_replace('United States', '', $propertyAddressArray[1])}}</td>
+                                        <td class="text-center">{{$eviction->owner_name}}</td>
+                                        <td class="text-center">{{$eviction->tenant_name}}</td>
                                         <td style="width:150px;">
                                             <select title="status" class="form-control status_select" id="status_{{$eviction->id}}">
                                             @foreach ($statusArray as $status)
@@ -67,13 +66,18 @@
                                                     <i class="fas fa-calendar-alt"></i>
                                                 </span>
                                             </span><br>
-                                            <span id="court_date_{{$eviction->id}}">{{$eviction->court_date}}</span>
+                                            <span class="text-center"id="court_date_{{$eviction->id}}">
+                                                {{date('M j, Y', strtotime($eviction->court_date))}}<br>
+                                                {{date('h:i A', strtotime($eviction->court_date))}}</span>
                                         </td>
-                                        <td>{{$eviction->total_judgement}}</td>
-                                        <td>{{$eviction->court_filing_fee}}</td>
-                                        <td>{{$eviction->created_at}}</td>
-                                        <td class="text-center"><button type="submit" id="download_id_{{$eviction->id}}" class="pdf_download_btn_dashboard btn btn-success">Download</button></td>
-                                        <td class="text-center"><button type="button" id="id_{{$eviction->id}}_{{$propertyAddressArray[0]}}" class="btn btn-danger eviction-remove">Delete</button></td>
+                                        <td class="text-center">{{$eviction->total_judgement}}</td>
+                                        <td class="text-center">{{$eviction->court_filing_fee}}</td>
+                                        <td class="text-center">{{date('M j, Y', strtotime($eviction->created_at))}}<br>
+                                            {{date('h:i A', strtotime($eviction->created_at))}}</td>
+                                        <td class="text-center">
+                                            <button type="submit" id="download_id_{{$eviction->id}}" class="pdf_download_btn_dashboard btn-sm btn-primary fas fa-cloud-download-alt"></button>
+                                            <button type="button" id="id_{{$eviction->id}}_{{$propertyAddressArray[0]}}" class="fa fa-trash btn-sm btn-danger eviction-remove"></button>
+                                        </td>
 
                                     </tr>
                                 @endforeach

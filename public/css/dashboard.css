@@ -44,6 +44,9 @@
 }
 
 #navbarSupportedContent {
-    margin-left:22%;   
+    margin-left:9%;
 }
+}
+.pdf_download_btn_dashboard, .eviction-remove {
+    cursor:pointer;
 }
