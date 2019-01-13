@@ -121,6 +121,8 @@ if (document.location.href.split('/')[3] == 'online-eviction') {
             state = place.address_components[4].short_name;
             zipcode = place.address_components[6].long_name;
 
+
+
             $('#state').val(state);
             $('#zipcode').val(zipcode);
             $('#county').val(county);
@@ -128,6 +130,8 @@ if (document.location.href.split('/')[3] == 'online-eviction') {
             $('#street_name').val(streetName);
             $('#town').val(town);
             $('#display_address').text(houseNum + ' ' + streetName + ' ' + town + ' ' + state);
+
+            console.log(place.address_components);
 
             marker.setPosition(place.geometry.location);
             marker.setMap(map);
