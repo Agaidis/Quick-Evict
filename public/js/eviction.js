@@ -119,17 +119,20 @@ if (document.location.href.split('/')[3] == 'online-eviction') {
             town = place.address_components[2].long_name;
             county = place.address_components[3].long_name;
             state = place.address_components[4].short_name;
-            zipcode = place.address_components[6].long_name;
 
+            if (place.address_components[6].long_name == 'US') {
+                zipcode = place.address_components[7].long_name;
+            } else {
+                zipcode = place.address_components[6].long_name;
+            }
 
-
-            $('#state').val(state);
+            $('#state').val('PA');
             $('#zipcode').val(zipcode);
             $('#county').val(county);
             $('#house_num').val(houseNum);
             $('#street_name').val(streetName);
             $('#town').val(town);
-            $('#display_address').text(houseNum + ' ' + streetName + ' ' + town + ' ' + state);
+            $('#display_address').text(houseNum + ' ' + streetName + ' ' + town + ' ' + 'PA');
 
             console.log(place.address_components);
 

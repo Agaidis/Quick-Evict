@@ -67,8 +67,10 @@
                                                 </span>
                                             </span><br>
                                             <span class="text-center" id="court_date_{{$eviction->id}}">
-                                                {{date('M j, Y', strtotime($eviction->court_date))}}<br>
-                                                {{date('h:i A', strtotime($eviction->court_date))}}</span>
+                                                @if ($eviction->court_date != '')
+                                                    {{date('M j, Y', strtotime($eviction->court_date))}}<br>
+                                                    {{date('h:i A', strtotime($eviction->court_date))}}</span>
+                                                @endif
                                         </td>
                                         <td class="text-center">{{$eviction->total_judgement}}</td>
                                         <td class="text-center">{{$eviction->court_filing_fee}}</td>
