@@ -74,8 +74,6 @@
                                         </td>
                                         <td class="text-center">{{$eviction->total_judgement}}</td>
                                         <td class="text-center">{{$eviction->court_filing_fee}}</td>
-                                        $newdate = strtotime ( '-6 hour' , strtotime ( $date ) ) ;
-                                        $newdate = date ( 'Y-m-j' , $newdate );
                                         <td class="text-center">{{date('M j, Y', strtotime('-6 hour', $eviction->created_at))}}<br>
                                             {{date('h:i A', strtotime('-6 hour', $eviction->created_at))}}</td>
                                         <td class="text-center">
