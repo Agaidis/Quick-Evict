@@ -16,7 +16,7 @@ if (document.location.href.split('/')[3] == 'online-eviction') {
         });
 
         //Save and use Signature
-        $('.save_signature').on('blur', function() {
+        $('.save_signature').on('click', function() {
             $('#pdf_download_btn').prop('disabled', false);
             var dataURL = signaturePad.toDataURL(); // save image as PNG
             $('#signature_source').val(dataURL);
