@@ -6,16 +6,19 @@ if (document.location.href.split('/')[3] == 'online-eviction') {
 
         //Clear button to remove signature drawing
         $('.clear_signature').on('click', function() {
-           // $('#pdf_download_btn').prop('disabled', true);
+            $('#pdf_download_btn').prop('disabled', true);
             // Clears the canvas
             signaturePad.clear();
         });
 
+        $('.no_signature').on('click', function() {
+            $('#pdf_download_btn').prop('disabled', false);
+        });
+
         //Save and use Signature
-        $('#signature_pad').on('blur', function() {
-         //   $('#pdf_download_btn').prop('disabled', false);
+        $('.save_signature').on('blur', function() {
+            $('#pdf_download_btn').prop('disabled', false);
             var dataURL = signaturePad.toDataURL(); // save image as PNG
-            console.log(dataURL);
             $('#signature_source').val(dataURL);
         });
 
