@@ -96,20 +96,20 @@ class EvictionController extends Controller
             $unjustDamages = str_replace($removeValues, '', $unjustDamages);
 
             $tenantName = $_POST['tenant_name'];
-            $ownerName = $_POST['owner_name'];
+
             $pmName = $_POST['pm_name'];
 
 
 
             if ($_POST['rented_by_val'] == 'rentedByOwner') {
-                $verifyName = $ownerName;
-                $plantiffName = $ownerName;
+                $verifyName = $_POST['owner_name'];
+                $plantiffName = $_POST['owner_name'];
                 $plantiffPhone = $_POST['owner_phone'];
                 $plantiffAddress1 = $_POST['owner_address_1'];
                 $plantiffAddress2 = $_POST['owner_address_2'];
             } else {
                 $verifyName = $pmName;
-                $plantiffName = $_POST['other_name'] . ' on behalf of ' . $ownerName;
+                $plantiffName = $_POST['other_name'] . ' on behalf of ' . $_POST['owner_name'];
                 $plantiffPhone = $_POST['pm_phone'];
                 $plantiffAddress1 = $_POST['pm_address_1'];
                 $plantiffAddress2 = $_POST['pm_address_2'];
@@ -262,7 +262,6 @@ class EvictionController extends Controller
                 $eviction->status = 'Created LTC';
                 $eviction->total_judgement = $totalFees;
                 $eviction->property_address = $defendanthouseNum.' '.$defendantStreetName.'-1'.$defendantTown .',' . $defendantState.' '.$defendantZipcode;
-                $eviction->owner_name = $ownerName;
                 $eviction->tenant_name = $tenantName;
                 $eviction->court_filing_fee = $filingFee;
                 $eviction->pdf_download = 'true';
@@ -297,8 +296,8 @@ class EvictionController extends Controller
                 $eviction->additional_rent_amt = $_POST['additional_rent_amt'];
                 $eviction->plantiff_name = $plantiffName;
                 $eviction->plantiff_phone = $plantiffPhone;
-                $eviction->plantiff_address_1 = $plantiffAddress1;
-                $eviction->plantiff_address_2 = $plantiffAddress2;
+                $eviction->plantiff_address_line_1 = $plantiffAddress1;
+                $eviction->plantiff_address_line_2 = $plantiffAddress2;
                 $eviction->verify_name = $verifyName;
 
                 $eviction->save();

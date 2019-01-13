@@ -129,8 +129,8 @@ class DashboardController extends Controller
             $unitNum = $evictionData->unit_num;
             $plantiffName = $evictionData->plantiff_name;
             $plantiffPhone = $evictionData->plantiff_phone;
-            $plantiffAddress1 = $evictionData->plantiff_address_1;
-            $plantiffAddress2 = $evictionData->plantiff_address_2;
+            $plantiffAddress1 = $evictionData->plantiff_address_line_1;
+            $plantiffAddress2 = $evictionData->plantiff_address_line_2;
             $verifyName = $evictionData->verify_name;
 
 
