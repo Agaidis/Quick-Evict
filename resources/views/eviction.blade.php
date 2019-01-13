@@ -176,7 +176,7 @@
                                                         <div class="description">Sign above</div>
                                                         <div class="signature_pad_actions">
                                                             <button type="button" class="btn btn-warning clear_signature" data-action="clear">Clear</button>
-                                                            <button type="button" class="btn btn-success no_signature" data-action="save-png">Do not use Digital Signature</button>
+                                                            <button type="button" class="btn btn-danger no_signature" data-action="save-png">Do not use Digital Signature</button>
                                                             <button type="button" class="btn btn-success save_signature" data-action="save-png">Use Digital Signature</button>
                                                         </div>
                                                     </div>
