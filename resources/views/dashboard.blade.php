@@ -74,7 +74,7 @@
                                         </td>
                                         <td class="text-center">{{$eviction->total_judgement}}</td>
                                         <td class="text-center">{{$eviction->court_filing_fee}}</td>
-                                        <td class="text-center">{{date('M j, Y', strtotime('-6 hour', strtotime($eviction->created_at)))}}<br>
+                                        <td class="text-center">{{date('M j, Y', strtotime('-5 hour', strtotime($eviction->created_at)))}}<br>
                                             {{date('h:i A', strtotime('-6 hour', strtotime($eviction->created_at)))}}</td>
                                         <td class="text-center">
                                             <button type="submit" id="download_id_{{$eviction->id}}" class="pdf_download_btn_dashboard btn-sm btn-primary fas fa-cloud-download-alt"></button>

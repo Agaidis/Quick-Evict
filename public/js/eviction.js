@@ -120,7 +120,7 @@ if (document.location.href.split('/')[3] == 'online-eviction') {
             county = place.address_components[3].long_name;
             state = place.address_components[4].short_name;
 
-            if (place.address_components[6].long_name == 'US') {
+            if (place.address_components[6].short_name == 'US') {
                 zipcode = place.address_components[7].long_name;
             } else {
                 zipcode = place.address_components[6].long_name;
