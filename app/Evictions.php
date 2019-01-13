@@ -48,8 +48,8 @@ class Evictions extends Model
         'unit_num',
         'plantiff_name',
         'plantiff_phone',
-        'plantiff_address_1',
-        'plantiff_address_2',
+        'plantiff_address_line_1',
+        'plantiff_address_line_2',
         'verify_name'
     ];
 
