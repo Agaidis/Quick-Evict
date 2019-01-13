@@ -44,6 +44,7 @@ class Evictions extends Model
         'is_abandoned',
         'is_determination_request',
         'is_additional_rent',
+        'additional_rent_amt',
         'unit_num'
     ];
 
