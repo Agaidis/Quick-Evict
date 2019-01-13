@@ -170,13 +170,12 @@
                                         </div>
                                         <div class="form-group">
                                             <div class="row">
-                                                <div class="offset-1 col-sm-6">
+                                                <div class="offset-2 col-sm-6">
                                                     <canvas id="signature_pad" width="600" height="200" style="touch-action: none;"></canvas>
                                                     <div class="signature_pad_footer">
                                                         <div class="description">Sign above</div>
                                                         <div class="signature_pad_actions">
                                                             <button type="button" class="btn btn-warning clear_signature" data-action="clear">Clear</button>
-                                                            <button type="button" class="btn btn-success save_signature" data-action="save-png">Use Signature</button>
                                                         </div>
                                                     </div>
                                                 </div>

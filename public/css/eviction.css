@@ -162,13 +162,3 @@ form.eviction_form fieldset {
     border: 1px solid grey;
     border-radius:1em;
 }
-
-.clear_signature {
-    margin-left:35%;
-}
-.save_signature {
-    margin-left: 30px;
-}
-.description {
-    margin-left: 46%;
-}
