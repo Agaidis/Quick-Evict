@@ -194,10 +194,6 @@ if (document.location.href.split('/')[3] == 'online-eviction') {
                 $('.additional_rent_amt_div').css('display', 'none');
             }
         });
-        additional_rent_amt_div
-
-
-
 
 
         //create a global variable that will point to the tooltip in the DOM
