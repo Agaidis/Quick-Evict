@@ -187,7 +187,7 @@ if (document.location.href.split('/')[3] == 'online-eviction') {
 
         $('input[type=radio][name=addit_rent]').change(function () {
 
-            if ($(this)[0].id == 'yes') {
+            if ($(this)[0].id == 'addit_rent') {
                 $('.additional_rent_amt_div').css('display', 'block');
 
             } else {
