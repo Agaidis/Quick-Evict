@@ -176,6 +176,7 @@ if (document.location.href.split('/')[3] == 'online-eviction') {
             if ($(this)[0].id == 'rented_by_other') {
                 $('#landlord').prop('hidden', false);
                 $('#rented_by_other_div').css('display', 'block');
+                $('#rented_by_owner_div').css('display', 'none');
             } else {
                 $('#landlord').prop('hidden', true);
                 $('#rented_by_other_div').css('display', 'none');

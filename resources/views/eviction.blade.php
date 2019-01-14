@@ -51,11 +51,11 @@
                                                     <input checked type="radio" id="rented_by_owner" value="rentedByOwner" name="rented_by">
                                                     <label for="rented_by_owner">Property is Rented by Owner</label><br>
                                                     <div id="rented_by_owner_div">
-                                                        <div class="col-sm-6">
+                                                        <div class="col-sm-7">
                                                             <label class="labels">Owner Address Line 1</label>
                                                             <input class="form-control eviction_fields" placeholder="1234 Main Street" type="text" id="owner_address_1" name="owner_address_1"/>
-                                                        </div><br>
-                                                        <div class="col-sm-6">
+                                                        </div>
+                                                        <div class="col-sm-7">
                                                             <label class="labels">Owner Address Line 2 </label>
                                                             <input class="form-control eviction_fields" placeholder="Philadelphia, PA 17349" type="text" id="owner_address_2" name="owner_address_2"/>
                                                         </div>
@@ -75,11 +75,11 @@
                                                             <label class="labels" for="pm_phone">Property Manager Phone #</label>
                                                             <input class="form-control eviction_fields" placeholder="(ext)-000-0000" type="text" id="pm_phone" name="pm_phone" value="">
                                                         </div>
-                                                        <div class="col-sm-6">
+                                                        <div class="col-sm-7">
                                                             <label class="labels">Property Manager Address Line 1</label>
                                                             <input class="form-control eviction_fields" placeholder="1234 Main Street" type="text" id="pm_address_1" name="pm_address_1"/>
-                                                        </div><br>
-                                                        <div class="col-sm-6">
+                                                        </div>
+                                                        <div class="col-sm-7">
                                                             <label class="labels">Property Manager Address Line 2 </label>
                                                             <input class="form-control eviction_fields" placeholder="Philadelphia, PA 17349" type="text" id="pm_address_2" name="pm_address_2"/>
                                                         </div>
