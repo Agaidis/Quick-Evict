@@ -98,6 +98,7 @@ class EvictionController extends Controller
             $tenantName = $_POST['tenant_name'];
 
             $pmName = $_POST['pm_name'];
+            $ownerName = $_POST['owner_name'];
 
 
 
@@ -268,6 +269,7 @@ class EvictionController extends Controller
                 $eviction->court_number = $courtNumber;
                 $eviction->court_address_line_1 = $courtAddressLine1;
                 $eviction->court_address_line_2 = $courtAddressLine2;
+                $eviction->owner_name = $ownerName;
                 $eviction->magistrate_id = $magistrateId;
                 $eviction->attorney_fees = $attorneyFees;
                 $eviction->damage_amt = $damageAmt;
