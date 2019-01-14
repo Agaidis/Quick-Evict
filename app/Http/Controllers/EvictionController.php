@@ -63,7 +63,7 @@ class EvictionController extends Controller
             $courtAddressLine1 = $geoDetails->address_line_one;
             $courtAddressLine2 = $geoDetails->address_line_two;
 
-            $additionalRentAmt = $_POST['additional_rent_amt'];
+            $additionalRentAmt = str_replace($removeValues, '', $_POST['additional_rent_amt']);
 
             //Attorney Fees
             $attorneyFees = $_POST['attorney_fees'];

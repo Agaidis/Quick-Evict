@@ -176,10 +176,12 @@
                                                         <div class="labels">Additional Rent?</div>
                                                         <input type="radio" id="addit_rent" name="addit_rent" value="yes" checked />
                                                         <label for="addit_rent">Add additional rent due at hearing date</label><br>
-                                                        <div class="col-sm-10">
-                                                            <div class="details"></div>
-                                                            <b>Amount of additional rent remaining due and unpaid on hearing date:</b>
-                                                            <input class="form-control eviction_fields" type="text" id="additional_rent_amt" name="additional_rent_amt" /><br>
+                                                        <div class="additional_rent_amt_div">
+                                                            <div class="col-sm-10">
+                                                                <div class="details"></div>
+                                                                <b>Amount of additional rent remaining due and unpaid on hearing date:</b>
+                                                                <input class="form-control eviction_fields" type="text" id="additional_rent_amt" name="additional_rent_amt" /><br>
+                                                            </div>
                                                         </div>
                                                         <input type="radio" id="no_addit_rent" name="addit_rent" value="no" />
                                                         <label for="no_addit_rent">Do Not add additional rent due at hearing date</label>

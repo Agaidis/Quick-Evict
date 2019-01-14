@@ -185,6 +185,17 @@ if (document.location.href.split('/')[3] == 'online-eviction') {
             }
         });
 
+        $('input[type=radio][name=addit_rent]').change(function () {
+
+            if ($(this)[0].id == 'yes') {
+                $('.additional_rent_amt_div').css('display', 'block');
+
+            } else {
+                $('.additional_rent_amt_div').css('display', 'none');
+            }
+        });
+        additional_rent_amt_div
+
 
 
 
