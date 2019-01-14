@@ -179,6 +179,8 @@ if (document.location.href.split('/')[3] == 'online-eviction') {
             } else {
                 $('#landlord').prop('hidden', true);
                 $('#rented_by_other_div').css('display', 'none');
+                $('#rented_by_owner_div').css('display', 'block');
+
             }
         });
 
