@@ -63,6 +63,8 @@ class EvictionController extends Controller
             $courtAddressLine1 = $geoDetails->address_line_one;
             $courtAddressLine2 = $geoDetails->address_line_two;
 
+            $additionalRentAmt = $_POST['additional_rent_amt'];
+
             //Attorney Fees
             $attorneyFees = $_POST['attorney_fees'];
             $attorneyFees = str_replace($removeValues, '', $attorneyFees);
@@ -235,9 +237,11 @@ class EvictionController extends Controller
             $defendantStreetName = $_POST['streetName'];
             $defendantTown = $_POST['town'];
 
-
-
-            $totalFees = (float)$attorneyFees + (float)$dueRent + (float)$unjustDamages + (float)$damageAmt;
+            if (is_int($_POST['additional_rent_amt']) || is_float($_POST['additional_rent_amt'])) {
+                $totalFees = (float)$additionalRentAmt + (float)$attorneyFees + (float)$dueRent + (float)$unjustDamages + (float)$damageAmt;
+            } else {
+                $totalFees = (float)$attorneyFees + (float)$dueRent + (float)$unjustDamages + (float)$damageAmt;
+            }
 
             $totalFees = number_format($totalFees, 2);
 
