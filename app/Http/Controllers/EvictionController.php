@@ -237,7 +237,7 @@ class EvictionController extends Controller
             $defendantStreetName = $_POST['streetName'];
             $defendantTown = $_POST['town'];
 
-            if (is_int($_POST['additional_rent_amt']) || is_float($_POST['additional_rent_amt'])) {
+            if (is_numeric($_POST['additional_rent_amt'])) {
                 $totalFees = (float)$additionalRentAmt + (float)$attorneyFees + (float)$dueRent + (float)$unjustDamages + (float)$damageAmt;
             } else {
                 $totalFees = (float)$attorneyFees + (float)$dueRent + (float)$unjustDamages + (float)$damageAmt;
