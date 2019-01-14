@@ -156,11 +156,6 @@
                                                         <input type="text" class="form-control eviction_fields" id="due_rent" name="due_rent" placeholder="$" value="" />
                                                     </div>
                                                     <div class="col-sm-10">
-                                                        <div class="details"></div>
-                                                        <b>Amount of additional rent remaining due and unpaid on hearing date:</b>
-                                                        <input class="form-control eviction_fields" type="text" id="additional_rent_amt" name="additional_rent_amt" /><br>
-                                                    </div>
-                                                    <div class="col-sm-10">
                                                         <label for="damage_amt">Damages for Injury to Property</label>
                                                         <input type="text" class="form-control eviction_fields" id="damage_amt" name="damage_amt" placeholder="$" value="" />
                                                     </div>
@@ -181,6 +176,11 @@
                                                         <div class="labels">Additional Rent?</div>
                                                         <input type="radio" id="addit_rent" name="addit_rent" value="yes" checked />
                                                         <label for="addit_rent">Add additional rent due at hearing date</label><br>
+                                                        <div class="col-sm-10">
+                                                            <div class="details"></div>
+                                                            <b>Amount of additional rent remaining due and unpaid on hearing date:</b>
+                                                            <input class="form-control eviction_fields" type="text" id="additional_rent_amt" name="additional_rent_amt" /><br>
+                                                        </div>
                                                         <input type="radio" id="no_addit_rent" name="addit_rent" value="no" />
                                                         <label for="no_addit_rent">Do Not add additional rent due at hearing date</label>
                                                     </div>
