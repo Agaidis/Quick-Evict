@@ -44,7 +44,13 @@ class Evictions extends Model
         'is_abandoned',
         'is_determination_request',
         'is_additional_rent',
-        'unit_num'
+        'additional_rent_amt',
+        'unit_num',
+        'plantiff_name',
+        'plantiff_phone',
+        'plantiff_address_line_1',
+        'plantiff_address_line_2',
+        'verify_name'
     ];
 
     protected $table = 'evictions';

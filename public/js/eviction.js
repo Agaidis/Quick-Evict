@@ -1,19 +1,24 @@
 if (document.location.href.split('/')[3] == 'online-eviction') {
     $(document).ready(function () {
 
+        $('[data-toggle="tooltip"]').tooltip();
         var canvas = document.querySelector("canvas");
         var signaturePad = new SignaturePad(canvas, {});
 
         //Clear button to remove signature drawing
         $('.clear_signature').on('click', function() {
-           // $('#pdf_download_btn').prop('disabled', true);
+            $('#pdf_download_btn').prop('disabled', true);
             // Clears the canvas
             signaturePad.clear();
         });
 
+        $('.no_signature').on('click', function() {
+            $('#pdf_download_btn').prop('disabled', false);
+        });
+
         //Save and use Signature
         $('.save_signature').on('click', function() {
-         //   $('#pdf_download_btn').prop('disabled', false);
+            $('#pdf_download_btn').prop('disabled', false);
             var dataURL = signaturePad.toDataURL(); // save image as PNG
             $('#signature_source').val(dataURL);
         });
@@ -119,15 +124,22 @@ if (document.location.href.split('/')[3] == 'online-eviction') {
             town = place.address_components[2].long_name;
             county = place.address_components[3].long_name;
             state = place.address_components[4].short_name;
-            zipcode = place.address_components[6].long_name;
 
-            $('#state').val(state);
+            if (place.address_components[6].short_name == 'US') {
+                zipcode = place.address_components[7].long_name;
+            } else {
+                zipcode = place.address_components[6].long_name;
+            }
+
+            $('#state').val('PA');
             $('#zipcode').val(zipcode);
             $('#county').val(county);
             $('#house_num').val(houseNum);
             $('#street_name').val(streetName);
             $('#town').val(town);
-            $('#display_address').text(houseNum + ' ' + streetName + ' ' + town + ' ' + state);
+            $('#display_address').text(houseNum + ' ' + streetName + ' ' + town + ' ' + 'PA');
+
+            console.log(place.address_components);
 
             marker.setPosition(place.geometry.location);
             marker.setMap(map);
@@ -165,14 +177,24 @@ if (document.location.href.split('/')[3] == 'online-eviction') {
             if ($(this)[0].id == 'rented_by_other') {
                 $('#landlord').prop('hidden', false);
                 $('#rented_by_other_div').css('display', 'block');
+                $('#rented_by_owner_div').css('display', 'none');
             } else {
                 $('#landlord').prop('hidden', true);
                 $('#rented_by_other_div').css('display', 'none');
+                $('#rented_by_owner_div').css('display', 'block');
+
             }
         });
 
+        $('input[type=radio][name=addit_rent]').change(function () {
 
+            if ($(this)[0].id == 'addit_rent') {
+                $('.additional_rent_amt_div').css('display', 'block');
 
+            } else {
+                $('.additional_rent_amt_div').css('display', 'none');
+            }
+        });
 
 
         //create a global variable that will point to the tooltip in the DOM
@@ -248,6 +270,34 @@ if (document.location.href.split('/')[3] == 'online-eviction') {
                 tipObj = null;
             }
         }
+
+        $('#tenant_num_select').on('change', function() {
+            var tenantNum = $(this)[0].value;
+            var html = '';
+
+            $('#tenant_num').val(tenantNum);
+
+            for (var i = 1; i <= tenantNum; i++) {
+                var currentTenantObj = $('#tenant_name_' + i);
+
+                if (currentTenantObj.length > 0) {
+                    html += '<input class="form-control eviction_fields" placeholder="Tenant Name '+ i +'" type="text" id="tenant_name_'+ i +'" name="tenant_name[]" value="' + currentTenantObj.val() + '"/><br>';
+                } else {
+                    html += '<input class="form-control eviction_fields" placeholder="Tenant Name '+ i +'" type="text" id="tenant_name_'+ i +'" name="tenant_name[]" value=""/><br>';
+                }
+            }
+
+            $('#tenant_input_container').empty().append($(html));
+        });
+
+        $('#breached_conditions_lease').on('change', function() {
+           if ($(this).is(':checked')) {
+               $('#breached_details').prop('disabled', false);
+           } else {
+               $('#breached_details').prop('disabled', true);
+           }
+        });
+
 
         //On Submit
         $('#pdf_download_btn').on('click', function () {

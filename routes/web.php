@@ -25,7 +25,6 @@ Route::get('/dashboard/getCourtDate', 'DashboardController@getCourtDate');
 Route::post('/dashboard/storeCourtDate', 'DashboardController@storeCourtDate');
 
 Route::get('/online-eviction', 'EvictionController@index');
-Route::post('/online-eviction/saveSignature', 'EvictionController@saveSignature');
 
 Route::get('/eviction-info', 'EvictionInfoController@index');
 

@@ -125,7 +125,15 @@ class DashboardController extends Controller
             $isAbandoned = $evictionData->is_abandoned;
             $isDeterminationRequest = $evictionData->is_determination_request;
             $isAdditionalRent = $evictionData->is_additional_rent;
+            $additionalRentAmt = $evictionData->additional_rent_amt;
             $unitNum = $evictionData->unit_num;
+            $plantiffName = $evictionData->plantiff_name;
+            $plantiffPhone = $evictionData->plantiff_phone;
+            $plantiffAddress1 = $evictionData->plantiff_address_line_1;
+            $plantiffAddress2 = $evictionData->plantiff_address_line_2;
+            $verifyName = $evictionData->verify_name;
+
+            $defendantAddress = $defendantHouseNum . ' ' .$defendantStreetName . ', ' .$unitNum .' '. $defendantTown .', '.$defendantState.' '.$defendantZipcode;
 
 
             if ($attorneyFees > 0) {
@@ -240,7 +248,7 @@ span.cls_010{font-family:Arial,serif;font-size:10.77px;color:rgb(0,0,0);font-wei
 <span style="position:absolute;left:47.95px;top:16.85px" class="cls_003"><span class="cls_003">COMMONWEALTH OF PENNSYLVANIA</span></span><br>
 <span style="position:absolute;left:460.45px;top:16.80px" class="cls_002"><span class="cls_002">LANDLORD/TENANT COMPLAINT</span></span><br>
 <span style="position:absolute;left:47.95px;top:29.55px" class="cls_003"><span class="cls_003">COUNTY OF ' . strtoupper($courtDetails->county) .'</span></span><br>
-<span style="position:absolute;left:447.28px;top:86.80px" class="cls_005"><span class="cls_005">PLAINTIFF:</span><br><p style="margin-left:6px;">'. $plaintiffLine .'<br>PO Box 5304<br>Lancaster, PA 17606<br>'.$pmPhone.'</p></span><br>
+<span style="position:absolute;left:447.28px;top:86.80px" class="cls_005"><span class="cls_005">PLAINTIFF:</span><br><p style="margin-left:6px;">'. $plantiffName .'<br>'. $plantiffAddress1.'<br>'. $plantiffAddress2.'<br>'.$plantiffPhone.'</p></span><br>
 <span style="position:absolute;left:600.50px;top:86.80px" class="cls_005"><span class="cls_005">NAME and ADDRESS</span></span>
 <span style="position:absolute;left:55.40px;top:92.36px" class="cls_004"><span class="cls_004">Mag. Dist. No: '. $courtNumber .'</span></span><br>
 <span style="position:absolute;left:55.40px;top:105.85px" class="cls_004"><span class="cls_004">MDJ Name: '. $courtDetails->mdj_name .'</span></span><br>
@@ -284,7 +292,7 @@ span.cls_010{font-family:Arial,serif;font-size:10.77px;color:rgb(0,0,0);font-wei
 <span style="position:absolute;left:600.40px;top:494.45px" class="cls_004"><span style="text-decoration: underline;" class="cls_004">__________'.$dueRent.'_________</span></span><br>
 <span style="position:absolute;left:60.50px;top:514.95px" class="cls_004"><span class="cls_004">'. $additionalRentCheckbox .' And additional rent remaining due and unpaid on hearing date</span></span><br>
 <span style="position:absolute;left:600.40px;top:514.95px" class="cls_004"><span class="cls_004">$</span></span><br>
-<span style="position:absolute;left:600.40px;top:514.95px" class="cls_004"><span class="cls_004">___________________</span></span><br>
+<span style="position:absolute;left:600.40px;top:514.95px" class="cls_004"><span class="cls_004">__________'.$additionalRentAmt.'_________</span></span><br>
 <span style="position:absolute;left:60.50px;top:534.45px" class="cls_004"><span class="cls_004">' . $attorneyFeesCheckbox . ' Attorney fees in the amount of</span></span><br>
 <span style="position:absolute;left:600.40px;top:534.45px" class="cls_004"><span class="cls_004">$</span></span><br>
 <span style="position:absolute;left:600.40px;top:534.45px" class="cls_004"><span style="text-decoration: underline;" class="cls_004">__________'.$attorneyFees.'_________</span></span><br>
@@ -293,7 +301,7 @@ span.cls_010{font-family:Arial,serif;font-size:10.77px;color:rgb(0,0,0);font-wei
 <span style="position:absolute;left:600.40px;top:567.20px" class="cls_004"><span class="cls_004">$</span></span><br>
 <span style="position:absolute;left:600.40px;top:567.20px" class="cls_004"><span style="text-decoration: underline;" class="cls_004">__________'.$totalFees.'_________</span></span><br>
 <span style="position:absolute;left:55.40px;top:590.15px" class="cls_004"><span class="cls_004">1. The location and the address, if any, of the real property is:</span></span><br>
-<span style="position:absolute;left:393.85px;top:590.15px" class="cls_004"><span style="text-decoration: underline;" class="cls_004">'.$defendantHouseNum.' '.$defendantStreetName . ', ' .$unitNum.', ' . $defendantTown .','.$defendantState.' '.$defendantZipcode . '</span></span><br>
+<span style="position:absolute;left:393.85px;top:590.15px" class="cls_004"><span style="text-decoration: underline;" class="cls_004">'.$defendantAddress.'</span></span><br>
 <span style="position:absolute;left:55.40px;top:610.05px" class="cls_004"><span class="cls_004">2. The plaintiff is the landlord of that property.</span></span><br>
 <span style="position:absolute;left:55.40px;top:630.55px" class="cls_004"><span class="cls_004">3. The plaintiff leased or rented the property to you or to ___________________________________________under whom you claim</span></span><br>
 <span style="position:absolute;left:55.40px;top:650.65px" class="cls_004"><span class="cls_004">4.</span></span><br>
@@ -308,7 +316,7 @@ span.cls_010{font-family:Arial,serif;font-size:10.77px;color:rgb(0,0,0);font-wei
 <span style="position:absolute;left:77.30px;top:740.55px" class="cls_004"><span class="cls_004">'.$unsatisfiedLease.'Rent reserved and due has, upon demand, remained unsatisfied.</span></span><br>
 <span style="position:absolute;left:55.40px;top:760.15px" class="cls_004"><span class="cls_004">6.</span></span><br>
 <span style="position:absolute;left:65.50px;top:760.15px" class="cls_004"><span class="cls_004">You retain the real property and refuse to give up to its possession.</span></span><br>
-<span style="position:absolute;left:55.40px;top:780.65px" class="cls_004"><span class="cls_004">I, <span style="text-decoration:underline;"> ' . $pmName . ' </span> verify that the facts set forth in this complaint are</span></span><br>
+<span style="position:absolute;left:55.40px;top:780.65px" class="cls_004"><span class="cls_004">I, <span style="text-decoration:underline;"> ' . $verifyName . ' </span> verify that the facts set forth in this complaint are</span></span><br>
 <span style="position:absolute;left:55.40px;top:795.85px" class="cls_004"><span class="cls_004">true and correct to the best of my knowledge, information and belief. This statement is made subject to the penalties of Section 4904</span></span><br>
 <span style="position:absolute;left:55.40px;top:810.05px" class="cls_004"><span class="cls_004">of the Crimes Code (18 PA. C.S. § 4904) relating to unsworn falsification to authorities.</span></span><br>
 <span style="position:absolute;left:55.40px;top:820.90px" class="cls_004"><span class="cls_004">I certify this filing complies with the UJS Case Records Public Access Policy.</span></span><br>

@@ -63,6 +63,8 @@ class EvictionController extends Controller
             $courtAddressLine1 = $geoDetails->address_line_one;
             $courtAddressLine2 = $geoDetails->address_line_two;
 
+            $additionalRentAmt = str_replace($removeValues, '', $_POST['additional_rent_amt']);
+
             //Attorney Fees
             $attorneyFees = $_POST['attorney_fees'];
             $attorneyFees = str_replace($removeValues, '', $attorneyFees);
@@ -95,22 +97,25 @@ class EvictionController extends Controller
             $unjustDamages = $_POST['unjust_damages'];
             $unjustDamages = str_replace($removeValues, '', $unjustDamages);
 
-            $tenantName = $_POST['tenant_name'];
-            $ownerName = $_POST['owner_name'];
+            $tenantName = implode(', ', $_POST['tenant_name']);
 
             $pmName = $_POST['pm_name'];
-            $pmPhone = $_POST['pm_phone'];
+            $ownerName = $_POST['owner_name'];
+
 
 
             if ($_POST['rented_by_val'] == 'rentedByOwner') {
-                $plaintiffLine = $ownerName;
-                $ownerPMName = $ownerName;
-            } else if ($_POST['rented_by_val'] == 'rentedByOther') {
-                $ownerPMName = $pmName;
-                $plaintiffLine = $_POST['other_name'] . ' on behalf of ' . $ownerName;
+                $verifyName = $_POST['owner_name'];
+                $plantiffName = $_POST['owner_name'];
+                $plantiffPhone = $_POST['owner_phone'];
+                $plantiffAddress1 = $_POST['owner_address_1'];
+                $plantiffAddress2 = $_POST['owner_address_2'];
             } else {
-                $ownerPMName = $ownerName;
-                $plaintiffLine = $ownerName;
+                $verifyName = $pmName;
+                $plantiffName = $_POST['other_name'] . ' on behalf of ' . $_POST['owner_name'];
+                $plantiffPhone = $_POST['pm_phone'];
+                $plantiffAddress1 = $_POST['pm_address_1'];
+                $plantiffAddress2 = $_POST['pm_address_2'];
             }
 
             $additionalTenantAmt = 1;
@@ -232,9 +237,11 @@ class EvictionController extends Controller
             $defendantStreetName = $_POST['streetName'];
             $defendantTown = $_POST['town'];
 
-
-
-            $totalFees = (float)$attorneyFees + (float)$dueRent + (float)$unjustDamages + (float)$damageAmt;
+            if (is_numeric($_POST['additional_rent_amt'])) {
+                $totalFees = (float)$additionalRentAmt + (float)$attorneyFees + (float)$dueRent + (float)$unjustDamages + (float)$damageAmt;
+            } else {
+                $totalFees = (float)$attorneyFees + (float)$dueRent + (float)$unjustDamages + (float)$damageAmt;
+            }
 
             $totalFees = number_format($totalFees, 2);
 
@@ -260,13 +267,13 @@ class EvictionController extends Controller
                 $eviction->status = 'Created LTC';
                 $eviction->total_judgement = $totalFees;
                 $eviction->property_address = $defendanthouseNum.' '.$defendantStreetName.'-1'.$defendantTown .',' . $defendantState.' '.$defendantZipcode;
-                $eviction->owner_name = $ownerName;
                 $eviction->tenant_name = $tenantName;
                 $eviction->court_filing_fee = $filingFee;
                 $eviction->pdf_download = 'true';
                 $eviction->court_number = $courtNumber;
                 $eviction->court_address_line_1 = $courtAddressLine1;
                 $eviction->court_address_line_2 = $courtAddressLine2;
+                $eviction->owner_name = $ownerName;
                 $eviction->magistrate_id = $magistrateId;
                 $eviction->attorney_fees = $attorneyFees;
                 $eviction->damage_amt = $damageAmt;
@@ -276,7 +283,6 @@ class EvictionController extends Controller
                 $eviction->unjust_damages = $unjustDamages;
                 $eviction->breached_details = $breachedDetails;
                 $eviction->property_damage_details = $propertyDamageDetails;
-                $eviction->plaintiff_line = $plaintiffLine;
                 $eviction->is_residential = $isIsResidential;
                 $eviction->no_quit_notice = $isNoQuitNotice;
                 $eviction->unsatisfied_lease = $isUnsatisfiedLease;
@@ -290,11 +296,15 @@ class EvictionController extends Controller
                 $eviction->defendant_street_name = $defendantStreetName;
                 $eviction->defendant_town = $defendantTown;
                 $eviction->filing_fee = $filingFee;
-                $eviction->pm_name = $pmName;
-                $eviction->pm_phone = $pmPhone;
                 $eviction->is_abandoned = $isAbandoned;
                 $eviction->is_determination_request = $isDeterminationRequest;
                 $eviction->unit_num = $_POST['unit_number'];
+                $eviction->additional_rent_amt = $_POST['additional_rent_amt'];
+                $eviction->plantiff_name = $plantiffName;
+                $eviction->plantiff_phone = $plantiffPhone;
+                $eviction->plantiff_address_line_1 = $plantiffAddress1;
+                $eviction->plantiff_address_line_2 = $plantiffAddress2;
+                $eviction->verify_name = $verifyName;
 
                 $eviction->save();
 
@@ -346,7 +356,7 @@ span.cls_010{font-family:Arial,serif;font-size:10.77px;color:rgb(0,0,0);font-wei
 <span style="position:absolute;left:47.95px;top:16.85px" class="cls_003"><span class="cls_003">COMMONWEALTH OF PENNSYLVANIA</span></span><br>
 <span style="position:absolute;left:460.45px;top:16.80px" class="cls_002"><span class="cls_002">LANDLORD/TENANT COMPLAINT</span></span><br>
 <span style="position:absolute;left:47.95px;top:29.55px" class="cls_003"><span class="cls_003">COUNTY OF ' . strtoupper($courtDetails->county) .'</span></span><br>
-<span style="position:absolute;left:447.28px;top:86.80px" class="cls_005"><span class="cls_005">PLAINTIFF:</span><br><p style="margin-left:6px;">'. $plaintiffLine .'<br>PO Box 5304<br>Lancaster, PA 17606<br>'.$pmPhone.'</p></span><br>
+<span style="position:absolute;left:447.28px;top:86.80px" class="cls_005"><span class="cls_005">PLAINTIFF:</span><br><p style="margin-left:6px;">'. $plantiffName .'<br>'. $plantiffAddress1 .'<br>'. $plantiffAddress2 .'<br>'.$plantiffPhone.'</p></span><br>
 <span style="position:absolute;left:600.50px;top:86.80px" class="cls_005"><span class="cls_005">NAME and ADDRESS</span></span>
 <span style="position:absolute;left:55.40px;top:92.36px" class="cls_004"><span class="cls_004">Mag. Dist. No: '. $courtNumber .'</span></span><br>
 <span style="position:absolute;left:55.40px;top:105.85px" class="cls_004"><span class="cls_004">MDJ Name: '. $courtDetails->mdj_name .'</span></span><br>
@@ -390,7 +400,7 @@ span.cls_010{font-family:Arial,serif;font-size:10.77px;color:rgb(0,0,0);font-wei
 <span style="position:absolute;left:600.40px;top:494.45px" class="cls_004"><span style="text-decoration: underline;" class="cls_004">__________'.$dueRent.'_________</span></span><br>
 <span style="position:absolute;left:60.50px;top:514.95px" class="cls_004"><span class="cls_004">'. $additionalRent .' And additional rent remaining due and unpaid on hearing date</span></span><br>
 <span style="position:absolute;left:600.40px;top:514.95px" class="cls_004"><span class="cls_004">$</span></span><br>
-<span style="position:absolute;left:600.40px;top:514.95px" class="cls_004"><span class="cls_004">___________________</span></span><br>
+<span style="position:absolute;left:600.40px;top:514.95px" class="cls_004"><span class="cls_004">__________'.$_POST['additional_rent_amt'].'_________</span></span><br>
 <span style="position:absolute;left:60.50px;top:534.45px" class="cls_004"><span class="cls_004">' . $attorneyFeesCheckbox . ' Attorney fees in the amount of</span></span><br>
 <span style="position:absolute;left:600.40px;top:534.45px" class="cls_004"><span class="cls_004">$</span></span><br>
 <span style="position:absolute;left:600.40px;top:534.45px" class="cls_004"><span style="text-decoration: underline;" class="cls_004">__________'.$attorneyFees.'_________</span></span><br>
@@ -399,7 +409,7 @@ span.cls_010{font-family:Arial,serif;font-size:10.77px;color:rgb(0,0,0);font-wei
 <span style="position:absolute;left:600.40px;top:567.20px" class="cls_004"><span class="cls_004">$</span></span><br>
 <span style="position:absolute;left:600.40px;top:567.20px" class="cls_004"><span style="text-decoration: underline;" class="cls_004">__________'.$totalFees.'_________</span></span><br>
 <span style="position:absolute;left:55.40px;top:590.15px" class="cls_004"><span class="cls_004">1. The location and the address, if any, of the real property is:</span></span><br>
-<span style="position:absolute;left:393.85px;top:590.15px" class="cls_004"><span style="text-decoration: underline;" class="cls_004">'.$defendanthouseNum.' '.$defendantStreetName . ', ' .$_POST['unit_number'].', ' . $defendantTown .','.$defendantState.' '.$defendantZipcode . '</span></span><br>
+<span style="position:absolute;left:393.85px;top:590.15px" class="cls_004"><span style="text-decoration: underline;" class="cls_004">'.$defendanthouseNum.' '.$defendantStreetName . ', ' .$_POST['unit_number']. ' ' .$defendantTown .','.$defendantState.' '.$defendantZipcode . '</span></span><br>
 <span style="position:absolute;left:55.40px;top:610.05px" class="cls_004"><span class="cls_004">2. The plaintiff is the landlord of that property.</span></span><br>
 <span style="position:absolute;left:55.40px;top:630.55px" class="cls_004"><span class="cls_004">3. The plaintiff leased or rented the property to you or to ___________________________________________under whom you claim</span></span><br>
 <span style="position:absolute;left:55.40px;top:650.65px" class="cls_004"><span class="cls_004">4.</span></span><br>
@@ -414,7 +424,7 @@ span.cls_010{font-family:Arial,serif;font-size:10.77px;color:rgb(0,0,0);font-wei
 <span style="position:absolute;left:77.30px;top:740.55px" class="cls_004"><span class="cls_004">'.$unsatisfiedLease.'Rent reserved and due has, upon demand, remained unsatisfied.</span></span><br>
 <span style="position:absolute;left:55.40px;top:760.15px" class="cls_004"><span class="cls_004">6.</span></span><br>
 <span style="position:absolute;left:65.50px;top:760.15px" class="cls_004"><span class="cls_004">You retain the real property and refuse to give up to its possession.</span></span><br>
-<span style="position:absolute;left:55.40px;top:780.65px" class="cls_004"><span class="cls_004">I, <span style="text-decoration:underline;"> ' . $ownerPMName . ' </span> verify that the facts set forth in this complaint are</span></span><br>
+<span style="position:absolute;left:55.40px;top:780.65px" class="cls_004"><span class="cls_004">I, <span style="text-decoration:underline;"> ' . $verifyName . ' </span> verify that the facts set forth in this complaint are</span></span><br>
 <span style="position:absolute;left:55.40px;top:795.85px" class="cls_004"><span class="cls_004">true and correct to the best of my knowledge, information and belief. This statement is made subject to the penalties of Section 4904</span></span><br>
 <span style="position:absolute;left:55.40px;top:810.05px" class="cls_004"><span class="cls_004">of the Crimes Code (18 PA. C.S. § 4904) relating to unsworn falsification to authorities.</span></span><br>
 <span style="position:absolute;left:55.40px;top:820.90px" class="cls_004"><span class="cls_004">I certify this filing complies with the UJS Case Records Public Access Policy.</span></span><br>
@@ -448,42 +458,6 @@ span.cls_010{font-family:Arial,serif;font-size:10.77px;color:rgb(0,0,0);font-wei
         } catch ( \Exception $e) {
             mail('andrew.gaidis@gmail.com', 'formulatePDFCreation Error', $e->getMessage());
             return back();
-        }
-    }
-
-    public function saveSignature() {
-
-        try {
-            $data = $_POST['img_data'];
-
-            if (preg_match('/data:image\/(gif|jpeg|png);base64,(.*)/i', $data, $matches)) {
-                $imageType = $matches[1];
-                $imageData = base64_decode($matches[2]);
-                $image = imagecreatefromstring($imageData);
-                $filename = 'test' . '.png';
-
-                if (imagepng($image, public_path().'/images/' . $filename)) {
-                    echo json_encode(array('filename' => '/images/' . $filename));
-
-                    $key = "EH2TKHIPLFYD7LHGDFL4";
-                    $secret = "MXWANmAm4UPHVY0++0C1bmbfz9DE2jSD+BBOqNEL8kU";
-
-                    $space_name = "quickevict";
-                    $region = "nyc3";
-
-                    $space = new SpacesConnect($key, $secret, $space_name, $region);
-                    $space->UploadFile(public_path().'/images/' . $filename, "public");
-                } else {
-                    throw new \Exception('Could not save the file.');
-                }
-            } else {
-                throw new \Exception('Invalid data URL.');
-            }
-            return 'success';
-
-        } catch ( \Exception $e ) {
-            mail('andrew.gaidis@gmail.com', 'save Signature Error', $e->getMessage());
-            return 'failure';
         }
     }
 }

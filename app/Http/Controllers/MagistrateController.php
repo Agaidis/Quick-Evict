@@ -108,11 +108,11 @@ class MagistrateController extends Controller
     public function editMagistrate(Request $request) {
 
         try {
-            $courtDetails = CourtDetails::find($request->dbCourtId);
 
             $isUnique = CourtDetails::where('id', '!=', $request->dbCourtId)->where('magistrate_id', $request->magistrateId)->first();
 
             if ($isUnique === null) {
+                $courtDetails = CourtDetails::find($request->dbCourtId);
                 $courtDetails->court_number = $request->courtId;
                 $courtDetails->phone_number = $request->courtNumber;
                 $courtDetails->magistrate_id = $request->magistrateId;
