@@ -14,11 +14,11 @@ class EvictionInfoController extends Controller
      */
     public function index()
     {
-//        if (Auth::guest()) {
-//            return view('/login');
-//        } else {
+        if (Auth::guest()) {
+            return view('/login');
+        } else {
         
         return view('evictionInfo');
-   //     }
+        }
     }
 }

@@ -14,12 +14,11 @@ class WhereDoesThisWorkController extends Controller
      */
     public function index()
     {
-//        if (Auth::guest()) {
-//            return view('/login');
-//        } else {
-        
-        return view('whereDoesThisWork');
-//        }
+        if (Auth::guest()) {
+            return view('/login');
+        } else {
+            return view('whereDoesThisWork');
+        }
     }
 
     public function store(Request $request) {

@@ -62,8 +62,8 @@
 <body>
     <div id="app">
         <nav class="navbar navbar-expand-md navbar-light navbar-laravel">
-            <div class="container">
-                <a class="navbar-brand" href="{{ url('/home') }}">
+            <div class="container-fluid">
+                <a class="navbar-brand" style="padding: 8px 14px!important;" href="{{ url('/home') }}">
                     <img src="https://quickevict.nyc3.digitaloceanspaces.com/EvictionTech%20logo.jpg" width="150" height="30">
                 </a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -77,7 +77,7 @@
                     </ul>
                     <!-- Right Side Of Navbar -->
 
-                        {{--@if (Auth::check())--}}
+                        @if (Auth::check())
                         <ul class="nav navbar-nav navbar-right">
                             <li><a href="{{ url('dashboard') }}" id="dashboard_btn">Dashboard</a></li>
                             <li><a href="{{ url('online-eviction') }}" id="online_eviction_btn">Online Eviction</a></li>
@@ -86,34 +86,35 @@
                             <li><a href="{{ url('where-does-this-work') }}" id="where_work_btn">Where Does this Work?</a></li>
                             <li><a href="{{ url('about-us') }}" id="about_us_btn">About Us</a></li>
                             <li><a href="{{ url('magistrateCreator') }}" id="magistrate_btn">Magistrate Creator</a></li>
-                        {{--@endif<!-- Authentication Links today -->--}}
-                        {{--@guest--}}
-                            {{--<ul style="margin-left:60%;" class="nav navbar-nav navbar-right">--}}
-                            {{--<li><a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a></li>--}}
-                            {{--<li><a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a></li>--}}
-                        {{--@else--}}
+                        @endif<!-- Authentication Links today -->
 
-                            {{--<li class="nav-item dropdown">--}}
-                                {{--<a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>--}}
-                                    {{--{{ Auth::user()->name }} <span class="caret"></span>--}}
-                                {{--</a>--}}
-
-                                {{--<div class="dropdown-menu" aria-labelledby="navbarDropdown">--}}
-                                    {{--<a class="dropdown-item" href="{{ route('logout') }}"--}}
-                                       {{--onclick="event.preventDefault();--}}
-                                                     {{--document.getElementById('logout-form').submit();">--}}
-                                        {{--{{ __('Logout') }}--}}
-                                    {{--</a>--}}
-
-                                    {{--<form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">--}}
-                                        {{--@csrf--}}
-                                    {{--</form>--}}
-                                {{--</div>--}}
-                            {{--</li>--}}
-                            </ul>
-                        {{--@endguest--}}
-                    {{--</ul>--}}
+                    </ul>
                 </div>
+
+                @guest
+                <ul style="margin-left:60%;" class="nav navbar-nav navbar-right">
+                    <li><a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a></li>
+                    <li><a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a></li>
+                    @else
+                        <li class="nav-item dropdown">
+                            <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                {{ Auth::user()->name }} <span class="caret"></span>
+                            </a>
+
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <a class="dropdown-item" href="{{ route('logout') }}"
+                                   onclick="event.preventDefault();
+                                                     document.getElementById('logout-form').submit();">
+                                    {{ __('Logout') }}
+                                </a>
+
+                                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                    @csrf
+                                </form>
+                            </div>
+                        </li>
+                </ul>
+                @endguest
             </div>
         </nav>
 
