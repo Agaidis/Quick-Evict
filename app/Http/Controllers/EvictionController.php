@@ -191,7 +191,12 @@ class EvictionController extends Controller
             } else {
                 $breachedConditionsLease = '<input type="checkbox"/>';
             }
-            $breachedDetails = $_POST['breached_details'];
+            if (isset($_POST['breached_details'])) {
+                $breachedDetails = $_POST['breached_details'];
+            } else {
+                $breachedDetails = '';
+            }
+
             $propertyDamageDetails = $_POST['damages_details'];
 
             if (isset($_POST['term_lease_ended'])) {
