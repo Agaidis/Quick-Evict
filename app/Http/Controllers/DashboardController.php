@@ -133,7 +133,7 @@ class DashboardController extends Controller
             $plantiffAddress2 = $evictionData->plantiff_address_line_2;
             $verifyName = $evictionData->verify_name;
 
-            $defendantAddress = $defendantHouseNum . ' ' .$defendantStreetName . ', ' .$unitNum .' '. $defendantTown .','.$defendantState.' '.$defendantZipcode;
+            $defendantAddress = $defendantHouseNum . ' ' .$defendantStreetName . ', ' .$unitNum .' '. $defendantTown .', '.$defendantState.' '.$defendantZipcode;
 
 
             if ($attorneyFees > 0) {
