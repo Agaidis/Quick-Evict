@@ -290,6 +290,14 @@ if (document.location.href.split('/')[3] == 'online-eviction') {
             $('#tenant_input_container').empty().append($(html));
         });
 
+        $('#breached_conditions_lease').on('change', function() {
+           if ($(this).is(':checked')) {
+               $('#breached_details').prop('disabled', false);
+           } else {
+               $('#breached_details').prop('disabled', true);
+           }
+        });
+
 
         //On Submit
         $('#pdf_download_btn').on('click', function () {

@@ -51,11 +51,11 @@
                                                     <input checked type="radio" id="rented_by_owner" value="rentedByOwner" name="rented_by">
                                                     <label for="rented_by_owner">Property is Rented by Owner</label><br>
                                                     <div id="rented_by_owner_div">
-                                                        <div class="col-sm-7">
+                                                        <div class="col-sm-8">
                                                             <label class="labels">Owner Address Line 1</label>
                                                             <input class="form-control eviction_fields" placeholder="1234 Main Street" type="text" id="owner_address_1" name="owner_address_1"/>
                                                         </div>
-                                                        <div class="col-sm-7">
+                                                        <div class="col-sm-8">
                                                             <label class="labels">Owner Address Line 2 </label>
                                                             <input class="form-control eviction_fields" placeholder="Philadelphia, PA 17349" type="text" id="owner_address_2" name="owner_address_2"/>
                                                         </div>
@@ -75,11 +75,11 @@
                                                             <label class="labels" for="pm_phone">Property Manager Phone #</label>
                                                             <input class="form-control eviction_fields" placeholder="(ext)-000-0000" type="text" id="pm_phone" name="pm_phone" value="">
                                                         </div>
-                                                        <div class="col-sm-7">
+                                                        <div class="col-sm-8">
                                                             <label class="labels">Property Manager Address Line 1</label>
                                                             <input class="form-control eviction_fields" placeholder="1234 Main Street" type="text" id="pm_address_1" name="pm_address_1"/>
                                                         </div>
-                                                        <div class="col-sm-7">
+                                                        <div class="col-sm-8">
                                                             <label class="labels">Property Manager Address Line 2 </label>
                                                             <input class="form-control eviction_fields" placeholder="Philadelphia, PA 17349" type="text" id="pm_address_2" name="pm_address_2"/>
                                                         </div>
@@ -103,9 +103,11 @@
                                                         </div>
 
                                                     </div>
+
+                                                    <!-- Tenant Number Container -->
                                                     <div class="row">
-                                                        <div class="col-sm-6 tenant_num_container">
-                                                            <div class="col-sm-8">
+                                                        <div class="col-sm-8 tenant_num_container">
+                                                            <div class="col-sm-6">
                                                                 <label for="tenant_num_select" class="labels">Number of Tenants</label>
                                                                 <span class="fa fa-question-circle" data-placement="right" data-toggle="tooltip" title="Select the number of tenants that are present, and put 1 name for each field that appears."></span>
                                                                 <select class="form-control" id="tenant_num_select">
@@ -125,12 +127,10 @@
                                                             <div class="col-sm-10" id="tenant_input_container"></div>
                                                         </div>
                                                     </div>
-
-
-
                                                         <input type="hidden" id="tenant_num" name="tenant_num" />
-                                                        <div class="row">
 
+
+                                                    <div class="row">
                                                         <div class="col-sm-10">
                                                             <div class="labels">Lease Type:</div>
                                                             <input type="radio" id="residential_lease" name="lease_type" value="isResidential" checked>
@@ -149,11 +149,22 @@
                                                             <div class="labels">Lease Status:</div>
                                                             <input type="checkbox" id="term_lease_ended" name="term_lease_ended">
                                                             <label for="term_lease_ended">Term of lease has ended</label><br>
-                                                            <input type="checkbox" id="breached_conditions_lease" name="breached_conditions_lease">
-                                                            <label for="breached_conditions_lease">Tenant Breached Conditions of Lease</label>
-                                                            <div class="details"></div><b>Tenant Breached Details:</b><input class="form-control" type="text" id="breached_details" name="breached_details" /><br>
+                                                        </div>
+                                                        <div class="col-sm-10">
                                                             <input type="checkbox" id="unsatisfied_lease" name="unsatisfied_lease">
                                                             <label for="unsatisfied_lease">Rent Reserved and due has, upon demand, remained unsatisfied</label>
+                                                        </div>
+
+
+                                                        <!-- Breached Conditions Container -->
+                                                        <div class="col-sm-10">
+                                                            <div class="labels">Breach of Contract? <span class="fa fa-question-circle" data-placement="right" data-toggle="tooltip" title="Check the box below if there was a breach of contract and give details in the input field if necessary."></span></div>
+                                                            <div class="breached_conditions_container">
+                                                                <input type="checkbox" id="breached_conditions_lease" name="breached_conditions_lease">
+                                                                <label for="breached_conditions_lease">Tenant Breached Conditions of Lease</label><br>
+                                                                <b>Tenant Breached Details:</b>
+                                                                <input class="form-control" placeholder="Breached Details" type="text" id="breached_details" name="breached_details" disabled />
+                                                            </div>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -166,36 +177,53 @@
                                                         <label for="due_rent">Rent that is Due at Filing Date</label>
                                                         <input type="text" class="form-control eviction_fields" id="due_rent" name="due_rent" placeholder="$" value="" />
                                                     </div>
-                                                    <div class="col-sm-10">
-                                                        <label for="damage_amt">Damages for Injury to Property</label>
-                                                        <input type="text" class="form-control eviction_fields" id="damage_amt" name="damage_amt" placeholder="$" value="" />
+
+
+                                                    <!-- Property Damages Container -->
+                                                    <div class="col-sm-12">
+                                                        <div class="labels">Property Damages? <span class="fa fa-question-circle" data-placement="right" data-toggle="tooltip" title="Fill in the below field with the amount of damages accrued and fill in the details field if necessary."></span></div>
+                                                        <div class="property_damages_container">
+                                                            <div class="col-sm-10">
+                                                                <label for="damage_amt">Damages for Injury to Property Amount $</label>
+                                                                <input type="text" class="form-control eviction_fields" id="damage_amt" name="damage_amt" placeholder="$" value="" />
+                                                            </div>
+                                                            <div class="col-sm-12">
+                                                                <b>Property Damages Details:</b>
+                                                                <input class="form-control eviction_fields" type="text" id="damages_details" name="damages_details" /><br>
+                                                            </div>
+                                                        </div>
                                                     </div>
+
+
                                                     <div class="col-sm-10">
-                                                        <div class="details"></div>
-                                                        <b>Property Damages Details:</b>
-                                                        <input class="form-control eviction_fields" type="text" id="damages_details" name="damages_details" /><br>
-                                                    </div>
-                                                        <div class="col-sm-10">
                                                         <label for="unjust_damages">Damages for Unjust Detention of Real Property</label>
                                                         <input type="text" class="form-control eviction_fields" id="unjust_damages" name="unjust_damages" placeholder="$" value="" />
                                                     </div>
+
                                                     <div class="col-sm-10">
                                                         <label for="attorney_fees">Attorney Fees</label>
                                                         <input type="text" class="form-control eviction_fields" id="attorney_fees" name="attorney_fees" placeholder="$" value="" />
                                                     </div>
+
                                                     <div class="col-sm-10">
-                                                        <div class="labels">Additional Rent?</div>
-                                                        <input type="radio" id="addit_rent" name="addit_rent" value="yes" checked />
-                                                        <label for="addit_rent">Add additional rent due at hearing date</label><br>
-                                                        <div class="additional_rent_amt_div">
-                                                            <div class="col-sm-10">
-                                                                <div class="details"></div>
-                                                                <b>Amount of additional rent remaining due and unpaid on hearing date:</b>
-                                                                <input class="form-control eviction_fields" type="text" id="additional_rent_amt" name="additional_rent_amt" /><br>
+                                                        <div class="labels">Additional Rent? <span class="fa fa-question-circle" data-placement="right" data-toggle="tooltip" title="Was there additional read due at the hearing date? If so, change the radio button and fill in the additional rent amount field."></span></div>
+                                                        <div class="additional_rent_container">
+                                                            <input type="radio" id="no_addit_rent" name="addit_rent" value="no" checked />
+                                                            <label for="no_addit_rent">Do Not add additional rent due at hearing date</label><br>
+
+                                                            <input type="radio" id="addit_rent" name="addit_rent" value="yes" />
+                                                            <label for="addit_rent">Add additional rent due at hearing date</label><br>
+
+                                                            <div class="additional_rent_amt_div">
+                                                                <div class="col-sm-10">
+                                                                    <b>Amount of additional rent remaining due and unpaid on hearing date:</b>
+                                                                    <input class="form-control eviction_fields" type="text" id="additional_rent_amt" name="additional_rent_amt" /><br>
+                                                                </div>
                                                             </div>
                                                         </div>
-                                                        <input type="radio" id="no_addit_rent" name="addit_rent" value="no" />
-                                                        <label for="no_addit_rent">Do Not add additional rent due at hearing date</label>
+
+
+
                                                     </div>
                                                 </div>
                                                 <input type="checkbox" id="is_abandoned" name="is_abandoned">
@@ -206,7 +234,7 @@
                                         </div>
                                         <div class="form-group">
                                             <div class="row">
-                                                <div class="offset-2 col-sm-6">
+                                                <div class="offset-1 col-sm-10">
                                                     <canvas id="signature_pad" width="600" height="200" style="touch-action: none;"></canvas>
                                                     <div class="signature_pad_footer">
                                                         <div class="description">Sign above</div>

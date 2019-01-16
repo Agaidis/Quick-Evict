@@ -103,13 +103,6 @@ form.eviction_form fieldset {
     font-weight: 300;
 }
 
-#details {
-    margin-left:4%;
-}
-#breached_details {
-    width:60%;
-}
-
 .magistrate_table {
     font-size:12px;
 }
@@ -126,46 +119,61 @@ form.eviction_form fieldset {
     text-align:center;
 }
 
-/*      Signature CSS   */
-#btnSaveSign {
-    color: #fff;
-    background: #f99a0b;
-    padding: 5px;
-    border: none;
-    border-radius: 5px;
-    font-size: 20px;
-    margin-top: 10px;
-}
-#signArea{
-    width:304px;
-    margin: 50px auto;
-}
-.sign-container {
-    width: 60%;
-    margin: auto;
-}
-.sign-preview {
-    width: 150px;
-    height: 50px;
-    border: solid 1px #CFCFCF;
-    margin: 10px 5px;
-}
-.tag-ingo {
-    font-family: cursive;
-    font-size: 12px;
-    text-align: left;
-    font-style: oblique;
-}
 
+/*      SIGNATURE PAD    */
 #signature_pad {
     margin-top:5%;
-    border: 1px solid grey;
-    border-radius:1em;
+    border: 1px solid gainsboro;
+    border-radius:2em;
 }
 
+.signature_pad_footer {
+    width:70%;
+}
+
+.description {
+    text-align:center;
+}
+
+.no_signature {
+    margin-left: 8%;
+}
+
+.additional_rent_amt_div {
+    display:none;
+}
+
+
+/* Eviction Containers  */
 .tenant_num_container {
     border: 1px solid gainsboro;
     border-radius:2em;
     margin:3%;
     padding:1%;
+}
+
+.breached_conditions_container {
+    border: 1px solid gainsboro;
+    border-radius:2em;
+    margin:1%;
+    padding:3%;
+}
+
+.property_damages_container {
+    border: 1px solid gainsboro;
+    border-radius:2em;
+    margin:1%;
+    padding:2%;
+    width:60%;
+}
+
+.additional_rent_container {
+    border: 1px solid gainsboro;
+    border-radius:2em;
+    margin:1%;
+    padding:2%;
+}
+
+#breached_details {
+    width:90%;
 }
