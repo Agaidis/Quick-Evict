@@ -162,3 +162,10 @@ form.eviction_form fieldset {
     border: 1px solid grey;
     border-radius:1em;
 }
+
+.tenant_num_container {
+    border: 1px solid gainsboro;
+    border-radius:2em;
+    margin:3%;
+    padding:1%;
+}

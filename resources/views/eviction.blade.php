@@ -101,25 +101,36 @@
                                                             <label class="labels" for="monthly_rent">Monthly Rent</label>
                                                             <input type="text" class="form-control eviction_fields" id="monthly_rent" name="monthly_rent" placeholder="$" value="" />
                                                         </div>
-                                                        <div class="col-sm-6">
-                                                            <label class="labels">Tenant(s) Name</label>
-                                                            <input class="form-control eviction_fields" placeholder="Tenant(s) Name" type="text" id="tenant_name" name="tenant_name"/>
-                                                        </div><br><br>
-                                                        <div class="col-sm-3">
-                                                            <label for="tenant_num" class="labels"># of Tenants on Lease</label>
-                                                            <select class="form-control" id="tenant_num" name="tenant_num">
-                                                                <option value="1">1</option>
-                                                                <option value="2">2</option>
-                                                                <option value="3">3</option>
-                                                                <option value="4">4</option>
-                                                                <option value="5">5</option>
-                                                                <option value="6">6</option>
-                                                                <option value="7">7</option>
-                                                                <option value="8">8</option>
-                                                                <option value="9">9</option>
-                                                                <option value="10">10</option>
-                                                            </select>
+
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-sm-6 tenant_num_container">
+                                                            <div class="col-sm-8">
+                                                                <label for="tenant_num_select" class="labels">Number of Tenants</label>
+                                                                <span class="fa fa-question-circle" data-placement="right" data-toggle="tooltip" title="Select the number of tenants that are present, and put 1 name for each field that appears."></span>
+                                                                <select class="form-control" id="tenant_num_select">
+                                                                    <option value="" selected disabled>Select # of Tenants</option>
+                                                                    <option value="1">1</option>
+                                                                    <option value="2">2</option>
+                                                                    <option value="3">3</option>
+                                                                    <option value="4">4</option>
+                                                                    <option value="5">5</option>
+                                                                    <option value="6">6</option>
+                                                                    <option value="7">7</option>
+                                                                    <option value="8">8</option>
+                                                                    <option value="9">9</option>
+                                                                    <option value="10">10</option>
+                                                                </select>
+                                                            </div><br>
+                                                            <div class="col-sm-10" id="tenant_input_container"></div>
                                                         </div>
+                                                    </div>
+
+
+
+                                                        <input type="hidden" id="tenant_num" name="tenant_num" />
+                                                        <div class="row">
+
                                                         <div class="col-sm-10">
                                                             <div class="labels">Lease Type:</div>
                                                             <input type="radio" id="residential_lease" name="lease_type" value="isResidential" checked>

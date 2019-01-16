@@ -1,6 +1,7 @@
 if (document.location.href.split('/')[3] == 'online-eviction') {
     $(document).ready(function () {
 
+        $('[data-toggle="tooltip"]').tooltip();
         var canvas = document.querySelector("canvas");
         var signaturePad = new SignaturePad(canvas, {});
 
@@ -269,6 +270,26 @@ if (document.location.href.split('/')[3] == 'online-eviction') {
                 tipObj = null;
             }
         }
+
+        $('#tenant_num_select').on('change', function() {
+            var tenantNum = $(this)[0].value;
+            var html = '';
+
+            $('#tenant_num').val(tenantNum);
+
+            for (var i = 1; i <= tenantNum; i++) {
+                var currentTenantObj = $('#tenant_name_' + i);
+
+                if (currentTenantObj.length > 0) {
+                    html += '<input class="form-control eviction_fields" placeholder="Tenant Name '+ i +'" type="text" id="tenant_name_'+ i +'" name="tenant_name[]" value="' + currentTenantObj.val() + '"/><br>';
+                } else {
+                    html += '<input class="form-control eviction_fields" placeholder="Tenant Name '+ i +'" type="text" id="tenant_name_'+ i +'" name="tenant_name[]" value=""/><br>';
+                }
+            }
+
+            $('#tenant_input_container').empty().append($(html));
+        });
+
 
         //On Submit
         $('#pdf_download_btn').on('click', function () {
