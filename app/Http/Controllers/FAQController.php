@@ -14,10 +14,6 @@ class FAQController extends Controller
      */
     public function index()
     {
-        if (Auth::guest()) {
-            return view('/login');
-       } else {
-            return view('FAQ');
-        }
+        return view('FAQ');
     }
 }

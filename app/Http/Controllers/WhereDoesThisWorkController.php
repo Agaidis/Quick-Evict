@@ -14,11 +14,7 @@ class WhereDoesThisWorkController extends Controller
      */
     public function index()
     {
-        if (Auth::guest()) {
-            return view('/login');
-        } else {
-            return view('whereDoesThisWork');
-        }
+        return view('whereDoesThisWork');
     }
 
     public function store(Request $request) {

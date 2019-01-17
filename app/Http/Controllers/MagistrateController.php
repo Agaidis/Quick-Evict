@@ -10,6 +10,17 @@ use Illuminate\Support\Facades\Auth;
 
 class MagistrateController extends Controller
 {
+
+    /**
+     * Create a new controller instance.
+     *
+     *
+     */
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     public function index() {
         if (Auth::guest()) {
             return view('/login');
