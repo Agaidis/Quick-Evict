@@ -52,6 +52,7 @@
                                     <td class="text-center">
                                         <button type="button" id="id_{{$user->id}}_{{$user->name}}" class="fa fa-trash btn-sm btn-danger user_remove"></button>
                                     </td>
+
                                 </tr>
                             @endforeach
                             </tbody>
