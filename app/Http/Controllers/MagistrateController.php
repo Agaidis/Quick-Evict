@@ -5,16 +5,32 @@ namespace App\Http\Controllers;
 use App\CourtDetails;
 use App\GeoLocation;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 
 class MagistrateController extends Controller
 {
-    public function index() {
-        // Get all the series
-        $courtDetails = CourtDetails::all();
-        $geoLocations = GeoLocation::all();
 
-        return view('magistrateCreator', compact('courtDetails', 'geoLocations'));
+    /**
+     * Create a new controller instance.
+     *
+     *
+     */
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
+    public function index() {
+        if (Auth::guest()) {
+            return view('/login');
+        } else {
+            // Get all the series
+            $courtDetails = CourtDetails::all();
+            $geoLocations = GeoLocation::all();
+
+            return view('magistrateCreator', compact('courtDetails', 'geoLocations'));
+        }
     }
 
     public function store(Request $request) {
