@@ -322,6 +322,7 @@ class EvictionController extends Controller
                 $eviction->plantiff_address_line_1 = $plantiffAddress1;
                 $eviction->plantiff_address_line_2 = $plantiffAddress2;
                 $eviction->verify_name = $verifyName;
+                $eviction->user_id = Auth::user()->id;
 
                 $eviction->save();
 

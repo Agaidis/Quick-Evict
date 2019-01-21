@@ -50,7 +50,8 @@ class Evictions extends Model
         'plantiff_phone',
         'plantiff_address_line_1',
         'plantiff_address_line_2',
-        'verify_name'
+        'verify_name',
+        'user_id'
     ];
 
     protected $table = 'evictions';
