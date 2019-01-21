@@ -50,7 +50,28 @@ class UserManagementController extends Controller
 
             return 'success';
         } catch (\Exception $e) {
-            mail('andrew.gaidis@gmail.com', 'Admin Issue', 'There was an issue with changing a users status');
+            mail('andrew.gaidis@gmail.com', 'Admin Issue', 'There was an issue with changing a users role');
+            return 'failed';
+        }
+    }
+
+
+    /**
+     * @param $request
+     *
+     * @return string
+     *
+     */
+    public function changeCourtId(Request $request)
+    {
+        try {
+            $user = User::find($request->id);
+            $user->court_id = $request->court_id;
+            $user->save();
+
+            return 'success';
+        } catch (\Exception $e) {
+            mail('andrew.gaidis@gmail.com', 'Admin Issue', 'There was an issue with changing a users court_id');
             return 'failed';
         }
     }

@@ -24,6 +24,7 @@
                                 <th class="text-center">User Name</th>
                                 <th class="text-center">Email</th>
                                 <th class="text-center">Role</th>
+                                <th class="text-center">Court Id</th>
                                 <th class="text-center">Delete</th>
                             </tr>
                             </thead>
@@ -48,6 +49,8 @@
                                                 @endif
                                             @endforeach
                                         </select>
+                                    </td>
+                                    <td class="text-center">{{$user->court_id}}
                                     </td>
                                     <td class="text-center">
                                         <button type="button" id="id_{{$user->id}}_{{$user->name}}" class="fa fa-trash btn-sm btn-danger user_remove"></button>
