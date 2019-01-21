@@ -9,6 +9,7 @@ use App\CourtDetails;
 use Dompdf\Dompdf;
 use Illuminate\Support\Facades\DB;
 use App\Signature;
+use Illuminate\Support\Facades\Auth;
 
 class DashboardController extends Controller
 {
