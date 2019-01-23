@@ -50,7 +50,20 @@
                                             @endforeach
                                         </select>
                                     </td>
-                                    <td class="text-center">{{$user->court_id}}
+                                    <td class="text-center">
+                                        @if ($user->role == 'Court')
+                                            <select title="status" class="form-control court_select" id="user_court_{{$user->id}}">
+                                                @else
+                                                    <select title="status" disabled class="form-control court_select" id="user_court_{{$user->id}}">
+                                                @endif
+                                                @foreach ($courtNumbers as $courtNumber)
+                                                    @if ($user->court_id == $courtNumber->court_number)
+                                                        <option value="{{$user->court_id}}" selected>{{$user->court_id}}</option>
+                                                    @else
+                                                        <option value="{{$courtNumber->court_number}}">{{$courtNumber->court_number}}</option>
+                                                    @endif
+                                                @endforeach
+                                        </select>
                                     </td>
                                     <td class="text-center">
                                         <button type="button" id="id_{{$user->id}}_{{$user->name}}" class="fa fa-trash btn-sm btn-danger user_remove"></button>
