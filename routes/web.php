@@ -50,7 +50,7 @@ Route::post('/magistrateCreator/delete', 'MagistrateController@delete')->middlew
 Route::get('/userManagement', 'UserManagementController@index')->middleware('auth');
 Route::post('/userManagement/deleteUser', 'UserManagementController@deleteUser')->middleware('auth');
 Route::post('/userManagement/changeRole', 'UserManagementController@changeUserRole')->middleware('auth');
-Route::post('/userManagement/changeRole', 'UserManagementController@changeCourt')->middleware('auth');
+Route::post('/userManagement/changeCourt', 'UserManagementController@changeCourt')->middleware('auth');
 
 
 
