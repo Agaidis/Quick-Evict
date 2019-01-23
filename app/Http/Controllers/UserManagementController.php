@@ -33,7 +33,7 @@ class UserManagementController extends Controller
             return view('/login');
         } else {
             $users = User::all();
-            $courtNumbers = DB::table('court_details')->select('court_number')->orderBy('court_number', 'ASC')->get();
+            $courtNumbers = DB::table('court_details')->select('court_number')->orderBy('court_number', 'ASC')->distinct()->get();
 
             return view('userManagement', compact(
                 'users',
