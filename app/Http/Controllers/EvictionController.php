@@ -11,7 +11,6 @@ use App\CourtDetails;
 use JavaScript;
 use App\Evictions;
 use App\Signature;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
 
 
