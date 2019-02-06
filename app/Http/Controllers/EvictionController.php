@@ -11,6 +11,8 @@ use App\CourtDetails;
 use JavaScript;
 use App\Evictions;
 use App\Signature;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
 
 
 class EvictionController extends Controller
@@ -53,6 +55,8 @@ class EvictionController extends Controller
     }
 
     public function delete() {
+        Log::info('Deleting an Eviction');
+        Log::info(Auth::User()->id);
         try {
             $dbId = Evictions::where('id', $_POST['id'])->value('id');
             Evictions::destroy($dbId);
@@ -63,7 +67,8 @@ class EvictionController extends Controller
     }
 
     public function formulatePDF() {
-
+        Log::info('formulatePDF Eviction');
+        Log::info(Auth::User()->id);
         try {
             $removeValues = ['$', ','];
             $magistrateId = str_replace('magistrate_' , '', $_POST['court_number']);
@@ -334,10 +339,10 @@ class EvictionController extends Controller
 
                 $signature->save();
 
-                mail('andrew.gaidis@gmail.com', 'New Eviction Id', $evictionId);
+                mail('andrew.gaidis@gmail.com', 'New Eviction Id ' . Auth::User()->id, $evictionId);
 
             } catch ( \Exception $e) {
-                mail('andrew.gaidis@gmail.com', 'formulatePDFData Error', $e->getMessage());
+                mail('andrew.gaidis@gmail.com', 'formulatePDFData Error' . Auth::User()->id, $e->getMessage());
                 return back();
             }
 
@@ -474,7 +479,7 @@ span.cls_010{font-family:Arial,serif;font-size:10.77px;color:rgb(0,0,0);font-wei
 
             return view('eviction', compact('map'));
         } catch ( \Exception $e) {
-            mail('andrew.gaidis@gmail.com', 'formulatePDFCreation Error', $e->getMessage());
+            mail('andrew.gaidis@gmail.com', 'formulatePDFCreation Error' . Auth::User()->id, $e->getMessage());
             return back();
         }
     }

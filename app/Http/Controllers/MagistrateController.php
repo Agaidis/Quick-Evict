@@ -6,6 +6,7 @@ use App\CourtDetails;
 use App\GeoLocation;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
 
 
 class MagistrateController extends Controller
@@ -34,6 +35,8 @@ class MagistrateController extends Controller
     }
 
     public function store(Request $request) {
+        Log::info('Storing a Magistrate');
+        Log::info(Auth::User()->id);
         try {
             $isUnique = CourtDetails::where('magistrate_id', $request->magistrate_id)->first();
 
@@ -86,7 +89,7 @@ class MagistrateController extends Controller
             $errorDetails .= PHP_EOL . 'File: ' . $e->getFile();
             $errorDetails .= PHP_EOL . 'Line #' . $e->getLine();
             \Log::error( $errorDetails . PHP_EOL . 'Error Message: ' . $e->getMessage() . PHP_EOL . 'Trace: ' . $e->getTraceAsString());
-            mail( 'andrew.gaidis@gmail.com',  'Adding Magistrate Error', $errorDetails );
+            mail( 'andrew.gaidis@gmail.com',  'Adding Magistrate Error ' . Auth::User()->id, $errorDetails );
 
             $returnArray['responseMessage'] = 'Bad Request';
             $returnArray['responseCode'] = 400;
@@ -111,7 +114,7 @@ class MagistrateController extends Controller
             $errorDetails .= PHP_EOL . 'File: ' . $e->getFile();
             $errorDetails .= PHP_EOL . 'Line #' . $e->getLine();
             \Log::error( $errorDetails . PHP_EOL . 'Error Message: ' . $e->getMessage() . PHP_EOL . 'Trace: ' . $e->getTraceAsString());
-            mail( 'andrew.gaidis@gmail.com',  'Adding Magistrate Error', $errorDetails );
+            mail( 'andrew.gaidis@gmail.com',  'Adding Magistrate Error ' . Auth::User()->id, $errorDetails );
 
             $returnArray['responseMessage'] = 'Bad Request';
             $returnArray['responseCode'] = 400;
@@ -122,6 +125,8 @@ class MagistrateController extends Controller
     }
 
     public function editMagistrate(Request $request) {
+        Log::info('Editing a Magistrate');
+        Log::info(Auth::User()->id);
 
         try {
 
@@ -175,7 +180,7 @@ class MagistrateController extends Controller
             $errorDetails .= PHP_EOL . 'File: ' . $e->getFile();
             $errorDetails .= PHP_EOL . 'Line #' . $e->getLine();
             \Log::error( $errorDetails . PHP_EOL . 'Error Message: ' . $e->getMessage() . PHP_EOL . 'Trace: ' . $e->getTraceAsString());
-            mail( 'andrew.gaidis@gmail.com',  'Adding Magistrate Error', $errorDetails );
+            mail( 'andrew.gaidis@gmail.com',  'Adding Magistrate Error ' . Auth::User()->id, $errorDetails );
 
             $returnArray['responseMessage'] = 'Bad Request';
             $returnArray['responseCode'] = 400;
