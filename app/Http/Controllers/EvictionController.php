@@ -268,7 +268,7 @@ class EvictionController extends Controller
                 $totalFees = (float)$attorneyFees + (float)$dueRent + (float)$unjustDamages + (float)$damageAmt;
             }
 
-            $noCommaTotalFees = str_replace(',', $totalFees);
+            $noCommaTotalFees = str_replace(',','', $totalFees);
 
             $totalFees = number_format($totalFees, 2);
 
