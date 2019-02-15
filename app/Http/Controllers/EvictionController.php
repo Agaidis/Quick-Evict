@@ -273,10 +273,13 @@ class EvictionController extends Controller
             mail('andrew.gaidis@gmail.com', 'Total Fees', $totalFees);
 
             if ($totalFees < 2000) {
+                mail('andrew.gaidis@gmail.com', 'Less than 2000', $totalFees);
                 $filingFee = $upTo2000 + $additionalTenantFee;
             } else if ($totalFees >= 2000 && $totalFees <= 4000) {
+                mail('andrew.gaidis@gmail.com', 'between 2000 and 4000', $totalFees);
                 $filingFee = $btn20014000 + $additionalTenantFee;
             } else if ($totalFees > 4000) {
+                mail('andrew.gaidis@gmail.com', 'greater than 4000', $totalFees);
                 $filingFee = $greaterThan4000 + $additionalTenantFee;
             } else {
                 $filingFee = 'Didnt Work';
