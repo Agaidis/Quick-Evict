@@ -2,15 +2,22 @@
 @section('content')
     <meta name="csrf-token" id="token" content="{{ csrf_token() }}">
     <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <div id="getting_started_panel">
+                    <h2>Get Started</h2>
+                </div>
+
+            </div>
+        </div>
         <div class="row justify-content-center">
             <div class="col-md-10">
                 <div class="card">
-                    <div class="card-header">Home</div>
                     <div class="card-body">
-                        <h2 style="align-content:center">Welcome to EvictionTech!</h2>
-                        <div>EvictionTech is the leader in using technology and eviction expertise to improve the eviction process for real estate owners, property managers, and magistrate district courts.</div>
+                        <h2 style="align-content:center; text-align:center;">Welcome to Court<em>Zip</em>!</h2>
+                        <div>CourtZip is the leader in using technology and court filing expertise to improve the process for real estate owners, property managers, and magistrate district courts.</div>
 
-                        <div>Prior to EvictionTech, the eviction process was dramatically outdated. Filing evictions caused a lot of extra manual work and delays for everyone involved. EvictionTech brought together a collaboration between cutting edge MDJs, property managers, real estate owners, and web developers to create a better solution.</div>
+                        <div>Prior to CourtZip, the eviction process was dramatically outdated. Filing evictions caused a lot of extra manual work and delays for everyone involved. EvictionTech brought together a collaboration between cutting edge MDJs, property managers, real estate owners, and web developers to create a better solution.</div>
 
                         <div>EvictionTech solves the following problems:</div>
                         <div>
@@ -30,14 +37,10 @@
                                 <li><strong>Easy Online Payment:</strong> EvictionTech accepts debit or credit cards to make it easy for owners and property managers to pay for the eviction filing online.</li>
                             </ul>
 
-                            <div>To file an eviction, click here: <a href="https://evictiontech.com/online-eviction" target="_blank" data-saferedirecturl="https://www.google.com/url?q=https://evictiontech.com/online-eviction&amp;source=gmail&amp;ust=1545744067199000&amp;usg=AFQjCNEgtHwzpaaZGyqtrqUmbeUQmCKvAQ">https://evictiontech.com/<wbr />online-eviction</a></div>
-
-                            <div>EvictionTech is constantly growing -- click here to see where EvictionTech is live:<a href="https://evictiontech.com/where-does-this-work" target="_blank" data-saferedirecturl="https://www.google.com/url?q=https://evictiontech.com/where-does-this-work&amp;source=gmail&amp;ust=1545744067199000&amp;usg=AFQjCNHKCBedkszbEYh7nBDiSoQZXACX5A">https://evictiontech.com/<wbr />where-does-this-work</a></div>
+                            <div>EvictionTech is constantly growing -- click here to see where EvictionTech is live:<a href="https://evictiontech.com/where-does-this-work" target="_blank" data-saferedirecturl="https://www.google.com/url?q=https://evictiontech.com/where-does-this-work&amp;source=gmail&amp;ust=1545744067199000&amp;usg=AFQjCNHKCBedkszbEYh7nBDiSoQZXACX5A">Locations</a></div>
 
                             <div>To get more info --- contact EvictionTech here:</div>
                         </div>
-
-
                     </div>
                 </div>
             </div>
