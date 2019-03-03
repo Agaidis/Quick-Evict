@@ -3,11 +3,12 @@
     <meta name="csrf-token" id="token" content="{{ csrf_token() }}">
     <div class="container-fluid">
         <div class="row">
-            <div class="col-md-12">
+            <div class="col-md-10">
                 <div class="card" id="getting_started_panel">
-                    <h2 style="text-align:center;">Get Started</h2>
+                    <div class="card-body">
+                        <h2 style="text-align:center;">Get Started</h2>
+                    </div>
                 </div>
-
             </div>
         </div>
         <div class="row justify-content-center">
