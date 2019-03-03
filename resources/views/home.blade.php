@@ -4,7 +4,7 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-md-12">
-                <div id="getting_started_panel">
+                <div class="card" id="getting_started_panel">
                     <h2>Get Started</h2>
                 </div>
 
