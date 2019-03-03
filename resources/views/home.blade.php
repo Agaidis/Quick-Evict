@@ -2,8 +2,8 @@
 @section('content')
     <meta name="csrf-token" id="token" content="{{ csrf_token() }}">
     <div class="container-fluid">
-        <div class="row">
-            <div class="col-md-10 col-md-offset-2">
+        <div class="row justify-content-center">
+            <div class="col-md-10">
                 <div class="card" id="getting_started_panel">
                     <div class="card-body">
                         <h2 style="text-align:center;">Get Started</h2>
