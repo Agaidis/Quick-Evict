@@ -5,7 +5,7 @@
         <div class="row">
             <div class="col-md-12">
                 <div class="card" id="getting_started_panel">
-                    <h2>Get Started</h2>
+                    <h2 style="text-align:center;">Get Started</h2>
                 </div>
 
             </div>
@@ -14,7 +14,7 @@
             <div class="col-md-10">
                 <div class="card">
                     <div class="card-body">
-                        <h2 style="align-content:center; text-align:center;">Welcome to Court<em>Zip</em>!</h2>
+                        <h2 style="text-align:center;">Welcome to Court<em>Zip</em>!</h2>
                         <div>CourtZip is the leader in using technology and court filing expertise to improve the process for real estate owners, property managers, and magistrate district courts.</div>
 
                         <div>Prior to CourtZip, the eviction process was dramatically outdated. Filing evictions caused a lot of extra manual work and delays for everyone involved. EvictionTech brought together a collaboration between cutting edge MDJs, property managers, real estate owners, and web developers to create a better solution.</div>
