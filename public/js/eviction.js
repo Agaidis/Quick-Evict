@@ -1,120 +1,307 @@
-$(document).ready(function () {
-    // $("#wizard").steps({
-    //     headerTag: "h3",
-    //     bodyTag: "section",
-    //     transitionEffect: "slideLeft",
-    //     autoFocus: true
-    // });
-    $('#filing_date').val(new Date());
-    $('#landlord').prop('hidden', true);
+if (document.location.href.split('/')[3] == 'online-eviction') {
+    $(document).ready(function () {
 
+        $('[data-toggle="tooltip"]').tooltip();
+        var canvas = document.querySelector("canvas");
+        var signaturePad = new SignaturePad(canvas, {});
+
+        //Clear button to remove signature drawing
+        $('.clear_signature').on('click', function() {
+            $('#pdf_download_btn').prop('disabled', true);
+            // Clears the canvas
+            signaturePad.clear();
+        });
+
+        $('.no_signature').on('click', function() {
+            $('#pdf_download_btn').prop('disabled', false);
+        });
+
+        //Save and use Signature
+        $('.save_signature').on('click', function() {
+            $('#pdf_download_btn').prop('disabled', false);
+            var dataURL = signaturePad.toDataURL(); // save image as PNG
+            $('#signature_source').val(dataURL);
+        });
+
+        $('#filing_date').val(new Date());
+        $('#landlord').prop('hidden', true);
+
+        var map;
+        var marker;
+        var bounds;
+        var houseNum;
+        var streetName;
+        var town;
+        var county;
+        var zipcode;
+        var state;
+
+        var center = new google.maps.LatLng(40.149660, -76.306370);
+        //Create the areas for magistrates
 
         map = new google.maps.Map(document.getElementById('map'), {
             center: {lat: 40.144128, lng: -76.311420},
-            zoom: 7
+            zoom: 9,
+            scaleControl: true
+        });
+        bounds = new google.maps.LatLngBounds();
+        google.maps.event.addListenerOnce(map, 'tilesloaded', function (evt) {
+
+            bounds = map.getBounds();
+        });
+        marker = new google.maps.Marker({
+            position: center
         });
 
 
-    // Create the search box and link it to the UI element.
-    var input = document.getElementById('pac-input');
-    var searchBox = new google.maps.places.SearchBox(input);
+        var input = /** @type {!HTMLInputElement} */(
+            document.getElementById('pac-input'));
+        var types = document.getElementById('type-selector');
+        map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
+        map.controls[google.maps.ControlPosition.TOP_LEFT].push(types);
+
+        var autocomplete = new google.maps.places.Autocomplete(input);
+        var magArray = [];
+        var objArray = [];
+        var magNamesArray = [];
+        var count = 0;
+
+        $.each(quickEvict.geoData, function(key, value) {
+            magId = 'magistrate_' + value.magistrate_id;
+            var geoPoints = value.geo_locations.replace(/\s/g, '').replace(/},/g, '},dd').split(',dd');
+            var obj = [];
+
+            console.log(magId);
+
+            for (var i in geoPoints) {
+                obj.push(JSON.parse(geoPoints[i]));
+            }
+            magNamesArray.push(magId);
+            objArray.push(obj);
+            magArray.push(magId);
+            magArray[count] = new google.maps.Polygon({
+                path: obj,
+                geodesic: true,
+                strokeColor: '#091096',
+                strokeOpacity: 1.0,
+                strokeWeight: 2,
+                fillColor: '#B1AAA9',
+                fillOpacity: 0.35,
+                areaName: magId,
+                courtId: value.court_number,
+                county: value.county,
+                township: value.township
+            });
+            magArray[count].setMap(map);
 
 
-    // Bias the SearchBox results towards current map's viewport.
-    map.addListener('bounds_changed', function() {
-        searchBox.setBounds(map.getBounds());
-    });
+            google.maps.event.addListener(magArray[count], 'mouseover', function (e) {
+                var magistrateId = $(this)[0].areaName.split('magistrate_');
+                injectTooltip(e, magistrateId[1] + '<br>' + $(this)[0].county + '<br>' + $(this)[0].township);
+            });
 
-    var markers = [];
-    // Listen for the event fired when the user selects a prediction and retrieve
-    // more details for that place.
-    searchBox.addListener('places_changed', function() {
-        var places = searchBox.getPlaces();
+            google.maps.event.addListener(magArray[count], 'mousemove', function (e) {
+                moveTooltip(e);
+            });
 
-        if (places.length == 0) {
-            return;
-        }
+            google.maps.event.addListener(magArray[count], 'mouseout', function (e) {
+                deleteTooltip(e);
+            });
 
-        // Clear out the old markers.
-        markers.forEach(function(marker) {
+            count++;
+        });
+        autocomplete.addListener('place_changed', function () {
             marker.setMap(null);
-        });
-        markers = [];
-
-        // For each place, get the icon, name and location.
-        var bounds = new google.maps.LatLngBounds();
-        places.forEach(function(place) {
+            var place = autocomplete.getPlace();
+            newBounds = bounds;
             if (!place.geometry) {
-                console.log("Returned place contains no geometry");
+                window.alert("Returned place contains no geometry");
                 return;
             }
-            var icon = {
-                url: place.icon,
-                size: new google.maps.Size(71, 150),
-                origin: new google.maps.Point(0, 0),
-                anchor: new google.maps.Point(17, 34),
-                scaledSize: new google.maps.Size(25, 25)
-            };
 
-            // Create a marker for each place.
-            markers.push(new google.maps.Marker({
-                map: map,
-                icon: icon,
-                title: place.name,
-                position: place.geometry.location
-            }));
+            houseNum = place.address_components[0].long_name;
+            streetName = place.address_components[1].long_name;
+            town = place.address_components[2].long_name;
+            county = place.address_components[3].long_name;
+            state = place.address_components[4].short_name;
 
-            if (place.geometry.viewport) {
-                // Only geocodes have viewport.
-                bounds.union(place.geometry.viewport);
+            if (place.address_components[6].short_name == 'US') {
+                zipcode = place.address_components[7].long_name;
             } else {
-                bounds.extend(place.geometry.location);
+                zipcode = place.address_components[6].long_name;
+            }
+
+            $('#state').val('PA');
+            $('#zipcode').val(zipcode);
+            $('#county').val(county);
+            $('#house_num').val(houseNum);
+            $('#street_name').val(streetName);
+            $('#town').val(town);
+            $('#display_address').text(houseNum + ' ' + streetName + ' ' + town + ' ' + 'PA');
+
+            console.log(place.address_components);
+
+            marker.setPosition(place.geometry.location);
+            marker.setMap(map);
+            newBounds.extend(place.geometry.location);
+            map.fitBounds(newBounds);
+            var isFound = false;
+            for (var k = 0; k < magArray.length; k++) {
+                if (google.maps.geometry.poly.containsLocation(place.geometry.location, magArray[k])) {
+                    $('#court_number').val(magArray[k].areaName);
+                    isFound = true;
+                }
+            }
+            if (isFound == false) {
+                alert('Location outside all Zones');
+                $('.zipcode_div').css('display', 'none');
+                $('.unit_number_div').css('display', 'none');
+                $('.eviction_form_div').css('display', 'none');
+            } else {
+                $('.zipcode_div').css('display', 'block');
+                $('.unit_number_div').css('display', 'block');
+                $('.eviction_form_div').css('display', 'block');
             }
         });
-        map.fitBounds(bounds);
-    });
 
 
-    $('input[type=radio][name=rented_by]').change(function(){
-       console.log($(this)[0].id);
-       if ($(this)[0].id == 'rented_by_other') {
-           $('#landlord').prop('hidden', false);
-       } else {
-           $('#landlord').prop('hidden', true);
-       }
-    });
+        $(window).keydown(function (event) {
+            if (event.keyCode == 13) {
+                event.preventDefault();
+                return false;
+            }
+        });
 
-    //On Submit gather variables and make ajax call to backend
-    $.ajaxSetup({
-        headers: {
-            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        $('input[type=radio][name=rented_by]').change(function () {
+
+            if ($(this)[0].id == 'rented_by_other') {
+                $('#landlord').prop('hidden', false);
+                $('#rented_by_other_div').css('display', 'block');
+                $('#rented_by_owner_div').css('display', 'none');
+            } else {
+                $('#landlord').prop('hidden', true);
+                $('#rented_by_other_div').css('display', 'none');
+                $('#rented_by_owner_div').css('display', 'block');
+
+            }
+        });
+
+        $('input[type=radio][name=addit_rent]').change(function () {
+
+            if ($(this)[0].id == 'addit_rent') {
+                $('.additional_rent_amt_div').css('display', 'block');
+
+            } else {
+                $('.additional_rent_amt_div').css('display', 'none');
+            }
+        });
+
+
+        //create a global variable that will point to the tooltip in the DOM
+        var tipObj = null;
+
+//offset along x and y in px
+        var offset = {
+            x: 6,
+            y: -300
+        };
+
+        var coordPropName = null;
+
+        function injectTooltip(event, data) {
+            if (!tipObj && event) {
+                //create the tooltip object
+                tipObj = document.createElement("div");
+                tipObj.style.width = '80px';
+                tipObj.style.height = '80px';
+                tipObj.style.background = "lightgrey";
+                tipObj.style.borderRadius = "3px";
+                tipObj.style.padding = "6px";
+                tipObj.style.fontFamily = "Arial,Helvetica";
+                tipObj.style.textAlign = "center";
+                tipObj.style.fontSize = "10";
+                tipObj.innerHTML = data;
+
+                //fix for the version issue
+                eventPropNames = Object.keys(event);
+                if(!coordPropName){
+                    //discover the name of the prop with MouseEvent
+                    for(var i in eventPropNames){
+                        var name = eventPropNames[i];
+                        if(event[name] instanceof MouseEvent){
+                            coordPropName = name;
+                            break;
+                        }
+                    }
+                }
+
+                if(coordPropName) {
+                    //position it
+                    tipObj.style.position = "fixed";
+                    tipObj.style.top = event[coordPropName].clientY + window.scrollY + offset.y + "px";
+                    tipObj.style.left = event[coordPropName].clientX + window.scrollX + offset.x + "px";
+
+                    //add it to the body
+                    document.body.appendChild(tipObj);
+                }
+            }
         }
-    });
 
-    $('#pdf_download_btn').on('click', function() {
-       console.log("were clickin");
-       var data = $('#eviction_form').serialize();
-        $.ajaxSetup({
-            headers: {
-                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        /********************************************************************
+         * moveTooltip(e)
+         * update the position of the tooltip based on the event data
+         ********************************************************************/
+        function moveTooltip(event) {
+            if (tipObj && event) {
+                //position it
+                tipObj.style.top = event.Ba.clientY + window.scrollY + offset.y + "px";
+                tipObj.style.left = event.Ba.clientX + window.scrollX + offset.x + "px";
             }
+        }
+
+        /********************************************************************
+         * deleteTooltip(e)
+         * delete the tooltip if it exists in the DOM
+         ********************************************************************/
+        function deleteTooltip(event) {
+            if (tipObj) {
+                //delete the tooltip if it exists in the DOM
+                document.body.removeChild(tipObj);
+                tipObj = null;
+            }
+        }
+
+        $('#tenant_num_select').on('change', function() {
+            var tenantNum = $(this)[0].value;
+            var html = '';
+
+            $('#tenant_num').val(tenantNum);
+
+            for (var i = 1; i <= tenantNum; i++) {
+                var currentTenantObj = $('#tenant_name_' + i);
+
+                if (currentTenantObj.length > 0) {
+                    html += '<input class="form-control eviction_fields" placeholder="Tenant Name '+ i +'" type="text" id="tenant_name_'+ i +'" name="tenant_name[]" value="' + currentTenantObj.val() + '"/><br>';
+                } else {
+                    html += '<input class="form-control eviction_fields" placeholder="Tenant Name '+ i +'" type="text" id="tenant_name_'+ i +'" name="tenant_name[]" value=""/><br>';
+                }
+            }
+
+            $('#tenant_input_container').empty().append($(html));
         });
 
-        $.ajax({
-            beforeSend: function (xhr) {
-                xhr.setRequestHeader('X-CSRF-TOKEN', $("#token").attr('content'));
-            },
-            type: "POST",
-            url: '/online-eviction/pdf-data',
-            dataType: 'json',
-            data: data,
+        $('#breached_conditions_lease').on('change', function() {
+           if ($(this).is(':checked')) {
+               $('#breached_details').prop('disabled', false);
+           } else {
+               $('#breached_details').prop('disabled', true);
+           }
+        });
 
-            success: function (data) {
-               console.log(data);
-            },
-            error: function () {
-                console.log("something went wrong");
-            }
+
+        //On Submit
+        $('#pdf_download_btn').on('click', function () {
+            $('#rented_by_val').val($('input[name=rented_by]:checked').val());
         });
     });
-});
+}

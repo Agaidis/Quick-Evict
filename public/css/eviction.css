@@ -8,11 +8,12 @@ form.eviction_form fieldset {
     display: none;
 }
 
-  #map {
-      height: 80%;
-      width:80%;
-      margin-left: 5%;
-  }
+#map {
+    height: 80%;
+    width:80%;
+    margin-left: 5%;
+}
+
   html, body {
     height: 100%;
     margin: 0;
@@ -23,13 +24,18 @@ form.eviction_form fieldset {
       overflow:scroll;
   }
 
-  #address_container, #general_information_container, #amount_due_container, #owner_container {
+  #address_container, #general_information_container, #amount_due_container, #owner_container  {
       border: 1px solid darkgrey;
       padding: 10px;
       border-radius: 10px;
       width:80%;
   }
 
+.two_defendant_container, .one_defendant_container, .three_defendant_container, .court_information_container {
+    border: 1px solid darkgrey;
+    padding: 10px;
+    border-radius: 10px;
+}
   .labels {
       margin-top: 1%;
       font-weight: bold;
@@ -43,3 +49,132 @@ form.eviction_form fieldset {
       margin-top: 2%;
       margin-left: 30%;
   }
+
+.controls {
+    margin-top: 10px;
+    border: 1px solid transparent;
+    border-radius: 2px 0 0 2px;
+    box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    height: 32px;
+    outline: none;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+}
+#geo_locations {
+    width:1200px;
+    height:800px;
+}
+
+#edit_geo_locations {
+    width:100%;
+    height:800px;
+}
+.edit_magistrate_modal {
+    width:150%;
+    margin-left:-116px;
+}
+#pac-input {
+    background-color: #fff;
+    font-family: Roboto;
+    font-size: 15px;
+    font-weight: 300;
+    margin-left: 12px;
+    padding: 0 11px 0 13px;
+    text-overflow: ellipsis;
+    width: 300px;
+}
+
+#pac-input:focus {
+    border-color: #4d90fe;
+}
+
+.pac-container {
+    font-family: Roboto;
+}
+
+#type-selector {
+    color: #fff;
+    background-color: #4d90fe;
+    padding: 5px 11px 0px 11px;
+}
+
+#type-selector label {
+    font-family: Roboto;
+    font-size: 13px;
+    font-weight: 300;
+}
+
+.magistrate_table {
+    font-size:12px;
+}
+
+#rented_by_other_div {
+    display:none;
+}
+
+.eviction_form_div, .unit_number_div, .zipcode_div {
+    display:none;
+}
+
+.address_display_div, .unit_number_div, .zipcode_div {
+    text-align:center;
+}
+
+
+/*      SIGNATURE PAD    */
+#signature_pad {
+    margin-top:5%;
+    border: 1px solid gainsboro;
+    border-radius:2em;
+}
+
+.signature_pad_footer {
+    width:70%;
+}
+
+.description {
+    text-align:center;
+}
+
+.no_signature {
+    margin-left: 8%;
+}
+
+.additional_rent_amt_div {
+    display:none;
+}
+
+
+/* Eviction Containers  */
+.tenant_num_container {
+    border: 1px solid gainsboro;
+    border-radius:2em;
+    margin:3%;
+    padding:1%;
+}
+
+.breached_conditions_container {
+    border: 1px solid gainsboro;
+    border-radius:2em;
+    margin:1%;
+    padding:3%;
+}
+
+.property_damages_container {
+    border: 1px solid gainsboro;
+    border-radius:2em;
+    margin:1%;
+    padding:2%;
+    width:60%;
+}
+
+.additional_rent_container {
+    border: 1px solid gainsboro;
+    border-radius:2em;
+    margin:1%;
+    padding:2%;
+}
+
+#breached_details {
+    width:90%;
+}
