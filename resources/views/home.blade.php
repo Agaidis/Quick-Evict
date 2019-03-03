@@ -38,7 +38,7 @@
                                 <li><strong>Easy Online Payment:</strong> EvictionTech accepts debit or credit cards to make it easy for owners and property managers to pay for the eviction filing online.</li>
                             </ul>
 
-                            <div>EvictionTech is constantly growing -- click here to see where EvictionTech is live:<a href="https://evictiontech.com/where-does-this-work" target="_blank" data-saferedirecturl="https://www.google.com/url?q=https://evictiontech.com/where-does-this-work&amp;source=gmail&amp;ust=1545744067199000&amp;usg=AFQjCNHKCBedkszbEYh7nBDiSoQZXACX5A">Locations</a></div>
+                            <div>EvictionTech is constantly growing -- click here to see where EvictionTech is live: <a href="https://evictiontech.com/where-does-this-work" target="_blank" data-saferedirecturl="https://www.google.com/url?q=https://evictiontech.com/where-does-this-work&amp;source=gmail&amp;ust=1545744067199000&amp;usg=AFQjCNHKCBedkszbEYh7nBDiSoQZXACX5A"> Locations</a></div>
 
                             <div>To get more info --- contact EvictionTech here:</div>
                         </div>
