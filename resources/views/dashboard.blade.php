@@ -30,6 +30,7 @@
                                 </tr>
                                 </thead>
                                 <tbody>
+                                @if (isset($evictions))
                                 @foreach ($evictions as $eviction)
                                     <?php $propertyAddressArray = explode('-1', $eviction->property_address);
                                         $statusArray = array('Created LTC',
@@ -83,6 +84,7 @@
 
                                     </tr>
                                 @endforeach
+                                    @endif
                                 </tbody>
                             </table>
                             <input type="hidden" name="id" id="download_id"/>

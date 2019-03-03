@@ -24,6 +24,7 @@
                                 <th class="text-center">User Name</th>
                                 <th class="text-center">Email</th>
                                 <th class="text-center">Role</th>
+                                <th class="text-center">Court Id</th>
                                 <th class="text-center">Delete</th>
                             </tr>
                             </thead>
@@ -47,6 +48,23 @@
                                                     <option value="{{$userRole}}">{{$userRole}}</option>
                                                 @endif
                                             @endforeach
+                                        </select>
+                                    </td>
+                                    <td class="text-center">
+                                        @if ($user->role == 'Court')
+                                            <select title="status" class="form-control court_select" id="user_court_{{$user->id}}">
+                                                <option>Select a Court</option>
+                                                @else
+                                                    <select title="status" disabled class="form-control court_select" id="user_court_{{$user->id}}">
+                                                        <option>Select a Court</option>
+                                                @endif
+                                                @foreach ($courtNumbers as $courtNumber)
+                                                    @if ($user->court_id == $courtNumber->court_number)
+                                                        <option value="{{$user->court_id}}" selected>{{$user->court_id}}</option>
+                                                    @else
+                                                        <option value="{{$courtNumber->court_number}}">{{$courtNumber->court_number}}</option>
+                                                    @endif
+                                                @endforeach
                                         </select>
                                     </td>
                                     <td class="text-center">
