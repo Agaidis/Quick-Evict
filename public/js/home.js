@@ -119,4 +119,8 @@ $(document).ready(function () {
                 }
             });
     });
+
+    $('.home_btns').on('click', function() {
+        window.location.href = 'https://evictiontech.com/online-eviction';
+    });
 });
