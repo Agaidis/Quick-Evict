@@ -4,9 +4,14 @@
     <div class="container-fluid">
         <div class="row justify-content-center">
             <div class="col-md-10">
-                <div class="card" id="getting_started_panel">
+                <div class="card" id="getting_started_panel" style="margin-bottom:3%;">
                     <div class="card-body">
-                        <h2 style="text-align:center;">Get Started</h2>
+                        <h2 style="text-align:center;">Start a Filing</h2>
+                        <div class="button_panel">
+                            <button type="button" class="btn btn-primary home_btns" id="eviction_btn">Eviction</button>
+                            <button type="button" class="btn btn-primary home_btns" id="oop_btn">Order of Possession</button>
+                            <button type="button" class="btn btn-primary home_btns" id="ltc_btn">LTC</button>
+                        </div>
                     </div>
                 </div>
             </div>
