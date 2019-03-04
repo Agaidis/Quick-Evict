@@ -61,13 +61,14 @@
 }
 .button_panel {
     text-align: center;
+    margin-top: 5%;
 }
 .home_btns {
     font-size:16px;
     padding:3% 4% 3% 4%;
 }
 
-#eviction_btn {
+#oop_btn {
     margin-left:3%;
 }
 
