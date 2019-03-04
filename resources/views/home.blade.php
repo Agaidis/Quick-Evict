@@ -8,9 +8,9 @@
                     <div class="card-body">
                         <h2 class="titles">Start a Filing:</h2>
                         <div class="button_panel">
-                            <button type="button" class="btn btn-primary home_btns" id="eviction_btn">Eviction</button>
-                            <button type="button" class="btn btn-primary home_btns" id="oop_btn">Order of Possession</button>
                             <button type="button" class="btn btn-primary home_btns" id="ltc_btn">LTC</button>
+                            <button type="button" class="btn btn-primary home_btns" id="oop_btn">Order of Possession</button>
+                            <button type="button" class="btn btn-primary home_btns" id="civil_complaint_btn">Civil Complaint</button>
                         </div>
                     </div>
                 </div>
