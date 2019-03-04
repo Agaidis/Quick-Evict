@@ -55,3 +55,22 @@
 .pdf_download_btn_dashboard, .eviction-remove {
     cursor:pointer;
 }
+
+.titles {
+    text-align: center;
+}
+.button_panel {
+    text-align: center;
+}
+.home_btns {
+    font-size:16px;
+    padding:3% 4% 3% 4%;
+}
+
+#eviction_btn {
+    margin-left:3%;
+}
+
+#ltc_btn {
+    margin-left:3%;
+}
