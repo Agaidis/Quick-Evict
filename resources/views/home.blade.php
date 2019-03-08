@@ -8,9 +8,9 @@
                     <div class="card-body">
                         <h2 class="titles">Start a Filing:</h2>
                         <div class="button_panel">
-                            <button type="button" class="btn btn-primary home_btns" id="ltc_btn">LTC</button>
-                            <button type="button" class="btn btn-primary home_btns" id="oop_btn">Order of Possession</button>
-                            <button type="button" class="btn btn-primary home_btns" id="civil_complaint_btn">Civil Complaint</button>
+                            <a href="{{ url('new-ltc') }}"><button type="button" class="btn btn-primary home_btns" id="ltc_btn">LTC</button></a>
+                            <a href="{{ url('new-oop') }}"><button type="button" class="btn btn-primary home_btns" id="oop_btn">Order of Possession</button></a>
+                            <a href="{{ url('new-civil-complaint') }}"><button type="button" class="btn btn-primary home_btns" id="civil_complaint_btn">Civil Complaint</button></a>
                         </div>
                     </div>
                 </div>

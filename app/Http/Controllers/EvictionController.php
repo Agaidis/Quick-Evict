@@ -157,11 +157,7 @@ class EvictionController extends Controller
                 }
             }
 
-            mail('andrew.gaidis@gmail.com', 'Values' , ' upTo2000: ' . $upTo2000 . ' btn20014000: ' . $btn20014000 . ' Greater than 4000: ' . $greaterThan4000);
-
             $tenantNum = (int)$_POST['tenant_num'];
-
-            mail('andrew.gaidis@gmail.com', 'tenantNumber', $tenantNum);
 
             if ($tenantNum > 3) {
                 $multiplyBy = $tenantNum - 3;
@@ -271,8 +267,6 @@ class EvictionController extends Controller
             $noCommaTotalFees = str_replace(',','', $totalFees);
 
             $totalFees = number_format($totalFees, 2);
-
-            mail('andrew.gaidis@gmail.com', 'Total Fees', $totalFees);
 
             if ($noCommaTotalFees < 2000) {
                 mail('andrew.gaidis@gmail.com', 'Less than 2000', $totalFees);

@@ -6,7 +6,7 @@
     <div class="row justify-content-center">
         <div class="col-md-10">
            <div class="card">
-                <div class="card-header"><h2>Eviction Info</h2></div>
+                <div class="card-header"><h2>Additional Information</h2></div>
                 <div class="card-body">
                     <div class="row" style="margin-left: 6%; margin-right: 6%;">
                         <p><b>Information on Filing Evictions in Pennsylvania</b>:

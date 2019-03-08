@@ -28,12 +28,19 @@ Route::get('/dashboard/getCourtDate', 'DashboardController@getCourtDate')->middl
 Route::post('/dashboard/storeCourtDate', 'DashboardController@storeCourtDate')->middleware('auth');
 
 /* Eviction Creator */
-Route::get('/online-eviction', 'EvictionController@index')->middleware('auth');
-Route::post('/online-eviction/pdf-data', 'EvictionController@formulatePDF')->middleware('auth');
-Route::post('/online-eviction/add-file', 'EvictionController@addFile')->middleware('auth');
+Route::get('/new-ltc', 'EvictionController@index')->middleware('auth');
+Route::post('/new-ltc/pdf-data', 'EvictionController@formulatePDF')->middleware('auth');
+
+/* Order of Possession Creator */
+Route::get('/new-oop', 'OrderOfPossessionController@index')->middleware('auth');
+Route::post('/new-oop/pdf-data', 'OrderOfPossessionController@formulatePDF')->middleware('auth');
+
+/* Civil Complaint Creator */
+Route::get('/new-civil-complaint', 'CivilComplaintController@index')->middleware('auth');
+Route::post('/new-civil-complaint/pdf-data', 'CivilComplaintController@formulatePDF')->middleware('auth');
 
 /* Informational Pages */
-Route::get('/eviction-info', 'EvictionInfoController@index');
+Route::get('/information', 'InfoController@index');
 Route::get('/FAQ', 'FAQController@index');
 Route::get('/where-does-this-work', 'WhereDoesThisWorkController@index');
 Route::post('/where-does-this-work', 'WhereDoesThisWorkController@store');

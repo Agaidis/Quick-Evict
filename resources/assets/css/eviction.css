@@ -23,7 +23,7 @@ form.eviction_form fieldset {
       overflow:scroll;
   }
 
-  #address_container, #general_information_container, #amount_due_container, #owner_container  {
+  #address_container, #general_information_container, #amount_due_container, #owner_container, #additional_info_container  {
       border: 1px solid darkgrey;
       padding: 10px;
       border-radius: 10px;
@@ -111,7 +111,7 @@ form.eviction_form fieldset {
     display:none;
 }
 
-.eviction_form_div, .unit_number_div, .zipcode_div {
+.filing_form_div, .unit_number_div, .zipcode_div {
     display:none;
 }
 

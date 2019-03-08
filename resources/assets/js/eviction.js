@@ -1,4 +1,4 @@
-if (document.location.href.split('/')[3] == 'online-eviction') {
+if (document.location.href.split('/')[3] == 'new-ltc' || document.location.href.split('/')[3] ==  'new-oop' || document.location.href.split('/')[3] ==  'new-civil-complaint') {
     $(document).ready(function () {
 
         $('[data-toggle="tooltip"]').tooltip();
@@ -160,11 +160,11 @@ if (document.location.href.split('/')[3] == 'online-eviction') {
                 alert('Location outside all Zones');
                 $('.zipcode_div').css('display', 'none');
                 $('.unit_number_div').css('display', 'none');
-                $('.eviction_form_div').css('display', 'none');
+                $('.filing_form_div').css('display', 'none');
             } else {
                 $('.zipcode_div').css('display', 'block');
                 $('.unit_number_div').css('display', 'block');
-                $('.eviction_form_div').css('display', 'block');
+                $('.filing_form_div').css('display', 'block');
             }
         });
 
