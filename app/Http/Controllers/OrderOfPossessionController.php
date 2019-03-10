@@ -136,8 +136,8 @@ span.cls_009{font-family:Arial,serif;font-size:9.31px;color:rgb(0,0,0);font-weig
 <span style="position:absolute;left:394.89px;top:225.80px" class="cls_004"><span class="cls_004">Case Filed:</span></span>
 <span style="position:absolute;left:395.84px;top:240.80px" class="cls_004"><span class="cls_004">Time Filed:</span></span>
 <span style="position:absolute;left:371.27px;top:255.80px" class="cls_004"><span class="cls_004">Date Order Filed:</span></span>
-<span style="position:absolute;left:93.00px;top:217.75px" class="cls_004"><span class="cls_004">Judgment Amount</span></span>
-<span style="position:absolute;left:200.00px;top:217.55px" class="cls_003"><span class="cls_003">$_</span>'. $_POST['judgment_amount'] .'</span>
+<span style="position:absolute;left:93.00px;top:180.75px" class="cls_004"><span class="cls_004">Judgment Amount</span></span>
+<span style="position:absolute;left:210.00px;top:180.75px" class="cls_003"><span class="cls_003">$_</span>'. $_POST['judgment_amount'] .'</span>
 <span style="position:absolute;left:39.00px;top:233.75px" class="cls_004"><span class="cls_004">Costs in Original LT Proceeding</span></span>
 <span style="position:absolute;left:200.00px;top:233.55px" class="cls_003"><span class="cls_003">$_</span>'. $_POST['costs_original_lt_proceeding'] .'</span>
 <span style="position:absolute;left:69.00px;top:245.75px" class="cls_004"><span class="cls_004">Costs in this Proceeding</span></span>
