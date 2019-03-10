@@ -162,9 +162,9 @@ span.cls_009{font-family:Arial,serif;font-size:9.31px;color:rgb(0,0,0);font-weig
 <span style="position:absolute;left:400.00px;top:802.40px" class="cls_004"><span class="cls_004">Date:</span> '. date("d/m/Y") .'</span>
 <span style="position:absolute;left:420.00px;top:855.55px" class="cls_004"><span class="cls_004">Plaintiff Signature:</span><img style="position:absolute; top:-60px" width="160" height="65" src="'.$_POST['signature_source'].'"/></span>
 <span style="position:absolute;left:55.40px;top:985.85px" class="cls_007"><span class="cls_007">AOPC 311A</span></span>
-<span style="position:absolute;left:605.75px;top:985.50px" class="cls_008"><span class="cls_008">FREE INTERPRETER</span></span>
-<span style="position:absolute;left:590.75px;top:1000.50px" class="cls_009"><span class="cls_009">www.pacourts.us/language-rights</span></span><br>
-<span style = "position:absolute;left:303.75px;top:985.50px" class="cls_008" ><span class="cls_008" > CourtZip ID # </span ></span ><br >
+<span style="position:absolute;left:505.75px;top:865.50px" class="cls_008"><span class="cls_008">FREE INTERPRETER</span></span>
+<span style="position:absolute;left:505.75px;top:875.50px" class="cls_009"><span class="cls_009">www.pacourts.us/language-rights</span></span><br>
+<span style = "position:absolute;left:303.75px;top:865.50px" class="cls_008" ><span class="cls_008" > CourtZip ID # </span ></span ><br >
 </span></body></html>
 ');
 
