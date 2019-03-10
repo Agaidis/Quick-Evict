@@ -136,15 +136,15 @@ span.cls_009{font-family:Arial,serif;font-size:9.31px;color:rgb(0,0,0);font-weig
 <span style="position:absolute;left:394.89px;top:225px" class="cls_004"><span class="cls_004">Case Filed:</span></span>
 <span style="position:absolute;left:395.84px;top:240px" class="cls_004"><span class="cls_004">Time Filed:</span></span>
 <span style="position:absolute;left:371.27px;top:255px" class="cls_004"><span class="cls_004">Date Order Filed:</span></span>
-<span style="position:absolute;left:110.00px;top:180px" class="cls_004"><span class="cls_004">Judgment Amount</span></span>
+<span style="position:absolute;left:112.00px;top:180px" class="cls_004"><span class="cls_004">Judgment Amount</span></span>
 <span style="position:absolute;left:215.00px;top:180px" class="cls_003"><span class="cls_003">$_</span>'. $_POST['judgment_amount'] .'</span>
 <span style="position:absolute;left:39.00px;top:195px" class="cls_004"><span class="cls_004">Costs in Original LT Proceeding</span></span>
 <span style="position:absolute;left:215.00px;top:195px" class="cls_003"><span class="cls_003">$_</span>'. $_POST['costs_original_lt_proceeding'] .'</span>
-<span style="position:absolute;left:69.00px;top:210px" class="cls_004"><span class="cls_004">Costs in this Proceeding</span></span>
+<span style="position:absolute;left:89.00px;top:210px" class="cls_004"><span class="cls_004">Costs in this Proceeding</span></span>
 <span style="position:absolute;left:215.00px;top:210px" class="cls_003"><span class="cls_003">$_</span>'. $_POST['costs_this_proceeding'] .'</span>
-<span style="position:absolute;left:109.85px;top:225px" class="cls_004"><span class="cls_004">Attorney Fees</span></span>
+<span style="position:absolute;left:119.85px;top:225px" class="cls_004"><span class="cls_004">Attorney Fees</span></span>
 <span style="position:absolute;left:215.00px;top:225px" class="cls_003"><span class="cls_003">$_</span>'. $_POST['attorney_fees'] .'</span>
-<span style="position:absolute;left:147.00px;top:240px" class="cls_004"><span class="cls_004">Total</span></span>
+<span style="position:absolute;left:177.00px;top:240px" class="cls_004"><span class="cls_004">Total</span></span>
 <span style="position:absolute;left:215.00px;top:240px" class="cls_003"><span class="cls_003">$_</span>'. $totalFees .'</span>
 <span style="position:absolute;left:36.00px;top:523px" class="cls_004"><span class="cls_004">TO THE MAGISTERIAL DISTRICT JUDGE:</span></span>
 <span style="position:absolute;left:36.00px;top:535px" class="cls_004"><span class="cls_004">The Plaintiff(s) named below, having obtained a judgment for possession of real property located at:</span>'.$defendanthouseNum.' '.$defendantStreetName.' '. $_POST['unit_number'] . '<br>'.$defendantTown .',' . $defendantState.' '.$defendantZipcode.'  </p></span>
