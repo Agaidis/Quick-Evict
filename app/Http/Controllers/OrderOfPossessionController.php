@@ -51,4 +51,32 @@ class OrderOfPossessionController extends Controller
             return view('orderOfPossession', compact('map'));
         }
     }
+
+    public function formulatePDF()
+    {
+        Log::info('formulatePDF OOP');
+        Log::info(Auth::User()->id);
+        try {
+            $dompdf = new Dompdf();
+            $options = new Options();
+            $options->setIsRemoteEnabled(true);
+            $dompdf->setOptions($options);
+            $dompdf->loadHtml('');
+
+            // (Optional) Setup the paper size and orientation
+            $dompdf->setPaper('A4', 'portrait');
+
+            // Render the HTML as PDF
+            $dompdf->render();
+
+            // Output the generated PDF to Browser
+            $dompdf->stream();
+
+
+            return view('orderOfPossession', compact('map'));
+        } catch (\Exception $e) {
+            mail('andrew.gaidis@gmail.com', 'formulatePDFCreation Error' . Auth::User()->id, $e->getMessage());
+            return back();
+        }
+    }
 }

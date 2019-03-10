@@ -9536,6 +9536,7 @@ a.text-dark:focus {
 .button_panel {
     text-align: center;
     margin-top: 3%;
+    margin-left:80px;
 }
 .home_btns {
     font-size:16px;
