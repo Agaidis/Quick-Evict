@@ -130,14 +130,14 @@ span.cls_009{font-family:Arial,serif;font-size:9.31px;color:rgb(0,0,0);font-weig
 <span style="position:absolute;left:450.90px;top:120px" class="cls_005"><span class="cls_005">PLANTIFF:</span><br><p style="margin-left:6px;">'. $plantiffName .'<br>'. $plantiffAddress1 .'<br>'. $plantiffAddress2 .'<br>'.$plantiffPhone.'</p></span>
 <span style="position:absolute;left:500.90px;top:145px" class="cls_005"><span class="cls_005">V.</span></span>
 <span style="position:absolute;left:450.90px;top:180px" class="cls_005"><span class="cls_005">DEFENDANT:</span><br><p style="margin-left:6px;">'. $_POST['tenant_name'].'<br>'.$defendanthouseNum.' '.$defendantStreetName.' '. $_POST['unit_number'] . '<br>'.$defendantTown .',' . $defendantState.' '.$defendantZipcode.'  </p></span>
-<span style="position:absolute;left:50.90px;top:180px" class="cls_004"><span class="cls_004">Address: '.$courtAddressLine1.'<p style="margin-left:47px;">'.$courtAddressLine2.'</p></span></span>
+<span style="position:absolute;left:50.90px;top:180px" class="cls_004"><span class="cls_004">Address: '.$courtAddressLine1.'<p style="margin-left:49px; margin-top:-20px;">'.$courtAddressLine2.'</p></span></span>
 <span style="position:absolute;left:50.90px;top:205px" class="cls_004"><span class="cls_004">Telephone:</span>'.$courtDetails->phone_number.'</span>
-<span style="position:absolute;left:395.89px;top:310px" class="cls_004"><span class="cls_004">Docket No:</span></span>
-<span style="position:absolute;left:394.89px;top:325px" class="cls_004"><span class="cls_004">Case Filed:</span></span>
-<span style="position:absolute;left:395.84px;top:340px" class="cls_004"><span class="cls_004">Time Filed:</span></span>
-<span style="position:absolute;left:371.27px;top:355px" class="cls_004"><span class="cls_004">Date Order Filed:</span></span>
-<span style="position:absolute;left:112.00px;top:480px" class="cls_004"><span class="cls_004">Judgment Amount</span></span>
-<span style="position:absolute;left:215.00px;top:480px" class="cls_003"><span class="cls_003">$_</span>'. $_POST['judgment_amount'] .'</span>
+<span style="position:absolute;left:450px;top:310px" class="cls_004"><span class="cls_004">Docket No:</span></span>
+<span style="position:absolute;left:450px;top:325px" class="cls_004"><span class="cls_004">Case Filed:</span></span>
+<span style="position:absolute;left:450px;top:340px" class="cls_004"><span class="cls_004">Time Filed:</span></span>
+<span style="position:absolute;left:450px;top:355px" class="cls_004"><span class="cls_004">Date Order Filed:</span></span>
+<span style="position:absolute;left:112.00px;top:400px" class="cls_004"><span class="cls_004">Judgment Amount</span></span>
+<span style="position:absolute;left:215.00px;top:400px" class="cls_003"><span class="cls_003">$_</span>'. $_POST['judgment_amount'] .'</span>
 <span style="position:absolute;left:39.00px;top:495px" class="cls_004"><span class="cls_004">Costs in Original LT Proceeding</span></span>
 <span style="position:absolute;left:215.00px;top:495px" class="cls_003"><span class="cls_003">$_</span>'. $_POST['costs_original_lt_proceeding'] .'</span>
 <span style="position:absolute;left:83.00px;top:510px" class="cls_004"><span class="cls_004">Costs in this Proceeding</span></span>
