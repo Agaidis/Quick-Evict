@@ -122,9 +122,9 @@ span.cls_009{font-family:Arial,serif;font-size:9.31px;color:rgb(0,0,0);font-weig
 <span style="position:absolute;margin-left:-44px;top:-22px;width:787px;height:1112px;overflow:hidden">
 <span style="position:absolute;left:0px;top:0px"><img src="https://quickevict.nyc3.digitaloceanspaces.com/oop.jpg" width="800" height="1052"></span>
 <span style="position:absolute;left:47.95px;top:16px" class="cls_003"><span class="cls_003">COMMONWEALTH OF PENNSYLVANIA</span></span>
-<span style="position:absolute;left:500.25px;top:37px" class="cls_002"><span class="cls_002">REQUEST FOR ORDER FOR</span></span>
-<span style="position:absolute;left:50.05px;top:51px" class="cls_003"><span class="cls_003">COUNTY OF ' . strtoupper($courtDetails->county) .'</span></span><br>
-<span style="position:absolute;left:500.80px;top:55px" class="cls_002"><span class="cls_002">POSSESSION</span></span>
+<span style="position:absolute;left:500.25px;top:16px" class="cls_002"><span class="cls_002">REQUEST FOR ORDER FOR</span></span>
+<span style="position:absolute;left:47.95px;top:30px" class="cls_003"><span class="cls_003">COUNTY OF ' . strtoupper($courtDetails->county) .'</span></span><br>
+<span style="position:absolute;left:540.80px;top:40px" class="cls_002"><span class="cls_002">POSSESSION</span></span>
 <span style="position:absolute;left:50.64px;top:91px" class="cls_004"><span class="cls_004">Mag. Dist. No: '. $courtNumber .'</span></span>
 <span style="position:absolute;left:50.90px;top:104px" class="cls_004"><span class="cls_004">MDJ Name: '. $courtDetails->mdj_name .'</span></span>
 <span style="position:absolute;left:450.90px;top:130px" class="cls_005"><span class="cls_005">PLANTIFF:</span><br><p style="margin-left:6px;">'. $plantiffName .'<br>'. $plantiffAddress1 .'<br>'. $plantiffAddress2 .'<br>'.$plantiffPhone.'</p></span>
