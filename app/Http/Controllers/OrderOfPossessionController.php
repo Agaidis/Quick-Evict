@@ -136,18 +136,18 @@ span.cls_009{font-family:Arial,serif;font-size:9.31px;color:rgb(0,0,0);font-weig
 <span style="position:absolute;left:450px;top:325px" class="cls_004"><span class="cls_004">Case Filed:</span></span>
 <span style="position:absolute;left:450px;top:340px" class="cls_004"><span class="cls_004">Time Filed:</span></span>
 <span style="position:absolute;left:450px;top:355px" class="cls_004"><span class="cls_004">Date Order Filed:</span></span>
-<span style="position:absolute;left:120.00px;top:430px" class="cls_004"><span class="cls_004">Judgment Amount</span></span>
-<span style="position:absolute;left:235.00px;top:430px" class="cls_003"><span class="cls_003">$_</span>'. $_POST['judgment_amount'] .'</span>
+<span style="position:absolute;left:135.00px;top:430px" class="cls_004"><span class="cls_004">Judgment Amount</span></span>
+<span style="position:absolute;left:235.00px;top:430px" class="cls_003"><span class="cls_003">$</span>'. $_POST['judgment_amount'] .'</span>
 <span style="position:absolute;left:60.00px;top:445px" class="cls_004"><span class="cls_004">Costs in Original LT Proceeding</span></span>
-<span style="position:absolute;left:235.00px;top:445px" class="cls_003"><span class="cls_003">$_</span>'. $_POST['costs_original_lt_proceeding'] .'</span>
+<span style="position:absolute;left:235.00px;top:445px" class="cls_003"><span class="cls_003">$</span>'. $_POST['costs_original_lt_proceeding'] .'</span>
 <span style="position:absolute;left:105.00px;top:460px" class="cls_004"><span class="cls_004">Costs in this Proceeding</span></span>
-<span style="position:absolute;left:235.00px;top:460px" class="cls_003"><span class="cls_003">$_</span>'. $_POST['costs_this_proceeding'] .'</span>
-<span style="position:absolute;left:160.85px;top:475px" class="cls_004"><span class="cls_004">Attorney Fees</span></span>
-<span style="position:absolute;left:235.00px;top:475px" class="cls_003"><span class="cls_003">$_</span>'. $_POST['attorney_fees'] .'</span>
-<span style="position:absolute;left:195.00px;top:490px" class="cls_004"><span class="cls_004">Total</span></span>
-<span style="position:absolute;left:235.00px;top:490px" class="cls_003"><span class="cls_003">$_</span>'. $totalFees .'</span>
-<span style="position:absolute;left:50px;top:550px" class="cls_004"><span class="cls_004">TO THE MAGISTERIAL DISTRICT JUDGE:</span></span>
-<span style="position:absolute;left:50px;top:555px" class="cls_004"><span class="cls_004">The Plaintiff(s) named below, having obtained a judgment for possession of real property located at:</span>'.$defendanthouseNum.' '.$defendantStreetName.' '. $_POST['unit_number'] . '<br>'.$defendantTown .',' . $defendantState.' '.$defendantZipcode.'  </p></span>
+<span style="position:absolute;left:235.00px;top:460px" class="cls_003"><span class="cls_003">$</span>'. $_POST['costs_this_proceeding'] .'</span>
+<span style="position:absolute;left:157px;top:475px" class="cls_004"><span class="cls_004">Attorney Fees</span></span>
+<span style="position:absolute;left:235px;top:475px" class="cls_003"><span class="cls_003">$</span>'. $_POST['attorney_fees'] .'</span>
+<span style="position:absolute;left:210px;top:490px" class="cls_004"><span class="cls_004">Total</span></span>
+<span style="position:absolute;left:235px;top:490px" class="cls_003"><span class="cls_003">$</span>'. $totalFees .'</span>
+<span style="position:absolute;left:50px;top:570px" class="cls_004"><span class="cls_004">TO THE MAGISTERIAL DISTRICT JUDGE:</span></span>
+<span style="position:absolute;left:50px;top:585px" class="cls_004"><span class="cls_004">The Plaintiff(s) named below, having obtained a judgment for possession of real property located at:</span><br>'.$defendanthouseNum.' '.$defendantStreetName.' '. $_POST['unit_number'] . '<br>'.$defendantTown .',' . $defendantState.' '.$defendantZipcode.'  </p></span>
 <span style="position:absolute;left:50px;top:593px" class="cls_004"><span class="cls_004">Address if any:</span></span>
 <span style="position:absolute;left:50px;top:644px" class="cls_004"><span class="cls_004">Requests that you issue an ORDER FOR POSSESSION for such property.</span></span>
 <span style="position:absolute;left:50px;top:765px" class="cls_004"><span class="cls_004">I certify that this filing complies with the provisions of the Case Records Public Access Policy of the Unified Judicial</span></span>
