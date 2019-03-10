@@ -130,7 +130,7 @@ span.cls_009{font-family:Arial,serif;font-size:9.31px;color:rgb(0,0,0);font-weig
 <span style="position:absolute;left:450.90px;top:120px" class="cls_005"><span class="cls_005">PLANTIFF:</span><br><p style="margin-left:6px;">'. $plantiffName .'<br>'. $plantiffAddress1 .'<br>'. $plantiffAddress2 .'<br>'.$plantiffPhone.'</p></span>
 <span style="position:absolute;left:500.90px;top:145px" class="cls_005"><span class="cls_005">V.</span></span>
 <span style="position:absolute;left:450.90px;top:180px" class="cls_005"><span class="cls_005">DEFENDANT:</span><br><p style="margin-left:6px;">'. $_POST['tenant_name'].'<br>'.$defendanthouseNum.' '.$defendantStreetName.' '. $_POST['unit_number'] . '<br>'.$defendantTown .',' . $defendantState.' '.$defendantZipcode.'  </p></span>
-<span style="position:absolute;left:50.90px;top:180px" class="cls_004"><span class="cls_004">Address:</span> '.$courtAddressLine1.'<p style="margin-left:47px;">'.$courtAddressLine2.'</p></span>
+<span style="position:absolute;left:50.90px;top:180px" class="cls_004"><span class="cls_004">Address: '.$courtAddressLine1.'<p style="margin-left:47px;">'.$courtAddressLine2.'</p></span></span>
 <span style="position:absolute;left:50.90px;top:205px" class="cls_004"><span class="cls_004">Telephone:</span>'.$courtDetails->phone_number.'</span>
 <span style="position:absolute;left:395.89px;top:310px" class="cls_004"><span class="cls_004">Docket No:</span></span>
 <span style="position:absolute;left:394.89px;top:325px" class="cls_004"><span class="cls_004">Case Filed:</span></span>
