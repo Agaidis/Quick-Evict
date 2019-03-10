@@ -122,15 +122,15 @@ span.cls_009{font-family:Arial,serif;font-size:9.31px;color:rgb(0,0,0);font-weig
 <span style="position:absolute;margin-left:-44px;top:-22px;width:787px;height:1112px;overflow:hidden">
 <span style="position:absolute;left:0px;top:0px"><img src="https://quickevict.nyc3.digitaloceanspaces.com/oop.jpg" width="800" height="1052"></span>
 <span style="position:absolute;left:47.95px;top:16.85px" class="cls_003"><span class="cls_003">COMMONWEALTH OF PENNSYLVANIA</span></span>
-<span style="position:absolute;left:364.25px;top:37.95px" class="cls_002"><span class="cls_002">REQUEST FOR ORDER FOR</span></span>
-<span style="position:absolute;left:36.05px;top:51.00px" class="cls_003"><span class="cls_003">COUNTY OF ' . strtoupper($courtDetails->county) .'</span></span><br>
-<span style="position:absolute;left:412.80px;top:55.20px" class="cls_002"><span class="cls_002">POSSESSION</span></span>
-<span style="position:absolute;left:40.64px;top:91.99px" class="cls_004"><span class="cls_004">Mag. Dist. No: '. $courtNumber .'</span></span>
-<span style="position:absolute;left:40.90px;top:104.40px" class="cls_004"><span class="cls_004">MDJ Name: '. $courtDetails->mdj_name .'</span></span>
-<span style="position:absolute;left:400.90px;top:91.99px" class="cls_005"><span class="cls_005">PLANTIFF:</span><br><p style="margin-left:6px;">'. $plantiffName .'<br>'. $plantiffAddress1 .'<br>'. $plantiffAddress2 .'<br>'.$plantiffPhone.'</p></span>
-<span style="position:absolute;left:450.90px;top:113.20px" class="cls_005"><span class="cls_005">V.</span></span>
-<span style="position:absolute;left:400.90px;top:150.20px" class="cls_005"><span class="cls_005">DEFENDANT:</span><br><p style="margin-left:6px;">'. $_POST['tenant_name'].'<br>'.$defendanthouseNum.' '.$defendantStreetName.' '. $_POST['unit_number'] . '<br>'.$defendantTown .',' . $defendantState.' '.$defendantZipcode.'  </p></span>
-<span style="position:absolute;left:40.90px;top:122.60px" class="cls_004"><span class="cls_004">Address: '.$courtAddressLine1.'<br><span style="margin-left:45px;">'.$courtAddressLine2.'</span></span>
+<span style="position:absolute;left:500.25px;top:37.95px" class="cls_002"><span class="cls_002">REQUEST FOR ORDER FOR</span></span>
+<span style="position:absolute;left:50.05px;top:51.00px" class="cls_003"><span class="cls_003">COUNTY OF ' . strtoupper($courtDetails->county) .'</span></span><br>
+<span style="position:absolute;left:500.80px;top:55.20px" class="cls_002"><span class="cls_002">POSSESSION</span></span>
+<span style="position:absolute;left:50.64px;top:91.99px" class="cls_004"><span class="cls_004">Mag. Dist. No: '. $courtNumber .'</span></span>
+<span style="position:absolute;left:50.90px;top:104.40px" class="cls_004"><span class="cls_004">MDJ Name: '. $courtDetails->mdj_name .'</span></span>
+<span style="position:absolute;left:450.90px;top:230.99px" class="cls_005"><span class="cls_005">PLANTIFF:</span><br><p style="margin-left:6px;">'. $plantiffName .'<br>'. $plantiffAddress1 .'<br>'. $plantiffAddress2 .'<br>'.$plantiffPhone.'</p></span>
+<span style="position:absolute;left:500.90px;top:180.20px" class="cls_005"><span class="cls_005">V.</span></span>
+<span style="position:absolute;left:400.90px;top:250.20px" class="cls_005"><span class="cls_005">DEFENDANT:</span><br><p style="margin-left:6px;">'. $_POST['tenant_name'].'<br>'.$defendanthouseNum.' '.$defendantStreetName.' '. $_POST['unit_number'] . '<br>'.$defendantTown .',' . $defendantState.' '.$defendantZipcode.'  </p></span>
+<span style="position:absolute;left:40.90px;top:250.60px" class="cls_004"><span class="cls_004">Address: '.$courtAddressLine1.'<br><span style="margin-left:45px;">'.$courtAddressLine2.'</span></span>
 <span style="position:absolute;left:40.90px;top:165.30px" class="cls_004"><span class="cls_004">Telephone:</span></span>
 <span style="position:absolute;left:395.89px;top:210.80px" class="cls_004"><span class="cls_004">Docket No:</span></span>
 <span style="position:absolute;left:394.89px;top:225.80px" class="cls_004"><span class="cls_004">Case Filed:</span></span>
