@@ -159,12 +159,12 @@ span.cls_009{font-family:Arial,serif;font-size:9.31px;color:rgb(0,0,0);font-weig
 <span style="position:absolute;left:36.40px;top:575.91px" class="cls_004"><span class="cls_004">System of Pennsylvania that require filing confidential information and documents differently than non-confidential</span></span>
 <span style="position:absolute;left:36.40px;top:586.71px" class="cls_004"><span class="cls_004">information and documents.</span></span>
 <span style="position:absolute;left:36.70px;top:632.55px" class="cls_004"><span class="cls_004">Plaintiff:</span> '. $plantiffName .'</span>
-<span style="position:absolute;left:318.00px;top:632.40px" class="cls_004"><span class="cls_004">Date:</span> '. date("d/m/Y") .'</span>
-<span style="position:absolute;left:264.00px;top:655.55px" class="cls_004"><span class="cls_004">Plaintiff Signature:</span><img style="position:absolute; top:-60px" width="160" height="65" src="'.$_POST['signature_source'].'"/></span>
-<span style="position:absolute;left:36.00px;top:743.15px" class="cls_007"><span class="cls_007">AOPC 311A</span></span>
-<span style="position:absolute;left:303.40px;top:741.65px" class="cls_007"><span class="cls_007">1</span></span>
-<span style="position:absolute;left:471.65px;top:743.15px" class="cls_008"><span class="cls_008">FREE INTERPRETER</span></span>
-<span style="position:absolute;left:452.45px;top:750.10px" class="cls_009"><span class="cls_009"> </span><A HREF="http://www.pacourts.us/language-rights/">www.pacourts.us/language-rights</A> </span>
+<span style="position:absolute;left:400.00px;top:802.40px" class="cls_004"><span class="cls_004">Date:</span> '. date("d/m/Y") .'</span>
+<span style="position:absolute;left:420.00px;top:855.55px" class="cls_004"><span class="cls_004">Plaintiff Signature:</span><img style="position:absolute; top:-60px" width="160" height="65" src="'.$_POST['signature_source'].'"/></span>
+<span style="position:absolute;left:55.40px;top:985.85px" class="cls_007"><span class="cls_007">AOPC 311A</span></span>
+<span style="position:absolute;left:605.75px;top:985.50px" class="cls_008"><span class="cls_008">FREE INTERPRETER</span></span>
+<span style="position:absolute;left:590.75px;top:1000.50px" class="cls_009"><span class="cls_009">www.pacourts.us/language-rights</span></span><br>
+<span style = "position:absolute;left:303.75px;top:985.50px" class="cls_008" ><span class="cls_008" > CourtZip ID # ' . $evictionId .'</span ></span ><br >
 </span></body></html>
 ');
 
