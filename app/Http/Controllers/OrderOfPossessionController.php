@@ -146,14 +146,14 @@ span.cls_009{font-family:Arial,serif;font-size:9.31px;color:rgb(0,0,0);font-weig
 <span style="position:absolute;left:235.00px;top:490px" class="cls_003"><span class="cls_003">$_</span>'. $_POST['attorney_fees'] .'</span>
 <span style="position:absolute;left:195.00px;top:520px" class="cls_004"><span class="cls_004">Total</span></span>
 <span style="position:absolute;left:235.00px;top:520px" class="cls_003"><span class="cls_003">$_</span>'. $totalFees .'</span>
-<span style="position:absolute;left:36.00px;top:523px" class="cls_004"><span class="cls_004">TO THE MAGISTERIAL DISTRICT JUDGE:</span></span>
-<span style="position:absolute;left:36.00px;top:535px" class="cls_004"><span class="cls_004">The Plaintiff(s) named below, having obtained a judgment for possession of real property located at:</span>'.$defendanthouseNum.' '.$defendantStreetName.' '. $_POST['unit_number'] . '<br>'.$defendantTown .',' . $defendantState.' '.$defendantZipcode.'  </p></span>
-<span style="position:absolute;left:36.00px;top:593px" class="cls_004"><span class="cls_004">Address if any:</span></span>
-<span style="position:absolute;left:36.00px;top:644px" class="cls_004"><span class="cls_004">Requests that you issue an ORDER FOR POSSESSION for such property.</span></span>
-<span style="position:absolute;left:36.40px;top:665px" class="cls_004"><span class="cls_004">I certify that this filing complies with the provisions of the Case Records Public Access Policy of the Unified Judicial</span></span>
-<span style="position:absolute;left:36.40px;top:675px" class="cls_004"><span class="cls_004">System of Pennsylvania that require filing confidential information and documents differently than non-confidential</span></span>
-<span style="position:absolute;left:36.40px;top:686px" class="cls_004"><span class="cls_004">information and documents.</span></span>
-<span style="position:absolute;left:36.70px;top:702px" class="cls_004"><span class="cls_004">Plaintiff:</span> '. $plantiffName .'</span>
+<span style="position:absolute;left:50px;top:623px" class="cls_004"><span class="cls_004">TO THE MAGISTERIAL DISTRICT JUDGE:</span></span>
+<span style="position:absolute;left:50px;top:635px" class="cls_004"><span class="cls_004">The Plaintiff(s) named below, having obtained a judgment for possession of real property located at:</span>'.$defendanthouseNum.' '.$defendantStreetName.' '. $_POST['unit_number'] . '<br>'.$defendantTown .',' . $defendantState.' '.$defendantZipcode.'  </p></span>
+<span style="position:absolute;left:50px;top:693px" class="cls_004"><span class="cls_004">Address if any:</span></span>
+<span style="position:absolute;left:50px;top:744px" class="cls_004"><span class="cls_004">Requests that you issue an ORDER FOR POSSESSION for such property.</span></span>
+<span style="position:absolute;left:50px;top:765px" class="cls_004"><span class="cls_004">I certify that this filing complies with the provisions of the Case Records Public Access Policy of the Unified Judicial</span></span>
+<span style="position:absolute;left:50px;top:775px" class="cls_004"><span class="cls_004">System of Pennsylvania that require filing confidential information and documents differently than non-confidential</span></span>
+<span style="position:absolute;left:50px;top:786px" class="cls_004"><span class="cls_004">information and documents.</span></span>
+<span style="position:absolute;left:50px;top:802px" class="cls_004"><span class="cls_004">Plaintiff:</span> '. $plantiffName .'</span>
 <span style="position:absolute;left:400.00px;top:710px" class="cls_004"><span class="cls_004">Date:</span> '. date("d/m/Y") .'</span>
 <span style="position:absolute;left:400.00px;top:740px" class="cls_004"><span class="cls_004">Plaintiff Signature:</span><img style="position:absolute;" width="160" height="65" src="'.$_POST['signature_source'].'"/></span>
 <span style="position:absolute;left:55.40px;top:860px" class="cls_007"><span class="cls_007">AOPC 311A</span></span>
