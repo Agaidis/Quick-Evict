@@ -153,7 +153,7 @@ span.cls_009{font-family:Arial,serif;font-size:9.31px;color:rgb(0,0,0);font-weig
 <span style="position:absolute;left:36.40px;top:665.11px" class="cls_004"><span class="cls_004">I certify that this filing complies with the provisions of the Case Records Public Access Policy of the Unified Judicial</span></span>
 <span style="position:absolute;left:36.40px;top:675.91px" class="cls_004"><span class="cls_004">System of Pennsylvania that require filing confidential information and documents differently than non-confidential</span></span>
 <span style="position:absolute;left:36.40px;top:686.71px" class="cls_004"><span class="cls_004">information and documents.</span></span>
-<span style="position:absolute;left:36.70px;top:702.40px" class="cls_004"><span class="cls_004">Plaintiff:</span><span style="text-decoration:underline;" '. $plantiffName .'</span></span>
+<span style="position:absolute;left:36.70px;top:702.40px" class="cls_004"><span class="cls_004">Plaintiff:</span> '. $plantiffName .'</span>
 <span style="position:absolute;left:415.00px;top:702.40px" class="cls_004"><span class="cls_004">Date:</span> '. date("d/m/Y") .'</span>
 <span style="position:absolute;left:415.00px;top:735.55px" class="cls_004"><span class="cls_004">Plaintiff Signature:</span><img style="position:absolute; top:-60px" width="160" height="65" src="'.$_POST['signature_source'].'"/></span>
 <span style="position:absolute;left:55.40px;top:860.50px" class="cls_007"><span class="cls_007">AOPC 311A</span></span>
