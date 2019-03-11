@@ -102,20 +102,20 @@ class OrderOfPossessionController extends Controller
                 $eviction->total_judgement = $totalFees;
                 $eviction->property_address = $defendanthouseNum.' '.$defendantStreetName.'-1'.$defendantTown .',' . $defendantState.' '.$defendantZipcode;
                 $eviction->tenant_name = $_POST['tenant_name'];
-                $eviction->pdf_download = 'true';
-                $eviction->court_number = $courtNumber;
-                $eviction->court_address_line_1 = $courtAddressLine1;
-                $eviction->court_address_line_2 = $courtAddressLine2;
-                $eviction->owner_name = $ownerName;
-                $eviction->magistrate_id = $magistrateId;
-                $eviction->plantiff_name = $plantiffName;
-                $eviction->plantiff_phone = $plantiffPhone;
-                $eviction->plantiff_address_line_1 = $plantiffAddress1;
-                $eviction->plantiff_address_line_2 = $plantiffAddress2;
-                $eviction->verify_name = $verifyName;
-                $eviction->user_id = Auth::user()->id;
-                $eviction->docket_number = $_POST['docket_number'];
-                $eviction->date_of_oop = date("d/m/Y");
+//                $eviction->pdf_download = 'true';
+//                $eviction->court_number = $courtNumber;
+//                $eviction->court_address_line_1 = $courtAddressLine1;
+//                $eviction->court_address_line_2 = $courtAddressLine2;
+//                $eviction->owner_name = $ownerName;
+//                $eviction->magistrate_id = $magistrateId;
+//                $eviction->plantiff_name = $plantiffName;
+//                $eviction->plantiff_phone = $plantiffPhone;
+//                $eviction->plantiff_address_line_1 = $plantiffAddress1;
+//                $eviction->plantiff_address_line_2 = $plantiffAddress2;
+//                $eviction->verify_name = $verifyName;
+//                $eviction->user_id = Auth::user()->id;
+//                $eviction->docket_number = $_POST['docket_number'];
+//                $eviction->date_of_oop = date("d/m/Y");
 
                 $eviction->save();
 
