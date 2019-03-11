@@ -127,11 +127,11 @@ span.cls_009{font-family:Arial,serif;font-size:9.31px;color:rgb(0,0,0);font-weig
 <span style="position:absolute;left:570.80px;top:40px" class="cls_002"><span class="cls_002">POSSESSION</span></span>
 <span style="position:absolute;left:50.64px;top:120px" class="cls_004"><span class="cls_004">Mag. Dist. No: '. $courtNumber .'</span></span>
 <span style="position:absolute;left:50.90px;top:134px" class="cls_004"><span class="cls_004">MDJ Name: '. $courtDetails->mdj_name .'</span></span>
-<span style="position:absolute;left:450.90px;top:120px" class="cls_005"><span class="cls_005">PLANTIFF:</span><p style="margin-left:6px; margin-top:-3px;">'. $plantiffName .'<br>'. $plantiffAddress1 .'<br>'. $plantiffAddress2 .'<br>'.$plantiffPhone.'</p></span>
-<span style="position:absolute;left:500.90px;top:145px" class="cls_005"><span class="cls_005">V.</span></span>
-<span style="position:absolute;left:450.90px;top:180px" class="cls_005"><span class="cls_005">DEFENDANT:</span><p style="margin-left:6px; margin-top:-3px;">'. $_POST['tenant_name'].'<br>'.$defendanthouseNum.' '.$defendantStreetName.' '. $_POST['unit_number'] . '<br>'.$defendantTown .',' . $defendantState.' '.$defendantZipcode.'  </p></span>
-<span style="position:absolute;left:50.90px;top:165px" class="cls_004"><span class="cls_004">Address: '.$courtAddressLine1.'<p style="margin-left:49px; margin-top:-4px;">'.$courtAddressLine2.'</p></span></span>
-<span style="position:absolute;left:50.90px;top:205px" class="cls_004"><span class="cls_004">Telephone:</span>'.$courtDetails->phone_number.'</span>
+<span style="position:absolute;left:450px;top:120px" class="cls_005"><span class="cls_005">PLANTIFF:</span><p style="margin-left:6px; margin-top:-3px;">'. $plantiffName .'<br>'. $plantiffAddress1 .'<br>'. $plantiffAddress2 .'<br>'.$plantiffPhone.'</p></span>
+<span style="position:absolute;left:450px;top:175px" class="cls_005"><span class="cls_005">V.</span></span>
+<span style="position:absolute;left:450px;top:200px" class="cls_005"><span class="cls_005">DEFENDANT:</span><p style="margin-left:6px; margin-top:-3px;">'. $_POST['tenant_name'].'<br>'.$defendanthouseNum.' '.$defendantStreetName.' '. $_POST['unit_number'] . '<br>'.$defendantTown .',' . $defendantState.' '.$defendantZipcode.'  </p></span>
+<span style="position:absolute;left:50px;top:165px" class="cls_004"><span class="cls_004">Address: '.$courtAddressLine1.'<p style="margin-left:49px; margin-top:-4px;">'.$courtAddressLine2.'</p></span></span>
+<span style="position:absolute;left:50px;top:205px" class="cls_004"><span class="cls_004">Telephone:</span>'.$courtDetails->phone_number.'</span>
 <span style="position:absolute;left:450px;top:310px" class="cls_004"><span class="cls_004">Docket No:</span></span>
 <span style="position:absolute;left:450px;top:325px" class="cls_004"><span class="cls_004">Case Filed:</span></span>
 <span style="position:absolute;left:450px;top:340px" class="cls_004"><span class="cls_004">Time Filed:</span></span>
