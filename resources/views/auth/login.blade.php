@@ -4,7 +4,7 @@
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
-            <img id="login-logo" src="https://quickevict.nyc3.digitaloceanspaces.com/courtzip.png" alt="login Logo">
+            <img id="login-logo" src="https://quickevict.nyc3.digitaloceanspaces.com/ziplogo.png" alt="login Logo">
             <div class="card">
                 <div class="card-header">{{ __('Login') }}</div>
 
