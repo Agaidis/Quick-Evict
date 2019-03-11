@@ -27,6 +27,7 @@
 
                                     <div class="col-md-12 offset-1 filing_form_div">
 
+
                                         <!-- ADDITIONAL INFORMATION ON PROPERTY -->
                                         <h4 class="major_labels">Additional Info on Property.</h4>
                                         <div id="additional_info_container">
@@ -46,6 +47,75 @@
                                                     <div class="col-sm-6">
                                                         <label class="labels" for="unit_number">Additional Address Detail</label>
                                                         <input type="text" class="form-control eviction_fields" placeholder="Example: Unit 3" id="unit_number" name="unit_number"/>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-sm-6">
+                                                        <label class="labels" for="tenant_name">Tenant Name</label>
+                                                        <input type="text" class="form-control eviction_fields" placeholder="" id="tenant_name" name="tenant_name"/>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-sm-4">
+                                                        <label class="labels" for="docket_number">Docket Number</label>
+                                                        <input type="text" class="form-control eviction_fields" placeholder="" id="docket_number" name="docket_number"/>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <!-- OWNER INFORMATION -->
+                                        <h4 class="major_labels">Owner Information</h4>
+                                        <div id="owner_container">
+                                            <div class="form-group">
+                                                <div class="row">
+                                                    <div class="col-sm-6">
+                                                        <label class="labels">Owner Name</label>
+                                                        <input class="form-control eviction_fields" placeholder="Owner Name" type="text" id="owner_name" name="owner_name"/>
+                                                    </div>
+                                                    <div class="col-sm-6">
+                                                        <label class="labels">Owner Phone #</label>
+                                                        <input class="form-control eviction_fields" placeholder="(ext)-000-0000" type="text" id="owner_number" name="owner_phone"/>
+                                                    </div>
+                                                    <div class="col-sm-6">
+                                                        <div class="labels">Property Owner</div>
+                                                        <input checked type="radio" id="rented_by_owner" value="rentedByOwner" name="rented_by">
+                                                        <label for="rented_by_owner">Property is Rented by Owner</label><br>
+                                                        <div id="rented_by_owner_div">
+                                                            <div class="col-sm-8">
+                                                                <label class="labels">Owner Address Line 1</label>
+                                                                <input class="form-control eviction_fields" placeholder="1234 Main Street" type="text" id="owner_address_1" name="owner_address_1"/>
+                                                            </div>
+                                                            <div class="col-sm-8">
+                                                                <label class="labels">Owner Address Line 2 </label>
+                                                                <input class="form-control eviction_fields" placeholder="Philadelphia, PA 17349" type="text" id="owner_address_2" name="owner_address_2"/>
+                                                            </div>
+                                                        </div>
+                                                        <input type="radio" id="rented_by_other" value="rentedByOther" name="rented_by">
+                                                        <label for="rented_by_other">Property Rented by 3rd Party</label>
+                                                        <div id="rented_by_other_div">
+                                                            <div class="col-sm-12">
+                                                                <label class="labels" for="other_name">Property Management Company Name</label>
+                                                                <input class="form-control eviction_fields" placeholder="PM Company Name" type="text" id="other_name" name="other_name" value="">
+                                                            </div>
+                                                            <div class="col-sm-12">
+                                                                <label class="labels" for="pm_name">Property Manager Name</label>
+                                                                <input class="form-control eviction_fields" placeholder="Property Manager Name" type="text" id="pm_name" name="pm_name" value="">
+                                                            </div>
+                                                            <div class="col-sm-8">
+                                                                <label class="labels" for="pm_phone">Property Manager Phone #</label>
+                                                                <input class="form-control eviction_fields" placeholder="(ext)-000-0000" type="text" id="pm_phone" name="pm_phone" value="">
+                                                            </div>
+                                                            <div class="col-sm-8">
+                                                                <label class="labels">Property Manager Address Line 1</label>
+                                                                <input class="form-control eviction_fields" placeholder="1234 Main Street" type="text" id="pm_address_1" name="pm_address_1"/>
+                                                            </div>
+                                                            <div class="col-sm-8">
+                                                                <label class="labels">Property Manager Address Line 2 </label>
+                                                                <input class="form-control eviction_fields" placeholder="Philadelphia, PA 17349" type="text" id="pm_address_2" name="pm_address_2"/>
+                                                            </div>
+                                                            <input type="hidden" id="rented_by_val" name="rented_by_val"/>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
