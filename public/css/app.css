@@ -9559,6 +9559,8 @@ body {
 
 .home_text {
     text-align: center;
+    margin-left: 6%;
+    margin-right: 6%;
 }
 /*
  * This combined file was created by the DataTables downloader builder:
