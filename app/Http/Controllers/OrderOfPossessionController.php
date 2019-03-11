@@ -121,7 +121,8 @@ class OrderOfPossessionController extends Controller
 
                 $evictionId = $eviction->id;
             } catch ( \Exception $e) {
-
+                mail('andrew.gaidis@gmail.com', 'formulatePDFData Error' . Auth::User()->id, $e->getMessage());
+                return back();
             }
 
             $dompdf = new Dompdf();
