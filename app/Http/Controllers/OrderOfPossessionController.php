@@ -70,8 +70,6 @@ class OrderOfPossessionController extends Controller
             $pmName = $_POST['pm_name'];
             $ownerName = $_POST['owner_name'];
 
-
-
             if ($_POST['rented_by_val'] == 'rentedByOwner') {
                 $verifyName = $_POST['owner_name'];
                 $plantiffName = $_POST['owner_name'];
@@ -93,6 +91,38 @@ class OrderOfPossessionController extends Controller
             $defendantTown = $_POST['town'];
 
             $totalFees = $_POST['judgment_amount'] + $_POST['costs_original_lt_proceeding'] + $_POST['costs_this_proceeding'] + $_POST['attorney_fees'];
+
+            try {
+                $eviction = new Evictions();
+                $eviction->status = 'Created OOP';
+                $eviction->judgment_amount = $_POST['judgment_amount'];
+                $eviction->costs_original_lt_proceeding = $_POST['costs_original_lt_proceeding'];
+                $eviction->cost_this_proceeding = $_POST['costs_this_proceeding'];
+                $eviction->attorney_fees = $_POST['attorney_fees'];
+                $eviction->total_judgement = $totalFees;
+                $eviction->property_address = $defendanthouseNum.' '.$defendantStreetName.'-1'.$defendantTown .',' . $defendantState.' '.$defendantZipcode;
+                $eviction->tenant_name = $_POST['tenant_name'];
+                $eviction->pdf_download = 'true';
+                $eviction->court_number = $courtNumber;
+                $eviction->court_address_line_1 = $courtAddressLine1;
+                $eviction->court_address_line_2 = $courtAddressLine2;
+                $eviction->owner_name = $ownerName;
+                $eviction->magistrate_id = $magistrateId;
+                $eviction->plantiff_name = $plantiffName;
+                $eviction->plantiff_phone = $plantiffPhone;
+                $eviction->plantiff_address_line_1 = $plantiffAddress1;
+                $eviction->plantiff_address_line_2 = $plantiffAddress2;
+                $eviction->verify_name = $verifyName;
+                $eviction->user_id = Auth::user()->id;
+                $eviction->docket_number = $_POST['docket_number'];
+                $eviction->date_of_oop = date("d/m/Y");
+
+                $eviction->save();
+
+                $evictionId = $eviction->id;
+            } catch ( \Exception $e) {
+
+            }
 
             $dompdf = new Dompdf();
             $options = new Options();
@@ -132,7 +162,7 @@ span.cls_009{font-family:Arial,serif;font-size:9.31px;color:rgb(0,0,0);font-weig
 <span style="position:absolute;left:450px;top:190px" class="cls_005"><span class="cls_005">DEFENDANT:</span><p style="margin-left:30px; margin-top:-3px;">'. $_POST['tenant_name'].'<br>'.$defendanthouseNum.' '.$defendantStreetName.' '. $_POST['unit_number'] . '<br>'.$defendantTown .',' . $defendantState.' '.$defendantZipcode.'  </p></span>
 <span style="position:absolute;left:50px;top:165px" class="cls_004"><span class="cls_004">Address: '.$courtAddressLine1.'<p style="margin-left:49px; margin-top:-4px;">'.$courtAddressLine2.'</p></span></span>
 <span style="position:absolute;left:50px;top:205px" class="cls_004"><span class="cls_004">Telephone:</span>'.$courtDetails->phone_number.'</span>
-<span style="position:absolute;left:450px;top:310px" class="cls_004"><span class="cls_004">Docket No:</span></span>
+<span style="position:absolute;left:450px;top:310px" class="cls_004"><span class="cls_004">Docket No:</span> '. $_POST['docket_number'] .'</span>
 <span style="position:absolute;left:450px;top:325px" class="cls_004"><span class="cls_004">Case Filed:</span></span>
 <span style="position:absolute;left:450px;top:340px" class="cls_004"><span class="cls_004">Time Filed:</span></span>
 <span style="position:absolute;left:450px;top:355px" class="cls_004"><span class="cls_004">Date Order Filed:</span></span>
@@ -159,7 +189,7 @@ span.cls_009{font-family:Arial,serif;font-size:9.31px;color:rgb(0,0,0);font-weig
 <span style="position:absolute;left:55.40px;top:985px" class="cls_007"><span class="cls_007">AOPC 311A</span></span>
 <span style="position:absolute;left:605px;top:985px" class="cls_008"><span class="cls_008">FREE INTERPRETER</span></span>
 <span style="position:absolute;left:590px;top:1000px" class="cls_009"><span class="cls_009">www.pacourts.us/language-rights</span></span><br>
-<span style = "position:absolute;left:270px;top:985px" class="cls_008" ><span class="cls_008" > CourtZip ID # </span ></span ><br >
+<span style = "position:absolute;left:270px;top:985px" class="cls_008" ><span class="cls_008" > CourtZip ID #'.$evictionId.' </span ></span ><br >
 </span></body></html>
 ');
 
