@@ -67,6 +67,8 @@
 .home_btns {
     font-size:16px;
     padding:2% 3% 2% 3%;
+    background-color: rgba(6, 84, 116, 0.96);
+    border-color: rgba(6, 84, 116, 0.96);
 }
 
 #oop_btn {
@@ -75,4 +77,8 @@
 
 #civil_complaint_btn {
     margin-left:3%;
+}
+
+body {
+    background-color: darkgrey;
 }

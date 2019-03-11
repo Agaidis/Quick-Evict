@@ -9541,6 +9541,8 @@ a.text-dark:focus {
 .home_btns {
     font-size:16px;
     padding:2% 3% 2% 3%;
+    background-color: rgba(6, 84, 116, 0.96);
+    border-color: rgba(6, 84, 116, 0.96);
 }
 
 #oop_btn {
@@ -9549,6 +9551,10 @@ a.text-dark:focus {
 
 #civil_complaint_btn {
     margin-left:3%;
+}
+
+body {
+    background-color: darkgrey;
 }
 /*
  * This combined file was created by the DataTables downloader builder:
