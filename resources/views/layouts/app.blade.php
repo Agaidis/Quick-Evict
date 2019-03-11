@@ -66,7 +66,7 @@
         <nav class="navbar navbar-expand-md navbar-light navbar-laravel">
             <div class="container-fluid">
                 <a class="navbar-brand" style="padding: 8px 14px!important;" href="{{ url('/home') }}">
-                    <img src="https://quickevict.nyc3.digitaloceanspaces.com/EvictionTech%20logo.jpg" width="150" height="30">
+                    <img src="https://quickevict.nyc3.digitaloceanspaces.com/courtzip.png" width="150" height="30">
                 </a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
