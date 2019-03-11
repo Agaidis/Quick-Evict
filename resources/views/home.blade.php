@@ -21,9 +21,9 @@
                 <div class="card">
                     <div class="card-body">
                         <h2 class="titles">Welcome to Court<em>Zip</em>!</h2>
-                        <div>CourtZip is the leader in combining technology and court filing expertise to improve the process for filing complaints at local courts and magistrates. CourtZip makes it easy to file local complaints including civil complaints under $10,000, landlord-tenant complaints (for evictions), and order of possession (for possession of property from eviction).</div>
+                        <div class="home_text">CourtZip is the leader in combining technology and court filing expertise to improve the process for filing complaints at local courts and magistrates. CourtZip makes it easy to file local complaints including civil complaints under $10,000, landlord-tenant complaints (for evictions), and order of possession (for possession of property from eviction).</div>
                         <br />
-                        <div>Prior to CourtZip, the filing process was dramatically outdated. Filing at the local court caused a lot of extra manual work and delays for everyone involved. CourtZip brought together a collaboration between cutting-edge judges, government officials, property managers, real estate owners, and web developers to create a better solution.</div>
+                        <div class="home_text">Prior to CourtZip, the filing process was dramatically outdated. Filing at the local court caused a lot of extra manual work and delays for everyone involved. CourtZip brought together a collaboration between cutting-edge judges, government officials, property managers, real estate owners, and web developers to create a better solution.</div>
                         <br />
                         <div>CourtZip solves the following problems:</div><br />
                         <div>
@@ -35,7 +35,7 @@
                                 <li><strong>Online Filing</strong>: Evictions and local civil complaints are currently filed via the mail, which causes huge delays in filing. CourtZip enables you to file immediately online -- dramatically decreasing any delays. Each judge has their own CourtZip dashboard where they see the filing the same day it was submitted and set-up a court date immediately. Online filing also decreases the delays from incorrect filings via mail being sent back and forth.<br /></li>
                                 <li><strong>Easy Online Payment</strong>: CourtZip accepts debit or credit cards to make it easy for anyone to pay for the filing fee online.</li>
                             </ul>
-                            <br />
+
                             <div>CourtZip is constantly growing -- click here to see where CourtZip is live: <a href="https://courtzip.com/where-does-this-work" target="_blank" data-saferedirecturl="https://www.google.com/url?q=https://courtzip.com/where-does-this-work&amp;source=gmail&amp;ust=1552399282868000&amp;usg=AFQjCNF-m5XENIdqZcAXtJzQ63df9HROHg">Locations</a></div>
                             <div>To get more info --- contact CourtZip here: <a href="mailto:Info@courtzip.com" target="_blank">Info@courtzip.com</a></div>
                         </div>

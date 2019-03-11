@@ -82,3 +82,7 @@
 body {
     background-color: darkgrey;
 }
+
+.home_text {
+    text-align: center;
+}
