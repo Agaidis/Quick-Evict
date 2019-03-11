@@ -9556,6 +9556,10 @@ a.text-dark:focus {
 body {
     background-color: darkgrey;
 }
+
+.home_text {
+    text-align: center;
+}
 /*
  * This combined file was created by the DataTables downloader builder:
  *   https://datatables.net/download
