@@ -154,12 +154,12 @@ span.cls_009{font-family:Arial,serif;font-size:9.31px;color:rgb(0,0,0);font-weig
 <span style="position:absolute;left:50px;top:760px" class="cls_004"><span class="cls_004">System of Pennsylvania that require filing confidential information and documents differently than non-confidential</span></span>
 <span style="position:absolute;left:50px;top:775px" class="cls_004"><span class="cls_004">information and documents.</span></span>
 <span style="position:absolute;left:50px;top:840px" class="cls_004"><span class="cls_004">Plaintiff:</span> '. $plantiffName .'</span>
-<span style="position:absolute;left:430.00px;top:840px" class="cls_004"><span class="cls_004">Date:</span> '. date("d/m/Y") .'</span>
-<span style="position:absolute;left:370.00px;top:880px" class="cls_004"><span class="cls_004">Plaintiff Signature:</span><img style="position:absolute;" width="160" height="65" src="'.$_POST['signature_source'].'"/></span>
+<span style="position:absolute;left:427.00px;top:840px" class="cls_004"><span class="cls_004">Date:</span> '. date("d/m/Y") .'</span>
+<span style="position:absolute;left:370.00px;top:865px" class="cls_004"><span class="cls_004">Plaintiff Signature:</span><img style="position:absolute;" width="160" height="65" src="'.$_POST['signature_source'].'"/></span>
 <span style="position:absolute;left:55.40px;top:985px" class="cls_007"><span class="cls_007">AOPC 311A</span></span>
 <span style="position:absolute;left:605px;top:985px" class="cls_008"><span class="cls_008">FREE INTERPRETER</span></span>
 <span style="position:absolute;left:590px;top:1000px" class="cls_009"><span class="cls_009">www.pacourts.us/language-rights</span></span><br>
-<span style = "position:absolute;left:220px;top:985px" class="cls_008" ><span class="cls_008" > CourtZip ID # </span ></span ><br >
+<span style = "position:absolute;left:270px;top:985px" class="cls_008" ><span class="cls_008" > CourtZip ID # </span ></span ><br >
 </span></body></html>
 ');
 
