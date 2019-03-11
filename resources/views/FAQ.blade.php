@@ -9,16 +9,16 @@
                 <div class="card-header"><h2>FAQ</h2></div>
                 <div class="card-body">
                     <div class="row" style="margin-left: 6%; margin-right: 6%;">
-                        <p><h4>Frequently Asked Questions about EvictionTech</h4>:</p><br>
+                        <p><h4>Frequently Asked Questions about CourtZip</h4>:</p><br>
 
-                        <p><b>What is EvictionTech?</b><br>
-                        EvictionTech is a tech company 100% focused on making the eviction process easier for everyone involved including owners, landlords, and magistrates.  EvictionTech was founded by a team of investors, landlords, property managers, and tech enthusiasts who were frustrated by how complicated, time-consuming, and error prone it is to file an eviction.</p>
+                        <p><b>What is CourtZip?</b><br>
+                            CourtZip is a tech company 100% focused on making the local court filing process easier for everyone involved. CourtZip was founded by a team of judges, lawyers, investors, landlords, property managers, and tech enthusiasts who were frustrated by how complicated, time-consuming, and error prone it is to file at a local court.</p>
 
-                        <p><b>What does EvictionTech do?</b><br>
-                        EvictionTech's first product is to make it easier and faster to successfully file a Landlord Tenant Complaint.  The owner / landlord / property manager can fill in some basic fields on the OnlineEviction page.  EvictionTech has a back-end database to match the address of the property to the proper magistrate.  EvictionTech has compiled a database for every magistrate so the filing fee is automatically generated.  Once the fields are filled in and the owner / property manager hits the submit button -- a full landlord - tenant complaint form is completed.  This landlord tenant complaint form is then either filed online by EvictionTech or mailed to the magistrate --- depending on the policies of the magistrate.</p>
+                        <p><b>What does CourtZip do?</b><br>
+                            CourtZip's first product is to make it easier and faster to successfully file a Civil Complaint (under $10,000), Landlord Tenant Complaint, or Order of Possession. The user can fill in some basic fields on the  page. EvictionTech has a back-end database to match the address of the property to the proper magistrate. CourtZip has compiled a database for every magistrate so the filing fee is automatically generated. Once the fields are filled in and the user hits the submit button -- a full civil complaint, LTC, or OOP form is completed. This form is then filed online by CourtZip.</p>
 
-                        <p><b>How does EvictionTech know where to file an LTC?</b><br>
-                        EvictionTech uses geo-mapping to map the address to the proper magistrate.... pretty slick technology!</p>
+                        <p><b>How does CourtZip know where to file an LTC?</b><br>
+                            CourtZip uses geo-mapping to map the address to the proper magistrate.... pretty slick technology!  CourtZip works with the local courts so the geo-fence changes if the court maps change.</p>
 
                         <p><b>How do I know if a magistrate allows online filing?</b><br>
                         If the magistrate has online filing --- you will see a notice appear on the site after you fill in the property address.</p>

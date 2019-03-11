@@ -33,7 +33,7 @@
                                 @if (isset($evictions))
                                 @foreach ($evictions as $eviction)
                                     <?php $propertyAddressArray = explode('-1', $eviction->property_address);
-                                        $statusArray = array('Created LTC',
+                                        $statusArray = array('Created LTC', 'Created OOP',
                                             'LTC Mailed',
                                             'LTC Submitted Online',
                                             'Court Hearing Scheduled',
