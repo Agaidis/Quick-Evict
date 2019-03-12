@@ -20,7 +20,7 @@
     <script src="{{ asset('js/steps.js') }}" defer></script>
     <script src="{{ asset('js/datatables.min.js') }}" defer></script>
     <script src="{{ asset('js/magistrateCreator.js') }}" defer></script>
-    <script src="{{ asset('js/home.js') }}" defer></script>
+    {{--<script src="{{ asset('js/home.js') }}" defer></script>--}}
     <script src="{{ asset('js/userManagement.js') }}" defer></script>
     <script src="{{ asset('js/numeric-1.2.6.min.js') }}" defer></script>
     <script src="{{ asset('js/bezier.js') }}" defer></script>
