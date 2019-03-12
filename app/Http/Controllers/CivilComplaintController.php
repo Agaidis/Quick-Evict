@@ -113,6 +113,7 @@ class CivilComplaintController extends Controller
 
                 $evictionId = $eviction->id;
             } catch ( \Exception $e) {
+                Log::info($e);
                 mail('andrew.gaidis@gmail.com', 'formulatePDFData Error' . Auth::User()->id, $e->getMessage());
                 return back();
             }
@@ -201,6 +202,7 @@ span.cls_011{font-family:Arial,serif;font-size:9px;color:rgb(0,0,0);font-weight:
 
             return view('civilComplaint', compact('map'));
         } catch (\Exception $e) {
+            Log:info($e);
             mail('andrew.gaidis@gmail.com', 'formulatePDFCreation  Civil Complaint Error' . Auth::User()->id, $e->getMessage());
             return back();
         }

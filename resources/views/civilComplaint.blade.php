@@ -55,12 +55,6 @@
                                                         <input type="text" class="form-control eviction_fields" placeholder="" id="tenant_name" name="tenant_name"/>
                                                     </div>
                                                 </div>
-                                                <div class="row">
-                                                    <div class="col-sm-4">
-                                                        <label class="labels" for="docket_number">Docket Number</label>
-                                                        <input type="text" class="form-control eviction_fields" placeholder="" id="docket_number" name="docket_number"/>
-                                                    </div>
-                                                </div>
                                             </div>
                                         </div>
 
