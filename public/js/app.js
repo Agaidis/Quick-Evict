@@ -48574,3 +48574,1950 @@ module.exports = __webpack_require__(/*! /Users/andrew/Desktop/CourtMaps/courtma
 /***/ })
 
 /******/ });
+    stats = function(a) {
+      var r = {mean: 0, variance: 0, deviation: 0}, t = a.length;
+      for(var m, s = 0, l = t; l--; s += a[l]);
+      for(m = r.mean = s / t, l = t, s = 0; l--; s += Math.pow(a[l] - m, 2));
+      return r.deviation = Math.sqrt(r.variance = s / t), r;
+    }
+
+    // Matrices look like this:
+    // q = [[1,2,3],
+    //      [4,5,6],
+    //      [7,3,9]];
+
+    // M x B = C
+    // M-1 x M x B = M-1 x C
+    // I x B = M-1 x C
+
+    var generate141Matrix = function(N) {
+      result = [];
+      for (var row = 0; row < N; row++) {
+        var newRow = [];
+        for (var col = 0; col < N; col++) {
+          if (col == row) {
+            newRow.push(4);
+          } else if (Math.abs(row - col) == 1) {
+            newRow.push(1);
+          } else {
+            newRow.push(0);
+          };
+        };
+        result.push(newRow);
+      }
+      return result;
+    };
+
+    var generateConstantMatrix = function (sampledPoints) {
+      // given an vector of N points, this should return N-2 ordered pairs
+      result = [];
+      result.push(
+        numeric.sub(numeric.mul(sampledPoints[1], 6),
+        sampledPoints[0])
+      );
+      for (i = 2; i < sampledPoints.length - 2; i++) {
+        result.push( numeric.mul(sampledPoints[i], 6) );
+      }
+      result.push(
+        numeric.sub(numeric.mul(sampledPoints[sampledPoints.length - 2], 6),
+        sampledPoints[sampledPoints.length - 1])
+      );
+      return result;
+    }
+
+    var convertBSplineControlPointsToBezierControlPoints = function(BSplinePoints) {
+      // Each Bezier curve has P0 and P3 (endpoints) == sampled points, and the
+      // intermediate points P1 and P2 are 1/3 & 2/3 along the way between the BSpline
+      // control points
+
+      var beziers = [];
+      for (var i = 0; i < BSplinePoints.length - 1; i++) {
+
+        // bezier control points are:
+        if (i == 0) {
+          // First one is a special case
+          var p0 = BSplinePoints[0];
+        } else {
+          var p0 = p3;
+        }
+
+        var p1 = numeric.add( numeric.mul(2/3, BSplinePoints[i]),
+                              numeric.mul(1/3, BSplinePoints[i + 1])
+                            );
+        var p2 = numeric.add( numeric.mul(1/3, BSplinePoints[i]),
+                              numeric.mul(2/3, BSplinePoints[i + 1])
+                            );
+        if (i == BSplinePoints.length - 2) {
+          // Last one is a special case
+          var p3 = BSplinePoints[BSplinePoints.length - 1];
+        } else {
+          var p3 = numeric.add( numeric.mul(1/6, BSplinePoints[i]),
+                                numeric.mul(2/3, BSplinePoints[i + 1]),
+                                numeric.mul(1/6, BSplinePoints[i + 2])
+                              );
+        }
+
+        var bezierSegmentControlPoints = [p0, p1, p2, p3];
+        beziers.push(bezierSegmentControlPoints);
+      }
+      return beziers;
+    };
+
+    var getBezierControlPoints = function(sampledPoints) {
+      if (sampledPoints.length < 4) {
+        // We need 4 sampled points to draw a *cubic* bezier through those points
+        // These 3 cases are for shorter lengths: single point, line, quadratic
+        if (sampledPoints.length === 3) {
+            beziers =[sampledPoints[0], sampledPoints[1], sampledPoints[1], sampledPoints[2]];
+            return [beziers]
+        } else if (sampledPoints.length === 2) {
+            beziers = [sampledPoints[0], sampledPoints[0], sampledPoints[1], sampledPoints[1]]
+            return [beziers]
+        } else if (sampledPoints.length === 1) {
+            beziers = [sampledPoints[0], sampledPoints[0], sampledPoints[0], sampledPoints[0]];
+            return [beziers]
+        };
+      }
+
+      // Below here we have enough points to generate a cubic bezier
+      var M = generate141Matrix(sampledPoints.length - 2);
+      var C = generateConstantMatrix(sampledPoints);
+      var B = numeric.dot(numeric.inv(M), C);
+
+      // B-spline control points also include the endpoints of the sampled data
+      // These are the B Splines3
+      B.splice(0, 0, sampledPoints[0]);
+      B.push(sampledPoints[sampledPoints.length - 1]);
+      var beziers = convertBSplineControlPointsToBezierControlPoints(B);
+      return beziers;
+
+    }
+
+    /*
+
+    How does this basically work? Like this:
+
+    var M = generate141Matrix(3);
+
+    var sampledPoints = [[1,-1],
+                         [-1,2],
+                         [1,4],
+                         [4,3],
+                         [7,5]]
+    var C = generateConstantMatrix(sampledPoints);
+    var B = numeric.dot(numeric.inv(M), C);
+    convertBSplineControlPointsToBezierControlPoints(B);
+    */
+
+
+
+/*! bootstrap-timepicker v0.5.2 
+* http://jdewit.github.com/bootstrap-timepicker 
+* Copyright (c) 2016 Joris de Wit and bootstrap-timepicker contributors 
+* MIT License 
+*/!function(a,b,c){"use strict";var d=function(b,c){this.widget="",this.$element=a(b),this.defaultTime=c.defaultTime,this.disableFocus=c.disableFocus,this.disableMousewheel=c.disableMousewheel,this.isOpen=c.isOpen,this.minuteStep=c.minuteStep,this.modalBackdrop=c.modalBackdrop,this.orientation=c.orientation,this.secondStep=c.secondStep,this.snapToStep=c.snapToStep,this.showInputs=c.showInputs,this.showMeridian=c.showMeridian,this.showSeconds=c.showSeconds,this.template=c.template,this.appendWidgetTo=c.appendWidgetTo,this.showWidgetOnAddonClick=c.showWidgetOnAddonClick,this.icons=c.icons,this.maxHours=c.maxHours,this.explicitMode=c.explicitMode,this.handleDocumentClick=function(a){var b=a.data.scope;b.$element.parent().find(a.target).length||b.$widget.is(a.target)||b.$widget.find(a.target).length||b.hideWidget()},this._init()};d.prototype={constructor:d,_init:function(){var b=this;this.showWidgetOnAddonClick&&this.$element.parent().hasClass("input-group")&&this.$element.parent().hasClass("bootstrap-timepicker")?(this.$element.parent(".input-group.bootstrap-timepicker").find(".input-group-addon").on({"click.timepicker":a.proxy(this.showWidget,this)}),this.$element.on({"focus.timepicker":a.proxy(this.highlightUnit,this),"click.timepicker":a.proxy(this.highlightUnit,this),"keydown.timepicker":a.proxy(this.elementKeydown,this),"blur.timepicker":a.proxy(this.blurElement,this),"mousewheel.timepicker DOMMouseScroll.timepicker":a.proxy(this.mousewheel,this)})):this.template?this.$element.on({"focus.timepicker":a.proxy(this.showWidget,this),"click.timepicker":a.proxy(this.showWidget,this),"blur.timepicker":a.proxy(this.blurElement,this),"mousewheel.timepicker DOMMouseScroll.timepicker":a.proxy(this.mousewheel,this)}):this.$element.on({"focus.timepicker":a.proxy(this.highlightUnit,this),"click.timepicker":a.proxy(this.highlightUnit,this),"keydown.timepicker":a.proxy(this.elementKeydown,this),"blur.timepicker":a.proxy(this.blurElement,this),"mousewheel.timepicker DOMMouseScroll.timepicker":a.proxy(this.mousewheel,this)}),this.template!==!1?this.$widget=a(this.getTemplate()).on("click",a.proxy(this.widgetClick,this)):this.$widget=!1,this.showInputs&&this.$widget!==!1&&this.$widget.find("input").each(function(){a(this).on({"click.timepicker":function(){a(this).select()},"keydown.timepicker":a.proxy(b.widgetKeydown,b),"keyup.timepicker":a.proxy(b.widgetKeyup,b)})}),this.setDefaultTime(this.defaultTime)},blurElement:function(){this.highlightedUnit=null,this.updateFromElementVal()},clear:function(){this.hour="",this.minute="",this.second="",this.meridian="",this.$element.val("")},decrementHour:function(){if(this.showMeridian)if(1===this.hour)this.hour=12;else{if(12===this.hour)return this.hour--,this.toggleMeridian();if(0===this.hour)return this.hour=11,this.toggleMeridian();this.hour--}else this.hour<=0?this.hour=this.maxHours-1:this.hour--},decrementMinute:function(a){var b;b=a?this.minute-a:this.minute-this.minuteStep,0>b?(this.decrementHour(),this.minute=b+60):this.minute=b},decrementSecond:function(){var a=this.second-this.secondStep;0>a?(this.decrementMinute(!0),this.second=a+60):this.second=a},elementKeydown:function(a){switch(a.which){case 9:if(a.shiftKey){if("hour"===this.highlightedUnit){this.hideWidget();break}this.highlightPrevUnit()}else{if(this.showMeridian&&"meridian"===this.highlightedUnit||this.showSeconds&&"second"===this.highlightedUnit||!this.showMeridian&&!this.showSeconds&&"minute"===this.highlightedUnit){this.hideWidget();break}this.highlightNextUnit()}a.preventDefault(),this.updateFromElementVal();break;case 27:this.updateFromElementVal();break;case 37:a.preventDefault(),this.highlightPrevUnit(),this.updateFromElementVal();break;case 38:switch(a.preventDefault(),this.highlightedUnit){case"hour":this.incrementHour(),this.highlightHour();break;case"minute":this.incrementMinute(),this.highlightMinute();break;case"second":this.incrementSecond(),this.highlightSecond();break;case"meridian":this.toggleMeridian(),this.highlightMeridian()}this.update();break;case 39:a.preventDefault(),this.highlightNextUnit(),this.updateFromElementVal();break;case 40:switch(a.preventDefault(),this.highlightedUnit){case"hour":this.decrementHour(),this.highlightHour();break;case"minute":this.decrementMinute(),this.highlightMinute();break;case"second":this.decrementSecond(),this.highlightSecond();break;case"meridian":this.toggleMeridian(),this.highlightMeridian()}this.update()}},getCursorPosition:function(){var a=this.$element.get(0);if("selectionStart"in a)return a.selectionStart;if(c.selection){a.focus();var b=c.selection.createRange(),d=c.selection.createRange().text.length;return b.moveStart("character",-a.value.length),b.text.length-d}},getTemplate:function(){var a,b,c,d,e,f;switch(this.showInputs?(b='<input type="text" class="bootstrap-timepicker-hour" maxlength="2"/>',c='<input type="text" class="bootstrap-timepicker-minute" maxlength="2"/>',d='<input type="text" class="bootstrap-timepicker-second" maxlength="2"/>',e='<input type="text" class="bootstrap-timepicker-meridian" maxlength="2"/>'):(b='<span class="bootstrap-timepicker-hour"></span>',c='<span class="bootstrap-timepicker-minute"></span>',d='<span class="bootstrap-timepicker-second"></span>',e='<span class="bootstrap-timepicker-meridian"></span>'),f='<table><tr><td><a href="#" data-action="incrementHour"><span class="'+this.icons.up+'"></span></a></td><td class="separator">&nbsp;</td><td><a href="#" data-action="incrementMinute"><span class="'+this.icons.up+'"></span></a></td>'+(this.showSeconds?'<td class="separator">&nbsp;</td><td><a href="#" data-action="incrementSecond"><span class="'+this.icons.up+'"></span></a></td>':"")+(this.showMeridian?'<td class="separator">&nbsp;</td><td class="meridian-column"><a href="#" data-action="toggleMeridian"><span class="'+this.icons.up+'"></span></a></td>':"")+"</tr><tr><td>"+b+'</td> <td class="separator">:</td><td>'+c+"</td> "+(this.showSeconds?'<td class="separator">:</td><td>'+d+"</td>":"")+(this.showMeridian?'<td class="separator">&nbsp;</td><td>'+e+"</td>":"")+'</tr><tr><td><a href="#" data-action="decrementHour"><span class="'+this.icons.down+'"></span></a></td><td class="separator"></td><td><a href="#" data-action="decrementMinute"><span class="'+this.icons.down+'"></span></a></td>'+(this.showSeconds?'<td class="separator">&nbsp;</td><td><a href="#" data-action="decrementSecond"><span class="'+this.icons.down+'"></span></a></td>':"")+(this.showMeridian?'<td class="separator">&nbsp;</td><td><a href="#" data-action="toggleMeridian"><span class="'+this.icons.down+'"></span></a></td>':"")+"</tr></table>",this.template){case"modal":a='<div class="bootstrap-timepicker-widget modal hide fade in" data-backdrop="'+(this.modalBackdrop?"true":"false")+'"><div class="modal-header"><a href="#" class="close" data-dismiss="modal">&times;</a><h3>Pick a Time</h3></div><div class="modal-content">'+f+'</div><div class="modal-footer"><a href="#" class="btn btn-primary" data-dismiss="modal">OK</a></div></div>';break;case"dropdown":a='<div class="bootstrap-timepicker-widget dropdown-menu">'+f+"</div>"}return a},getTime:function(){return""===this.hour?"":this.hour+":"+(1===this.minute.toString().length?"0"+this.minute:this.minute)+(this.showSeconds?":"+(1===this.second.toString().length?"0"+this.second:this.second):"")+(this.showMeridian?" "+this.meridian:"")},hideWidget:function(){this.isOpen!==!1&&(this.$element.trigger({type:"hide.timepicker",time:{value:this.getTime(),hours:this.hour,minutes:this.minute,seconds:this.second,meridian:this.meridian}}),"modal"===this.template&&this.$widget.modal?this.$widget.modal("hide"):this.$widget.removeClass("open"),a(c).off("mousedown.timepicker, touchend.timepicker",this.handleDocumentClick),this.isOpen=!1,this.$widget.detach())},highlightUnit:function(){this.position=this.getCursorPosition(),this.position>=0&&this.position<=2?this.highlightHour():this.position>=3&&this.position<=5?this.highlightMinute():this.position>=6&&this.position<=8?this.showSeconds?this.highlightSecond():this.highlightMeridian():this.position>=9&&this.position<=11&&this.highlightMeridian()},highlightNextUnit:function(){switch(this.highlightedUnit){case"hour":this.highlightMinute();break;case"minute":this.showSeconds?this.highlightSecond():this.showMeridian?this.highlightMeridian():this.highlightHour();break;case"second":this.showMeridian?this.highlightMeridian():this.highlightHour();break;case"meridian":this.highlightHour()}},highlightPrevUnit:function(){switch(this.highlightedUnit){case"hour":this.showMeridian?this.highlightMeridian():this.showSeconds?this.highlightSecond():this.highlightMinute();break;case"minute":this.highlightHour();break;case"second":this.highlightMinute();break;case"meridian":this.showSeconds?this.highlightSecond():this.highlightMinute()}},highlightHour:function(){var a=this.$element.get(0),b=this;this.highlightedUnit="hour",a.setSelectionRange&&setTimeout(function(){b.hour<10?a.setSelectionRange(0,1):a.setSelectionRange(0,2)},0)},highlightMinute:function(){var a=this.$element.get(0),b=this;this.highlightedUnit="minute",a.setSelectionRange&&setTimeout(function(){b.hour<10?a.setSelectionRange(2,4):a.setSelectionRange(3,5)},0)},highlightSecond:function(){var a=this.$element.get(0),b=this;this.highlightedUnit="second",a.setSelectionRange&&setTimeout(function(){b.hour<10?a.setSelectionRange(5,7):a.setSelectionRange(6,8)},0)},highlightMeridian:function(){var a=this.$element.get(0),b=this;this.highlightedUnit="meridian",a.setSelectionRange&&(this.showSeconds?setTimeout(function(){b.hour<10?a.setSelectionRange(8,10):a.setSelectionRange(9,11)},0):setTimeout(function(){b.hour<10?a.setSelectionRange(5,7):a.setSelectionRange(6,8)},0))},incrementHour:function(){if(this.showMeridian){if(11===this.hour)return this.hour++,this.toggleMeridian();12===this.hour&&(this.hour=0)}return this.hour===this.maxHours-1?void(this.hour=0):void this.hour++},incrementMinute:function(a){var b;b=a?this.minute+a:this.minute+this.minuteStep-this.minute%this.minuteStep,b>59?(this.incrementHour(),this.minute=b-60):this.minute=b},incrementSecond:function(){var a=this.second+this.secondStep-this.second%this.secondStep;a>59?(this.incrementMinute(!0),this.second=a-60):this.second=a},mousewheel:function(b){if(!this.disableMousewheel){b.preventDefault(),b.stopPropagation();var c=b.originalEvent.wheelDelta||-b.originalEvent.detail,d=null;switch("mousewheel"===b.type?d=-1*b.originalEvent.wheelDelta:"DOMMouseScroll"===b.type&&(d=40*b.originalEvent.detail),d&&(b.preventDefault(),a(this).scrollTop(d+a(this).scrollTop())),this.highlightedUnit){case"minute":c>0?this.incrementMinute():this.decrementMinute(),this.highlightMinute();break;case"second":c>0?this.incrementSecond():this.decrementSecond(),this.highlightSecond();break;case"meridian":this.toggleMeridian(),this.highlightMeridian();break;default:c>0?this.incrementHour():this.decrementHour(),this.highlightHour()}return!1}},changeToNearestStep:function(a,b){return a%b===0?a:Math.round(a%b/b)?(a+(b-a%b))%60:a-a%b},place:function(){if(!this.isInline){var c=this.$widget.outerWidth(),d=this.$widget.outerHeight(),e=10,f=a(b).width(),g=a(b).height(),h=a(b).scrollTop(),i=parseInt(this.$element.parents().filter(function(){return"auto"!==a(this).css("z-index")}).first().css("z-index"),10)+10,j=this.component?this.component.parent().offset():this.$element.offset(),k=this.component?this.component.outerHeight(!0):this.$element.outerHeight(!1),l=this.component?this.component.outerWidth(!0):this.$element.outerWidth(!1),m=j.left,n=j.top;this.$widget.removeClass("timepicker-orient-top timepicker-orient-bottom timepicker-orient-right timepicker-orient-left"),"auto"!==this.orientation.x?(this.$widget.addClass("timepicker-orient-"+this.orientation.x),"right"===this.orientation.x&&(m-=c-l)):(this.$widget.addClass("timepicker-orient-left"),j.left<0?m-=j.left-e:j.left+c>f&&(m=f-c-e));var o,p,q=this.orientation.y;"auto"===q&&(o=-h+j.top-d,p=h+g-(j.top+k+d),q=Math.max(o,p)===p?"top":"bottom"),this.$widget.addClass("timepicker-orient-"+q),"top"===q?n+=k:n-=d+parseInt(this.$widget.css("padding-top"),10),this.$widget.css({top:n,left:m,zIndex:i})}},remove:function(){a("document").off(".timepicker"),this.$widget&&this.$widget.remove(),delete this.$element.data().timepicker},setDefaultTime:function(a){if(this.$element.val())this.updateFromElementVal();else if("current"===a){var b=new Date,c=b.getHours(),d=b.getMinutes(),e=b.getSeconds(),f="AM";0!==e&&(e=Math.ceil(b.getSeconds()/this.secondStep)*this.secondStep,60===e&&(d+=1,e=0)),0!==d&&(d=Math.ceil(b.getMinutes()/this.minuteStep)*this.minuteStep,60===d&&(c+=1,d=0)),this.showMeridian&&(0===c?c=12:c>=12?(c>12&&(c-=12),f="PM"):f="AM"),this.hour=c,this.minute=d,this.second=e,this.meridian=f,this.update()}else a===!1?(this.hour=0,this.minute=0,this.second=0,this.meridian="AM"):this.setTime(a)},setTime:function(a,b){if(!a)return void this.clear();var c,d,e,f,g,h;if("object"==typeof a&&a.getMonth)e=a.getHours(),f=a.getMinutes(),g=a.getSeconds(),this.showMeridian&&(h="AM",e>12&&(h="PM",e%=12),12===e&&(h="PM"));else{if(c=(/a/i.test(a)?1:0)+(/p/i.test(a)?2:0),c>2)return void this.clear();if(d=a.replace(/[^0-9\:]/g,"").split(":"),e=d[0]?d[0].toString():d.toString(),this.explicitMode&&e.length>2&&e.length%2!==0)return void this.clear();f=d[1]?d[1].toString():"",g=d[2]?d[2].toString():"",e.length>4&&(g=e.slice(-2),e=e.slice(0,-2)),e.length>2&&(f=e.slice(-2),e=e.slice(0,-2)),f.length>2&&(g=f.slice(-2),f=f.slice(0,-2)),e=parseInt(e,10),f=parseInt(f,10),g=parseInt(g,10),isNaN(e)&&(e=0),isNaN(f)&&(f=0),isNaN(g)&&(g=0),g>59&&(g=59),f>59&&(f=59),e>=this.maxHours&&(e=this.maxHours-1),this.showMeridian?(e>12&&(c=2,e-=12),c||(c=1),0===e&&(e=12),h=1===c?"AM":"PM"):12>e&&2===c?e+=12:e>=this.maxHours?e=this.maxHours-1:(0>e||12===e&&1===c)&&(e=0)}this.hour=e,this.snapToStep?(this.minute=this.changeToNearestStep(f,this.minuteStep),this.second=this.changeToNearestStep(g,this.secondStep)):(this.minute=f,this.second=g),this.meridian=h,this.update(b)},showWidget:function(){this.isOpen||this.$element.is(":disabled")||(this.$widget.appendTo(this.appendWidgetTo),a(c).on("mousedown.timepicker, touchend.timepicker",{scope:this},this.handleDocumentClick),this.$element.trigger({type:"show.timepicker",time:{value:this.getTime(),hours:this.hour,minutes:this.minute,seconds:this.second,meridian:this.meridian}}),this.place(),this.disableFocus&&this.$element.blur(),""===this.hour&&(this.defaultTime?this.setDefaultTime(this.defaultTime):this.setTime("0:0:0")),"modal"===this.template&&this.$widget.modal?this.$widget.modal("show").on("hidden",a.proxy(this.hideWidget,this)):this.isOpen===!1&&this.$widget.addClass("open"),this.isOpen=!0)},toggleMeridian:function(){this.meridian="AM"===this.meridian?"PM":"AM"},update:function(a){this.updateElement(),a||this.updateWidget(),this.$element.trigger({type:"changeTime.timepicker",time:{value:this.getTime(),hours:this.hour,minutes:this.minute,seconds:this.second,meridian:this.meridian}})},updateElement:function(){this.$element.val(this.getTime()).change()},updateFromElementVal:function(){this.setTime(this.$element.val())},updateWidget:function(){if(this.$widget!==!1){var a=this.hour,b=1===this.minute.toString().length?"0"+this.minute:this.minute,c=1===this.second.toString().length?"0"+this.second:this.second;this.showInputs?(this.$widget.find("input.bootstrap-timepicker-hour").val(a),this.$widget.find("input.bootstrap-timepicker-minute").val(b),this.showSeconds&&this.$widget.find("input.bootstrap-timepicker-second").val(c),this.showMeridian&&this.$widget.find("input.bootstrap-timepicker-meridian").val(this.meridian)):(this.$widget.find("span.bootstrap-timepicker-hour").text(a),this.$widget.find("span.bootstrap-timepicker-minute").text(b),this.showSeconds&&this.$widget.find("span.bootstrap-timepicker-second").text(c),this.showMeridian&&this.$widget.find("span.bootstrap-timepicker-meridian").text(this.meridian))}},updateFromWidgetInputs:function(){if(this.$widget!==!1){var a=this.$widget.find("input.bootstrap-timepicker-hour").val()+":"+this.$widget.find("input.bootstrap-timepicker-minute").val()+(this.showSeconds?":"+this.$widget.find("input.bootstrap-timepicker-second").val():"")+(this.showMeridian?this.$widget.find("input.bootstrap-timepicker-meridian").val():"");this.setTime(a,!0)}},widgetClick:function(b){b.stopPropagation(),b.preventDefault();var c=a(b.target),d=c.closest("a").data("action");d&&this[d](),this.update(),c.is("input")&&c.get(0).setSelectionRange(0,2)},widgetKeydown:function(b){var c=a(b.target),d=c.attr("class").replace("bootstrap-timepicker-","");switch(b.which){case 9:if(b.shiftKey){if("hour"===d)return this.hideWidget()}else if(this.showMeridian&&"meridian"===d||this.showSeconds&&"second"===d||!this.showMeridian&&!this.showSeconds&&"minute"===d)return this.hideWidget();break;case 27:this.hideWidget();break;case 38:switch(b.preventDefault(),d){case"hour":this.incrementHour();break;case"minute":this.incrementMinute();break;case"second":this.incrementSecond();break;case"meridian":this.toggleMeridian()}this.setTime(this.getTime()),c.get(0).setSelectionRange(0,2);break;case 40:switch(b.preventDefault(),d){case"hour":this.decrementHour();break;case"minute":this.decrementMinute();break;case"second":this.decrementSecond();break;case"meridian":this.toggleMeridian()}this.setTime(this.getTime()),c.get(0).setSelectionRange(0,2)}},widgetKeyup:function(a){(65===a.which||77===a.which||80===a.which||46===a.which||8===a.which||a.which>=48&&a.which<=57||a.which>=96&&a.which<=105)&&this.updateFromWidgetInputs()}},a.fn.timepicker=function(b){var c=Array.apply(null,arguments);return c.shift(),this.each(function(){var e=a(this),f=e.data("timepicker"),g="object"==typeof b&&b;f||e.data("timepicker",f=new d(this,a.extend({},a.fn.timepicker.defaults,g,a(this).data()))),"string"==typeof b&&f[b].apply(f,c)})},a.fn.timepicker.defaults={defaultTime:"current",disableFocus:!1,disableMousewheel:!1,isOpen:!1,minuteStep:15,modalBackdrop:!1,orientation:{x:"auto",y:"auto"},secondStep:15,snapToStep:!1,showSeconds:!1,showInputs:!0,showMeridian:!0,template:"dropdown",appendWidgetTo:"body",showWidgetOnAddonClick:!0,icons:{up:"fa fa-arrow-up",down:"fa fa-arrow-down"},maxHours:24,explicitMode:!1},a.fn.timepicker.Constructor=d,a(c).on("focus.timepicker.data-api click.timepicker.data-api",'[data-provide="timepicker"]',function(b){var c=a(this);c.data("timepicker")||(b.preventDefault(),c.timepicker())})}(jQuery,window,document);
+/*! jQuery UI - v1.12.1 - 2019-01-01
+* http://jqueryui.com
+* Includes: keycode.js, widgets/datepicker.js
+* Copyright jQuery Foundation and other contributors; Licensed MIT */
+
+(function(t){"function"==typeof define&&define.amd?define(["jquery"],t):t(jQuery)})(function(t){function e(t){for(var e,i;t.length&&t[0]!==document;){if(e=t.css("position"),("absolute"===e||"relative"===e||"fixed"===e)&&(i=parseInt(t.css("zIndex"),10),!isNaN(i)&&0!==i))return i;t=t.parent()}return 0}function i(){this._curInst=null,this._keyEvent=!1,this._disabledInputs=[],this._datepickerShowing=!1,this._inDialog=!1,this._mainDivId="ui-datepicker-div",this._inlineClass="ui-datepicker-inline",this._appendClass="ui-datepicker-append",this._triggerClass="ui-datepicker-trigger",this._dialogClass="ui-datepicker-dialog",this._disableClass="ui-datepicker-disabled",this._unselectableClass="ui-datepicker-unselectable",this._currentClass="ui-datepicker-current-day",this._dayOverClass="ui-datepicker-days-cell-over",this.regional=[],this.regional[""]={closeText:"Done",prevText:"Prev",nextText:"Next",currentText:"Today",monthNames:["January","February","March","April","May","June","July","August","September","October","November","December"],monthNamesShort:["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"],dayNames:["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"],dayNamesShort:["Sun","Mon","Tue","Wed","Thu","Fri","Sat"],dayNamesMin:["Su","Mo","Tu","We","Th","Fr","Sa"],weekHeader:"Wk",dateFormat:"mm/dd/yy",firstDay:0,isRTL:!1,showMonthAfterYear:!1,yearSuffix:""},this._defaults={showOn:"focus",showAnim:"fadeIn",showOptions:{},defaultDate:null,appendText:"",buttonText:"...",buttonImage:"",buttonImageOnly:!1,hideIfNoPrevNext:!1,navigationAsDateFormat:!1,gotoCurrent:!1,changeMonth:!1,changeYear:!1,yearRange:"c-10:c+10",showOtherMonths:!1,selectOtherMonths:!1,showWeek:!1,calculateWeek:this.iso8601Week,shortYearCutoff:"+10",minDate:null,maxDate:null,duration:"fast",beforeShowDay:null,beforeShow:null,onSelect:null,onChangeMonthYear:null,onClose:null,numberOfMonths:1,showCurrentAtPos:0,stepMonths:1,stepBigMonths:12,altField:"",altFormat:"",constrainInput:!0,showButtonPanel:!1,autoSize:!1,disabled:!1},t.extend(this._defaults,this.regional[""]),this.regional.en=t.extend(!0,{},this.regional[""]),this.regional["en-US"]=t.extend(!0,{},this.regional.en),this.dpDiv=s(t("<div id='"+this._mainDivId+"' class='ui-datepicker ui-widget ui-widget-content ui-helper-clearfix ui-corner-all'></div>"))}function s(e){var i="button, .ui-datepicker-prev, .ui-datepicker-next, .ui-datepicker-calendar td a";return e.on("mouseout",i,function(){t(this).removeClass("ui-state-hover"),-1!==this.className.indexOf("ui-datepicker-prev")&&t(this).removeClass("ui-datepicker-prev-hover"),-1!==this.className.indexOf("ui-datepicker-next")&&t(this).removeClass("ui-datepicker-next-hover")}).on("mouseover",i,n)}function n(){t.datepicker._isDisabledDatepicker(a.inline?a.dpDiv.parent()[0]:a.input[0])||(t(this).parents(".ui-datepicker-calendar").find("a").removeClass("ui-state-hover"),t(this).addClass("ui-state-hover"),-1!==this.className.indexOf("ui-datepicker-prev")&&t(this).addClass("ui-datepicker-prev-hover"),-1!==this.className.indexOf("ui-datepicker-next")&&t(this).addClass("ui-datepicker-next-hover"))}function o(e,i){t.extend(e,i);for(var s in i)null==i[s]&&(e[s]=i[s]);return e}t.ui=t.ui||{},t.ui.version="1.12.1",t.ui.keyCode={BACKSPACE:8,COMMA:188,DELETE:46,DOWN:40,END:35,ENTER:13,ESCAPE:27,HOME:36,LEFT:37,PAGE_DOWN:34,PAGE_UP:33,PERIOD:190,RIGHT:39,SPACE:32,TAB:9,UP:38},t.extend(t.ui,{datepicker:{version:"1.12.1"}});var a;t.extend(i.prototype,{markerClassName:"hasDatepicker",maxRows:4,_widgetDatepicker:function(){return this.dpDiv},setDefaults:function(t){return o(this._defaults,t||{}),this},_attachDatepicker:function(e,i){var s,n,o;s=e.nodeName.toLowerCase(),n="div"===s||"span"===s,e.id||(this.uuid+=1,e.id="dp"+this.uuid),o=this._newInst(t(e),n),o.settings=t.extend({},i||{}),"input"===s?this._connectDatepicker(e,o):n&&this._inlineDatepicker(e,o)},_newInst:function(e,i){var n=e[0].id.replace(/([^A-Za-z0-9_\-])/g,"\\\\$1");return{id:n,input:e,selectedDay:0,selectedMonth:0,selectedYear:0,drawMonth:0,drawYear:0,inline:i,dpDiv:i?s(t("<div class='"+this._inlineClass+" ui-datepicker ui-widget ui-widget-content ui-helper-clearfix ui-corner-all'></div>")):this.dpDiv}},_connectDatepicker:function(e,i){var s=t(e);i.append=t([]),i.trigger=t([]),s.hasClass(this.markerClassName)||(this._attachments(s,i),s.addClass(this.markerClassName).on("keydown",this._doKeyDown).on("keypress",this._doKeyPress).on("keyup",this._doKeyUp),this._autoSize(i),t.data(e,"datepicker",i),i.settings.disabled&&this._disableDatepicker(e))},_attachments:function(e,i){var s,n,o,a=this._get(i,"appendText"),r=this._get(i,"isRTL");i.append&&i.append.remove(),a&&(i.append=t("<span class='"+this._appendClass+"'>"+a+"</span>"),e[r?"before":"after"](i.append)),e.off("focus",this._showDatepicker),i.trigger&&i.trigger.remove(),s=this._get(i,"showOn"),("focus"===s||"both"===s)&&e.on("focus",this._showDatepicker),("button"===s||"both"===s)&&(n=this._get(i,"buttonText"),o=this._get(i,"buttonImage"),i.trigger=t(this._get(i,"buttonImageOnly")?t("<img/>").addClass(this._triggerClass).attr({src:o,alt:n,title:n}):t("<button type='button'></button>").addClass(this._triggerClass).html(o?t("<img/>").attr({src:o,alt:n,title:n}):n)),e[r?"before":"after"](i.trigger),i.trigger.on("click",function(){return t.datepicker._datepickerShowing&&t.datepicker._lastInput===e[0]?t.datepicker._hideDatepicker():t.datepicker._datepickerShowing&&t.datepicker._lastInput!==e[0]?(t.datepicker._hideDatepicker(),t.datepicker._showDatepicker(e[0])):t.datepicker._showDatepicker(e[0]),!1}))},_autoSize:function(t){if(this._get(t,"autoSize")&&!t.inline){var e,i,s,n,o=new Date(2009,11,20),a=this._get(t,"dateFormat");a.match(/[DM]/)&&(e=function(t){for(i=0,s=0,n=0;t.length>n;n++)t[n].length>i&&(i=t[n].length,s=n);return s},o.setMonth(e(this._get(t,a.match(/MM/)?"monthNames":"monthNamesShort"))),o.setDate(e(this._get(t,a.match(/DD/)?"dayNames":"dayNamesShort"))+20-o.getDay())),t.input.attr("size",this._formatDate(t,o).length)}},_inlineDatepicker:function(e,i){var s=t(e);s.hasClass(this.markerClassName)||(s.addClass(this.markerClassName).append(i.dpDiv),t.data(e,"datepicker",i),this._setDate(i,this._getDefaultDate(i),!0),this._updateDatepicker(i),this._updateAlternate(i),i.settings.disabled&&this._disableDatepicker(e),i.dpDiv.css("display","block"))},_dialogDatepicker:function(e,i,s,n,a){var r,l,h,c,u,d=this._dialogInst;return d||(this.uuid+=1,r="dp"+this.uuid,this._dialogInput=t("<input type='text' id='"+r+"' style='position: absolute; top: -100px; width: 0px;'/>"),this._dialogInput.on("keydown",this._doKeyDown),t("body").append(this._dialogInput),d=this._dialogInst=this._newInst(this._dialogInput,!1),d.settings={},t.data(this._dialogInput[0],"datepicker",d)),o(d.settings,n||{}),i=i&&i.constructor===Date?this._formatDate(d,i):i,this._dialogInput.val(i),this._pos=a?a.length?a:[a.pageX,a.pageY]:null,this._pos||(l=document.documentElement.clientWidth,h=document.documentElement.clientHeight,c=document.documentElement.scrollLeft||document.body.scrollLeft,u=document.documentElement.scrollTop||document.body.scrollTop,this._pos=[l/2-100+c,h/2-150+u]),this._dialogInput.css("left",this._pos[0]+20+"px").css("top",this._pos[1]+"px"),d.settings.onSelect=s,this._inDialog=!0,this.dpDiv.addClass(this._dialogClass),this._showDatepicker(this._dialogInput[0]),t.blockUI&&t.blockUI(this.dpDiv),t.data(this._dialogInput[0],"datepicker",d),this},_destroyDatepicker:function(e){var i,s=t(e),n=t.data(e,"datepicker");s.hasClass(this.markerClassName)&&(i=e.nodeName.toLowerCase(),t.removeData(e,"datepicker"),"input"===i?(n.append.remove(),n.trigger.remove(),s.removeClass(this.markerClassName).off("focus",this._showDatepicker).off("keydown",this._doKeyDown).off("keypress",this._doKeyPress).off("keyup",this._doKeyUp)):("div"===i||"span"===i)&&s.removeClass(this.markerClassName).empty(),a===n&&(a=null))},_enableDatepicker:function(e){var i,s,n=t(e),o=t.data(e,"datepicker");n.hasClass(this.markerClassName)&&(i=e.nodeName.toLowerCase(),"input"===i?(e.disabled=!1,o.trigger.filter("button").each(function(){this.disabled=!1}).end().filter("img").css({opacity:"1.0",cursor:""})):("div"===i||"span"===i)&&(s=n.children("."+this._inlineClass),s.children().removeClass("ui-state-disabled"),s.find("select.ui-datepicker-month, select.ui-datepicker-year").prop("disabled",!1)),this._disabledInputs=t.map(this._disabledInputs,function(t){return t===e?null:t}))},_disableDatepicker:function(e){var i,s,n=t(e),o=t.data(e,"datepicker");n.hasClass(this.markerClassName)&&(i=e.nodeName.toLowerCase(),"input"===i?(e.disabled=!0,o.trigger.filter("button").each(function(){this.disabled=!0}).end().filter("img").css({opacity:"0.5",cursor:"default"})):("div"===i||"span"===i)&&(s=n.children("."+this._inlineClass),s.children().addClass("ui-state-disabled"),s.find("select.ui-datepicker-month, select.ui-datepicker-year").prop("disabled",!0)),this._disabledInputs=t.map(this._disabledInputs,function(t){return t===e?null:t}),this._disabledInputs[this._disabledInputs.length]=e)},_isDisabledDatepicker:function(t){if(!t)return!1;for(var e=0;this._disabledInputs.length>e;e++)if(this._disabledInputs[e]===t)return!0;return!1},_getInst:function(e){try{return t.data(e,"datepicker")}catch(i){throw"Missing instance data for this datepicker"}},_optionDatepicker:function(e,i,s){var n,a,r,l,h=this._getInst(e);return 2===arguments.length&&"string"==typeof i?"defaults"===i?t.extend({},t.datepicker._defaults):h?"all"===i?t.extend({},h.settings):this._get(h,i):null:(n=i||{},"string"==typeof i&&(n={},n[i]=s),h&&(this._curInst===h&&this._hideDatepicker(),a=this._getDateDatepicker(e,!0),r=this._getMinMaxDate(h,"min"),l=this._getMinMaxDate(h,"max"),o(h.settings,n),null!==r&&void 0!==n.dateFormat&&void 0===n.minDate&&(h.settings.minDate=this._formatDate(h,r)),null!==l&&void 0!==n.dateFormat&&void 0===n.maxDate&&(h.settings.maxDate=this._formatDate(h,l)),"disabled"in n&&(n.disabled?this._disableDatepicker(e):this._enableDatepicker(e)),this._attachments(t(e),h),this._autoSize(h),this._setDate(h,a),this._updateAlternate(h),this._updateDatepicker(h)),void 0)},_changeDatepicker:function(t,e,i){this._optionDatepicker(t,e,i)},_refreshDatepicker:function(t){var e=this._getInst(t);e&&this._updateDatepicker(e)},_setDateDatepicker:function(t,e){var i=this._getInst(t);i&&(this._setDate(i,e),this._updateDatepicker(i),this._updateAlternate(i))},_getDateDatepicker:function(t,e){var i=this._getInst(t);return i&&!i.inline&&this._setDateFromField(i,e),i?this._getDate(i):null},_doKeyDown:function(e){var i,s,n,o=t.datepicker._getInst(e.target),a=!0,r=o.dpDiv.is(".ui-datepicker-rtl");if(o._keyEvent=!0,t.datepicker._datepickerShowing)switch(e.keyCode){case 9:t.datepicker._hideDatepicker(),a=!1;break;case 13:return n=t("td."+t.datepicker._dayOverClass+":not(."+t.datepicker._currentClass+")",o.dpDiv),n[0]&&t.datepicker._selectDay(e.target,o.selectedMonth,o.selectedYear,n[0]),i=t.datepicker._get(o,"onSelect"),i?(s=t.datepicker._formatDate(o),i.apply(o.input?o.input[0]:null,[s,o])):t.datepicker._hideDatepicker(),!1;case 27:t.datepicker._hideDatepicker();break;case 33:t.datepicker._adjustDate(e.target,e.ctrlKey?-t.datepicker._get(o,"stepBigMonths"):-t.datepicker._get(o,"stepMonths"),"M");break;case 34:t.datepicker._adjustDate(e.target,e.ctrlKey?+t.datepicker._get(o,"stepBigMonths"):+t.datepicker._get(o,"stepMonths"),"M");break;case 35:(e.ctrlKey||e.metaKey)&&t.datepicker._clearDate(e.target),a=e.ctrlKey||e.metaKey;break;case 36:(e.ctrlKey||e.metaKey)&&t.datepicker._gotoToday(e.target),a=e.ctrlKey||e.metaKey;break;case 37:(e.ctrlKey||e.metaKey)&&t.datepicker._adjustDate(e.target,r?1:-1,"D"),a=e.ctrlKey||e.metaKey,e.originalEvent.altKey&&t.datepicker._adjustDate(e.target,e.ctrlKey?-t.datepicker._get(o,"stepBigMonths"):-t.datepicker._get(o,"stepMonths"),"M");break;case 38:(e.ctrlKey||e.metaKey)&&t.datepicker._adjustDate(e.target,-7,"D"),a=e.ctrlKey||e.metaKey;break;case 39:(e.ctrlKey||e.metaKey)&&t.datepicker._adjustDate(e.target,r?-1:1,"D"),a=e.ctrlKey||e.metaKey,e.originalEvent.altKey&&t.datepicker._adjustDate(e.target,e.ctrlKey?+t.datepicker._get(o,"stepBigMonths"):+t.datepicker._get(o,"stepMonths"),"M");break;case 40:(e.ctrlKey||e.metaKey)&&t.datepicker._adjustDate(e.target,7,"D"),a=e.ctrlKey||e.metaKey;break;default:a=!1}else 36===e.keyCode&&e.ctrlKey?t.datepicker._showDatepicker(this):a=!1;a&&(e.preventDefault(),e.stopPropagation())},_doKeyPress:function(e){var i,s,n=t.datepicker._getInst(e.target);return t.datepicker._get(n,"constrainInput")?(i=t.datepicker._possibleChars(t.datepicker._get(n,"dateFormat")),s=String.fromCharCode(null==e.charCode?e.keyCode:e.charCode),e.ctrlKey||e.metaKey||" ">s||!i||i.indexOf(s)>-1):void 0},_doKeyUp:function(e){var i,s=t.datepicker._getInst(e.target);if(s.input.val()!==s.lastVal)try{i=t.datepicker.parseDate(t.datepicker._get(s,"dateFormat"),s.input?s.input.val():null,t.datepicker._getFormatConfig(s)),i&&(t.datepicker._setDateFromField(s),t.datepicker._updateAlternate(s),t.datepicker._updateDatepicker(s))}catch(n){}return!0},_showDatepicker:function(i){if(i=i.target||i,"input"!==i.nodeName.toLowerCase()&&(i=t("input",i.parentNode)[0]),!t.datepicker._isDisabledDatepicker(i)&&t.datepicker._lastInput!==i){var s,n,a,r,l,h,c;s=t.datepicker._getInst(i),t.datepicker._curInst&&t.datepicker._curInst!==s&&(t.datepicker._curInst.dpDiv.stop(!0,!0),s&&t.datepicker._datepickerShowing&&t.datepicker._hideDatepicker(t.datepicker._curInst.input[0])),n=t.datepicker._get(s,"beforeShow"),a=n?n.apply(i,[i,s]):{},a!==!1&&(o(s.settings,a),s.lastVal=null,t.datepicker._lastInput=i,t.datepicker._setDateFromField(s),t.datepicker._inDialog&&(i.value=""),t.datepicker._pos||(t.datepicker._pos=t.datepicker._findPos(i),t.datepicker._pos[1]+=i.offsetHeight),r=!1,t(i).parents().each(function(){return r|="fixed"===t(this).css("position"),!r}),l={left:t.datepicker._pos[0],top:t.datepicker._pos[1]},t.datepicker._pos=null,s.dpDiv.empty(),s.dpDiv.css({position:"absolute",display:"block",top:"-1000px"}),t.datepicker._updateDatepicker(s),l=t.datepicker._checkOffset(s,l,r),s.dpDiv.css({position:t.datepicker._inDialog&&t.blockUI?"static":r?"fixed":"absolute",display:"none",left:l.left+"px",top:l.top+"px"}),s.inline||(h=t.datepicker._get(s,"showAnim"),c=t.datepicker._get(s,"duration"),s.dpDiv.css("z-index",e(t(i))+1),t.datepicker._datepickerShowing=!0,t.effects&&t.effects.effect[h]?s.dpDiv.show(h,t.datepicker._get(s,"showOptions"),c):s.dpDiv[h||"show"](h?c:null),t.datepicker._shouldFocusInput(s)&&s.input.trigger("focus"),t.datepicker._curInst=s))}},_updateDatepicker:function(e){this.maxRows=4,a=e,e.dpDiv.empty().append(this._generateHTML(e)),this._attachHandlers(e);var i,s=this._getNumberOfMonths(e),o=s[1],r=17,l=e.dpDiv.find("."+this._dayOverClass+" a");l.length>0&&n.apply(l.get(0)),e.dpDiv.removeClass("ui-datepicker-multi-2 ui-datepicker-multi-3 ui-datepicker-multi-4").width(""),o>1&&e.dpDiv.addClass("ui-datepicker-multi-"+o).css("width",r*o+"em"),e.dpDiv[(1!==s[0]||1!==s[1]?"add":"remove")+"Class"]("ui-datepicker-multi"),e.dpDiv[(this._get(e,"isRTL")?"add":"remove")+"Class"]("ui-datepicker-rtl"),e===t.datepicker._curInst&&t.datepicker._datepickerShowing&&t.datepicker._shouldFocusInput(e)&&e.input.trigger("focus"),e.yearshtml&&(i=e.yearshtml,setTimeout(function(){i===e.yearshtml&&e.yearshtml&&e.dpDiv.find("select.ui-datepicker-year:first").replaceWith(e.yearshtml),i=e.yearshtml=null},0))},_shouldFocusInput:function(t){return t.input&&t.input.is(":visible")&&!t.input.is(":disabled")&&!t.input.is(":focus")},_checkOffset:function(e,i,s){var n=e.dpDiv.outerWidth(),o=e.dpDiv.outerHeight(),a=e.input?e.input.outerWidth():0,r=e.input?e.input.outerHeight():0,l=document.documentElement.clientWidth+(s?0:t(document).scrollLeft()),h=document.documentElement.clientHeight+(s?0:t(document).scrollTop());return i.left-=this._get(e,"isRTL")?n-a:0,i.left-=s&&i.left===e.input.offset().left?t(document).scrollLeft():0,i.top-=s&&i.top===e.input.offset().top+r?t(document).scrollTop():0,i.left-=Math.min(i.left,i.left+n>l&&l>n?Math.abs(i.left+n-l):0),i.top-=Math.min(i.top,i.top+o>h&&h>o?Math.abs(o+r):0),i},_findPos:function(e){for(var i,s=this._getInst(e),n=this._get(s,"isRTL");e&&("hidden"===e.type||1!==e.nodeType||t.expr.filters.hidden(e));)e=e[n?"previousSibling":"nextSibling"];return i=t(e).offset(),[i.left,i.top]},_hideDatepicker:function(e){var i,s,n,o,a=this._curInst;!a||e&&a!==t.data(e,"datepicker")||this._datepickerShowing&&(i=this._get(a,"showAnim"),s=this._get(a,"duration"),n=function(){t.datepicker._tidyDialog(a)},t.effects&&(t.effects.effect[i]||t.effects[i])?a.dpDiv.hide(i,t.datepicker._get(a,"showOptions"),s,n):a.dpDiv["slideDown"===i?"slideUp":"fadeIn"===i?"fadeOut":"hide"](i?s:null,n),i||n(),this._datepickerShowing=!1,o=this._get(a,"onClose"),o&&o.apply(a.input?a.input[0]:null,[a.input?a.input.val():"",a]),this._lastInput=null,this._inDialog&&(this._dialogInput.css({position:"absolute",left:"0",top:"-100px"}),t.blockUI&&(t.unblockUI(),t("body").append(this.dpDiv))),this._inDialog=!1)},_tidyDialog:function(t){t.dpDiv.removeClass(this._dialogClass).off(".ui-datepicker-calendar")},_checkExternalClick:function(e){if(t.datepicker._curInst){var i=t(e.target),s=t.datepicker._getInst(i[0]);(i[0].id!==t.datepicker._mainDivId&&0===i.parents("#"+t.datepicker._mainDivId).length&&!i.hasClass(t.datepicker.markerClassName)&&!i.closest("."+t.datepicker._triggerClass).length&&t.datepicker._datepickerShowing&&(!t.datepicker._inDialog||!t.blockUI)||i.hasClass(t.datepicker.markerClassName)&&t.datepicker._curInst!==s)&&t.datepicker._hideDatepicker()}},_adjustDate:function(e,i,s){var n=t(e),o=this._getInst(n[0]);this._isDisabledDatepicker(n[0])||(this._adjustInstDate(o,i+("M"===s?this._get(o,"showCurrentAtPos"):0),s),this._updateDatepicker(o))},_gotoToday:function(e){var i,s=t(e),n=this._getInst(s[0]);this._get(n,"gotoCurrent")&&n.currentDay?(n.selectedDay=n.currentDay,n.drawMonth=n.selectedMonth=n.currentMonth,n.drawYear=n.selectedYear=n.currentYear):(i=new Date,n.selectedDay=i.getDate(),n.drawMonth=n.selectedMonth=i.getMonth(),n.drawYear=n.selectedYear=i.getFullYear()),this._notifyChange(n),this._adjustDate(s)},_selectMonthYear:function(e,i,s){var n=t(e),o=this._getInst(n[0]);o["selected"+("M"===s?"Month":"Year")]=o["draw"+("M"===s?"Month":"Year")]=parseInt(i.options[i.selectedIndex].value,10),this._notifyChange(o),this._adjustDate(n)},_selectDay:function(e,i,s,n){var o,a=t(e);t(n).hasClass(this._unselectableClass)||this._isDisabledDatepicker(a[0])||(o=this._getInst(a[0]),o.selectedDay=o.currentDay=t("a",n).html(),o.selectedMonth=o.currentMonth=i,o.selectedYear=o.currentYear=s,this._selectDate(e,this._formatDate(o,o.currentDay,o.currentMonth,o.currentYear)))},_clearDate:function(e){var i=t(e);this._selectDate(i,"")},_selectDate:function(e,i){var s,n=t(e),o=this._getInst(n[0]);i=null!=i?i:this._formatDate(o),o.input&&o.input.val(i),this._updateAlternate(o),s=this._get(o,"onSelect"),s?s.apply(o.input?o.input[0]:null,[i,o]):o.input&&o.input.trigger("change"),o.inline?this._updateDatepicker(o):(this._hideDatepicker(),this._lastInput=o.input[0],"object"!=typeof o.input[0]&&o.input.trigger("focus"),this._lastInput=null)},_updateAlternate:function(e){var i,s,n,o=this._get(e,"altField");o&&(i=this._get(e,"altFormat")||this._get(e,"dateFormat"),s=this._getDate(e),n=this.formatDate(i,s,this._getFormatConfig(e)),t(o).val(n))},noWeekends:function(t){var e=t.getDay();return[e>0&&6>e,""]},iso8601Week:function(t){var e,i=new Date(t.getTime());return i.setDate(i.getDate()+4-(i.getDay()||7)),e=i.getTime(),i.setMonth(0),i.setDate(1),Math.floor(Math.round((e-i)/864e5)/7)+1},parseDate:function(e,i,s){if(null==e||null==i)throw"Invalid arguments";if(i="object"==typeof i?""+i:i+"",""===i)return null;var n,o,a,r,l=0,h=(s?s.shortYearCutoff:null)||this._defaults.shortYearCutoff,c="string"!=typeof h?h:(new Date).getFullYear()%100+parseInt(h,10),u=(s?s.dayNamesShort:null)||this._defaults.dayNamesShort,d=(s?s.dayNames:null)||this._defaults.dayNames,p=(s?s.monthNamesShort:null)||this._defaults.monthNamesShort,f=(s?s.monthNames:null)||this._defaults.monthNames,m=-1,g=-1,_=-1,v=-1,b=!1,y=function(t){var i=e.length>n+1&&e.charAt(n+1)===t;return i&&n++,i},w=function(t){var e=y(t),s="@"===t?14:"!"===t?20:"y"===t&&e?4:"o"===t?3:2,n="y"===t?s:1,o=RegExp("^\\d{"+n+","+s+"}"),a=i.substring(l).match(o);if(!a)throw"Missing number at position "+l;return l+=a[0].length,parseInt(a[0],10)},k=function(e,s,n){var o=-1,a=t.map(y(e)?n:s,function(t,e){return[[e,t]]}).sort(function(t,e){return-(t[1].length-e[1].length)});if(t.each(a,function(t,e){var s=e[1];return i.substr(l,s.length).toLowerCase()===s.toLowerCase()?(o=e[0],l+=s.length,!1):void 0}),-1!==o)return o+1;throw"Unknown name at position "+l},x=function(){if(i.charAt(l)!==e.charAt(n))throw"Unexpected literal at position "+l;l++};for(n=0;e.length>n;n++)if(b)"'"!==e.charAt(n)||y("'")?x():b=!1;else switch(e.charAt(n)){case"d":_=w("d");break;case"D":k("D",u,d);break;case"o":v=w("o");break;case"m":g=w("m");break;case"M":g=k("M",p,f);break;case"y":m=w("y");break;case"@":r=new Date(w("@")),m=r.getFullYear(),g=r.getMonth()+1,_=r.getDate();break;case"!":r=new Date((w("!")-this._ticksTo1970)/1e4),m=r.getFullYear(),g=r.getMonth()+1,_=r.getDate();break;case"'":y("'")?x():b=!0;break;default:x()}if(i.length>l&&(a=i.substr(l),!/^\s+/.test(a)))throw"Extra/unparsed characters found in date: "+a;if(-1===m?m=(new Date).getFullYear():100>m&&(m+=(new Date).getFullYear()-(new Date).getFullYear()%100+(c>=m?0:-100)),v>-1)for(g=1,_=v;;){if(o=this._getDaysInMonth(m,g-1),o>=_)break;g++,_-=o}if(r=this._daylightSavingAdjust(new Date(m,g-1,_)),r.getFullYear()!==m||r.getMonth()+1!==g||r.getDate()!==_)throw"Invalid date";return r},ATOM:"yy-mm-dd",COOKIE:"D, dd M yy",ISO_8601:"yy-mm-dd",RFC_822:"D, d M y",RFC_850:"DD, dd-M-y",RFC_1036:"D, d M y",RFC_1123:"D, d M yy",RFC_2822:"D, d M yy",RSS:"D, d M y",TICKS:"!",TIMESTAMP:"@",W3C:"yy-mm-dd",_ticksTo1970:1e7*60*60*24*(718685+Math.floor(492.5)-Math.floor(19.7)+Math.floor(4.925)),formatDate:function(t,e,i){if(!e)return"";var s,n=(i?i.dayNamesShort:null)||this._defaults.dayNamesShort,o=(i?i.dayNames:null)||this._defaults.dayNames,a=(i?i.monthNamesShort:null)||this._defaults.monthNamesShort,r=(i?i.monthNames:null)||this._defaults.monthNames,l=function(e){var i=t.length>s+1&&t.charAt(s+1)===e;return i&&s++,i},h=function(t,e,i){var s=""+e;if(l(t))for(;i>s.length;)s="0"+s;return s},c=function(t,e,i,s){return l(t)?s[e]:i[e]},u="",d=!1;if(e)for(s=0;t.length>s;s++)if(d)"'"!==t.charAt(s)||l("'")?u+=t.charAt(s):d=!1;else switch(t.charAt(s)){case"d":u+=h("d",e.getDate(),2);break;case"D":u+=c("D",e.getDay(),n,o);break;case"o":u+=h("o",Math.round((new Date(e.getFullYear(),e.getMonth(),e.getDate()).getTime()-new Date(e.getFullYear(),0,0).getTime())/864e5),3);break;case"m":u+=h("m",e.getMonth()+1,2);break;case"M":u+=c("M",e.getMonth(),a,r);break;case"y":u+=l("y")?e.getFullYear():(10>e.getFullYear()%100?"0":"")+e.getFullYear()%100;break;case"@":u+=e.getTime();break;case"!":u+=1e4*e.getTime()+this._ticksTo1970;break;case"'":l("'")?u+="'":d=!0;break;default:u+=t.charAt(s)}return u},_possibleChars:function(t){var e,i="",s=!1,n=function(i){var s=t.length>e+1&&t.charAt(e+1)===i;return s&&e++,s};for(e=0;t.length>e;e++)if(s)"'"!==t.charAt(e)||n("'")?i+=t.charAt(e):s=!1;else switch(t.charAt(e)){case"d":case"m":case"y":case"@":i+="0123456789";break;case"D":case"M":return null;case"'":n("'")?i+="'":s=!0;break;default:i+=t.charAt(e)}return i},_get:function(t,e){return void 0!==t.settings[e]?t.settings[e]:this._defaults[e]},_setDateFromField:function(t,e){if(t.input.val()!==t.lastVal){var i=this._get(t,"dateFormat"),s=t.lastVal=t.input?t.input.val():null,n=this._getDefaultDate(t),o=n,a=this._getFormatConfig(t);try{o=this.parseDate(i,s,a)||n}catch(r){s=e?"":s}t.selectedDay=o.getDate(),t.drawMonth=t.selectedMonth=o.getMonth(),t.drawYear=t.selectedYear=o.getFullYear(),t.currentDay=s?o.getDate():0,t.currentMonth=s?o.getMonth():0,t.currentYear=s?o.getFullYear():0,this._adjustInstDate(t)}},_getDefaultDate:function(t){return this._restrictMinMax(t,this._determineDate(t,this._get(t,"defaultDate"),new Date))},_determineDate:function(e,i,s){var n=function(t){var e=new Date;return e.setDate(e.getDate()+t),e},o=function(i){try{return t.datepicker.parseDate(t.datepicker._get(e,"dateFormat"),i,t.datepicker._getFormatConfig(e))}catch(s){}for(var n=(i.toLowerCase().match(/^c/)?t.datepicker._getDate(e):null)||new Date,o=n.getFullYear(),a=n.getMonth(),r=n.getDate(),l=/([+\-]?[0-9]+)\s*(d|D|w|W|m|M|y|Y)?/g,h=l.exec(i);h;){switch(h[2]||"d"){case"d":case"D":r+=parseInt(h[1],10);break;case"w":case"W":r+=7*parseInt(h[1],10);break;case"m":case"M":a+=parseInt(h[1],10),r=Math.min(r,t.datepicker._getDaysInMonth(o,a));break;case"y":case"Y":o+=parseInt(h[1],10),r=Math.min(r,t.datepicker._getDaysInMonth(o,a))}h=l.exec(i)}return new Date(o,a,r)},a=null==i||""===i?s:"string"==typeof i?o(i):"number"==typeof i?isNaN(i)?s:n(i):new Date(i.getTime());return a=a&&"Invalid Date"==""+a?s:a,a&&(a.setHours(0),a.setMinutes(0),a.setSeconds(0),a.setMilliseconds(0)),this._daylightSavingAdjust(a)},_daylightSavingAdjust:function(t){return t?(t.setHours(t.getHours()>12?t.getHours()+2:0),t):null},_setDate:function(t,e,i){var s=!e,n=t.selectedMonth,o=t.selectedYear,a=this._restrictMinMax(t,this._determineDate(t,e,new Date));t.selectedDay=t.currentDay=a.getDate(),t.drawMonth=t.selectedMonth=t.currentMonth=a.getMonth(),t.drawYear=t.selectedYear=t.currentYear=a.getFullYear(),n===t.selectedMonth&&o===t.selectedYear||i||this._notifyChange(t),this._adjustInstDate(t),t.input&&t.input.val(s?"":this._formatDate(t))},_getDate:function(t){var e=!t.currentYear||t.input&&""===t.input.val()?null:this._daylightSavingAdjust(new Date(t.currentYear,t.currentMonth,t.currentDay));return e},_attachHandlers:function(e){var i=this._get(e,"stepMonths"),s="#"+e.id.replace(/\\\\/g,"\\");e.dpDiv.find("[data-handler]").map(function(){var e={prev:function(){t.datepicker._adjustDate(s,-i,"M")},next:function(){t.datepicker._adjustDate(s,+i,"M")},hide:function(){t.datepicker._hideDatepicker()},today:function(){t.datepicker._gotoToday(s)},selectDay:function(){return t.datepicker._selectDay(s,+this.getAttribute("data-month"),+this.getAttribute("data-year"),this),!1},selectMonth:function(){return t.datepicker._selectMonthYear(s,this,"M"),!1},selectYear:function(){return t.datepicker._selectMonthYear(s,this,"Y"),!1}};t(this).on(this.getAttribute("data-event"),e[this.getAttribute("data-handler")])})},_generateHTML:function(t){var e,i,s,n,o,a,r,l,h,c,u,d,p,f,m,g,_,v,b,y,w,k,x,C,D,T,I,M,P,S,N,H,A,z,O,E,W,F,L,R=new Date,Y=this._daylightSavingAdjust(new Date(R.getFullYear(),R.getMonth(),R.getDate())),B=this._get(t,"isRTL"),j=this._get(t,"showButtonPanel"),q=this._get(t,"hideIfNoPrevNext"),K=this._get(t,"navigationAsDateFormat"),U=this._getNumberOfMonths(t),V=this._get(t,"showCurrentAtPos"),X=this._get(t,"stepMonths"),$=1!==U[0]||1!==U[1],G=this._daylightSavingAdjust(t.currentDay?new Date(t.currentYear,t.currentMonth,t.currentDay):new Date(9999,9,9)),J=this._getMinMaxDate(t,"min"),Q=this._getMinMaxDate(t,"max"),Z=t.drawMonth-V,te=t.drawYear;if(0>Z&&(Z+=12,te--),Q)for(e=this._daylightSavingAdjust(new Date(Q.getFullYear(),Q.getMonth()-U[0]*U[1]+1,Q.getDate())),e=J&&J>e?J:e;this._daylightSavingAdjust(new Date(te,Z,1))>e;)Z--,0>Z&&(Z=11,te--);for(t.drawMonth=Z,t.drawYear=te,i=this._get(t,"prevText"),i=K?this.formatDate(i,this._daylightSavingAdjust(new Date(te,Z-X,1)),this._getFormatConfig(t)):i,s=this._canAdjustMonth(t,-1,te,Z)?"<a class='ui-datepicker-prev ui-corner-all' data-handler='prev' data-event='click' title='"+i+"'><span class='ui-icon ui-icon-circle-triangle-"+(B?"e":"w")+"'>"+i+"</span></a>":q?"":"<a class='ui-datepicker-prev ui-corner-all ui-state-disabled' title='"+i+"'><span class='ui-icon ui-icon-circle-triangle-"+(B?"e":"w")+"'>"+i+"</span></a>",n=this._get(t,"nextText"),n=K?this.formatDate(n,this._daylightSavingAdjust(new Date(te,Z+X,1)),this._getFormatConfig(t)):n,o=this._canAdjustMonth(t,1,te,Z)?"<a class='ui-datepicker-next ui-corner-all' data-handler='next' data-event='click' title='"+n+"'><span class='ui-icon ui-icon-circle-triangle-"+(B?"w":"e")+"'>"+n+"</span></a>":q?"":"<a class='ui-datepicker-next ui-corner-all ui-state-disabled' title='"+n+"'><span class='ui-icon ui-icon-circle-triangle-"+(B?"w":"e")+"'>"+n+"</span></a>",a=this._get(t,"currentText"),r=this._get(t,"gotoCurrent")&&t.currentDay?G:Y,a=K?this.formatDate(a,r,this._getFormatConfig(t)):a,l=t.inline?"":"<button type='button' class='ui-datepicker-close ui-state-default ui-priority-primary ui-corner-all' data-handler='hide' data-event='click'>"+this._get(t,"closeText")+"</button>",h=j?"<div class='ui-datepicker-buttonpane ui-widget-content'>"+(B?l:"")+(this._isInRange(t,r)?"<button type='button' class='ui-datepicker-current ui-state-default ui-priority-secondary ui-corner-all' data-handler='today' data-event='click'>"+a+"</button>":"")+(B?"":l)+"</div>":"",c=parseInt(this._get(t,"firstDay"),10),c=isNaN(c)?0:c,u=this._get(t,"showWeek"),d=this._get(t,"dayNames"),p=this._get(t,"dayNamesMin"),f=this._get(t,"monthNames"),m=this._get(t,"monthNamesShort"),g=this._get(t,"beforeShowDay"),_=this._get(t,"showOtherMonths"),v=this._get(t,"selectOtherMonths"),b=this._getDefaultDate(t),y="",k=0;U[0]>k;k++){for(x="",this.maxRows=4,C=0;U[1]>C;C++){if(D=this._daylightSavingAdjust(new Date(te,Z,t.selectedDay)),T=" ui-corner-all",I="",$){if(I+="<div class='ui-datepicker-group",U[1]>1)switch(C){case 0:I+=" ui-datepicker-group-first",T=" ui-corner-"+(B?"right":"left");break;case U[1]-1:I+=" ui-datepicker-group-last",T=" ui-corner-"+(B?"left":"right");break;default:I+=" ui-datepicker-group-middle",T=""}I+="'>"}for(I+="<div class='ui-datepicker-header ui-widget-header ui-helper-clearfix"+T+"'>"+(/all|left/.test(T)&&0===k?B?o:s:"")+(/all|right/.test(T)&&0===k?B?s:o:"")+this._generateMonthYearHeader(t,Z,te,J,Q,k>0||C>0,f,m)+"</div><table class='ui-datepicker-calendar'><thead>"+"<tr>",M=u?"<th class='ui-datepicker-week-col'>"+this._get(t,"weekHeader")+"</th>":"",w=0;7>w;w++)P=(w+c)%7,M+="<th scope='col'"+((w+c+6)%7>=5?" class='ui-datepicker-week-end'":"")+">"+"<span title='"+d[P]+"'>"+p[P]+"</span></th>";for(I+=M+"</tr></thead><tbody>",S=this._getDaysInMonth(te,Z),te===t.selectedYear&&Z===t.selectedMonth&&(t.selectedDay=Math.min(t.selectedDay,S)),N=(this._getFirstDayOfMonth(te,Z)-c+7)%7,H=Math.ceil((N+S)/7),A=$?this.maxRows>H?this.maxRows:H:H,this.maxRows=A,z=this._daylightSavingAdjust(new Date(te,Z,1-N)),O=0;A>O;O++){for(I+="<tr>",E=u?"<td class='ui-datepicker-week-col'>"+this._get(t,"calculateWeek")(z)+"</td>":"",w=0;7>w;w++)W=g?g.apply(t.input?t.input[0]:null,[z]):[!0,""],F=z.getMonth()!==Z,L=F&&!v||!W[0]||J&&J>z||Q&&z>Q,E+="<td class='"+((w+c+6)%7>=5?" ui-datepicker-week-end":"")+(F?" ui-datepicker-other-month":"")+(z.getTime()===D.getTime()&&Z===t.selectedMonth&&t._keyEvent||b.getTime()===z.getTime()&&b.getTime()===D.getTime()?" "+this._dayOverClass:"")+(L?" "+this._unselectableClass+" ui-state-disabled":"")+(F&&!_?"":" "+W[1]+(z.getTime()===G.getTime()?" "+this._currentClass:"")+(z.getTime()===Y.getTime()?" ui-datepicker-today":""))+"'"+(F&&!_||!W[2]?"":" title='"+W[2].replace(/'/g,"&#39;")+"'")+(L?"":" data-handler='selectDay' data-event='click' data-month='"+z.getMonth()+"' data-year='"+z.getFullYear()+"'")+">"+(F&&!_?"&#xa0;":L?"<span class='ui-state-default'>"+z.getDate()+"</span>":"<a class='ui-state-default"+(z.getTime()===Y.getTime()?" ui-state-highlight":"")+(z.getTime()===G.getTime()?" ui-state-active":"")+(F?" ui-priority-secondary":"")+"' href='#'>"+z.getDate()+"</a>")+"</td>",z.setDate(z.getDate()+1),z=this._daylightSavingAdjust(z);I+=E+"</tr>"}Z++,Z>11&&(Z=0,te++),I+="</tbody></table>"+($?"</div>"+(U[0]>0&&C===U[1]-1?"<div class='ui-datepicker-row-break'></div>":""):""),x+=I}y+=x}return y+=h,t._keyEvent=!1,y},_generateMonthYearHeader:function(t,e,i,s,n,o,a,r){var l,h,c,u,d,p,f,m,g=this._get(t,"changeMonth"),_=this._get(t,"changeYear"),v=this._get(t,"showMonthAfterYear"),b="<div class='ui-datepicker-title'>",y="";
+if(o||!g)y+="<span class='ui-datepicker-month'>"+a[e]+"</span>";else{for(l=s&&s.getFullYear()===i,h=n&&n.getFullYear()===i,y+="<select class='ui-datepicker-month' data-handler='selectMonth' data-event='change'>",c=0;12>c;c++)(!l||c>=s.getMonth())&&(!h||n.getMonth()>=c)&&(y+="<option value='"+c+"'"+(c===e?" selected='selected'":"")+">"+r[c]+"</option>");y+="</select>"}if(v||(b+=y+(!o&&g&&_?"":"&#xa0;")),!t.yearshtml)if(t.yearshtml="",o||!_)b+="<span class='ui-datepicker-year'>"+i+"</span>";else{for(u=this._get(t,"yearRange").split(":"),d=(new Date).getFullYear(),p=function(t){var e=t.match(/c[+\-].*/)?i+parseInt(t.substring(1),10):t.match(/[+\-].*/)?d+parseInt(t,10):parseInt(t,10);return isNaN(e)?d:e},f=p(u[0]),m=Math.max(f,p(u[1]||"")),f=s?Math.max(f,s.getFullYear()):f,m=n?Math.min(m,n.getFullYear()):m,t.yearshtml+="<select class='ui-datepicker-year' data-handler='selectYear' data-event='change'>";m>=f;f++)t.yearshtml+="<option value='"+f+"'"+(f===i?" selected='selected'":"")+">"+f+"</option>";t.yearshtml+="</select>",b+=t.yearshtml,t.yearshtml=null}return b+=this._get(t,"yearSuffix"),v&&(b+=(!o&&g&&_?"":"&#xa0;")+y),b+="</div>"},_adjustInstDate:function(t,e,i){var s=t.selectedYear+("Y"===i?e:0),n=t.selectedMonth+("M"===i?e:0),o=Math.min(t.selectedDay,this._getDaysInMonth(s,n))+("D"===i?e:0),a=this._restrictMinMax(t,this._daylightSavingAdjust(new Date(s,n,o)));t.selectedDay=a.getDate(),t.drawMonth=t.selectedMonth=a.getMonth(),t.drawYear=t.selectedYear=a.getFullYear(),("M"===i||"Y"===i)&&this._notifyChange(t)},_restrictMinMax:function(t,e){var i=this._getMinMaxDate(t,"min"),s=this._getMinMaxDate(t,"max"),n=i&&i>e?i:e;return s&&n>s?s:n},_notifyChange:function(t){var e=this._get(t,"onChangeMonthYear");e&&e.apply(t.input?t.input[0]:null,[t.selectedYear,t.selectedMonth+1,t])},_getNumberOfMonths:function(t){var e=this._get(t,"numberOfMonths");return null==e?[1,1]:"number"==typeof e?[1,e]:e},_getMinMaxDate:function(t,e){return this._determineDate(t,this._get(t,e+"Date"),null)},_getDaysInMonth:function(t,e){return 32-this._daylightSavingAdjust(new Date(t,e,32)).getDate()},_getFirstDayOfMonth:function(t,e){return new Date(t,e,1).getDay()},_canAdjustMonth:function(t,e,i,s){var n=this._getNumberOfMonths(t),o=this._daylightSavingAdjust(new Date(i,s+(0>e?e:n[0]*n[1]),1));return 0>e&&o.setDate(this._getDaysInMonth(o.getFullYear(),o.getMonth())),this._isInRange(t,o)},_isInRange:function(t,e){var i,s,n=this._getMinMaxDate(t,"min"),o=this._getMinMaxDate(t,"max"),a=null,r=null,l=this._get(t,"yearRange");return l&&(i=l.split(":"),s=(new Date).getFullYear(),a=parseInt(i[0],10),r=parseInt(i[1],10),i[0].match(/[+\-].*/)&&(a+=s),i[1].match(/[+\-].*/)&&(r+=s)),(!n||e.getTime()>=n.getTime())&&(!o||e.getTime()<=o.getTime())&&(!a||e.getFullYear()>=a)&&(!r||r>=e.getFullYear())},_getFormatConfig:function(t){var e=this._get(t,"shortYearCutoff");return e="string"!=typeof e?e:(new Date).getFullYear()%100+parseInt(e,10),{shortYearCutoff:e,dayNamesShort:this._get(t,"dayNamesShort"),dayNames:this._get(t,"dayNames"),monthNamesShort:this._get(t,"monthNamesShort"),monthNames:this._get(t,"monthNames")}},_formatDate:function(t,e,i,s){e||(t.currentDay=t.selectedDay,t.currentMonth=t.selectedMonth,t.currentYear=t.selectedYear);var n=e?"object"==typeof e?e:this._daylightSavingAdjust(new Date(s,i,e)):this._daylightSavingAdjust(new Date(t.currentYear,t.currentMonth,t.currentDay));return this.formatDate(this._get(t,"dateFormat"),n,this._getFormatConfig(t))}}),t.fn.datepicker=function(e){if(!this.length)return this;t.datepicker.initialized||(t(document).on("mousedown",t.datepicker._checkExternalClick),t.datepicker.initialized=!0),0===t("#"+t.datepicker._mainDivId).length&&t("body").append(t.datepicker.dpDiv);var i=Array.prototype.slice.call(arguments,1);return"string"!=typeof e||"isDisabled"!==e&&"getDate"!==e&&"widget"!==e?"option"===e&&2===arguments.length&&"string"==typeof arguments[1]?t.datepicker["_"+e+"Datepicker"].apply(t.datepicker,[this[0]].concat(i)):this.each(function(){"string"==typeof e?t.datepicker["_"+e+"Datepicker"].apply(t.datepicker,[this].concat(i)):t.datepicker._attachDatepicker(this,e)}):t.datepicker["_"+e+"Datepicker"].apply(t.datepicker,[this[0]].concat(i))},t.datepicker=new i,t.datepicker.initialized=!1,t.datepicker.uuid=(new Date).getTime(),t.datepicker.version="1.12.1",t.datepicker});
+if (document.location.href.split('/')[3] == 'new-ltc' || document.location.href.split('/')[3] ==  'new-oop' || document.location.href.split('/')[3] ==  'new-civil-complaint') {
+    $(document).ready(function () {
+
+        $('[data-toggle="tooltip"]').tooltip();
+        var canvas = document.querySelector("canvas");
+        var signaturePad = new SignaturePad(canvas, {});
+
+        //Clear button to remove signature drawing
+        $('.clear_signature').on('click', function() {
+            $('#pdf_download_btn').prop('disabled', true);
+            // Clears the canvas
+            signaturePad.clear();
+        });
+
+        $('.no_signature').on('click', function() {
+            $('#pdf_download_btn').prop('disabled', false);
+        });
+
+        //Save and use Signature
+        $('.save_signature').on('click', function() {
+            $('#pdf_download_btn').prop('disabled', false);
+            var dataURL = signaturePad.toDataURL(); // save image as PNG
+            $('#signature_source').val(dataURL);
+        });
+
+        $('#filing_date').val(new Date());
+        $('#landlord').prop('hidden', true);
+
+        var map;
+        var marker;
+        var bounds;
+        var houseNum;
+        var streetName;
+        var town;
+        var county;
+        var zipcode;
+        var state;
+
+        var center = new google.maps.LatLng(40.149660, -76.306370);
+        //Create the areas for magistrates
+
+        map = new google.maps.Map(document.getElementById('map'), {
+            center: {lat: 40.144128, lng: -76.311420},
+            zoom: 9,
+            scaleControl: true
+        });
+        bounds = new google.maps.LatLngBounds();
+        google.maps.event.addListenerOnce(map, 'tilesloaded', function (evt) {
+
+            bounds = map.getBounds();
+        });
+        marker = new google.maps.Marker({
+            position: center
+        });
+
+
+        var input = /** @type {!HTMLInputElement} */(
+            document.getElementById('pac-input'));
+        var types = document.getElementById('type-selector');
+        map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
+        map.controls[google.maps.ControlPosition.TOP_LEFT].push(types);
+
+        var autocomplete = new google.maps.places.Autocomplete(input);
+        var magArray = [];
+        var objArray = [];
+        var magNamesArray = [];
+        var count = 0;
+
+        $.each(quickEvict.geoData, function(key, value) {
+            magId = 'magistrate_' + value.magistrate_id;
+            var geoPoints = value.geo_locations.replace(/\s/g, '').replace(/},/g, '},dd').split(',dd');
+            var obj = [];
+
+            console.log(magId);
+
+            for (var i in geoPoints) {
+                obj.push(JSON.parse(geoPoints[i]));
+            }
+            magNamesArray.push(magId);
+            objArray.push(obj);
+            magArray.push(magId);
+            magArray[count] = new google.maps.Polygon({
+                path: obj,
+                geodesic: true,
+                strokeColor: '#091096',
+                strokeOpacity: 1.0,
+                strokeWeight: 2,
+                fillColor: '#B1AAA9',
+                fillOpacity: 0.35,
+                areaName: magId,
+                courtId: value.court_number,
+                county: value.county,
+                township: value.township
+            });
+            magArray[count].setMap(map);
+
+
+            google.maps.event.addListener(magArray[count], 'mouseover', function (e) {
+                var magistrateId = $(this)[0].areaName.split('magistrate_');
+                injectTooltip(e, magistrateId[1] + '<br>' + $(this)[0].county + '<br>' + $(this)[0].township);
+            });
+
+            google.maps.event.addListener(magArray[count], 'mousemove', function (e) {
+                moveTooltip(e);
+            });
+
+            google.maps.event.addListener(magArray[count], 'mouseout', function (e) {
+                deleteTooltip(e);
+            });
+
+            count++;
+        });
+        autocomplete.addListener('place_changed', function () {
+            marker.setMap(null);
+            var place = autocomplete.getPlace();
+            newBounds = bounds;
+            if (!place.geometry) {
+                window.alert("Returned place contains no geometry");
+                return;
+            }
+
+            houseNum = place.address_components[0].long_name;
+            streetName = place.address_components[1].long_name;
+
+            if (place.address_components[3].types[0].indexOf('administrative') >= 0) {
+                town = place.address_components[2].long_name;
+            } else {
+                town = place.address_components[3].long_name;
+            }
+
+            county = place.address_components[3].long_name;
+            state = place.address_components[4].short_name;
+
+            if (place.address_components[6].short_name == 'US') {
+                zipcode = place.address_components[7].long_name;
+            } else {
+                zipcode = place.address_components[6].long_name;
+            }
+
+            $('#state').val('PA');
+            $('#zipcode').val(zipcode);
+            $('#county').val(county);
+            $('#house_num').val(houseNum);
+            $('#street_name').val(streetName);
+            $('#town').val(town);
+            $('#display_address').text(houseNum + ' ' + streetName + ' ' + town + ' ' + 'PA');
+
+            marker.setPosition(place.geometry.location);
+            marker.setMap(map);
+            newBounds.extend(place.geometry.location);
+            map.fitBounds(newBounds);
+            var isFound = false;
+            for (var k = 0; k < magArray.length; k++) {
+                if (google.maps.geometry.poly.containsLocation(place.geometry.location, magArray[k])) {
+                    $('#court_number').val(magArray[k].areaName);
+                    isFound = true;
+                }
+            }
+            if (isFound == false) {
+                alert('Location outside all Zones');
+                $('.zipcode_div').css('display', 'none');
+                $('.unit_number_div').css('display', 'none');
+                $('.filing_form_div').css('display', 'none');
+            } else {
+                $('.zipcode_div').css('display', 'block');
+                $('.unit_number_div').css('display', 'block');
+                $('.filing_form_div').css('display', 'block');
+            }
+        });
+
+
+        $(window).keydown(function (event) {
+            if (event.keyCode == 13) {
+                event.preventDefault();
+                return false;
+            }
+        });
+
+        $('input[type=radio][name=rented_by]').change(function () {
+
+            if ($(this)[0].id == 'rented_by_other') {
+                $('#landlord').prop('hidden', false);
+                $('#rented_by_other_div').css('display', 'block');
+                $('#rented_by_owner_div').css('display', 'none');
+            } else {
+                $('#landlord').prop('hidden', true);
+                $('#rented_by_other_div').css('display', 'none');
+                $('#rented_by_owner_div').css('display', 'block');
+
+            }
+        });
+
+        $('input[type=radio][name=addit_rent]').change(function () {
+
+            if ($(this)[0].id == 'addit_rent') {
+                $('.additional_rent_amt_div').css('display', 'block');
+
+            } else {
+                $('.additional_rent_amt_div').css('display', 'none');
+            }
+        });
+
+
+        //create a global variable that will point to the tooltip in the DOM
+        var tipObj = null;
+
+//offset along x and y in px
+        var offset = {
+            x: 6,
+            y: -300
+        };
+
+        var coordPropName = null;
+
+        function injectTooltip(event, data) {
+            if (!tipObj && event) {
+                //create the tooltip object
+                tipObj = document.createElement("div");
+                tipObj.style.width = '80px';
+                tipObj.style.height = '80px';
+                tipObj.style.background = "lightgrey";
+                tipObj.style.borderRadius = "3px";
+                tipObj.style.padding = "6px";
+                tipObj.style.fontFamily = "Arial,Helvetica";
+                tipObj.style.textAlign = "center";
+                tipObj.style.fontSize = "10";
+                tipObj.innerHTML = data;
+
+                //fix for the version issue
+                eventPropNames = Object.keys(event);
+                if(!coordPropName){
+                    //discover the name of the prop with MouseEvent
+                    for(var i in eventPropNames){
+                        var name = eventPropNames[i];
+                        if(event[name] instanceof MouseEvent){
+                            coordPropName = name;
+                            break;
+                        }
+                    }
+                }
+
+                if(coordPropName) {
+                    //position it
+                    tipObj.style.position = "fixed";
+                    tipObj.style.top = event[coordPropName].clientY + window.scrollY + offset.y + "px";
+                    tipObj.style.left = event[coordPropName].clientX + window.scrollX + offset.x + "px";
+
+                    //add it to the body
+                    document.body.appendChild(tipObj);
+                }
+            }
+        }
+
+        /********************************************************************
+         * moveTooltip(e)
+         * update the position of the tooltip based on the event data
+         ********************************************************************/
+        function moveTooltip(event) {
+            if (tipObj && event) {
+                //position it
+                tipObj.style.top = event.Ba.clientY + window.scrollY + offset.y + "px";
+                tipObj.style.left = event.Ba.clientX + window.scrollX + offset.x + "px";
+            }
+        }
+
+        /********************************************************************
+         * deleteTooltip(e)
+         * delete the tooltip if it exists in the DOM
+         ********************************************************************/
+        function deleteTooltip(event) {
+            if (tipObj) {
+                //delete the tooltip if it exists in the DOM
+                document.body.removeChild(tipObj);
+                tipObj = null;
+            }
+        }
+
+        $('#tenant_num_select').on('change', function() {
+            var tenantNum = $(this)[0].value;
+            var html = '';
+
+            $('#tenant_num').val(tenantNum);
+
+            for (var i = 1; i <= tenantNum; i++) {
+                var currentTenantObj = $('#tenant_name_' + i);
+
+                if (currentTenantObj.length > 0) {
+                    html += '<input class="form-control eviction_fields" placeholder="Tenant Name '+ i +'" type="text" id="tenant_name_'+ i +'" name="tenant_name[]" value="' + currentTenantObj.val() + '"/><br>';
+                } else {
+                    html += '<input class="form-control eviction_fields" placeholder="Tenant Name '+ i +'" type="text" id="tenant_name_'+ i +'" name="tenant_name[]" value=""/><br>';
+                }
+            }
+
+            $('#tenant_input_container').empty().append($(html));
+        });
+
+        $('#breached_conditions_lease').on('change', function() {
+           if ($(this).is(':checked')) {
+               $('#breached_details').prop('disabled', false);
+           } else {
+               $('#breached_details').prop('disabled', true);
+           }
+        });
+
+
+        //On Submit
+        $('#pdf_download_btn').on('click', function () {
+            $('#rented_by_val').val($('input[name=rented_by]:checked').val());
+        });
+    });
+}
+/**
+ * Created by andrew on 11/11/18.
+ */
+$(document).ready(function () {
+
+    $('#court_date').datepicker();
+    $('#court_time').timepicker();
+
+    $('.calendar_tooltip').tooltip();
+
+    $('.court_calendar').on('click', function() {
+        var id = $(this)[0].id.split('_');
+        $('#id_court_date').val(id[2]);
+
+        var splitCourtDate = $('#court_date_' + id[2]).text().split(' ');
+
+        $('#court_date').val('').datepicker('setDate', new Date(splitCourtDate[0]));
+        $('#court_time').val('').timepicker('setTime', splitCourtDate[1] + splitCourtDate[2]);
+    }).css( 'cursor', 'pointer' );
+
+
+    $('#submit_date').on('click', function () {
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+
+        $.ajax({
+            beforeSend: function (xhr) {
+                xhr.setRequestHeader('X-CSRF-TOKEN', $("#token").attr('content'));
+            },
+            type: "POST",
+            url: '/dashboard/storeCourtDate',
+            dataType: 'json',
+            data: {
+                id: $('#id_court_date').val(),
+                courtDate: $('#court_date').val(),
+                courtTime: $('#court_time').val()
+            },
+
+            success: function (data) {
+                console.log(data);
+                location.reload();
+            },
+            error: function (data) {
+                console.log(data);
+                location.reload();
+            }
+        });
+    });
+
+
+    $('#eviction_table').DataTable( {
+        "pagingType": "simple",
+        "aaSorting": []
+    }).on('click', '.eviction-remove', function () {
+        var id = $(this)[0].id;
+        var splitId = id.split('_');
+        var conf = confirm('Are you sure you want to Delete ' + splitId[2] + ' ?');
+
+        if (conf == true) {
+
+            var evictionId = splitId[1];
+            $.ajax({
+                beforeSend: function (xhr) {
+                    xhr.setRequestHeader('X-CSRF-TOKEN', $("#token").attr('content'));
+                },
+                type: "POST",
+                url: '/dashboard/delete',
+                dataType: 'json',
+                data: {id: evictionId},
+
+                success: function (data) {
+                    console.log(data);
+                    location.reload();
+                },
+                error: function (data) {
+                    console.log(data);
+                }
+            });
+        } else {
+
+        }
+    }).on('click', '.pdf_download_btn_dashboard', function () {
+        console.log('this is it' + $(this)[0].id);
+        var id = $(this)[0].id;
+        var splitId = id.split('_');
+
+        $('#download_id').val(splitId[2]);
+
+    }).on('change', '.status_select', function() {
+        var id = $(this)[0].id;
+        var splitId = id.split('_');
+        var status = $('#status_' + splitId[1]).val();
+
+        $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+
+            $.ajax({
+                beforeSend: function (xhr) {
+                    xhr.setRequestHeader('X-CSRF-TOKEN', $("#token").attr('content'));
+                },
+                type: "POST",
+                url: '/dashboard/statusChange',
+                dataType: 'json',
+                data: {
+                    id: splitId[1],
+                    status: status
+                },
+
+                success: function (data) {
+                    console.log(data);
+                },
+                error: function (data) {
+                    console.log(data);
+                }
+            });
+    });
+});
+if(!this.JSON){this.JSON={};}
+(function(){function f(n){return n<10?'0'+n:n;}
+if(typeof Date.prototype.toJSON!=='function'){Date.prototype.toJSON=function(key){return isFinite(this.valueOf())?this.getUTCFullYear()+'-'+
+f(this.getUTCMonth()+1)+'-'+
+f(this.getUTCDate())+'T'+
+f(this.getUTCHours())+':'+
+f(this.getUTCMinutes())+':'+
+f(this.getUTCSeconds())+'Z':null;};String.prototype.toJSON=Number.prototype.toJSON=Boolean.prototype.toJSON=function(key){return this.valueOf();};}
+var cx=/[\u0000\u00ad\u0600-\u0604\u070f\u17b4\u17b5\u200c-\u200f\u2028-\u202f\u2060-\u206f\ufeff\ufff0-\uffff]/g,escapable=/[\\\"\x00-\x1f\x7f-\x9f\u00ad\u0600-\u0604\u070f\u17b4\u17b5\u200c-\u200f\u2028-\u202f\u2060-\u206f\ufeff\ufff0-\uffff]/g,gap,indent,meta={'\b':'\\b','\t':'\\t','\n':'\\n','\f':'\\f','\r':'\\r','"':'\\"','\\':'\\\\'},rep;function quote(string){escapable.lastIndex=0;return escapable.test(string)?'"'+string.replace(escapable,function(a){var c=meta[a];return typeof c==='string'?c:'\\u'+('0000'+a.charCodeAt(0).toString(16)).slice(-4);})+'"':'"'+string+'"';}
+function str(key,holder){var i,k,v,length,mind=gap,partial,value=holder[key];if(value&&typeof value==='object'&&typeof value.toJSON==='function'){value=value.toJSON(key);}
+if(typeof rep==='function'){value=rep.call(holder,key,value);}
+switch(typeof value){case'string':return quote(value);case'number':return isFinite(value)?String(value):'null';case'boolean':case'null':return String(value);case'object':if(!value){return'null';}
+gap+=indent;partial=[];if(Object.prototype.toString.apply(value)==='[object Array]'){length=value.length;for(i=0;i<length;i+=1){partial[i]=str(i,value)||'null';}
+v=partial.length===0?'[]':gap?'[\n'+gap+
+partial.join(',\n'+gap)+'\n'+
+mind+']':'['+partial.join(',')+']';gap=mind;return v;}
+if(rep&&typeof rep==='object'){length=rep.length;for(i=0;i<length;i+=1){k=rep[i];if(typeof k==='string'){v=str(k,value);if(v){partial.push(quote(k)+(gap?': ':':')+v);}}}}else{for(k in value){if(Object.hasOwnProperty.call(value,k)){v=str(k,value);if(v){partial.push(quote(k)+(gap?': ':':')+v);}}}}
+v=partial.length===0?'{}':gap?'{\n'+gap+partial.join(',\n'+gap)+'\n'+
+mind+'}':'{'+partial.join(',')+'}';gap=mind;return v;}}
+if(typeof JSON.stringify!=='function'){JSON.stringify=function(value,replacer,space){var i;gap='';indent='';if(typeof space==='number'){for(i=0;i<space;i+=1){indent+=' ';}}else if(typeof space==='string'){indent=space;}
+rep=replacer;if(replacer&&typeof replacer!=='function'&&(typeof replacer!=='object'||typeof replacer.length!=='number')){throw new Error('JSON.stringify');}
+return str('',{'':value});};}
+if(typeof JSON.parse!=='function'){JSON.parse=function(text,reviver){var j;function walk(holder,key){var k,v,value=holder[key];if(value&&typeof value==='object'){for(k in value){if(Object.hasOwnProperty.call(value,k)){v=walk(value,k);if(v!==undefined){value[k]=v;}else{delete value[k];}}}}
+return reviver.call(holder,key,value);}
+cx.lastIndex=0;if(cx.test(text)){text=text.replace(cx,function(a){return'\\u'+
+('0000'+a.charCodeAt(0).toString(16)).slice(-4);});}
+if(/^[\],:{}\s]*$/.test(text.replace(/\\(?:["\\\/bfnrt]|u[0-9a-fA-F]{4})/g,'@').replace(/"[^"\\\n\r]*"|true|false|null|-?\d+(?:\.\d*)?(?:[eE][+\-]?\d+)?/g,']').replace(/(?:^|:|,)(?:\s*\[)+/g,''))){j=eval('('+text+')');return typeof reviver==='function'?walk({'':j},''):j;}
+throw new SyntaxError('JSON.parse');};}}());
+/**
+ * Created by andrew on 10/8/18.
+ */
+
+    $(document).ready(function () {
+
+        $('#magistrate_table').DataTable( {
+            "pagingType": "simple"
+        }).on('click', '.magistrate-remove', function () {
+            var id = $(this)[0].id;
+            var splitId = id.split('_');
+            var conf = confirm('Are you sure you want to Delete ' + splitId[2]);
+
+            if (conf == true) {
+
+                var magistrateId = splitId[2];
+                $.ajax({
+                    beforeSend: function (xhr) {
+                        xhr.setRequestHeader('X-CSRF-TOKEN', $("#token").attr('content'));
+                    },
+                    type: "POST",
+                    url: '/magistrateCreator/delete',
+                    dataType: 'json',
+                    data: {id: magistrateId},
+
+                    success: function (data) {
+                        console.log(data);
+                        location.reload();
+                    },
+                    error: function (data) {
+                        console.log(data);
+                    }
+                });
+            } else {
+
+            }
+        }).on('click', '.magistrate-edit', function () {
+            var id = $(this)[0].id;
+            var splitId = id.split('_');
+            var magistrateId = splitId[2];
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+
+            $.ajax({
+                beforeSend: function (xhr) {
+                    xhr.setRequestHeader('X-CSRF-TOKEN', $("#token").attr('content'));
+                },
+                type: "GET",
+                url: '/magistrateCreator/getMagistrate',
+                dataType: 'json',
+                data: {magistrateId: magistrateId},
+
+                success: function (data) {
+                    console.log(data);
+                    $('#db_geo_id').val(data[0][0].id);
+                    $('#db_court_id').val(data[1][0].id);
+                    $('#edit_court_id').val(data[1][0].court_number);
+                    $('#edit_magistrate_id').val(data[1][0].magistrate_id);
+                    $('#edit_township').val(data[1][0].township);
+                    $('#edit_county').val(data[1][0].county);
+                    $('#edit_mdj_name').val(data[1][0].mdj_name);
+                    $('#edit_court_number').val(data[1][0].phone_number);
+                    $('#edit_court_address_one').val(data[0][0].address_line_one);
+                    $('#edit_court_address_two').val(data[0][0].address_line_two);
+                    $('#edit_one_under_2000').val(data[1][0].one_defendant_up_to_2000);
+                    $('#edit_one_btn_2000_4001').val(data[1][0].one_defendant_between_2001_4000);
+                    $('#edit_one_over_4000').val(data[1][0].one_defendant_greater_than_4000);
+                    $('#edit_one_oop').val(data[1][0].one_defendant_out_of_pocket);
+                    $('#edit_two_under_2000').val(data[1][0].two_defendant_up_to_2000);
+                    $('#edit_two_btn_2000_4001').val(data[1][0].two_defendant_between_2001_4000);
+                    $('#edit_two_over_4000').val(data[1][0].two_defendant_greater_than_4000);
+                    $('#edit_two_oop').val(data[1][0].two_defendant_out_of_pocket);
+                    $('#edit_three_under_2000').val(data[1][0].three_defendant_up_to_2000);
+                    $('#edit_three_btn_2000_4001').val(data[1][0].three_defendant_between_2001_4000);
+                    $('#edit_three_over_4000').val(data[1][0].three_defendant_greater_than_4000);
+                    $('#edit_three_oop').val(data[1][0].three_defendant_out_of_pocket);
+                    $('#edit_additional_tenants').val(data[1][0].additional_tenant);
+                    $('#edit_geo_locations').val(data[0][0].geo_locations);
+                },
+                error: function (data) {
+                    console.log(data);
+
+                }
+            });
+        });
+
+        $('#submit_magistrate').on('click', function () {
+            var data = $('#magistrate_form').serialize();
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+
+            $.ajax({
+                beforeSend: function (xhr) {
+                    xhr.setRequestHeader('X-CSRF-TOKEN', $("#token").attr('content'));
+                },
+                type: "POST",
+                url: '/magistrateCreator',
+                dataType: 'json',
+                data: data,
+
+                success: function (data) {
+                    if (data.messageDetails == 'All Good') {
+                        alertMsgCreate(true, data.responseMessage);
+                        location.reload();
+                    } else {
+                        alertMsgCreate(false, data.responseMessage);
+                    }
+
+                },
+                error: function (data) {
+                    console.log(data);
+                }
+            });
+        });
+
+        $('#submit_edit').on('click', function () {
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+
+            $.ajax({
+                beforeSend: function (xhr) {
+                    xhr.setRequestHeader('X-CSRF-TOKEN', $("#token").attr('content'));
+                },
+                type: "POST",
+                url: '/magistrateCreator/editMagistrate',
+                dataType: 'json',
+                data: {
+                    dbCourtId: $('#db_court_id').val(),
+                    dbGeoId: $('#db_geo_id').val(),
+                    magistrateId: $('#edit_magistrate_id').val(),
+                    township: $('#edit_township').val(),
+                    courtId: $('#edit_court_id').val(),
+                    county: $('#edit_county').val(),
+                    mdjName: $('#edit_mdj_name').val(),
+                    courtNumber: $('#edit_court_number').val(),
+                    addressOne: $('#edit_court_address_one').val(),
+                    addressTwo: $('#edit_court_address_two').val(),
+                    oneUnder2000: $('#edit_one_under_2000').val(),
+                    oneBtn20004001: $('#edit_one_btn_2000_4001').val(),
+                    oneOver4000: $('#edit_one_over_4000').val(),
+                    oneOOP: $('#edit_one_oop').val(),
+                    twoUnder2000: $('#edit_two_under_2000').val(),
+                    twoBtn20004001: $('#edit_two_btn_2000_4001').val(),
+                    twoOver4000: $('#edit_two_over_4000').val(),
+                    twoOOP: $('#edit_two_oop').val(),
+                    threeUnder2000: $('#edit_three_under_2000').val(),
+                    threeBtn20004001: $('#edit_three_btn_2000_4001').val(),
+                    threeOver4000: $('#edit_three_over_4000').val(),
+                    threeOOP: $('#edit_three_oop').val(),
+                    additionalTenant: $('#edit_additional_tenants').val(),
+                    geoLocations: $('#edit_geo_locations').val()
+                },
+                success: function (data) {
+
+                },
+                error: function (data) {
+                    console.log(data);
+                }
+
+            });
+            setTimeout(function() { location.reload(); }, 1000);
+
+        });
+        //Creates a message when user performs an action using ajax i.e add, edit, delete
+        function alertMsgCreate(isSuccess, msg) {
+            var result = '';
+            if (isSuccess) {
+                result = $('<div class="alert alert-success">' + msg + '</div>');
+                $('#flash-msg').append(result);
+                setTimeout(function () {
+                    $(".alert").alert('close');
+                }, 4000);
+            } else {
+                result = $('<div class="alert alert-danger">' + msg + '</div>');
+                $('#flash-msg').append(result);
+                setTimeout(function () {
+                    $(".alert").alert('close');
+                }, 6000);
+            }
+        }
+    });
+"use strict";var numeric=typeof exports=="undefined"?function(){}:exports;typeof global!="undefined"&&(global.numeric=numeric),numeric.version="1.2.6",numeric.bench=function(t,n){var r,i,s,o;typeof n=="undefined"&&(n=15),s=.5,r=new Date;for(;;){s*=2;for(o=s;o>3;o-=4)t(),t(),t(),t();while(o>0)t(),o--;i=new Date;if(i-r>n)break}for(o=s;o>3;o-=4)t(),t(),t(),t();while(o>0)t(),o--;return i=new Date,1e3*(3*s-1)/(i-r)},numeric._myIndexOf=function(t){var n=this.length,r;for(r=0;r<n;++r)if(this[r]===t)return r;return-1},numeric.myIndexOf=Array.prototype.indexOf?Array.prototype.indexOf:numeric._myIndexOf,numeric.Function=Function,numeric.precision=4,numeric.largeArray=50,numeric.prettyPrint=function(t){function n(e){if(e===0)return"0";if(isNaN(e))return"NaN";if(e<0)return"-"+n(-e);if(isFinite(e)){var t=Math.floor(Math.log(e)/Math.log(10)),r=e/Math.pow(10,t),i=r.toPrecision(numeric.precision);return parseFloat(i)===10&&(t++,r=1,i=r.toPrecision(numeric.precision)),parseFloat(i).toString()+"e"+t.toString()}return"Infinity"}function i(e){var t;if(typeof e=="undefined")return r.push(Array(numeric.precision+8).join(" ")),!1;if(typeof e=="string")return r.push('"'+e+'"'),!1;if(typeof e=="boolean")return r.push(e.toString()),!1;if(typeof e=="number"){var s=n(e),o=e.toPrecision(numeric.precision),u=parseFloat(e.toString()).toString(),a=[s,o,u,parseFloat(o).toString(),parseFloat(u).toString()];for(t=1;t<a.length;t++)a[t].length<s.length&&(s=a[t]);return r.push(Array(numeric.precision+8-s.length).join(" ")+s),!1}if(e===null)return r.push("null"),!1;if(typeof e=="function"){r.push(e.toString());var f=!1;for(t in e)e.hasOwnProperty(t)&&(f?r.push(",\n"):r.push("\n{"),f=!0,r.push(t),r.push(": \n"),i(e[t]));return f&&r.push("}\n"),!0}if(e instanceof Array){if(e.length>numeric.largeArray)return r.push("...Large Array..."),!0;var f=!1;r.push("[");for(t=0;t<e.length;t++)t>0&&(r.push(","),f&&r.push("\n ")),f=i(e[t]);return r.push("]"),!0}r.push("{");var f=!1;for(t in e)e.hasOwnProperty(t)&&(f&&r.push(",\n"),f=!0,r.push(t),r.push(": \n"),i(e[t]));return r.push("}"),!0}var r=[];return i(t),r.join("")},numeric.parseDate=function(t){function n(e){if(typeof e=="string")return Date.parse(e.replace(/-/g,"/"));if(e instanceof Array){var t=[],r;for(r=0;r<e.length;r++)t[r]=n(e[r]);return t}throw new Error("parseDate: parameter must be arrays of strings")}return n(t)},numeric.parseFloat=function(t){function n(e){if(typeof e=="string")return parseFloat(e);if(e instanceof Array){var t=[],r;for(r=0;r<e.length;r++)t[r]=n(e[r]);return t}throw new Error("parseFloat: parameter must be arrays of strings")}return n(t)},numeric.parseCSV=function(t){var n=t.split("\n"),r,i,s=[],o=/(([^'",]*)|('[^']*')|("[^"]*")),/g,u=/^\s*(([+-]?[0-9]+(\.[0-9]*)?(e[+-]?[0-9]+)?)|([+-]?[0-9]*(\.[0-9]+)?(e[+-]?[0-9]+)?))\s*$/,a=function(e){return e.substr(0,e.length-1)},f=0;for(i=0;i<n.length;i++){var l=(n[i]+",").match(o),c;if(l.length>0){s[f]=[];for(r=0;r<l.length;r++)c=a(l[r]),u.test(c)?s[f][r]=parseFloat(c):s[f][r]=c;f++}}return s},numeric.toCSV=function(t){var n=numeric.dim(t),r,i,s,o,u,a;s=n[0],o=n[1],a=[];for(r=0;r<s;r++){u=[];for(i=0;i<s;i++)u[i]=t[r][i].toString();a[r]=u.join(", ")}return a.join("\n")+"\n"},numeric.getURL=function(t){var n=new XMLHttpRequest;return n.open("GET",t,!1),n.send(),n},numeric.imageURL=function(t){function n(e){var t=e.length,n,r,i,s,o,u,a,f,l="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=",c="";for(n=0;n<t;n+=3)r=e[n],i=e[n+1],s=e[n+2],o=r>>2,u=((r&3)<<4)+(i>>4),a=((i&15)<<2)+(s>>6),f=s&63,n+1>=t?a=f=64:n+2>=t&&(f=64),c+=l.charAt(o)+l.charAt(u)+l.charAt(a)+l.charAt(f);return c}function r(e,t,n){typeof t=="undefined"&&(t=0),typeof n=="undefined"&&(n=e.length);var r=[0,1996959894,3993919788,2567524794,124634137,1886057615,3915621685,2657392035,249268274,2044508324,3772115230,2547177864,162941995,2125561021,3887607047,2428444049,498536548,1789927666,4089016648,2227061214,450548861,1843258603,4107580753,2211677639,325883990,1684777152,4251122042,2321926636,335633487,1661365465,4195302755,2366115317,997073096,1281953886,3579855332,2724688242,1006888145,1258607687,3524101629,2768942443,901097722,1119000684,3686517206,2898065728,853044451,1172266101,3705015759,2882616665,651767980,1373503546,3369554304,3218104598,565507253,1454621731,3485111705,3099436303,671266974,1594198024,3322730930,2970347812,795835527,1483230225,3244367275,3060149565,1994146192,31158534,2563907772,4023717930,1907459465,112637215,2680153253,3904427059,2013776290,251722036,2517215374,3775830040,2137656763,141376813,2439277719,3865271297,1802195444,476864866,2238001368,4066508878,1812370925,453092731,2181625025,4111451223,1706088902,314042704,2344532202,4240017532,1658658271,366619977,2362670323,4224994405,1303535960,984961486,2747007092,3569037538,1256170817,1037604311,2765210733,3554079995,1131014506,879679996,2909243462,3663771856,1141124467,855842277,2852801631,3708648649,1342533948,654459306,3188396048,3373015174,1466479909,544179635,3110523913,3462522015,1591671054,702138776,2966460450,3352799412,1504918807,783551873,3082640443,3233442989,3988292384,2596254646,62317068,1957810842,3939845945,2647816111,81470997,1943803523,3814918930,2489596804,225274430,2053790376,3826175755,2466906013,167816743,2097651377,4027552580,2265490386,503444072,1762050814,4150417245,2154129355,426522225,1852507879,4275313526,2312317920,282753626,1742555852,4189708143,2394877945,397917763,1622183637,3604390888,2714866558,953729732,1340076626,3518719985,2797360999,1068828381,1219638859,3624741850,2936675148,906185462,1090812512,3747672003,2825379669,829329135,1181335161,3412177804,3160834842,628085408,1382605366,3423369109,3138078467,570562233,1426400815,3317316542,2998733608,733239954,1555261956,3268935591,3050360625,752459403,1541320221,2607071920,3965973030,1969922972,40735498,2617837225,3943577151,1913087877,83908371,2512341634,3803740692,2075208622,213261112,2463272603,3855990285,2094854071,198958881,2262029012,4057260610,1759359992,534414190,2176718541,4139329115,1873836001,414664567,2282248934,4279200368,1711684554,285281116,2405801727,4167216745,1634467795,376229701,2685067896,3608007406,1308918612,956543938,2808555105,3495958263,1231636301,1047427035,2932959818,3654703836,1088359270,936918e3,2847714899,3736837829,1202900863,817233897,3183342108,3401237130,1404277552,615818150,3134207493,3453421203,1423857449,601450431,3009837614,3294710456,1567103746,711928724,3020668471,3272380065,1510334235,755167117],i=-1,s=0,o=e.length,u;for(u=t;u<n;u++)s=(i^e[u])&255,i=i>>>8^r[s];return i^-1}var i=t[0].length,s=t[0][0].length,o,u,a,f,l,c,h,p,d,v,m,g=[137,80,78,71,13,10,26,10,0,0,0,13,73,72,68,82,s>>24&255,s>>16&255,s>>8&255,s&255,i>>24&255,i>>16&255,i>>8&255,i&255,8,2,0,0,0,-1,-2,-3,-4,-5,-6,-7,-8,73,68,65,84,8,29];m=r(g,12,29),g[29]=m>>24&255,g[30]=m>>16&255,g[31]=m>>8&255,g[32]=m&255,o=1,u=0;for(p=0;p<i;p++){p<i-1?g.push(0):g.push(1),c=3*s+1+(p===0)&255,h=3*s+1+(p===0)>>8&255,g.push(c),g.push(h),g.push(~c&255),g.push(~h&255),p===0&&g.push(0);for(d=0;d<s;d++)for(f=0;f<3;f++)c=t[f][p][d],c>255?c=255:c<0?c=0:c=Math.round(c),o=(o+c)%65521,u=(u+o)%65521,g.push(c);g.push(0)}return v=(u<<16)+o,g.push(v>>24&255),g.push(v>>16&255),g.push(v>>8&255),g.push(v&255),l=g.length-41,g[33]=l>>24&255,g[34]=l>>16&255,g[35]=l>>8&255,g[36]=l&255,m=r(g,37),g.push(m>>24&255),g.push(m>>16&255),g.push(m>>8&255),g.push(m&255),g.push(0),g.push(0),g.push(0),g.push(0),g.push(73),g.push(69),g.push(78),g.push(68),g.push(174),g.push(66),g.push(96),g.push(130),"data:image/png;base64,"+n(g)},numeric._dim=function(t){var n=[];while(typeof t=="object")n.push(t.length),t=t[0];return n},numeric.dim=function(t){var n,r;if(typeof t=="object")return n=t[0],typeof n=="object"?(r=n[0],typeof r=="object"?numeric._dim(t):[t.length,n.length]):[t.length];return[]},numeric.mapreduce=function(t,n){return Function("x","accum","_s","_k",'if(typeof accum === "undefined") accum = '+n+";\n"+'if(typeof x === "number") { var xi = x; '+t+"; return accum; }\n"+'if(typeof _s === "undefined") _s = numeric.dim(x);\n'+'if(typeof _k === "undefined") _k = 0;\n'+"var _n = _s[_k];\n"+"var i,xi;\n"+"if(_k < _s.length-1) {\n"+"    for(i=_n-1;i>=0;i--) {\n"+"        accum = arguments.callee(x[i],accum,_s,_k+1);\n"+"    }"+"    return accum;\n"+"}\n"+"for(i=_n-1;i>=1;i-=2) { \n"+"    xi = x[i];\n"+"    "+t+";\n"+"    xi = x[i-1];\n"+"    "+t+";\n"+"}\n"+"if(i === 0) {\n"+"    xi = x[i];\n"+"    "+t+"\n"+"}\n"+"return accum;")},numeric.mapreduce2=function(t,n){return Function("x","var n = x.length;\nvar i,xi;\n"+n+";\n"+"for(i=n-1;i!==-1;--i) { \n"+"    xi = x[i];\n"+"    "+t+";\n"+"}\n"+"return accum;")},numeric.same=function same(e,t){var n,r;if(e instanceof Array&&t instanceof Array){r=e.length;if(r!==t.length)return!1;for(n=0;n<r;n++){if(e[n]===t[n])continue;if(typeof e[n]!="object")return!1;if(!same(e[n],t[n]))return!1}return!0}return!1},numeric.rep=function(t,n,r){typeof r=="undefined"&&(r=0);var i=t[r],s=Array(i),o;if(r===t.length-1){for(o=i-2;o>=0;o-=2)s[o+1]=n,s[o]=n;return o===-1&&(s[0]=n),s}for(o=i-1;o>=0;o--)s[o]=numeric.rep(t,n,r+1);return s},numeric.dotMMsmall=function(t,n){var r,i,s,o,u,a,f,l,c,h,p,d,v,m;o=t.length,u=n.length,a=n[0].length,f=Array(o);for(r=o-1;r>=0;r--){l=Array(a),c=t[r];for(s=a-1;s>=0;s--){h=c[u-1]*n[u-1][s];for(i=u-2;i>=1;i-=2)p=i-1,h+=c[i]*n[i][s]+c[p]*n[p][s];i===0&&(h+=c[0]*n[0][s]),l[s]=h}f[r]=l}return f},numeric._getCol=function(t,n,r){var i=t.length,s;for(s=i-1;s>0;--s)r[s]=t[s][n],--s,r[s]=t[s][n];s===0&&(r[0]=t[0][n])},numeric.dotMMbig=function(t,n){var r=numeric._getCol,i=n.length,s=Array(i),o=t.length,u=n[0].length,a=new Array(o),f,l=numeric.dotVV,c,h,p,d;--i,--o;for(c=o;c!==-1;--c)a[c]=Array(u);--u;for(c=u;c!==-1;--c){r(n,c,s);for(h=o;h!==-1;--h)d=0,f=t[h],a[h][c]=l(f,s)}return a},numeric.dotMV=function(t,n){var r=t.length,i=n.length,s,o=Array(r),u=numeric.dotVV;for(s=r-1;s>=0;s--)o[s]=u(t[s],n);return o},numeric.dotVM=function(t,n){var r,i,s,o,u,a,f,l,c,h,p,d,v,m,g,y,b,w,E;o=t.length,u=n[0].length,f=Array(u);for(s=u-1;s>=0;s--){h=t[o-1]*n[o-1][s];for(i=o-2;i>=1;i-=2)p=i-1,h+=t[i]*n[i][s]+t[p]*n[p][s];i===0&&(h+=t[0]*n[0][s]),f[s]=h}return f},numeric.dotVV=function(t,n){var r,i=t.length,s,o=t[i-1]*n[i-1];for(r=i-2;r>=1;r-=2)s=r-1,o+=t[r]*n[r]+t[s]*n[s];return r===0&&(o+=t[0]*n[0]),o},numeric.dot=function(t,n){var r=numeric.dim;switch(r(t).length*1e3+r(n).length){case 2002:return n.length<10?numeric.dotMMsmall(t,n):numeric.dotMMbig(t,n);case 2001:return numeric.dotMV(t,n);case 1002:return numeric.dotVM(t,n);case 1001:return numeric.dotVV(t,n);case 1e3:return numeric.mulVS(t,n);case 1:return numeric.mulSV(t,n);case 0:return t*n;default:throw new Error("numeric.dot only works on vectors and matrices")}},numeric.diag=function(t){var n,r,i,s=t.length,o=Array(s),u;for(n=s-1;n>=0;n--){u=Array(s),r=n+2;for(i=s-1;i>=r;i-=2)u[i]=0,u[i-1]=0;i>n&&(u[i]=0),u[n]=t[n];for(i=n-1;i>=1;i-=2)u[i]=0,u[i-1]=0;i===0&&(u[0]=0),o[n]=u}return o},numeric.getDiag=function(e){var t=Math.min(e.length,e[0].length),n,r=Array(t);for(n=t-1;n>=1;--n)r[n]=e[n][n],--n,r[n]=e[n][n];return n===0&&(r[0]=e[0][0]),r},numeric.identity=function(t){return numeric.diag(numeric.rep([t],1))},numeric.pointwise=function(t,n,r){typeof r=="undefined"&&(r="");var i=[],s,o=/\[i\]$/,u,a="",f=!1;for(s=0;s<t.length;s++)o.test(t[s])?(u=t[s].substring(0,t[s].length-3),a=u):u=t[s],u==="ret"&&(f=!0),i.push(u);return i[t.length]="_s",i[t.length+1]="_k",i[t.length+2]='if(typeof _s === "undefined") _s = numeric.dim('+a+");\n"+'if(typeof _k === "undefined") _k = 0;\n'+"var _n = _s[_k];\n"+"var i"+(f?"":", ret = Array(_n)")+";\n"+"if(_k < _s.length-1) {\n"+"    for(i=_n-1;i>=0;i--) ret[i] = arguments.callee("+t.join(",")+",_s,_k+1);\n"+"    return ret;\n"+"}\n"+r+"\n"+"for(i=_n-1;i!==-1;--i) {\n"+"    "+n+"\n"+"}\n"+"return ret;",Function.apply(null,i)},numeric.pointwise2=function(t,n,r){typeof r=="undefined"&&(r="");var i=[],s,o=/\[i\]$/,u,a="",f=!1;for(s=0;s<t.length;s++)o.test(t[s])?(u=t[s].substring(0,t[s].length-3),a=u):u=t[s],u==="ret"&&(f=!0),i.push(u);return i[t.length]="var _n = "+a+".length;\n"+"var i"+(f?"":", ret = Array(_n)")+";\n"+r+"\n"+"for(i=_n-1;i!==-1;--i) {\n"+n+"\n"+"}\n"+"return ret;",Function.apply(null,i)},numeric._biforeach=function _biforeach(e,t,n,r,i){if(r===n.length-1){i(e,t);return}var s,o=n[r];for(s=o-1;s>=0;s--)_biforeach(typeof e=="object"?e[s]:e,typeof t=="object"?t[s]:t,n,r+1,i)},numeric._biforeach2=function _biforeach2(e,t,n,r,i){if(r===n.length-1)return i(e,t);var s,o=n[r],u=Array(o);for(s=o-1;s>=0;--s)u[s]=_biforeach2(typeof e=="object"?e[s]:e,typeof t=="object"?t[s]:t,n,r+1,i);return u},numeric._foreach=function _foreach(e,t,n,r){if(n===t.length-1){r(e);return}var i,s=t[n];for(i=s-1;i>=0;i--)_foreach(e[i],t,n+1,r)},numeric._foreach2=function _foreach2(e,t,n,r){if(n===t.length-1)return r(e);var i,s=t[n],o=Array(s);for(i=s-1;i>=0;i--)o[i]=_foreach2(e[i],t,n+1,r);return o},numeric.ops2={add:"+",sub:"-",mul:"*",div:"/",mod:"%",and:"&&",or:"||",eq:"===",neq:"!==",lt:"<",gt:">",leq:"<=",geq:">=",band:"&",bor:"|",bxor:"^",lshift:"<<",rshift:">>",rrshift:">>>"},numeric.opseq={addeq:"+=",subeq:"-=",muleq:"*=",diveq:"/=",modeq:"%=",lshifteq:"<<=",rshifteq:">>=",rrshifteq:">>>=",bandeq:"&=",boreq:"|=",bxoreq:"^="},numeric.mathfuns=["abs","acos","asin","atan","ceil","cos","exp","floor","log","round","sin","sqrt","tan","isNaN","isFinite"],numeric.mathfuns2=["atan2","pow","max","min"],numeric.ops1={neg:"-",not:"!",bnot:"~",clone:""},numeric.mapreducers={any:["if(xi) return true;","var accum = false;"],all:["if(!xi) return false;","var accum = true;"],sum:["accum += xi;","var accum = 0;"],prod:["accum *= xi;","var accum = 1;"],norm2Squared:["accum += xi*xi;","var accum = 0;"],norminf:["accum = max(accum,abs(xi));","var accum = 0, max = Math.max, abs = Math.abs;"],norm1:["accum += abs(xi)","var accum = 0, abs = Math.abs;"],sup:["accum = max(accum,xi);","var accum = -Infinity, max = Math.max;"],inf:["accum = min(accum,xi);","var accum = Infinity, min = Math.min;"]},function(){var e,t;for(e=0;e<numeric.mathfuns2.length;++e)t=numeric.mathfuns2[e],numeric.ops2[t]=t;for(e in numeric.ops2)if(numeric.ops2.hasOwnProperty(e)){t=numeric.ops2[e];var n,r,i="";numeric.myIndexOf.call(numeric.mathfuns2,e)!==-1?(i="var "+t+" = Math."+t+";\n",n=function(e,n,r){return e+" = "+t+"("+n+","+r+")"},r=function(e,n){return e+" = "+t+"("+e+","+n+")"}):(n=function(e,n,r){return e+" = "+n+" "+t+" "+r},numeric.opseq.hasOwnProperty(e+"eq")?r=function(e,n){return e+" "+t+"= "+n}:r=function(e,n){return e+" = "+e+" "+t+" "+n}),numeric[e+"VV"]=numeric.pointwise2(["x[i]","y[i]"],n("ret[i]","x[i]","y[i]"),i),numeric[e+"SV"]=numeric.pointwise2(["x","y[i]"],n("ret[i]","x","y[i]"),i),numeric[e+"VS"]=numeric.pointwise2(["x[i]","y"],n("ret[i]","x[i]","y"),i),numeric[e]=Function("var n = arguments.length, i, x = arguments[0], y;\nvar VV = numeric."+e+"VV, VS = numeric."+e+"VS, SV = numeric."+e+"SV;\n"+"var dim = numeric.dim;\n"+"for(i=1;i!==n;++i) { \n"+"  y = arguments[i];\n"+'  if(typeof x === "object") {\n'+'      if(typeof y === "object") x = numeric._biforeach2(x,y,dim(x),0,VV);\n'+"      else x = numeric._biforeach2(x,y,dim(x),0,VS);\n"+'  } else if(typeof y === "object") x = numeric._biforeach2(x,y,dim(y),0,SV);\n'+"  else "+r("x","y")+"\n"+"}\nreturn x;\n"),numeric[t]=numeric[e],numeric[e+"eqV"]=numeric.pointwise2(["ret[i]","x[i]"],r("ret[i]","x[i]"),i),numeric[e+"eqS"]=numeric.pointwise2(["ret[i]","x"],r("ret[i]","x"),i),numeric[e+"eq"]=Function("var n = arguments.length, i, x = arguments[0], y;\nvar V = numeric."+e+"eqV, S = numeric."+e+"eqS\n"+"var s = numeric.dim(x);\n"+"for(i=1;i!==n;++i) { \n"+"  y = arguments[i];\n"+'  if(typeof y === "object") numeric._biforeach(x,y,s,0,V);\n'+"  else numeric._biforeach(x,y,s,0,S);\n"+"}\nreturn x;\n")}for(e=0;e<numeric.mathfuns2.length;++e)t=numeric.mathfuns2[e],delete numeric.ops2[t];for(e=0;e<numeric.mathfuns.length;++e)t=numeric.mathfuns[e],numeric.ops1[t]=t;for(e in numeric.ops1)numeric.ops1.hasOwnProperty(e)&&(i="",t=numeric.ops1[e],numeric.myIndexOf.call(numeric.mathfuns,e)!==-1&&Math.hasOwnProperty(t)&&(i="var "+t+" = Math."+t+";\n"),numeric[e+"eqV"]=numeric.pointwise2(["ret[i]"],"ret[i] = "+t+"(ret[i]);",i),numeric[e+"eq"]=Function("x",'if(typeof x !== "object") return '+t+"x\n"+"var i;\n"+"var V = numeric."+e+"eqV;\n"+"var s = numeric.dim(x);\n"+"numeric._foreach(x,s,0,V);\n"+"return x;\n"),numeric[e+"V"]=numeric.pointwise2(["x[i]"],"ret[i] = "+t+"(x[i]);",i),numeric[e]=Function("x",'if(typeof x !== "object") return '+t+"(x)\n"+"var i;\n"+"var V = numeric."+e+"V;\n"+"var s = numeric.dim(x);\n"+"return numeric._foreach2(x,s,0,V);\n"));for(e=0;e<numeric.mathfuns.length;++e)t=numeric.mathfuns[e],delete numeric.ops1[t];for(e in numeric.mapreducers)numeric.mapreducers.hasOwnProperty(e)&&(t=numeric.mapreducers[e],numeric[e+"V"]=numeric.mapreduce2(t[0],t[1]),numeric[e]=Function("x","s","k",t[1]+'if(typeof x !== "object") {'+"    xi = x;\n"+t[0]+";\n"+"    return accum;\n"+"}"+'if(typeof s === "undefined") s = numeric.dim(x);\n'+'if(typeof k === "undefined") k = 0;\n'+"if(k === s.length-1) return numeric."+e+"V(x);\n"+"var xi;\n"+"var n = x.length, i;\n"+"for(i=n-1;i!==-1;--i) {\n"+"   xi = arguments.callee(x[i]);\n"+t[0]+";\n"+"}\n"+"return accum;\n"))}(),numeric.truncVV=numeric.pointwise(["x[i]","y[i]"],"ret[i] = round(x[i]/y[i])*y[i];","var round = Math.round;"),numeric.truncVS=numeric.pointwise(["x[i]","y"],"ret[i] = round(x[i]/y)*y;","var round = Math.round;"),numeric.truncSV=numeric.pointwise(["x","y[i]"],"ret[i] = round(x/y[i])*y[i];","var round = Math.round;"),numeric.trunc=function(t,n){return typeof t=="object"?typeof n=="object"?numeric.truncVV(t,n):numeric.truncVS(t,n):typeof n=="object"?numeric.truncSV(t,n):Math.round(t/n)*n},numeric.inv=function(t){var n=numeric.dim(t),r=Math.abs,i=n[0],s=n[1],o=numeric.clone(t),u,a,f=numeric.identity(i),l,c,h,p,d,t;for(p=0;p<s;++p){var v=-1,m=-1;for(h=p;h!==i;++h)d=r(o[h][p]),d>m&&(v=h,m=d);a=o[v],o[v]=o[p],o[p]=a,c=f[v],f[v]=f[p],f[p]=c,t=a[p];for(d=p;d!==s;++d)a[d]/=t;for(d=s-1;d!==-1;--d)c[d]/=t;for(h=i-1;h!==-1;--h)if(h!==p){u=o[h],l=f[h],t=u[p];for(d=p+1;d!==s;++d)u[d]-=a[d]*t;for(d=s-1;d>0;--d)l[d]-=c[d]*t,--d,l[d]-=c[d]*t;d===0&&(l[0]-=c[0]*t)}}return f},numeric.det=function(t){var n=numeric.dim(t);if(n.length!==2||n[0]!==n[1])throw new Error("numeric: det() only works on square matrices");var r=n[0],i=1,s,o,u,a=numeric.clone(t),f,l,c,h,p,d,v;for(o=0;o<r-1;o++){u=o;for(s=o+1;s<r;s++)Math.abs(a[s][o])>Math.abs(a[u][o])&&(u=s);u!==o&&(h=a[u],a[u]=a[o],a[o]=h,i*=-1),f=a[o];for(s=o+1;s<r;s++){l=a[s],c=l[o]/f[o];for(u=o+1;u<r-1;u+=2)p=u+1,l[u]-=f[u]*c,l[p]-=f[p]*c;u!==r&&(l[u]-=f[u]*c)}if(f[o]===0)return 0;i*=f[o]}return i*a[o][o]},numeric.transpose=function(t){var n,r,i=t.length,s=t[0].length,o=Array(s),u,a,f;for(r=0;r<s;r++)o[r]=Array(i);for(n=i-1;n>=1;n-=2){a=t[n],u=t[n-1];for(r=s-1;r>=1;--r)f=o[r],f[n]=a[r],f[n-1]=u[r],--r,f=o[r],f[n]=a[r],f[n-1]=u[r];r===0&&(f=o[0],f[n]=a[0],f[n-1]=u[0])}if(n===0){u=t[0];for(r=s-1;r>=1;--r)o[r][0]=u[r],--r,o[r][0]=u[r];r===0&&(o[0][0]=u[0])}return o},numeric.negtranspose=function(t){var n,r,i=t.length,s=t[0].length,o=Array(s),u,a,f;for(r=0;r<s;r++)o[r]=Array(i);for(n=i-1;n>=1;n-=2){a=t[n],u=t[n-1];for(r=s-1;r>=1;--r)f=o[r],f[n]=-a[r],f[n-1]=-u[r],--r,f=o[r],f[n]=-a[r],f[n-1]=-u[r];r===0&&(f=o[0],f[n]=-a[0],f[n-1]=-u[0])}if(n===0){u=t[0];for(r=s-1;r>=1;--r)o[r][0]=-u[r],--r,o[r][0]=-u[r];r===0&&(o[0][0]=-u[0])}return o},numeric._random=function _random(e,t){var n,r=e[t],i=Array(r),s;if(t===e.length-1){s=Math.random;for(n=r-1;n>=1;n-=2)i[n]=s(),i[n-1]=s();return n===0&&(i[0]=s()),i}for(n=r-1;n>=0;n--)i[n]=_random(e,t+1);return i},numeric.random=function(t){return numeric._random(t,0)},numeric.norm2=function(t){return Math.sqrt(numeric.norm2Squared(t))},numeric.linspace=function(t,n,r){typeof r=="undefined"&&(r=Math.max(Math.round(n-t)+1,1));if(r<2)return r===1?[t]:[];var i,s=Array(r);r--;for(i=r;i>=0;i--)s[i]=(i*n+(r-i)*t)/r;return s},numeric.getBlock=function(t,n,r){function s(e,t){var o,u=n[t],a=r[t]-u,f=Array(a);if(t===i.length-1){for(o=a;o>=0;o--)f[o]=e[o+u];return f}for(o=a;o>=0;o--)f[o]=s(e[o+u],t+1);return f}var i=numeric.dim(t);return s(t,0)},numeric.setBlock=function(t,n,r,i){function o(e,t,i){var u,a=n[i],f=r[i]-a;if(i===s.length-1)for(u=f;u>=0;u--)e[u+a]=t[u];for(u=f;u>=0;u--)o(e[u+a],t[u],i+1)}var s=numeric.dim(t);return o(t,i,0),t},numeric.getRange=function(t,n,r){var i=n.length,s=r.length,o,u,a=Array(i),f,l;for(o=i-1;o!==-1;--o){a[o]=Array(s),f=a[o],l=t[n[o]];for(u=s-1;u!==-1;--u)f[u]=l[r[u]]}return a},numeric.blockMatrix=function(t){var n=numeric.dim(t);if(n.length<4)return numeric.blockMatrix([t]);var r=n[0],i=n[1],s,o,u,a,f;s=0,o=0;for(u=0;u<r;++u)s+=t[u][0].length;for(a=0;a<i;++a)o+=t[0][a][0].length;var l=Array(s);for(u=0;u<s;++u)l[u]=Array(o);var c=0,h,p,d,v,m;for(u=0;u<r;++u){h=o;for(a=i-1;a!==-1;--a){f=t[u][a],h-=f[0].length;for(d=f.length-1;d!==-1;--d){m=f[d],p=l[c+d];for(v=m.length-1;v!==-1;--v)p[h+v]=m[v]}}c+=t[u][0].length}return l},numeric.tensor=function(t,n){if(typeof t=="number"||typeof n=="number")return numeric.mul(t,n);var r=numeric.dim(t),i=numeric.dim(n);if(r.length!==1||i.length!==1)throw new Error("numeric: tensor product is only defined for vectors");var s=r[0],o=i[0],u=Array(s),a,f,l,c;for(f=s-1;f>=0;f--){a=Array(o),c=t[f];for(l=o-1;l>=3;--l)a[l]=c*n[l],--l,a[l]=c*n[l],--l,a[l]=c*n[l],--l,a[l]=c*n[l];while(l>=0)a[l]=c*n[l],--l;u[f]=a}return u},numeric.T=function(t,n){this.x=t,this.y=n},numeric.t=function(t,n){return new numeric.T(t,n)},numeric.Tbinop=function(t,n,r,i,s){var o=numeric.indexOf;if(typeof s!="string"){var u;s="";for(u in numeric)numeric.hasOwnProperty(u)&&(t.indexOf(u)>=0||n.indexOf(u)>=0||r.indexOf(u)>=0||i.indexOf(u)>=0)&&u.length>1&&(s+="var "+u+" = numeric."+u+";\n")}return Function(["y"],"var x = this;\nif(!(y instanceof numeric.T)) { y = new numeric.T(y); }\n"+s+"\n"+"if(x.y) {"+"  if(y.y) {"+"    return new numeric.T("+i+");\n"+"  }\n"+"  return new numeric.T("+r+");\n"+"}\n"+"if(y.y) {\n"+"  return new numeric.T("+n+");\n"+"}\n"+"return new numeric.T("+t+");\n")},numeric.T.prototype.add=numeric.Tbinop("add(x.x,y.x)","add(x.x,y.x),y.y","add(x.x,y.x),x.y","add(x.x,y.x),add(x.y,y.y)"),numeric.T.prototype.sub=numeric.Tbinop("sub(x.x,y.x)","sub(x.x,y.x),neg(y.y)","sub(x.x,y.x),x.y","sub(x.x,y.x),sub(x.y,y.y)"),numeric.T.prototype.mul=numeric.Tbinop("mul(x.x,y.x)","mul(x.x,y.x),mul(x.x,y.y)","mul(x.x,y.x),mul(x.y,y.x)","sub(mul(x.x,y.x),mul(x.y,y.y)),add(mul(x.x,y.y),mul(x.y,y.x))"),numeric.T.prototype.reciprocal=function(){var t=numeric.mul,n=numeric.div;if(this.y){var r=numeric.add(t(this.x,this.x),t(this.y,this.y));return new numeric.T(n(this.x,r),n(numeric.neg(this.y),r))}return new T(n(1,this.x))},numeric.T.prototype.div=function div(e){e instanceof numeric.T||(e=new numeric.T(e));if(e.y)return this.mul(e.reciprocal());var div=numeric.div;return this.y?new numeric.T(div(this.x,e.x),div(this.y,e.x)):new numeric.T(div(this.x,e.x))},numeric.T.prototype.dot=numeric.Tbinop("dot(x.x,y.x)","dot(x.x,y.x),dot(x.x,y.y)","dot(x.x,y.x),dot(x.y,y.x)","sub(dot(x.x,y.x),dot(x.y,y.y)),add(dot(x.x,y.y),dot(x.y,y.x))"),numeric.T.prototype.transpose=function(){var t=numeric.transpose,n=this.x,r=this.y;return r?new numeric.T(t(n),t(r)):new numeric.T(t(n))},numeric.T.prototype.transjugate=function(){var t=numeric.transpose,n=this.x,r=this.y;return r?new numeric.T(t(n),numeric.negtranspose(r)):new numeric.T(t(n))},numeric.Tunop=function(t,n,r){return typeof r!="string"&&(r=""),Function("var x = this;\n"+r+"\n"+"if(x.y) {"+"  "+n+";\n"+"}\n"+t+";\n")},numeric.T.prototype.exp=numeric.Tunop("return new numeric.T(ex)","return new numeric.T(mul(cos(x.y),ex),mul(sin(x.y),ex))","var ex = numeric.exp(x.x), cos = numeric.cos, sin = numeric.sin, mul = numeric.mul;"),numeric.T.prototype.conj=numeric.Tunop("return new numeric.T(x.x);","return new numeric.T(x.x,numeric.neg(x.y));"),numeric.T.prototype.neg=numeric.Tunop("return new numeric.T(neg(x.x));","return new numeric.T(neg(x.x),neg(x.y));","var neg = numeric.neg;"),numeric.T.prototype.sin=numeric.Tunop("return new numeric.T(numeric.sin(x.x))","return x.exp().sub(x.neg().exp()).div(new numeric.T(0,2));"),numeric.T.prototype.cos=numeric.Tunop("return new numeric.T(numeric.cos(x.x))","return x.exp().add(x.neg().exp()).div(2);"),numeric.T.prototype.abs=numeric.Tunop("return new numeric.T(numeric.abs(x.x));","return new numeric.T(numeric.sqrt(numeric.add(mul(x.x,x.x),mul(x.y,x.y))));","var mul = numeric.mul;"),numeric.T.prototype.log=numeric.Tunop("return new numeric.T(numeric.log(x.x));","var theta = new numeric.T(numeric.atan2(x.y,x.x)), r = x.abs();\nreturn new numeric.T(numeric.log(r.x),theta.x);"),numeric.T.prototype.norm2=numeric.Tunop("return numeric.norm2(x.x);","var f = numeric.norm2Squared;\nreturn Math.sqrt(f(x.x)+f(x.y));"),numeric.T.prototype.inv=function(){var t=this;if(typeof t.y=="undefined")return new numeric.T(numeric.inv(t.x));var n=t.x.length,r,i,s,o=numeric.identity(n),u=numeric.rep([n,n],0),a=numeric.clone(t.x),f=numeric.clone(t.y),l,c,h,p,d,v,m,g,r,i,s,y,b,w,E,S,x,T;for(r=0;r<n;r++){w=a[r][r],E=f[r][r],y=w*w+E*E,s=r;for(i=r+1;i<n;i++)w=a[i][r],E=f[i][r],b=w*w+E*E,b>y&&(s=i,y=b);s!==r&&(T=a[r],a[r]=a[s],a[s]=T,T=f[r],f[r]=f[s],f[s]=T,T=o[r],o[r]=o[s],o[s]=T,T=u[r],u[r]=u[s],u[s]=T),l=a[r],c=f[r],d=o[r],v=u[r],w=l[r],E=c[r];for(i=r+1;i<n;i++)S=l[i],x=c[i],l[i]=(S*w+x*E)/y,c[i]=(x*w-S*E)/y;for(i=0;i<n;i++)S=d[i],x=v[i],d[i]=(S*w+x*E)/y,v[i]=(x*w-S*E)/y;for(i=r+1;i<n;i++){h=a[i],p=f[i],m=o[i],g=u[i],w=h[r],E=p[r];for(s=r+1;s<n;s++)S=l[s],x=c[s],h[s]-=S*w-x*E,p[s]-=x*w+S*E;for(s=0;s<n;s++)S=d[s],x=v[s],m[s]-=S*w-x*E,g[s]-=x*w+S*E}}for(r=n-1;r>0;r--){d=o[r],v=u[r];for(i=r-1;i>=0;i--){m=o[i],g=u[i],w=a[i][r],E=f[i][r];for(s=n-1;s>=0;s--)S=d[s],x=v[s],m[s]-=w*S-E*x,g[s]-=w*x+E*S}}return new numeric.T(o,u)},numeric.T.prototype.get=function(t){var n=this.x,r=this.y,i=0,s,o=t.length;if(r){while(i<o)s=t[i],n=n[s],r=r[s],i++;return new numeric.T(n,r)}while(i<o)s=t[i],n=n[s],i++;return new numeric.T(n)},numeric.T.prototype.set=function(t,n){var r=this.x,i=this.y,s=0,o,u=t.length,a=n.x,f=n.y;if(u===0)return f?this.y=f:i&&(this.y=undefined),this.x=r,this;if(f){i||(i=numeric.rep(numeric.dim(r),0),this.y=i);while(s<u-1)o=t[s],r=r[o],i=i[o],s++;return o=t[s],r[o]=a,i[o]=f,this}if(i){while(s<u-1)o=t[s],r=r[o],i=i[o],s++;return o=t[s],r[o]=a,a instanceof Array?i[o]=numeric.rep(numeric.dim(a),0):i[o]=0,this}while(s<u-1)o=t[s],r=r[o],s++;return o=t[s],r[o]=a,this},numeric.T.prototype.getRows=function(t,n){var r=n-t+1,i,s=Array(r),o,u=this.x,a=this.y;for(i=t;i<=n;i++)s[i-t]=u[i];if(a){o=Array(r);for(i=t;i<=n;i++)o[i-t]=a[i];return new numeric.T(s,o)}return new numeric.T(s)},numeric.T.prototype.setRows=function(t,n,r){var i,s=this.x,o=this.y,u=r.x,a=r.y;for(i=t;i<=n;i++)s[i]=u[i-t];if(a){o||(o=numeric.rep(numeric.dim(s),0),this.y=o);for(i=t;i<=n;i++)o[i]=a[i-t]}else if(o)for(i=t;i<=n;i++)o[i]=numeric.rep([u[i-t].length],0);return this},numeric.T.prototype.getRow=function(t){var n=this.x,r=this.y;return r?new numeric.T(n[t],r[t]):new numeric.T(n[t])},numeric.T.prototype.setRow=function(t,n){var r=this.x,i=this.y,s=n.x,o=n.y;return r[t]=s,o?(i||(i=numeric.rep(numeric.dim(r),0),this.y=i),i[t]=o):i&&(i=numeric.rep([s.length],0)),this},numeric.T.prototype.getBlock=function(t,n){var r=this.x,i=this.y,s=numeric.getBlock;return i?new numeric.T(s(r,t,n),s(i,t,n)):new numeric.T(s(r,t,n))},numeric.T.prototype.setBlock=function(t,n,r){r instanceof numeric.T||(r=new numeric.T(r));var i=this.x,s=this.y,o=numeric.setBlock,u=r.x,a=r.y;if(a)return s||(this.y=numeric.rep(numeric.dim(this),0),s=this.y),o(i,t,n,u),o(s,t,n,a),this;o(i,t,n,u),s&&o(s,t,n,numeric.rep(numeric.dim(u),0))},numeric.T.rep=function(t,n){var r=numeric.T;n instanceof r||(n=new r(n));var i=n.x,s=n.y,o=numeric.rep;return s?new r(o(t,i),o(t,s)):new r(o(t,i))},numeric.T.diag=function diag(e){e instanceof numeric.T||(e=new numeric.T(e));var t=e.x,n=e.y,diag=numeric.diag;return n?new numeric.T(diag(t),diag(n)):new numeric.T(diag(t))},numeric.T.eig=function(){if(this.y)throw new Error("eig: not implemented for complex matrices.");return numeric.eig(this.x)},numeric.T.identity=function(t){return new numeric.T(numeric.identity(t))},numeric.T.prototype.getDiag=function(){var t=numeric,n=this.x,r=this.y;return r?new t.T(t.getDiag(n),t.getDiag(r)):new t.T(t.getDiag(n))},numeric.house=function(t){var n=numeric.clone(t),r=t[0]>=0?1:-1,i=r*numeric.norm2(t);n[0]+=i;var s=numeric.norm2(n);if(s===0)throw new Error("eig: internal error");return numeric.div(n,s)},numeric.toUpperHessenberg=function(t){var n=numeric.dim(t);if(n.length!==2||n[0]!==n[1])throw new Error("numeric: toUpperHessenberg() only works on square matrices");var r=n[0],i,s,o,u,a,f=numeric.clone(t),l,c,h,p,d=numeric.identity(r),v;for(s=0;s<r-2;s++){u=Array(r-s-1);for(i=s+1;i<r;i++)u[i-s-1]=f[i][s];if(numeric.norm2(u)>0){a=numeric.house(u),l=numeric.getBlock(f,[s+1,s],[r-1,r-1]),c=numeric.tensor(a,numeric.dot(a,l));for(i=s+1;i<r;i++){h=f[i],p=c[i-s-1];for(o=s;o<r;o++)h[o]-=2*p[o-s]}l=numeric.getBlock(f,[0,s+1],[r-1,r-1]),c=numeric.tensor(numeric.dot(l,a),a);for(i=0;i<r;i++){h=f[i],p=c[i];for(o=s+1;o<r;o++)h[o]-=2*p[o-s-1]}l=Array(r-s-1);for(i=s+1;i<r;i++)l[i-s-1]=d[i];c=numeric.tensor(a,numeric.dot(a,l));for(i=s+1;i<r;i++){v=d[i],p=c[i-s-1];for(o=0;o<r;o++)v[o]-=2*p[o]}}}return{H:f,Q:d}},numeric.epsilon=2.220446049250313e-16,numeric.QRFrancis=function(e,t){typeof t=="undefined"&&(t=1e4),e=numeric.clone(e);var n=numeric.clone(e),r=numeric.dim(e),i=r[0],s,o,u,a,f,l,c,h,p,d=numeric.identity(i),v,m,g,y,b,w,E,S,x;if(i<3)return{Q:d,B:[[0,i-1]]};var T=numeric.epsilon;for(x=0;x<t;x++){for(E=0;E<i-1;E++)if(Math.abs(e[E+1][E])<T*(Math.abs(e[E][E])+Math.abs(e[E+1][E+1]))){var N=numeric.QRFrancis(numeric.getBlock(e,[0,0],[E,E]),t),C=numeric.QRFrancis(numeric.getBlock(e,[E+1,E+1],[i-1,i-1]),t);g=Array(E+1);for(w=0;w<=E;w++)g[w]=d[w];y=numeric.dot(N.Q,g);for(w=0;w<=E;w++)d[w]=y[w];g=Array(i-E-1);for(w=E+1;w<i;w++)g[w-E-1]=d[w];y=numeric.dot(C.Q,g);for(w=E+1;w<i;w++)d[w]=y[w-E-1];return{Q:d,B:N.B.concat(numeric.add(C.B,E+1))}}u=e[i-2][i-2],a=e[i-2][i-1],f=e[i-1][i-2],l=e[i-1][i-1],h=u+l,c=u*l-a*f,p=numeric.getBlock(e,[0,0],[2,2]);if(h*h>=4*c){var k,L;k=.5*(h+Math.sqrt(h*h-4*c)),L=.5*(h-Math.sqrt(h*h-4*c)),p=numeric.add(numeric.sub(numeric.dot(p,p),numeric.mul(p,k+L)),numeric.diag(numeric.rep([3],k*L)))}else p=numeric.add(numeric.sub(numeric.dot(p,p),numeric.mul(p,h)),numeric.diag(numeric.rep([3],c)));s=[p[0][0],p[1][0],p[2][0]],o=numeric.house(s),g=[e[0],e[1],e[2]],y=numeric.tensor(o,numeric.dot(o,g));for(w=0;w<3;w++){m=e[w],b=y[w];for(S=0;S<i;S++)m[S]-=2*b[S]}g=numeric.getBlock(e,[0,0],[i-1,2]),y=numeric.tensor(numeric.dot(g,o),o);for(w=0;w<i;w++){m=e[w],b=y[w];for(S=0;S<3;S++)m[S]-=2*b[S]}g=[d[0],d[1],d[2]],y=numeric.tensor(o,numeric.dot(o,g));for(w=0;w<3;w++){v=d[w],b=y[w];for(S=0;S<i;S++)v[S]-=2*b[S]}var A;for(E=0;E<i-2;E++){for(S=E;S<=E+1;S++)if(Math.abs(e[S+1][S])<T*(Math.abs(e[S][S])+Math.abs(e[S+1][S+1]))){var N=numeric.QRFrancis(numeric.getBlock(e,[0,0],[S,S]),t),C=numeric.QRFrancis(numeric.getBlock(e,[S+1,S+1],[i-1,i-1]),t);g=Array(S+1);for(w=0;w<=S;w++)g[w]=d[w];y=numeric.dot(N.Q,g);for(w=0;w<=S;w++)d[w]=y[w];g=Array(i-S-1);for(w=S+1;w<i;w++)g[w-S-1]=d[w];y=numeric.dot(C.Q,g);for(w=S+1;w<i;w++)d[w]=y[w-S-1];return{Q:d,B:N.B.concat(numeric.add(C.B,S+1))}}A=Math.min(i-1,E+3),s=Array(A-E);for(w=E+1;w<=A;w++)s[w-E-1]=e[w][E];o=numeric.house(s),g=numeric.getBlock(e,[E+1,E],[A,i-1]),y=numeric.tensor(o,numeric.dot(o,g));for(w=E+1;w<=A;w++){m=e[w],b=y[w-E-1];for(S=E;S<i;S++)m[S]-=2*b[S-E]}g=numeric.getBlock(e,[0,E+1],[i-1,A]),y=numeric.tensor(numeric.dot(g,o),o);for(w=0;w<i;w++){m=e[w],b=y[w];for(S=E+1;S<=A;S++)m[S]-=2*b[S-E-1]}g=Array(A-E);for(w=E+1;w<=A;w++)g[w-E-1]=d[w];y=numeric.tensor(o,numeric.dot(o,g));for(w=E+1;w<=A;w++){v=d[w],b=y[w-E-1];for(S=0;S<i;S++)v[S]-=2*b[S]}}}throw new Error("numeric: eigenvalue iteration does not converge -- increase maxiter?")},numeric.eig=function(t,n){var r=numeric.toUpperHessenberg(t),i=numeric.QRFrancis(r.H,n),s=numeric.T,o=t.length,u,a,f=!1,l=i.B,c=numeric.dot(i.Q,numeric.dot(r.H,numeric.transpose(i.Q))),h=new s(numeric.dot(i.Q,r.Q)),p,d=l.length,v,m,g,y,b,w,E,S,x,T,N,C,k,L,A=Math.sqrt;for(a=0;a<d;a++){u=l[a][0];if(u!==l[a][1]){v=u+1,m=c[u][u],g=c[u][v],y=c[v][u],b=c[v][v];if(g===0&&y===0)continue;w=-m-b,E=m*b-g*y,S=w*w-4*E,S>=0?(w<0?x=-0.5*(w-A(S)):x=-0.5*(w+A(S)),k=(m-x)*(m-x)+g*g,L=y*y+(b-x)*(b-x),k>L?(k=A(k),N=(m-x)/k,C=g/k):(L=A(L),N=y/L,C=(b-x)/L),p=new s([[C,-N],[N,C]]),h.setRows(u,v,p.dot(h.getRows(u,v)))):(x=-0.5*w,T=.5*A(-S),k=(m-x)*(m-x)+g*g,L=y*y+(b-x)*(b-x),k>L?(k=A(k+T*T),N=(m-x)/k,C=g/k,x=0,T/=k):(L=A(L+T*T),N=y/L,C=(b-x)/L,x=T/L,T=0),p=new s([[C,-N],[N,C]],[[x,
+T],[T,-x]]),h.setRows(u,v,p.dot(h.getRows(u,v))))}}var O=h.dot(t).dot(h.transjugate()),o=t.length,M=numeric.T.identity(o);for(v=0;v<o;v++)if(v>0)for(a=v-1;a>=0;a--){var _=O.get([a,a]),D=O.get([v,v]);if(!numeric.neq(_.x,D.x)&&!numeric.neq(_.y,D.y)){M.setRow(v,M.getRow(a));continue}x=O.getRow(a).getBlock([a],[v-1]),T=M.getRow(v).getBlock([a],[v-1]),M.set([v,a],O.get([a,v]).neg().sub(x.dot(T)).div(_.sub(D)))}for(v=0;v<o;v++)x=M.getRow(v),M.setRow(v,x.div(x.norm2()));return M=M.transpose(),M=h.transjugate().dot(M),{lambda:O.getDiag(),E:M}},numeric.ccsSparse=function(t){var n=t.length,r,i,s,o,u=[];for(s=n-1;s!==-1;--s){i=t[s];for(o in i){o=parseInt(o);while(o>=u.length)u[u.length]=0;i[o]!==0&&u[o]++}}var r=u.length,a=Array(r+1);a[0]=0;for(s=0;s<r;++s)a[s+1]=a[s]+u[s];var f=Array(a[r]),l=Array(a[r]);for(s=n-1;s!==-1;--s){i=t[s];for(o in i)i[o]!==0&&(u[o]--,f[a[o]+u[o]]=s,l[a[o]+u[o]]=i[o])}return[a,f,l]},numeric.ccsFull=function(t){var n=t[0],r=t[1],i=t[2],s=numeric.ccsDim(t),o=s[0],u=s[1],a,f,l,c,h,p=numeric.rep([o,u],0);for(a=0;a<u;a++){l=n[a],c=n[a+1];for(f=l;f<c;++f)p[r[f]][a]=i[f]}return p},numeric.ccsTSolve=function(t,n,r,i,s){function h(e){var t;if(r[e]!==0)return;r[e]=1;for(t=o[e];t<o[e+1];++t)h(u[t]);s[c]=e,++c}var o=t[0],u=t[1],a=t[2],f=o.length-1,l=Math.max,c=0;typeof i=="undefined"&&(r=numeric.rep([f],0)),typeof i=="undefined"&&(i=numeric.linspace(0,r.length-1)),typeof s=="undefined"&&(s=[]);var p,d,v,m,g,y,b,w,E;for(p=i.length-1;p!==-1;--p)h(i[p]);s.length=c;for(p=s.length-1;p!==-1;--p)r[s[p]]=0;for(p=i.length-1;p!==-1;--p)d=i[p],r[d]=n[d];for(p=s.length-1;p!==-1;--p){d=s[p],v=o[d],m=l(o[d+1],v);for(g=v;g!==m;++g)if(u[g]===d){r[d]/=a[g];break}E=r[d];for(g=v;g!==m;++g)y=u[g],y!==d&&(r[y]-=E*a[g])}return r},numeric.ccsDFS=function(t){this.k=Array(t),this.k1=Array(t),this.j=Array(t)},numeric.ccsDFS.prototype.dfs=function(t,n,r,i,s,o){var u=0,a,f=s.length,l=this.k,c=this.k1,h=this.j,p,d;if(i[t]!==0)return;i[t]=1,h[0]=t,l[0]=p=n[t],c[0]=d=n[t+1];for(;;)if(p>=d){s[f]=h[u];if(u===0)return;++f,--u,p=l[u],d=c[u]}else a=o[r[p]],i[a]===0?(i[a]=1,l[u]=p,++u,h[u]=a,p=n[a],c[u]=d=n[a+1]):++p},numeric.ccsLPSolve=function(t,n,r,i,s,o,u){var a=t[0],f=t[1],l=t[2],c=a.length-1,h=0,p=n[0],d=n[1],v=n[2],m,g,y,b,w,E,S,x,T,N,C,k;g=p[s],y=p[s+1],i.length=0;for(m=g;m<y;++m)u.dfs(o[d[m]],a,f,r,i,o);for(m=i.length-1;m!==-1;--m)r[i[m]]=0;for(m=g;m!==y;++m)b=o[d[m]],r[b]=v[m];for(m=i.length-1;m!==-1;--m){b=i[m],E=a[b],S=a[b+1];for(x=E;x<S;++x)if(o[f[x]]===b){r[b]/=l[x];break}k=r[b];for(x=E;x<S;++x)T=o[f[x]],T!==b&&(r[T]-=k*l[x])}return r},numeric.ccsLUP1=function(t,n){var r=t[0].length-1,i=[numeric.rep([r+1],0),[],[]],s=[numeric.rep([r+1],0),[],[]],o=i[0],u=i[1],a=i[2],f=s[0],l=s[1],c=s[2],h=numeric.rep([r],0),p=numeric.rep([r],0),d,v,m,g,y,b,w,E,S,x,T=numeric.ccsLPSolve,N=Math.max,C=Math.abs,k=numeric.linspace(0,r-1),L=numeric.linspace(0,r-1),A=new numeric.ccsDFS(r);typeof n=="undefined"&&(n=1);for(d=0;d<r;++d){T(i,t,h,p,d,L,A),b=-1,w=-1;for(v=p.length-1;v!==-1;--v){m=p[v];if(m<=d)continue;E=C(h[m]),E>b&&(w=m,b=E)}C(h[d])<n*b&&(v=k[d],b=k[w],k[d]=b,L[b]=d,k[w]=v,L[v]=w,b=h[d],h[d]=h[w],h[w]=b),b=o[d],w=f[d],S=h[d],u[b]=k[d],a[b]=1,++b;for(v=p.length-1;v!==-1;--v)m=p[v],E=h[m],p[v]=0,h[m]=0,m<=d?(l[w]=m,c[w]=E,++w):(u[b]=k[m],a[b]=E/S,++b);o[d+1]=b,f[d+1]=w}for(v=u.length-1;v!==-1;--v)u[v]=L[u[v]];return{L:i,U:s,P:k,Pinv:L}},numeric.ccsDFS0=function(t){this.k=Array(t),this.k1=Array(t),this.j=Array(t)},numeric.ccsDFS0.prototype.dfs=function(t,n,r,i,s,o,u){var a=0,f,l=s.length,c=this.k,h=this.k1,p=this.j,d,v;if(i[t]!==0)return;i[t]=1,p[0]=t,c[0]=d=n[o[t]],h[0]=v=n[o[t]+1];for(;;){if(isNaN(d))throw new Error("Ow!");if(d>=v){s[l]=o[p[a]];if(a===0)return;++l,--a,d=c[a],v=h[a]}else f=r[d],i[f]===0?(i[f]=1,c[a]=d,++a,p[a]=f,f=o[f],d=n[f],h[a]=v=n[f+1]):++d}},numeric.ccsLPSolve0=function(t,n,r,i,s,o,u,a){var f=t[0],l=t[1],c=t[2],h=f.length-1,p=0,d=n[0],v=n[1],m=n[2],g,y,b,w,E,S,x,T,N,C,k,L;y=d[s],b=d[s+1],i.length=0;for(g=y;g<b;++g)a.dfs(v[g],f,l,r,i,o,u);for(g=i.length-1;g!==-1;--g)w=i[g],r[u[w]]=0;for(g=y;g!==b;++g)w=v[g],r[w]=m[g];for(g=i.length-1;g!==-1;--g){w=i[g],N=u[w],S=f[w],x=f[w+1];for(T=S;T<x;++T)if(l[T]===N){r[N]/=c[T];break}L=r[N];for(T=S;T<x;++T)r[l[T]]-=L*c[T];r[N]=L}},numeric.ccsLUP0=function(t,n){var r=t[0].length-1,i=[numeric.rep([r+1],0),[],[]],s=[numeric.rep([r+1],0),[],[]],o=i[0],u=i[1],a=i[2],f=s[0],l=s[1],c=s[2],h=numeric.rep([r],0),p=numeric.rep([r],0),d,v,m,g,y,b,w,E,S,x,T=numeric.ccsLPSolve0,N=Math.max,C=Math.abs,k=numeric.linspace(0,r-1),L=numeric.linspace(0,r-1),A=new numeric.ccsDFS0(r);typeof n=="undefined"&&(n=1);for(d=0;d<r;++d){T(i,t,h,p,d,L,k,A),b=-1,w=-1;for(v=p.length-1;v!==-1;--v){m=p[v];if(m<=d)continue;E=C(h[k[m]]),E>b&&(w=m,b=E)}C(h[k[d]])<n*b&&(v=k[d],b=k[w],k[d]=b,L[b]=d,k[w]=v,L[v]=w),b=o[d],w=f[d],S=h[k[d]],u[b]=k[d],a[b]=1,++b;for(v=p.length-1;v!==-1;--v)m=p[v],E=h[k[m]],p[v]=0,h[k[m]]=0,m<=d?(l[w]=m,c[w]=E,++w):(u[b]=k[m],a[b]=E/S,++b);o[d+1]=b,f[d+1]=w}for(v=u.length-1;v!==-1;--v)u[v]=L[u[v]];return{L:i,U:s,P:k,Pinv:L}},numeric.ccsLUP=numeric.ccsLUP0,numeric.ccsDim=function(t){return[numeric.sup(t[1])+1,t[0].length-1]},numeric.ccsGetBlock=function(t,n,r){var i=numeric.ccsDim(t),s=i[0],o=i[1];typeof n=="undefined"?n=numeric.linspace(0,s-1):typeof n=="number"&&(n=[n]),typeof r=="undefined"?r=numeric.linspace(0,o-1):typeof r=="number"&&(r=[r]);var u,a,f,l=n.length,c,h=r.length,p,d,v,m=numeric.rep([o],0),g=[],y=[],b=[m,g,y],w=t[0],E=t[1],S=t[2],x=numeric.rep([s],0),T=0,N=numeric.rep([s],0);for(c=0;c<h;++c){d=r[c];var C=w[d],k=w[d+1];for(u=C;u<k;++u)p=E[u],N[p]=1,x[p]=S[u];for(u=0;u<l;++u)v=n[u],N[v]&&(g[T]=u,y[T]=x[n[u]],++T);for(u=C;u<k;++u)p=E[u],N[p]=0;m[c+1]=T}return b},numeric.ccsDot=function(t,n){var r=t[0],i=t[1],s=t[2],o=n[0],u=n[1],a=n[2],f=numeric.ccsDim(t),l=numeric.ccsDim(n),c=f[0],h=f[1],p=l[1],d=numeric.rep([c],0),v=numeric.rep([c],0),m=Array(c),g=numeric.rep([p],0),y=[],b=[],w=[g,y,b],E,S,x,T,N,C,k,L,A,O,M;for(x=0;x!==p;++x){T=o[x],N=o[x+1],A=0;for(S=T;S<N;++S){O=u[S],M=a[S],C=r[O],k=r[O+1];for(E=C;E<k;++E)L=i[E],v[L]===0&&(m[A]=L,v[L]=1,A+=1),d[L]=d[L]+s[E]*M}T=g[x],N=T+A,g[x+1]=N;for(S=A-1;S!==-1;--S)M=T+S,E=m[S],y[M]=E,b[M]=d[E],v[E]=0,d[E]=0;g[x+1]=g[x]+A}return w},numeric.ccsLUPSolve=function(t,n){var r=t.L,i=t.U,s=t.P,o=n[0],u=!1;typeof o!="object"&&(n=[[0,n.length],numeric.linspace(0,n.length-1),n],o=n[0],u=!0);var a=n[1],f=n[2],l=r[0].length-1,c=o.length-1,h=numeric.rep([l],0),p=Array(l),d=numeric.rep([l],0),v=Array(l),m=numeric.rep([c+1],0),g=[],y=[],b=numeric.ccsTSolve,w,E,S,x,T,N,C=0;for(w=0;w<c;++w){T=0,S=o[w],x=o[w+1];for(E=S;E<x;++E)N=t.Pinv[a[E]],v[T]=N,d[N]=f[E],++T;v.length=T,b(r,d,h,v,p);for(E=v.length-1;E!==-1;--E)d[v[E]]=0;b(i,h,d,p,v);if(u)return d;for(E=p.length-1;E!==-1;--E)h[p[E]]=0;for(E=v.length-1;E!==-1;--E)N=v[E],g[C]=N,y[C]=d[N],d[N]=0,++C;m[w+1]=C}return[m,g,y]},numeric.ccsbinop=function(t,n){return typeof n=="undefined"&&(n=""),Function("X","Y","var Xi = X[0], Xj = X[1], Xv = X[2];\nvar Yi = Y[0], Yj = Y[1], Yv = Y[2];\nvar n = Xi.length-1,m = Math.max(numeric.sup(Xj),numeric.sup(Yj))+1;\nvar Zi = numeric.rep([n+1],0), Zj = [], Zv = [];\nvar x = numeric.rep([m],0),y = numeric.rep([m],0);\nvar xk,yk,zk;\nvar i,j,j0,j1,k,p=0;\n"+n+"for(i=0;i<n;++i) {\n"+"  j0 = Xi[i]; j1 = Xi[i+1];\n"+"  for(j=j0;j!==j1;++j) {\n"+"    k = Xj[j];\n"+"    x[k] = 1;\n"+"    Zj[p] = k;\n"+"    ++p;\n"+"  }\n"+"  j0 = Yi[i]; j1 = Yi[i+1];\n"+"  for(j=j0;j!==j1;++j) {\n"+"    k = Yj[j];\n"+"    y[k] = Yv[j];\n"+"    if(x[k] === 0) {\n"+"      Zj[p] = k;\n"+"      ++p;\n"+"    }\n"+"  }\n"+"  Zi[i+1] = p;\n"+"  j0 = Xi[i]; j1 = Xi[i+1];\n"+"  for(j=j0;j!==j1;++j) x[Xj[j]] = Xv[j];\n"+"  j0 = Zi[i]; j1 = Zi[i+1];\n"+"  for(j=j0;j!==j1;++j) {\n"+"    k = Zj[j];\n"+"    xk = x[k];\n"+"    yk = y[k];\n"+t+"\n"+"    Zv[j] = zk;\n"+"  }\n"+"  j0 = Xi[i]; j1 = Xi[i+1];\n"+"  for(j=j0;j!==j1;++j) x[Xj[j]] = 0;\n"+"  j0 = Yi[i]; j1 = Yi[i+1];\n"+"  for(j=j0;j!==j1;++j) y[Yj[j]] = 0;\n"+"}\n"+"return [Zi,Zj,Zv];")},function(){var k,A,B,C;for(k in numeric.ops2)isFinite(eval("1"+numeric.ops2[k]+"0"))?A="[Y[0],Y[1],numeric."+k+"(X,Y[2])]":A="NaN",isFinite(eval("0"+numeric.ops2[k]+"1"))?B="[X[0],X[1],numeric."+k+"(X[2],Y)]":B="NaN",isFinite(eval("1"+numeric.ops2[k]+"0"))&&isFinite(eval("0"+numeric.ops2[k]+"1"))?C="numeric.ccs"+k+"MM(X,Y)":C="NaN",numeric["ccs"+k+"MM"]=numeric.ccsbinop("zk = xk "+numeric.ops2[k]+"yk;"),numeric["ccs"+k]=Function("X","Y",'if(typeof X === "number") return '+A+";\n"+'if(typeof Y === "number") return '+B+";\n"+"return "+C+";\n")}(),numeric.ccsScatter=function(t){var n=t[0],r=t[1],i=t[2],s=numeric.sup(r)+1,o=n.length,u=numeric.rep([s],0),a=Array(o),f=Array(o),l=numeric.rep([s],0),c;for(c=0;c<o;++c)l[r[c]]++;for(c=0;c<s;++c)u[c+1]=u[c]+l[c];var h=u.slice(0),p,d;for(c=0;c<o;++c)d=r[c],p=h[d],a[p]=n[c],f[p]=i[c],h[d]=h[d]+1;return[u,a,f]},numeric.ccsGather=function(t){var n=t[0],r=t[1],i=t[2],s=n.length-1,o=r.length,u=Array(o),a=Array(o),f=Array(o),l,c,h,p,d;d=0;for(l=0;l<s;++l){h=n[l],p=n[l+1];for(c=h;c!==p;++c)a[d]=l,u[d]=r[c],f[d]=i[c],++d}return[u,a,f]},numeric.sdim=function dim(e,t,n){typeof t=="undefined"&&(t=[]);if(typeof e!="object")return t;typeof n=="undefined"&&(n=0),n in t||(t[n]=0),e.length>t[n]&&(t[n]=e.length);var r;for(r in e)e.hasOwnProperty(r)&&dim(e[r],t,n+1);return t},numeric.sclone=function clone(e,t,n){typeof t=="undefined"&&(t=0),typeof n=="undefined"&&(n=numeric.sdim(e).length);var r,i=Array(e.length);if(t===n-1){for(r in e)e.hasOwnProperty(r)&&(i[r]=e[r]);return i}for(r in e)e.hasOwnProperty(r)&&(i[r]=clone(e[r],t+1,n));return i},numeric.sdiag=function(t){var n=t.length,r,i=Array(n),s,o,u;for(r=n-1;r>=1;r-=2)s=r-1,i[r]=[],i[r][r]=t[r],i[s]=[],i[s][s]=t[s];return r===0&&(i[0]=[],i[0][0]=t[r]),i},numeric.sidentity=function(t){return numeric.sdiag(numeric.rep([t],1))},numeric.stranspose=function(t){var n=[],r=t.length,i,s,o;for(i in t){if(!t.hasOwnProperty(i))continue;o=t[i];for(s in o){if(!o.hasOwnProperty(s))continue;typeof n[s]!="object"&&(n[s]=[]),n[s][i]=o[s]}}return n},numeric.sLUP=function(t,n){throw new Error("The function numeric.sLUP had a bug in it and has been removed. Please use the new numeric.ccsLUP function instead.")},numeric.sdotMM=function(t,n){var r=t.length,i=n.length,s=numeric.stranspose(n),o=s.length,u,a,f,l,c,h,p=Array(r),d;for(f=r-1;f>=0;f--){d=[],u=t[f];for(c=o-1;c>=0;c--){h=0,a=s[c];for(l in u){if(!u.hasOwnProperty(l))continue;l in a&&(h+=u[l]*a[l])}h&&(d[c]=h)}p[f]=d}return p},numeric.sdotMV=function(t,n){var r=t.length,i,s,o,u=Array(r),a;for(s=r-1;s>=0;s--){i=t[s],a=0;for(o in i){if(!i.hasOwnProperty(o))continue;n[o]&&(a+=i[o]*n[o])}a&&(u[s]=a)}return u},numeric.sdotVM=function(t,n){var r,i,s,o,u=[],a;for(r in t){if(!t.hasOwnProperty(r))continue;s=n[r],o=t[r];for(i in s){if(!s.hasOwnProperty(i))continue;u[i]||(u[i]=0),u[i]+=o*s[i]}}return u},numeric.sdotVV=function(t,n){var r,i=0;for(r in t)t[r]&&n[r]&&(i+=t[r]*n[r]);return i},numeric.sdot=function(t,n){var r=numeric.sdim(t).length,i=numeric.sdim(n).length,s=r*1e3+i;switch(s){case 0:return t*n;case 1001:return numeric.sdotVV(t,n);case 2001:return numeric.sdotMV(t,n);case 1002:return numeric.sdotVM(t,n);case 2002:return numeric.sdotMM(t,n);default:throw new Error("numeric.sdot not implemented for tensors of order "+r+" and "+i)}},numeric.sscatter=function(t){var n=t[0].length,r,i,s,o=t.length,u=[],a;for(i=n-1;i>=0;--i){if(!t[o-1][i])continue;a=u;for(s=0;s<o-2;s++)r=t[s][i],a[r]||(a[r]=[]),a=a[r];a[t[s][i]]=t[s+1][i]}return u},numeric.sgather=function gather(e,t,n){typeof t=="undefined"&&(t=[]),typeof n=="undefined"&&(n=[]);var r,i,s;r=n.length;for(i in e)if(e.hasOwnProperty(i)){n[r]=parseInt(i),s=e[i];if(typeof s=="number"){if(s){if(t.length===0)for(i=r+1;i>=0;--i)t[i]=[];for(i=r;i>=0;--i)t[i].push(n[i]);t[r+1].push(s)}}else gather(s,t,n)}return n.length>r&&n.pop(),t},numeric.cLU=function(t){var n=t[0],r=t[1],i=t[2],s=n.length,o=0,u,a,f,l,c,h;for(u=0;u<s;u++)n[u]>o&&(o=n[u]);o++;var p=Array(o),d=Array(o),v=numeric.rep([o],Infinity),m=numeric.rep([o],-Infinity),g,y,b;for(f=0;f<s;f++)u=n[f],a=r[f],a<v[u]&&(v[u]=a),a>m[u]&&(m[u]=a);for(u=0;u<o-1;u++)m[u]>m[u+1]&&(m[u+1]=m[u]);for(u=o-1;u>=1;u--)v[u]<v[u-1]&&(v[u-1]=v[u]);var w=0,E=0;for(u=0;u<o;u++)d[u]=numeric.rep([m[u]-v[u]+1],0),p[u]=numeric.rep([u-v[u]],0),w+=u-v[u]+1,E+=m[u]-u+1;for(f=0;f<s;f++)u=n[f],d[u][r[f]-v[u]]=i[f];for(u=0;u<o-1;u++){l=u-v[u],g=d[u];for(a=u+1;v[a]<=u&&a<o;a++){c=u-v[a],h=m[u]-u,y=d[a],b=y[c]/g[l];if(b){for(f=1;f<=h;f++)y[f+c]-=b*g[f+l];p[a][u-v[a]]=b}}}var g=[],y=[],S=[],x=[],T=[],N=[],s,C,k;s=0,C=0;for(u=0;u<o;u++){l=v[u],c=m[u],k=d[u];for(a=u;a<=c;a++)k[a-l]&&(g[s]=u,y[s]=a,S[s]=k[a-l],s++);k=p[u];for(a=l;a<u;a++)k[a-l]&&(x[C]=u,T[C]=a,N[C]=k[a-l],C++);x[C]=u,T[C]=u,N[C]=1,C++}return{U:[g,y,S],L:[x,T,N]}},numeric.cLUsolve=function(t,n){var r=t.L,i=t.U,s=numeric.clone(n),o=r[0],u=r[1],a=r[2],f=i[0],l=i[1],c=i[2],h=f.length,p=o.length,d=s.length,v,m,g;g=0;for(v=0;v<d;v++){while(u[g]<v)s[v]-=a[g]*s[u[g]],g++;g++}g=h-1;for(v=d-1;v>=0;v--){while(l[g]>v)s[v]-=c[g]*s[l[g]],g--;s[v]/=c[g],g--}return s},numeric.cgrid=function(t,n){typeof t=="number"&&(t=[t,t]);var r=numeric.rep(t,-1),i,s,o;if(typeof n!="function")switch(n){case"L":n=function(e,n){return e>=t[0]/2||n<t[1]/2};break;default:n=function(e,t){return!0}}o=0;for(i=1;i<t[0]-1;i++)for(s=1;s<t[1]-1;s++)n(i,s)&&(r[i][s]=o,o++);return r},numeric.cdelsq=function(t){var n=[[-1,0],[0,-1],[0,1],[1,0]],r=numeric.dim(t),i=r[0],s=r[1],o,u,a,f,l,c=[],h=[],p=[];for(o=1;o<i-1;o++)for(u=1;u<s-1;u++){if(t[o][u]<0)continue;for(a=0;a<4;a++){f=o+n[a][0],l=u+n[a][1];if(t[f][l]<0)continue;c.push(t[o][u]),h.push(t[f][l]),p.push(-1)}c.push(t[o][u]),h.push(t[o][u]),p.push(4)}return[c,h,p]},numeric.cdotMV=function(t,n){var r,i=t[0],s=t[1],o=t[2],u,a=i.length,f;f=0;for(u=0;u<a;u++)i[u]>f&&(f=i[u]);f++,r=numeric.rep([f],0);for(u=0;u<a;u++)r[i[u]]+=o[u]*n[s[u]];return r},numeric.Spline=function(t,n,r,i,s){this.x=t,this.yl=n,this.yr=r,this.kl=i,this.kr=s},numeric.Spline.prototype._at=function(t,n){var r=this.x,i=this.yl,s=this.yr,o=this.kl,u=this.kr,t,a,f,l,c=numeric.add,h=numeric.sub,p=numeric.mul;a=h(p(o[n],r[n+1]-r[n]),h(s[n+1],i[n])),f=c(p(u[n+1],r[n]-r[n+1]),h(s[n+1],i[n])),l=(t-r[n])/(r[n+1]-r[n]);var d=l*(1-l);return c(c(c(p(1-l,i[n]),p(l,s[n+1])),p(a,d*(1-l))),p(f,d*l))},numeric.Spline.prototype.at=function(t){if(typeof t=="number"){var n=this.x,r=n.length,i,s,o,u=Math.floor,a,f,l;i=0,s=r-1;while(s-i>1)o=u((i+s)/2),n[o]<=t?i=o:s=o;return this._at(t,i)}var r=t.length,c,h=Array(r);for(c=r-1;c!==-1;--c)h[c]=this.at(t[c]);return h},numeric.Spline.prototype.diff=function(){var t=this.x,n=this.yl,r=this.yr,i=this.kl,s=this.kr,o=n.length,u,a,f,l=i,c=s,h=Array(o),p=Array(o),d=numeric.add,v=numeric.mul,m=numeric.div,g=numeric.sub;for(u=o-1;u!==-1;--u)a=t[u+1]-t[u],f=g(r[u+1],n[u]),h[u]=m(d(v(f,6),v(i[u],-4*a),v(s[u+1],-2*a)),a*a),p[u+1]=m(d(v(f,-6),v(i[u],2*a),v(s[u+1],4*a)),a*a);return new numeric.Spline(t,l,c,h,p)},numeric.Spline.prototype.roots=function(){function t(e){return e*e}function n(e,t,n,r,i){var s=n*2-(t-e),o=-r*2+(t-e),u=(i+1)*.5,a=u*(1-u);return(1-u)*e+u*t+s*a*(1-u)+o*a*u}var r=[],i=this.x,s=this.yl,o=this.yr,u=this.kl,a=this.kr;typeof s[0]=="number"&&(s=[s],o=[o],u=[u],a=[a]);var f=s.length,l=i.length-1,c,h,p,d,v,m,g,y,b,w,r=Array(f),E,S,x,T,N,C,k,L,A,O,M,_,D,P,H,B,j,F=Math.sqrt;for(c=0;c!==f;++c){g=s[c],y=o[c],b=u[c],w=a[c],E=[];for(h=0;h!==l;h++){h>0&&y[h]*g[h]<0&&E.push(i[h]),A=i[h+1]-i[h],O=i[h],T=g[h],N=y[h+1],S=b[h]/A,x=w[h+1]/A,L=t(S-x+3*(T-N))+12*x*T,C=x+3*T+2*S-3*N,k=3*(x+S+2*(T-N)),L<=0?(_=C/k,_>i[h]&&_<i[h+1]?M=[i[h],_,i[h+1]]:M=[i[h],i[h+1]]):(_=(C-F(L))/k,D=(C+F(L))/k,M=[i[h]],_>i[h]&&_<i[h+1]&&M.push(_),D>i[h]&&D<i[h+1]&&M.push(D),M.push(i[h+1])),H=M[0],_=this._at(H,h);for(p=0;p<M.length-1;p++){B=M[p+1],D=this._at(B,h);if(_===0){E.push(H),H=B,_=D;continue}if(D===0||_*D>0){H=B,_=D;continue}var I=0;for(;;){j=(_*B-D*H)/(_-D);if(j<=H||j>=B)break;P=this._at(j,h);if(P*D>0)B=j,D=P,I===-1&&(_*=.5),I=-1;else{if(!(P*_>0))break;H=j,_=P,I===1&&(D*=.5),I=1}}E.push(j),H=M[p+1],_=this._at(H,h)}D===0&&E.push(B)}r[c]=E}return typeof this.yl[0]=="number"?r[0]:r},numeric.spline=function(t,n,r,i){var s=t.length,o=[],u=[],a=[],f,l=numeric.sub,c=numeric.mul,h=numeric.add;for(f=s-2;f>=0;f--)u[f]=t[f+1]-t[f],a[f]=l(n[f+1],n[f]);if(typeof r=="string"||typeof i=="string")r=i="periodic";var p=[[],[],[]];switch(typeof r){case"undefined":o[0]=c(3/(u[0]*u[0]),a[0]),p[0].push(0,0),p[1].push(0,1),p[2].push(2/u[0],1/u[0]);break;case"string":o[0]=h(c(3/(u[s-2]*u[s-2]),a[s-2]),c(3/(u[0]*u[0]),a[0])),p[0].push(0,0,0),p[1].push(s-2,0,1),p[2].push(1/u[s-2],2/u[s-2]+2/u[0],1/u[0]);break;default:o[0]=r,p[0].push(0),p[1].push(0),p[2].push(1)}for(f=1;f<s-1;f++)o[f]=h(c(3/(u[f-1]*u[f-1]),a[f-1]),c(3/(u[f]*u[f]),a[f])),p[0].push(f,f,f),p[1].push(f-1,f,f+1),p[2].push(1/u[f-1],2/u[f-1]+2/u[f],1/u[f]);switch(typeof i){case"undefined":o[s-1]=c(3/(u[s-2]*u[s-2]),a[s-2]),p[0].push(s-1,s-1),p[1].push(s-2,s-1),p[2].push(1/u[s-2],2/u[s-2]);break;case"string":p[1][p[1].length-1]=0;break;default:o[s-1]=i,p[0].push(s-1),p[1].push(s-1),p[2].push(1)}typeof o[0]!="number"?o=numeric.transpose(o):o=[o];var d=Array(o.length);if(typeof r=="string")for(f=d.length-1;f!==-1;--f)d[f]=numeric.ccsLUPSolve(numeric.ccsLUP(numeric.ccsScatter(p)),o[f]),d[f][s-1]=d[f][0];else for(f=d.length-1;f!==-1;--f)d[f]=numeric.cLUsolve(numeric.cLU(p),o[f]);return typeof n[0]=="number"?d=d[0]:d=numeric.transpose(d),new numeric.Spline(t,n,n,d,d)},numeric.fftpow2=function fftpow2(e,t){var n=e.length;if(n===1)return;var r=Math.cos,i=Math.sin,s,o,u=Array(n/2),a=Array(n/2),f=Array(n/2),l=Array(n/2);o=n/2;for(s=n-1;s!==-1;--s)--o,f[o]=e[s],l[o]=t[s],--s,u[o]=e[s],a[o]=t[s];fftpow2(u,a),fftpow2(f,l),o=n/2;var c,h=-6.283185307179586/n,p,d;for(s=n-1;s!==-1;--s)--o,o===-1&&(o=n/2-1),c=h*s,p=r(c),d=i(c),e[s]=u[o]+p*f[o]-d*l[o],t[s]=a[o]+p*l[o]+d*f[o]},numeric._ifftpow2=function _ifftpow2(e,t){var n=e.length;if(n===1)return;var r=Math.cos,i=Math.sin,s,o,u=Array(n/2),a=Array(n/2),f=Array(n/2),l=Array(n/2);o=n/2;for(s=n-1;s!==-1;--s)--o,f[o]=e[s],l[o]=t[s],--s,u[o]=e[s],a[o]=t[s];_ifftpow2(u,a),_ifftpow2(f,l),o=n/2;var c,h=6.283185307179586/n,p,d;for(s=n-1;s!==-1;--s)--o,o===-1&&(o=n/2-1),c=h*s,p=r(c),d=i(c),e[s]=u[o]+p*f[o]-d*l[o],t[s]=a[o]+p*l[o]+d*f[o]},numeric.ifftpow2=function(t,n){numeric._ifftpow2(t,n),numeric.diveq(t,t.length),numeric.diveq(n,n.length)},numeric.convpow2=function(t,n,r,i){numeric.fftpow2(t,n),numeric.fftpow2(r,i);var s,o=t.length,u,a,f,l;for(s=o-1;s!==-1;--s)u=t[s],f=n[s],a=r[s],l=i[s],t[s]=u*a-f*l,n[s]=u*l+f*a;numeric.ifftpow2(t,n)},numeric.T.prototype.fft=function(){var t=this.x,n=this.y,r=t.length,i=Math.log,s=i(2),o=Math.ceil(i(2*r-1)/s),u=Math.pow(2,o),a=numeric.rep([u],0),f=numeric.rep([u],0),l=Math.cos,c=Math.sin,h,p=-3.141592653589793/r,d,v=numeric.rep([u],0),m=numeric.rep([u],0),g=Math.floor(r/2);for(h=0;h<r;h++)v[h]=t[h];if(typeof n!="undefined")for(h=0;h<r;h++)m[h]=n[h];a[0]=1;for(h=1;h<=u/2;h++)d=p*h*h,a[h]=l(d),f[h]=c(d),a[u-h]=l(d),f[u-h]=c(d);var y=new numeric.T(v,m),b=new numeric.T(a,f);return y=y.mul(b),numeric.convpow2(y.x,y.y,numeric.clone(b.x),numeric.neg(b.y)),y=y.mul(b),y.x.length=r,y.y.length=r,y},numeric.T.prototype.ifft=function(){var t=this.x,n=this.y,r=t.length,i=Math.log,s=i(2),o=Math.ceil(i(2*r-1)/s),u=Math.pow(2,o),a=numeric.rep([u],0),f=numeric.rep([u],0),l=Math.cos,c=Math.sin,h,p=3.141592653589793/r,d,v=numeric.rep([u],0),m=numeric.rep([u],0),g=Math.floor(r/2);for(h=0;h<r;h++)v[h]=t[h];if(typeof n!="undefined")for(h=0;h<r;h++)m[h]=n[h];a[0]=1;for(h=1;h<=u/2;h++)d=p*h*h,a[h]=l(d),f[h]=c(d),a[u-h]=l(d),f[u-h]=c(d);var y=new numeric.T(v,m),b=new numeric.T(a,f);return y=y.mul(b),numeric.convpow2(y.x,y.y,numeric.clone(b.x),numeric.neg(b.y)),y=y.mul(b),y.x.length=r,y.y.length=r,y.div(r)},numeric.gradient=function(t,n){var r=n.length,i=t(n);if(isNaN(i))throw new Error("gradient: f(x) is a NaN!");var s=Math.max,o,u=numeric.clone(n),a,f,l=Array(r),c=numeric.div,h=numeric.sub,p,d,s=Math.max,v=.001,m=Math.abs,g=Math.min,y,b,w,E=0,S,x,T;for(o=0;o<r;o++){var N=s(1e-6*i,1e-8);for(;;){++E;if(E>20)throw new Error("Numerical gradient fails");u[o]=n[o]+N,a=t(u),u[o]=n[o]-N,f=t(u),u[o]=n[o];if(isNaN(a)||isNaN(f)){N/=16;continue}l[o]=(a-f)/(2*N),y=n[o]-N,b=n[o],w=n[o]+N,S=(a-i)/N,x=(i-f)/N,T=s(m(l[o]),m(i),m(a),m(f),m(y),m(b),m(w),1e-8),p=g(s(m(S-l[o]),m(x-l[o]),m(S-x))/T,N/T);if(!(p>v))break;N/=16}}return l},numeric.uncmin=function(t,n,r,i,s,o,u){var a=numeric.gradient;typeof u=="undefined"&&(u={}),typeof r=="undefined"&&(r=1e-8),typeof i=="undefined"&&(i=function(e){return a(t,e)}),typeof s=="undefined"&&(s=1e3),n=numeric.clone(n);var f=n.length,l=t(n),c,h;if(isNaN(l))throw new Error("uncmin: f(x0) is a NaN!");var p=Math.max,d=numeric.norm2;r=p(r,numeric.epsilon);var v,m,g,y=u.Hinv||numeric.identity(f),b=numeric.dot,w=numeric.inv,E=numeric.sub,S=numeric.add,x=numeric.tensor,T=numeric.div,N=numeric.mul,C=numeric.all,k=numeric.isFinite,L=numeric.neg,A=0,O,M,_,D,P,H,B,j,F,I,q,R,U="";m=i(n);while(A<s){if(typeof o=="function"&&o(A,n,l,m,y)){U="Callback returned true";break}if(!C(k(m))){U="Gradient has Infinity or NaN";break}v=L(b(y,m));if(!C(k(v))){U="Search direction has Infinity or NaN";break}I=d(v);if(I<r){U="Newton step smaller than tol";break}F=1,h=b(m,v),_=n;while(A<s){if(F*I<r)break;M=N(v,F),_=S(n,M),c=t(_);if(c-l>=.1*F*h||isNaN(c)){F*=.5,++A;continue}break}if(F*I<r){U="Line search step size smaller than tol";break}if(A===s){U="maxit reached during line search";break}g=i(_),D=E(g,m),B=b(D,M),P=b(y,D),y=E(S(y,N((B+b(D,P))/(B*B),x(M,M))),T(S(x(P,M),x(M,P)),B)),n=_,l=c,m=g,++A}return{solution:n,f:l,gradient:m,invHessian:y,iterations:A,message:U}},numeric.Dopri=function(t,n,r,i,s,o,u){this.x=t,this.y=n,this.f=r,this.ymid=i,this.iterations=s,this.events=u,this.message=o},numeric.Dopri.prototype._at=function(t,n){function r(e){return e*e}var i=this,s=i.x,o=i.y,u=i.f,a=i.ymid,f=s.length,l,c,h,p,d,v,t,m=Math.floor,g,y=.5,b=numeric.add,w=numeric.mul,E=numeric.sub,S,x,T;return l=s[n],c=s[n+1],p=o[n],d=o[n+1],g=c-l,h=l+y*g,v=a[n],S=E(u[n],w(p,1/(l-h)+2/(l-c))),x=E(u[n+1],w(d,1/(c-h)+2/(c-l))),T=[r(t-c)*(t-h)/r(l-c)/(l-h),r(t-l)*r(t-c)/r(l-h)/r(c-h),r(t-l)*(t-h)/r(c-l)/(c-h),(t-l)*r(t-c)*(t-h)/r(l-c)/(l-h),(t-c)*r(t-l)*(t-h)/r(l-c)/(c-h)],b(b(b(b(w(p,T[0]),w(v,T[1])),w(d,T[2])),w(S,T[3])),w(x,T[4]))},numeric.Dopri.prototype.at=function(t){var n,r,i,s=Math.floor;if(typeof t!="number"){var o=t.length,u=Array(o);for(n=o-1;n!==-1;--n)u[n]=this.at(t[n]);return u}var a=this.x;n=0,r=a.length-1;while(r-n>1)i=s(.5*(n+r)),a[i]<=t?n=i:r=i;return this._at(t,n)},numeric.dopri=function(t,n,r,i,s,o,u){typeof s=="undefined"&&(s=1e-6),typeof o=="undefined"&&(o=1e3);var a=[t],f=[r],l=[i(t,r)],c,h,p,d,v,m,g=[],y=.2,b=[.075,.225],w=[44/45,-56/15,32/9],E=[19372/6561,-25360/2187,64448/6561,-212/729],S=[9017/3168,-355/33,46732/5247,49/176,-5103/18656],x=[35/384,0,500/1113,125/192,-2187/6784,11/84],T=[.10013431883002395,0,.3918321794184259,-0.02982460176594817,.05893268337240795,-0.04497888809104361,.023904308236133973],N=[.2,.3,.8,8/9,1,1],C=[-71/57600,0,71/16695,-71/1920,17253/339200,-22/525,.025],k=0,L,A,O=(n-t)/10,M=0,_=numeric.add,D=numeric.mul,P,H,B=Math.max,j=Math.min,F=Math.abs,I=numeric.norminf,q=Math.pow,R=numeric.any,U=numeric.lt,z=numeric.and,W=numeric.sub,X,V,$,J=new numeric.Dopri(a,f,l,g,-1,"");typeof u=="function"&&(X=u(t,r));while(t<n&&M<o){++M,t+O>n&&(O=n-t),c=i(t+N[0]*O,_(r,D(y*O,l[k]))),h=i(t+N[1]*O,_(_(r,D(b[0]*O,l[k])),D(b[1]*O,c))),p=i(t+N[2]*O,_(_(_(r,D(w[0]*O,l[k])),D(w[1]*O,c)),D(w[2]*O,h))),d=i(t+N[3]*O,_(_(_(_(r,D(E[0]*O,l[k])),D(E[1]*O,c)),D(E[2]*O,h)),D(E[3]*O,p))),v=i(t+N[4]*O,_(_(_(_(_(r,D(S[0]*O,l[k])),D(S[1]*O,c)),D(S[2]*O,h)),D(S[3]*O,p)),D(S[4]*O,d))),P=_(_(_(_(_(r,D(l[k],O*x[0])),D(h,O*x[2])),D(p,O*x[3])),D(d,O*x[4])),D(v,O*x[5])),m=i(t+O,P),L=_(_(_(_(_(D(l[k],O*C[0]),D(h,O*C[2])),D(p,O*C[3])),D(d,O*C[4])),D(v,O*C[5])),D(m,O*C[6])),typeof L=="number"?H=F(L):H=I(L);if(H>s){O=.2*O*q(s/H,.25);if(t+O===t){J.msg="Step size became too small";break}continue}g[k]=_(_(_(_(_(_(r,D(l[k],O*T[0])),D(h,O*T[2])),D(p,O*T[3])),D(d,O*T[4])),D(v,O*T[5])),D(m,O*T[6])),++k,a[k]=t+O,f[k]=P,l[k]=m;if(typeof u=="function"){var K,Q=t,G=t+.5*O,Y;V=u(G,g[k-1]),$=z(U(X,0),U(0,V)),R($)||(Q=G,G=t+O,X=V,V=u(G,P),$=z(U(X,0),U(0,V)));if(R($)){var Z,et,tt,nt,rt=0,it=1,st=1;for(;;){if(typeof X=="number")Y=(st*V*Q-it*X*G)/(st*V-it*X);else{Y=G;for(A=X.length-1;A!==-1;--A)X[A]<0&&V[A]>0&&(Y=j(Y,(st*V[A]*Q-it*X[A]*G)/(st*V[A]-it*X[A])))}if(Y<=Q||Y>=G)break;K=J._at(Y,k-1),nt=u(Y,K),tt=z(U(X,0),U(0,nt)),R(tt)?(G=Y,V=nt,$=tt,st=1,rt===-1?it*=.5:it=1,rt=-1):(Q=Y,X=nt,it=1,rt===1?st*=.5:st=1,rt=1)}return P=J._at(.5*(t+Y),k-1),J.f[k]=i(Y,K),J.x[k]=Y,J.y[k]=K,J.ymid[k-1]=P,J.events=$,J.iterations=M,J}}t+=O,r=P,X=V,O=j(.8*O*q(s/H,.25),4*O)}return J.iterations=M,J},numeric.LU=function(e,t){t=t||!1;var n=Math.abs,r,i,s,o,u,a,f,l,c,h=e.length,p=h-1,d=new Array(h);t||(e=numeric.clone(e));for(s=0;s<h;++s){f=s,a=e[s],c=n(a[s]);for(i=s+1;i<h;++i)o=n(e[i][s]),c<o&&(c=o,f=i);d[s]=f,f!=s&&(e[s]=e[f],e[f]=a,a=e[s]),u=a[s];for(r=s+1;r<h;++r)e[r][s]/=u;for(r=s+1;r<h;++r){l=e[r];for(i=s+1;i<p;++i)l[i]-=l[s]*a[i],++i,l[i]-=l[s]*a[i];i===p&&(l[i]-=l[s]*a[i])}}return{LU:e,P:d}},numeric.LUsolve=function(t,n){var r,i,s=t.LU,o=s.length,u=numeric.clone(n),a=t.P,f,l,c,h;for(r=o-1;r!==-1;--r)u[r]=n[r];for(r=0;r<o;++r){f=a[r],a[r]!==r&&(h=u[r],u[r]=u[f],u[f]=h),l=s[r];for(i=0;i<r;++i)u[r]-=u[i]*l[i]}for(r=o-1;r>=0;--r){l=s[r];for(i=r+1;i<o;++i)u[r]-=u[i]*l[i];u[r]/=l[r]}return u},numeric.solve=function(t,n,r){return numeric.LUsolve(numeric.LU(t,r),n)},numeric.echelonize=function(t){var n=numeric.dim(t),r=n[0],i=n[1],s=numeric.identity(r),o=Array(r),u,a,f,l,c,h,p,d,v=Math.abs,m=numeric.diveq;t=numeric.clone(t);for(u=0;u<r;++u){f=0,c=t[u],h=s[u];for(a=1;a<i;++a)v(c[f])<v(c[a])&&(f=a);o[u]=f,m(h,c[f]),m(c,c[f]);for(a=0;a<r;++a)if(a!==u){p=t[a],d=p[f];for(l=i-1;l!==-1;--l)p[l]-=c[l]*d;p=s[a];for(l=r-1;l!==-1;--l)p[l]-=h[l]*d}}return{I:s,A:t,P:o}},numeric.__solveLP=function(t,n,r,i,s,o,u){var a=numeric.sum,f=numeric.log,l=numeric.mul,c=numeric.sub,h=numeric.dot,p=numeric.div,d=numeric.add,v=t.length,m=r.length,g,y=!1,b,w=0,E=1,S,x,T=numeric.transpose(n),N=numeric.svd,C=numeric.transpose,k=numeric.leq,L=Math.sqrt,A=Math.abs,O=numeric.muleq,M=numeric.norminf,_=numeric.any,D=Math.min,P=numeric.all,H=numeric.gt,B=Array(v),j=Array(m),F=numeric.rep([m],1),I,q=numeric.solve,R=c(r,h(n,o)),U,z=h(t,t),W;for(U=w;U<s;++U){var X,V,$;for(X=m-1;X!==-1;--X)j[X]=p(n[X],R[X]);var J=C(j);for(X=v-1;X!==-1;--X)B[X]=a(J[X]);E=.25*A(z/h(t,B));var K=100*L(z/h(B,B));if(!isFinite(E)||E>K)E=K;W=d(t,l(E,B)),I=h(J,j);for(X=v-1;X!==-1;--X)I[X][X]+=1;$=q(I,p(W,E),!0);var Q=p(R,h(n,$)),G=1;for(X=m-1;X!==-1;--X)Q[X]<0&&(G=D(G,-0.999*Q[X]));g=c(o,l($,G)),R=c(r,h(n,g));if(!P(H(R,0)))return{solution:o,message:"",iterations:U};o=g;if(E<i)return{solution:g,message:"",iterations:U};if(u){var Y=h(t,W),Z=h(n,W);y=!0;for(X=m-1;X!==-1;--X)if(Y*Z[X]<0){y=!1;break}}else o[v-1]>=0?y=!1:y=!0;if(y)return{solution:g,message:"Unbounded",iterations:U}}return{solution:o,message:"maximum iteration count exceeded",iterations:U}},numeric._solveLP=function(t,n,r,i,s){var o=t.length,u=r.length,a,f=numeric.sum,l=numeric.log,c=numeric.mul,h=numeric.sub,p=numeric.dot,d=numeric.div,v=numeric.add,m=numeric.rep([o],0).concat([1]),g=numeric.rep([u,1],-1),y=numeric.blockMatrix([[n,g]]),b=r,a=numeric.rep([o],0).concat(Math.max(0,numeric.sup(numeric.neg(r)))+1),w=numeric.__solveLP(m,y,b,i,s,a,!1),E=numeric.clone(w.solution);E.length=o;var S=numeric.inf(h(r,p(n,E)));if(S<0)return{solution:NaN,message:"Infeasible",iterations:w.iterations};var x=numeric.__solveLP(t,n,r,i,s-w.iterations,E,!0);return x.iterations+=w.iterations,x},numeric.solveLP=function(t,n,r,i,s,o,u){typeof u=="undefined"&&(u=1e3),typeof o=="undefined"&&(o=numeric.epsilon);if(typeof i=="undefined")return numeric._solveLP(t,n,r,o,u);var a=i.length,f=i[0].length,l=n.length,c=numeric.echelonize(i),h=numeric.rep([f],0),p=c.P,d=[],v;for(v=p.length-1;v!==-1;--v)h[p[v]]=1;for(v=f-1;v!==-1;--v)h[v]===0&&d.push(v);var m=numeric.getRange,g=numeric.linspace(0,a-1),y=numeric.linspace(0,l-1),b=m(i,g,d),w=m(n,y,p),E=m(n,y,d),S=numeric.dot,x=numeric.sub,T=S(w,c.I),N=x(E,S(T,b)),C=x(r,S(T,s)),k=Array(p.length),L=Array(d.length);for(v=p.length-1;v!==-1;--v)k[v]=t[p[v]];for(v=d.length-1;v!==-1;--v)L[v]=t[d[v]];var A=x(L,S(k,S(c.I,b))),O=numeric._solveLP(A,N,C,o,u),M=O.solution;if(M!==M)return O;var _=S(c.I,x(s,S(b,M))),D=Array(t.length);for(v=p.length-1;v!==-1;--v)D[p[v]]=_[v];for(v=d.length-1;v!==-1;--v)D[d[v]]=M[v];return{solution:D,message:O.message,iterations:O.iterations}},numeric.MPStoLP=function(t){function y(e){throw new Error("MPStoLP: "+e+"\nLine "+s+": "+t[s]+"\nCurrent state: "+r[n]+"\n")}t instanceof String&&t.split("\n");var n=0,r=["Initial state","NAME","ROWS","COLUMNS","RHS","BOUNDS","ENDATA"],i=t.length,s,o,u,a=0,f={},l=[],c=0,h={},p=0,d,v=[],m=[],g=[];for(s=0;s<i;++s){u=t[s];var b=u.match(/\S*/g),w=[];for(o=0;o<b.length;++o)b[o]!==""&&w.push(b[o]);if(w.length===0)continue;for(o=0;o<r.length;++o)if(u.substr(0,r[o].length)===r[o])break;if(o<r.length){n=o,o===1&&(d=w[1]);if(o===6)return{name:d,c:v,A:numeric.transpose(m),b:g,rows:f,vars:h};continue}switch(n){case 0:case 1:y("Unexpected line");case 2:switch(w[0]){case"N":a===0?a=w[1]:y("Two or more N rows");break;case"L":f[w[1]]=c,l[c]=1,g[c]=0,++c;break;case"G":f[w[1]]=c,l[c]=-1,g[c]=0,++c;break;case"E":f[w[1]]=c,l[c]=0,g[c]=0,++c;break;default:y("Parse error "+numeric.prettyPrint(w))}break;case 3:h.hasOwnProperty(w[0])||(h[w[0]]=p,v[p]=0,m[p]=numeric.rep([c],0),++p);var E=h[w[0]];for(o=1;o<w.length;o+=2){if(w[o]===a){v[E]=parseFloat(w[o+1]);continue}var S=f[w[o]];m[E][S]=(l[S]<0?-1:1)*parseFloat(w[o+1])}break;case 4:for(o=1;o<w.length;o+=2)g[f[w[o]]]=(l[f[w[o]]]<0?-1:1)*parseFloat(w[o+1]);break;case 5:break;case 6:y("Internal error")}}y("Reached end of file without ENDATA")},numeric.seedrandom={pow:Math.pow,random:Math.random},function(e,t,n,r,i,s,o){function u(e){var t,r,i=this,s=e.length,o=0,u=i.i=i.j=i.m=0;i.S=[],i.c=[],s||(e=[s++]);while(o<n)i.S[o]=o++;for(o=0;o<n;o++)t=i.S[o],u=l(u+t+e[o%s]),r=i.S[u],i.S[o]=r,i.S[u]=t;i.g=function(t){var r=i.S,s=l(i.i+1),o=r[s],u=l(i.j+o),a=r[u];r[s]=a,r[u]=o;var f=r[l(o+a)];while(--t)s=l(s+1),o=r[s],u=l(u+o),a=r[u],r[s]=a,r[u]=o,f=f*n+r[l(o+a)];return i.i=s,i.j=u,f},i.g(n)}function a(e,t,n,r,i){n=[],i=typeof e;if(t&&i=="object")for(r in e)if(r.indexOf("S")<5)try{n.push(a(e[r],t-1))}catch(s){}return n.length?n:e+(i!="string"?"\0":"")}function f(e,t,n,r){e+="",n=0;for(r=0;r<e.length;r++)t[l(r)]=l((n^=t[l(r)]*19)+e.charCodeAt(r));e="";for(r in t)e+=String.fromCharCode(t[r]);return e}function l(e){return e&n-1}t.seedrandom=function(c,h){var p=[],d;return c=f(a(h?[c,e]:arguments.length?c:[(new Date).getTime(),e,window],3),p),d=new u(p),f(d.S,e),t.random=function(){var t=d.g(r),u=o,a=0;while(t<i)t=(t+a)*n,u*=n,a=d.g(1);while(t>=s)t/=2,u/=2,a>>>=1;return(t+a)/u},c},o=t.pow(n,r),i=t.pow(2,i),s=i*2,f(t.random(),e)}([],numeric.seedrandom,256,6,52),function(e){function t(e){if(typeof e!="object")return e;var n=[],r,i=e.length;for(r=0;r<i;r++)n[r+1]=t(e[r]);return n}function n(e){if(typeof e!="object")return e;var t=[],r,i=e.length;for(r=1;r<i;r++)t[r-1]=n(e[r]);return t}function r(e,t,n){var r,i,s,o,u;for(s=1;s<=n;s+=1){e[s][s]=1/e[s][s],u=-e[s][s];for(r=1;r<s;r+=1)e[r][s]=u*e[r][s];o=s+1;if(n<o)break;for(i=o;i<=n;i+=1){u=e[s][i],e[s][i]=0;for(r=1;r<=s;r+=1)e[r][i]=e[r][i]+u*e[r][s]}}}function i(e,t,n,r){var i,s,o,u;for(s=1;s<=n;s+=1){u=0;for(i=1;i<s;i+=1)u+=e[i][s]*r[i];r[s]=(r[s]-u)/e[s][s]}for(o=1;o<=n;o+=1){s=n+1-o,r[s]=r[s]/e[s][s],u=-r[s];for(i=1;i<s;i+=1)r[i]=r[i]+u*e[i][s]}}function s(e,t,n,r){var i,s,o,u,a,f;for(s=1;s<=n;s+=1){r[1]=s,f=0,o=s-1;if(o<1){f=e[s][s]-f;if(f<=0)break;e[s][s]=Math.sqrt(f)}else{for(u=1;u<=o;u+=1){a=e[u][s];for(i=1;i<u;i+=1)a-=e[i][s]*e[i][u];a/=e[u][u],e[u][s]=a,f+=a*a}f=e[s][s]-f;if(f<=0)break;e[s][s]=Math.sqrt(f)}r[1]=0}}function o(e,t,n,o,u,a,f,l,c,h,p,d,v,m,g,y){function V(){m[1]=m[1]+1,E=L;for(b=1;b<=h;b+=1){E+=1,P=-l[b];for(w=1;w<=o;w+=1)P+=f[w][b]*u[w];Math.abs(P)<U&&(P=0);if(b>p)g[E]=P;else{g[E]=-Math.abs(P);if(P>0){for(w=1;w<=o;w+=1)f[w][b]=-f[w][b];l[b]=-l[b]}}}for(b=1;b<=v;b+=1)g[L+d[b]]=0;O=0,D=0;for(b=1;b<=h;b+=1)g[L+b]<D*g[_+b]&&(O=b,D=g[L+b]/g[_+b]);return O===0?999:0}function $(){for(b=1;b<=o;b+=1){P=0;for(w=1;w<=o;w+=1)P+=e[w][b]*f[w][O];g[b]=P}S=N;for(b=1;b<=o;b+=1)g[S+b]=0;for(w=v+1;w<=o;w+=1)for(b=1;b<=o;b+=1)g[S+b]=g[S+b]+e[b][w]*g[w];q=!0;for(b=v;b>=1;b-=1){P=g[b],E=k+b*(b+3)/2,S=E-b;for(w=b+1;w<=v;w+=1)P-=g[E]*g[C+w],E+=w;P/=g[S],g[C+b]=P;if(d[b]<p)break;if(P<0)break;q=!1,T=b}if(!q){H=g[A+T]/g[C+T];for(b=1;b<=v;b+=1){if(d[b]<p)break;if(g[C+b]<0)break;D=g[A+b]/g[C+b],D<
+H&&(H=D,T=b)}}P=0;for(b=N+1;b<=N+o;b+=1)P+=g[b]*g[b];if(Math.abs(P)<=U){if(q)return y[1]=1,999;for(b=1;b<=v;b+=1)g[A+b]=g[A+b]-H*g[C+b];return g[A+v+1]=g[A+v+1]+H,700}P=0;for(b=1;b<=o;b+=1)P+=g[N+b]*f[b][O];B=-g[L+O]/P,R=!0,q||H<B&&(B=H,R=!1);for(b=1;b<=o;b+=1)u[b]=u[b]+B*g[N+b],Math.abs(u[b])<U&&(u[b]=0);a[1]=a[1]+B*P*(B/2+g[A+v+1]);for(b=1;b<=v;b+=1)g[A+b]=g[A+b]-B*g[C+b];g[A+v+1]=g[A+v+1]+B;if(!R){P=-l[O];for(w=1;w<=o;w+=1)P+=u[w]*f[w][O];if(O>p)g[L+O]=P;else{g[L+O]=-Math.abs(P);if(P>0){for(w=1;w<=o;w+=1)f[w][O]=-f[w][O];l[O]=-l[O]}}return 700}v+=1,d[v]=O,E=k+(v-1)*v/2+1;for(b=1;b<=v-1;b+=1)g[E]=g[b],E+=1;if(v===o)g[E]=g[o];else{for(b=o;b>=v+1;b-=1){if(g[b]===0)break;j=Math.max(Math.abs(g[b-1]),Math.abs(g[b])),F=Math.min(Math.abs(g[b-1]),Math.abs(g[b])),g[b-1]>=0?D=Math.abs(j*Math.sqrt(1+F*F/(j*j))):D=-Math.abs(j*Math.sqrt(1+F*F/(j*j))),j=g[b-1]/D,F=g[b]/D;if(j===1)break;if(j===0){g[b-1]=F*D;for(w=1;w<=o;w+=1)D=e[w][b-1],e[w][b-1]=e[w][b],e[w][b]=D}else{g[b-1]=D,I=F/(1+j);for(w=1;w<=o;w+=1)D=j*e[w][b-1]+F*e[w][b],e[w][b]=I*(e[w][b-1]+D)-e[w][b],e[w][b-1]=D}}g[E]=g[v]}return 0}function J(){E=k+T*(T+1)/2+1,S=E+T;if(g[S]===0)return 798;j=Math.max(Math.abs(g[S-1]),Math.abs(g[S])),F=Math.min(Math.abs(g[S-1]),Math.abs(g[S])),g[S-1]>=0?D=Math.abs(j*Math.sqrt(1+F*F/(j*j))):D=-Math.abs(j*Math.sqrt(1+F*F/(j*j))),j=g[S-1]/D,F=g[S]/D;if(j===1)return 798;if(j===0){for(b=T+1;b<=v;b+=1)D=g[S-1],g[S-1]=g[S],g[S]=D,S+=b;for(b=1;b<=o;b+=1)D=e[b][T],e[b][T]=e[b][T+1],e[b][T+1]=D}else{I=F/(1+j);for(b=T+1;b<=v;b+=1)D=j*g[S-1]+F*g[S],g[S]=I*(g[S-1]+D)-g[S],g[S-1]=D,S+=b;for(b=1;b<=o;b+=1)D=j*e[b][T]+F*e[b][T+1],e[b][T+1]=I*(e[b][T]+D)-e[b][T+1],e[b][T]=D}return 0}function K(){S=E-T;for(b=1;b<=T;b+=1)g[S]=g[E],E+=1,S+=1;return g[A+T]=g[A+T+1],d[T]=d[T+1],T+=1,T<v?797:0}function Q(){return g[A+v]=g[A+v+1],g[A+v+1]=0,d[v]=0,v-=1,m[2]=m[2]+1,0}var b,w,E,S,x,T,N,C,k,L,A,O,M,_,D,P,H,B,j,F,I,q,R,U,z,W,X;M=Math.min(o,h),E=2*o+M*(M+5)/2+2*h+1,U=1e-60;do U+=U,z=1+.1*U,W=1+.2*U;while(z<=1||W<=1);for(b=1;b<=o;b+=1)g[b]=t[b];for(b=o+1;b<=E;b+=1)g[b]=0;for(b=1;b<=h;b+=1)d[b]=0;x=[];if(y[1]===0){s(e,n,o,x);if(x[1]!==0){y[1]=2;return}i(e,n,o,t),r(e,n,o)}else{for(w=1;w<=o;w+=1){u[w]=0;for(b=1;b<=w;b+=1)u[w]=u[w]+e[b][w]*t[b]}for(w=1;w<=o;w+=1){t[w]=0;for(b=w;b<=o;b+=1)t[w]=t[w]+e[w][b]*u[b]}}a[1]=0;for(w=1;w<=o;w+=1){u[w]=t[w],a[1]=a[1]+g[w]*u[w],g[w]=0;for(b=w+1;b<=o;b+=1)e[b][w]=0}a[1]=-a[1]/2,y[1]=0,N=o,C=N+o,A=C+M,k=A+M+1,L=k+M*(M+1)/2,_=L+h;for(b=1;b<=h;b+=1){P=0;for(w=1;w<=o;w+=1)P+=f[w][b]*f[w][b];g[_+b]=Math.sqrt(P)}v=0,m[1]=0,m[2]=0,X=0;for(;;){X=V();if(X===999)return;for(;;){X=$();if(X===0)break;if(X===999)return;if(X===700)if(T===v)Q();else{for(;;){J(),X=K();if(X!==797)break}Q()}}}}function u(e,r,i,s,u,a){e=t(e),r=t(r),i=t(i);var f,l,c,h,p,d=[],v=[],m=[],g=[],y=[],b;u=u||0,a=a?t(a):[undefined,0],s=s?t(s):[],l=e.length-1,c=i[1].length-1;if(!s)for(f=1;f<=c;f+=1)s[f]=0;for(f=1;f<=c;f+=1)v[f]=0;h=0,p=Math.min(l,c);for(f=1;f<=l;f+=1)m[f]=0;d[1]=0;for(f=1;f<=2*l+p*(p+5)/2+2*c+1;f+=1)g[f]=0;for(f=1;f<=2;f+=1)y[f]=0;return o(e,r,l,l,m,d,i,s,l,c,u,v,h,y,g,a),b="",a[1]===1&&(b="constraints are inconsistent, no solution!"),a[1]===2&&(b="matrix D in quadratic function is not positive definite!"),{solution:n(m),value:n(d),unconstrained_solution:n(r),iterations:n(y),iact:n(v),message:b}}e.solveQP=u}(numeric),numeric.svd=function(t){function g(e,t){return e=Math.abs(e),t=Math.abs(t),e>t?e*Math.sqrt(1+t*t/e/e):t==0?e:t*Math.sqrt(1+e*e/t/t)}var n,r=numeric.epsilon,i=1e-64/r,s=50,o=0,u=0,a=0,f=0,l=0,c=numeric.clone(t),h=c.length,p=c[0].length;if(h<p)throw"Need more rows than columns";var d=new Array(p),v=new Array(p);for(u=0;u<p;u++)d[u]=v[u]=0;var m=numeric.rep([p,p],0),y=0,b=0,w=0,E=0,S=0,x=0,T=0;for(u=0;u<p;u++){d[u]=b,T=0,l=u+1;for(a=u;a<h;a++)T+=c[a][u]*c[a][u];if(T<=i)b=0;else{y=c[u][u],b=Math.sqrt(T),y>=0&&(b=-b),w=y*b-T,c[u][u]=y-b;for(a=l;a<p;a++){T=0;for(f=u;f<h;f++)T+=c[f][u]*c[f][a];y=T/w;for(f=u;f<h;f++)c[f][a]+=y*c[f][u]}}v[u]=b,T=0;for(a=l;a<p;a++)T+=c[u][a]*c[u][a];if(T<=i)b=0;else{y=c[u][u+1],b=Math.sqrt(T),y>=0&&(b=-b),w=y*b-T,c[u][u+1]=y-b;for(a=l;a<p;a++)d[a]=c[u][a]/w;for(a=l;a<h;a++){T=0;for(f=l;f<p;f++)T+=c[a][f]*c[u][f];for(f=l;f<p;f++)c[a][f]+=T*d[f]}}S=Math.abs(v[u])+Math.abs(d[u]),S>E&&(E=S)}for(u=p-1;u!=-1;u+=-1){if(b!=0){w=b*c[u][u+1];for(a=l;a<p;a++)m[a][u]=c[u][a]/w;for(a=l;a<p;a++){T=0;for(f=l;f<p;f++)T+=c[u][f]*m[f][a];for(f=l;f<p;f++)m[f][a]+=T*m[f][u]}}for(a=l;a<p;a++)m[u][a]=0,m[a][u]=0;m[u][u]=1,b=d[u],l=u}for(u=p-1;u!=-1;u+=-1){l=u+1,b=v[u];for(a=l;a<p;a++)c[u][a]=0;if(b!=0){w=c[u][u]*b;for(a=l;a<p;a++){T=0;for(f=l;f<h;f++)T+=c[f][u]*c[f][a];y=T/w;for(f=u;f<h;f++)c[f][a]+=y*c[f][u]}for(a=u;a<h;a++)c[a][u]=c[a][u]/b}else for(a=u;a<h;a++)c[a][u]=0;c[u][u]+=1}r*=E;for(f=p-1;f!=-1;f+=-1)for(var N=0;N<s;N++){var C=!1;for(l=f;l!=-1;l+=-1){if(Math.abs(d[l])<=r){C=!0;break}if(Math.abs(v[l-1])<=r)break}if(!C){o=0,T=1;var k=l-1;for(u=l;u<f+1;u++){y=T*d[u],d[u]=o*d[u];if(Math.abs(y)<=r)break;b=v[u],w=g(y,b),v[u]=w,o=b/w,T=-y/w;for(a=0;a<h;a++)S=c[a][k],x=c[a][u],c[a][k]=S*o+x*T,c[a][u]=-S*T+x*o}}x=v[f];if(l==f){if(x<0){v[f]=-x;for(a=0;a<p;a++)m[a][f]=-m[a][f]}break}if(N>=s-1)throw"Error: no convergence.";E=v[l],S=v[f-1],b=d[f-1],w=d[f],y=((S-x)*(S+x)+(b-w)*(b+w))/(2*w*S),b=g(y,1),y<0?y=((E-x)*(E+x)+w*(S/(y-b)-w))/E:y=((E-x)*(E+x)+w*(S/(y+b)-w))/E,o=1,T=1;for(u=l+1;u<f+1;u++){b=d[u],S=v[u],w=T*b,b=o*b,x=g(y,w),d[u-1]=x,o=y/x,T=w/x,y=E*o+b*T,b=-E*T+b*o,w=S*T,S*=o;for(a=0;a<p;a++)E=m[a][u-1],x=m[a][u],m[a][u-1]=E*o+x*T,m[a][u]=-E*T+x*o;x=g(y,w),v[u-1]=x,o=y/x,T=w/x,y=o*b+T*S,E=-T*b+o*S;for(a=0;a<h;a++)S=c[a][u-1],x=c[a][u],c[a][u-1]=S*o+x*T,c[a][u]=-S*T+x*o}d[l]=0,d[f]=y,v[f]=E}for(u=0;u<v.length;u++)v[u]<r&&(v[u]=0);for(u=0;u<p;u++)for(a=u-1;a>=0;a--)if(v[a]<v[u]){o=v[a],v[a]=v[u],v[u]=o;for(f=0;f<c.length;f++)n=c[f][u],c[f][u]=c[f][a],c[f][a]=n;for(f=0;f<m.length;f++)n=m[f][u],m[f][u]=m[f][a],m[f][a]=n;u=a}return{U:c,S:v,V:m}};
+/**
+ * Usage for accepting signatures:
+ *  $('.sigPad').signaturePad()
+ *
+ * Usage for displaying previous signatures:
+ *  $('.sigPad').signaturePad({displayOnly:true}).regenerate(sig)
+ *  or
+ *  var api = $('.sigPad').signaturePad({displayOnly:true})
+ *  api.regenerate(sig)
+ */
+(function ($) {
+
+function SignaturePad (selector, options) {
+  /**
+   * Reference to the object for use in public methods
+   *
+   * @private
+   *
+   * @type {Object}
+   */
+  var self = this
+
+  /**
+   * Holds the merged default settings and user passed settings
+   *
+   * @private
+   *
+   * @type {Object}
+   */
+  , settings = $.extend({}, $.fn.signaturePad.defaults, options)
+
+  /**
+   * The current context, as passed by jQuery, of selected items
+   *
+   * @private
+   *
+   * @type {Object}
+   */
+  , context = $(selector)
+
+  /**
+   * jQuery reference to the canvas element inside the signature pad
+   *
+   * @private
+   *
+   * @type {Object}
+   */
+  , canvas = $(settings.canvas, context)
+
+  /**
+   * Dom reference to the canvas element inside the signature pad
+   *
+   * @private
+   *
+   * @type {Object}
+   */
+  , element = canvas.get(0)
+
+  /**
+   * The drawing context for the signature canvas
+   *
+   * @private
+   *
+   * @type {Object}
+   */
+  , canvasContext = null
+
+  /**
+   * Holds the previous point of drawing
+   * Disallows drawing over the same location to make lines more delicate
+   *
+   * @private
+   *
+   * @type {Object}
+   */
+  , previous = {'x': null, 'y': null}
+
+  /**
+   * An array holding all the points and lines to generate the signature
+   * Each item is an object like:
+   * {
+   *   mx: moveTo x coordinate
+   *   my: moveTo y coordinate
+   *   lx: lineTo x coordinate
+   *   lx: lineTo y coordinate
+   * }
+   *
+   * @private
+   *
+   * @type {Array}
+   */
+  , output = []
+
+  /**
+   * Stores a timeout for when the mouse leaves the canvas
+   * If the mouse has left the canvas for a specific amount of time
+   * Stops drawing on the canvas
+   *
+   * @private
+   *
+   * @type {Object}
+   */
+  , mouseLeaveTimeout = false
+
+    /**
+     * Whether the mouse button is currently pressed down or not
+     *
+     * @private
+     *
+     * @type {Boolean}
+     */
+  , mouseButtonDown = false
+
+  /**
+   * Whether the browser is a touch event browser or not
+   *
+   * @private
+   *
+   * @type {Boolean}
+   */
+  , touchable = false
+
+  /**
+   * Whether events have already been bound to the canvas or not
+   *
+   * @private
+   *
+   * @type {Boolean}
+   */
+  , eventsBound = false
+
+  /**
+   * Remembers the default font-size when typing, and will allow it to be scaled for bigger/smaller names
+   *
+   * @private
+   *
+   * @type {Number}
+   */
+  , typeItDefaultFontSize = 30
+
+  /**
+   * Remembers the current font-size when typing
+   *
+   * @private
+   *
+   * @type {Number}
+   */
+  , typeItCurrentFontSize = typeItDefaultFontSize
+
+  /**
+   * Remembers how many characters are in the name field, to help with the scaling feature
+   *
+   * @private
+   *
+   * @type {Number}
+   */
+  , typeItNumChars = 0
+
+
+  , strokePoints = []
+
+  /**
+   * Clears the mouseLeaveTimeout
+   * Resets some other variables that may be active
+   *
+   * @private
+   */
+  function clearMouseLeaveTimeout () {
+    clearTimeout(mouseLeaveTimeout)
+    mouseLeaveTimeout = false
+    mouseButtonDown = false
+  }
+
+  /**
+   * Draws a line on canvas using the mouse position
+   * Checks previous position to not draw over top of previous drawing
+   *  (makes the line really thick and poorly anti-aliased)
+   *
+   * @private
+   *
+   * @param {Object} e The event object
+   * @param {Number} newYOffset A pixel value for drawing the newY, used for drawing a single dot on click
+   */
+  function drawLine (e, newYOffset) {
+    var offset, newX, newY
+
+    e.preventDefault()
+
+    offset = $(e.target).offset()
+
+    clearTimeout(mouseLeaveTimeout)
+    mouseLeaveTimeout = false
+
+    if (typeof e.changedTouches !== 'undefined') {
+      newX = Math.floor(e.changedTouches[0].pageX - offset.left)
+      newY = Math.floor(e.changedTouches[0].pageY - offset.top)
+    } else {
+      newX = Math.floor(e.pageX - offset.left)
+      newY = Math.floor(e.pageY - offset.top)
+    }
+
+    if (previous.x === newX && previous.y === newY)
+      return true
+
+    if (previous.x === null)
+      previous.x = newX
+
+    if (previous.y === null)
+      previous.y = newY
+
+    if (newYOffset)
+      newY += newYOffset
+
+    // We always draw the linear bits
+    canvasContext.beginPath()
+    canvasContext.moveTo(previous.x, previous.y)
+    canvasContext.lineTo(newX, newY)
+    canvasContext.lineCap = settings.penCap
+    canvasContext.stroke()
+    canvasContext.closePath()
+
+
+    // But if we want beziers, we erase the straight lines
+    // As soon as we have enough points to draw a bezier over it
+    if (settings.drawBezierCurves === true) {
+      strokePoints.push({'lx': newX, 'ly': newY,
+                         'mx': previous.x, 'my': previous.y});
+
+      // 4 points to define a bezier * the number of points we need for skipping
+      var maxCacheLength = 4 * settings.bezierSkip;
+
+      if (strokePoints.length >= maxCacheLength) {
+        // "Erase" the linear part that we drew and replace it with the bezier
+        var retrace = output.slice(output.length - maxCacheLength + 2, output.length);
+
+        canvasContext.strokeStyle = settings.bgColour;
+        for (i in retrace) {
+          var point = retrace[i];
+          canvasContext.beginPath()
+          canvasContext.moveTo(point.mx, point.my)
+          canvasContext.lineTo(point.lx, point.ly)
+          canvasContext.lineCap = settings.penCap
+          canvasContext.stroke()
+          canvasContext.closePath()
+        }
+        canvasContext.strokeStyle = settings.penColour
+        strokePath(strokePoints, canvasContext);
+        strokePoints = strokePoints.slice(maxCacheLength - 1, maxCacheLength);
+      }
+    }
+
+    output.push({
+      'lx' : newX
+      , 'ly' : newY
+      , 'mx' : previous.x
+      , 'my' : previous.y
+    })
+
+    previous.x = newX
+    previous.y = newY
+
+    if (settings.onDraw && typeof settings.onDraw === 'function')
+      settings.onDraw.apply(self)
+  }
+
+  /**
+   * Callback registered to mouse/touch events of the canvas
+   * Stops the drawing abilities
+   *
+   * @private
+   *
+   * @param {Object} e The event object
+   */
+  function stopDrawing (e) {
+    if (!!e && !(e.type === "touchend" || e.type == "touchcancel")) {
+      drawLine(e, 1)
+    } else {
+      if (touchable) {
+        canvas.each(function () {
+          this.removeEventListener('touchmove', drawLine)
+        })
+      } else {
+        canvas.unbind('mousemove.signaturepad')
+      }
+
+      if (output.length > 0) {
+        if (settings.onDrawEnd && typeof settings.onDrawEnd === 'function')
+            settings.onDrawEnd.apply(self)
+
+        strokePoints = [];
+        resetCanvas();
+
+        drawSignature(output, canvasContext, false);
+      }
+    }
+
+    previous.x = null
+    previous.y = null
+
+    if (settings.output && output.length > 0)
+      $(settings.output, context).val(JSON.stringify(output))
+  }
+
+  /**
+   * Draws the signature line
+   *
+   * @private
+   */
+  function drawSigLine () {
+    if (!settings.lineWidth)
+      return false
+
+    canvasContext.beginPath()
+    canvasContext.lineWidth = settings.lineWidth
+    canvasContext.strokeStyle = settings.lineColour
+    canvasContext.moveTo(settings.lineMargin, settings.lineTop)
+    canvasContext.lineTo(element.width - settings.lineMargin, settings.lineTop)
+    canvasContext.stroke()
+    canvasContext.closePath()
+  }
+
+  function resetCanvas() {
+    canvasContext.clearRect(0, 0, element.width, element.height)
+    canvasContext.fillStyle = settings.bgColour
+    canvasContext.fillRect(0, 0, element.width, element.height)
+
+    if (!settings.displayOnly)
+      drawSigLine()
+
+    canvasContext.lineWidth = settings.penWidth
+    canvasContext.strokeStyle = settings.penColour
+  }
+
+  /**
+   * Clears all drawings off the canvas and redraws the signature line
+   *
+   * @private
+   */
+  function clearCanvas () {
+    resetCanvas();
+    $(settings.output, context).val('')
+    output = []
+
+    stopDrawing()
+  }
+
+  /**
+   * Callback registered to mouse/touch events of the canvas
+   * Draws a line at the mouse cursor location, starting a new line if necessary
+   *
+   * @private
+   *
+   * @param {Object} e The event object
+   * @param {Object} o The object context registered to the event; canvas
+   */
+  function onMouseMove(e, o) {
+    if (previous.x == null) {
+      drawLine(e, 1)
+    } else {
+      drawLine(e, o)
+    }
+  }
+
+  /**
+   * Callback registered to mouse/touch events of canvas
+   * Triggers the drawLine function
+   *
+   * @private
+   *
+   * @param {Object} e The event object
+   * @param {Object} touchObject The object context registered to the event; canvas
+   */
+  function startDrawing (e, touchObject) {
+    if (touchable) {
+      touchObject.addEventListener('touchmove', onMouseMove, false)
+    } else {
+      canvas.bind('mousemove.signaturepad', onMouseMove)
+    }
+
+    // Draws a single point on initial mouse down, for people with periods in their name
+    drawLine(e, 1)
+  }
+
+  /**
+   * Removes all the mouse events from the canvas
+   *
+   * @private
+   */
+  function disableCanvas () {
+    eventsBound = false
+
+    canvas.each(function () {
+      if (this.removeEventListener) {
+        this.removeEventListener('touchend', stopDrawing)
+        this.removeEventListener('touchcancel', stopDrawing)
+        this.removeEventListener('touchmove', drawLine)
+      }
+
+      if (this.ontouchstart)
+        this.ontouchstart = null;
+    })
+
+    $(document).unbind('mouseup.signaturepad')
+    canvas.unbind('mousedown.signaturepad')
+    canvas.unbind('mousemove.signaturepad')
+    canvas.unbind('mouseleave.signaturepad')
+
+    $(settings.clear, context).unbind('click.signaturepad')
+  }
+
+  /**
+   * Lazy touch event detection
+   * Uses the first press on the canvas to detect either touch or mouse reliably
+   * Will then bind other events as needed
+   *
+   * @private
+   *
+   * @param {Object} e The event object
+   */
+  function initDrawEvents (e) {
+    if (eventsBound)
+      return false
+
+    eventsBound = true
+
+    // Closes open keyboards to free up space
+    $('input').blur();
+
+    if (typeof e.changedTouches !== 'undefined')
+      touchable = true
+
+    if (touchable) {
+      canvas.each(function () {
+        this.addEventListener('touchend', stopDrawing, false)
+        this.addEventListener('touchcancel', stopDrawing, false)
+      })
+
+      canvas.unbind('mousedown.signaturepad')
+    } else {
+      $(document).bind('mouseup.signaturepad', function () {
+        if (mouseButtonDown) {
+          stopDrawing()
+          clearMouseLeaveTimeout()
+        }
+      })
+      canvas.bind('mouseleave.signaturepad', function (e) {
+        if (mouseButtonDown) stopDrawing(e)
+
+        if (mouseButtonDown && !mouseLeaveTimeout) {
+          mouseLeaveTimeout = setTimeout(function () {
+            stopDrawing()
+            clearMouseLeaveTimeout()
+          }, 500)
+        }
+      })
+
+      canvas.each(function () {
+        this.ontouchstart = null
+      })
+    }
+  }
+
+  /**
+   * Triggers the abilities to draw on the canvas
+   * Sets up mouse/touch events, hides and shows descriptions and sets current classes
+   *
+   * @private
+   */
+  function drawIt () {
+    $(settings.typed, context).hide()
+    clearCanvas()
+
+    canvas.each(function () {
+      this.ontouchstart = function (e) {
+        e.preventDefault()
+        mouseButtonDown = true
+        initDrawEvents(e)
+        startDrawing(e, this)
+      }
+    })
+
+    canvas.bind('mousedown.signaturepad', function (e) {
+      e.preventDefault()
+      mouseButtonDown = true
+      initDrawEvents(e)
+      startDrawing(e)
+    })
+
+    $(settings.clear, context).bind('click.signaturepad', function (e) { e.preventDefault(); clearCanvas() })
+
+    $(settings.typeIt, context).bind('click.signaturepad', function (e) { e.preventDefault(); typeIt() })
+    $(settings.drawIt, context).unbind('click.signaturepad')
+    $(settings.drawIt, context).bind('click.signaturepad', function (e) { e.preventDefault() })
+
+    $(settings.typeIt, context).removeClass(settings.currentClass)
+    $(settings.drawIt, context).addClass(settings.currentClass)
+    $(settings.sig, context).addClass(settings.currentClass)
+
+    $(settings.typeItDesc, context).hide()
+    $(settings.drawItDesc, context).show()
+    $(settings.clear, context).show()
+  }
+
+  /**
+   * Triggers the abilities to type in the input for generating a signature
+   * Sets up mouse events, hides and shows descriptions and sets current classes
+   *
+   * @private
+   */
+  function typeIt () {
+    clearCanvas()
+    disableCanvas()
+    $(settings.typed, context).show()
+
+    $(settings.drawIt, context).bind('click.signaturepad', function (e) { e.preventDefault(); drawIt() })
+    $(settings.typeIt, context).unbind('click.signaturepad')
+    $(settings.typeIt, context).bind('click.signaturepad', function (e) { e.preventDefault() })
+
+    $(settings.output, context).val('')
+
+    $(settings.drawIt, context).removeClass(settings.currentClass)
+    $(settings.typeIt, context).addClass(settings.currentClass)
+    $(settings.sig, context).removeClass(settings.currentClass)
+
+    $(settings.drawItDesc, context).hide()
+    $(settings.clear, context).hide()
+    $(settings.typeItDesc, context).show()
+
+    typeItCurrentFontSize = typeItDefaultFontSize = $(settings.typed, context).css('font-size').replace(/px/, '')
+  }
+
+  /**
+   * Callback registered on key up and blur events for input field
+   * Writes the text fields value as Html into an element
+   *
+   * @private
+   *
+   * @param {String} val The value of the input field
+   */
+  function type (val) {
+    var typed = $(settings.typed, context)
+      , cleanedVal = val.replace(/>/g, '&gt;').replace(/</g, '&lt;').trim()
+      , oldLength = typeItNumChars
+      , edgeOffset = typeItCurrentFontSize * 0.5
+
+    typeItNumChars = cleanedVal.length
+    typed.html(cleanedVal)
+
+    if (!cleanedVal) {
+      typed.css('font-size', typeItDefaultFontSize + 'px')
+      return
+    }
+
+    if (typeItNumChars > oldLength && typed.outerWidth() > element.width) {
+      while (typed.outerWidth() > element.width) {
+        typeItCurrentFontSize--
+        typed.css('font-size', typeItCurrentFontSize + 'px')
+      }
+    }
+
+    if (typeItNumChars < oldLength && typed.outerWidth() + edgeOffset < element.width && typeItCurrentFontSize < typeItDefaultFontSize) {
+      while (typed.outerWidth() + edgeOffset < element.width && typeItCurrentFontSize < typeItDefaultFontSize) {
+        typeItCurrentFontSize++
+        typed.css('font-size', typeItCurrentFontSize + 'px')
+      }
+    }
+  }
+
+  /**
+   * Default onBeforeValidate function to clear errors
+   *
+   * @private
+   *
+   * @param {Object} context current context object
+   * @param {Object} settings provided settings
+   */
+  function onBeforeValidate (context, settings) {
+    $('p.' + settings.errorClass, context).remove()
+    context.removeClass(settings.errorClass)
+    $('input, label', context).removeClass(settings.errorClass)
+  }
+
+  /**
+   * Default onFormError function to show errors
+   *
+   * @private
+   *
+   * @param {Object} errors object contains validation errors (e.g. nameInvalid=true)
+   * @param {Object} context current context object
+   * @param {Object} settings provided settings
+   */
+  function onFormError (errors, context, settings) {
+    if (errors.nameInvalid) {
+      context.prepend(['<p class="', settings.errorClass, '">', settings.errorMessage, '</p>'].join(''))
+      $(settings.name, context).focus()
+      $(settings.name, context).addClass(settings.errorClass)
+      $('label[for=' + $(settings.name).attr('id') + ']', context).addClass(settings.errorClass)
+    }
+
+    if (errors.drawInvalid)
+      context.prepend(['<p class="', settings.errorClass, '">', settings.errorMessageDraw, '</p>'].join(''))
+  }
+
+  /**
+   * Validates the form to confirm a name was typed in the field
+   * If drawOnly also confirms that the user drew a signature
+   *
+   * @private
+   *
+   * @return {Boolean}
+   */
+  function validateForm () {
+    var valid = true
+      , errors = {drawInvalid: false, nameInvalid: false}
+      , onBeforeArguments = [context, settings]
+      , onErrorArguments = [errors, context, settings]
+
+    if (settings.onBeforeValidate && typeof settings.onBeforeValidate === 'function') {
+      settings.onBeforeValidate.apply(self,onBeforeArguments)
+    } else {
+      onBeforeValidate.apply(self, onBeforeArguments)
+    }
+
+    if (settings.drawOnly && output.length < 1) {
+      errors.drawInvalid = true
+      valid = false
+    }
+
+    if ($(settings.name, context).val() === '') {
+      errors.nameInvalid = true
+      valid = false
+    }
+
+    if (settings.onFormError && typeof settings.onFormError === 'function') {
+      settings.onFormError.apply(self,onErrorArguments)
+    } else {
+      onFormError.apply(self, onErrorArguments)
+    }
+
+    return valid
+  }
+
+  /**
+   * Draws a 3-sized piece of the signature.  Supposed to be reused by
+   * drawSignature and drawLine
+   *
+   * @private
+   *
+   * @param {Array} Array of at least `bezierSkip` * 4 points
+   * @param {Object} context the canvas context to draw on
+   */
+  function strokePath(paths, context) {
+    var showSampledPoints = false;
+    /* OK, a few thoughts here:
+    - if we have a signature with 250 points and we are going to draw 3 points each time,
+    then we would have ~83 calls to this function .
+    - I think I remembered why I didn't implement the autoscaling feature yesterday...
+    it was because it is really only valid for *drawOnly* mode... think about it, the user
+    draws the signature, then when drawSignature is called, the signature is centered, and
+    zoomed in/out... not a good UX, so maybe autoscaling should only be enabled when
+    drawOnly is enabled and it would be only part of drawSignature when called by regenerate
+    function.
+    */
+    var bezierSkip = 4; // this program samples too fast, so even if we spline it,
+                         // the result is choppy. need to throw away points or do
+                         // a best fit curve of some sort. throwing away points
+                         // is easier. Only use 1/bezierSkip points.
+    var section = [];   // section is an array of path points that will be used
+                        // to compute the bezier control points
+    var sections = [];  // sections is an array of the preceding section arrays
+
+
+    // Separate the sampled points into contiguous sections
+    for (var i = 0; i < paths.length - 1; i++) {
+      // this method of separating the contiguous paths is fucking stupid
+      if (typeof(paths[i]) === 'object' && typeof(paths[i + 1]) === 'object') {
+        var source = paths[i];
+        var destination = paths[i + 1];
+
+        if (source.mx == source.lx && source.my == source.ly) {
+          // don't put duplicated elements in, it screws up
+          // the curves. do nothing here.
+          continue;
+        } else {
+          section.push(source);
+        }
+
+        if ( !(source.lx == destination.mx && source.ly == destination.my) &&
+             !(source.mx == destination.lx && source.my == destination.ly) ) {
+          // when we reach the endpoint or starting point of a signaturepad segment
+          // (i.e. somewhere where the user has either STARTED clicking and dragging,
+          // or somewhehire the user has lifted the mouse), one of these 2 conditions
+          // is met.  save this as a separate section (so we don't try to stroke beziers
+          // where the user has lifted the mouse)
+
+          // First save the section as an independent piece in our sections array
+          sections.push(section);
+          // Now reset the section array to start recording the next section
+          section = [];
+        }
+
+        if (i == paths.length - 2) {
+          section.push(destination);
+          sections.push(section);
+        }
+      }
+    }
+
+    /*
+      Now we have sections of points that we have sampled.
+      Next step is to compute the Bezier control points that will render
+      curves that pass through all the sampled points.
+    */
+
+    var lengths = [];
+    for (k = 0; k < sections.length; k++) {
+
+      // Clean the sections for use. Make sure we're keeping the endpoints, and strip out every 1/bezierSkip points.
+      var lastPoint = sections[k].pop();
+      sections[k] = sections[k].filter(function(element, index) { return index % settings.bezierSkip == 0; });
+      sections[k].push(lastPoint);
+
+      // compute total length information so we can do some variable width stuff
+      var section = sections[k];
+      for (j = 0; j < section.length; j++) {
+        var point = section[j];
+
+        // city blocks distance is good enough and doesn't require squaring and square rooting
+        var length = Math.abs(point.lx - point.mx) + Math.abs(point.ly - point.my);
+        lengths.push(length);
+        // console.log(point.lx, point.mx, point.ly , point.my);
+      }
+    }
+    var signatureStats = stats(lengths); //stats() is in beziers.js
+    signatureStats.length = numeric.sum(lengths);
+    signatureStats.mean *= 3;     // the number of segments per bezier? Sort of.
+    signatureStats.deviation *= 3 // this isn't accurate, but its good enough for me for today and it makes the signature pretty-ish)
+
+    for (k = 0; k < sections.length; k++) {
+      var section = sections[k];
+      var simpleTuples = section.map(function(n) {return[n.lx, n.ly]});
+      var beziers = getBezierControlPoints(simpleTuples);
+
+      for (var i in beziers) {
+        var p0 = beziers[i][0],
+            p1 = beziers[i][1],
+            p2 = beziers[i][2],
+            p3 = beziers[i][3];
+
+        if (settings.variableStrokeWidth === true) {
+          var bezierSegmentLength = (
+                    Math.abs(p0[0] - p1[0]) +
+                    Math.abs(p1[0] - p2[0]) +
+                    Math.abs(p2[0] - p3[0]) +
+                    Math.abs(p0[1] - p1[1]) +
+                    Math.abs(p1[1] - p2[1]) +
+                    Math.abs(p2[1] - p3[1])
+                    );
+          // is this long or short compared to the average segment?
+          // how many standard deviations from the mean (this data set isn't gaussian... but good enough)
+          var zscore = (bezierSegmentLength - signatureStats.mean) / signatureStats.deviation;
+          if (zscore > 0) {
+            // fast
+            var width = 3 - zscore / 2.5;
+          } else if (zscore <= 0) {
+            var width = 3 - zscore * 2;
+          }
+          // Ugh, this is straight up hacky. Basically, the distribution isn't gaussian.
+          // In particular, to the downside (negative z's, the magitude of zscores tend to
+          // not vary so far from the mean, but to the upside (positive z's, fast pen strokes),
+          // they tend to be really big numbers, like 4+ zscores.  so this is stupidly applying
+          // different scaling on both sides of zero.
+
+          // console.log("len:", parseInt(bezierSegmentLength),'z-score:', +zscore.toFixed(3), 'width:', +width.toFixed(3));
+        }
+
+        // p0 and p3 are the start and end points of the bezier curve.
+        // i want to see these plotted.
+        if (showSampledPoints === true) {
+          var pixelSize = 2;
+          context.fillStyle = '#FF0000';
+          context.fillRect(p0[0], p0[1], pixelSize, pixelSize);
+          context.fillRect(p3[0], p3[1], pixelSize, pixelSize);
+        }
+        context.beginPath()
+        context.moveTo(p0[0], p0[1])
+        context.bezierCurveTo(
+          p1[0], p1[1],
+          p2[0], p2[1],
+          p3[0], p3[1]
+          );
+
+        context.lineWidth = settings.penWidth
+        context.lineWidth = width;
+        context.lineCap = settings.penCap
+        context.stroke()
+        context.closePath();
+      }
+    }
+  }
+
+  /**
+   * Redraws the signature on a specific canvas
+   *
+   * @private
+   *
+   * @param {Array} paths the signature JSON
+   * @param {Object} context the canvas context to draw on
+   * @param {Boolean} saveOutput whether to write the path to the output array or not
+   */
+  function drawSignature (paths, context, saveOutput) {
+    if (settings.autoscale) {
+      var maxX = 0,
+          maxY = 0,
+          minX = $(canvas).width(),
+          minY = $(canvas).height();
+      $.each(paths, function(idx, el) {
+        maxX = Math.max(el.mx, el.lx, maxX);
+        minX = Math.min(el.mx, el.lx, minX);
+        maxY = Math.max(el.my, el.ly, maxY);
+        minY = Math.min(el.my, el.ly, minY);
+      });
+
+      var padding = 0.15;
+      maxX *= (1 + padding);
+      minX *= (1 - padding);
+      maxY *= (1 + padding);
+      minY *= (1 - padding);
+      var signatureWidth = maxX - minX;
+      var signatureHeight = maxY - minY;
+      var signatureAspectRatio = signatureWidth / signatureHeight;
+      var canvasAspectRatio = canvas.width() / canvas.height();
+      if (signatureAspectRatio > canvasAspectRatio) {
+        // signature is "fat"
+        // width is the constraining factor, so we need to limit this by width
+        var scaleFactor = canvas.width() / signatureWidth;
+      } else {
+        // signature is "tall"
+        var scaleFactor = canvas.height() / signatureHeight;
+      }
+
+      // there's whitespace to the top and left of the signature
+      // that gets scaled. translate it back to center
+      // first translate balances out the whitespace.
+      // this only fixes the whitespace on the CONSTRAINING
+      // dimenson.  i.e. the x axis for "fat" signatures
+      context.translate(-minX * scaleFactor, -minY * scaleFactor);
+      context.scale.apply(context, [scaleFactor, scaleFactor]);
+
+      // now to center on the non-constraining dimension
+      // one of these will be zero (the constraining dimension)
+      // then the other gets translated to the middle
+      context.translate(
+        (canvas.width() / scaleFactor - signatureWidth) / 2,
+        (canvas.height() / scaleFactor - signatureHeight) / 2);
+
+    } else {
+      context.scale.apply(context, settings.scale);
+    }
+
+    for(var i in paths) {
+      if (typeof paths[i] === 'object') {
+
+        if (settings.drawBezierCurves === false) {
+          context.beginPath()
+          context.moveTo(paths[i].mx, paths[i].my)
+          context.lineTo(paths[i].lx, paths[i].ly)
+          context.lineCap = settings.penCap
+          context.stroke()
+          context.closePath()
+        }
+
+        if (saveOutput) {
+          output.push({
+            'lx' : paths[i].lx
+            , 'ly' : paths[i].ly
+            , 'mx' : paths[i].mx
+            , 'my' : paths[i].my
+          })
+        }
+      }
+    } /* end linear segments */
+
+    if (settings.drawBezierCurves === true) {
+      strokePath(paths, context);
+    } /* end bezier curves */
+  }
+
+  /**
+   * Initialisation function, called immediately after all declarations
+   * Technically public, but only should be used internally
+   *
+   * @private
+   */
+  function init () {
+    // Fixes the jQuery.fn.offset() function for Mobile Safari Browsers i.e. iPod Touch, iPad and iPhone
+    // https://gist.github.com/661844
+    // http://bugs.jquery.com/ticket/6446
+    if (parseFloat(((/CPU.+OS ([0-9_]{3}).*AppleWebkit.*Mobile/i.exec(navigator.userAgent)) || [0,'4_2'])[1].replace('_','.')) < 4.1) {
+       $.fn.Oldoffset = $.fn.offset;
+       $.fn.offset = function () {
+          var result = $(this).Oldoffset()
+          result.top -= window.scrollY
+          result.left -= window.scrollX
+
+          return result
+       }
+    }
+
+    // Disable selection on the typed div and canvas
+    $(settings.typed, context).bind('selectstart.signaturepad', function (e) { return $(e.target).is(':input') })
+    canvas.bind('selectstart.signaturepad', function (e) { return $(e.target).is(':input') })
+
+    if (!element.getContext && FlashCanvas)
+      FlashCanvas.initElement(element)
+
+    if (element.getContext) {
+      canvasContext = element.getContext('2d')
+
+      $(settings.sig, context).show()
+
+      if (!settings.displayOnly) {
+        if (!settings.drawOnly) {
+          $(settings.name, context).bind('keyup.signaturepad', function () {
+            type($(this).val())
+          })
+
+          $(settings.name, context).bind('blur.signaturepad', function () {
+            type($(this).val())
+          })
+
+          $(settings.drawIt, context).bind('click.signaturepad', function (e) {
+            e.preventDefault()
+            drawIt()
+          })
+        }
+
+        if (settings.drawOnly || settings.defaultAction === 'drawIt') {
+          drawIt()
+        } else {
+          typeIt()
+        }
+
+        if (settings.validateFields) {
+          if ($(selector).is('form')) {
+            $(selector).bind('submit.signaturepad', function () { return validateForm() })
+          } else {
+            $(selector).parents('form').bind('submit.signaturepad', function () { return validateForm() })
+          }
+        }
+
+        $(settings.sigNav, context).show()
+      }
+    }
+  }
+
+  $.extend(self, {
+    /**
+     * Initializes SignaturePad
+     */
+    init : function () { init() }
+
+    /**
+     * Allows options to be updated after initialization
+     *
+     * @param {Object} options An object containing the options to be changed
+     */
+    , updateOptions : function (options) {
+      $.extend(settings, options)
+    }
+
+    /**
+     * Regenerates a signature on the canvas using an array of objects
+     * Follows same format as object property
+     * @see var object
+     *
+     * @param {Array} paths An array of the lines and points
+     */
+    , regenerate : function (paths) {
+      self.clearCanvas()
+      $(settings.typed, context).hide()
+
+      if (typeof paths === 'string')
+        paths = JSON.parse(paths)
+
+      drawSignature(paths, canvasContext, true)
+
+      if (settings.output && $(settings.output, context).length > 0)
+        $(settings.output, context).val(JSON.stringify(output))
+    }
+
+    /**
+     * Clears the canvas
+     * Redraws the background colour and the signature line
+     */
+    , clearCanvas : function () { clearCanvas() }
+
+    /**
+     * Returns the signature as a Js array
+     *
+     * @return {Array}
+     */
+    , getSignature : function () { return output }
+
+    /**
+     * Returns the signature as a Json string
+     *
+     * @return {String}
+     */
+    , getSignatureString : function () { return JSON.stringify(output) }
+
+    /**
+     * Returns the signature as an image
+     * Re-draws the signature in a shadow canvas to create a clean version
+     *
+     * @return {String}
+     */
+    , getSignatureImage : function () {
+      var tmpCanvas = document.createElement('canvas')
+        , tmpContext = null
+        , data = null
+
+      tmpCanvas.style.position = 'absolute'
+      tmpCanvas.style.top = '-999em'
+      tmpCanvas.width = element.width
+      tmpCanvas.height = element.height
+      document.body.appendChild(tmpCanvas)
+
+      if (!tmpCanvas.getContext && FlashCanvas)
+        FlashCanvas.initElement(tmpCanvas)
+
+      tmpContext = tmpCanvas.getContext('2d')
+
+      tmpContext.fillStyle = settings.bgColour
+      tmpContext.fillRect(0, 0, element.width, element.height)
+      tmpContext.lineWidth = settings.penWidth
+      tmpContext.strokeStyle = settings.penColour
+
+      drawSignature(output, tmpContext)
+      data = tmpCanvas.toDataURL.apply(tmpCanvas, arguments)
+
+      document.body.removeChild(tmpCanvas)
+      tmpCanvas = null
+
+      return data
+    }
+
+    /**
+     * The form validation function
+     * Validates that the signature has been filled in properly
+     * Allows it to be hooked into another validation function and called at a different time
+     *
+     * @return {Boolean}
+     */
+    , validateForm : function () { return validateForm() }
+  })
+}
+
+/**
+ * Create the plugin
+ * Returns an Api which can be used to call specific methods
+ *
+ * @param {Object} options The options array
+ *
+ * @return {Object} The Api for controlling the instance
+ */
+$.fn.signaturePad = function (options) {
+  var api = null
+
+  this.each(function () {
+    if (!$.data(this, 'plugin-signaturePad')) {
+      api = new SignaturePad(this, options)
+      api.init()
+      $.data(this, 'plugin-signaturePad', api)
+    } else {
+      api = $.data(this, 'plugin-signaturePad')
+      api.updateOptions(options)
+    }
+  })
+
+  return api
+}
+
+/**
+ * Expose the defaults so they can be overwritten for multiple instances
+ *
+ * @type {Object}
+ */
+$.fn.signaturePad.defaults = {
+  defaultAction : 'typeIt' // What action should be highlighted first: typeIt or drawIt
+  , displayOnly : false // Initialize canvas for signature display only; ignore buttons and inputs
+  , drawOnly : false // Whether the to allow a typed signature or not
+  , canvas : 'canvas' // Selector for selecting the canvas element
+  , sig : '.sig' // Parts of the signature form that require Javascript (hidden by default)
+  , sigNav : '.sigNav' // The TypeIt/DrawIt navigation (hidden by default)
+  , bgColour : '#ffffff' // The colour fill for the background of the canvas; or transparent
+  , penColour : '#145394' // Colour of the drawing ink
+  , penWidth : 2 // Thickness of the pen
+  , penCap : 'round' // Determines how the end points of each line are drawn (values: 'butt', 'round', 'square')
+  , lineColour : '#ccc' // Colour of the signature line
+  , lineWidth : 2 // Thickness of the signature line
+  , lineMargin : 5 // Margin on right and left of signature line
+  , lineTop : 35 // Distance to draw the line from the top
+  , name : '.name' // The input field for typing a name
+  , typed : '.typed' // The Html element to accept the printed name
+  , clear : '.clearButton' // Button for clearing the canvas
+  , typeIt : '.typeIt a' // Button to trigger name typing actions (current by default)
+  , drawIt : '.drawIt a' // Button to trigger name drawing actions
+  , typeItDesc : '.typeItDesc' // The description for TypeIt actions
+  , drawItDesc : '.drawItDesc' // The description for DrawIt actions (hidden by default)
+  , output : '.output' // The hidden input field for remembering line coordinates
+  , currentClass : 'current' // The class used to mark items as being currently active
+  , validateFields : true // Whether the name, draw fields should be validated
+  , errorClass : 'error' // The class applied to the new error Html element
+  , errorMessage : 'Please enter your name' // The error message displayed on invalid submission
+  , errorMessageDraw : 'Please sign the document' // The error message displayed when drawOnly and no signature is drawn
+  , onBeforeValidate : null // Pass a callback to be used instead of the built-in function
+  , onFormError : null // Pass a callback to be used instead of the built-in function
+  , onDraw : null // Pass a callback to be used to capture the drawing process
+  , onDrawEnd : null // Pass a callback to be exectued after the drawing process
+  , scale: [1, 1] // Canvas scale for X and Y respectivately
+  , autoscale: false // Autoscale the signature size if rendered onto a different sized canvas,
+  , drawBezierCurves: false // Render smoother signatures using Bezier curves that pass through all the sampled points. Bezier curves are the new hot stuff, but lets let the default behavior be the original for now
+                            // Original default behavior -- linear interpolation between sampled points for rendering signature
+  , variableStrokeWidth: false // Vary the width of the line segments based on estimated "speed"
+  , bezierSkip: 4, // Too many sample points make the beziers still squiggly, so skip some. The more you skip, the more the shape gets distorted from the sample, but the smoother the loops will look.  It may do a poor job with rendering the maxima/minima though.
+                   // TODO: Ideally you actually don't skip ARBITRARY points, but you figure out which points are higher value.  for example, max and max y, min x and min y within a segment will tell you how far out the mouse ACTUALLY went.  if you skip the apexes
+                   // It will make the signature render poorly.  This is an improvement for later.
+                   // this program samples too fast, so even if we spline it,
+                   // the result is choppy. need to throw away points or do
+                   // a best fit curve of some sort. throwing away points
+                   // is easier. Only use 1/bezierSkip points. Also reduces computational effort.
+}
+
+}(jQuery))
+
+/*!
+ * jquery-timepicker v1.11.14 - A jQuery timepicker plugin inspired by Google Calendar. It supports both mouse and keyboard navigation.
+ * Copyright (c) 2018 Jon Thornton - http://jonthornton.github.com/jquery-timepicker/
+ * License: MIT
+ */
+
+!function(a){"object"==typeof exports&&exports&&"object"==typeof module&&module&&module.exports===exports?a(require("jquery")):"function"==typeof define&&define.amd?define(["jquery"],a):a(jQuery)}(function(a){function b(a){var b=a[0];return b.offsetWidth>0&&b.offsetHeight>0}function c(b){if(b.minTime&&(b.minTime=t(b.minTime)),b.maxTime&&(b.maxTime=t(b.maxTime)),b.durationTime&&"function"!=typeof b.durationTime&&(b.durationTime=t(b.durationTime)),"now"==b.scrollDefault)b.scrollDefault=function(){return b.roundingFunction(t(new Date),b)};else if(b.scrollDefault&&"function"!=typeof b.scrollDefault){var c=b.scrollDefault;b.scrollDefault=function(){return b.roundingFunction(t(c),b)}}else b.minTime&&(b.scrollDefault=function(){return b.roundingFunction(b.minTime,b)});if("string"===a.type(b.timeFormat)&&b.timeFormat.match(/[gh]/)&&(b._twelveHourTime=!0),b.showOnFocus===!1&&b.showOn.indexOf("focus")!=-1&&b.showOn.splice(b.showOn.indexOf("focus"),1),b.disableTimeRanges.length>0){for(var d in b.disableTimeRanges)b.disableTimeRanges[d]=[t(b.disableTimeRanges[d][0]),t(b.disableTimeRanges[d][1])];b.disableTimeRanges=b.disableTimeRanges.sort(function(a,b){return a[0]-b[0]});for(var d=b.disableTimeRanges.length-1;d>0;d--)b.disableTimeRanges[d][0]<=b.disableTimeRanges[d-1][1]&&(b.disableTimeRanges[d-1]=[Math.min(b.disableTimeRanges[d][0],b.disableTimeRanges[d-1][0]),Math.max(b.disableTimeRanges[d][1],b.disableTimeRanges[d-1][1])],b.disableTimeRanges.splice(d,1))}return b}function d(b){var c=b.data("timepicker-settings"),d=b.data("timepicker-list");if(d&&d.length&&(d.remove(),b.data("timepicker-list",!1)),c.useSelect){d=a("<select />",{"class":"ui-timepicker-select"}),b.attr("name")&&d.attr("name","ui-timepicker-"+b.attr("name"));var g=d}else{d=a("<ul />",{"class":"ui-timepicker-list"});var g=a("<div />",{"class":"ui-timepicker-wrapper",tabindex:-1});g.css({display:"none",position:"absolute"}).append(d)}if(c.noneOption)if(c.noneOption===!0&&(c.noneOption=c.useSelect?"Time...":"None"),a.isArray(c.noneOption)){for(var i in c.noneOption)if(parseInt(i,10)==i){var k=e(c.noneOption[i],c.useSelect);d.append(k)}}else{var k=e(c.noneOption,c.useSelect);d.append(k)}if(c.className&&g.addClass(c.className),(null!==c.minTime||null!==c.durationTime)&&c.showDuration){"function"==typeof c.step?"function":c.step;g.addClass("ui-timepicker-with-duration"),g.addClass("ui-timepicker-step-"+c.step)}var l=c.minTime;"function"==typeof c.durationTime?l=t(c.durationTime()):null!==c.durationTime&&(l=c.durationTime);var n=null!==c.minTime?c.minTime:0,o=null!==c.maxTime?c.maxTime:n+v-1;o<n&&(o+=v),o===v-1&&"string"===a.type(c.timeFormat)&&c.show2400&&(o=v);var p=c.disableTimeRanges,w=0,x=p.length,z=c.step;"function"!=typeof z&&(z=function(){return c.step});for(var i=n,A=0;i<=o;A++,i+=60*z(A)){var B=i,C=s(B,c);if(c.useSelect){var D=a("<option />",{value:C});D.text(C)}else{var D=a("<li />");D.addClass(B%v<v/2?"ui-timepicker-am":"ui-timepicker-pm"),D.data("time",u(B,c)),D.text(C)}if((null!==c.minTime||null!==c.durationTime)&&c.showDuration){var E=r(i-l,c.step);if(c.useSelect)D.text(D.text()+" ("+E+")");else{var F=a("<span />",{"class":"ui-timepicker-duration"});F.text(" ("+E+")"),D.append(F)}}w<x&&(B>=p[w][1]&&(w+=1),p[w]&&B>=p[w][0]&&B<p[w][1]&&(c.useSelect?D.prop("disabled",!0):D.addClass("ui-timepicker-disabled"))),d.append(D)}if(g.data("timepicker-input",b),b.data("timepicker-list",g),c.useSelect)b.val()&&d.val(f(t(b.val()),c)),d.on("focus",function(){a(this).data("timepicker-input").trigger("showTimepicker")}),d.on("blur",function(){a(this).data("timepicker-input").trigger("hideTimepicker")}),d.on("change",function(){m(b,a(this).val(),"select")}),m(b,d.val(),"initial"),b.hide().after(d);else{var G=c.appendTo;"string"==typeof G?G=a(G):"function"==typeof G&&(G=G(b)),G.append(g),j(b,d),d.on("mousedown click","li",function(c){b.off("focus.timepicker"),b.on("focus.timepicker-ie-hack",function(){b.off("focus.timepicker-ie-hack"),b.on("focus.timepicker",y.show)}),h(b)||b[0].focus(),d.find("li").removeClass("ui-timepicker-selected"),a(this).addClass("ui-timepicker-selected"),q(b)&&(b.trigger("hideTimepicker"),d.on("mouseup.timepicker click.timepicker","li",function(a){d.off("mouseup.timepicker click.timepicker"),g.hide()}))})}}function e(b,c){var d,e,f;return"object"==typeof b?(d=b.label,e=b.className,f=b.value):"string"==typeof b?(d=b,f=""):a.error("Invalid noneOption value"),c?a("<option />",{value:f,"class":e,text:d}):a("<li />",{"class":e,text:d}).data("time",String(f))}function f(a,b){if(a=b.roundingFunction(a,b),null!==a)return s(a,b)}function g(b){if(b.target!=window){var c=a(b.target);c.closest(".ui-timepicker-input").length||c.closest(".ui-timepicker-wrapper").length||(y.hide(),a(document).unbind(".ui-timepicker"),a(window).unbind(".ui-timepicker"))}}function h(a){var b=a.data("timepicker-settings");return(window.navigator.msMaxTouchPoints||"ontouchstart"in document)&&b.disableTouchKeyboard}function i(b,c,d){if(!d&&0!==d)return!1;var e=b.data("timepicker-settings"),f=!1,d=e.roundingFunction(d,e);return c.find("li").each(function(b,c){var e=a(c);if("number"==typeof e.data("time"))return e.data("time")==d?(f=e,!1):void 0}),f}function j(a,b){b.find("li").removeClass("ui-timepicker-selected");var c=a.data("timepicker-settings"),d=t(l(a),c);if(null!==d){var e=i(a,b,d);if(e){var f=e.offset().top-b.offset().top;(f+e.outerHeight()>b.outerHeight()||f<0)&&b.scrollTop(b.scrollTop()+e.position().top-e.outerHeight()),(c.forceRoundTime||e.data("time")===d)&&e.addClass("ui-timepicker-selected")}}}function k(b,c){if("timepicker"!=c){var d=a(this);if(""===this.value)return void m(d,null,c);if(!d.is(":focus")||b&&"change"==b.type){var e=d.data("timepicker-settings"),f=t(this.value,e);if(null===f)return void d.trigger("timeFormatError");var g=!1;if(null!==e.minTime&&null!==e.maxTime&&(f<e.minTime||f>e.maxTime)&&(g=!0),a.each(e.disableTimeRanges,function(){if(f>=this[0]&&f<this[1])return g=!0,!1}),e.forceRoundTime){var h=e.roundingFunction(f,e);h!=f&&(f=h,c=null)}var i=s(f,e);g?(m(d,i,"error")||b&&"change"==b.type)&&d.trigger("timeRangeError"):m(d,i,c)}}}function l(a){return a.is("input")?a.val():a.data("ui-timepicker-value")}function m(a,b,c){if(a.is("input")){a.val(b);var d=a.data("timepicker-settings");d.useSelect&&"select"!=c&&a.data("timepicker-list")&&a.data("timepicker-list").val(f(t(b),d))}return a.data("ui-timepicker-value")!=b?(a.data("ui-timepicker-value",b),"select"==c?a.trigger("selectTime").trigger("changeTime").trigger("change","timepicker"):["error","initial"].indexOf(c)==-1&&a.trigger("changeTime"),!0):(["error","initial"].indexOf(c)==-1&&a.trigger("selectTime"),!1)}function n(a){switch(a.keyCode){case 13:case 9:return;default:a.preventDefault()}}function o(c){var d=a(this),e=d.data("timepicker-list");if(!e||!b(e)){if(40!=c.keyCode)return!0;y.show.call(d.get(0)),e=d.data("timepicker-list"),h(d)||d.focus()}switch(c.keyCode){case 13:return q(d)&&(k.call(d.get(0),{type:"change"}),y.hide.apply(this)),c.preventDefault(),!1;case 38:var f=e.find(".ui-timepicker-selected");return f.length?f.is(":first-child")||(f.removeClass("ui-timepicker-selected"),f.prev().addClass("ui-timepicker-selected"),f.prev().position().top<f.outerHeight()&&e.scrollTop(e.scrollTop()-f.outerHeight())):(e.find("li").each(function(b,c){if(a(c).position().top>0)return f=a(c),!1}),f.addClass("ui-timepicker-selected")),!1;case 40:return f=e.find(".ui-timepicker-selected"),0===f.length?(e.find("li").each(function(b,c){if(a(c).position().top>0)return f=a(c),!1}),f.addClass("ui-timepicker-selected")):f.is(":last-child")||(f.removeClass("ui-timepicker-selected"),f.next().addClass("ui-timepicker-selected"),f.next().position().top+2*f.outerHeight()>e.outerHeight()&&e.scrollTop(e.scrollTop()+f.outerHeight())),!1;case 27:e.find("li").removeClass("ui-timepicker-selected"),y.hide();break;case 9:y.hide();break;default:return!0}}function p(c){var d=a(this),e=d.data("timepicker-list"),f=d.data("timepicker-settings");if(!e||!b(e)||f.disableTextInput)return!0;if("paste"===c.type||"cut"===c.type)return void setTimeout(function(){f.typeaheadHighlight?j(d,e):e.hide()},0);switch(c.keyCode){case 96:case 97:case 98:case 99:case 100:case 101:case 102:case 103:case 104:case 105:case 48:case 49:case 50:case 51:case 52:case 53:case 54:case 55:case 56:case 57:case 65:case 77:case 80:case 186:case 8:case 46:f.typeaheadHighlight?j(d,e):e.hide()}}function q(a){var b=a.data("timepicker-settings"),c=a.data("timepicker-list"),d=null,e=c.find(".ui-timepicker-selected");return!e.hasClass("ui-timepicker-disabled")&&(e.length&&(d=e.data("time")),null!==d&&("string"!=typeof d&&(d=s(d,b)),m(a,d,"select")),!0)}function r(a,b){a=Math.abs(a);var c,d,e=Math.round(a/60),f=[];return e<60?f=[e,w.mins]:(c=Math.floor(e/60),d=e%60,30==b&&30==d&&(c+=w.decimal+5),f.push(c),f.push(1==c?w.hr:w.hrs),30!=b&&d&&(f.push(d),f.push(w.mins))),f.join(" ")}function s(b,c){if("number"!=typeof b)return null;var d=parseInt(b%60),e=parseInt(b/60%60),f=parseInt(b/3600%24),g=new Date(1970,0,2,f,e,d,0);if(isNaN(g.getTime()))return null;if("function"===a.type(c.timeFormat))return c.timeFormat(g);for(var h,i,j="",k=0;k<c.timeFormat.length;k++)switch(i=c.timeFormat.charAt(k)){case"a":j+=g.getHours()>11?w.pm:w.am;break;case"A":j+=g.getHours()>11?w.PM:w.AM;break;case"g":h=g.getHours()%12,j+=0===h?"12":h;break;case"G":h=g.getHours(),b===v&&(h=c.show2400?24:0),j+=h;break;case"h":h=g.getHours()%12,0!==h&&h<10&&(h="0"+h),j+=0===h?"12":h;break;case"H":h=g.getHours(),b===v&&(h=c.show2400?24:0),j+=h>9?h:"0"+h;break;case"i":var e=g.getMinutes();j+=e>9?e:"0"+e;break;case"s":d=g.getSeconds(),j+=d>9?d:"0"+d;break;case"\\":k++,j+=c.timeFormat.charAt(k);break;default:j+=i}return j}function t(a,b){if(""===a||null===a)return null;if("object"==typeof a)return 3600*a.getHours()+60*a.getMinutes()+a.getSeconds();if("string"!=typeof a)return a;a=a.toLowerCase().replace(/[\s\.]/g,""),"a"!=a.slice(-1)&&"p"!=a.slice(-1)||(a+="m");var c="("+w.am.replace(".","")+"|"+w.pm.replace(".","")+"|"+w.AM.replace(".","")+"|"+w.PM.replace(".","")+")?",d=new RegExp("^"+c+"([0-9]?[0-9])\\W?([0-5][0-9])?\\W?([0-5][0-9])?"+c+"$"),e=a.match(d);if(!e)return null;var f=parseInt(1*e[2],10),g=e[1]||e[5],h=f,i=1*e[3]||0,j=1*e[4]||0;if(f<=12&&g){var k=g==w.pm||g==w.PM;h=12==f?k?12:0:f+(k?12:0)}else if(b){var l=3600*f+60*i+j;if(l>=v+(b.show2400?1:0)){if(b.wrapHours===!1)return null;h=f%24}}var m=3600*h+60*i+j;if(f<12&&!g&&b&&b._twelveHourTime&&b.scrollDefault){var n=m-b.scrollDefault();n<0&&n>=v/-2&&(m=(m+v/2)%v)}return m}function u(a,b){return a==v&&b.show2400?a:a%v}var v=86400,w={am:"am",pm:"pm",AM:"AM",PM:"PM",decimal:".",mins:"mins",hr:"hr",hrs:"hrs"},x={appendTo:"body",className:null,closeOnWindowScroll:!1,disableTextInput:!1,disableTimeRanges:[],disableTouchKeyboard:!1,durationTime:null,forceRoundTime:!1,maxTime:null,minTime:null,noneOption:!1,orientation:"l",roundingFunction:function(a,b){if(null===a)return null;if("number"!=typeof b.step)return a;var c=a%(60*b.step),d=b.minTime||0;return c-=d%(60*b.step),c>=30*b.step?a+=60*b.step-c:a-=c,u(a,b)},scrollDefault:null,selectOnBlur:!1,show2400:!1,showDuration:!1,showOn:["click","focus"],showOnFocus:!0,step:30,stopScrollPropagation:!1,timeFormat:"g:ia",typeaheadHighlight:!0,useSelect:!1,wrapHours:!0},y={init:function(b){return this.each(function(){var e=a(this),f=[];for(var g in x)e.data(g)&&(f[g]=e.data(g));var h=a.extend({},x,b,f);if(h.lang&&(w=a.extend(w,h.lang)),h=c(h),e.data("timepicker-settings",h),e.addClass("ui-timepicker-input"),h.useSelect)d(e);else{if(e.prop("autocomplete","off"),h.showOn)for(var i in h.showOn)e.on(h.showOn[i]+".timepicker",y.show);e.on("change.timepicker",k),e.on("keydown.timepicker",o),e.on("keyup.timepicker",p),h.disableTextInput&&e.on("keydown.timepicker",n),e.on("cut.timepicker",p),e.on("paste.timepicker",p),k.call(e.get(0),null,"initial")}})},show:function(c){var e=a(this),f=e.data("timepicker-settings");if(c&&c.preventDefault(),f.useSelect)return void e.data("timepicker-list").focus();h(e)&&e.blur();var k=e.data("timepicker-list");if(!e.prop("readonly")&&(k&&0!==k.length&&"function"!=typeof f.durationTime||(d(e),k=e.data("timepicker-list")),!b(k))){e.data("ui-timepicker-value",e.val()),j(e,k),y.hide(),k.show();var m={};f.orientation.match(/r/)?m.left=e.offset().left+e.outerWidth()-k.outerWidth()+parseInt(k.css("marginLeft").replace("px",""),10):m.left=e.offset().left+parseInt(k.css("marginLeft").replace("px",""),10);var n;n=f.orientation.match(/t/)?"t":f.orientation.match(/b/)?"b":e.offset().top+e.outerHeight(!0)+k.outerHeight()>a(window).height()+a(window).scrollTop()?"t":"b","t"==n?(k.addClass("ui-timepicker-positioned-top"),m.top=e.offset().top-k.outerHeight()+parseInt(k.css("marginTop").replace("px",""),10)):(k.removeClass("ui-timepicker-positioned-top"),m.top=e.offset().top+e.outerHeight()+parseInt(k.css("marginTop").replace("px",""),10)),k.offset(m);var o=k.find(".ui-timepicker-selected");if(!o.length){var p=t(l(e));null!==p?o=i(e,k,p):f.scrollDefault&&(o=i(e,k,f.scrollDefault()))}if(o.length&&!o.hasClass("ui-timepicker-disabled")||(o=k.find("li:not(.ui-timepicker-disabled):first")),o&&o.length){var q=k.scrollTop()+o.position().top-o.outerHeight();k.scrollTop(q)}else k.scrollTop(0);return f.stopScrollPropagation&&a(document).on("wheel.ui-timepicker",".ui-timepicker-wrapper",function(b){b.preventDefault();var c=a(this).scrollTop();a(this).scrollTop(c+b.originalEvent.deltaY)}),a(document).on("touchstart.ui-timepicker mousedown.ui-timepicker",g),a(window).on("resize.ui-timepicker",g),f.closeOnWindowScroll&&a(document).on("scroll.ui-timepicker",g),e.trigger("showTimepicker"),this}},hide:function(c){var d=a(this),e=d.data("timepicker-settings");return e&&e.useSelect&&d.blur(),a(".ui-timepicker-wrapper").each(function(){var c=a(this);if(b(c)){var d=c.data("timepicker-input"),e=d.data("timepicker-settings");e&&e.selectOnBlur&&q(d),c.hide(),d.trigger("hideTimepicker")}}),this},option:function(b,e){return"string"==typeof b&&"undefined"==typeof e?a(this).data("timepicker-settings")[b]:this.each(function(){var f=a(this),g=f.data("timepicker-settings"),h=f.data("timepicker-list");"object"==typeof b?g=a.extend(g,b):"string"==typeof b&&(g[b]=e),g=c(g),f.data("timepicker-settings",g),k.call(f.get(0),{type:"change"},"initial"),h&&(h.remove(),f.data("timepicker-list",!1)),g.useSelect&&d(f)})},getSecondsFromMidnight:function(){return t(l(this))},getTime:function(a){var b=this,c=l(b);if(!c)return null;var d=t(c);if(null===d)return null;a||(a=new Date);var e=new Date(a);return e.setHours(d/3600),e.setMinutes(d%3600/60),e.setSeconds(d%60),e.setMilliseconds(0),e},isVisible:function(){var a=this,c=a.data("timepicker-list");return!(!c||!b(c))},setTime:function(a){var b=this,c=b.data("timepicker-settings");if(c.forceRoundTime)var d=f(t(a),c);else var d=s(t(a),c);return a&&null===d&&c.noneOption&&(d=a),m(b,d,"initial"),k.call(b.get(0),{type:"change"},"initial"),b.data("timepicker-list")&&j(b,b.data("timepicker-list")),this},remove:function(){var a=this;if(a.hasClass("ui-timepicker-input")){var b=a.data("timepicker-settings");return a.removeAttr("autocomplete","off"),a.removeClass("ui-timepicker-input"),a.removeData("timepicker-settings"),a.off(".timepicker"),a.data("timepicker-list")&&a.data("timepicker-list").remove(),b.useSelect&&a.show(),a.removeData("timepicker-list"),this}}};a.fn.timepicker=function(b){return this.length?y[b]?this.hasClass("ui-timepicker-input")?y[b].apply(this,Array.prototype.slice.call(arguments,1)):this:"object"!=typeof b&&b?void a.error("Method "+b+" does not exist on jQuery.timepicker"):y.init.apply(this,arguments):this}});
