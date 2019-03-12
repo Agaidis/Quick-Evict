@@ -24,11 +24,8 @@
     <script src="{{ asset('js/userManagement.js') }}" defer></script>
     <script src="{{ asset('js/numeric-1.2.6.min.js') }}" defer></script>
     <script src="{{ asset('js/bezier.js') }}" defer></script>
-    <script src="https://cdn.jsdelivr.net/npm/signature_pad@2.3.2/dist/signature_pad.min.js"></script>
     <script src="{{ asset('js/json2.min.js') }}" defer></script>
     <script src="{{ asset('js/signaturepad.js') }}" defer></script>
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAfPLSbGAHZkEd-8DDB0FcGSlhrV9LQMGM&libraries=places" defer></script>
-    <script src="https://js.stripe.com/v3/"></script>
     <script src="{{ asset('js/app.js') }}" defer></script>
 
     <script src="{{ asset('js/bootstrap-timepicker.min.js') }}" defer></script>
