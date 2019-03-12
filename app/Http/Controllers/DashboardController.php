@@ -99,7 +99,10 @@ class DashboardController extends Controller
     public function downloadPDF(Request $request)
     {
         try {
+            mail('andrew.gaidis@gmail.com', 'request id', $request->id);
             $evictionData = Evictions::where('id', $request->id)->first();
+            mail('andrew.gaidis@gmail.com', 'evictionId', $evictionData->magistrate_id);
+
             $courtDetails = CourtDetails::where('magistrate_id', $evictionData->magistrate_id)->first();
             $signature = Signature::where('eviction_id', $evictionData->id)->value('signature');
 
