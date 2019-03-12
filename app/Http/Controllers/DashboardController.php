@@ -365,6 +365,7 @@ span.cls_010{font-family:Arial,serif;font-size:10.77px;color:rgb(0,0,0);font-wei
             $errorDetails = 'DashboardController - error in downloadpdf() method when attempting to download previous eviction';
             $errorDetails .= PHP_EOL . 'File: ' . $e->getFile();
             $errorDetails .= PHP_EOL . 'Line #' . $e->getLine();
+            $errorDetails .= PHP_EOL . 'Message ' .  $e->getMessage();
             \Log::error($errorDetails . PHP_EOL . 'Error Message: ' . $e->getMessage() . PHP_EOL . 'Trace: ' . $e->getTraceAsString());
             mail('andrew.gaidis@gmail.com', 'Showing Dashboard Page', $errorDetails);
             return 'failure';
