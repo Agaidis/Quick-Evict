@@ -80,7 +80,6 @@
                     @if (Auth::check())
 
                             <li><a href="{{ url('dashboard') }}" id="dashboard_btn">Dashboard</a></li>
-                            <li><a href="{{ url('online-eviction') }}" id="online_eviction_btn">Online Eviction</a></li>
                             <li><a href="{{ url('information') }}" id="eviction_info_btn">Information</a></li>
                             <li><a href="{{ url('FAQ') }}" id="faq_btn">FAQ</a></li>
                             <li><a href="{{ url('where-does-this-work') }}" id="where_work_btn">Where Does this Work?</a></li>
