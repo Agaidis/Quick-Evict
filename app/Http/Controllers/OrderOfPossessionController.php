@@ -151,9 +151,9 @@ span.cls_009{font-family:Arial,serif;font-size:9px;color:rgb(0,0,0);font-weight:
 <span style="position:absolute;left:570.80px;top:40px" class="cls_002"><span class="cls_002">POSSESSION</span></span>
 <span style="position:absolute;left:51px;top:120px" class="cls_004"><span class="cls_004">Mag. Dist. No: '. $courtNumber .'</span></span>
 <span style="position:absolute;left:51px;top:134px" class="cls_004"><span class="cls_004">MDJ Name: '. $courtDetails->mdj_name .'</span></span>
-<span style="position:absolute;left:450px;top:120px" class="cls_005"><span class="cls_005">PLANTIFF:</span><p style="margin-left:70px;">'. $plantiffName .'<br>'. $plantiffAddress1 .'<br>'. $plantiffAddress2 .'<br>'.$plantiffPhone.'</p></span>
+<span style="position:absolute;left:450px;top:110px" class="cls_005"><span class="cls_005">PLANTIFF:</span><p style="margin-left:70px;">'. $plantiffName .'<br>'. $plantiffAddress1 .'<br>'. $plantiffAddress2 .'<br>'.$plantiffPhone.'</p></span>
 <span style="position:absolute;left:450px;top:185px" class="cls_005"><span class="cls_005">V.</span></span>
-<span style="position:absolute;left:450px;top:200px" class="cls_005"><span class="cls_005">DEFENDANT:</span><p style="margin-left:70px;">'. $_POST['tenant_name'].'<br>'.$defendanthouseNum.' '.$defendantStreetName.' '. $_POST['unit_number'] . '<br>'.$defendantTown .',' . $defendantState.' '.$defendantZipcode.'  </p></span>
+<span style="position:absolute;left:450px;top:190px" class="cls_005"><span class="cls_005">DEFENDANT:</span><p style="margin-left:70px;">'. $_POST['tenant_name'].'<br>'.$defendanthouseNum.' '.$defendantStreetName.' '. $_POST['unit_number'] . '<br>'.$defendantTown .',' . $defendantState.' '.$defendantZipcode.'  </p></span>
 <span style="position:absolute;left:51px;top:165px" class="cls_004"><span class="cls_004">Address: '.$courtAddressLine1.'<p style="margin-left:49px; margin-top:-4px;">'.$courtAddressLine2.'</p></span></span>
 <span style="position:absolute;left:51px;top:205px" class="cls_004"><span class="cls_004">Telephone:</span>'.$courtDetails->phone_number.'</span>
 <span style="position:absolute;left:450px;top:310px" class="cls_004"><span class="cls_004">Docket No:</span> '. $_POST['docket_number'] .'</span>
