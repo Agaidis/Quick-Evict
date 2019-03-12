@@ -24,8 +24,8 @@ let mix = require('laravel-mix');
 //     'resources/assets/js/timepicker.min.js',
 //     'resources/assets/js/userManagerment.js'
 // ], 'public/js/app.js').version()
-    //.js('resources/assets/js/app.js', 'public/js')
-    mix.sass('resources/assets/sass/app.scss', 'public/css')
+mix.js('resources/assets/js/app.js', 'public/js')
+    .sass('resources/assets/sass/app.scss', 'public/css')
     .styles([
         'public/css/app.css',
         'resources/assets/css/bootstrap-timepicker.min.css',
