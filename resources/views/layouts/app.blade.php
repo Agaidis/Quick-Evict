@@ -13,6 +13,7 @@
     <link rel="icon" href="https://quickevict.nyc3.digitaloceanspaces.com/ziplogo.png"/>
 
     <!-- Scripts -->
+    <script type="text/javascript" src="{{ mix('js/courtzip.js') }}"></script>
     {{--<script src="{{ asset('js/app.js') }}" defer></script>--}}
     {{--<script src="{{ asset('js/timepicker.min.js') }}" defer></script>--}}
     {{--<script src="{{ asset ('js/datepicker-ui.min.js') }}" defer></script>--}}
