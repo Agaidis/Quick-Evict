@@ -19,7 +19,7 @@
     {{--<script src="{{ asset ('js/datepicker-ui.min.js') }}" defer></script>--}}
     {{--<script src="{{ asset('js/eviction.js') }}" defer></script>--}}
     {{--<script src="{{ asset('js/steps.js') }}" defer></script>--}}
-    {{--<script src="{{ asset('js/datatables.min.js') }}" defer></script>--}}
+    <script src="{{ asset('js/datatables.min.js') }}" defer></script>
     {{--<script src="{{ asset('js/magistrateCreator.js') }}" defer></script>--}}
     <script src="{{ asset('js/home.js') }}" defer></script>
     {{--<script src="{{ asset('js/userManagement.js') }}" defer></script>--}}
