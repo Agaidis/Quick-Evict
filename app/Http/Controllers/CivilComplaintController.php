@@ -95,6 +95,7 @@ class CivilComplaintController extends Controller
                 $eviction->status = 'Created OOP';
                 $eviction->property_address = $defendanthouseNum.' '.$defendantStreetName.'-1'.$defendantTown .',' . $defendantState.' '.$defendantZipcode;
                 $eviction->tenant_name = $_POST['tenant_name'];
+                $eviction->total_judgement = '0';
                 $eviction->pdf_download = 'true';
                 $eviction->court_number = $courtNumber;
                 $eviction->court_address_line_1 = $courtAddressLine1;
