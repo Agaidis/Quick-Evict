@@ -83,6 +83,7 @@ $(document).ready(function () {
 
         }
     }).on('click', '.pdf_download_btn_dashboard', function () {
+        console.log('this is it' + $(this)[0].id);
         var id = $(this)[0].id;
         var splitId = id.split('_');
 
