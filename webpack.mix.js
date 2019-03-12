@@ -11,7 +11,7 @@ let mix = require('laravel-mix');
  |
  */
 
-mix.babel([
+mix.js([
     'public/js/app.js',
     'resources/assets/js/bezier.js',
     'resources/assets/js/bootstrap-timepicker.min.js',
@@ -25,7 +25,7 @@ mix.babel([
     'resources/assets/js/timepicker.min.js',
     'resources/assets/js/userManagerment.js'
 ], 'public/js/courtzip.js').version()
-    .js('resources/assets/js/app.js', 'public/js')
+    .js('resources/assets/js/app.js', 'public/js/courtzip.js')
     .sass('resources/assets/sass/app.scss', 'public/css')
     .styles([
         'public/css/app.css',
