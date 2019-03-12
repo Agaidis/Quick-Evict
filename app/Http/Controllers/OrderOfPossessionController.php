@@ -171,7 +171,7 @@ span.cls_009{font-family:Arial,serif;font-size:9px;color:rgb(0,0,0);font-weight:
 <span style="position:absolute;left:200px;top:490px" class="cls_004"><span class="cls_004">Total</span></span>
 <span style="position:absolute;left:235px;top:490px" class="cls_003"><span class="cls_003">$</span>'. $totalFees .'</span>
 <span style="position:absolute;left:50px;top:570px" class="cls_004"><span class="cls_004">TO THE MAGISTERIAL DISTRICT JUDGE:</span></span>
-<span style="position:absolute;left:50px;top:585px" class="cls_004"><span class="cls_004">The Plaintiff(s) named below, having obtained a judgment for possession of real property located at:</span><br>'.$defendanthouseNum.' '.$defendantStreetName.' '. $_POST['unit_number'] . '<br><span style="margin-top:8px;">'.$defendantTown .',' . $defendantState.' '.$defendantZipcode.'  </span></p></span>
+<span style="position:absolute;left:50px;top:585px" class="cls_004"><span class="cls_004">The Plaintiff(s) named below, having obtained a judgment for possession of real property located at:</span><br>'.$defendanthouseNum.' '.$defendantStreetName.' '. $_POST['unit_number'] . '<br><br><span style="margin-top:-3px;">'.$defendantTown .',' . $defendantState.' '.$defendantZipcode.'  </span></p></span>
 <span style="position:absolute;left:50px;top:665px" class="cls_004"><span class="cls_004">Address if any:</span></span>
 <span style="position:absolute;left:50px;top:720px" class="cls_004"><span class="cls_004">Requests that you issue an ORDER FOR POSSESSION for such property.</span></span>
 <span style="position:absolute;left:50px;top:745px" class="cls_004"><span class="cls_004">I certify that this filing complies with the provisions of the Case Records Public Access Policy of the Unified Judicial</span></span>
@@ -179,7 +179,7 @@ span.cls_009{font-family:Arial,serif;font-size:9px;color:rgb(0,0,0);font-weight:
 <span style="position:absolute;left:50px;top:775px" class="cls_004"><span class="cls_004">information and documents.</span></span>
 <span style="position:absolute;left:50px;top:840px" class="cls_004"><span class="cls_004">Plaintiff:</span> '. $plantiffName .'</span>
 <span style="position:absolute;left:427.00px;top:840px" class="cls_004"><span class="cls_004">Date:</span> '. date("d/m/Y") .'</span>
-<span style="position:absolute;left:360.00px;top:865px" class="cls_004"><span class="cls_004">Plaintiff Signature:</span><img style="position:absolute; margin-top: -5px; margin-left:10px;" width="140" height="45" src="'.$_POST['signature_source'].'"/></span>
+<span style="position:absolute;left:358.00px;top:865px" class="cls_004"><span class="cls_004">Plaintiff Signature:</span><img style="position:absolute; margin-top: -5px; margin-left:10px;" width="140" height="45" src="'.$_POST['signature_source'].'"/></span>
 <span style="position:absolute;left:55px;top:985px" class="cls_007"><span class="cls_007">AOPC 311A</span></span>
 <span style="position:absolute;left:605px;top:985px" class="cls_008"><span class="cls_008">FREE INTERPRETER</span></span>
 <span style="position:absolute;left:590px;top:1000px" class="cls_009"><span class="cls_009">www.pacourts.us/language-rights</span></span><br>
