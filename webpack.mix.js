@@ -24,7 +24,7 @@ mix.babel([
     'resources/assets/js/signaturepad.js',
     'resources/assets/js/timepicker.min.js',
     'resources/assets/js/userManagerment.js'
-], 'public/js/courtzip.js')
+], 'public/js/courtzip.js').version();
     .js('resources/assets/js/app.js', 'public/js')
     .sass('resources/assets/sass/app.scss', 'public/css')
     .styles([
