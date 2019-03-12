@@ -151,9 +151,9 @@ span.cls_009{font-family:Arial,serif;font-size:9px;color:rgb(0,0,0);font-weight:
 <span style="position:absolute;left:570.80px;top:40px" class="cls_002"><span class="cls_002">POSSESSION</span></span>
 <span style="position:absolute;left:51px;top:120px" class="cls_004"><span class="cls_004">Mag. Dist. No: '. $courtNumber .'</span></span>
 <span style="position:absolute;left:51px;top:134px" class="cls_004"><span class="cls_004">MDJ Name: '. $courtDetails->mdj_name .'</span></span>
-<span style="position:absolute;left:450px;top:120px" class="cls_005"><span class="cls_005">PLANTIFF:</span><p style="margin-left:70px;">'. $plantiffName .'<br>'. $plantiffAddress1 .'<br>'. $plantiffAddress2 .'<br>'.$plantiffPhone.'</p></span>
+<span style="position:absolute;left:450px;top:120px" class="cls_005"><span class="cls_005">PLANTIFF:</span><p style="margin-left:72px;">'. $plantiffName .'<br>'. $plantiffAddress1 .'<br>'. $plantiffAddress2 .'<br>'.$plantiffPhone.'</p></span>
 <span style="position:absolute;left:450px;top:185px" class="cls_005"><span class="cls_005">V.</span></span>
-<span style="position:absolute;left:450px;top:200px" class="cls_005"><span class="cls_005">DEFENDANT:</span><p style="margin-left:70px;">'. $_POST['tenant_name'].'<br>'.$defendanthouseNum.' '.$defendantStreetName.' '. $_POST['unit_number'] . '<br>'.$defendantTown .',' . $defendantState.' '.$defendantZipcode.'  </p></span>
+<span style="position:absolute;left:450px;top:200px" class="cls_005"><span class="cls_005">DEFENDANT:</span><p style="margin-left:78px;">'. $_POST['tenant_name'].'<br>'.$defendanthouseNum.' '.$defendantStreetName.' '. $_POST['unit_number'] . '<br>'.$defendantTown .',' . $defendantState.' '.$defendantZipcode.'  </p></span>
 <span style="position:absolute;left:51px;top:165px" class="cls_004"><span class="cls_004">Address: '.$courtAddressLine1.'<p style="margin-left:49px; margin-top:-4px;">'.$courtAddressLine2.'</p></span></span>
 <span style="position:absolute;left:51px;top:205px" class="cls_004"><span class="cls_004">Telephone:</span>'.$courtDetails->phone_number.'</span>
 <span style="position:absolute;left:450px;top:310px" class="cls_004"><span class="cls_004">Docket No:</span> '. $_POST['docket_number'] .'</span>
@@ -171,7 +171,7 @@ span.cls_009{font-family:Arial,serif;font-size:9px;color:rgb(0,0,0);font-weight:
 <span style="position:absolute;left:200px;top:490px" class="cls_004"><span class="cls_004">Total</span></span>
 <span style="position:absolute;left:235px;top:490px" class="cls_003"><span class="cls_003">$</span>'. $totalFees .'</span>
 <span style="position:absolute;left:50px;top:570px" class="cls_004"><span class="cls_004">TO THE MAGISTERIAL DISTRICT JUDGE:</span></span>
-<span style="position:absolute;left:50px;top:585px" class="cls_004"><span class="cls_004">The Plaintiff(s) named below, having obtained a judgment for possession of real property located at:</span><br>'.$defendanthouseNum.' '.$defendantStreetName.' '. $_POST['unit_number'] . '<br><br><span style="margin-top:5px;">'.$defendantTown .',' . $defendantState.' '.$defendantZipcode.'  </span></p></span>
+<span style="position:absolute;left:50px;top:585px" class="cls_004"><span class="cls_004">The Plaintiff(s) named below, having obtained a judgment for possession of real property located at:</span><br>'.$defendanthouseNum.' '.$defendantStreetName.' '. $_POST['unit_number'] . '<br><br><span style="margin-top:-15px;">'.$defendantTown .',' . $defendantState.' '.$defendantZipcode.'  </span></p></span>
 <span style="position:absolute;left:50px;top:665px" class="cls_004"><span class="cls_004">Address if any:</span></span>
 <span style="position:absolute;left:50px;top:720px" class="cls_004"><span class="cls_004">Requests that you issue an ORDER FOR POSSESSION for such property.</span></span>
 <span style="position:absolute;left:50px;top:745px" class="cls_004"><span class="cls_004">I certify that this filing complies with the provisions of the Case Records Public Access Policy of the Unified Judicial</span></span>
