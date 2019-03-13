@@ -183,7 +183,7 @@ span.cls_011{font-family:Arial,serif;font-size:10px;color:rgb(0,0,0);font-weight
 <span style="position:absolute;left:50px;top:910px" class="cls_004"><span class="cls_004">hearing, you must file it on a complaint form at this office at least five days before the date set for the hearing.</span></span>
 <span style="position:absolute;left:50px;top:925px" class="cls_007"><span class="cls_007">If you are disabled and require a reasonable accommodation to gain access to the Magisterial District Court and its services,</span></span>
 <span style="position:absolute;left:50px;top:940px" class="cls_007"><span class="cls_007">please contact the Magisterial District Court at the above address or telephone number.  We are unable to provide</span></span>
-<span style="position:absolute;left:50px;top:940px" class="cls_007"><span class="cls_007">transportation.</span></span>
+<span style="position:absolute;left:50px;top:955px" class="cls_007"><span class="cls_007">transportation.</span></span>
 <span style="position:absolute;left:50px;top:985px" class="cls_008"><span class="cls_008">AOPC 308A</span></span>
 <span style="position:absolute;left:605px;top:985px" class="cls_009"><span class="cls_009">FREE INTERPRETER</span></span>
 <span style="position:absolute;left:590px;top:1000px" class="cls_011"><span class="cls_011"> </span><A HREF="http://www.pacourts.us/language-rights/">www.pacourts.us/language-rights</A> </span>
