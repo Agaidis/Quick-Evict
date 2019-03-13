@@ -156,21 +156,21 @@ span.cls_011{font-family:Arial,serif;font-size:9px;color:rgb(0,0,0);font-weight:
 <span style="position:absolute;left:288px;top:240px" class="cls_004"><span class="cls_004">DATE PAID</span></span><br>
 <span style="position:absolute;left:50px;top:256px" class="cls_004"><span class="cls_004">FILING COSTS</span></span><br>
 <span style="position:absolute;left:152px;top:256px" class="cls_004"><span class="cls_004">$</span></span><br>
-<span style="position:absolute;left:50px;top:273px" class="cls_004"><span class="cls_004">POSTAGE</span></span><br>
-<span style="position:absolute;left:152px;top:273px" class="cls_004"><span class="cls_004">$</span></span><br>
-<span style="position:absolute;left:50px;top:288px" class="cls_004"><span class="cls_004">SERVICE COSTS</span></span><br>
-<span style="position:absolute;left:152px;top:288px" class="cls_004"><span class="cls_004">$</span></span><br>
+<span style="position:absolute;left:50px;top:275px" class="cls_004"><span class="cls_004">POSTAGE</span></span><br>
+<span style="position:absolute;left:152px;top:275px" class="cls_004"><span class="cls_004">$</span></span><br>
+<span style="position:absolute;left:50px;top:296px" class="cls_004"><span class="cls_004">SERVICE COSTS</span></span><br>
+<span style="position:absolute;left:152px;top:296px" class="cls_004"><span class="cls_004">$</span></span><br>
 <span style="position:absolute;left:481px;top:298px" class="cls_004"><span class="cls_004">Docket No:</span></span><br>
-<span style="position:absolute;left:50px;top:298px" class="cls_004"><span class="cls_004">CONSTABLE ED.</span></span><br>
-<span style="position:absolute;left:152px;top:298px" class="cls_004"><span class="cls_004">$</span></span><br>
-<span style="position:absolute;left:481px;top:315px" class="cls_004"><span class="cls_004">Case Filed:</span></span><br>
-<span style="position:absolute;left:50px;top:312px" class="cls_004"><span class="cls_004">TOTAL</span></span><br>
+<span style="position:absolute;left:50px;top:312px" class="cls_004"><span class="cls_004">CONSTABLE ED.</span></span><br>
 <span style="position:absolute;left:152px;top:312px" class="cls_004"><span class="cls_004">$</span></span><br>
-<span style="position:absolute;left:55px;top:336px" class="cls_003"><span class="cls_003">Pa.R.C.P.M.D.J. No. 206 sets forth those costs recoverable by the prevailing party.</span></span>
-<span style="position:absolute;left:60px;top:356px" class="cls_003"><span class="cls_003">To The Defendant:  The above named plaintiff(s) asks judgment against you for $__________________ together with costs</span></span>
-<span style="position:absolute;left:126.00px;top:356px" class="cls_003"><span class="cls_003">upon the following claim (Civil fines must include citation of the statute or ordinance violated):</span></span>
-<span style="position:absolute;left:36.00px;top:470.80px" class="cls_003"><span class="cls_003">I, ____________'.$_POST['tenant_name'].'______________ verify that the facts set forth in this complaint are true and correct to the</span></span>
-<span style="position:absolute;left:36.00px;top:482.80px" class="cls_003"><span class="cls_003">best of my knowledge, information, and belief.  This statement is made subject to the penalties of Section 4904 of the</span></span>
+<span style="position:absolute;left:481px;top:315px" class="cls_004"><span class="cls_004">Case Filed:</span></span><br>
+<span style="position:absolute;left:50px;top:340px" class="cls_004"><span class="cls_004">TOTAL</span></span><br>
+<span style="position:absolute;left:152px;top:340px" class="cls_004"><span class="cls_004">$</span></span><br>
+<span style="position:absolute;left:55px;top:400px" class="cls_003"><span class="cls_003">Pa.R.C.P.M.D.J. No. 206 sets forth those costs recoverable by the prevailing party.</span></span>
+<span style="position:absolute;left:55px;top:415px" class="cls_003"><span class="cls_003">To The Defendant:  The above named plaintiff(s) asks judgment against you for $__________________ together with costs</span></span>
+<span style="position:absolute;left:100px;top:415px" class="cls_003"><span class="cls_003">upon the following claim (Civil fines must include citation of the statute or ordinance violated):</span></span>
+<span style="position:absolute;left:55px;top:500px" class="cls_003"><span class="cls_003">I, ____________'.$_POST['tenant_name'].'______________ verify that the facts set forth in this complaint are true and correct to the</span></span>
+<span style="position:absolute;left:55px;top:515px" class="cls_003"><span class="cls_003">best of my knowledge, information, and belief.  This statement is made subject to the penalties of Section 4904 of the</span></span>
 <span style="position:absolute;left:36.00px;top:494.80px" class="cls_003"><span class="cls_003">Crimes Code (18 PA. C.S. § 4904) related to unsworn falsification to authorities.</span></span>
 <span style="position:absolute;left:36.57px;top:512.49px" class="cls_003"><span class="cls_003">I certify that this filing complies with the provisions of the Case Records Public Access Policy of the Unified Judicial System</span></span>
 <span style="position:absolute;left:36.57px;top:524.43px" class="cls_003"><span class="cls_003">of Pennsylvania that require filing confidential information and documents differently than non-confidential information and</span></span>
