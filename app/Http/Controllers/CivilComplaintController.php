@@ -139,7 +139,7 @@ span.cls_010{font-family:Arial,serif;font-size:10px;color:rgb(0,0,0);font-weight
 span.cls_011{font-family:Arial,serif;font-size:9px;color:rgb(0,0,0);font-weight:normal;font-style:normal;text-decoration: underline}
 --></style></head><body>
 <span style="position:absolute;margin-left:-44px;top:-22px;width:787px;height:1112px;overflow:hidden">
-<span style="position:absolute;left:0px;top:0px"><img src="https://quickevict.nyc3.digitaloceanspaces.com/civilcomplaint.jpg" width="800" height="1052"></span>
+<span style="position:absolute;left:0px;top:0px"><img src="https://quickevict.nyc3.digitaloceanspaces.com/civilcomplaint.jpg" width="750" height="1052"></span>
 <span style="position:absolute;left:48px;top:16px" class="cls_003"><span class="cls_003">COMMONWEALTH OF PENNSYLVANIA</span></span>
 <span style="position:absolute;left:450px;top:16px" class="cls_002"><span class="cls_002">CIVIL COMPLAINT</span></span>
 <span style="position:absolute;left:48px;top:35px" class="cls_003"><span class="cls_003">COUNTY OF ' . strtoupper($courtDetails->county) .'</span></span>
