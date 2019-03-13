@@ -147,7 +147,7 @@ span.cls_011{font-family:Arial,serif;font-size:9px;color:rgb(0,0,0);font-weight:
 <span style="position:absolute;left:464px;top:87px" class="cls_005"><span class="cls_005">NAME and ADDRESS</span></span>
 <span style="position:absolute;left:51px;top:120px" class="cls_004"><span class="cls_004">Mag. Dist. No: '. $courtNumber .'</span></span><br>
 <span style="position:absolute;left:51px;top:134px" class="cls_004"><span class="cls_004">MDJ Name: '. $courtDetails->mdj_name .'</span></span><br>
-<span style="position:absolute;left:55px;top:120px" class="cls_004"><span class="cls_004">Address: '.$courtAddressLine1.'<br><span style="margin-left:45px;">'.$courtAddressLine2.'</span></span></span><br>
+<span style="position:absolute;left:55px;top:140px" class="cls_004"><span class="cls_004">Address: '.$courtAddressLine1.'<br><span style="margin-left:45px;">'.$courtAddressLine2.'</span></span></span><br>
 <span style="position:absolute;left:581px;top:184px" class="cls_006"><span class="cls_006">V.</span></span>
 <span style="position:absolute;left:450px;top:200px" class="cls_010"><span class="cls_010">DEFENDANT:</span><br><p style="margin-left:6px;">'.$_POST['tenant_name'].'<br>'.$defendanthouseNum.' '.$defendantStreetName.' '. $_POST['unit_number'] . '<br>'.$defendantTown .',' . $defendantState.' '.$defendantZipcode.'  </p></span><br>
 <span style="position:absolute;left:601px;top:180px" class="cls_005"><span class="cls_005">NAME and ADDRESS</span></span><br>
