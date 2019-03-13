@@ -95,6 +95,11 @@ class CivilComplaintController extends Controller
                 $eviction->status = 'Created Civil Complaint';
                 $eviction->property_address = $defendanthouseNum.' '.$defendantStreetName.'-1'.$defendantTown .',' . $defendantState.' '.$defendantZipcode;
                 $eviction->tenant_name = $_POST['tenant_name'];
+                $eviction->defendant_state = $defendantState;
+                $eviction->defendant_zipcode = $defendantZipcode;
+                $eviction->defendant_house_num = $defendanthouseNum;
+                $eviction->defendant_street_name = $defendantStreetName;
+                $eviction->defendant_town = $defendantTown;
                 $eviction->total_judgement = $_POST['total_judgment'];
                 $eviction->pdf_download = 'true';
                 $eviction->court_number = $courtNumber;
@@ -115,6 +120,13 @@ class CivilComplaintController extends Controller
                 $eviction->save();
 
                 $evictionId = $eviction->id;
+
+                $signature = new Signature();
+                $signature->eviction_id = $evictionId;
+                $signature->signature = $_POST['signature_source'];
+
+                $signature->save();
+
             } catch ( \Exception $e) {
                 Log::info($e);
                 mail('andrew.gaidis@gmail.com', 'formulatePDFData Error' . Auth::User()->id, $e->getMessage());
