@@ -375,8 +375,8 @@ span.cls_009{font-family:Arial,serif;font-size:10px;color:rgb(0,0,0);font-weight
 <span style="position:absolute;left:48px;top:16px" class="cls_003"><span class="cls_003">COMMONWEALTH OF PENNSYLVANIA</span></span><br>
 <span style="position:absolute;left:460px;top:17px" class="cls_002"><span class="cls_002">LANDLORD/TENANT COMPLAINT</span></span><br>
 <span style="position:absolute;left:48px;top:35px" class="cls_003"><span class="cls_003">COUNTY OF ' . strtoupper($courtDetails->county) .'</span></span><br>
-<span style="position:absolute;left:450px;top:70px" class="cls_005"><span class="cls_005">PLAINTIFF:</span><br><p style="margin-left:6px;">'. $plantiffName .'<br>'. $plantiffAddress1 .'<br>'. $plantiffAddress2 .'<br>'.$plantiffPhone.'</p></span><br>
-<span style="position:absolute;left:615px;top:70px" class="cls_005"><span class="cls_005">NAME and ADDRESS</span></span>
+<span style="position:absolute;left:450px;top:80px" class="cls_005"><span class="cls_005">PLAINTIFF:</span><br><p style="margin-left:6px;">'. $plantiffName .'<br>'. $plantiffAddress1 .'<br>'. $plantiffAddress2 .'<br>'.$plantiffPhone.'</p></span><br>
+<span style="position:absolute;left:615px;top:80px" class="cls_005"><span class="cls_005">NAME and ADDRESS</span></span>
 <span style="position:absolute;left:55px;top:92px" class="cls_004"><span class="cls_004">Mag. Dist. No: '. $courtNumber .'</span></span><br>
 <span style="position:absolute;left:55px;top:105.85px" class="cls_004"><span class="cls_004">MDJ Name: '. $courtDetails->mdj_name .'</span></span><br>
 <span style="position:absolute;left:55px;top:120.05px" class="cls_004"><span class="cls_004">Address: '.$courtAddressLine1.'<br><span style="margin-left:45px;">'.$courtAddressLine2.'</span></span></span><br>
@@ -437,7 +437,7 @@ span.cls_009{font-family:Arial,serif;font-size:10px;color:rgb(0,0,0);font-weight
 <span style="position:absolute;left:55.40px;top:685.45px" class="cls_004"><span class="cls_004">5.</span></span><br>
 <span style="position:absolute;left:77.30px;top:685.45px" class="cls_004"><span class="cls_004">'.$leaseEnded.'The term for which the property was leased or rented is fully ended, or</span></span><br>
 <span style="position:absolute;left:77.30px;top:700.35px" class="cls_004"><span class="cls_004">'.$breachedConditionsLease.'A forfeiture has resulted by reason of a breach of the conditions of the lease, to wit:</span></span><br>
-<span style="position:absolute;left:504.74px;top:700.35px" class="cls_004"><span style="text-decoration: underline;" class="cls_004">'.$breachedDetails.'_____</span></span>
+<span style="position:absolute;left:515px;top:700px" class="cls_004"><span style="text-decoration: underline;" class="cls_004">'.$breachedDetails.'_____</span></span>
 <span style="position:absolute;left:77.30px;top:710.35px" class="cls_004"><span class="cls_004">________________________________________________________________________________________________or,</span></span><br>
 <span style="position:absolute;left:77.30px;top:725.15px" class="cls_004"><span class="cls_004">___________________________________________________________________________________________________</span></span><br>
 <span style="position:absolute;left:77.30px;top:740.55px" class="cls_004"><span class="cls_004">'.$unsatisfiedLease.'Rent reserved and due has, upon demand, remained unsatisfied.</span></span><br>
