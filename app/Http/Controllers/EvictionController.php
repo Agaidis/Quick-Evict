@@ -360,24 +360,15 @@ class EvictionController extends Controller
 <style type="text/css">
 <!--
 input[type=checkbox] { display: inline!important; font-size: 9pt; margin:1%; }
-span.cls_003{font-family:Arial,serif;font-size:13.30px;color:rgb(0,0,0);font-weight:normal;font-style:normal;text-decoration: none}
-span.cls_003{font-family:Arial,serif;font-size:13.30px;color:rgb(0,0,0);font-weight:normal;font-style:normal;text-decoration: none}
-span.cls_002{font-family:Arial,serif;font-size:18.75px;color:rgb(0,0,0);font-weight:bold;font-style:normal;text-decoration: none}
-span.cls_002{font-family:Arial,serif;font-size:18.75px;color:rgb(0,0,0);font-weight:bold;font-style:normal;text-decoration: none}
-span.cls_005{font-family:Arial,serif;font-size:9.31px;color:rgb(0,0,0);font-weight:normal;font-style:normal;text-decoration: none}
-span.cls_005{font-family:Arial,serif;font-size:9.31px;color:rgb(0,0,0);font-weight:normal;font-style:normal;text-decoration: none}
-span.cls_004{font-family:Arial,serif;font-size:12.10px;color:rgb(0,0,0);font-weight:normal;font-style:normal;text-decoration: none}
-span.cls_004{font-family:Arial,serif;font-size:12.10px;color:rgb(0,0,0);font-weight:normal;font-style:normal;text-decoration: none}
-span.cls_006{font-family:Arial,serif;font-size:7.98px;color:rgb(0,0,0);font-weight:normal;font-style:normal;text-decoration: none}
-span.cls_006{font-family:Arial,serif;font-size:7.98px;color:rgb(0,0,0);font-weight:normal;font-style:normal;text-decoration: none}
-span.cls_009{font-family:Arial,serif;font-size:9.31px;color:rgb(0,0,0);font-weight:normal;font-style:normal;text-decoration: underline}
-span.cls_009{font-family:Arial,serif;font-size:9.31px;color:rgb(0,0,0);font-weight:normal;font-style:normal;text-decoration: none}
-span.cls_007{font-family:Arial,serif;font-size:10.77px;color:rgb(0,0,0);font-weight:bold;font-style:normal;text-decoration: none}
-span.cls_007{font-family:Arial,serif;font-size:10.77px;color:rgb(0,0,0);font-weight:bold;font-style:normal;text-decoration: none}
-span.cls_008{font-family:Arial,serif;font-size:10.77px;color:rgb(0,0,0);font-weight:normal;font-style:normal;text-decoration: none}
-span.cls_008{font-family:Arial,serif;font-size:10.77px;color:rgb(0,0,0);font-weight:normal;font-style:normal;text-decoration: none}
-span.cls_010{font-family:Arial,serif;font-size:10.77px;color:rgb(0,0,0);font-weight:normal;font-style:normal;text-decoration: underline}
-span.cls_010{font-family:Arial,serif;font-size:10.77px;color:rgb(0,0,0);font-weight:normal;font-style:normal;text-decoration: none}
+span.cls_002{font-family:Arial,serif;font-size:19px;color:rgb(0,0,0);font-weight:bold;font-style:normal;text-decoration: none}
+span.cls_003{font-family:Arial,serif;font-size:14px;color:rgb(0,0,0);font-weight:normal;font-style:normal;text-decoration: none}
+span.cls_004{font-family:Arial,serif;font-size:13px;color:rgb(0,0,0);font-weight:normal;font-style:normal;text-decoration: none}
+span.cls_005{font-family:Arial,serif;font-size:10px;color:rgb(0,0,0);font-weight:normal;font-style:normal;text-decoration: none}
+span.cls_006{font-family:Arial,serif;font-size:10px;color:rgb(0,0,0);font-weight:normal;font-style:normal;text-decoration: none}
+span.cls_007{font-family:Arial,serif;font-size:13px;color:rgb(0,0,0);font-weight:bold;font-style:normal;text-decoration: none}
+span.cls_008{font-family:Arial,serif;font-size:12px;color:rgb(0,0,0);font-weight:normal;font-style:normal;text-decoration: none}
+span.cls_009{font-family:Arial,serif;font-size:10px;color:rgb(0,0,0);font-weight:normal;font-style:normal;text-decoration: none}
+
 --></style></head><body>
 <span style="position:absolute;margin-left:-44px;top:-22px;width:787px;height:1112px;overflow:hidden">
 <span style="position:absolute;left:0px;top:0px"><img src="https://quickevict.nyc3.digitaloceanspaces.com/background1.jpg" width="800" height="1052"></span>
@@ -469,7 +460,6 @@ span.cls_010{font-family:Arial,serif;font-size:10.77px;color:rgb(0,0,0);font-wei
 <span style = "position:absolute;left:590.75px;top:1000.50px" class="cls_008" ><span class="cls_008" > www.pacourts.us/language-rights</span ></span ><br >
 <span style = "position:absolute;left:303.75px;top:985.50px" class="cls_008" ><span class="cls_008" > CourtZip ID # ' . $evictionId .'</span ></span ><br >
 <span style = "position:absolute;left:120.65px;top:985.85px" class="cls_007" ><span class="cls_007" > </span >Filing Fee: $'.$filingFee.'</span ><br >
-<span style = "position:absolute;left:452.45px;top:1000px" class="cls_010" ><span class="cls_010" > </span ></span >
 </span ></body ></html>');
 
             // (Optional) Setup the paper size and orientation
