@@ -135,15 +135,15 @@ span.cls_006{font-family:Arial,serif;font-size:8px;color:rgb(0,0,0);font-weight:
 span.cls_007{font-family:Arial,serif;font-size:12px;color:rgb(0,0,0);font-weight:bold;font-style:normal;text-decoration: none}
 span.cls_008{font-family:Arial,serif;font-size:10px;color:rgb(0,0,0);font-weight:normal;font-style:normal;text-decoration: none}
 span.cls_009{font-family:Arial,serif;font-size:9px;color:rgb(0,0,0);font-weight:bold;font-style:normal;text-decoration: none}
-span.cls_010{font-family:Arial,serif;font-size:10px;color:rgb(0,0,0);font-weight:normal;font-style:normal;text-decoration: underline}
+span.cls_010{font-family:Arial,serif;font-size:10px;color:rgb(0,0,0);font-weight:normal;font-style:normal;text-decoration: none}
 span.cls_011{font-family:Arial,serif;font-size:9px;color:rgb(0,0,0);font-weight:normal;font-style:normal;text-decoration: underline}
 --></style></head><body>
 <span style="position:absolute;margin-left:-44px;top:-22px;width:787px;height:1112px;overflow:hidden">
 <span style="position:absolute;left:0px;top:0px"><img src="https://quickevict.nyc3.digitaloceanspaces.com/civilcomplaint.jpg" width="800" height="1052"></span>
 <span style="position:absolute;left:48px;top:16px" class="cls_003"><span class="cls_003">COMMONWEALTH OF PENNSYLVANIA</span></span>
-<span style="position:absolute;left:398px;top:35px" class="cls_002"><span class="cls_002">CIVIL COMPLAINT</span></span>
-<span style="position:absolute;left:36px;top:49px" class="cls_003"><span class="cls_003">COUNTY OF ' . strtoupper($courtDetails->county) .'</span></span>
-<span style="position:absolute;left:336px;top:86px" class="cls_010"><span class="cls_010">PLAINTIFF:</span><br><p style="margin-left:6px;">'. $plantiffName .'<br>'. $plantiffAddress1 .'<br>'. $plantiffAddress2 .'<br>'.$plantiffPhone.'</p></span><br>
+<span style="position:absolute;left:450px;top:16px" class="cls_002"><span class="cls_002">CIVIL COMPLAINT</span></span>
+<span style="position:absolute;left:48px;top:35px" class="cls_003"><span class="cls_003">COUNTY OF ' . strtoupper($courtDetails->county) .'</span></span>
+<span style="position:absolute;left:400px;top:120px" class="cls_010"><span class="cls_010">PLAINTIFF:</span><br><p style="margin-left:6px;">'. $plantiffName .'<br>'. $plantiffAddress1 .'<br>'. $plantiffAddress2 .'<br>'.$plantiffPhone.'</p></span><br>
 <span style="position:absolute;left:464px;top:87px" class="cls_005"><span class="cls_005">NAME and ADDRESS</span></span>
 <span style="position:absolute;left:51px;top:120px" class="cls_004"><span class="cls_004">Mag. Dist. No: '. $courtNumber .'</span></span><br>
 <span style="position:absolute;left:51px;top:134px" class="cls_004"><span class="cls_004">MDJ Name: '. $courtDetails->mdj_name .'</span></span><br>
