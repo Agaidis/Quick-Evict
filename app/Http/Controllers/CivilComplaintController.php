@@ -167,7 +167,7 @@ span.cls_011{font-family:Arial,serif;font-size:12px;color:rgb(0,0,0);font-weight
 <span style="position:absolute;left:50px;top:336px" class="cls_004"><span class="cls_004">TOTAL</span></span><br>
 <span style="position:absolute;left:155px;top:336px" class="cls_004"><span class="cls_004">$</span></span><br>
 <span style="position:absolute;left:55px;top:388px" class="cls_003"><span class="cls_003">Pa.R.C.P.M.D.J. No. 206 sets forth those costs recoverable by the prevailing party.</span></span>
-<span style="position:absolute;left:570px;top:405px" class="cls_003">'. $_POST['total_judgment'] .'</span>
+<span style="position:absolute;left:565px;top:410px" class="cls_003">'. $_POST['total_judgment'] .'</span>
 <span style="position:absolute;left:55px;top:410px" class="cls_003"><span class="cls_003">To The Defendant:  The above named plaintiff(s) asks judgment against you for $__________________ together with costs</span></span>
 <span style="position:absolute;left:166px;top:425px" class="cls_003"><span class="cls_003">upon the following claim (Civil fines must include citation of the statute or ordinance violated):</span></span>
 <span style="position:absolute;left:140px;top:600px" class="cls_003">'.$_POST['tenant_name'].'</span>
