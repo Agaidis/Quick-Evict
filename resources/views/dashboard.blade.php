@@ -12,6 +12,12 @@
                                 {{ session('status') }}
                             </div>
                         @endif
+                            <h2 class="titles">Start a Filing:</h2>
+                            <div class="button_panel">
+                                <a href="{{ url('new-ltc') }}"><button type="button" class="btn btn-primary home_btns" id="ltc_btn">LTC</button></a>
+                                <a href="{{ url('new-oop') }}"><button type="button" class="btn btn-primary home_btns" id="oop_btn">Order of Possession</button></a>
+                                <a href="{{ url('new-civil-complaint') }}"><button type="button" class="btn btn-primary home_btns" id="civil_complaint_btn">Civil Complaint</button></a>
+                            </div>
                         <form method="post" action="{{ action('DashboardController@downloadPDF') }}" enctype="multipart/form-data" id="dashboard_form">
                             <input type="hidden" name="_token" value="{{ Session::token() }}">
                             <table class="table table-hover table-responsive-md table-bordered eviction_table" id="eviction_table">
