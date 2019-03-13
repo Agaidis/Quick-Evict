@@ -124,6 +124,7 @@
                                             <div class="form-group">
                                                 <div class="row">
                                                     <div class="col-sm-8">
+                                                        <div class="col-sm-6">
                                                             <div class="col-sm-10">
                                                                 <label for="unjust_damages">Judgment Amount</label>
                                                                 <input type="text" class="form-control eviction_fields" id="judgment_amount" name="judgment_amount" placeholder="$" value="" />
@@ -140,6 +141,7 @@
                                                                 <label for="attorney_fees">Attorney Fees</label>
                                                                 <input type="text" class="form-control eviction_fields" id="attorney_fees" name="attorney_fees" placeholder="$" value="" />
                                                             </div>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
@@ -152,10 +154,9 @@
                                                 <div class="offset-1 col-sm-10">
                                                     <canvas id="signature_pad" width="600" height="200" style="touch-action: none;"></canvas>
                                                     <div class="signature_pad_footer">
-                                                        <div class="description">Sign above</div>
                                                         <div class="signature_pad_actions">
                                                             <button type="button" class="btn btn-warning clear_signature" data-action="clear">Clear</button>
-                                                            <button type="button" class="btn btn-danger no_signature" data-action="save-png">Do not use Digital Signature</button>
+                                                            <button type="button" class="btn btn-danger no_signature" data-action="save-png">No Digital Signature</button>
                                                             <button type="button" class="btn btn-success save_signature" data-action="save-png">Use Digital Signature</button>
                                                         </div>
                                                     </div>
