@@ -155,17 +155,17 @@ span.cls_011{font-family:Arial,serif;font-size:9px;color:rgb(0,0,0);font-weight:
 <span style="position:absolute;left:190px;top:240px" class="cls_004"><span class="cls_004">AMOUNT</span></span><br>
 <span style="position:absolute;left:288px;top:240px" class="cls_004"><span class="cls_004">DATE PAID</span></span><br>
 <span style="position:absolute;left:50px;top:256px" class="cls_004"><span class="cls_004">FILING COSTS</span></span><br>
-<span style="position:absolute;left:152px;top:256px" class="cls_004"><span class="cls_004">$</span></span><br>
+<span style="position:absolute;left:155px;top:256px" class="cls_004"><span class="cls_004">$</span></span><br>
 <span style="position:absolute;left:50px;top:275px" class="cls_004"><span class="cls_004">POSTAGE</span></span><br>
-<span style="position:absolute;left:152px;top:275px" class="cls_004"><span class="cls_004">$</span></span><br>
+<span style="position:absolute;left:155px;top:275px" class="cls_004"><span class="cls_004">$</span></span><br>
 <span style="position:absolute;left:50px;top:294px" class="cls_004"><span class="cls_004">SERVICE COSTS</span></span><br>
-<span style="position:absolute;left:152px;top:294px" class="cls_004"><span class="cls_004">$</span></span><br>
+<span style="position:absolute;left:155px;top:294px" class="cls_004"><span class="cls_004">$</span></span><br>
 <span style="position:absolute;left:481px;top:298px" class="cls_004"><span class="cls_004">Docket No:</span></span><br>
 <span style="position:absolute;left:50px;top:312px" class="cls_004"><span class="cls_004">CONSTABLE ED.</span></span><br>
-<span style="position:absolute;left:152px;top:312px" class="cls_004"><span class="cls_004">$</span></span><br>
+<span style="position:absolute;left:155px;top:312px" class="cls_004"><span class="cls_004">$</span></span><br>
 <span style="position:absolute;left:481px;top:315px" class="cls_004"><span class="cls_004">Case Filed:</span></span><br>
-<span style="position:absolute;left:50px;top:338px" class="cls_004"><span class="cls_004">TOTAL</span></span><br>
-<span style="position:absolute;left:152px;top:338px" class="cls_004"><span class="cls_004">$</span></span><br>
+<span style="position:absolute;left:50px;top:336px" class="cls_004"><span class="cls_004">TOTAL</span></span><br>
+<span style="position:absolute;left:155px;top:336px" class="cls_004"><span class="cls_004">$</span></span><br>
 <span style="position:absolute;left:55px;top:390px" class="cls_003"><span class="cls_003">Pa.R.C.P.M.D.J. No. 206 sets forth those costs recoverable by the prevailing party.</span></span>
 <span style="position:absolute;left:55px;top:405px" class="cls_003"><span class="cls_003">To The Defendant:  The above named plaintiff(s) asks judgment against you for $__________________ together with costs</span></span>
 <span style="position:absolute;left:100px;top:415px" class="cls_003"><span class="cls_003">upon the following claim (Civil fines must include citation of the statute or ordinance violated):</span></span>
