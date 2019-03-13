@@ -121,12 +121,12 @@
                                             <div class="form-group">
                                                 <div class="row">
                                                     <div class="col-sm-6">
-                                                        <label for="total_judgment">Total Judgment</label>
+                                                        <label class="labels" for="total_judgment">Total Judgment</label>
                                                         <input type="text" class="form-control eviction_fields" id="total_judgment" name="total_judgment" placeholder="$" value="" />
                                                     </div>
-                                                    <div class="col-sm-12">
-                                                        <label for="total_judgment">Claim Description</label>
-                                                        <textarea class="form-control eviction_fields" id="claim_description" name="claim_description" placeholder="Broken Window"></textarea>
+                                                    <div class="col-sm-10">
+                                                        <label class="labels" for="total_judgment">Claim Description</label>
+                                                        <textarea style="height:150px;" class="form-control eviction_fields" id="claim_description" name="claim_description" placeholder="Broken Window"></textarea>
                                                     </div>
                                                 </div>
                                             </div>
