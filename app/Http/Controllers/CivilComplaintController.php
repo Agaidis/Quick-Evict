@@ -167,8 +167,8 @@ span.cls_011{font-family:Arial,serif;font-size:10px;color:rgb(0,0,0);font-weight
 <span style="position:absolute;left:50px;top:336px" class="cls_004"><span class="cls_004">TOTAL</span></span><br>
 <span style="position:absolute;left:155px;top:336px" class="cls_004"><span class="cls_004">$</span></span><br>
 <span style="position:absolute;left:55px;top:390px" class="cls_003"><span class="cls_003">Pa.R.C.P.M.D.J. No. 206 sets forth those costs recoverable by the prevailing party.</span></span>
-<span style="position:absolute;left:55px;top:405px" class="cls_003"><span class="cls_003">To The Defendant:  The above named plaintiff(s) asks judgment against you for $__________________ together with costs</span></span>
-<span style="position:absolute;left:166px;top:419px" class="cls_003"><span class="cls_003">upon the following claim (Civil fines must include citation of the statute or ordinance violated):</span></span>
+<span style="position:absolute;left:55px;top:410px" class="cls_003"><span class="cls_003">To The Defendant:  The above named plaintiff(s) asks judgment against you for $__________________ together with costs</span></span>
+<span style="position:absolute;left:166px;top:425px" class="cls_003"><span class="cls_003">upon the following claim (Civil fines must include citation of the statute or ordinance violated):</span></span>
 <span style="position:absolute;left:55px;top:690px" class="cls_003"><span class="cls_003">I, ____________'.$_POST['tenant_name'].'______________ verify that the facts set forth in this complaint are true and correct to the</span></span>
 <span style="position:absolute;left:55px;top:705px" class="cls_003"><span class="cls_003">best of my knowledge, information, and belief.  This statement is made subject to the penalties of Section 4904 of the</span></span>
 <span style="position:absolute;left:55px;top:720px" class="cls_003"><span class="cls_003">Crimes Code (18 PA. C.S. § 4904) related to unsworn falsification to authorities.</span></span>
