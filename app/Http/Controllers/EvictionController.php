@@ -375,8 +375,8 @@ span.cls_009{font-family:Arial,serif;font-size:10px;color:rgb(0,0,0);font-weight
 <span style="position:absolute;left:48px;top:16px" class="cls_003"><span class="cls_003">COMMONWEALTH OF PENNSYLVANIA</span></span><br>
 <span style="position:absolute;left:460px;top:17px" class="cls_002"><span class="cls_002">LANDLORD/TENANT COMPLAINT</span></span><br>
 <span style="position:absolute;left:48px;top:35px" class="cls_003"><span class="cls_003">COUNTY OF ' . strtoupper($courtDetails->county) .'</span></span><br>
-<span style="position:absolute;left:450px;top:80px" class="cls_005"><span class="cls_005">PLAINTIFF:</span><br><p style="margin-left:6px;">'. $plantiffName .'<br>'. $plantiffAddress1 .'<br>'. $plantiffAddress2 .'<br>'.$plantiffPhone.'</p></span><br>
-<span style="position:absolute;left:615px;top:80px" class="cls_005"><span class="cls_005">NAME and ADDRESS</span></span>
+<span style="position:absolute;left:450px;top:85px" class="cls_005"><span class="cls_005">PLAINTIFF:</span><br><p style="margin-left:6px;">'. $plantiffName .'<br>'. $plantiffAddress1 .'<br>'. $plantiffAddress2 .'<br>'.$plantiffPhone.'</p></span><br>
+<span style="position:absolute;left:615px;top:85px" class="cls_005"><span class="cls_005">NAME and ADDRESS</span></span>
 <span style="position:absolute;left:55px;top:92px" class="cls_004"><span class="cls_004">Mag. Dist. No: '. $courtNumber .'</span></span><br>
 <span style="position:absolute;left:55px;top:105.85px" class="cls_004"><span class="cls_004">MDJ Name: '. $courtDetails->mdj_name .'</span></span><br>
 <span style="position:absolute;left:55px;top:120.05px" class="cls_004"><span class="cls_004">Address: '.$courtAddressLine1.'<br><span style="margin-left:45px;">'.$courtAddressLine2.'</span></span></span><br>
