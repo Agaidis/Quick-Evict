@@ -365,7 +365,7 @@ span.cls_003{font-family:Arial,serif;font-size:14px;color:rgb(0,0,0);font-weight
 span.cls_004{font-family:Arial,serif;font-size:13px;color:rgb(0,0,0);font-weight:normal;font-style:normal;text-decoration: none}
 span.cls_005{font-family:Arial,serif;font-size:10px;color:rgb(0,0,0);font-weight:normal;font-style:normal;text-decoration: none}
 span.cls_006{font-family:Arial,serif;font-size:10px;color:rgb(0,0,0);font-weight:normal;font-style:normal;text-decoration: none}
-span.cls_007{font-family:Arial,serif;font-size:13px;color:rgb(0,0,0);font-weight:bold;font-style:normal;text-decoration: none}
+span.cls_007{font-family:Arial,serif;font-size:12px;color:rgb(0,0,0);font-weight:bold;font-style:normal;text-decoration: none}
 span.cls_008{font-family:Arial,serif;font-size:12px;color:rgb(0,0,0);font-weight:normal;font-style:normal;text-decoration: none}
 span.cls_009{font-family:Arial,serif;font-size:10px;color:rgb(0,0,0);font-weight:normal;font-style:normal;text-decoration: none}
 
@@ -452,9 +452,9 @@ span.cls_009{font-family:Arial,serif;font-size:10px;color:rgb(0,0,0);font-weight
 <span style = "position:absolute;left:55px;top:905px" class="cls_005" ><span class="cls_005" >IF YOU HAVE A DEFENSE to this complaint you may present it at the hearing . IF YOU HAVE A CLAIM against the plaintiff arising out of the occupancy of the premises,</span ></span ><br >
 <span style = "position:absolute;left:55px;top:915px" class="cls_005" ><span class="cls_005" > which is in the magisterial district judge jurisdiction and which you intend to assert at the hearing, YOU MUST FILE it on the complaint form at the office BEFORE THE TIME </span ></span ><br >
 <span style = "position:absolute;left:55px;top:925px" class="cls_005" ><span class="cls_005" > set for the hearing . IF YOU DO NOT APPEAR AT THE HEARING, a judgment for possession and costs, and for damages and rent if claimed, may nevertheless be entered </span ></span ><br >
-<span style = "position:absolute;left:55px;top:936px" class="cls_005" ><span class="cls_005" > against you . A judgment against you for possession may result in your EVICTION from the premises .</span ></span ><br >
-<span style = "position:absolute;left:55px;top:946px" class="cls_007" ><span class="cls_007" >If you are disabled and require a reasonable accommodation to gain access to the Magisterial District Court and its services, please </span ></span ><br >
-<span style = "position:absolute;left:55px;top:955px" class="cls_007" ><span class="cls_007" > contact the Magisterial District Court at the above address or telephone number. We are unable to provide transportation.</span ></span ><br >
+<span style = "position:absolute;left:55px;top:935px" class="cls_005" ><span class="cls_005" > against you . A judgment against you for possession may result in your EVICTION from the premises .</span ></span ><br >
+<span style = "position:absolute;left:55px;top:945px" class="cls_007" ><span class="cls_007" >If you are disabled and require a reasonable accommodation to gain access to the Magisterial District Court and its services, please </span ></span ><br >
+<span style = "position:absolute;left:55px;top:960px" class="cls_007" ><span class="cls_007" > contact the Magisterial District Court at the above address or telephone number. We are unable to provide transportation.</span ></span ><br >
 <span style = "position:absolute;left:55px;top:986px" class="cls_008" ><span class="cls_008" > AOPC 310A </span ></span ><br >
 <span style = "position:absolute;left:606px;top:986px" class="cls_008" ><span class="cls_008" > FREE INTERPRETER</span ></span ><br >
 <span style = "position:absolute;left:590.75px;top:1000.50px" class="cls_008" ><span class="cls_008" > www.pacourts.us/language-rights</span ></span ><br >
