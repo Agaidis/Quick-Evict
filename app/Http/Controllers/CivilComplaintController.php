@@ -166,15 +166,15 @@ span.cls_011{font-family:Arial,serif;font-size:10px;color:rgb(0,0,0);font-weight
 <span style="position:absolute;left:481px;top:315px" class="cls_004"><span class="cls_004">Case Filed:</span></span><br>
 <span style="position:absolute;left:50px;top:336px" class="cls_004"><span class="cls_004">TOTAL</span></span><br>
 <span style="position:absolute;left:155px;top:336px" class="cls_004"><span class="cls_004">$</span></span><br>
-<span style="position:absolute;left:55px;top:390px" class="cls_003"><span class="cls_003">Pa.R.C.P.M.D.J. No. 206 sets forth those costs recoverable by the prevailing party.</span></span>
+<span style="position:absolute;left:55px;top:388px" class="cls_003"><span class="cls_003">Pa.R.C.P.M.D.J. No. 206 sets forth those costs recoverable by the prevailing party.</span></span>
 <span style="position:absolute;left:55px;top:410px" class="cls_003"><span class="cls_003">To The Defendant:  The above named plaintiff(s) asks judgment against you for $__________________ together with costs</span></span>
 <span style="position:absolute;left:166px;top:425px" class="cls_003"><span class="cls_003">upon the following claim (Civil fines must include citation of the statute or ordinance violated):</span></span>
-<span style="position:absolute;left:55px;top:690px" class="cls_003"><span class="cls_003">I, ____________'.$_POST['tenant_name'].'______________ verify that the facts set forth in this complaint are true and correct to the</span></span>
-<span style="position:absolute;left:55px;top:705px" class="cls_003"><span class="cls_003">best of my knowledge, information, and belief.  This statement is made subject to the penalties of Section 4904 of the</span></span>
-<span style="position:absolute;left:55px;top:720px" class="cls_003"><span class="cls_003">Crimes Code (18 PA. C.S. § 4904) related to unsworn falsification to authorities.</span></span>
-<span style="position:absolute;left:55px;top:750px" class="cls_003"><span class="cls_003">I certify that this filing complies with the provisions of the Case Records Public Access Policy of the Unified Judicial System</span></span>
-<span style="position:absolute;left:55px;top:775px" class="cls_003"><span class="cls_003">of Pennsylvania that require filing confidential information and documents differently than non-confidential information and</span></span>
-<span style="position:absolute;left:55px;top:790px" class="cls_003"><span class="cls_003">documents.</span></span>
+<span style="position:absolute;left:55px;top:660px" class="cls_003"><span class="cls_003">I, ____________'.$_POST['tenant_name'].'______________ verify that the facts set forth in this complaint are true and correct to the</span></span>
+<span style="position:absolute;left:55px;top:675px" class="cls_003"><span class="cls_003">best of my knowledge, information, and belief.  This statement is made subject to the penalties of Section 4904 of the</span></span>
+<span style="position:absolute;left:55px;top:690px" class="cls_003"><span class="cls_003">Crimes Code (18 PA. C.S. § 4904) related to unsworn falsification to authorities.</span></span>
+<span style="position:absolute;left:55px;top:720px" class="cls_003"><span class="cls_003">I certify that this filing complies with the provisions of the Case Records Public Access Policy of the Unified Judicial System</span></span>
+<span style="position:absolute;left:55px;top:735px" class="cls_003"><span class="cls_003">of Pennsylvania that require filing confidential information and documents differently than non-confidential information and</span></span>
+<span style="position:absolute;left:55px;top:750px" class="cls_003"><span class="cls_003">documents.</span></span>
 <span style="position:absolute;left:480px;top:780px" class="cls_004"><img style="position:absolute; top:-60px" width="160" height="65" src="'.$_POST['signature_source'].'"/><span class="cls_004">(Signature of Plaintiff or Authorized Agent)</span></span>
 <span style="position:absolute;left:55px;top:px" class="cls_004"><span class="cls_004">The plaintiff\'s attorney shall file an entry of appearance with the magisterial district court pursuant to Pa.R.C.P.M.D.J. 207.1</span></span>
 <span style="position:absolute;left:50px;top:850px" class="cls_007"><span class="cls_007">If you intend to enter a defense to this complaint, you should notify this office immediately at the above telephone number.  You</span></span>
