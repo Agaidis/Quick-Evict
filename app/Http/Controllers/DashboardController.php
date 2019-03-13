@@ -244,7 +244,7 @@ class DashboardController extends Controller
             $options->setIsRemoteEnabled(true);
             $dompdf->setOptions($options);
 
-            if ($fileType == 'evictions' || $fileType == '') {
+            if ($fileType == 'eviction' || $fileType == '') {
                 $dompdf->loadHtml('<html>
 <head><meta http-equiv=Content-Type content="text/html; charset=UTF-8">
 <style type="text/css">
