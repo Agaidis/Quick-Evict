@@ -117,14 +117,12 @@
 
                                         <!-- Amounts Container -->
                                         <h4 class="major_labels">Amount</h4>
-                                        <div id="general_information_container" class="major_labels">
+                                        <div id="amount_due_container" class="major_labels">
                                             <div class="form-group">
                                                 <div class="row">
-                                                    <div class="col-sm-10">
-                                                        <div class="col-sm-6">
-                                                            <label for="total_judgment">Total Judgment</label>
-                                                            <input type="text" class="form-control eviction_fields" id="total_judgment" name="total_judgment" placeholder="$" value="" />
-                                                        </div>
+                                                    <div class="col-sm-6">
+                                                        <label for="total_judgment">Total Judgment</label>
+                                                        <input type="text" class="form-control eviction_fields" id="total_judgment" name="total_judgment" placeholder="$" value="" />
                                                     </div>
                                                 </div>
                                             </div>
