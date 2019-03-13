@@ -92,7 +92,7 @@ class CivilComplaintController extends Controller
 
             try {
                 $eviction = new Evictions();
-                $eviction->status = 'Created OOP';
+                $eviction->status = 'Created Civil Complaint';
                 $eviction->property_address = $defendanthouseNum.' '.$defendantStreetName.'-1'.$defendantTown .',' . $defendantState.' '.$defendantZipcode;
                 $eviction->tenant_name = $_POST['tenant_name'];
                 $eviction->total_judgement = $_POST['total_judgment'];
@@ -109,6 +109,8 @@ class CivilComplaintController extends Controller
                 $eviction->verify_name = $verifyName;
                 $eviction->user_id = Auth::user()->id;
                 $eviction->court_filing_fee = '0';
+                $eviction->claim_description = $_POST['claim_description'];
+                $eviction->file_type = 'civil complaint';
 
                 $eviction->save();
 
