@@ -6,14 +6,12 @@
             <div class="col-md-10">
                 <div class="card" id="getting_started_panel" style="margin-bottom:3%;">
                     <div class="card-body">
-                        @if (Auth::check())
                         <h2 class="titles">Start a Filing:</h2>
                         <div class="button_panel">
-                            <a href="{{ url('new-ltc') }}"><button type="button" class="btn btn-primary home_btns" id="ltc_btn">LTC</button></a>
+                            <a href="{{ url('new-ltc') }}"><button type="button" class="btn btn-primary home_btns" id="ltc_btn">Landlord-Tenant Complaint</button></a>
                             <a href="{{ url('new-oop') }}"><button type="button" class="btn btn-primary home_btns" id="oop_btn">Order of Possession</button></a>
                             <a href="{{ url('new-civil-complaint') }}"><button type="button" class="btn btn-primary home_btns" id="civil_complaint_btn">Civil Complaint</button></a>
                         </div>
-                        @endif
                     </div>
                 </div>
             </div>

@@ -14,7 +14,7 @@
                         @endif
                             <h2 class="titles">Start a New Filing:</h2>
                             <div style="margin-top:0!important;" class="button_panel">
-                                <a href="{{ url('new-ltc') }}"><button type="button" class="btn btn-primary home_btns" id="ltc_btn">LTC</button></a>
+                                <a href="{{ url('new-ltc') }}"><button type="button" class="btn btn-primary home_btns" id="ltc_btn">Landlord-Tenant Complaint</button></a>
                                 <a href="{{ url('new-oop') }}"><button type="button" class="btn btn-primary home_btns" id="oop_btn">Order of Possession</button></a>
                                 <a href="{{ url('new-civil-complaint') }}"><button type="button" class="btn btn-primary home_btns" id="civil_complaint_btn">Civil Complaint</button></a>
                             </div>
