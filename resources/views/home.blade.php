@@ -36,6 +36,7 @@
                         </ul>
                         <p>CourtZip is constantly growing -- click here to see where CourtZip is live:&nbsp;<u><a href="https://courtzip.com/where-does-this-work" data-saferedirecturl="https://www.google.com/url?q=https://courtzip.com/where-does-this-work&amp;source=gmail&amp;ust=1552678182363000&amp;usg=AFQjCNEzs8xrrhkzKG6qWWWw7u29nIRo9g">Locations</a></u></p>
                         <p>To get more info --- contact CourtZip here:&nbsp;<u><a href="mailto:Info@courtzip.com">Info@courtzip.com</a></u></p>
+                        <p>DISCLAIMER:  This website is created and maintained by CourtZip, a private entity, and is not owned, operated, or maintained by the Commonwealth of Pennsylvania or the Administrative Office of Pennsylvania Courts.</p>
                     </div>
                 </div>
             </div>
