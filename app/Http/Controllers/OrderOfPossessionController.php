@@ -90,7 +90,7 @@ class OrderOfPossessionController extends Controller
             $defendantStreetName = $_POST['streetName'];
             $defendantTown = $_POST['town'];
 
-            $totalFees = $_POST['judgment_amount'] + $_POST['costs_original_lt_proceeding'] + $_POST['costs_this_proceeding'] + $_POST['attorney_fees'];
+            $totalFees = (float)$_POST['judgment_amount'] + (float)$_POST['costs_original_lt_proceeding'] + (float)$_POST['costs_this_proceeding'] + (float)$_POST['attorney_fees'];
 
             try {
                 $eviction = new Evictions();
