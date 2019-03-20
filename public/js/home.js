@@ -5,7 +5,12 @@ $(document).ready(function () {
 
     $('#court_date').datepicker();
     $('#court_time').timepicker({
-        interval: 5
+        interval: 5,
+        beforeShow: function() {
+            setTimeout(function () {
+                $('.ui-timepicker').css('z-index', 99999999999999);
+            }, 0)
+        }
     });
 
     $('.calendar_tooltip').tooltip();
