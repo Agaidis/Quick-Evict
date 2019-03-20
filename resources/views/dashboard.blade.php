@@ -42,14 +42,18 @@
                                         $statusArray = array('Created LTC', 'Created OOP', 'Created Civil Complaint',
                                             'LTC Mailed',
                                             'LTC Submitted Online',
+                                            'Waiting on AOR',
                                             'Court Hearing Scheduled',
                                             'Court Hearing Extended',
+                                            'Court Hearing Rescheduled',
                                             'Judgement Issued in Favor of Owner',
                                             'Judgement Denied by Court',
                                             'Tenant Filed Appeal',
+                                            'OOP Scheduled',
                                             'OOP Mailed',
                                             'OOP Submitted Online',
                                             'Paid Judgement',
+                                            'Case Withdrawn',
                                             'Locked Out Tenant');?>
                                     <tr>
                                         <td class="text-center">{{$eviction->id}}</td>
