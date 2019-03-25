@@ -54,10 +54,7 @@ class OrderOfPossessionController extends Controller
 
     public function formulatePDF()
     {
-        Log::info('formulatePDF OOP');
-        Log::info(Auth::User()->id);
         try {
-            $removeValues = ['$', ','];
             $magistrateId = str_replace('magistrate_' , '', $_POST['court_number']);
             $courtDetails = CourtDetails::where('magistrate_id', $magistrateId)->first();
             $geoDetails = GeoLocation::where('magistrate_id', $magistrateId)->first();
@@ -73,12 +70,14 @@ class OrderOfPossessionController extends Controller
             if ($_POST['rented_by_val'] == 'rentedByOwner') {
                 $verifyName = $_POST['owner_name'];
                 $plantiffName = $_POST['owner_name'];
+                $plantiffNameBreakpoint = $_POST['owner_name'];
                 $plantiffPhone = $_POST['owner_phone'];
                 $plantiffAddress1 = $_POST['owner_address_1'];
                 $plantiffAddress2 = $_POST['owner_address_2'];
             } else {
                 $verifyName = $pmName;
                 $plantiffName = $_POST['other_name'] . ' on behalf of ' . $_POST['owner_name'];
+                $plantiffNameBreakpoint = $_POST['other_name'] . ' on behalf of <br>' . $_POST['owner_name'];
                 $plantiffPhone = $_POST['pm_phone'];
                 $plantiffAddress1 = $_POST['pm_address_1'];
                 $plantiffAddress2 = $_POST['pm_address_2'];
@@ -190,7 +189,7 @@ span.cls_009{font-family:Arial,serif;font-size:9px;color:rgb(0,0,0);font-weight:
 <span style="position:absolute;left:50px;top:745px" class="cls_004"><span class="cls_004">I certify that this filing complies with the provisions of the Case Records Public Access Policy of the Unified Judicial</span></span>
 <span style="position:absolute;left:50px;top:760px" class="cls_004"><span class="cls_004">System of Pennsylvania that require filing confidential information and documents differently than non-confidential</span></span>
 <span style="position:absolute;left:50px;top:775px" class="cls_004"><span class="cls_004">information and documents.</span></span>
-<span style="position:absolute;left:50px;top:840px" class="cls_004"><span class="cls_004">Plaintiff:</span> '. $plantiffName .'</span>
+<span style="position:absolute;left:50px;top:840px" class="cls_004"><span class="cls_004">Plaintiff:</span> '. $plantiffNameBreakpoint .'</span>
 <span style="position:absolute;left:427.00px;top:840px" class="cls_004"><span class="cls_004">Date:</span> '. date("d/m/Y") .'</span>
 <span style="position:absolute;left:358.00px;top:865px" class="cls_004"><span class="cls_004">Plaintiff Signature:</span><img style="position:absolute; margin-top: -5px; margin-left:10px;" width="140" height="45" src="'.$_POST['signature_source'].'"/></span>
 <span style="position:absolute;left:55px;top:985px" class="cls_007"><span class="cls_007">AOPC 311A</span></span>
