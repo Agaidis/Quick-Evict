@@ -99,7 +99,7 @@ class OrderOfPossessionController extends Controller
                 $eviction->costs_original_lt_proceeding = $_POST['costs_original_lt_proceeding'];
                 $eviction->cost_this_proceeding = $_POST['costs_this_proceeding'];
                 $eviction->attorney_fees = $_POST['attorney_fees'];
-                $eviction->total_judgement = $totalFees;
+                $eviction->total_judgement = '';
                 $eviction->property_address = $defendanthouseNum.' '.$defendantStreetName.'-1'.$defendantTown .',' . $defendantState.' '.$defendantZipcode;
                 $eviction->defendant_state = $defendantState;
                 $eviction->defendant_zipcode = $defendantZipcode;
@@ -182,7 +182,7 @@ span.cls_009{font-family:Arial,serif;font-size:9px;color:rgb(0,0,0);font-weight:
 <span style="position:absolute;left:157px;top:475px" class="cls_004"><span class="cls_004">Attorney Fees</span></span>
 <span style="position:absolute;left:235px;top:475px" class="cls_003"><span class="cls_003">$</span>'. $_POST['attorney_fees'] .'</span>
 <span style="position:absolute;left:200px;top:490px" class="cls_004"><span class="cls_004">Total</span></span>
-<span style="position:absolute;left:235px;top:490px" class="cls_003"><span class="cls_003">$</span>'. $totalFees .'</span>
+<span style="position:absolute;left:235px;top:490px" class="cls_003"><span class="cls_003">$</span></span>
 <span style="position:absolute;left:50px;top:570px" class="cls_004"><span class="cls_004">TO THE MAGISTERIAL DISTRICT JUDGE:</span></span>
 <span style="position:absolute;left:50px;top:585px" class="cls_004"><span class="cls_004">The Plaintiff(s) named below, having obtained a judgment for possession of real property located at:</span><br>'.$defendanthouseNum.' '.$defendantStreetName.' '. $_POST['unit_number'] . '<br><br><span style="position:absolute; margin-top:-10px;">'.$defendantTown .',' . $defendantState.' '.$defendantZipcode.'  </span></span>
 <span style="position:absolute;left:50px;top:665px" class="cls_004"><span class="cls_004">Address if any:</span></span>
