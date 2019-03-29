@@ -67,7 +67,7 @@ class CivilComplaintController extends Controller
             $courtAddressLine1 = $geoDetails->address_line_one;
             $courtAddressLine2 = $geoDetails->address_line_two;
 
-            $pmName = $_POST['pm_name'];
+
             $ownerName = $_POST['owner_name'];
 
 
