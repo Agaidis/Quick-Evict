@@ -186,7 +186,7 @@ span.cls_011{font-family:Arial,serif;font-size:12px;color:rgb(0,0,0);font-weight
 <span style="position:absolute;left:166px;top:425px" class="cls_003"><span class="cls_003">upon the following claim (Civil fines must include citation of the statute or ordinance violated):</span></span>
 <span style="position:absolute;left:60px;top:460px" class="cls_003">' . $_POST['claim_description'] . ' </span>
 <span style="position:absolute;left:140px;top:600px" class="cls_003">'.$_POST['tenant_name'].'</span>
-<span style="position:absolute;left:55px;top:600px" class="cls_003"><span class="cls_003">I, ' . $verifyName . ' verify that the facts set forth in this complaint are true and correct to the</span></span>
+<span style="position:absolute;left:55px;top:600px" class="cls_003"><span class="cls_003">I, ____________' . $verifyName . ' ______________ verify that the facts set forth in this complaint are true and correct to the</span></span>
 <span style="position:absolute;left:55px;top:615px" class="cls_003"><span class="cls_003">best of my knowledge, information, and belief.  This statement is made subject to the penalties of Section 4904 of the</span></span>
 <span style="position:absolute;left:55px;top:645px" class="cls_003"><span class="cls_003">Crimes Code (18 PA. C.S. § 4904) related to unsworn falsification to authorities.</span></span>
 <span style="position:absolute;left:55px;top:675px" class="cls_003"><span class="cls_003">I certify that this filing complies with the provisions of the Case Records Public Access Policy of the Unified Judicial System</span></span>
