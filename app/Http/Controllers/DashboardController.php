@@ -36,7 +36,7 @@ class DashboardController extends Controller
             $courtNumber = Auth::user()->court_id;
 
 
-            $evictions = DB::select('select * from evictions id DESC');
+            $evictions = DB::select('select * from evictions');
 //            if (Auth::user()->role == 'Administrator') {
 //                $evictions = DB::select('select * from evictions ORDER BY FIELD(status, "Created LTC", "LTC Mailed", "LTC Submitted Online", "Court Hearing Scheduled", "Court Hearing Extended", "Judgement Issued in Favor of Owner", "Judgement Denied by Court", "Tenant Filed Appeal", "OOP Mailed", "OOP Submitted Online", "Paid Judgement", "Locked Out Tenant"), id DESC');
 //            } else if (Auth::user()->role == 'General User') {
