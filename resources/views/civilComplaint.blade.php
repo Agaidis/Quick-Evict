@@ -71,21 +71,18 @@
                                                         <label class="labels">Plaintiff Phone #</label>
                                                         <input class="form-control eviction_fields" placeholder="(ext)-000-0000" type="text" id="owner_number" name="owner_phone"/>
                                                     </div>
-                                                    <div class="col-sm-6">
-                                                        <div id="rented_by_owner_div">
-                                                            <div class="col-sm-8">
-                                                                <label class="labels">Plaintiff Address Line 1</label>
-                                                                <input class="form-control eviction_fields" placeholder="1234 Main Street" type="text" id="owner_address_1" name="owner_address_1"/>
-                                                            </div>
-                                                            <div class="col-sm-8">
-                                                                <label class="labels">Plaintiff Address Line 2 </label>
-                                                                <input class="form-control eviction_fields" placeholder="Philadelphia, PA 17349" type="text" id="owner_address_2" name="owner_address_2"/>
-                                                            </div>
-                                                        </div>
+                                                    <div class="col-sm-8">
+                                                        <label class="labels">Plaintiff Address Line 1</label>
+                                                        <input class="form-control eviction_fields" placeholder="1234 Main Street" type="text" id="owner_address_1" name="owner_address_1"/>
+                                                    </div>
+                                                    <div class="col-sm-8">
+                                                        <label class="labels">Plaintiff Address Line 2 </label>
+                                                        <input class="form-control eviction_fields" placeholder="Philadelphia, PA 17349" type="text" id="owner_address_2" name="owner_address_2"/>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
+
 
                                         <!-- Amounts Container -->
                                         <h4 class="major_labels">Judgment Info</h4>
