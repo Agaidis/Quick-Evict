@@ -70,19 +70,13 @@ class CivilComplaintController extends Controller
             $pmName = $_POST['pm_name'];
             $ownerName = $_POST['owner_name'];
 
-            if ($_POST['rented_by_val'] == 'rentedByOwner') {
+
                 $verifyName = $_POST['owner_name'];
                 $plantiffName = $_POST['owner_name'];
                 $plantiffPhone = $_POST['owner_phone'];
                 $plantiffAddress1 = $_POST['owner_address_1'];
                 $plantiffAddress2 = $_POST['owner_address_2'];
-            } else {
-                $verifyName = $pmName;
-                $plantiffName = $_POST['other_name'] . ' on behalf of ' . $_POST['owner_name'];
-                $plantiffPhone = $_POST['pm_phone'];
-                $plantiffAddress1 = $_POST['pm_address_1'];
-                $plantiffAddress2 = $_POST['pm_address_2'];
-            }
+
 
             $defendantState = $_POST['state'];
             $defendantZipcode = $_POST['zipcode'];
