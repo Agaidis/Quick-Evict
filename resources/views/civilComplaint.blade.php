@@ -13,7 +13,7 @@
                                 <form method="post" action="{{ action('CivilComplaintController@formulatePDF') }}" enctype="multipart/form-data" id="eviction_form">
                                     <input type="hidden" name="_token" value="{{ Session::token() }}">
                                     <h2 style="text-align:center;" class="title">Defendant Location</h2>
-                                    <h3 style="text-align:center;" class="fs-subtitle">Enter the address you plan on evicting.</h3>
+                                    <h3 style="text-align:center;" class="fs-subtitle">Enter the address you plan on complaint occurred.</h3>
                                     <div class="form-group">
                                         <div class="row">
                                             <div class="col-sm-6 col-md-8 col-lg-8 col-xl-8">
@@ -51,7 +51,7 @@
                                                 </div>
                                                 <div class="row">
                                                     <div class="col-sm-6">
-                                                        <label class="labels" for="tenant_name">Tenant Name</label>
+                                                        <label class="labels" for="tenant_name">Defendant Name</label>
                                                         <input type="text" class="form-control eviction_fields" placeholder="" id="tenant_name" name="tenant_name"/>
                                                     </div>
                                                 </div>
@@ -59,16 +59,16 @@
                                         </div>
 
                                         <!-- OWNER INFORMATION -->
-                                        <h4 class="major_labels">Owner Information</h4>
+                                        <h4 class="major_labels">Plaintiff Information</h4>
                                         <div id="owner_container">
                                             <div class="form-group">
                                                 <div class="row">
                                                     <div class="col-sm-6">
-                                                        <label class="labels">Owner Name</label>
-                                                        <input class="form-control eviction_fields" placeholder="Owner Name" type="text" id="owner_name" name="owner_name"/>
+                                                        <label class="labels">Plaintiff Name</label>
+                                                        <input class="form-control eviction_fields" placeholder="Plaintiff Name" type="text" id="owner_name" name="owner_name"/>
                                                     </div>
                                                     <div class="col-sm-6">
-                                                        <label class="labels">Owner Phone #</label>
+                                                        <label class="labels">Plaintiff Phone #</label>
                                                         <input class="form-control eviction_fields" placeholder="(ext)-000-0000" type="text" id="owner_number" name="owner_phone"/>
                                                     </div>
                                                     <div class="col-sm-6">
@@ -116,7 +116,7 @@
                                         </div>
 
                                         <!-- Amounts Container -->
-                                        <h4 class="major_labels">Judgment Infon</h4>
+                                        <h4 class="major_labels">Judgment Info</h4>
                                         <div id="amount_due_container" class="major_labels">
                                             <div class="form-group">
                                                 <div class="row">
