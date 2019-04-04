@@ -253,6 +253,7 @@
                                         <div class="form-group">
                                             <div class="row">
                                                 <div class="offset-1 col-sm-10">
+                                                    <span><input type="checkbox" id="legal_checkbox"/><em>By checking this box, I understand that my electronic signature constitutes a legal signature, <br>and that by entering my name above I acknowledge and warrant the accuracy of the information provided in this document.</em></span>
                                                     <canvas id="signature_pad" width="600" height="200" style="touch-action: none;"></canvas>
                                                     <div class="signature_pad_footer">
                                                         <div class="description">Sign above</div>

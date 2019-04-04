@@ -122,7 +122,6 @@ form.eviction_form fieldset {
 
 /*      SIGNATURE PAD    */
 #signature_pad {
-    margin-top:5%;
     border: 1px solid gainsboro;
     border-radius:2em;
 }
@@ -176,4 +175,8 @@ form.eviction_form fieldset {
 
 #breached_details {
     width:90%;
+}
+
+#legal_checkbox {
+    margin-top:5%;
 }
