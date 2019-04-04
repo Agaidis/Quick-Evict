@@ -13,12 +13,16 @@ if (document.location.href.split('/')[3] == 'new-ltc' || document.location.href.
         });
 
         $('.no_signature').on('click', function() {
-            $('#pdf_download_btn').prop('disabled', false);
+            if ($('#legal_checkbox').is(':checked')) {
+                $('#pdf_download_btn').prop('disabled', false);
+            }
         });
 
         //Save and use Signature
         $('.save_signature').on('click', function() {
+        if ($('#legal_checkbox').is(':checked')) {
             $('#pdf_download_btn').prop('disabled', false);
+        }
             var dataURL = signaturePad.toDataURL(); // save image as PNG
             $('#signature_source').val(dataURL);
         });
