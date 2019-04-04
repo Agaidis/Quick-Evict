@@ -4,15 +4,18 @@ if (document.location.href.split('/')[3] == 'new-ltc' || document.location.href.
         $('[data-toggle="tooltip"]').tooltip();
         var canvas = document.querySelector("canvas");
         var signaturePad = new SignaturePad(canvas, {});
+        let isSigned = false;
 
         //Clear button to remove signature drawing
         $('.clear_signature').on('click', function() {
+            isSigned = false;
             $('#pdf_download_btn').prop('disabled', true);
             // Clears the canvas
             signaturePad.clear();
         });
 
         $('.no_signature').on('click', function() {
+            isSigned = true;
             if ($('#legal_checkbox').is(':checked')) {
                 $('#pdf_download_btn').prop('disabled', false);
             }
@@ -20,11 +23,18 @@ if (document.location.href.split('/')[3] == 'new-ltc' || document.location.href.
 
         //Save and use Signature
         $('.save_signature').on('click', function() {
+            isSigned = true;
         if ($('#legal_checkbox').is(':checked')) {
             $('#pdf_download_btn').prop('disabled', false);
         }
             var dataURL = signaturePad.toDataURL(); // save image as PNG
             $('#signature_source').val(dataURL);
+        });
+
+        $('#legal_checkbox').on('change', function () {
+           if ($(this).is(':checked') && isSigned === true) {
+               $('#pdf_download_btn').prop('disabled', false);
+           }
         });
 
         $('#filing_date').val(new Date());
