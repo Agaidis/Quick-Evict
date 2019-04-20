@@ -123,20 +123,11 @@ form.eviction_form fieldset {
 
 /*      SIGNATURE PAD    */
 #signature_pad {
-    border: 1px solid gainsboro;
-    border-radius:2em;
-}
-
-.signature_pad_footer {
-    width:70%;
+    border-bottom: 3px solid black;
 }
 
 .description {
     text-align:center;
-}
-
-.no_signature {
-    margin-left: 8%;
 }
 
 .additional_rent_amt_div {
@@ -181,3 +172,4 @@ form.eviction_form fieldset {
 #legal_checkbox {
     margin-top:5%;
 }
+
