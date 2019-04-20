@@ -3,6 +3,7 @@
  */
 $(document).ready(function () {
 
+    console.log('it works!');
     $('#court_date').datepicker();
     $('#court_time').timepicker({
         step: 5
