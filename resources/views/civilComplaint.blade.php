@@ -123,7 +123,7 @@
                                     <div class="modal-dialog" role="document">
                                         <div class="set_court_date_modal modal-content">
                                             <div class="modal-header">
-                                                <h4 class="set_court_date_title">Court Date: </h4>
+                                                <h4 class="set_court_date_title">Signature: </h4>
                                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                     <span aria-hidden="true">&times;</span>
                                                 </button>
@@ -142,8 +142,8 @@
                                             <div class="modal-footer">
                                                 <div class="signature_pad_actions">
                                                     <button type="button" class="btn btn-warning clear_signature" data-action="clear">Clear</button>
-                                                    <button type="button" class="btn btn-danger no_signature" data-action="save-png">Do not use Digital Signature</button>
-                                                    <button type="button" class="btn btn-success save_signature" data-action="save-png">Use Digital Signature</button>
+                                                    <button type="button" class="btn btn-danger no_signature" data-dismiss="modal" data-action="save-png">No Signature Needed</button>
+                                                    <button type="button" class="btn btn-success save_signature" data-dismiss="modal" data-action="save-png">Use Digital Signature</button>
                                                 </div>
                                             </div>
                                         </div>
