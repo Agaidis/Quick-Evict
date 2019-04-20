@@ -173,3 +173,7 @@ form.eviction_form fieldset {
     margin-top:5%;
 }
 
+#modal_set_court_date {
+    width:130%;
+    margin-left: -15%;
+}
