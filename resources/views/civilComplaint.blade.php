@@ -1,6 +1,5 @@
 <title>New Civil Complaint</title>
 @extends('layouts.app')
-@include('signatureSection')
 @section('content')
     <meta name="csrf-token" id="token" content="{{ csrf_token() }}">
     <div class="container-fluid">
@@ -27,6 +26,7 @@
                                     </div>
 
                                     <div class="col-md-12 offset-1 filing_form_div">
+
 
                                         <!-- ADDITIONAL INFORMATION ON PROPERTY -->
                                         <h4 class="major_labels">Additional Info on Property.</h4>
