@@ -14,21 +14,6 @@
 
     <!-- Scripts -->
     <script src="{{ mix('js/app.js') }}" defer></script>
-{{--    <script src="{{ asset('js/timepicker.min.js') }}" defer></script>--}}
-{{--    <script src="{{ asset ('js/datepicker-ui.min.js') }}" defer></script>--}}
-{{--    <script src="{{ asset('js/eviction.js') }}" defer></script>--}}
-{{--    <script src="{{ asset('js/steps.js') }}" defer></script>--}}
-{{--    <script src="{{ asset('js/datatables.min.js') }}" defer></script>--}}
-{{--    <script src="{{ asset('js/magistrateCreator.js') }}" defer></script>--}}
-{{--    <script src="{{ asset('js/home.js') }}" defer></script>--}}
-{{--    <script src="{{ asset('js/userManagement.js') }}" defer></script>--}}
-{{--    <script src="{{ asset('js/numeric-1.2.6.min.js') }}" defer></script>--}}
-{{--    <script src="{{ asset('js/bezier.js') }}" defer></script>--}}
-{{--    <script src="{{ asset('js/json2.min.js') }}" defer></script>--}}
-{{--    <script src="{{ asset('js/signaturepad.js') }}" defer></script>--}}
-{{--    <script src="{{ asset('js/bootstrap-timepicker.min.js') }}" defer></script>--}}
-
-
 
 {{--<script>--}}
         {{--var stripe = Stripe('pk_test_6pRNASCoBOKtIshFeQd4XMUh');--}}
@@ -44,17 +29,6 @@
 
     <!-- Styles -->
     <link href="{{ mix('css/app.css') }}" rel="stylesheet">
-    {{--<link href="{{ asset('css/app.css') }}" rel="stylesheet">--}}
-    {{--<link href="{{ asset('css/dashboard.css') }}" rel="stylesheet">--}}
-    {{--<link href="{{ asset('css/datatables.min.css') }}" rel="stylesheet"/>--}}
-    {{--<link href="{{ asset('css/eviction.css') }}" rel="stylesheet">--}}
-    {{--<link href="{{ asset('css/steps.css') }}" rel="stylesheet">--}}
-    {{--<link href="{{ asset('css/signaturepad.css') }}" rel="stylesheet">--}}
-    {{--<link href="{{ asset('css/timepicker.min.css') }}" rel="stylesheet>">--}}
-    {{--<link href="{{ asset('css/datepicker.structure.min.css') }}" rel="stylesheet">--}}
-    {{--<link href="{{ asset('css/datepicker.theme.min.css') }}" rel="stylesheet">--}}
-    {{--<link href="{{ asset('css/datepicker-ui.min.css') }}" rel="stylesheet">--}}
-    {{--<link href="{{ asset('css/bootstrap-timepicker.min.css') }}" rel="stylesheet">--}}
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
 
 </head>

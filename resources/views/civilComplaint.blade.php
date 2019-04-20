@@ -1,10 +1,12 @@
 <title>New Civil Complaint</title>
 @extends('layouts.app')
+
 @section('content')
     <meta name="csrf-token" id="token" content="{{ csrf_token() }}">
     <div class="container-fluid">
         <div class="row justify-content-center">
             <div class="col-md-10">
+                @yield('signature')
                 <div class="card">
                     <div class="card-header"><h2>New Civil Complaint</h2></div>
                     <div class="card-body">
