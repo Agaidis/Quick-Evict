@@ -16,9 +16,9 @@
                                 <p class="alert alert-danger">{{ Session::get('alert-success') }} <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a></p>
                             @endif
                     </div> <!-- end .flash-message -->
-                        <div>Thanks for your interest in EvictionTech.</div>
-                        <div>The goal for EvictionTech is to eventually make evictions easier for owners and landlords in all communities in the United States.</div>
-                        <div>Currently, EvictionTech is in beta and only works in Central Pennsylvania in the following counties:</div>
+                        <div>Thanks for your interest in CourtZip.</div>
+                        <div>The goal for CourtZip is to eventually make evictions easier for owners and landlords in all communities in the United States.</div>
+                        <div>Currently, CourtZip is in beta and only works in Central Pennsylvania in the following counties:</div>
                         <div><br>
                             <table class="table table-responsive table-hover">
                                 <tbody>

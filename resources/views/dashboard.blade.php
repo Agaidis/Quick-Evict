@@ -12,6 +12,12 @@
                                 {{ session('status') }}
                             </div>
                         @endif
+                            <h2 class="titles">Start a New Filing:</h2>
+                            <div style="margin-top:0!important;" class="button_panel">
+                                <a href="{{ url('new-ltc') }}"><button type="button" class="btn btn-primary home_btns" id="ltc_btn">Landlord-Tenant Complaint</button></a>
+                                <a href="{{ url('new-oop') }}"><button type="button" class="btn btn-primary home_btns" id="oop_btn">Order of Possession</button></a>
+                                <a href="{{ url('new-civil-complaint') }}"><button type="button" class="btn btn-primary home_btns" id="civil_complaint_btn">Civil Complaint</button></a>
+                            </div>
                         <form method="post" action="{{ action('DashboardController@downloadPDF') }}" enctype="multipart/form-data" id="dashboard_form">
                             <input type="hidden" name="_token" value="{{ Session::token() }}">
                             <table class="table table-hover table-responsive-md table-bordered eviction_table" id="eviction_table">
@@ -33,17 +39,21 @@
                                 @if (isset($evictions))
                                 @foreach ($evictions as $eviction)
                                     <?php $propertyAddressArray = explode('-1', $eviction->property_address);
-                                        $statusArray = array('Created LTC',
+                                        $statusArray = array('Created LTC', 'Created OOP', 'Created Civil Complaint',
                                             'LTC Mailed',
                                             'LTC Submitted Online',
+                                            'Waiting on AOR',
                                             'Court Hearing Scheduled',
                                             'Court Hearing Extended',
+                                            'Court Hearing Rescheduled',
                                             'Judgement Issued in Favor of Owner',
                                             'Judgement Denied by Court',
                                             'Tenant Filed Appeal',
+                                            'OOP Scheduled',
                                             'OOP Mailed',
                                             'OOP Submitted Online',
                                             'Paid Judgement',
+                                            'Case Withdrawn',
                                             'Locked Out Tenant');?>
                                     <tr>
                                         <td class="text-center">{{$eviction->id}}</td>

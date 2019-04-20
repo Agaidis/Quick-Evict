@@ -4,40 +4,39 @@
     <div class="container-fluid">
         <div class="row justify-content-center">
             <div class="col-md-10">
-                <div class="card">
-                    <div class="card-header">Home</div>
+                <div class="card" id="getting_started_panel" style="margin-bottom:3%;">
                     <div class="card-body">
-                        <h2 style="align-content:center">Welcome to EvictionTech!</h2>
-                        <div>EvictionTech is the leader in using technology and eviction expertise to improve the eviction process for real estate owners, property managers, and magistrate district courts.</div>
-
-                        <div>Prior to EvictionTech, the eviction process was dramatically outdated. Filing evictions caused a lot of extra manual work and delays for everyone involved. EvictionTech brought together a collaboration between cutting edge MDJs, property managers, real estate owners, and web developers to create a better solution.</div>
-
-                        <div>EvictionTech solves the following problems:</div>
-                        <div>
-                            <ul>
-                                <li><strong>Geo-Coded Magistrates:</strong> Evictions must be filed in the correct magistrate, which is often confusing. EvictionTech has geo-coded each rental address into the specific magistrate to be filed. The owner or property manager just types in the address and EvictionTech matches the address to the proper magistrate --- never have to call the court again or file in the wrong place!</li>
-                            </ul>
-                            <ul>
-                                <li><strong>Filing Fees:</strong> Each magistrate has different filing fees based on a # of different variables. EvictionTech built a database of every fee for each magistrate so property managers and owners never have to call a court again to know the fee. Just type in the basic filing info and EvictionTech pulls the specific filing fee for you, saving time for everyone!</li>
-                            </ul>
-                            <ul>
-                                <li><strong>Landlord-Tenant Complaint:</strong> EvictionTech makes the Landlord-Tenant complaint easier to fill out correctly by walking you through the process with easy to understand fields to fill out. Once filled in, a full landlord-tenant complaint is accurately completed by EvictionTech in the proper form needed by the state of Pennsylvania. This results in less errors in incorrect Landlord-Tenant complaint forms and never have a mistake from mis-reading handwriting again.</li>
-                            </ul>
-                            <ul>
-                                <li><strong>Online Filing</strong>: Evictions are currently filed via the mail, which causes huge delays in filing. EvictionTech enables a property manager or owner to file immediately online -- dramatically decreasing the eviction delay. Each magistrate has their own EvictionTech dashboard where they see the eviction filed the same day it was submitted and set-up a court date immediately. Online filing also decreases the delays from incorrect filings via mail being sent back and forth.</li>
-                            </ul>
-                            <ul>
-                                <li><strong>Easy Online Payment:</strong> EvictionTech accepts debit or credit cards to make it easy for owners and property managers to pay for the eviction filing online.</li>
-                            </ul>
-
-                            <div>To file an eviction, click here: <a href="https://evictiontech.com/online-eviction" target="_blank" data-saferedirecturl="https://www.google.com/url?q=https://evictiontech.com/online-eviction&amp;source=gmail&amp;ust=1545744067199000&amp;usg=AFQjCNEgtHwzpaaZGyqtrqUmbeUQmCKvAQ">https://evictiontech.com/<wbr />online-eviction</a></div>
-
-                            <div>EvictionTech is constantly growing -- click here to see where EvictionTech is live:<a href="https://evictiontech.com/where-does-this-work" target="_blank" data-saferedirecturl="https://www.google.com/url?q=https://evictiontech.com/where-does-this-work&amp;source=gmail&amp;ust=1545744067199000&amp;usg=AFQjCNHKCBedkszbEYh7nBDiSoQZXACX5A">https://evictiontech.com/<wbr />where-does-this-work</a></div>
-
-                            <div>To get more info --- contact EvictionTech here:</div>
+                        <h2 class="titles">Start a Filing:</h2>
+                        <div class="button_panel">
+                            <a href="{{ url('new-ltc') }}"><button type="button" class="btn btn-primary home_btns" id="ltc_btn">Landlord-Tenant Complaint</button></a>
+                            <a href="{{ url('new-oop') }}"><button type="button" class="btn btn-primary home_btns" id="oop_btn">Order of Possession</button></a>
+                            <a href="{{ url('new-civil-complaint') }}"><button type="button" class="btn btn-primary home_btns" id="civil_complaint_btn">Civil Complaint</button></a>
                         </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row justify-content-center">
+            <div class="col-md-10">
+                <div class="card">
+                    <div class="card-body">
+                        <h2 class="titles">Welcome to Court<em>Zip</em>!</h2>
+                        <div>CourtZip is the leader in combining technology and court filing expertise to improve the process for filing Complaints in Pennsylvania Magisterial District Courts. CourtZip makes it easy to file Civil Complaints under $12,000, Landlord-Tenant Complaints (for evictions), and Orders of Possession (for possession of property from eviction).</div>
 
+                        <div>Prior to CourtZip, the filing process was outdated. Filing in the District Court required extra manual work and delays for everyone involved. CourtZip results from a collaboration of innovative judges, attorneys, government officials, property managers, real estate owners, and web developers to create a better solution.</div>
 
+                        <div>CourtZip solves the following problems:</div>
+
+                        <ul>
+                            <li><strong>Which Court to File My Complaint: </strong>Civil Complaints (under $12,000 at issue) &nbsp;and Landlord-Tenant Complaints must be filed in the correct Magisterial District Court, which is often confusing as most counties have numerous Magisterial District Courts with irregular boundaries. CourtZip has geo-coded each Pennsylvania address into the specific Court to be filed. The user types in the address and CourtZip identifies the proper court.&nbsp; You never again have to call different Courts, search cumbersome websites, or file in the wrong Court.</li>
+                            <li><strong>How Much is Filing Fee:</strong> Each Court has different filing fees based on different variables, which generally require a call to the proper Court to determine. CourtZip built a database, updated routinely, of every fee for each Court. You never have to call a Court again to ascertain the fees. Just type in the basic filing info and CourtZip populates the specific filing fee for you, saving time for the Court staff and filers.</li>
+                            <li><strong>Creating a Typed Civil Complaint, Landlord-Tenant Complaint, or Order of </strong><strong>Possession:</strong> Whether you are filing one complaint or you file hundreds each month, CourtZip can make it easier and faster for you to draft them.</li>
+                            <li><strong>Faster Delivery of Filing: </strong>Landlord-Tenant, Order of Possession, and Civil Complaints are currently filed by mail (or in person), which causes delays and inaccuracies in filing. CourtZip enables you to file immediately online, eliminating delays and errors. Each Court has its own CourtZip dashboard where its staff and assigned Magisterial District Judge can access the filing and can set-up a hearing date.</li>
+                            <li><strong>Easier Payment</strong>: CourtZip accepts debit or credit cards to make it easy for anyone to pay for the filing fee.</li>
+                        </ul>
+                        <p>CourtZip is constantly growing -- click here to see where CourtZip is live:&nbsp;<u><a href="https://courtzip.com/where-does-this-work" data-saferedirecturl="https://www.google.com/url?q=https://courtzip.com/where-does-this-work&amp;source=gmail&amp;ust=1552678182363000&amp;usg=AFQjCNEzs8xrrhkzKG6qWWWw7u29nIRo9g">Locations</a></u></p>
+                        <p>To get more info --- contact CourtZip here:&nbsp;<u><a href="mailto:Info@courtzip.com">Info@courtzip.com</a></u></p><br><br>
+                        <p style="font-size:10px; text-align:center;">DISCLAIMER:  This website is created and maintained<br> by CourtZip, a private entity, and is not owned, operated, or maintained by the Commonwealth of Pennsylvania or the Administrative Office of Pennsylvania Courts.</p>
                     </div>
                 </div>
             </div>

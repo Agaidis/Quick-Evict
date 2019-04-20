@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
-class EvictionInfoController extends Controller
+class InfoController extends Controller
 {
         /**
      * Show the application dashboard.
@@ -14,6 +14,6 @@ class EvictionInfoController extends Controller
      */
     public function index()
     {
-        return view('evictionInfo');
+        return view('info');
     }
 }

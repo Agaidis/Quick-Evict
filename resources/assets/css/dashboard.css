@@ -1,6 +1,6 @@
 #login-logo {
     height:auto;
-    margin-left:31%;
+    margin-left:20%;
 }
 
 .navbar-nav {
@@ -54,4 +54,37 @@
 }
 .pdf_download_btn_dashboard, .eviction-remove {
     cursor:pointer;
+}
+
+.titles {
+    text-align: center;
+}
+.button_panel {
+    text-align: center;
+    margin-top: 3%;
+    margin-left:80px;
+}
+.home_btns {
+    font-size:16px;
+    padding:2% 3% 2% 3%;
+    background-color: rgba(6, 84, 116, 0.96);
+    border-color: rgba(6, 84, 116, 0.96);
+}
+
+#oop_btn {
+    margin-left:3%;
+}
+
+#civil_complaint_btn {
+    margin-left:3%;
+}
+
+body {
+    background-color: darkgrey;
+}
+
+.home_text {
+    text-align: center;
+    margin-left: 6%;
+    margin-right: 6%;
 }
