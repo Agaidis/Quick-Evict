@@ -104,16 +104,7 @@
                                         <div class="form-group">
                                             <div class="row">
                                                 <div class="offset-1 col-sm-10">
-                                                    <span><input type="checkbox" id="legal_checkbox"/><em>By checking this box, I understand that my electronic signature constitutes a legal signature, <br>and that by entering my name above I acknowledge and warrant the accuracy of the information provided in this document.</em></span>
-                                                    <canvas id="signature_pad" width="600" height="200" style="touch-action: none;"></canvas>
-                                                    <div class="signature_pad_footer">
-                                                        <div class="description">Sign above</div>
-                                                        <div class="signature_pad_actions">
-                                                            <button type="button" class="btn btn-warning clear_signature" data-action="clear">Clear</button>
-                                                            <button type="button" class="btn btn-danger no_signature" data-action="save-png">Do not use Digital Signature</button>
-                                                            <button type="button" class="btn btn-success save_signature" data-action="save-png">Use Digital Signature</button>
-                                                        </div>
-                                                    </div>
+                                                    <button type="button" id="finalize_document" data-target="#modal_signature" data-toggle="modal" class="btn btn-primary">Finalize Document</button>
                                                 </div>
                                             </div>
                                         </div>
@@ -128,6 +119,36 @@
                                         <input type="hidden" id="court_number" name="court_number"/>
                                     </div>
                                 </form>
+                                <div class="modal fade" id="modal_signature">
+                                    <div class="modal-dialog" role="document">
+                                        <div class="set_court_date_modal modal-content">
+                                            <div class="modal-header">
+                                                <h4 class="set_court_date_title">Court Date: </h4>
+                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                    <span aria-hidden="true">&times;</span>
+                                                </button>
+                                            </div>
+                                            <div class="modal-body">
+                                                <div class="row">
+                                                    <div class="col-md-offset-3 col-sm-8">
+                                                        <span><input type="checkbox" id="legal_checkbox"/><em>By checking this box, I understand that my electronic signature constitutes a legal signature, <br>and that by entering my name above I acknowledge and warrant the accuracy of the information provided in this document.</em></span>
+                                                        <canvas id="signature_pad" width="600" height="200" style="touch-action: none;"></canvas>
+                                                        <div class="signature_pad_footer">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="modal-footer">
+                                                <div class="signature_pad_actions">
+                                                    <button type="button" class="btn btn-warning clear_signature" data-action="clear">Clear</button>
+                                                    <button type="button" class="btn btn-danger no_signature" data-action="save-png">Do not use Digital Signature</button>
+                                                    <button type="button" class="btn btn-success save_signature" data-action="save-png">Use Digital Signature</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
