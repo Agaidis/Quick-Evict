@@ -8,11 +8,12 @@ form.eviction_form fieldset {
     display: none;
 }
 
-  #map {
+#map {
     height: 80%;
-      width:80%;
-      margin-left: 5%;
-  }
+    width:80%;
+    margin-left: 5%;
+}
+
   html, body {
     height: 100%;
     margin: 0;
