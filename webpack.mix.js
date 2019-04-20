@@ -29,6 +29,7 @@ let mix = require('laravel-mix');
 //mix.js('resources/assets/js/app.js', 'public/js')
     //.sass('resources/assets/sass/app.scss', 'public/css')
     .styles([
+        'public/css/app.css',
         'resources/assets/css/bootstrap-timepicker.min.css',
         'resources/assets/css/dashboard.css',
         'resources/assets/css/datatables.min.css',

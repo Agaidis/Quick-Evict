@@ -43046,7 +43046,6 @@ if (document.location.href.split('/')[3] == 'new-ltc' || document.location.href.
  * Created by andrew on 11/11/18.
  */
 $(document).ready(function () {
-  console.log('it works!');
   $('#court_date').datepicker();
   $('#court_time').timepicker({
     step: 5
