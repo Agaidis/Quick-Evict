@@ -6,7 +6,6 @@
     <div class="container-fluid">
         <div class="row justify-content-center">
             <div class="col-md-10">
-                @yield('signature')
                 <div class="card">
                     <div class="card-header"><h2>New Civil Complaint</h2></div>
                     <div class="card-body">
@@ -28,7 +27,7 @@
                                     </div>
 
                                     <div class="col-md-12 offset-1 filing_form_div">
-
+                                    @yield('signature')
 
                                         <!-- ADDITIONAL INFORMATION ON PROPERTY -->
                                         <h4 class="major_labels">Additional Info on Property.</h4>
