@@ -13,22 +13,20 @@
     <link rel="icon" href="https://quickevict.nyc3.digitaloceanspaces.com/ziplogo.png"/>
 
     <!-- Scripts -->
-    <script src="{{ asset('js/app.js') }}" defer></script>
-    <script src="{{ asset('js/timepicker.min.js') }}" defer></script>
-    <script src="{{ asset ('js/datepicker-ui.min.js') }}" defer></script>
-    <script src="{{ asset('js/eviction.js') }}" defer></script>
-    <script src="{{ asset('js/steps.js') }}" defer></script>
-    <script src="{{ asset('js/datatables.min.js') }}" defer></script>
-    <script src="{{ asset('js/magistrateCreator.js') }}" defer></script>
-    <script src="{{ asset('js/home.js') }}" defer></script>
-    <script src="{{ asset('js/userManagement.js') }}" defer></script>
-    <script src="{{ asset('js/numeric-1.2.6.min.js') }}" defer></script>
-    <script src="{{ asset('js/bezier.js') }}" defer></script>
-    <script src="{{ asset('js/json2.min.js') }}" defer></script>
-    <script src="{{ asset('js/signaturepad.js') }}" defer></script>
-
-
-    <script src="{{ asset('js/bootstrap-timepicker.min.js') }}" defer></script>
+    <script src="{{ mix('js/app.js') }}" defer></script>
+{{--    <script src="{{ asset('js/timepicker.min.js') }}" defer></script>--}}
+{{--    <script src="{{ asset ('js/datepicker-ui.min.js') }}" defer></script>--}}
+{{--    <script src="{{ asset('js/eviction.js') }}" defer></script>--}}
+{{--    <script src="{{ asset('js/steps.js') }}" defer></script>--}}
+{{--    <script src="{{ asset('js/datatables.min.js') }}" defer></script>--}}
+{{--    <script src="{{ asset('js/magistrateCreator.js') }}" defer></script>--}}
+{{--    <script src="{{ asset('js/home.js') }}" defer></script>--}}
+{{--    <script src="{{ asset('js/userManagement.js') }}" defer></script>--}}
+{{--    <script src="{{ asset('js/numeric-1.2.6.min.js') }}" defer></script>--}}
+{{--    <script src="{{ asset('js/bezier.js') }}" defer></script>--}}
+{{--    <script src="{{ asset('js/json2.min.js') }}" defer></script>--}}
+{{--    <script src="{{ asset('js/signaturepad.js') }}" defer></script>--}}
+{{--    <script src="{{ asset('js/bootstrap-timepicker.min.js') }}" defer></script>--}}
 
 
 
