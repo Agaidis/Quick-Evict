@@ -121,7 +121,7 @@
                                 </form>
                                 <div class="modal fade" id="modal_signature">
                                     <div class="modal-dialog" role="document">
-                                        <div class="set_court_date_modal modal-content">
+                                        <div class="modal_signature modal-content">
                                             <div class="modal-header">
                                                 <h4 class="set_court_date_title">Signature: </h4>
                                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
