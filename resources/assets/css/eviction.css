@@ -124,6 +124,7 @@ form.eviction_form fieldset {
 /*      SIGNATURE PAD    */
 #signature_pad {
     border-bottom: 3px solid black;
+    margin-left:-19px;
 }
 
 .description {
@@ -169,9 +170,6 @@ form.eviction_form fieldset {
     width:90%;
 }
 
-#legal_checkbox {
-    margin-top:5%;
-}
 
 .modal_signature {
     width:130%;
