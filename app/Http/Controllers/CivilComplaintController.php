@@ -212,7 +212,7 @@ class CivilComplaintController extends Controller
 //            $dompdf->stream();
 
 
-            return view('dashboard');
+            return redirect('dashboard');
         } catch (\Exception $e) {
             Log:info($e);
             mail('andrew.gaidis@gmail.com', 'formulatePDFCreation  Civil Complaint Error' . Auth::User()->id, $e->getMessage());

@@ -209,7 +209,7 @@ class OrderOfPossessionController extends Controller
 //            $dompdf->stream();
 
 
-            return view('dashboard');
+            return redirect('dashboard');
         } catch (\Exception $e) {
             mail('andrew.gaidis@gmail.com', 'formulatePDFCreation Error' . Auth::User()->id, $e->getMessage());
             return back();
