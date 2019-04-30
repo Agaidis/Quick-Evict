@@ -103,13 +103,16 @@
 
                                         <div class="form-group">
                                             <div class="row">
-                                                <div class="offset-1 col-sm-10">
+                                                <div class="offset-4 col-sm-10">
                                                     <button type="button" id="finalize_document" data-target="#modal_signature" data-toggle="modal" class="btn btn-primary">Finalize Document</button>
                                                 </div>
                                             </div>
                                         </div>
+
                                         <div id="status_msg"></div>
-                                        <button type="submit" id="pdf_download_btn" disabled class="btn btn-primary">Download PDF File</button>
+
+                                        <button type="submit" id="pdf_download_btn" disabled class="btn btn-primary">Submit</button>
+
                                         <input type="hidden" id="signature_source" name="signature_source"/>
                                         <input type="hidden" id="state" name="state"/>
                                         <input type="hidden" id="county" name="county"/>
