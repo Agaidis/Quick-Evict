@@ -183,3 +183,7 @@ form.eviction_form fieldset {
 #legal_checkbox_container {
     display:flex;
 }
+
+#finalize_document {
+    margin-top: 15px;
+}
