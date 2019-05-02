@@ -6,7 +6,12 @@
 
         $('#digital_signature').val(true);
         $('#is_digital_signature_allowed').on('change', function () {
-            $('#digital_signature').val(document.getElementById("is_digital_signature_allowed").checked);
+            if (document.getElementById("is_digital_signature_allowed").checked == true) {
+                $('#digital_signature').val(1);
+            } else {
+                $('#digital_signature').val(0);
+            }
+
         });
 
         $('#edit_is_digital_signature_allowed').on('change', function () {
