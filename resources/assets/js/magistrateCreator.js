@@ -4,6 +4,7 @@
 
     $(document).ready(function () {
 
+        $('#digital_signature').val(true);
         $('#is_digital_signature_allowed').on('change', function () {
             $('#digital_signature').val(document.getElementById("is_digital_signature_allowed").checked);
         });
