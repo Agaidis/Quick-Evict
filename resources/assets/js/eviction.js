@@ -170,6 +170,22 @@ if (document.location.href.split('/')[3] == 'new-ltc' || document.location.href.
                 $('.zipcode_div').css('display', 'block');
                 $('.unit_number_div').css('display', 'block');
                 $('.filing_form_div').css('display', 'block');
+
+                $.ajax({
+                    url : '/get-signature-type',
+                    type : 'GET',
+                    data : {
+                        'evictionId' : $('#court_number').val()
+                    },
+                    dataType:'json',
+                    success : function(data) {
+                        alert('Data: ' + data);
+                    },
+                    error : function(data)
+                    {
+                        alert("Request: "+JSON.stringify(data));
+                    }
+                });
             }
         });
 

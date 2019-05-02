@@ -59,6 +59,8 @@ Route::post('/userManagement/deleteUser', 'UserManagementController@deleteUser')
 Route::post('/userManagement/changeRole', 'UserManagementController@changeUserRole')->middleware('auth');
 Route::post('/userManagement/changeCourt', 'UserManagementController@changeCourt')->middleware('auth');
 
+Route::get('/get-signature-type', 'EvictionController@getDigitalSignature')->middleware('auth');
+
 
 
 Route::get('command/migrate', function () {
