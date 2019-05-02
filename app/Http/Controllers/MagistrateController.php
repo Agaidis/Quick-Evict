@@ -59,6 +59,7 @@ class MagistrateController extends Controller
                 $courtDetails->three_defendant_greater_than_4000 = $request->three_over_4000;
                 $courtDetails->three_defendant_out_of_pocket = $request->three_oop;
                 $courtDetails->additional_tenant = $request->additional_tenants;
+                $courtDetails->digital_signature = $request->is_digital_signature_allowed;
 
                 $courtDetails->mdj_name = $request->mdj_name;
                 $courtDetails->phone_number = $request->court_number;
@@ -153,6 +154,7 @@ class MagistrateController extends Controller
                 $courtDetails->three_defendant_greater_than_4000 = $request->threeOver4000;
                 $courtDetails->three_defendant_out_of_pocket = $request->threeOOP;
                 $courtDetails->additional_tenant = $request->additionalTenant;
+                $courtDetails->digital_signature = $request->edit_is_digital_signature_allowed;
                 $courtDetails->save();
 
 
