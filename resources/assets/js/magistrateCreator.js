@@ -178,7 +178,7 @@
                     threeOOP: $('#edit_three_oop').val(),
                     additionalTenant: $('#edit_additional_tenants').val(),
                     geoLocations: $('#edit_geo_locations').val(),
-                    digitalSignature: $('#digital_signature').val()
+                    digitalSignature: $('#edit_digital_signature').val()
                 },
                 success: function (data) {
 
