@@ -94,6 +94,8 @@
                     $('#edit_additional_tenants').val(data[1][0].additional_tenant);
                     $('#edit_geo_locations').val(data[0][0].geo_locations);
 
+                    console.log(data[0][0].digital_signature);
+
                     if (data[0][0].digital_signature == 1) {
                         $('#edit_is_digital_signature_allowed').prop('checked', true);
                     }
