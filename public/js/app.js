@@ -43497,6 +43497,13 @@ $(document).ready(function () {
         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
       }
     });
+
+    if (document.getElementById("edit_is_digital_signature_allowed").checked == true) {
+      $('#edit_digital_signature').val(1);
+    } else {
+      $('#edit_digital_signature').val(0);
+    }
+
     $.ajax({
       beforeSend: function beforeSend(xhr) {
         xhr.setRequestHeader('X-CSRF-TOKEN', $("#token").attr('content'));
