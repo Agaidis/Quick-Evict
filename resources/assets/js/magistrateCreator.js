@@ -4,6 +4,14 @@
 
     $(document).ready(function () {
 
+        $('#is_digital_signature_allowed').on('change', function () {
+            $('#digital_signature').val(document.getElementById("is_digital_signature_allowed").checked);
+        });
+
+        $('#edit_is_digital_signature_allowed').on('change', function () {
+            $('#edit_digital_signature').val(document.getElementById("edit_is_digital_signature_allowed").checked);
+        });
+
         $('#magistrate_table').DataTable( {
             "pagingType": "simple"
         }).on('click', '.magistrate-remove', function () {
@@ -79,6 +87,10 @@
                     $('#edit_three_oop').val(data[1][0].three_defendant_out_of_pocket);
                     $('#edit_additional_tenants').val(data[1][0].additional_tenant);
                     $('#edit_geo_locations').val(data[0][0].geo_locations);
+
+                    if (data[0][0].digital_signature) {
+                        $('#edit_is_digital_signature_allowed').prop('checked', true);
+                    }
                 },
                 error: function (data) {
                     console.log(data);
@@ -157,7 +169,8 @@
                     threeOver4000: $('#edit_three_over_4000').val(),
                     threeOOP: $('#edit_three_oop').val(),
                     additionalTenant: $('#edit_additional_tenants').val(),
-                    geoLocations: $('#edit_geo_locations').val()
+                    geoLocations: $('#edit_geo_locations').val(),
+                    digitalSignature: $('#digital_signature').val()
                 },
                 success: function (data) {
 
