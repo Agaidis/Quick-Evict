@@ -13,7 +13,7 @@
                                 <form method="post" action="{{ action('CivilComplaintController@formulatePDF') }}" enctype="multipart/form-data" id="eviction_form">
                                     <input type="hidden" name="_token" value="{{ Session::token() }}">
                                     <h2 style="text-align:center;" class="title">Defendant Location</h2>
-                                    <h3 style="text-align:center;" class="fs-subtitle">Enter the address you plan on complaint occurred.</h3>
+                                    <h3 style="text-align:center;" class="fs-subtitle">Enter the address the plaintiff alleges the complaint occurred.</h3>
                                     <div class="form-group">
                                         <div class="row">
                                             <div class="col-sm-6 col-md-8 col-lg-8 col-xl-8">

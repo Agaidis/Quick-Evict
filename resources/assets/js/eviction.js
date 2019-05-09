@@ -19,10 +19,13 @@ if (document.location.href.split('/')[3] == 'new-ltc' || document.location.href.
         });
 
         //Save and use Signature
-        $('.save_signature').on('click', function() {
+        $('.save_signature').on('click', function(e) {
+            e.preventDefault();
             if ($('#legal_checkbox').is(':checked')) {
                 $('#pdf_download_btn').prop('disabled', false);
-            };
+            } else {
+                alert('You need to check the Signature checkbox above to agree to the digital terms in order to continue.')
+            }
 
             var dataURL = signaturePad.toDataURL(); // save image as PNG
             $('#signature_source').val(dataURL);
