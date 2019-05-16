@@ -10804,11 +10804,12 @@ form.eviction_form fieldset {
     display: none;
 }
 
-  #map {
+#map {
     height: 80%;
-      width:80%;
-      margin-left: 5%;
-  }
+    width:80%;
+    margin-left: 5%;
+}
+
   html, body {
     height: 100%;
     margin: 0;
@@ -10838,11 +10839,6 @@ form.eviction_form fieldset {
 
   .major_labels {
       margin-top: 2%;
-  }
-
-  #pdf_download_btn {
-      margin-top: 2%;
-      margin-left: 30%;
   }
 
 .controls {
@@ -10918,20 +10914,12 @@ form.eviction_form fieldset {
 
 /*      SIGNATURE PAD    */
 #signature_pad {
-    border: 1px solid gainsboro;
-    border-radius:2em;
-}
-
-.signature_pad_footer {
-    width:70%;
+    border-bottom: 3px solid black;
+    margin-left:-19px;
 }
 
 .description {
     text-align:center;
-}
-
-.no_signature {
-    margin-left: 8%;
 }
 
 .additional_rent_amt_div {
@@ -10973,8 +10961,22 @@ form.eviction_form fieldset {
     width:90%;
 }
 
+
+.modal_signature {
+    width:130%;
+    margin-left: -15%;
+}
+
 #legal_checkbox {
-    margin-top:5%;
+    margin-top:5px;
+}
+
+#legal_checkbox_container {
+    display:flex;
+}
+
+#finalize_document {
+    margin-top: 15px;
 }
 @font-face {
   font-family: 'Journal';

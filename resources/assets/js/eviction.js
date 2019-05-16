@@ -19,10 +19,13 @@ if (document.location.href.split('/')[3] == 'new-ltc' || document.location.href.
         });
 
         //Save and use Signature
-        $('.save_signature').on('click', function() {
+        $('.save_signature').on('click', function(e) {
+            e.preventDefault();
             if ($('#legal_checkbox').is(':checked')) {
                 $('#pdf_download_btn').prop('disabled', false);
-            };
+            } else {
+                alert('You need to check the Signature checkbox above to agree to the digital terms in order to continue.')
+            }
 
             var dataURL = signaturePad.toDataURL(); // save image as PNG
             $('#signature_source').val(dataURL);
@@ -170,6 +173,22 @@ if (document.location.href.split('/')[3] == 'new-ltc' || document.location.href.
                 $('.zipcode_div').css('display', 'block');
                 $('.unit_number_div').css('display', 'block');
                 $('.filing_form_div').css('display', 'block');
+
+                // $.ajax({
+                //     url : '/get-signature-type',
+                //     type : 'GET',
+                //     data : {
+                //         'evictionId' : $('#court_number').val()
+                //     },
+                //     dataType:'json',
+                //     success : function(data) {
+                //         alert('Data: ' + data);
+                //     },
+                //     error : function(data)
+                //     {
+                //         alert("Request: "+JSON.stringify(data));
+                //     }
+                // });
             }
         });
 

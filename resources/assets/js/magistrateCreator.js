@@ -4,6 +4,20 @@
 
     $(document).ready(function () {
 
+        $('#digital_signature').val(1);
+        $('#is_digital_signature_allowed').on('change', function () {
+            if (document.getElementById("is_digital_signature_allowed").checked == true) {
+                $('#digital_signature').val(1);
+            } else {
+                $('#digital_signature').val(0);
+            }
+
+        });
+
+        $('#edit_is_digital_signature_allowed').on('change', function () {
+            $('#edit_digital_signature').val(document.getElementById("edit_is_digital_signature_allowed").checked);
+        });
+
         $('#magistrate_table').DataTable( {
             "pagingType": "simple"
         }).on('click', '.magistrate-remove', function () {
@@ -79,6 +93,12 @@
                     $('#edit_three_oop').val(data[1][0].three_defendant_out_of_pocket);
                     $('#edit_additional_tenants').val(data[1][0].additional_tenant);
                     $('#edit_geo_locations').val(data[0][0].geo_locations);
+
+                    console.log(data[1][0].digital_signature);
+
+                    if (data[1][0].digital_signature == 1) {
+                        $('#edit_is_digital_signature_allowed').prop('checked', true);
+                    }
                 },
                 error: function (data) {
                     console.log(data);
@@ -126,6 +146,14 @@
                 }
             });
 
+
+            if (document.getElementById("edit_is_digital_signature_allowed").checked == true) {
+                $('#edit_digital_signature').val(1);
+            } else {
+                $('#edit_digital_signature').val(0);
+            }
+
+
             $.ajax({
                 beforeSend: function (xhr) {
                     xhr.setRequestHeader('X-CSRF-TOKEN', $("#token").attr('content'));
@@ -157,7 +185,8 @@
                     threeOver4000: $('#edit_three_over_4000').val(),
                     threeOOP: $('#edit_three_oop').val(),
                     additionalTenant: $('#edit_additional_tenants').val(),
-                    geoLocations: $('#edit_geo_locations').val()
+                    geoLocations: $('#edit_geo_locations').val(),
+                    digitalSignature: $('#edit_digital_signature').val()
                 },
                 success: function (data) {
 

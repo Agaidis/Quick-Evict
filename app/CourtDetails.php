@@ -27,7 +27,8 @@ class CourtDetails extends Model
         'mailing_address',
         'phone_number',
         'accept_e_signature',
-        'township'
+        'township',
+        'digital_signature'
     ];
 
     protected $table = 'court_details';
