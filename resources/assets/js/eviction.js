@@ -188,7 +188,7 @@ if (document.location.href.split('/')[3] == 'new-ltc' || document.location.href.
                          'courtNumber' : $('#court_number').val()
                      },
                      success : function(data) {
-                         console.log(data[0].digital_signature);
+                         console.log(data);
                         if (data[0].digital_signature == 0) {
                             console.log('hey');
                             $('#finalize_document').css('display', 'none');
