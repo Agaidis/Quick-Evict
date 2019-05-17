@@ -117,9 +117,10 @@ class OrderOfPossessionController extends Controller
                 $eviction->plantiff_address_line_1 = $plantiffAddress1;
                 $eviction->plantiff_address_line_2 = $plantiffAddress2;
                 $eviction->verify_name = $verifyName;
+                $eviction->unit_num = $_POST['unit_number'];
                 $eviction->user_id = Auth::user()->id;
                 $eviction->docket_number = $_POST['docket_number'];
-                $eviction->date_of_oop = date("d/m/Y");
+                $eviction->date_of_oop = date("m/d/Y");
                 $eviction->court_filing_fee = '0';
                 $eviction->file_type = 'oop';
 
