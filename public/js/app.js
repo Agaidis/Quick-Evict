@@ -42904,9 +42904,14 @@ if (document.location.href.split('/')[3] == 'new-ltc' || document.location.href.
         $('.zipcode_div').css('display', 'block');
         $('.unit_number_div').css('display', 'block');
         $('.filing_form_div').css('display', 'block');
+        $.ajaxSetup({
+          headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+          }
+        });
         $.ajax({
           url: '/get-signature-type',
-          type: 'GET',
+          type: 'POST',
           data: {
             'courtNumber': $('#court_number').val()
           },

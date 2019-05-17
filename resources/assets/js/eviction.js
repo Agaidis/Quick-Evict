@@ -181,7 +181,7 @@ if (document.location.href.split('/')[3] == 'new-ltc' || document.location.href.
                  $.ajax({
 
                      url : '/get-signature-type',
-                     type : 'GET',
+                     type : 'POST',
                      data : {
                          'courtNumber' : $('#court_number').val()
                      },
