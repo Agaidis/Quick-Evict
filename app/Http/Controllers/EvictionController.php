@@ -486,7 +486,6 @@ class EvictionController extends Controller
             } else {
                 mail('andrew.gaidis@gmail.com', 'formulatePDFCreation Success' . Auth::User()->id,  'not found');
             }
-            mail('andrew.gaidis@gmail.com', 'formulatePDFCreation Success' . Auth::User()->id, 'its making it here atleast');
             $courtNumber = $_POST['courtNumber'];
             $isDigitalSignature = Evictions::where('court_number', $courtNumber)->value('digital_signature');
 
