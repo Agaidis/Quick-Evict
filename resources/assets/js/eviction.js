@@ -179,8 +179,10 @@ if (document.location.href.split('/')[3] == 'new-ltc' || document.location.href.
                     }
                 });
                  $.ajax({
-
-                     url : '/get-signature-type',
+                     beforeSend: function (xhr) {
+                         xhr.setRequestHeader('X-CSRF-TOKEN', $("#token").attr('content'));
+                     },
+                     url : 'https://courtzip.com/get-signature-type',
                      type : 'POST',
                      data : {
                          'courtNumber' : $('#court_number').val()

@@ -15,6 +15,7 @@
     <!-- Scripts -->
     <script src="{{ mix('js/app.js') }}" defer></script>
 
+
 {{--<script>--}}
         {{--var stripe = Stripe('pk_test_6pRNASCoBOKtIshFeQd4XMUh');--}}
         {{--var elements = stripe.elements();--}}
