@@ -42760,7 +42760,7 @@ if (document.location.href.split('/')[3] == 'new-ltc' || document.location.href.
     $('.save_signature').on('click', function () {
       if ($('#legal_checkbox').is(':checked')) {
         $('#pdf_download_btn').prop('disabled', false);
-        $('.modal_signature').modal('hide');
+        $('#modal_signature').modal('hide');
       } else {
         alert('You need to check the Signature checkbox above to agree to the digital terms in order to continue.');
       }
