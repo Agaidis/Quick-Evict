@@ -102,7 +102,7 @@ if (document.location.href.split('/')[3] == 'new-ltc' || document.location.href.
             });
             magArray[count].setMap(map);
 
-
+            console.log(quickEvict.userId);
             google.maps.event.addListener(magArray[count], 'mouseover', function (e) {
                 var magistrateId = $(this)[0].areaName.split('magistrate_');
                 injectTooltip(e, magistrateId[1] + '<br>' + $(this)[0].county + '<br>' + $(this)[0].township);

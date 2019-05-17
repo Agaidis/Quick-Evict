@@ -46,7 +46,8 @@ class EvictionController extends Controller
             }
 
             JavaScript::put([
-                'geoData' => $geoData
+                'geoData' => $geoData,
+                'userId' => Auth::user()->role
             ]);
 
             return view('eviction', compact('map'));
