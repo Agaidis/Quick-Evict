@@ -188,11 +188,11 @@ if (document.location.href.split('/')[3] == 'new-ltc' || document.location.href.
                          'courtNumber' : $('#court_number').val()
                      },
                      success : function(data) {
-                         alert('Data: ' + data);
+                        console.log(data);
                      },
                      error : function(data)
                      {
-                         alert("Request: "+JSON.stringify(data));
+                         console.log(data);
                      }
                  });
             }
