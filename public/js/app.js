@@ -42741,6 +42741,17 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
 /***/ (function(module, exports) {
 
 if (document.location.href.split('/')[3] == 'new-ltc' || document.location.href.split('/')[3] == 'new-oop' || document.location.href.split('/')[3] == 'new-civil-complaint') {
+  var validateSignature = function validateSignature() {
+    if ($('#legal_checkbox').is(':checked')) {
+      $('#pdf_download_btn').prop('disabled', false);
+      $('.modal_signature').modal('hide');
+      return;
+    } else {
+      alert('You need to check the Signature checkbox above to agree to the digital terms in order to continue.');
+      return false;
+    }
+  };
+
   $(document).ready(function () {
     $('[data-toggle="tooltip"]').tooltip();
     var canvas = document.querySelector("canvas");
@@ -42755,19 +42766,7 @@ if (document.location.href.split('/')[3] == 'new-ltc' || document.location.href.
       if ($('#legal_checkbox').is(':checked')) {
         $('#pdf_download_btn').prop('disabled', false);
       }
-    });
-
-    function validateSignature() {
-      if ($('#legal_checkbox').is(':checked')) {
-        $('#pdf_download_btn').prop('disabled', false);
-        $('.modal_signature').modal('hide');
-        return;
-      } else {
-        alert('You need to check the Signature checkbox above to agree to the digital terms in order to continue.');
-        return false;
-      }
-    } //Save and use Signature
-
+    }); //Save and use Signature
 
     $('.save_signature').on('click', function (e) {
       console.log(e);
