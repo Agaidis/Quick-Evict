@@ -197,7 +197,6 @@
                                             <div class="modal-footer">
                                                 <div class="signature_pad_actions">
                                                     <button type="button" class="btn btn-warning clear_signature" data-action="clear">Clear</button>
-                                                    <button type="button" class="btn btn-danger no_signature" data-dismiss="modal" data-action="save-png">No Signature Needed</button>
                                                     <button type="button" class="btn btn-success save_signature" data-dismiss="modal" data-action="save-png">Use Digital Signature</button>
                                                 </div>
                                             </div>
