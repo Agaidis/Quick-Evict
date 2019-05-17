@@ -42821,19 +42821,32 @@ if (document.location.href.split('/')[3] == 'new-ltc' || document.location.href.
       magNamesArray.push(magId);
       objArray.push(obj);
       magArray.push(magId);
-      magArray[count] = new google.maps.Polygon({
-        path: obj,
-        geodesic: true,
-        strokeColor: '#091096',
-        strokeOpacity: 1.0,
-        strokeWeight: 2,
-        fillColor: '#B1AAA9',
-        fillOpacity: 0.35,
-        areaName: magId,
-        courtId: value.court_number,
-        county: value.county,
-        township: value.township
-      });
+
+      if (quickEvict.userId == 'Administrator') {
+        magArray[count] = new google.maps.Polygon({
+          path: obj,
+          geodesic: true,
+          strokeColor: '#091096',
+          strokeOpacity: 1.0,
+          strokeWeight: 2,
+          fillColor: '#B1AAA9',
+          fillOpacity: 0.35,
+          areaName: magId,
+          courtId: value.court_number,
+          county: value.county,
+          township: value.township
+        });
+      } else {
+        magArray[count] = new google.maps.Polygon({
+          path: obj,
+          geodesic: true,
+          areaName: magId,
+          courtId: value.court_number,
+          county: value.county,
+          township: value.township
+        });
+      }
+
       magArray[count].setMap(map);
 
       if (quickEvict.userId == 'Administrator') {
