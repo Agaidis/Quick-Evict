@@ -42919,7 +42919,10 @@ if (document.location.href.split('/')[3] == 'new-ltc' || document.location.href.
             'courtNumber': $('#court_number').val()
           },
           success: function success(data) {
-            console.log(data[0].digital_signature);
+            if (data[0].digital_signature == 0) {
+              $('#finalize_document').css('display', 'none');
+              $('#pdf_download_btn').prop('disabled', false);
+            }
           },
           error: function error(data) {
             console.log(data);
