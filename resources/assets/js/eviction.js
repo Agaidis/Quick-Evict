@@ -19,11 +19,10 @@ if (document.location.href.split('/')[3] == 'new-ltc' || document.location.href.
         });
 
         //Save and use Signature
-        $('.save_signature').on('click', function(e) {
-            console.log(e);
-            e.preventDefault();
+        $('.save_signature').on('click', function() {
             if ($('#legal_checkbox').is(':checked')) {
                 $('#pdf_download_btn').prop('disabled', false);
+                $('.modal_signature').modal('hide');
             } else {
                 alert('You need to check the Signature checkbox above to agree to the digital terms in order to continue.')
             }
@@ -333,15 +332,4 @@ if (document.location.href.split('/')[3] == 'new-ltc' || document.location.href.
             $('#rented_by_val').val($('input[name=rented_by]:checked').val());
         });
     });
-
-    function validateSignature() {
-        if ($('#legal_checkbox').is(':checked')) {
-            $('#pdf_download_btn').prop('disabled', false);
-            $('.modal_signature').modal('hide');
-            return;
-        } else {
-            alert('You need to check the Signature checkbox above to agree to the digital terms in order to continue.');
-            return false;
-        }
-    }
 }
