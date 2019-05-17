@@ -481,7 +481,6 @@ class EvictionController extends Controller
 
     public function getDigitalSignature() {
         try {
-
             $courtNumber = explode('_', $_POST['courtNumber']);
             mail('andrew.gaidis@gmail.com', 'test test', $courtNumber[1]);
             $isDigitalSignature = Evictions::where('court_number', $courtNumber[1])->value('digital_signature');
