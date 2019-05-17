@@ -42918,7 +42918,6 @@ if (document.location.href.split('/')[3] == 'new-ltc' || document.location.href.
           data: {
             'courtNumber': $('#court_number').val()
           },
-          dataType: 'json',
           success: function success(data) {
             alert('Data: ' + data);
           },
