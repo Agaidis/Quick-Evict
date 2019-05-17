@@ -478,4 +478,16 @@ class EvictionController extends Controller
             return back();
         }
     }
+
+    public function getDigitalSignature() {
+        try {
+            $courtNumber = $_POST['courtNumber'];
+            $isDigitalSignature = Evictions::where('court_number', $courtNumber)->value('digital_signature');
+
+            return $isDigitalSignature;
+        } catch ( Exception $e ) {
+            mail('andrew.gaidis@gmail.com', 'formulatePDFCreation Error' . Auth::User()->id, $e->getMessage());
+            return back();
+        }
+    }
 }
