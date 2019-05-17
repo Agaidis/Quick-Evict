@@ -190,14 +190,13 @@ if (document.location.href.split('/')[3] == 'new-ltc' || document.location.href.
                      success : function(data) {
                          console.log(data);
                         if (data[0].digital_signature == 0) {
-                            console.log('hey');
                             $('#finalize_document').css('display', 'none');
                             $('#pdf_download_btn').prop('disabled', false);
                         }
                      },
                      error : function(data)
                      {
-                         console.log(data);
+
                      }
                  });
             }

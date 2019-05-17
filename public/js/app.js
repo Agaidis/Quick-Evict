@@ -42922,14 +42922,11 @@ if (document.location.href.split('/')[3] == 'new-ltc' || document.location.href.
             console.log(data);
 
             if (data[0].digital_signature == 0) {
-              console.log('hey');
               $('#finalize_document').css('display', 'none');
               $('#pdf_download_btn').prop('disabled', false);
             }
           },
-          error: function error(data) {
-            console.log(data);
-          }
+          error: function error(data) {}
         });
       }
     });
