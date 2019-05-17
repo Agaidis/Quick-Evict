@@ -483,9 +483,9 @@ class EvictionController extends Controller
         try {
             $courtNumber = explode('_', $_POST['courtNumber']);
 
-            $isDigitalSignature = Evictions::where('magistrate_id', $courtNumber[1])->value('digital_signature');
-            mail('andrew.gaidis@gmail.com', 'ugh', $isDigitalSignature);
-            return $isDigitalSignature;
+         //   $isDigitalSignature = Evictions::where('magistrate_id', $courtNumber[1])->value('digital_signature');
+            mail('andrew.gaidis@gmail.com', 'ugh', 'oh so now it works');
+            return 'whatever';
         } catch ( Exception $e ) {
             mail('andrew.gaidis@gmail.com', 'formulatePDFCreation Error' . Auth::User()->id, $e->getMessage());
             return back();
