@@ -483,7 +483,7 @@ class EvictionController extends Controller
         try {
             $courtNumber = explode('_', $_POST['courtNumber']);
 
-         //   $isDigitalSignature = Evictions::where('magistrate_id', $courtNumber[1])->value('digital_signature');
+            $isDigitalSignature = Evictions::where('magistrate_id', $courtNumber[1])->get();
             mail('andrew.gaidis@gmail.com', 'ugh', 'oh so now it works');
             return 'whatever';
         } catch ( Exception $e ) {
