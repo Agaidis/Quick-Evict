@@ -21,7 +21,6 @@ if (document.location.href.split('/')[3] == 'new-ltc' || document.location.href.
         //Save and use Signature
         $('.save_signature').on('click', function() {
             if ($('#legal_checkbox').is(':checked')) {
-                console.log('im in the if');
                 $('#pdf_download_btn').prop('disabled', false);
                 $('#modal_signature').modal('hide');
             } else {
