@@ -102,20 +102,20 @@ if (document.location.href.split('/')[3] == 'new-ltc' || document.location.href.
             });
             magArray[count].setMap(map);
 
-            console.log(quickEvict.userId);
-            google.maps.event.addListener(magArray[count], 'mouseover', function (e) {
-                var magistrateId = $(this)[0].areaName.split('magistrate_');
-                injectTooltip(e, magistrateId[1] + '<br>' + $(this)[0].county + '<br>' + $(this)[0].township);
-            });
+            if (quickEvict.userId == 'Administrator') {
+                google.maps.event.addListener(magArray[count], 'mouseover', function (e) {
+                    var magistrateId = $(this)[0].areaName.split('magistrate_');
+                    injectTooltip(e, magistrateId[1] + '<br>' + $(this)[0].county + '<br>' + $(this)[0].township);
+                });
 
-            google.maps.event.addListener(magArray[count], 'mousemove', function (e) {
-                moveTooltip(e);
-            });
+                google.maps.event.addListener(magArray[count], 'mousemove', function (e) {
+                    moveTooltip(e);
+                });
 
-            google.maps.event.addListener(magArray[count], 'mouseout', function (e) {
-                deleteTooltip(e);
-            });
-
+                google.maps.event.addListener(magArray[count], 'mouseout', function (e) {
+                    deleteTooltip(e);
+                });
+            }
             count++;
         });
         autocomplete.addListener('place_changed', function () {

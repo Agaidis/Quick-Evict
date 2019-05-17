@@ -45,7 +45,8 @@ class CivilComplaintController extends Controller
             }
 
             JavaScript::put([
-                'geoData' => $geoData
+                'geoData' => $geoData,
+                'userId' => Auth::user()->role
             ]);
 
             return view('civilComplaint', compact('map'));

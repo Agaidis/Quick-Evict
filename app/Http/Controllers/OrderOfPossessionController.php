@@ -45,7 +45,8 @@ class OrderOfPossessionController extends Controller
             }
 
             JavaScript::put([
-                'geoData' => $geoData
+                'geoData' => $geoData,
+                'userId' => Auth::user()->role
             ]);
 
             return view('orderOfPossession', compact('map'));
