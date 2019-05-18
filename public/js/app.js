@@ -50012,7 +50012,7 @@ $(document).ready(function () {
 
 /***/ 0:
 /*!*********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** multi ./resources/assets/js/bootstrap.js ./resources/assets/js/json2.min.js ./resources/assets/js/timepicker.min.js ./resources/assets/js/datepicker-ui.min.js ./resources/assets/js/eviction.js ./resources/assets/js/datatables.min.js ./resources/assets/js/magistrateCreator.js ./resources/assets/js/home.js ./resources/assets/js/userManagement.js ./resources/assets/js/numeric-1.2.6.min.js ./resources/assets/js/bezier.js ./resources/assets/js/signaturepad.js ./resources/assets/js/bootstrap-timepicker.min.js ./resources/assets/sass/app.scss ***!
+  !*** multi ./resources/assets/js/bootstrap.js ./resources/assets/js/json2.min.js ./resources/assets/js/timepicker.min.js ./resources/assets/js/datepicker-ui.min.js ./resources/assets/js/eviction.js ./resources/assets/js/datatables.min.js ./resources/assets/js/magistrateCreator.js ./resources/assets/js/userManagement.js ./resources/assets/js/numeric-1.2.6.min.js ./resources/assets/js/bezier.js ./resources/assets/js/signaturepad.js ./resources/assets/js/bootstrap-timepicker.min.js ./resources/assets/js/home.js ./resources/assets/sass/app.scss ***!
   \*********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
@@ -50024,12 +50024,12 @@ __webpack_require__(/*! /Users/andrewgaidis/projects/Quick-Evict/resources/asset
 __webpack_require__(/*! /Users/andrewgaidis/projects/Quick-Evict/resources/assets/js/eviction.js */"./resources/assets/js/eviction.js");
 __webpack_require__(/*! /Users/andrewgaidis/projects/Quick-Evict/resources/assets/js/datatables.min.js */"./resources/assets/js/datatables.min.js");
 __webpack_require__(/*! /Users/andrewgaidis/projects/Quick-Evict/resources/assets/js/magistrateCreator.js */"./resources/assets/js/magistrateCreator.js");
-__webpack_require__(/*! /Users/andrewgaidis/projects/Quick-Evict/resources/assets/js/home.js */"./resources/assets/js/home.js");
 __webpack_require__(/*! /Users/andrewgaidis/projects/Quick-Evict/resources/assets/js/userManagement.js */"./resources/assets/js/userManagement.js");
 __webpack_require__(/*! /Users/andrewgaidis/projects/Quick-Evict/resources/assets/js/numeric-1.2.6.min.js */"./resources/assets/js/numeric-1.2.6.min.js");
 __webpack_require__(/*! /Users/andrewgaidis/projects/Quick-Evict/resources/assets/js/bezier.js */"./resources/assets/js/bezier.js");
 __webpack_require__(/*! /Users/andrewgaidis/projects/Quick-Evict/resources/assets/js/signaturepad.js */"./resources/assets/js/signaturepad.js");
 __webpack_require__(/*! /Users/andrewgaidis/projects/Quick-Evict/resources/assets/js/bootstrap-timepicker.min.js */"./resources/assets/js/bootstrap-timepicker.min.js");
+__webpack_require__(/*! /Users/andrewgaidis/projects/Quick-Evict/resources/assets/js/home.js */"./resources/assets/js/home.js");
 module.exports = __webpack_require__(/*! /Users/andrewgaidis/projects/Quick-Evict/resources/assets/sass/app.scss */"./resources/assets/sass/app.scss");
 
 
