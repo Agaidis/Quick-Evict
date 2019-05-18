@@ -5,7 +5,8 @@ $(document).ready(function () {
 
     $('#court_date').datepicker();
     $('#court_time').timepicker({
-        step: 5
+        step: 5,
+        minuteStep: 5
     });
 
     $('.calendar_tooltip').tooltip();
