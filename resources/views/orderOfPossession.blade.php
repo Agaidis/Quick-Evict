@@ -47,12 +47,30 @@
                                                         <input type="text" class="form-control eviction_fields" placeholder="Example: Unit 3" id="unit_number" name="unit_number"/>
                                                     </div>
                                                 </div>
+                                                <!-- Tenant Number Container -->
                                                 <div class="row">
-                                                    <div class="col-sm-6">
-                                                        <label class="labels" for="tenant_name">Tenant Name</label>
-                                                        <input type="text" class="form-control eviction_fields" placeholder="" id="tenant_name" name="tenant_name"/>
+                                                    <div class="col-sm-8 tenant_num_container">
+                                                        <div class="col-sm-6">
+                                                            <label for="tenant_num_select" class="labels">Number of Tenants</label>
+                                                            <span class="fa fa-question-circle" data-placement="right" data-toggle="tooltip" title="Select the number of tenants that are present, and put 1 name for each field that appears."></span>
+                                                            <select class="form-control" id="tenant_num_select">
+                                                                <option value="" selected disabled>Select # of Tenants</option>
+                                                                <option value="1">1</option>
+                                                                <option value="2">2</option>
+                                                                <option value="3">3</option>
+                                                                <option value="4">4</option>
+                                                                <option value="5">5</option>
+                                                                <option value="6">6</option>
+                                                                <option value="7">7</option>
+                                                                <option value="8">8</option>
+                                                                <option value="9">9</option>
+                                                                <option value="10">10</option>
+                                                            </select>
+                                                        </div><br>
+                                                        <div class="col-sm-10" id="tenant_input_container"></div>
                                                     </div>
                                                 </div>
+                                                <input type="hidden" id="tenant_num" name="tenant_num" />
                                                 <div class="row">
                                                     <div class="col-sm-4">
                                                         <label class="labels" for="docket_number">Docket Number</label>

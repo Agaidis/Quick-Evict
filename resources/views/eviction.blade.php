@@ -224,7 +224,7 @@
                                                     </div>
 
                                                     <div class="col-sm-10">
-                                                        <div class="labels">Additional Rent? <span class="fa fa-question-circle" data-placement="right" data-toggle="tooltip" title="Was there additional read due at the hearing date? If so, change the radio button and fill in the additional rent amount field."></span></div>
+                                                        <div class="labels">Additional Rent? <span class="fa fa-question-circle" data-placement="right" data-toggle="tooltip" title="Was there additional rent due at the hearing date? If so, change the radio button and fill in the additional rent amount field."></span></div>
                                                         <div class="additional_rent_container">
                                                             <input type="radio" id="no_addit_rent" name="addit_rent" value="no" checked />
                                                             <label for="no_addit_rent">Do Not add additional rent due at hearing date</label><br>
