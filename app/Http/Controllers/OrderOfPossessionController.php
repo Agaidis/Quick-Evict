@@ -151,7 +151,6 @@ class OrderOfPossessionController extends Controller
                 $eviction->costs_original_lt_proceeding = $_POST['costs_original_lt_proceeding'];
                 $eviction->cost_this_proceeding = $_POST['costs_this_proceeding'];
                 $eviction->attorney_fees = $_POST['attorney_fees'];
-                $eviction->total_judgement = '';
                 $eviction->property_address = $defendanthouseNum.' '.$defendantStreetName.'-1'.$defendantTown .',' . $defendantState.' '.$defendantZipcode;
                 $eviction->defendant_state = $defendantState;
                 $eviction->defendant_zipcode = $defendantZipcode;
@@ -189,13 +188,13 @@ class OrderOfPossessionController extends Controller
 
                 $signature->save();
 
-            } catch ( \Exception $e) {
+            } catch ( Exception $e ) {
                 mail('andrew.gaidis@gmail.com', 'formulatePDFData Error' . Auth::User()->id, $e->getMessage());
-                return back();
+                print_r($e->getMessage());
             }
 
             return redirect('dashboard');
-        } catch (\Exception $e) {
+        } catch ( Exception $e ) {
             mail('andrew.gaidis@gmail.com', 'formulatePDFCreation Error' . Auth::User()->id, $e->getMessage());
            print_r($e->getMessage());
         }

@@ -88,7 +88,7 @@ class CivilComplaintController extends Controller
             try {
                 $eviction = new Evictions();
                 $eviction->status = 'Created Civil Complaint';
-                $eviction->property_address = $defendanthouseNum.' '.$defendantStreetName.'-1'.$defendantTown .',' . $defendantState.' '.$defendantZipcode;
+                $eviction->property_address = $defendanthouseNum.' '.$defendantStreetName.'-1'.$defendantTown .', ' . $defendantState.' '.$defendantZipcode;
                 $eviction->tenant_name = $_POST['tenant_name'];
                 $eviction->defendant_state = $defendantState;
                 $eviction->defendant_zipcode = $defendantZipcode;

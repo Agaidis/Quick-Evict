@@ -273,7 +273,7 @@ span.cls_008{font-family:Arial,serif;font-size:10.77px;color:rgb(0,0,0);font-wei
 <span style="position:absolute;left:55.40px;top:105.85px" class="cls_004"><span class="cls_004">MDJ Name: ' . $courtDetails->mdj_name . '</span></span><br>
 <span style="position:absolute;left:55.40px;top:120.05px" class="cls_004"><span class="cls_004">Address: ' . $courtAddressLine1 . '<br><span style="margin-left:45px;">' . $courtAddressLine2 . '</span></span></span><br>
 <span style="position:absolute;left:581.34px;top:183.90px" class="cls_006"><span class="cls_006">V.</span></span><br>
-<span style="position:absolute;left:447.28px;top:180.90px" class="cls_009"><span class="cls_009">DEFENDANT:</span><br><p style="margin-left:6px;">' . $tenantName . '<br>' . $defendantHouseNum . ' ' . $defendantStreetName . ' ' . $unitNum . '<br>' . $defendantTown . ',' . $defendantState . ' ' . $defendantZipcode . '  </p></span><br>
+<span style="position:absolute;left:447.28px;top:180.90px" class="cls_009"><span class="cls_009">DEFENDANT:</span><br><p style="margin-left:6px;">' . $tenantName . '<br>' . $defendantHouseNum . ' ' . $defendantStreetName . ' ' . $unitNum . '<br>' . $defendantTown . ', ' . $defendantState . ' ' . $defendantZipcode . '  </p></span><br>
 <span style="position:absolute;left:600.50px;top:180.00px" class="cls_005"><span class="cls_005">NAME and ADDRESS</span></span><br>
 <span style="position:absolute;left:55.40px;top:188.45px" class="cls_004"><span class="cls_004">Telephone: ' . $courtDetails->phone_number . '</span></span><br>
 <span style="position:absolute;left:195.45px;top:214.95px" class="cls_004"><span class="cls_004">AMOUNT</span></span><br>
@@ -377,7 +377,7 @@ span.cls_009{font-family:Arial,serif;font-size:9px;color:rgb(0,0,0);font-weight:
 <span style="position:absolute;left:51px;top:134px" class="cls_004"><span class="cls_004">MDJ Name: '. $courtDetails->mdj_name .'</span></span>
 <span style="position:absolute;left:445px;top:100px" class="cls_005"><span class="cls_005">PLANTIFF:</span><p style="margin-left:65px;">'. $plantiffName .'<br>'. $plantiffAddress1 .'<br>'. $plantiffAddress2 .'<br>'.$plantiffPhone.'</p></span>
 <span style="position:absolute;left:450px;top:185px" class="cls_005"><span class="cls_005">V.</span></span>
-<span style="position:absolute;left:450px;top:200px" class="cls_005"><span class="cls_005">DEFENDANT:</span><br><p style="margin-left:65px;">' . $tenantName . '<br>' . $defendantHouseNum . ' ' . $defendantStreetName . ' ' . $unitNum . '<br>' . $defendantTown . ',' . $defendantState . ' ' . $defendantZipcode . '  </p></span><br>
+<span style="position:absolute;left:450px;top:200px" class="cls_005"><span class="cls_005">DEFENDANT:</span><br><p style="margin-left:65px;">' . $tenantName . '<br>' . $defendantHouseNum . ' ' . $defendantStreetName . ' ' . $unitNum . '<br>' . $defendantTown . ', ' . $defendantState . ' ' . $defendantZipcode . '  </p></span><br>
 <span style="position:absolute;left:51px;top:165px" class="cls_004"><span class="cls_004">Address: '.$courtAddressLine1.'<p style="margin-left:49px; margin-top:-4px;">'.$courtAddressLine2.'</p></span></span>
 <span style="position:absolute;left:51px;top:205px" class="cls_004"><span class="cls_004">Telephone:</span>'.$courtDetails->phone_number.'</span>
 <span style="position:absolute;left:450px;top:310px" class="cls_004"><span class="cls_004">Docket No:</span> '. $docketNumber .'</span>
@@ -395,7 +395,7 @@ span.cls_009{font-family:Arial,serif;font-size:9px;color:rgb(0,0,0);font-weight:
 <span style="position:absolute;left:200px;top:490px" class="cls_004"><span class="cls_004">Total</span></span>
 <span style="position:absolute;left:235px;top:490px" class="cls_003"><span class="cls_003">$</span>'. $totalFees .'</span>
 <span style="position:absolute;left:50px;top:570px" class="cls_004"><span class="cls_004">TO THE MAGISTERIAL DISTRICT JUDGE:</span></span>
-<span style="position:absolute;left:50px;top:585px" class="cls_004"><span class="cls_004">The Plaintiff(s) named below, having obtained a judgment for possession of real property located at:</span><br>'.$defendantHouseNum.' '.$defendantStreetName.' '. $unitNum . '<br><br><span style="position:absolute; margin-top:-10px;">'.$defendantTown .',' . $defendantState.' '.$defendantZipcode.'  </span></span>
+<span style="position:absolute;left:50px;top:585px" class="cls_004"><span class="cls_004">The Plaintiff(s) named below, having obtained a judgment for possession of real property located at:</span><br>'.$defendantHouseNum.' '.$defendantStreetName.' '. $unitNum . '<br><br><span style="position:absolute; margin-top:-10px;">'.$defendantTown .', ' . $defendantState.' '.$defendantZipcode.'  </span></span>
 <span style="position:absolute;left:50px;top:665px" class="cls_004"><span class="cls_004">Address if any:</span></span>
 <span style="position:absolute;left:50px;top:720px" class="cls_004"><span class="cls_004">Requests that you issue an ORDER FOR POSSESSION for such property.</span></span>
 <span style="position:absolute;left:50px;top:745px" class="cls_004"><span class="cls_004">I certify that this filing complies with the provisions of the Case Records Public Access Policy of the Unified Judicial</span></span>
@@ -438,7 +438,7 @@ span.cls_011{font-family:Arial,serif;font-size:12px;color:rgb(0,0,0);font-weight
 <span style="position:absolute;left:55px;top:140px" class="cls_004"><span class="cls_004">MDJ Name: '. $courtDetails->mdj_name .'</span></span><br>
 <span style="position:absolute;left:55px;top:165px" class="cls_004"><span class="cls_004">Address: '.$courtAddressLine1.'<br><span style="margin-left:50px;">'.$courtAddressLine2.'</span></span></span><br>
 <span style="position:absolute;left:581px;top:190px" class="cls_006"><span class="cls_006">V.</span></span>
-<span style="position:absolute;left:450px;top:205px" class="cls_010"><span class="cls_010">DEFENDANT:</span><br><p style="margin-left:6px;">'.$tenantName.'<br>'.$defendantHouseNum.' '.$defendantStreetName.' '. $unitNum . '<br>'.$defendantTown .',' . $defendantState.' '.$defendantZipcode.'  </p></span><br>
+<span style="position:absolute;left:450px;top:205px" class="cls_010"><span class="cls_010">DEFENDANT:</span><br><p style="margin-left:6px;">'.$tenantName.'<br>'.$defendantHouseNum.' '.$defendantStreetName.' '. $unitNum . '<br>'.$defendantTown .', ' . $defendantState.' '.$defendantZipcode.'  </p></span><br>
 <span style="position:absolute;left:615px;top:205px" class="cls_005"><span class="cls_005">NAME and ADDRESS</span></span><br>
 <span style="position:absolute;left:55px;top:200px" class="cls_004"><span class="cls_004">Telephone: '.$courtDetails->phone_number.'</span></span><br>
 <span style="position:absolute;left:190px;top:240px" class="cls_004"><span class="cls_004">AMOUNT</span></span><br>
