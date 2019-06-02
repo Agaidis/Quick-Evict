@@ -42899,6 +42899,7 @@ if (document.location.href.split('/')[3] == 'new-ltc' || document.location.href.
       $('#street_name').val(streetName);
       $('#town').val(town);
       $('#display_address').text(houseNum + ' ' + streetName + ' ' + town + ' ' + 'PA');
+      $('.fs-subtitle').text(houseNum + ' ' + streetName + ' ' + town + ' ' + 'PA');
       marker.setPosition(place.geometry.location);
       marker.setMap(map);
       newBounds.extend(place.geometry.location);
