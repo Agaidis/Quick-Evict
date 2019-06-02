@@ -124,10 +124,11 @@ class OrderOfPossessionController extends Controller
 
             $totalFees = (float)$_POST['judgment_amount'] + (float)$_POST['costs_original_lt_proceeding'] + (float)$_POST['costs_this_proceeding'] + (float)$_POST['attorney_fees'];
 
+            mail('andrew.gaidis@gmail.com', 'total fees', $totalFees);
             $noCommaTotalFees = str_replace(',','', $totalFees);
 
             $totalFees = number_format($totalFees, 2);
-
+            mail('andrew.gaidis@gmail.com', 'total fees', $totalFees);
             if ($noCommaTotalFees < 2000) {
                 $filingFee = $upTo2000 + $additionalTenantFee;
             } else if ($noCommaTotalFees >= 2000 && $noCommaTotalFees <= 4000) {
@@ -141,7 +142,7 @@ class OrderOfPossessionController extends Controller
             if ($noCommaTotalFees > 0) {
                 $isAmtGreaterThanZero = true;
             }
-
+            mail('andrew.gaidis@gmail.com', 'total fees', $totalFees);
             try {
                 $eviction = new Evictions();
                 $eviction->status = 'Created OOP';
