@@ -122,13 +122,13 @@ class CivilComplaintController extends Controller
 
                 $signature->save();
 
-            } catch ( \Exception $e) {
+            } catch ( Exception $e ) {
                 Log::info($e);
                 mail('andrew.gaidis@gmail.com', 'formulatePDFData Error' . Auth::User()->id, $e->getMessage());
-                return back();
+                print_r($e->getMessage());
             }
             return redirect('dashboard');
-        } catch (\Exception $e) {
+        } catch ( Exception $e ) {
             Log:info($e);
             mail('andrew.gaidis@gmail.com', 'formulatePDFCreation  Civil Complaint Error' . Auth::User()->id, $e->getMessage());
             print_r($e->getMessage());
