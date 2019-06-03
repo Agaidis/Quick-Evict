@@ -17,7 +17,7 @@
                                     <div class="form-group">
                                         <div class="row">
                                             <div class="col-sm-6 col-md-8 col-lg-8 col-xl-8">
-                                                <input style="margin-left: 25%;" class="form-control" placeholder="Rental Street Address" type="text" id="pac-input"/>
+                                                <input style="margin-left: 25%;" class="form-control" placeholder="Enter Address of Complaint" type="text" id="pac-input"/>
                                             </div>
                                         </div>
                                     </div>

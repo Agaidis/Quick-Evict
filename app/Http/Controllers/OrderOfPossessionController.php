@@ -188,7 +188,7 @@ class OrderOfPossessionController extends Controller
                 $signature->save();
 
             } catch ( Exception $e ) {
-                mail('andrew.gaidis@gmail.com', 'formulatePDFData Error' . Auth::User()->id, $e->getMessage());
+                mail('andrew.gaidis@gmail.com', 'Court Zip had an issue', $e->getMessage());
                 print_r($e->getMessage());
             }
 

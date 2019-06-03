@@ -159,6 +159,8 @@ class EvictionController extends Controller
             $isAmtGreaterThanZero = false;
             $isLeaseEnded = false;
             $isAdditionalRent = false;
+            $isAbandoned = false;
+            $isDeterminationRequest = false;
 
             //Lease Type
             $leaseType = $_POST['lease_type'];
