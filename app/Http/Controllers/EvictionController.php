@@ -4,13 +4,12 @@ namespace App\Http\Controllers;
 
 use Illuminate\Support\Facades\Auth;
 use App\GeoLocation;
-use Dompdf\Options;
 use GMaps;
-use Dompdf\Dompdf;
 use App\CourtDetails;
 use JavaScript;
 use App\Evictions;
 use App\Signature;
+use App\Classes\Mailer;
 use Illuminate\Support\Facades\Log;
 
 
@@ -67,8 +66,7 @@ class EvictionController extends Controller
     }
 
     public function formulatePDF() {
-        Log::info('formulatePDF Eviction');
-        Log::info(Auth::User()->id);
+        $mailer = new Mailer();
         try {
             $removeValues = ['$', ','];
             $magistrateId = str_replace('magistrate_' , '', $_POST['court_number']);
@@ -292,27 +290,26 @@ class EvictionController extends Controller
 
                 $signature->save();
 
-                mail('andrew.gaidis@gmail.com', 'New Eviction Id ' . Auth::User()->id, $evictionId);
-
+                return redirect('dashboard');
             } catch ( \Exception $e) {
-                mail('andrew.gaidis@gmail.com', 'formulatePDFData Error' . Auth::User()->id, $e->getMessage());
-                return back();
+                $mailer->sendMail('andrew.gaidis@gmail.com', 'LTC Error', '' );
+                alert('It looks like there was an issue while making this LTC. the Development team has been notified and are aware that your having issues. They will update you as soon as possible.');
             }
-            return redirect('dashboard');
         } catch ( \Exception $e) {
-            mail('andrew.gaidis@gmail.com', 'formulatePDFCreation Error' . Auth::User()->id, $e->getMessage());
-            print_r($e->getMessage());
+            $mailer->sendMail('andrew.gaidis@gmail.com', 'LTC Error', '' );
+            alert('It looks like there was an issue while making this LTC. the Development team has been notified and are aware that your having issues. They will update you as soon as possible.');
         }
     }
 
     public function getDigitalSignature() {
+        $mailer = new Mailer();
         try {
             $courtNumber = explode('_', $_POST['courtNumber']);
             $isDigitalSignature = CourtDetails::where('magistrate_id', $courtNumber[1])->get();
             return $isDigitalSignature;
         } catch ( Exception $e ) {
-            mail('andrew.gaidis@gmail.com', 'formulatePDFCreation Error' . Auth::User()->id, $e->getMessage());
-            return back();
+            $mailer->sendMail('andrew.gaidis@gmail.com', 'LTC Error', '' );
+            alert('It looks like there was an issue while making this LTC. the Development team has been notified and are aware that your having issues. They will update you as soon as possible.');
         }
     }
 }

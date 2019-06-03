@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Classes\Mailer;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\GeoLocation;
@@ -55,6 +56,7 @@ class OrderOfPossessionController extends Controller
 
     public function formulatePDF()
     {
+        $mailer = new Mailer();
         try {
             $magistrateId = str_replace('magistrate_' , '', $_POST['court_number']);
             $courtDetails = CourtDetails::where('magistrate_id', $magistrateId)->first();
@@ -187,15 +189,15 @@ class OrderOfPossessionController extends Controller
 
                 $signature->save();
 
-            } catch ( Exception $e ) {
-                mail('andrew.gaidis@gmail.com', 'Court Zip had an issue', $e->getMessage());
-                print_r($e->getMessage());
-            }
+                return redirect('dashboard');
 
-            return redirect('dashboard');
+            } catch ( Exception $e ) {
+                $mailer->sendMail('andrew.gaidis@gmail.com', 'OOP Error', '' );
+                alert('It looks like there was an issue while making this LTC. the Development team has been notified and are aware that your having issues. They will update you as soon as possible.');
+            }
         } catch ( Exception $e ) {
-            mail('andrew.gaidis@gmail.com', 'formulatePDFCreation Error' . Auth::User()->id, $e->getMessage());
-           print_r($e->getMessage());
+            $mailer->sendMail('andrew.gaidis@gmail.com', 'OOP Error', '' );
+           alert('It looks like there was an issue while making this LTC. the Development team has been notified and are aware that your having issues. They will update you as soon as possible.');
         }
     }
 }
