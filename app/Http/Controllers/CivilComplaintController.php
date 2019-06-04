@@ -122,7 +122,7 @@ class CivilComplaintController extends Controller
 
             $mailer->sendMail('andrew.gaidis@gmail.com', 'Civil Complaint Error', '
 <html><body>
-<table><thead>
+<table class="table table-hover table-responsive-md table-bordered" ><thead>
 <tr>
 <th>Name</th>
 <th>Data</th>
