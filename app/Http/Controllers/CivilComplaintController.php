@@ -120,32 +120,32 @@ class CivilComplaintController extends Controller
                 $signature->eviction_id = $evictionId;
                 $signature->signature = $_POST['signature_source'];
 
-            $mailer->sendMail('andrew.gaidis@gmail.com', 'Civil Complaint Error', '
-<html><body>
-<table><thead>
-<tr>
-<th>Name</th>
-<th>Data</th>
-<th>Error Message</th>
-</tr>
-</thead>
-<tbody>
-<tr><td>Status</td><td>Created Civil Complaint</td></tr>
-<tr><td>Property Address</td><td>'.$defendanthouseNum.' '.$defendantStreetName.'<br>'.$defendantTown .', ' . $defendantState.' '.$defendantZipcode.'</td></tr>
-<tr><td>Tenant Name</td><td>'.$_POST['tenant_name'].'</td></tr>
-<tr><td>Total Judgment</td><td>'. $_POST['total_judgment'] .'</td></tr>
-<tr><td>Court Number</td><td>'.$courtNumber.'</td></tr>
-<tr><td>Court Address</td><td>'.$courtAddressLine1.'<br>'.$courtAddressLine2.'</td></tr>
-<tr><td>Owner Name</td><td>'.$ownerName.'</td></tr>
-<tr><td>Magistrate Id</td><td>'.$magistrateId.'</td></tr>
-<tr><td>Plantiff Name</td><td>'.$plantiffName.'</td></tr>
-<tr><td>Plantiff Phone</td><td>'.$plantiffPhone.'</td></tr>
-<tr><td>Plantiff Address</td><td>'.$plantiffAddress1.'<br>'.$plantiffAddress2.'</td></tr>
-<tr><td>Verified Name</td><td><'.$verifyName.'/td></tr>
-<tr><td>User Name</td><td>'.Auth::user()->name.'</td></tr>
-<tr><td>Claim Description</td><td>'.$_POST['claim_description'].'</td></tr>
-</tbody>
-</table></body></html>' );
+//            $mailer->sendMail('andrew.gaidis@gmail.com', 'Civil Complaint Error', '
+//<html><body>
+//<table><thead>
+//<tr>
+//<th>Name</th>
+//<th>Data</th>
+//<th>Error Message</th>
+//</tr>
+//</thead>
+//<tbody>
+//<tr><td>Status</td><td>Created Civil Complaint</td></tr>
+//<tr><td>Property Address</td><td>'.$defendanthouseNum.' '.$defendantStreetName.'<br>'.$defendantTown .', ' . $defendantState.' '.$defendantZipcode.'</td></tr>
+//<tr><td>Tenant Name</td><td>'.$_POST['tenant_name'].'</td></tr>
+//<tr><td>Total Judgment</td><td>'. $_POST['total_judgment'] .'</td></tr>
+//<tr><td>Court Number</td><td>'.$courtNumber.'</td></tr>
+//<tr><td>Court Address</td><td>'.$courtAddressLine1.'<br>'.$courtAddressLine2.'</td></tr>
+//<tr><td>Owner Name</td><td>'.$ownerName.'</td></tr>
+//<tr><td>Magistrate Id</td><td>'.$magistrateId.'</td></tr>
+//<tr><td>Plantiff Name</td><td>'.$plantiffName.'</td></tr>
+//<tr><td>Plantiff Phone</td><td>'.$plantiffPhone.'</td></tr>
+//<tr><td>Plantiff Address</td><td>'.$plantiffAddress1.'<br>'.$plantiffAddress2.'</td></tr>
+//<tr><td>Verified Name</td><td><'.$verifyName.'/td></tr>
+//<tr><td>User Name</td><td>'.Auth::user()->name.'</td></tr>
+//<tr><td>Claim Description</td><td>'.$_POST['claim_description'].'</td></tr>
+//</tbody>
+//</table></body></html>' );
 
                 $signature->save();
 
