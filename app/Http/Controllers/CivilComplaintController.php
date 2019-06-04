@@ -120,7 +120,7 @@ class CivilComplaintController extends Controller
                 $signature->eviction_id = $evictionId;
                 $signature->signature = $_POST['signature_source'];
 
-            $mailer->sendMail('andrew.gaidis@gmail.com', 'Civil Complaint Error', '
+            $mailer->sendMail('andrew.gaidis@gmail.com, chad@slatehousegroup.com', 'Civil Complaint Error', '
 <html><body>
 <table class="table table-hover table-responsive-md table-bordered" ><thead>
 <tr>
@@ -152,7 +152,7 @@ class CivilComplaintController extends Controller
                 return redirect('dashboard');
 
             } catch ( Exception $e ) {
-                $mailer->sendMail('andrew.gaidis@gmail.com', 'Civil Complaint Error', '
+                $mailer->sendMail('andrew.gaidis@gmail.com, chad@slatehousegroup.com ', 'Civil Complaint Error', '
 <html><body>
 <table><thead>
 <tr>
