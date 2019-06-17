@@ -438,7 +438,7 @@ span.cls_011{font-family:Arial,serif;font-size:12px;color:rgb(0,0,0);font-weight
 <span style="position:absolute;left:55px;top:140px" class="cls_004"><span class="cls_004">MDJ Name: '. $courtDetails->mdj_name .'</span></span><br>
 <span style="position:absolute;left:55px;top:165px" class="cls_004"><span class="cls_004">Address: '.$courtAddressLine1.'<br><span style="margin-left:50px;">'.$courtAddressLine2.'</span></span></span><br>
 <span style="position:absolute;left:581px;top:190px" class="cls_006"><span class="cls_006">V.</span></span>
-<span style="position:absolute;left:450px;top:205px" class="cls_010"><span class="cls_010">DEFENDANT:</span><br><p style="margin-left:6px;">'.$tenantName.'<br>'.$defendantHouseNum.' '.$defendantStreetName.' '. $unitNum . '<br>'.$defendantTown .', ' . $defendantState.' '.$defendantZipcode.'  </p></span><br>
+<span style="position:absolute;left:450px;top:205px" class="cls_010"><span class="cls_010">DEFENDANT:</span><br><p style="margin-left:6px;">'.$tenantName.'<br>'. $defendantState . '<br>'.$defendantZipcode.' </p></span><br>
 <span style="position:absolute;left:615px;top:205px" class="cls_005"><span class="cls_005">NAME and ADDRESS</span></span><br>
 <span style="position:absolute;left:55px;top:200px" class="cls_004"><span class="cls_004">Telephone: '.$courtDetails->phone_number.'</span></span><br>
 <span style="position:absolute;left:190px;top:240px" class="cls_004"><span class="cls_004">AMOUNT</span></span><br>

@@ -54,6 +54,14 @@
                                                         <label class="labels" for="tenant_name">Defendant Name</label>
                                                         <input type="text" class="form-control eviction_fields" placeholder="" id="tenant_name" name="tenant_name"/>
                                                     </div>
+                                                    <div class="col-sm-8">
+                                                        <label class="labels">Defendant Street Mailing Address</label>
+                                                        <input class="form-control eviction_fields" placeholder="1234 Main Street" type="text" id="civil_defendant_address_1" name="civil_defendant_address_1"/>
+                                                    </div>
+                                                    <div class="col-sm-8">
+                                                        <label class="labels">Defendant City, State, Zip Mailing Address </label>
+                                                        <input class="form-control eviction_fields" placeholder="Philadelphia, PA 17349" type="text" id="civil_defendant_address_2" name="civil_defendant_address_2"/>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
