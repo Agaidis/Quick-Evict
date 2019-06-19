@@ -97,6 +97,7 @@ class CivilComplaintController extends Controller
                 $eviction->defendant_street_name = $defendantStreetName;
                 $eviction->defendant_town = $defendantTown;
                 $eviction->total_judgement = $_POST['total_judgment'];
+                $eviction->court_filing_fee =
                 $eviction->pdf_download = 'true';
                 $eviction->court_number = $courtNumber;
                 $eviction->court_address_line_1 = $courtAddressLine1;

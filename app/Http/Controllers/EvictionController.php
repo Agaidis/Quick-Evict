@@ -292,11 +292,11 @@ class EvictionController extends Controller
 
                 return redirect('dashboard');
             } catch ( \Exception $e) {
-                $mailer->sendMail('andrew.gaidis@gmail.com', 'LTC Error', '' );
+                $mailer->sendMail('andrew.gaidis@gmail.com', 'LTC Error 1' . Auth::user()->id, $e->getMessage() );
                 alert('It looks like there was an issue while making this LTC. the Development team has been notified and are aware that your having issues. They will update you as soon as possible.');
             }
         } catch ( \Exception $e) {
-            $mailer->sendMail('andrew.gaidis@gmail.com', 'LTC Error', '' );
+            $mailer->sendMail('andrew.gaidis@gmail.com', 'LTC Error 2' . Auth::user()->id, $e->getMessage() );
             alert('It looks like there was an issue while making this LTC. the Development team has been notified and are aware that your having issues. They will update you as soon as possible.');
         }
     }
@@ -308,7 +308,7 @@ class EvictionController extends Controller
             $isDigitalSignature = CourtDetails::where('magistrate_id', $courtNumber[1])->get();
             return $isDigitalSignature;
         } catch ( Exception $e ) {
-            $mailer->sendMail('andrew.gaidis@gmail.com', 'LTC Error', '' );
+            $mailer->sendMail('andrew.gaidis@gmail.com', 'LTC Error 3' . Auth::user()->id, $e->getMessage() );
             alert('It looks like there was an issue while making this LTC. the Development team has been notified and are aware that your having issues. They will update you as soon as possible.');
         }
     }
