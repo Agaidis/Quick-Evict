@@ -42744,23 +42744,38 @@ if (document.location.href.split('/')[3] == 'new-ltc' || document.location.href.
   $(document).ready(function () {
     $('[data-toggle="tooltip"]').tooltip();
     var canvas = document.querySelector("canvas");
-    var signaturePad = new SignaturePad(canvas, {}); //Clear button to remove signature drawing
+    var signaturePad = new SignaturePad(canvas, {
+      backgroundColor: "#F2F2F2"
+    }); //Clear button to remove signature drawing
 
     $('.clear_signature').on('click', function () {
-      $('#pdf_download_btn').prop('disabled', true); // Clears the canvas
-
+      // Clears the canvas
       signaturePad.clear();
     });
-    $('.no_signature').on('click', function () {
+    var text_max = 500;
+    $('#textarea_feedback').html(text_max + ' characters remaining');
+    $('#claim_description').on('keyup', function () {
+      var text_length = $('#claim_description').val().length;
+      var text_remaining = text_max - text_length;
+      $('#textarea_feedback').html(text_remaining + ' characters remaining');
+    });
+    $('.use_signature').on('click', function () {
+      $('.payment_section').css('display', 'initial');
+      $('.pay_submit_section').css('display', 'initial');
+    });
+    $('#legal_checkbox').on('change', function () {
       if ($('#legal_checkbox').is(':checked')) {
-        $('#pdf_download_btn').prop('disabled', false);
+        $('.use_signature').prop('disabled', false);
+        $('.pay_sign_submit').prop('disabled', false);
+      } else {
+        $('.use_signature').prop('disabled', true);
+        $('.pay_sign_submit').prop('disabled', true);
       }
     }); //Save and use Signature
 
-    $('.save_signature').on('click', function () {
+    $('.pay_sign_submit').on('click', function () {
       if ($('#legal_checkbox').is(':checked')) {
-        $('#pdf_download_btn').prop('disabled', false);
-        $('#modal_signature').modal('hide');
+        $('#rented_by_val').val($('input[name=rented_by]:checked').val());
       } else {
         alert('You need to check the Signature checkbox above to agree to the digital terms in order to continue.');
       }
@@ -42941,7 +42956,6 @@ if (document.location.href.split('/')[3] == 'new-ltc' || document.location.href.
 
             if (data[0].digital_signature == 0) {
               $('#finalize_document').css('display', 'none');
-              $('#pdf_download_btn').prop('disabled', false);
             }
           },
           error: function error(data) {}
@@ -43069,10 +43083,6 @@ if (document.location.href.split('/')[3] == 'new-ltc' || document.location.href.
       } else {
         $('#breached_details').prop('disabled', true);
       }
-    }); //On Submit
-
-    $('#pdf_download_btn').on('click', function () {
-      $('#rented_by_val').val($('input[name=rented_by]:checked').val());
     });
   });
 }
@@ -49294,6 +49304,80 @@ function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterat
 
 /***/ }),
 
+/***/ "./resources/assets/js/stripe.js":
+/*!***************************************!*\
+  !*** ./resources/assets/js/stripe.js ***!
+  \***************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+// Create a Stripe client.
+var stripe = Stripe('pk_test_FTcQeimeSasisJpDTYgHEMTh'); // Create an instance of Elements.
+
+var elements = stripe.elements(); // Custom styling can be passed to options when creating an Element.
+// (Note that this demo uses a wider set of styles than the guide below.)
+
+var style = {
+  base: {
+    color: '#32325d',
+    fontFamily: '"Helvetica Neue", Helvetica, sans-serif',
+    fontSmoothing: 'antialiased',
+    fontSize: '16px',
+    '::placeholder': {
+      color: '#aab7c4'
+    }
+  },
+  invalid: {
+    color: '#fa755a',
+    iconColor: '#fa755a'
+  }
+}; // Create an instance of the card Element.
+
+var card = elements.create('card', {
+  style: style
+}); // Add an instance of the card Element into the `card-element` <div>.
+
+card.mount('#card-element'); // Handle real-time validation errors from the card Element.
+
+card.addEventListener('change', function (event) {
+  var displayError = document.getElementById('card-errors');
+
+  if (event.error) {
+    displayError.textContent = event.error.message;
+  } else {
+    displayError.textContent = '';
+  }
+}); // Handle form submission.
+
+var form = document.getElementById('oop_form');
+form.addEventListener('submit', function (event) {
+  event.preventDefault();
+  stripe.createToken(card).then(function (result) {
+    if (result.error) {
+      // Inform the user if there was an error.
+      var errorElement = document.getElementById('card-errors');
+      errorElement.textContent = result.error.message;
+    } else {
+      // Send the token to your server.
+      stripeTokenHandler(result.token);
+    }
+  });
+}); // Submit the form with the token ID.
+
+function stripeTokenHandler(token) {
+  // Insert the token ID into the form so it gets submitted to the server
+  var form = document.getElementById('oop_form');
+  var hiddenInput = document.createElement('input');
+  hiddenInput.setAttribute('type', 'hidden');
+  hiddenInput.setAttribute('name', 'stripeToken');
+  hiddenInput.setAttribute('value', token.id);
+  form.appendChild(hiddenInput); // Submit the form
+
+  form.submit();
+}
+
+/***/ }),
+
 /***/ "./resources/assets/js/timepicker.min.js":
 /*!***********************************************!*\
   !*** ./resources/assets/js/timepicker.min.js ***!
@@ -50013,9 +50097,9 @@ $(document).ready(function () {
 /***/ }),
 
 /***/ 0:
-/*!*********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** multi ./resources/assets/js/bootstrap.js ./resources/assets/js/json2.min.js ./resources/assets/js/timepicker.min.js ./resources/assets/js/datepicker-ui.min.js ./resources/assets/js/eviction.js ./resources/assets/js/datatables.min.js ./resources/assets/js/magistrateCreator.js ./resources/assets/js/userManagement.js ./resources/assets/js/numeric-1.2.6.min.js ./resources/assets/js/bezier.js ./resources/assets/js/signaturepad.js ./resources/assets/js/bootstrap-timepicker.min.js ./resources/assets/js/home.js ./resources/assets/sass/app.scss ***!
-  \*********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
+/*!*****************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** multi ./resources/assets/js/bootstrap.js ./resources/assets/js/json2.min.js ./resources/assets/js/timepicker.min.js ./resources/assets/js/datepicker-ui.min.js ./resources/assets/js/eviction.js ./resources/assets/js/datatables.min.js ./resources/assets/js/magistrateCreator.js ./resources/assets/js/userManagement.js ./resources/assets/js/numeric-1.2.6.min.js ./resources/assets/js/bezier.js ./resources/assets/js/signaturepad.js ./resources/assets/js/bootstrap-timepicker.min.js ./resources/assets/js/home.js ./resources/assets/js/stripe.js ./resources/assets/sass/app.scss ***!
+  \*****************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -50032,6 +50116,7 @@ __webpack_require__(/*! /Users/andrewgaidis/projects/Quick-Evict/resources/asset
 __webpack_require__(/*! /Users/andrewgaidis/projects/Quick-Evict/resources/assets/js/signaturepad.js */"./resources/assets/js/signaturepad.js");
 __webpack_require__(/*! /Users/andrewgaidis/projects/Quick-Evict/resources/assets/js/bootstrap-timepicker.min.js */"./resources/assets/js/bootstrap-timepicker.min.js");
 __webpack_require__(/*! /Users/andrewgaidis/projects/Quick-Evict/resources/assets/js/home.js */"./resources/assets/js/home.js");
+__webpack_require__(/*! /Users/andrewgaidis/projects/Quick-Evict/resources/assets/js/stripe.js */"./resources/assets/js/stripe.js");
 module.exports = __webpack_require__(/*! /Users/andrewgaidis/projects/Quick-Evict/resources/assets/sass/app.scss */"./resources/assets/sass/app.scss");
 
 

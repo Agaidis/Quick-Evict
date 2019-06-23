@@ -39,6 +39,7 @@ class CivilComplaintController extends Controller
         } else {
 
             $geoData = GeoLocation::orderBy('magistrate_id', 'ASC')->get();
+            $map = new GMaps;
 
             foreach ($geoData as $geo) {
                 $township = CourtDetails::where('magistrate_id', $geo['magistrate_id'])->value('township');

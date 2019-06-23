@@ -10,6 +10,7 @@ use Dompdf\Dompdf;
 use Illuminate\Support\Facades\DB;
 use App\Signature;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
 
 class DashboardController extends Controller
 {
@@ -70,7 +71,7 @@ class DashboardController extends Controller
             $errorDetails = 'DashboardController - error in store() method when attempting to store magistrate';
             $errorDetails .= PHP_EOL . 'File: ' . $e->getFile();
             $errorDetails .= PHP_EOL . 'Line #' . $e->getLine();
-            \Log::error($errorDetails . PHP_EOL . 'Error Message: ' . $e->getMessage() . PHP_EOL . 'Trace: ' . $e->getTraceAsString());
+            Log::error($errorDetails . PHP_EOL . 'Error Message: ' . $e->getMessage() . PHP_EOL . 'Trace: ' . $e->getTraceAsString());
             mail('andrew.gaidis@gmail.com', 'Changing Status', $errorDetails);
         }
     }
@@ -92,7 +93,7 @@ class DashboardController extends Controller
             $errorDetails = 'DashboardController - error in store() method when attempting to store court date';
             $errorDetails .= PHP_EOL . 'File: ' . $e->getFile();
             $errorDetails .= PHP_EOL . 'Line #' . $e->getLine();
-            \Log::error($errorDetails . PHP_EOL . 'Error Message: ' . $e->getMessage() . PHP_EOL . 'Trace: ' . $e->getTraceAsString());
+            Log::error($errorDetails . PHP_EOL . 'Error Message: ' . $e->getMessage() . PHP_EOL . 'Trace: ' . $e->getTraceAsString());
             mail('andrew.gaidis@gmail.com', 'store court date', $errorDetails);
         }
         return 'success';
@@ -496,12 +497,12 @@ span.cls_011{font-family:Arial,serif;font-size:12px;color:rgb(0,0,0);font-weight
             $dompdf->stream();
 
             return 'success';
-        } catch (\Exception $e) {
+        } catch (Exception $e) {
             $errorDetails = 'DashboardController - error in downloadpdf() method when attempting to download previous eviction';
             $errorDetails .= PHP_EOL . 'File: ' . $e->getFile();
             $errorDetails .= PHP_EOL . 'Line #' . $e->getLine();
             $errorDetails .= PHP_EOL . 'Message ' .  $e->getMessage();
-            \Log::error($errorDetails . PHP_EOL . 'Error Message: ' . $e->getMessage() . PHP_EOL . 'Trace: ' . $e->getTraceAsString());
+            Log::error($errorDetails . PHP_EOL . 'Error Message: ' . $e->getMessage() . PHP_EOL . 'Trace: ' . $e->getTraceAsString());
             mail('andrew.gaidis@gmail.com', 'Showing Dashboard Page', $errorDetails);
             return 'failure';
         }

@@ -3,17 +3,16 @@
 namespace App\Http\Controllers;
 
 use App\Classes\Mailer;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\GeoLocation;
-use Dompdf\Options;
 use GMaps;
-use Dompdf\Dompdf;
 use App\CourtDetails;
 use JavaScript;
 use App\Evictions;
 use App\Signature;
 use Illuminate\Support\Facades\Log;
+use Stripe\Stripe;
+use Stripe\Account;
 
 class OrderOfPossessionController extends Controller
 {
@@ -38,6 +37,7 @@ class OrderOfPossessionController extends Controller
             return view('/login');
         } else {
 
+            $map = new GMaps;
             $geoData = GeoLocation::orderBy('magistrate_id', 'ASC')->get();
 
             foreach ($geoData as $geo) {
@@ -188,6 +188,26 @@ class OrderOfPossessionController extends Controller
                 $signature->signature = $_POST['signature_source'];
 
                 $signature->save();
+
+                // Set your secret key: remember to change this to your live secret key in production
+// See your keys here: https://dashboard.stripe.com/account/apikeys
+                try {
+                    \Stripe\Stripe::setApiKey('sk_test_MnFhi1rY4EF5NDsAWyURCRND');
+
+// Token is created using Checkout or Elements!
+// Get the payment token ID submitted by the form:
+                    $token = $_POST['stripeToken'];
+                    $charge = \Stripe\Charge::create([
+                        'amount' => 100,
+                        'currency' => 'usd',
+                        'description' => 'Example charge',
+                        'source' => $token,
+                    ]);
+                } catch ( Exception $e ) {
+                    Log::info($e->getMessage());
+                    $mailer->sendMail('andrew.gaidis@gmail.com', 'OOP Error', $e->getMessage() );
+                }
+
 
                 return redirect('dashboard');
 

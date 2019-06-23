@@ -102,8 +102,8 @@
                                                         <input type="text" class="form-control eviction_fields" id="total_judgment" name="total_judgment" placeholder="$" value="" />
                                                     </div>
                                                     <div class="col-sm-10">
-                                                        <label class="labels" for="total_judgment">Claim Description</label>
-                                                        <textarea style="height:150px;" class="form-control eviction_fields" id="claim_description" name="claim_description" placeholder="Broken Window"></textarea>
+                                                        <label class="labels" for="total_judgment">Claim Description</label><div id ="textarea_feedback"></div>
+                                                        <textarea style="height:150px;" class="form-control eviction_fields" id="claim_description" maxlength="500" name="claim_description" placeholder="Broken Window"></textarea>
                                                     </div>
                                                 </div>
                                             </div>

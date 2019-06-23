@@ -13,17 +13,10 @@
     <link rel="icon" href="https://quickevict.nyc3.digitaloceanspaces.com/ziplogo.png"/>
 
     <!-- Scripts -->
+    <script src="https://js.stripe.com/v3/"></script>
     <script src="{{ mix('js/app.js') }}" defer></script>
 
 
-{{--<script>--}}
-        {{--var stripe = Stripe('pk_test_6pRNASCoBOKtIshFeQd4XMUh');--}}
-        {{--var elements = stripe.elements();--}}
-        {{--var card = elements.create('card');--}}
-
-        {{--// Add an instance of the card UI component into the `card-element` <div>--}}
-        {{--card.mount('#card-element');--}}
-    {{--</script>--}}
     <!-- Fonts -->
     <link rel="dns-prefetch" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Raleway:300,400,600" rel="stylesheet" type="text/css">
@@ -102,7 +95,7 @@
         </main>
     </div>
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAfPLSbGAHZkEd-8DDB0FcGSlhrV9LQMGM&libraries=places" defer></script>
-    <script src="https://js.stripe.com/v3/"></script>
+
     <script src="https://cdn.jsdelivr.net/npm/signature_pad@2.3.2/dist/signature_pad.min.js"></script>
 </body>
 </html>
