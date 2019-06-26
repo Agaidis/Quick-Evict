@@ -2,22 +2,20 @@
 @section('content')
     <meta name="csrf-token" id="token" content="{{ csrf_token() }}">
     <div class="container-fluid">
-        <div class="row justify-content-center">
-            <div class="col-md-10">
-                <div class="card" id="getting_started_panel" style="margin-bottom:3%;">
+        <div class="row">
+            <div id="new_filing_container" class="col-md-4">
+                <div class="card">
                     <div class="card-body">
-                        <h2 class="titles">Start a Filing:</h2>
+                        <h3 class="titles" style="text-align:center;">Start a New Filing</h3>
                         <div class="button_panel">
-                            <a href="{{ url('new-ltc') }}"><button type="button" class="btn btn-primary home_btns" id="ltc_btn">Landlord-Tenant Complaint</button></a>
-                            <a href="{{ url('new-oop') }}"><button type="button" class="btn btn-primary home_btns" id="oop_btn">Order of Possession</button></a>
-                            <a href="{{ url('new-civil-complaint') }}"><button type="button" class="btn btn-primary home_btns" id="civil_complaint_btn">Civil Complaint</button></a>
+                            <a href="{{ url('new-ltc') }}"><button type="button" class="btn home_btns" id="ltc_btn">Landlord-Tenant Complaint</button></a><br>
+                            <a href="{{ url('new-oop') }}"><button type="button" class="btn home_btns" id="oop_btn">Order of Possession</button></a><br>
+                            <a href="{{ url('new-civil-complaint') }}"><button type="button" class="btn home_btns" id="civil_complaint_btn">Civil Complaint</button></a>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-        <div class="row justify-content-center">
-            <div class="col-md-10">
+            <div class="col-md-8">
                 <div class="card">
                     <div class="card-body">
                         <h2 class="titles">Welcome to Court<em>Zip</em>!</h2>
@@ -41,5 +39,6 @@
                 </div>
             </div>
         </div>
-    </div>
+
+        </div>
 @endsection

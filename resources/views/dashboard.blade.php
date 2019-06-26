@@ -2,22 +2,65 @@
 @section('content')
     <meta name="csrf-token" id="token" content="{{ csrf_token() }}">
     <div class="container-fluid">
+        <div class="row">
+            <div id="new_filing_container" class="col-md-4">
+                <div class="card">
+                    <div class="card-body">
+                        <h3 class="titles" style="text-align:center;">Start a New Filing</h3>
+                        <div class="button_panel">
+                            <a href="{{ url('new-ltc') }}"><button type="button" class="btn home_btns" id="ltc_btn">Landlord-Tenant Complaint</button></a><br>
+                            <a href="{{ url('new-oop') }}"><button type="button" class="btn home_btns" id="oop_btn">Order of Possession</button></a><br>
+                            <a href="{{ url('new-civil-complaint') }}"><button type="button" class="btn home_btns" id="civil_complaint_btn">Civil Complaint</button></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="notification_container" class="col-md-8">
+                <div class="card">
+                    <div class="card-body"><h3 class="titles" style="text-align:center;">Latest Notifications</h3>
+                        <table class="table table-hover table-responsive-md table-bordered eviction_table" id="notification_table">
+                            <thead>
+                            <tr>
+                                <th style="width: 1%" class="text-center">Id</th>
+                                <th style="width: 1%" class="text-center">Urgency</th>
+                                <th style="width: 9%" class="text-center">Property Address</th>
+                                <th style="width: 10%" class="text-center">Completion Date</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <td class="text-center">1</td>
+                                <td class="text-center"><span class="urgency_dot" id="red_urgency"></span></td>
+                                <td class="text-center">1234 Main Street</td>
+                                <td class="text-center">6/25/19</td>
+                            </tr>
+                            <tr>
+                                <td class="text-center">1</td>
+                                <td class="text-center"><span class="urgency_dot" id="red_urgency"></span></td>
+                                <td class="text-center">5678 Bully Street</td>
+                                <td class="text-center">6/23/19</td>
+                            </tr>
+                            <tr>
+                                <td class="text-center">1</td>
+                                <td class="text-center"><span class="urgency_dot" id="yellow_urgency"></span></td>
+                                <td class="text-center">1112 Fulton Ave</td>
+                                <td class="text-center">6/26/19</td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
         <div class="row justify-content-center">
             <div class="col-md-12">
                 <div class="card">
-                    <div class="card-header">Dashboard</div>
-                    <div class="card-body">
+                    <div class="card-body"><h3 class="titles" style="text-align:center;">Current Filings</h3>
                         @if (session('status'))
                             <div class="alert alert-success">
                                 {{ session('status') }}
                             </div>
                         @endif
-                            <h2 class="titles">Start a New Filing:</h2>
-                            <div style="margin-top:0!important;" class="button_panel">
-                                <a href="{{ url('new-ltc') }}"><button type="button" class="btn btn-primary home_btns" id="ltc_btn">Landlord-Tenant Complaint</button></a>
-                                <a href="{{ url('new-oop') }}"><button type="button" class="btn btn-primary home_btns" id="oop_btn">Order of Possession</button></a>
-                                <a href="{{ url('new-civil-complaint') }}"><button type="button" class="btn btn-primary home_btns" id="civil_complaint_btn">Civil Complaint</button></a>
-                            </div>
                         <form method="post" action="{{ action('DashboardController@downloadPDF') }}" enctype="multipart/form-data" id="dashboard_form">
                             <input type="hidden" name="_token" value="{{ Session::token() }}">
                             <table class="table table-hover table-responsive-md table-bordered eviction_table" id="eviction_table">

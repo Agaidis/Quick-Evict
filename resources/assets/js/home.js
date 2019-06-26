@@ -53,6 +53,11 @@ $(document).ready(function () {
         });
     });
 
+    $('#notification_table').DataTable( {
+        "pagingType": "simple",
+        "aaSorting": []
+    });
+
 
     $('#eviction_table').DataTable( {
         "pagingType": "simple",
