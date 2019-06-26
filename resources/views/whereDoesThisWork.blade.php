@@ -7,7 +7,7 @@
         <div class="col-md-10">
            <div class="card">
                 <div class="card-body body_container">
-                    <h3 class="titles" style="text-align:center;">Where does this work?</h3>
+                    <h2 class="titles" style="text-align:center;">Where does this work?</h2>
                     <div class="flash-message">
                         @if(Session::has('alert-success'))
                             <p class="alert alert-success">{{ Session::get('alert-success') }} <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a></p>

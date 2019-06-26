@@ -7,7 +7,7 @@
         <div class="col-md-10">
            <div class="card">
                 <div class="card-body body_container">
-                    <h3 class="titles" style="text-align:center;">FAQ</h3>
+                    <h2 class="titles" style="text-align:center;">FAQ</h2>
                     <div class="row" style="margin-left: 6%; margin-right: 6%;">
                         <h4>Frequently Asked Questions about CourtZip</h4>:<br><br>
                         <div>

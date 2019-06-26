@@ -6,7 +6,7 @@
             <div id="new_filing_container" class="col-md-4">
                 <div class="card">
                     <div class="card-body body_container">
-                        <h3 class="titles" style="text-align:center;">Start a New Filing</h3>
+                        <h2 class="titles" style="text-align:center;">Start a New Filing</h2>
                         <div class="button_panel">
                             <a href="{{ url('new-ltc') }}"><button type="button" class="btn home_btns" id="ltc_btn">Landlord-Tenant Complaint</button></a><br>
                             <a href="{{ url('new-oop') }}"><button type="button" class="btn home_btns" id="oop_btn">Order of Possession</button></a><br>
@@ -17,7 +17,7 @@
             </div>
             <div class="col-md-8">
                 <div class="card">
-                    <div class="card-body body_container>
+                    <div class="card-body body_container">
                         <h2 class="titles">Welcome to Court<em>Zip</em>!</h2>
                         <div>CourtZip is the leader in combining technology and court filing expertise to improve the process for filing Complaints in Pennsylvania Magisterial District Courts. CourtZip makes it easy to file Civil Complaints under $12,000, Landlord-Tenant Complaints (for evictions), and Orders of Possession (for possession of property from eviction).</div>
 
