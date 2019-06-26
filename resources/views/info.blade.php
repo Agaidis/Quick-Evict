@@ -7,7 +7,8 @@
         <div class="col-md-10">
            <div class="card">
                 <div class="card-header"><h2>Additional Information</h2></div>
-                <div class="card-body">
+                <div class="card-body body_container">
+                    <h3 class="titles" style="text-align:center;">Additional Information</h3>
                     <div class="row" style="margin-left: 6%; margin-right: 6%;">
                         <p><strong>Information on Filing Evictions in Pennsylvania</strong>: Evictions are a tricky process for both new and experienced real estate investors, property managers, and landlords. Here are the major steps to work through an eviction:</p>
                         <p><strong>Documents</strong>: Make sure that the owner has the property licensed as a rental property and have a copy of the signed lease for the current tenant. The judge may deny the eviction if the owner does not have a valid lease or have the property licensed as a rental.</p>

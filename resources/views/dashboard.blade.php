@@ -5,7 +5,7 @@
         <div class="row">
             <div id="new_filing_container" class="col-md-4">
                 <div class="card">
-                    <div class="card-body">
+                    <div class="card-body body_container">
                         <h3 class="titles" style="text-align:center;">Start a New Filing</h3>
                         <div class="button_panel">
                             <a href="{{ url('new-ltc') }}"><button type="button" class="btn home_btns" id="ltc_btn">Landlord-Tenant Complaint</button></a><br>
@@ -17,7 +17,7 @@
             </div>
             <div id="notification_container" class="col-md-8">
                 <div class="card">
-                    <div class="card-body"><h3 class="titles" style="text-align:center;">Latest Notifications</h3>
+                    <div class="card-body body_container"><h3 class="titles" style="text-align:center;">Latest Notifications</h3>
                         <table class="table table-hover table-responsive-md table-bordered eviction_table" id="notification_table">
                             <thead>
                             <tr>
@@ -55,7 +55,7 @@
         <div class="row justify-content-center">
             <div class="col-md-12">
                 <div class="card">
-                    <div class="card-body"><h3 class="titles" style="text-align:center;">Current Filings</h3>
+                    <div class="card-body body_container"><h3 class="titles" style="text-align:center;">Current Filings</h3>
                         @if (session('status'))
                             <div class="alert alert-success">
                                 {{ session('status') }}

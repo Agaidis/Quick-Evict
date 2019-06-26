@@ -103,7 +103,7 @@ body {
 .card {
     border-radius: 2em;
 }
-.card-body {
+.body_container {
     background-color: #F5F5F5;
     border-radius:2em;
 }

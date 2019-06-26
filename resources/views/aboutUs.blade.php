@@ -6,8 +6,8 @@
     <div class="row justify-content-center">
         <div class="col-md-10">
            <div class="card">
-                <div class="card-header"><h2>About Us</h2></div>
-                <div class="card-body">
+                <div class="card-body body_container">
+                    <h3 class="titles" style="text-align:center;">About Us</h3>
                     <div class="row">
                         <div>Civil and Landlord-Tenant Complaints can be incredibly frustrating, time-consuming, and confusing. CourtZip was created and is run by a team that has a deep background in technology, engineering, and legal process. We understood how difficult the civil process can be at the Magisterial District Court level. We heard complaints of civil filings not filed properly, rejected by judges for manual errors in the process, or just was too complicated to understand. We took our engineering background and built a better solution -- to make the process easier for everyone involved.</div>
 
