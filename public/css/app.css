@@ -10732,7 +10732,8 @@ a.text-dark:focus {
 
 .titles {
     text-align: center;
-    color: #116466;
+    color: #D9B08C;
+    font-weight:bold;
 }
 .urgency_dot {
     height: 10px;
@@ -10750,7 +10751,7 @@ a.text-dark:focus {
 .home_btns {
     font-size:24px;
     margin-top:2%;
-    padding:5% 6% 5% 6%;
+    padding:4% 5% 4% 5%;
     margin-bottom:4%;
     font-family: verdana;
     background-color:#116466;
@@ -10772,6 +10773,7 @@ body {
     /*background: radial-gradient(circle, rgba(209,232,226,1) 8%, rgba(44,53,49,1) 100%);*/
     background: rgb(176, 176, 176);
     background: linear-gradient(101deg, rgba(176, 176, 176, 1) 11%, rgba(72, 72, 72, 1) 100%);
+    background-attachment: fixed;
 
 }
 .card {
