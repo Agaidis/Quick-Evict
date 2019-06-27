@@ -57,7 +57,6 @@
                                                 @else
                                                     <select title="status" disabled class="form-control court_select" id="user_court_{{$user->id}}">
                                                         <option>Select a Court</option>
-                                                    </select>
                                                 @endif
                                                 @foreach ($courtNumbers as $courtNumber)
                                                     @if ($user->court_id == $courtNumber->court_number)
