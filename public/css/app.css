@@ -10838,6 +10838,9 @@ form.eviction_form fieldset {
     margin-left: 5%;
     min-height: 500px;
 }
+.step_3_title {
+    margin-right: 18%;
+}
 
   html, body {
     height: 100%;

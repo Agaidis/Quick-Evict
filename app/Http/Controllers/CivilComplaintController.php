@@ -110,7 +110,7 @@ class CivilComplaintController extends Controller
                 $mailer->sendMail('andrew.gaidis@gmail.com', 'OOP Error', $e->getMessage() );
             }
 
-                return redirect('dashboard');
+                return redirect('dashboard')->with('status','Your Civil Complaint has been successfully made! You can see its progress in the table below.');
 
             } catch ( Exception $e ) {
                 $mailer->sendMail('andrew.gaidis@gmail.com, chad@slatehousegroup.com ', 'Civil Complaint Error', '

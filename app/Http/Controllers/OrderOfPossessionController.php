@@ -177,7 +177,7 @@ class OrderOfPossessionController extends Controller
                 }
 
 
-                return redirect('dashboard');
+                return redirect('dashboard')->with('status','Your OOP has been successfully made! You can see its progress in the table below.');
 
             } catch ( Exception $e ) {
                 $mailer->sendMail('andrew.gaidis@gmail.com', 'OOP Error', '' );

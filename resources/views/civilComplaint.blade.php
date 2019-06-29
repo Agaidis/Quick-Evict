@@ -28,7 +28,7 @@
 
 
                                         <!-- ADDITIONAL INFORMATION ON PROPERTY -->
-                                        <h4 class="major_labels">Additional Info on Property.</h4>
+                                        <h2 class="titles major_labels step_3_title">Step 3:<br> Fill out information on the Incident</h2>
                                         <div id="additional_info_container">
                                             <div class="form-group">
                                                 <div class="row">
@@ -142,7 +142,7 @@
                                                         <span aria-hidden="true">&times;</span>
                                                     </button>
                                                 </div>
-                                                <h3 class="titles signature_title">Step 3:<br> Signature</h3>
+                                                <h3 class="titles signature_title">Step 4:<br> Signature</h3>
                                                 <div class="modal-body">
                                                     <div class="row">
                                                         <div>
@@ -155,7 +155,7 @@
                                                         </div>
                                                     </div><br><hr><br>
                                                     <div class="payment_section">
-                                                        <h3 class="titles payment_title">Step 4:<br> Payment Information</h3>
+                                                        <h3 class="titles payment_title">Step 5:<br> Payment Information</h3>
                                                         <div class="form-row">
                                                             <label for="card-element">
                                                                 <span class="credit_debit">Credit or debit card</span>

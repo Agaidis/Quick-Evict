@@ -279,7 +279,7 @@ class EvictionController extends Controller
                     $mailer->sendMail('andrew.gaidis@gmail.com', 'OOP Error', $e->getMessage() );
                 }
 
-                return redirect('dashboard');
+                return redirect('dashboard')->with('status','Your Eviction has been successfully made! You can see its progress in the table below.');
             } catch ( \Exception $e) {
                 $mailer->sendMail('andrew.gaidis@gmail.com', 'LTC Error 1' . Auth::user()->id, '<html><body>
 <table><thead>
