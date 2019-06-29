@@ -10,7 +10,7 @@
             </div>
         </div>
         <div class="row justify-content-center">
-            <div class="col-md-10">
+            <div class="col-md-12">
                 <div class="card">
                     <div class="card-body body_container">
                         <h2 class="titles" style="text-align:center;">Current Filings</h2>
