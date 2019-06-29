@@ -7,12 +7,12 @@ use Illuminate\Support\Facades\Auth;
 use App\GeoLocation;
 use GMaps;
 use App\CourtDetails;
-use JavaScript;
 use App\Evictions;
 use App\Signature;
 use Illuminate\Support\Facades\Log;
+use Exception;
 use Stripe\Stripe;
-use Stripe\Account;
+
 
 class OrderOfPossessionController extends Controller
 {
@@ -24,34 +24,6 @@ class OrderOfPossessionController extends Controller
     public function __construct()
     {
         $this->middleware('auth');
-    }
-
-    /**
-     * Show the application dashboard.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-        if (Auth::guest()) {
-            return view('/login');
-        } else {
-
-            $map = new GMaps;
-            $geoData = GeoLocation::orderBy('magistrate_id', 'ASC')->get();
-
-            foreach ($geoData as $geo) {
-                $township = CourtDetails::where('magistrate_id', $geo['magistrate_id'])->value('township');
-                $geo['township'] = $township;
-            }
-
-            JavaScript::put([
-                'geoData' => $geoData,
-                'userId' => Auth::user()->role
-            ]);
-
-            return view('orderOfPossession', compact('map'));
-        }
     }
 
     public function formulatePDF()
@@ -189,18 +161,14 @@ class OrderOfPossessionController extends Controller
 
                 $signature->save();
 
-                // Set your secret key: remember to change this to your live secret key in production
-// See your keys here: https://dashboard.stripe.com/account/apikeys
                 try {
-                    \Stripe\Stripe::setApiKey('sk_test_MnFhi1rY4EF5NDsAWyURCRND');
+                    Stripe::setApiKey('sk_test_MnFhi1rY4EF5NDsAWyURCRND');
 
-// Token is created using Checkout or Elements!
-// Get the payment token ID submitted by the form:
                     $token = $_POST['stripeToken'];
-                    $charge = \Stripe\Charge::create([
+                    \Stripe\Charge::create([
                         'amount' => 100,
                         'currency' => 'usd',
-                        'description' => 'Example charge',
+                        'description' => 'Order of Possession charge',
                         'source' => $token,
                     ]);
                 } catch ( Exception $e ) {

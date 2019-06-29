@@ -12,8 +12,7 @@
                         <div class="col-md-12">
                             <form method="post" action="{{ action('EvictionController@formulatePDF') }}" enctype="multipart/form-data" id="eviction_form">
                                 <input type="hidden" name="_token" value="{{ Session::token() }}">
-                                <h2 style="text-align:center;" class="title">Defendant Location</h2>
-                                <h3 style="text-align:center;" class="fs-subtitle">Enter the address of your tenant.</h3>
+                                <h2 style="text-align:center;" class="titles fs-subtitle">Step 2:<br> Enter the address of your tenant.</h2>
                                 <div class="form-group">
                                     <div class="row">
                                         <div class="col-sm-6 col-md-8 col-lg-8 col-xl-8">
@@ -283,7 +282,7 @@
                                                     <span aria-hidden="true">&times;</span>
                                                 </button>
                                             </div>
-                                            <h3 class="signature_title">1. Signature</h3>
+                                            <h3 class="titles signature_title">Step 3:<br> Signature</h3>
                                             <div class="modal-body">
                                                 <div class="row">
                                                     <div>
@@ -296,7 +295,7 @@
                                                     </div>
                                                 </div><br><hr><br>
                                                 <div class="payment_section">
-                                                    <h3 class="payment_title">2. Payment Information</h3>
+                                                    <h3 class="titles payment_title">Step 4:<br> Payment Information</h3>
                                                     <div class="form-row">
                                                         <label for="card-element">
                                                             <span class="credit_debit">Credit or debit card</span>

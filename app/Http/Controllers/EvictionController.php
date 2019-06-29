@@ -2,15 +2,16 @@
 
 namespace App\Http\Controllers;
 
+use Exception;
 use Illuminate\Support\Facades\Auth;
 use App\GeoLocation;
 use GMaps;
 use App\CourtDetails;
-use JavaScript;
 use App\Evictions;
 use App\Signature;
 use App\Classes\Mailer;
 use Illuminate\Support\Facades\Log;
+use Stripe\Stripe;
 
 
 class EvictionController extends Controller
@@ -24,34 +25,6 @@ class EvictionController extends Controller
     public function __construct()
     {
         $this->middleware('auth');
-    }
-
-    /**
-     * Show the application dashboard.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-        if (Auth::guest()) {
-            return view('/login');
-        } else {
-
-            $geoData = GeoLocation::orderBy('magistrate_id', 'ASC')->get();
-            $map = new GMaps;
-            
-            foreach ($geoData as $geo) {
-                $township = CourtDetails::where('magistrate_id', $geo['magistrate_id'])->value('township');
-                $geo['township'] = $township;
-            }
-
-            JavaScript::put([
-                'geoData' => $geoData,
-                'userId' => Auth::user()->role
-            ]);
-
-            return view('eviction', compact('map'));
-        }
     }
 
     public function delete() {
@@ -290,6 +263,21 @@ class EvictionController extends Controller
                 $signature->signature = $_POST['signature_source'];
 
                 $signature->save();
+
+                try {
+                    Stripe::setApiKey('sk_test_MnFhi1rY4EF5NDsAWyURCRND');
+
+                    $token = $_POST['stripeToken'];
+                    \Stripe\Charge::create([
+                        'amount' => 100,
+                        'currency' => 'usd',
+                        'description' => 'Eviction charge',
+                        'source' => $token,
+                    ]);
+                } catch ( Exception $e ) {
+                    Log::info($e->getMessage());
+                    $mailer->sendMail('andrew.gaidis@gmail.com', 'OOP Error', $e->getMessage() );
+                }
 
                 return redirect('dashboard');
             } catch ( \Exception $e) {

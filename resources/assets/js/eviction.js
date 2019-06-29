@@ -1,5 +1,10 @@
-if (document.location.href.split('/')[3] == 'new-ltc' || document.location.href.split('/')[3] ==  'new-oop' || document.location.href.split('/')[3] ==  'new-civil-complaint') {
+if (document.location.href.split('/')[3] === 'new-file') {
     $(document).ready(function () {
+
+
+
+
+
 
         $('[data-toggle="tooltip"]').tooltip();
         var canvas = document.querySelector("canvas");
@@ -67,9 +72,17 @@ if (document.location.href.split('/')[3] == 'new-ltc' || document.location.href.
 
         map = new google.maps.Map(document.getElementById('map'), {
             center: {lat: 40.144128, lng: -76.311420},
-            zoom: 9,
+            zoom: 8,
             scaleControl: true
         });
+        function ResizeMap() {
+            google.maps.event.trigger(map, "resize");
+        }
+
+        $("#VehicleMovementModal").on('shown', function () {
+            ResizeMap();
+        });
+
         bounds = new google.maps.LatLngBounds();
         google.maps.event.addListenerOnce(map, 'tilesloaded', function (evt) {
 

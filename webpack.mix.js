@@ -25,6 +25,7 @@ let mix = require('laravel-mix');
      'resources/assets/js/signaturepad.js',
      'resources/assets/js/bootstrap-timepicker.min.js',
      'resources/assets/js/home.js',
+     'resources/assets/js/newFile.js',
      'resources/assets/js/stripe.js',
  ], 'public/js/app.js').version()
 //mix.js('resources/assets/js/app.js', 'public/js')

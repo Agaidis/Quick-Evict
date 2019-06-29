@@ -12,6 +12,7 @@ form.eviction_form fieldset {
     height: 80%;
     width:80%;
     margin-left: 5%;
+    min-height: 500px;
 }
 
   html, body {
@@ -178,7 +179,7 @@ form.eviction_form fieldset {
     display:flex;
 }
 
-#finalize_document {
+#finalize_document, #step_1_btn {
     box-shadow: 3px 5px #888888;
     margin-top: 15px;
 }
@@ -202,4 +203,8 @@ form.eviction_form fieldset {
 
 .payment_section, .pay_submit_section {
     display:none;
+}
+
+#county_error, #file_type_error {
+    color:red;
 }

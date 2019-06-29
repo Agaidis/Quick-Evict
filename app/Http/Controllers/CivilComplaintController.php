@@ -3,17 +3,15 @@
 namespace App\Http\Controllers;
 
 use App\Classes\Mailer;
-use Illuminate\Http\Request;
+use Exception;
 use Illuminate\Support\Facades\Auth;
 use App\GeoLocation;
-use Dompdf\Options;
 use GMaps;
-use Dompdf\Dompdf;
 use App\CourtDetails;
-use JavaScript;
 use App\Evictions;
 use App\Signature;
 use Illuminate\Support\Facades\Log;
+use Stripe\Stripe;
 
 class CivilComplaintController extends Controller
 {
@@ -25,34 +23,6 @@ class CivilComplaintController extends Controller
     public function __construct()
     {
         $this->middleware('auth');
-    }
-
-    /**
-     * Show the application dashboard.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-        if (Auth::guest()) {
-            return view('/login');
-        } else {
-
-            $geoData = GeoLocation::orderBy('magistrate_id', 'ASC')->get();
-            $map = new GMaps;
-
-            foreach ($geoData as $geo) {
-                $township = CourtDetails::where('magistrate_id', $geo['magistrate_id'])->value('township');
-                $geo['township'] = $township;
-            }
-
-            JavaScript::put([
-                'geoData' => $geoData,
-                'userId' => Auth::user()->role
-            ]);
-
-            return view('civilComplaint', compact('map'));
-        }
     }
 
     public function formulatePDF()
@@ -125,6 +95,21 @@ class CivilComplaintController extends Controller
 
                 $signature->save();
 
+            try {
+                Stripe::setApiKey('sk_test_MnFhi1rY4EF5NDsAWyURCRND');
+
+                $token = $_POST['stripeToken'];
+                \Stripe\Charge::create([
+                    'amount' => 100,
+                    'currency' => 'usd',
+                    'description' => 'Civil Complaint charge',
+                    'source' => $token,
+                ]);
+            } catch ( Exception $e ) {
+                Log::info($e->getMessage());
+                $mailer->sendMail('andrew.gaidis@gmail.com', 'OOP Error', $e->getMessage() );
+            }
+
                 return redirect('dashboard');
 
             } catch ( Exception $e ) {
@@ -155,7 +140,8 @@ class CivilComplaintController extends Controller
 </tbody>
 </table></body></html>' );
                 alert('It looks like there was an issue while making this LTC. the Development team has been notified and are aware that your having issues. They will update you as soon as possible.');
-            }
+
+        }
 
     }
 }

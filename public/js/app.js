@@ -42740,7 +42740,7 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-if (document.location.href.split('/')[3] == 'new-ltc' || document.location.href.split('/')[3] == 'new-oop' || document.location.href.split('/')[3] == 'new-civil-complaint') {
+if (document.location.href.split('/')[3] === 'new-file') {
   $(document).ready(function () {
     $('[data-toggle="tooltip"]').tooltip();
     var canvas = document.querySelector("canvas");
@@ -42802,8 +42802,16 @@ if (document.location.href.split('/')[3] == 'new-ltc' || document.location.href.
         lat: 40.144128,
         lng: -76.311420
       },
-      zoom: 9,
+      zoom: 8,
       scaleControl: true
+    });
+
+    function ResizeMap() {
+      google.maps.event.trigger(map, "resize");
+    }
+
+    $("#VehicleMovementModal").on('shown', function () {
+      ResizeMap();
     });
     bounds = new google.maps.LatLngBounds();
     google.maps.event.addListenerOnce(map, 'tilesloaded', function (evt) {
@@ -43140,10 +43148,6 @@ $(document).ready(function () {
         location.reload();
       }
     });
-  });
-  $('#notification_table').DataTable({
-    "pagingType": "simple",
-    "aaSorting": []
   });
   $('#eviction_table').DataTable({
     "pagingType": "simple",
@@ -43624,6 +43628,44 @@ $(document).ready(function () {
       }, 6000);
     }
   }
+});
+
+/***/ }),
+
+/***/ "./resources/assets/js/newFile.js":
+/*!****************************************!*\
+  !*** ./resources/assets/js/newFile.js ***!
+  \****************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+$(document).ready(function () {
+  $('#step_1_btn').on('click', function (e) {
+    var fileType = $('#file_type_select').val();
+    var county = $('#county_select').val();
+    var isFileValid = false;
+    var isCountyValid = false;
+
+    if (fileType === 'none') {
+      isFileValid = false;
+      $('#file_type_error').text('File Type cannot be Blank. Please select one of the options.');
+    } else {
+      $('#file_type_error').text('');
+      isFileValid = true;
+    }
+
+    if (county === 'none') {
+      isCountyValid = false;
+      $('#county_error').text('County cannot be Blank. Please select one of the options.');
+    } else {
+      $('#county_error').text('');
+      isCountyValid = true;
+    }
+
+    if (isFileValid === true && isCountyValid === true) {
+      $('#new_file_form').submit();
+    }
+  });
 });
 
 /***/ }),
@@ -49353,7 +49395,7 @@ card.addEventListener('change', function (event) {
   }
 }); // Handle form submission.
 
-var form = document.getElementById('oop_form');
+var form = document.getElementById('eviction_form');
 form.addEventListener('submit', function (event) {
   event.preventDefault();
   stripe.createToken(card).then(function (result) {
@@ -49370,7 +49412,7 @@ form.addEventListener('submit', function (event) {
 
 function stripeTokenHandler(token) {
   // Insert the token ID into the form so it gets submitted to the server
-  var form = document.getElementById('oop_form');
+  var form = document.getElementById('eviction_form');
   var hiddenInput = document.createElement('input');
   hiddenInput.setAttribute('type', 'hidden');
   hiddenInput.setAttribute('name', 'stripeToken');
@@ -50101,9 +50143,9 @@ $(document).ready(function () {
 /***/ }),
 
 /***/ 0:
-/*!*****************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** multi ./resources/assets/js/bootstrap.js ./resources/assets/js/json2.min.js ./resources/assets/js/timepicker.min.js ./resources/assets/js/datepicker-ui.min.js ./resources/assets/js/eviction.js ./resources/assets/js/datatables.min.js ./resources/assets/js/magistrateCreator.js ./resources/assets/js/userManagement.js ./resources/assets/js/numeric-1.2.6.min.js ./resources/assets/js/bezier.js ./resources/assets/js/signaturepad.js ./resources/assets/js/bootstrap-timepicker.min.js ./resources/assets/js/home.js ./resources/assets/js/stripe.js ./resources/assets/sass/app.scss ***!
-  \*****************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
+/*!**************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** multi ./resources/assets/js/bootstrap.js ./resources/assets/js/json2.min.js ./resources/assets/js/timepicker.min.js ./resources/assets/js/datepicker-ui.min.js ./resources/assets/js/eviction.js ./resources/assets/js/datatables.min.js ./resources/assets/js/magistrateCreator.js ./resources/assets/js/userManagement.js ./resources/assets/js/numeric-1.2.6.min.js ./resources/assets/js/bezier.js ./resources/assets/js/signaturepad.js ./resources/assets/js/bootstrap-timepicker.min.js ./resources/assets/js/home.js ./resources/assets/js/newFile.js ./resources/assets/js/stripe.js ./resources/assets/sass/app.scss ***!
+  \**************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -50120,6 +50162,7 @@ __webpack_require__(/*! /Users/andrewgaidis/projects/Quick-Evict/resources/asset
 __webpack_require__(/*! /Users/andrewgaidis/projects/Quick-Evict/resources/assets/js/signaturepad.js */"./resources/assets/js/signaturepad.js");
 __webpack_require__(/*! /Users/andrewgaidis/projects/Quick-Evict/resources/assets/js/bootstrap-timepicker.min.js */"./resources/assets/js/bootstrap-timepicker.min.js");
 __webpack_require__(/*! /Users/andrewgaidis/projects/Quick-Evict/resources/assets/js/home.js */"./resources/assets/js/home.js");
+__webpack_require__(/*! /Users/andrewgaidis/projects/Quick-Evict/resources/assets/js/newFile.js */"./resources/assets/js/newFile.js");
 __webpack_require__(/*! /Users/andrewgaidis/projects/Quick-Evict/resources/assets/js/stripe.js */"./resources/assets/js/stripe.js");
 module.exports = __webpack_require__(/*! /Users/andrewgaidis/projects/Quick-Evict/resources/assets/sass/app.scss */"./resources/assets/sass/app.scss");
 

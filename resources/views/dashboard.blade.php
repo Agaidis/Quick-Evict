@@ -3,58 +3,14 @@
     <meta name="csrf-token" id="token" content="{{ csrf_token() }}">
     <div class="container-fluid">
         <div class="row">
-            <div id="new_filing_container" class="col-md-4">
-                <div class="card">
-                    <div class="card-body body_container">
-                        <h2 class="titles" style="text-align:center;">Start a New Filing</h2>
-                        <div class="button_panel">
-                            <a href="{{ url('new-ltc') }}"><button type="button" class="btn home_btns" id="ltc_btn">Landlord-Tenant Complaint</button></a><br>
-                            <a href="{{ url('new-oop') }}"><button type="button" class="btn home_btns" id="oop_btn">Order of Possession</button></a><br>
-                            <a href="{{ url('new-civil-complaint') }}"><button type="button" class="btn home_btns" id="civil_complaint_btn">Civil Complaint</button></a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div id="notification_container" class="col-md-8">
-                <div class="card">
-                    <div class="card-body body_container">
-                        <h2 class="titles" style="text-align:center;">Latest Notifications</h2>
-                        <table class="table table-hover table-responsive-md table-bordered eviction_table" id="notification_table">
-                            <thead>
-                            <tr>
-                                <th style="width: 1%" class="text-center">Id</th>
-                                <th style="width: 1%" class="text-center">Urgency</th>
-                                <th style="width: 9%" class="text-center">Property Address</th>
-                                <th style="width: 10%" class="text-center">Completion Date</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            <tr>
-                                <td class="text-center">1</td>
-                                <td class="text-center"><span class="urgency_dot" id="red_urgency"></span></td>
-                                <td class="text-center">1234 Main Street</td>
-                                <td class="text-center">6/25/19</td>
-                            </tr>
-                            <tr>
-                                <td class="text-center">1</td>
-                                <td class="text-center"><span class="urgency_dot" id="red_urgency"></span></td>
-                                <td class="text-center">5678 Bully Street</td>
-                                <td class="text-center">6/23/19</td>
-                            </tr>
-                            <tr>
-                                <td class="text-center">1</td>
-                                <td class="text-center"><span class="urgency_dot" id="yellow_urgency"></span></td>
-                                <td class="text-center">1112 Fulton Ave</td>
-                                <td class="text-center">6/26/19</td>
-                            </tr>
-                            </tbody>
-                        </table>
-                    </div>
+            <div id="new_filing_container" class="col-md-2">
+                <div class="button_panel">
+                    <a href="{{ url('new-file') }}"><button type="button" class="btn" id="new_file_btn">Start a new File</button></a><br>
                 </div>
             </div>
         </div>
         <div class="row justify-content-center">
-            <div class="col-md-12">
+            <div class="col-md-10">
                 <div class="card">
                     <div class="card-body body_container">
                         <h2 class="titles" style="text-align:center;">Current Filings</h2>
@@ -70,8 +26,6 @@
                                 <tr>
                                     <th style="width: 1%" class="text-center">Id</th>
                                     <th style="width: 14%" class="text-center">Property Address</th>
-                                    <th style="width: 9%" class="text-center">Owner</th>
-                                    <th style="width: 9%" class="text-center">Tenant</th>
                                     <th style="width: 15%" class="text-center">Status</th>
                                     <th style="width: 16%" class="text-center">Court Date</th>
                                     <th style="width: 8%" class="text-center">LTC<br> Total<br> Judgement</th>
@@ -103,8 +57,6 @@
                                     <tr>
                                         <td class="text-center">{{$eviction->id}}</td>
                                         <td class="text-center">{{$propertyAddressArray[0]}} <br> {{str_replace('United States', '', $propertyAddressArray[1])}}</td>
-                                        <td class="text-center">{{$eviction->owner_name}}</td>
-                                        <td class="text-center">{{$eviction->tenant_name}}</td>
                                         <td style="width:150px;">
                                             <select title="status" class="form-control status_select" id="status_{{$eviction->id}}">
                                             @foreach ($statusArray as $status)
