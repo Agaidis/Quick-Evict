@@ -3,7 +3,7 @@
     <meta name="csrf-token" id="token" content="{{ csrf_token() }}">
     <div class="container-fluid">
         <div class="row">
-            <div id="new_filing_container" class="col-md-2">
+            <div id="new_filing_container" class="col-md-3">
                 <div class="button_panel">
                     <a href="{{ url('new-file') }}"><button type="button" class="btn" id="new_file_btn">Start a new File</button></a><br>
                 </div>
