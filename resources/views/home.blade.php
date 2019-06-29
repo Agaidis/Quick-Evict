@@ -6,11 +6,8 @@
             <div id="new_filing_container" class="col-md-4">
                 <div class="card">
                     <div class="card-body body_container">
-                        <h2 class="titles" style="text-align:center;">Start a New Filing</h2>
                         <div class="button_panel">
-                            <a href="{{ url('new-ltc') }}"><button type="button" class="btn home_btns" id="ltc_btn">Landlord-Tenant Complaint</button></a><br>
-                            <a href="{{ url('new-oop') }}"><button type="button" class="btn home_btns" id="oop_btn">Order of Possession</button></a><br>
-                            <a href="{{ url('new-civil-complaint') }}"><button type="button" class="btn home_btns" id="civil_complaint_btn">Civil Complaint</button></a>
+                            <a href="{{ url('new-file') }}"><button type="button" class="btn btn-primary" id="new_file_btn">Start a new File</button></a><br>
                         </div>
                     </div>
                 </div>
