@@ -332,7 +332,7 @@
                                                                 <label for="additional_tenants">Additional Tenant $</label>
                                                                 <input placeholder="$" type="text" class="form-control" id="edit_additional_tenants" name="edit_additional_tenants" value="" />
                                                             </div>
-                                                            <div class="col-sm-12"><br><br>
+                                                            <div class="col-sm-12">
                                                                 <input type="checkbox" id="edit_is_digital_signature_allowed" name="edit_is_digital_signature_allowed" />
                                                                 <label for="edit_is_digital_signature_allowed">Is Digital Signature Allowed?</label>
                                                                 <input type="hidden" id="edit_digital_signature" name="edit_digital_signature" />
