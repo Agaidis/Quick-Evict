@@ -3,12 +3,12 @@
     <meta name="csrf-token" id="token" content="{{ csrf_token() }}">
     <div class="container-fluid">
         <div class="row">
-            <div id="new_filing_container" class="col-md-4">
+            <div id="new_filing_container" class="col-md-3">
                 <div class="button_panel">
                     <a href="{{ url('new-file') }}"><button type="button" class="btn btn-primary" id="new_file_btn">Start a new File</button></a><br>
                 </div>
             </div>
-            <div class="col-md-8">
+            <div class="col-md-11">
                 <div class="card">
                     <div class="card-body body_container">
                         <h2 class="titles">Welcome to Court<em>Zip</em>!</h2>
