@@ -179,6 +179,11 @@
                                                 <label for="is_digital_signature_allowed">Is Digital Signature Allowed?</label>
                                                 <input type="hidden" id="digital_signature" name="digital_signature" />
                                             </div>
+                                            <div class="col-sm-12"><br><br>
+                                                <input type="checkbox" checked id="is_online_submission_allowed" name="is_online_submission_allowed" />
+                                                <label for="is_online_submission_allowed">Is Online Submission Allowed?</label>
+                                                <input type="hidden" id="online_submission" name="online_submission" />
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -331,6 +336,11 @@
                                                                 <input type="checkbox" id="edit_is_digital_signature_allowed" name="edit_is_digital_signature_allowed" />
                                                                 <label for="edit_is_digital_signature_allowed">Is Digital Signature Allowed?</label>
                                                                 <input type="hidden" id="edit_digital_signature" name="edit_digital_signature" />
+                                                            </div>
+                                                            <div class="col-sm-12"><br><br>
+                                                                <input type="checkbox" id="edit_is_online_submission_allowed" name="edit_is_online_submission_allowed" />
+                                                                <label for="edit_is_online_submission_allowed">Is Digital Signature Allowed?</label>
+                                                                <input type="hidden" id="edit_online_submission" name="edit_online_submission" />
                                                             </div>
                                                         </div>
                                                     </div>
