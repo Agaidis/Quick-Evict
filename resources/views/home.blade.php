@@ -4,12 +4,8 @@
     <div class="container-fluid">
         <div class="row">
             <div id="new_filing_container" class="col-md-4">
-                <div class="card">
-                    <div class="card-body body_container">
-                        <div class="button_panel">
-                            <a href="{{ url('new-file') }}"><button type="button" class="btn btn-primary" id="new_file_btn">Start a new File</button></a><br>
-                        </div>
-                    </div>
+                <div class="button_panel">
+                    <a href="{{ url('new-file') }}"><button type="button" class="btn btn-primary" id="new_file_btn">Start a new File</button></a><br>
                 </div>
             </div>
             <div class="col-md-8">
