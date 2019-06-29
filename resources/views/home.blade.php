@@ -8,6 +8,8 @@
                     <a href="{{ url('new-file') }}"><button type="button" class="btn btn-primary" id="new_file_btn">Start a new File</button></a><br>
                 </div>
             </div>
+        </div>
+        <div class="row justify-content-center">
             <div class="col-md-11">
                 <div class="card">
                     <div class="card-body body_container">
