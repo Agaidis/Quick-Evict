@@ -5,7 +5,7 @@
         <div class="row">
             <div id="new_filing_container" class="col-md-3">
                 <div class="button_panel">
-                    <a href="{{ url('new-file') }}"><button type="button" class="btn btn-primary" id="new_file_btn">Start Filing Today</button></a><br>
+                    <a href="{{ url('new-file') }}"><button type="button" class="btn btn-primary" id="new_file_btn">Start a new File</button></a><br>
                 </div>
             </div>
         </div>
