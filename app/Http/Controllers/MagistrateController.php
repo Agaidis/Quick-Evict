@@ -156,7 +156,7 @@ class MagistrateController extends Controller
                 $courtDetails->three_defendant_out_of_pocket = $request->threeOOP;
                 $courtDetails->additional_tenant = $request->additionalTenant;
                 $courtDetails->digital_signature = $request->digitalSignature;
-                $courtDetails->online_submission = $request->online_submission;
+                $courtDetails->online_submission = $request->onlineSubmission;
                 $courtDetails->save();
 
 
