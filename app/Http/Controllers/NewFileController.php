@@ -39,7 +39,9 @@ class NewFileController extends Controller
 
                 foreach ($geoData as $geo) {
                     $township = CourtDetails::where('magistrate_id', $geo['magistrate_id'])->value('township');
+                    $isOnlineAccepted = CourtDetails::where('magistrate_id', $geo['magistrate_id'])->value('online_submission');
                     $geo['township'] = $township;
+                    $geo['isOnlineAccepted'] = $isOnlineAccepted;
                 }
 
                 JavaScript::put([

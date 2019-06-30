@@ -118,7 +118,7 @@ if (document.location.href.split('/')[3] === 'new-file') {
             magNamesArray.push(magId);
             objArray.push(obj);
             magArray.push(magId);
-            if (quickEvict.userId == 'Administrator') {
+            if (quickEvict.userId === 'Administrator') {
                 magArray[count] = new google.maps.Polygon({
                     path: obj,
                     geodesic: true,
@@ -144,7 +144,7 @@ if (document.location.href.split('/')[3] === 'new-file') {
             }
             magArray[count].setMap(map);
 
-            if (quickEvict.userId == 'Administrator') {
+            if (quickEvict.userId === 'Administrator') {
                 google.maps.event.addListener(magArray[count], 'mouseover', function (e) {
                     var magistrateId = $(this)[0].areaName.split('magistrate_');
                     injectTooltip(e, magistrateId[1] + '<br>' + $(this)[0].county + '<br>' + $(this)[0].township);
@@ -181,7 +181,7 @@ if (document.location.href.split('/')[3] === 'new-file') {
             county = place.address_components[3].long_name;
             state = place.address_components[4].short_name;
 
-            if (place.address_components[6].short_name == 'US') {
+            if (place.address_components[6].short_name === 'US') {
                 zipcode = place.address_components[7].long_name;
             } else {
                 zipcode = place.address_components[6].long_name;
@@ -206,7 +206,7 @@ if (document.location.href.split('/')[3] === 'new-file') {
                     isFound = true;
                 }
             }
-            if (isFound == false) {
+            if (isFound === false) {
                 alert('Location outside all Zones');
                 $('.zipcode_div').css('display', 'none');
                 $('.unit_number_div').css('display', 'none');
@@ -231,8 +231,12 @@ if (document.location.href.split('/')[3] === 'new-file') {
                      },
                      success : function(data) {
                          console.log(data);
-                        if (data[0].digital_signature == 0) {
+                        if (data[0].digital_signature === 0) {
                             $('#finalize_document').css('display', 'none');
+                        }
+                        if (data[0].online_submission === 0) {
+                            alert('Sorry, but this magistrate is currently not accepting online submissions');
+                            window.location.replace("http://courtzip.com/dashboard");
                         }
                      },
                      error : function(data)
