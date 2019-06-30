@@ -37,29 +37,29 @@
                                                     </div>
                                                 </div>
                                                 <div class="row">
-                                                    <div class="col-sm-6">
+                                                    <div class="col-sm-3">
                                                         <label class="labels" for="zipcode">Verify Zipcode: </label>
-                                                        <input type="text" class="form-control eviction_fields" placeholder="07753" id="zipcode" name="zipcode"/>
+                                                        <input type="text" class="form-control eviction_fields" placeholder="07753" id="zipcode" name="zipcode" maxlength="11"/>
                                                     </div>
                                                 </div>
                                                 <div class="row">
-                                                    <div class="col-sm-6">
+                                                    <div class="col-sm-4">
                                                         <label class="labels" for="unit_number">Additional Address Detail</label>
-                                                        <input type="text" class="form-control eviction_fields" placeholder="Example: Unit 3" id="unit_number" name="unit_number"/>
+                                                        <input type="text" class="form-control eviction_fields" placeholder="Example: Unit 3" id="unit_number" name="unit_number" maxlength="10"/>
                                                     </div>
                                                 </div>
                                                 <div class="row">
                                                     <div class="col-sm-6">
                                                         <label class="labels" for="tenant_name">Defendant Name</label>
-                                                        <input type="text" class="form-control eviction_fields" placeholder="" id="tenant_name" name="tenant_name"/>
+                                                        <input type="text" class="form-control eviction_fields" placeholder="" id="tenant_name" name="tenant_name" maxlength="20"/>
                                                     </div>
                                                     <div class="col-sm-8">
                                                         <label class="labels">Defendant Street Mailing Address</label>
-                                                        <input class="form-control eviction_fields" placeholder="1234 Main Street" type="text" id="civil_defendant_address_1" name="civil_defendant_address_1"/>
+                                                        <input class="form-control eviction_fields" placeholder="1234 Main Street" type="text" id="civil_defendant_address_1" name="civil_defendant_address_1" maxlength="30"/>
                                                     </div>
                                                     <div class="col-sm-8">
                                                         <label class="labels">Defendant City, State, Zip Mailing Address </label>
-                                                        <input class="form-control eviction_fields" placeholder="Philadelphia, PA 17349" type="text" id="civil_defendant_address_2" name="civil_defendant_address_2"/>
+                                                        <input class="form-control eviction_fields" placeholder="Philadelphia, PA 17349" type="text" id="civil_defendant_address_2" name="civil_defendant_address_2" maxlength="30"/>
                                                     </div>
                                                 </div>
                                             </div>
@@ -72,19 +72,19 @@
                                                 <div class="row">
                                                     <div class="col-sm-6">
                                                         <label class="labels">Plaintiff Name</label>
-                                                        <input class="form-control eviction_fields" placeholder="Plaintiff Name" type="text" id="owner_name" name="owner_name"/>
+                                                        <input class="form-control eviction_fields" placeholder="Plaintiff Name" type="text" id="owner_name" name="owner_name" maxlength="30"/>
                                                     </div>
                                                     <div class="col-sm-6">
                                                         <label class="labels">Plaintiff Phone #</label>
-                                                        <input class="form-control eviction_fields" placeholder="(ext)-000-0000" type="text" id="owner_number" name="owner_phone"/>
+                                                        <input class="form-control eviction_fields" placeholder="(ext)-000-0000" type="text" id="owner_number" name="owner_phone" maxlength="15"/>
                                                     </div>
                                                     <div class="col-sm-8">
                                                         <label class="labels">Plaintiff Address Line 1</label>
-                                                        <input class="form-control eviction_fields" placeholder="1234 Main Street" type="text" id="owner_address_1" name="owner_address_1"/>
+                                                        <input class="form-control eviction_fields" placeholder="1234 Main Street" type="text" id="owner_address_1" name="owner_address_1" maxlength="30"/>
                                                     </div>
                                                     <div class="col-sm-8">
                                                         <label class="labels">Plaintiff Address Line 2 </label>
-                                                        <input class="form-control eviction_fields" placeholder="Philadelphia, PA 17349" type="text" id="owner_address_2" name="owner_address_2"/>
+                                                        <input class="form-control eviction_fields" placeholder="Philadelphia, PA 17349" type="text" id="owner_address_2" name="owner_address_2" maxlength="30"/>
                                                     </div>
                                                 </div>
                                             </div>
@@ -98,7 +98,7 @@
                                                 <div class="row">
                                                     <div class="col-sm-6">
                                                         <label class="labels" for="total_judgment">Total Judgment</label>
-                                                        <input type="text" class="form-control eviction_fields" id="total_judgment" name="total_judgment" placeholder="$" value="" />
+                                                        <input type="text" class="form-control eviction_fields" id="total_judgment" name="total_judgment" placeholder="$" value=""  maxlength="9"/>
                                                     </div>
                                                     <div class="col-sm-10">
                                                         <label class="labels" for="total_judgment">Claim Description</label><div id ="textarea_feedback"></div>

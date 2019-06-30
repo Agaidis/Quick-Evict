@@ -36,15 +36,15 @@
                                                     </div>
                                                 </div>
                                                 <div class="row">
-                                                    <div class="col-sm-6">
+                                                    <div class="col-sm-3">
                                                         <label class="labels" for="zipcode">Verify Zipcode: </label>
-                                                        <input type="text" class="form-control eviction_fields" placeholder="07753" id="zipcode" name="zipcode"/>
+                                                        <input type="text" class="form-control eviction_fields" placeholder="07753" id="zipcode" name="zipcode" maxlength="11"/>
                                                     </div>
                                                 </div>
                                                 <div class="row">
-                                                    <div class="col-sm-6">
+                                                    <div class="col-sm-4">
                                                         <label class="labels" for="unit_number">Additional Address Detail</label>
-                                                        <input type="text" class="form-control eviction_fields" placeholder="Example: Unit 3" id="unit_number" name="unit_number"/>
+                                                        <input type="text" class="form-control eviction_fields" placeholder="Example: Unit 3" id="unit_number" name="unit_number" maxlength="10"/>
                                                     </div>
                                                 </div>
                                                 <!-- Tenant Number Container -->
@@ -74,7 +74,7 @@
                                                 <div class="row">
                                                     <div class="col-sm-4">
                                                         <label class="labels" for="docket_number">Docket Number</label>
-                                                        <input type="text" class="form-control eviction_fields" placeholder="" id="docket_number" name="docket_number"/>
+                                                        <input type="text" class="form-control eviction_fields" placeholder="" id="docket_number" name="docket_number" maxlength="5"/>
                                                     </div>
                                                 </div>
                                             </div>
@@ -87,11 +87,11 @@
                                                 <div class="row">
                                                     <div class="col-sm-6">
                                                         <label class="labels">Owner Name</label>
-                                                        <input class="form-control eviction_fields" placeholder="Owner Name" type="text" id="owner_name" name="owner_name"/>
+                                                        <input class="form-control eviction_fields" placeholder="Owner Name" type="text" id="owner_name" name="owner_name" maxlength="30"/>
                                                     </div>
                                                     <div class="col-sm-6">
                                                         <label class="labels">Owner Phone #</label>
-                                                        <input class="form-control eviction_fields" placeholder="(ext)-000-0000" type="text" id="owner_number" name="owner_phone"/>
+                                                        <input class="form-control eviction_fields" placeholder="(ext)-000-0000" type="text" id="owner_number" name="owner_phone" maxlength="15"/>
                                                     </div>
                                                     <div class="col-sm-6">
                                                         <div class="labels">Property Owner</div>
@@ -100,11 +100,11 @@
                                                         <div id="rented_by_owner_div">
                                                             <div class="col-sm-8">
                                                                 <label class="labels">Owner Address Line 1</label>
-                                                                <input class="form-control eviction_fields" placeholder="1234 Main Street" type="text" id="owner_address_1" name="owner_address_1"/>
+                                                                <input class="form-control eviction_fields" placeholder="1234 Main Street" type="text" id="owner_address_1" name="owner_address_1" maxlength="30"/>
                                                             </div>
                                                             <div class="col-sm-8">
                                                                 <label class="labels">Owner Address Line 2 </label>
-                                                                <input class="form-control eviction_fields" placeholder="Philadelphia, PA 17349" type="text" id="owner_address_2" name="owner_address_2"/>
+                                                                <input class="form-control eviction_fields" placeholder="Philadelphia, PA 17349" type="text" id="owner_address_2" name="owner_address_2" maxlength="30"/>
                                                             </div>
                                                         </div>
                                                         <input type="radio" id="rented_by_other" value="rentedByOther" name="rented_by">
@@ -112,23 +112,23 @@
                                                         <div id="rented_by_other_div">
                                                             <div class="col-sm-12">
                                                                 <label class="labels" for="other_name">Property Management Company Name</label>
-                                                                <input class="form-control eviction_fields" placeholder="PM Company Name" type="text" id="other_name" name="other_name" value="">
+                                                                <input class="form-control eviction_fields" placeholder="PM Company Name" type="text" id="other_name" name="other_name" value="" maxlength="30">
                                                             </div>
                                                             <div class="col-sm-12">
                                                                 <label class="labels" for="pm_name">Property Manager Name</label>
-                                                                <input class="form-control eviction_fields" placeholder="Property Manager Name" type="text" id="pm_name" name="pm_name" value="">
+                                                                <input class="form-control eviction_fields" placeholder="Property Manager Name" type="text" id="pm_name" name="pm_name" value="" maxlength="30">
                                                             </div>
                                                             <div class="col-sm-8">
                                                                 <label class="labels" for="pm_phone">Property Manager Phone #</label>
-                                                                <input class="form-control eviction_fields" placeholder="(ext)-000-0000" type="text" id="pm_phone" name="pm_phone" value="">
+                                                                <input class="form-control eviction_fields" placeholder="(ext)-000-0000" type="text" id="pm_phone" name="pm_phone" value="" maxlength="15">
                                                             </div>
                                                             <div class="col-sm-8">
                                                                 <label class="labels">Property Manager Address Line 1</label>
-                                                                <input class="form-control eviction_fields" placeholder="1234 Main Street" type="text" id="pm_address_1" name="pm_address_1"/>
+                                                                <input class="form-control eviction_fields" placeholder="1234 Main Street" type="text" id="pm_address_1" name="pm_address_1" maxlength="30"/>
                                                             </div>
                                                             <div class="col-sm-8">
                                                                 <label class="labels">Property Manager Address Line 2 </label>
-                                                                <input class="form-control eviction_fields" placeholder="Philadelphia, PA 17349" type="text" id="pm_address_2" name="pm_address_2"/>
+                                                                <input class="form-control eviction_fields" placeholder="Philadelphia, PA 17349" type="text" id="pm_address_2" name="pm_address_2" maxlength="30"/>
                                                             </div>
                                                             <input type="hidden" id="rented_by_val" name="rented_by_val"/>
                                                         </div>
@@ -145,19 +145,19 @@
                                                         <div class="col-sm-6">
                                                             <div class="col-sm-10">
                                                                 <label for="unjust_damages">Judgment Amount</label>
-                                                                <input type="text" class="form-control eviction_fields" id="judgment_amount" name="judgment_amount" placeholder="$" value="" />
+                                                                <input type="text" class="form-control eviction_fields" id="judgment_amount" name="judgment_amount" placeholder="$" value="" maxlength="9" />
                                                             </div>
                                                             <div class="col-sm-10">
                                                                 <label for="attorney_fees">Costs in Original LT Proceeding</label>
-                                                                <input type="text" class="form-control eviction_fields" id="costs_original_lt_proceeding" name="costs_original_lt_proceeding" placeholder="$" value="" />
+                                                                <input type="text" class="form-control eviction_fields" id="costs_original_lt_proceeding" name="costs_original_lt_proceeding" placeholder="$" value="" maxlength="9"/>
                                                             </div>
                                                             <div class="col-sm-10">
                                                                 <label for="unjust_damages">Costs in this Proceeding</label>
-                                                                <input type="text" class="form-control eviction_fields" id="costs_this_proceeding" name="costs_this_proceeding" placeholder="$" value="" />
+                                                                <input type="text" class="form-control eviction_fields" id="costs_this_proceeding" name="costs_this_proceeding" placeholder="$" value="" maxlength="9" />
                                                             </div>
                                                             <div class="col-sm-10">
                                                                 <label for="attorney_fees">Attorney Fees</label>
-                                                                <input type="text" class="form-control eviction_fields" id="attorney_fees" name="attorney_fees" placeholder="$" value="" />
+                                                                <input type="text" class="form-control eviction_fields" id="attorney_fees" name="attorney_fees" placeholder="$" value="" maxlength="9" />
                                                             </div>
                                                         </div>
                                                     </div>
