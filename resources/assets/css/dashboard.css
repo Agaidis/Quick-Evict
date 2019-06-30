@@ -86,10 +86,20 @@
     box-shadow: 5px 10px #888888;
 
 }
+#new_file_btn:hover {
+    background-color: #318782;
+}
 
+#new_file_btn:active {
+    background-color: #0f6674;
+}
 #new_filing_container {
     text-align:center;
     margin-bottom:2%;
+}
+
+#back_to_step_1_btn {
+    border-radius: 10em 0 0 10em;
 }
 .eviction_table {
     background-color:white;
