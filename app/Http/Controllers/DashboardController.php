@@ -106,7 +106,14 @@ class DashboardController extends Controller
             $evictionData = Evictions::where('id', $request->id)->first();
             mail('andrew.gaidis@gmail.com', 'evictionId', 'this is the magistrate id: ' . $evictionData->magistrate_id);
 
+
             $courtDetails = CourtDetails::where('magistrate_id', $evictionData->magistrate_id)->first();
+
+            if (Auth::user()->court_id == $evictionData->court_number) {
+                $evictionData->is_downloaded = 1;
+                $evictionData->save();
+            }
+
             $signature = Signature::where('eviction_id', $evictionData->id)->value('signature');
 
 

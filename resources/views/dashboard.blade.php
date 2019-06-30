@@ -25,6 +25,7 @@
                                 <thead>
                                 <tr>
                                     <th style="width: 1%" class="text-center">Id</th>
+                                    <th>Download Status</th>
                                     <th style="width: 14%" class="text-center">Property Address</th>
                                     <th style="width: 15%" class="text-center">Status</th>
                                     <th style="width: 16%" class="text-center">Court Date</th>
@@ -56,6 +57,13 @@
                                             'Locked Out Tenant');?>
                                     <tr>
                                         <td class="text-center">{{$eviction->id}}</td>
+                                        <td class="text-center">
+                                            @if ($eviction->is_downloaded == 0)
+                                                Not Downloaded
+                                            @else
+                                                Downloaded
+                                            @endif
+                                        </td>
                                         <td class="text-center">{{$propertyAddressArray[0]}} <br> {{str_replace('United States', '', $propertyAddressArray[1])}}</td>
                                         <td style="width:150px;">
                                             <select title="status" class="form-control status_select" id="status_{{$eviction->id}}">
