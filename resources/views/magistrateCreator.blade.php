@@ -339,7 +339,7 @@
                                                             </div>
                                                             <div class="col-sm-12">
                                                                 <input type="checkbox" id="edit_is_online_submission_allowed" name="edit_is_online_submission_allowed" />
-                                                                <label for="edit_is_online_submission_allowed">Is Digital Signature Allowed?</label>
+                                                                <label for="edit_is_online_submission_allowed">Is Online Submission Allowed?</label>
                                                                 <input type="hidden" id="edit_online_submission" name="edit_online_submission" />
                                                             </div>
                                                         </div>
