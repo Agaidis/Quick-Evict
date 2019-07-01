@@ -61,9 +61,9 @@
                                         <td class="text-center">{{$eviction->id}}</td>
                                         <td class="text-center">
                                             @if ($eviction->is_downloaded == 0)
-                                                Not Downloaded
+                                                No
                                             @else
-                                                Downloaded
+                                                Yes
                                             @endif
                                         </td>
                                         <td class="text-center">{{$propertyAddressArray[0]}} <br> {{str_replace('United States', '', $propertyAddressArray[1])}}</td>
