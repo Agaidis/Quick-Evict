@@ -27,6 +27,8 @@
                                     <th style="width: 1%" class="text-center">Id</th>
                                     <th>Download Status</th>
                                     <th style="width: 14%" class="text-center">Property Address</th>
+                                    <th style="width: 9%" class="text-center">Owner</th>
+                                    <th style="width: 9%" class="text-center">Tenant</th>
                                     <th style="width: 15%" class="text-center">Status</th>
                                     <th style="width: 16%" class="text-center">Court Date</th>
                                     <th style="width: 8%" class="text-center">LTC<br> Total<br> Judgement</th>
@@ -65,6 +67,8 @@
                                             @endif
                                         </td>
                                         <td class="text-center">{{$propertyAddressArray[0]}} <br> {{str_replace('United States', '', $propertyAddressArray[1])}}</td>
+                                        <td class="text-center">{{$eviction->owner_name}}</td>
+                                        <td class="text-center">{{$eviction->tenant_name}}</td>
                                         <td style="width:150px;">
                                             <select title="status" class="form-control status_select" id="status_{{$eviction->id}}">
                                             @foreach ($statusArray as $status)
