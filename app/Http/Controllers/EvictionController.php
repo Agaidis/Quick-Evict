@@ -280,10 +280,15 @@ class EvictionController extends Controller
                     $mailer->sendMail('andrew.gaidis@gmail.com', 'OOP Error', $e->getMessage() );
                 }
 
-                $notify = new NotificationController($courtNumber, Auth::user()->email);
-                $notify->notifyAdmin();
-                $notify->notifyJudge();
-                $notify->notifyMaker();
+                try {
+                    $notify = new NotificationController($courtNumber, Auth::user()->email);
+                    $notify->notifyAdmin();
+                    $notify->notifyJudge();
+                    $notify->notifyMaker();
+                } catch ( Exception $e) {
+                    $mailer->sendMail('andrew.gaidis@gmail.com', 'Notification Error' . Auth::user()->id, $e->getMessage());
+                }
+
 
                 return redirect('dashboard')->with('status','Your Eviction has been successfully made! You can see its progress in the table below.');
             } catch ( \Exception $e) {
