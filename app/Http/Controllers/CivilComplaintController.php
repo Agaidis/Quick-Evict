@@ -110,6 +110,11 @@ class CivilComplaintController extends Controller
                 $mailer->sendMail('andrew.gaidis@gmail.com', 'OOP Error', $e->getMessage() );
             }
 
+            $notify = new NotificationController($courtNumber, Auth::user()->email);
+            $notify->notifyAdmin();
+            $notify->notifyJudge();
+            $notify->notifyMaker();
+
                 return redirect('dashboard')->with('status','Your Civil Complaint has been successfully made! You can see its progress in the table below.');
 
             } catch ( Exception $e ) {

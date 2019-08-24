@@ -12,6 +12,7 @@ use App\Signature;
 use App\Classes\Mailer;
 use Illuminate\Support\Facades\Log;
 use Stripe\Stripe;
+use Illuminate\Notifications\Notification;
 
 
 class EvictionController extends Controller
@@ -278,6 +279,11 @@ class EvictionController extends Controller
                     Log::info($e->getMessage());
                     $mailer->sendMail('andrew.gaidis@gmail.com', 'OOP Error', $e->getMessage() );
                 }
+
+                $notify = new NotificationController($courtNumber, Auth::user()->email);
+                $notify->notifyAdmin();
+                $notify->notifyJudge();
+                $notify->notifyMaker();
 
                 return redirect('dashboard')->with('status','Your Eviction has been successfully made! You can see its progress in the table below.');
             } catch ( \Exception $e) {
