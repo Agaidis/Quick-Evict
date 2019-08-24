@@ -43,6 +43,7 @@ class NotificationController extends Controller
             $message = 'Your File has successfully been submitted. You can view this at the dashboard.';
 
             $this->mailer->sendMail($this->userEmail,  $subject, $message);
+
         } catch ( Exception $e) {
             $this->mailer->sendMail('andrew.gaidis@gmail.com', 'Notification Error' . Auth::user()->id, $e->getMessage() );
         }
