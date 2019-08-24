@@ -207,7 +207,7 @@
                                                             </div>
                                                             <div class="col-sm-12">
                                                                 <b>Property Damages Details:</b>
-                                                                <input class="form-control eviction_fields" type="text" id="damages_details" name="damages_details"  maxlength="9"/><br>
+                                                                <input class="form-control eviction_fields" type="text" id="damages_details" name="damages_details" maxlength="95"/><br>
                                                             </div>
                                                         </div>
                                                     </div>
