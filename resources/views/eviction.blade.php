@@ -181,7 +181,7 @@
                                                                 <input type="checkbox" id="breached_conditions_lease" name="breached_conditions_lease">
                                                                 <label for="breached_conditions_lease">Tenant Breached Conditions of Lease</label><br>
                                                                 <b>Tenant Breached Details:</b>
-                                                                <input class="form-control" placeholder="Breached Details" type="text" id="breached_details" name="breached_details" disabled  maxlength="80"/>
+                                                                <input class="form-control" placeholder="Breached Details" type="text" id="breached_details" name="breached_details" disabled  maxlength="95"/>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -207,7 +207,7 @@
                                                             </div>
                                                             <div class="col-sm-12">
                                                                 <b>Property Damages Details:</b>
-                                                                <input class="form-control eviction_fields" type="text" id="damages_details" name="damages_details" maxlength="95"/><br>
+                                                                <input class="form-control eviction_fields" type="text" id="damages_details" name="damages_details" maxlength="75"/><br>
                                                             </div>
                                                         </div>
                                                     </div>
