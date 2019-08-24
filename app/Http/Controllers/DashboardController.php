@@ -338,7 +338,7 @@ span.cls_008{font-family:Arial,serif;font-size:10.77px;color:rgb(0,0,0);font-wei
 <span style="position:absolute;left:77.30px;top:685.45px" class="cls_004"><span class="cls_004">' . $leaseEnded . 'The term for which the property was leased or rented is fully ended, or</span></span><br>
 <span style="position:absolute;left:77.30px;top:700.35px" class="cls_004"><span class="cls_004">' . $breachedConditionsLease . 'A forfeiture has resulted by reason of a breach of the conditions of the lease, to wit:</span></span><br>
 <span style="position:absolute;left:504.74px;top:700.35px" class="cls_004"></span>
-<span style="position:absolute;left:77.30px;top:710.35px" class="cls_004"><span class="cls_004"><span style="text-decoration: underline;" class="cls_004">' . $breachedDetails . '</span>________________________________________________________________________________________________or,</span></span><br>
+<span style="position:absolute;left:77.30px;top:712.35px" class="cls_004"><span class="cls_004"><span style="text-decoration: underline;" class="cls_004">' . $breachedDetails . '</span> or,</span><br>
 <span style="position:absolute;left:77.30px;top:725.15px" class="cls_004"><span class="cls_004">___________________________________________________________________________________________________</span></span><br>
 <span style="position:absolute;left:77.30px;top:740.55px" class="cls_004"><span class="cls_004">' . $unsatisfiedLease . 'Rent reserved and due has, upon demand, remained unsatisfied.</span></span><br>
 <span style="position:absolute;left:55.40px;top:760.15px" class="cls_004"><span class="cls_004">6.</span></span><br>

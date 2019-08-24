@@ -191,7 +191,7 @@
                                         <div id="amount_due_container" class="major_labels">
                                             <div class="form-group">
                                                 <div class="row">
-                                                    <div class="col-sm-10">
+                                                    <div class="col-sm-6">
                                                         <label for="due_rent">Rent that is Due at Filing Date</label>
                                                         <input type="text" class="form-control eviction_fields" id="due_rent" name="due_rent" placeholder="$" value=""  maxlength="9"/>
                                                     </div>
