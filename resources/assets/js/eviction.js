@@ -207,7 +207,7 @@ if (document.location.href.split('/')[3] === 'new-file') {
                 }
             }
             if (isFound === false) {
-                alert('Location outside all Zones');
+                alert('Address is either in a different county or outside all zones. Please go back to step 1 and verify you selected the right county.');
                 $('.zipcode_div').css('display', 'none');
                 $('.unit_number_div').css('display', 'none');
                 $('.filing_form_div').css('display', 'none');
