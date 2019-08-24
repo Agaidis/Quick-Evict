@@ -14,8 +14,22 @@
 
         });
 
+        $('#online_submission').val(1);
+        $('#is_online_submission_allowed').on('change', function () {
+            if (document.getElementById("is_online_submission_allowed").checked == true) {
+                $('#online_submission').val(1);
+            } else {
+                $('#online_submission').val(0);
+            }
+
+        });
+
         $('#edit_is_digital_signature_allowed').on('change', function () {
             $('#edit_digital_signature').val(document.getElementById("edit_is_digital_signature_allowed").checked);
+        });
+
+        $('#edit_is_online_submission_allowed').on('change', function () {
+            $('#edit_online_submission').val(document.getElementById("edit_is_online_submission_allowed").checked);
         });
 
         $('#magistrate_table').DataTable( {
@@ -94,10 +108,12 @@
                     $('#edit_additional_tenants').val(data[1][0].additional_tenant);
                     $('#edit_geo_locations').val(data[0][0].geo_locations);
 
-                    console.log(data[1][0].digital_signature);
-
                     if (data[1][0].digital_signature == 1) {
                         $('#edit_is_digital_signature_allowed').prop('checked', true);
+                    }
+
+                    if (data[1][0].online_submission == 1) {
+                        $('#edit_is_online_submission_allowed').prop('checked', true);
                     }
                 },
                 error: function (data) {
@@ -153,6 +169,12 @@
                 $('#edit_digital_signature').val(0);
             }
 
+            if (document.getElementById("edit_is_online_submission_allowed").checked == true) {
+                $('#edit_online_submission').val(1);
+            } else {
+                $('#edit_online_submission').val(0);
+            }
+
 
             $.ajax({
                 beforeSend: function (xhr) {
@@ -186,7 +208,8 @@
                     threeOOP: $('#edit_three_oop').val(),
                     additionalTenant: $('#edit_additional_tenants').val(),
                     geoLocations: $('#edit_geo_locations').val(),
-                    digitalSignature: $('#edit_digital_signature').val()
+                    digitalSignature: $('#edit_digital_signature').val(),
+                    onlineSubmission: $('#edit_online_submission').val()
                 },
                 success: function (data) {
 

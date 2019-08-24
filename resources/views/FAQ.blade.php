@@ -6,8 +6,8 @@
     <div class="row justify-content-center">
         <div class="col-md-10">
            <div class="card">
-                <div class="card-header"><h2>FAQ</h2></div>
-                <div class="card-body">
+                <div class="card-body body_container">
+                    <h2 class="titles" style="text-align:center;">FAQ</h2>
                     <div class="row" style="margin-left: 6%; margin-right: 6%;">
                         <h4>Frequently Asked Questions about CourtZip</h4>:<br><br>
                         <div>

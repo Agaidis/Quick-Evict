@@ -12,8 +12,8 @@
                         <div class="col-md-12">
                             <form method="post" action="{{ action('EvictionController@formulatePDF') }}" enctype="multipart/form-data" id="eviction_form">
                                 <input type="hidden" name="_token" value="{{ Session::token() }}">
-                                <h2 style="text-align:center;" class="title">Defendant Location</h2>
-                                <h3 style="text-align:center;" class="fs-subtitle">Enter the address of your tenant.</h3>
+                                <a href="{{'new-file'}}"><button type="button" id="back_to_step_1_btn" class="btn btn-primary">Back to Step 1</button></a>
+                                <h2 style="text-align:center;" class="titles fs-subtitle">Step 2:<br> Enter the address of your tenant.</h2>
                                 <div class="form-group">
                                     <div class="row">
                                         <div class="col-sm-6 col-md-8 col-lg-8 col-xl-8">
@@ -28,7 +28,7 @@
                                 <div class="col-md-12 offset-1 filing_form_div">
 
                                     <!-- ADDITIONAL INFORMATION ON PROPERTY -->
-                                    <h4 class="major_labels">Additional Info on Property.</h4>
+                                    <h2 class="titles major_labels step_3_title">Step 3:<br> Fill out information on the Incident</h2>
                                     <div id="additional_info_container">
                                         <div class="form-group">
                                             <div class="row">
@@ -37,15 +37,15 @@
                                                 </div>
                                             </div>
                                             <div class="row">
-                                                <div class="col-sm-6">
+                                                <div class="col-sm-3">
                                                     <label class="labels" for="zipcode">Verify Zipcode: </label>
-                                                    <input type="text" class="form-control eviction_fields" placeholder="07753" id="zipcode" name="zipcode"/>
+                                                    <input type="text" class="form-control eviction_fields" placeholder="07753" id="zipcode" name="zipcode" maxlength="12"/>
                                                 </div>
                                             </div>
                                             <div class="row">
-                                                <div class="col-sm-6">
+                                                <div class="col-sm-4">
                                                     <label class="labels" for="unit_number">Additional Address Detail</label>
-                                                    <input type="text" class="form-control eviction_fields" placeholder="Example: Unit 3" id="unit_number" name="unit_number"/>
+                                                    <input type="text" class="form-control eviction_fields" placeholder="Example: Unit 3" id="unit_number" name="unit_number" maxlength="10"/>
                                                 </div>
                                             </div>
                                         </div>
@@ -58,11 +58,11 @@
                                             <div class="row">
                                                 <div class="col-sm-6">
                                                     <label class="labels">Owner Name</label>
-                                                    <input class="form-control eviction_fields" placeholder="Owner Name" type="text" id="owner_name" name="owner_name"/>
+                                                    <input class="form-control eviction_fields" placeholder="Owner Name" type="text" id="owner_name" name="owner_name" maxlength="30"/>
                                                 </div>
                                                 <div class="col-sm-6">
                                                     <label class="labels">Owner Phone #</label>
-                                                    <input class="form-control eviction_fields" placeholder="(ext)-000-0000" type="text" id="owner_number" name="owner_phone"/>
+                                                    <input class="form-control eviction_fields" placeholder="(ext)-000-0000" type="text" id="owner_number" name="owner_phone" maxlength="15"/>
                                                 </div>
                                                 <div class="col-sm-6">
                                                     <div class="labels">Property Owner</div>
@@ -71,11 +71,11 @@
                                                     <div id="rented_by_owner_div">
                                                         <div class="col-sm-8">
                                                             <label class="labels">Owner Address Line 1</label>
-                                                            <input class="form-control eviction_fields" placeholder="1234 Main Street" type="text" id="owner_address_1" name="owner_address_1"/>
+                                                            <input class="form-control eviction_fields" placeholder="1234 Main Street" type="text" id="owner_address_1" name="owner_address_1" maxlength="30"/>
                                                         </div>
                                                         <div class="col-sm-8">
                                                             <label class="labels">Owner Address Line 2 </label>
-                                                            <input class="form-control eviction_fields" placeholder="Philadelphia, PA 17349" type="text" id="owner_address_2" name="owner_address_2"/>
+                                                            <input class="form-control eviction_fields" placeholder="Philadelphia, PA 17349" type="text" id="owner_address_2" name="owner_address_2" maxlength="30"/>
                                                         </div>
                                                     </div>
                                                     <input type="radio" id="rented_by_other" value="rentedByOther" name="rented_by">
@@ -83,23 +83,23 @@
                                                     <div id="rented_by_other_div">
                                                         <div class="col-sm-12">
                                                             <label class="labels" for="other_name">Property Management Company Name</label>
-                                                            <input class="form-control eviction_fields" placeholder="PM Company Name" type="text" id="other_name" name="other_name" value="">
+                                                            <input class="form-control eviction_fields" placeholder="PM Company Name" type="text" id="other_name" name="other_name" value="" maxlength="30">
                                                         </div>
                                                         <div class="col-sm-12">
                                                             <label class="labels" for="pm_name">Property Manager Name</label>
-                                                            <input class="form-control eviction_fields" placeholder="Property Manager Name" type="text" id="pm_name" name="pm_name" value="">
+                                                            <input class="form-control eviction_fields" placeholder="Property Manager Name" type="text" id="pm_name" name="pm_name" value="" maxlength="30">
                                                         </div>
                                                         <div class="col-sm-8">
                                                             <label class="labels" for="pm_phone">Property Manager Phone #</label>
-                                                            <input class="form-control eviction_fields" placeholder="(ext)-000-0000" type="text" id="pm_phone" name="pm_phone" value="">
+                                                            <input class="form-control eviction_fields" placeholder="(ext)-000-0000" type="text" id="pm_phone" name="pm_phone" value="" maxlength="15">
                                                         </div>
                                                         <div class="col-sm-8">
                                                             <label class="labels">Property Manager Address Line 1</label>
-                                                            <input class="form-control eviction_fields" placeholder="1234 Main Street" type="text" id="pm_address_1" name="pm_address_1"/>
+                                                            <input class="form-control eviction_fields" placeholder="1234 Main Street" type="text" id="pm_address_1" name="pm_address_1" maxlength="30"/>
                                                         </div>
                                                         <div class="col-sm-8">
                                                             <label class="labels">Property Manager Address Line 2 </label>
-                                                            <input class="form-control eviction_fields" placeholder="Philadelphia, PA 17349" type="text" id="pm_address_2" name="pm_address_2"/>
+                                                            <input class="form-control eviction_fields" placeholder="Philadelphia, PA 17349" type="text" id="pm_address_2" name="pm_address_2" maxlength="30"/>
                                                         </div>
                                                         <input type="hidden" id="rented_by_val" name="rented_by_val"/>
                                                     </div>
@@ -113,11 +113,11 @@
                                                     <div class="row">
                                                         <div class="col-sm-4">
                                                             <label class="labels" for="monthly_rent">Security Deposit</label>
-                                                            <input type="text" class="form-control eviction_fields" id="security_deposit" name="security_deposit" placeholder="$" value="" />
+                                                            <input type="text" class="form-control eviction_fields" id="security_deposit" name="security_deposit" placeholder="$" value=""  maxlength="9"/>
                                                         </div>
                                                         <div class="col-sm-4">
                                                             <label class="labels" for="monthly_rent">Monthly Rent</label>
-                                                            <input type="text" class="form-control eviction_fields" id="monthly_rent" name="monthly_rent" placeholder="$" value="" />
+                                                            <input type="text" class="form-control eviction_fields" id="monthly_rent" name="monthly_rent" placeholder="$" value=""  maxlength="9"/>
                                                         </div>
 
                                                     </div>
@@ -181,7 +181,7 @@
                                                                 <input type="checkbox" id="breached_conditions_lease" name="breached_conditions_lease">
                                                                 <label for="breached_conditions_lease">Tenant Breached Conditions of Lease</label><br>
                                                                 <b>Tenant Breached Details:</b>
-                                                                <input class="form-control" placeholder="Breached Details" type="text" id="breached_details" name="breached_details" disabled />
+                                                                <input class="form-control" placeholder="Breached Details" type="text" id="breached_details" name="breached_details" disabled  maxlength="80"/>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -193,7 +193,7 @@
                                                 <div class="row">
                                                     <div class="col-sm-10">
                                                         <label for="due_rent">Rent that is Due at Filing Date</label>
-                                                        <input type="text" class="form-control eviction_fields" id="due_rent" name="due_rent" placeholder="$" value="" />
+                                                        <input type="text" class="form-control eviction_fields" id="due_rent" name="due_rent" placeholder="$" value=""  maxlength="9"/>
                                                     </div>
 
 
@@ -203,11 +203,11 @@
                                                         <div class="property_damages_container">
                                                             <div class="col-sm-10">
                                                                 <label for="damage_amt">Damages for Injury to Property Amount $</label>
-                                                                <input type="text" class="form-control eviction_fields" id="damage_amt" name="damage_amt" placeholder="$" value="" />
+                                                                <input type="text" class="form-control eviction_fields" id="damage_amt" name="damage_amt" placeholder="$" value=""  maxlength="9"/>
                                                             </div>
                                                             <div class="col-sm-12">
                                                                 <b>Property Damages Details:</b>
-                                                                <input class="form-control eviction_fields" type="text" id="damages_details" name="damages_details" /><br>
+                                                                <input class="form-control eviction_fields" type="text" id="damages_details" name="damages_details"  maxlength="9"/><br>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -215,16 +215,16 @@
 
                                                     <div class="col-sm-10">
                                                         <label for="unjust_damages">Damages for Unjust Detention of Real Property</label>
-                                                        <input type="text" class="form-control eviction_fields" id="unjust_damages" name="unjust_damages" placeholder="$" value="" />
+                                                        <input type="text" class="form-control eviction_fields" id="unjust_damages" name="unjust_damages" placeholder="$" value=""  maxlength="9"/>
                                                     </div>
 
                                                     <div class="col-sm-10">
                                                         <label for="attorney_fees">Attorney Fees</label>
-                                                        <input type="text" class="form-control eviction_fields" id="attorney_fees" name="attorney_fees" placeholder="$" value="" />
+                                                        <input type="text" class="form-control eviction_fields" id="attorney_fees" name="attorney_fees" placeholder="$" value=""  maxlength="9"/>
                                                     </div>
 
                                                     <div class="col-sm-10">
-                                                        <div class="labels">Additional Rent? <span class="fa fa-question-circle" data-placement="right" data-toggle="tooltip" title="Was there additional read due at the hearing date? If so, change the radio button and fill in the additional rent amount field."></span></div>
+                                                        <div class="labels">Additional Rent? <span class="fa fa-question-circle" data-placement="right" data-toggle="tooltip" title="Was there additional rent due at the hearing date? If so, change the radio button and fill in the additional rent amount field."></span></div>
                                                         <div class="additional_rent_container">
                                                             <input type="radio" id="no_addit_rent" name="addit_rent" value="no" checked />
                                                             <label for="no_addit_rent">Do Not add additional rent due at hearing date</label><br>
@@ -235,13 +235,10 @@
                                                             <div class="additional_rent_amt_div">
                                                                 <div class="col-sm-10">
                                                                     <b>Amount of additional rent remaining due and unpaid on hearing date:</b>
-                                                                    <input class="form-control eviction_fields" type="text" id="additional_rent_amt" name="additional_rent_amt" /><br>
+                                                                    <input class="form-control eviction_fields" type="text" id="additional_rent_amt" name="additional_rent_amt" placeholder="$" maxlength="9"/><br>
                                                                 </div>
                                                             </div>
                                                         </div>
-
-
-
                                                     </div>
                                                 </div>
                                                 <input type="checkbox" id="is_abandoned" name="is_abandoned">
@@ -251,23 +248,16 @@
                                             </div>
                                         </div>
 
+
                                     <div class="form-group">
                                         <div class="row">
                                             <div class="offset-4 col-sm-10">
-                                                <button type="button" id="finalize_document" data-target="#modal_signature" data-toggle="modal" class="btn btn-primary">Finalize Document</button>
+                                                <button type="button" id="finalize_document" data-target="#modal_signature" data-toggle="modal" class="btn btn-primary">Sign and Payment</button>
                                             </div>
                                         </div>
                                     </div>
 
                                     <div id="status_msg"></div>
-
-                                    <div class="form-group">
-                                        <div class="row">
-                                            <div class="offset-4 col-sm-10">
-                                                <button type="submit" id="pdf_download_btn" disabled class="btn btn-primary">Submit</button>
-                                            </div>
-                                        </div>
-                                    </div>
 
                                     <input type="hidden" id="signature_source" name="signature_source"/>
                                     <input type="hidden" id="state" name="state"/>
@@ -277,37 +267,63 @@
                                     <input type="hidden" id="town" name="town"/>
                                     <input type="hidden" id="court_number" name="court_number"/>
                                 </div>
-                            </form>
-                            <div class="modal fade" id="modal_signature">
-                                <div class="modal-dialog" role="document">
-                                    <div class="modal_signature modal-content">
-                                        <div class="modal-header">
-                                            <h4 class="set_court_date_title">Signature: </h4>
-                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                <span aria-hidden="true">&times;</span>
-                                            </button>
-                                        </div>
-                                        <div class="modal-body">
-                                            <div class="row">
-                                                <div>
-                                                    <span id="legal_checkbox_container"><input type="checkbox" id="legal_checkbox"/><em><label for="legal_checkbox">By checking this box, I understand that my electronic signature constitutes a legal signature, <br>and that by entering my name above I acknowledge and warrant the accuracy of the information provided in this document.</label></em></span>
-                                                    <span style="font-size: 32px;">X</span> <canvas id="signature_pad" width="600" height="200" style="touch-action: none;"></canvas>
-                                                    <div class="signature_pad_footer">
+
+
+
+
+
+
+                                <!-- PAY AND SIGN MODAL-->
+                                <div class="modal fade" id="modal_signature">
+                                    <div class="modal-dialog" role="document">
+                                        <div class="modal_signature modal-content">
+                                            <div class="modal-header">
+                                                <h4 class="set_court_date_title">Sign Document and Payment Process </h4>
+                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                    <span aria-hidden="true">&times;</span>
+                                                </button>
+                                            </div>
+                                            <h3 class="titles signature_title">Step 4:<br> Signature</h3>
+                                            <div class="modal-body">
+                                                <div class="row">
+                                                    <div>
+                                                        <span style="font-size: 32px;">X</span> <canvas id="signature_pad" width="600" height="200" style="touch-action: none;"></canvas>
+                                                        <div class="signature_pad_footer">
+                                                        </div>
+                                                        <span id="legal_checkbox_container"><input type="checkbox" id="legal_checkbox"/><em><label style="text-align:center" for="legal_checkbox">By checking this box, I understand that my electronic signature constitutes a legal signature, <br>and that by entering my name above I acknowledge and warrant the accuracy of the information provided in this document.</label></em></span>
+                                                        <button type="button" class="btn btn-warning clear_signature" data-action="clear">Clear Signature</button>
+                                                        <button disabled type="button" class="btn btn-primary use_signature" data-action="clear">Use Signature</button>
                                                     </div>
+                                                </div><br><hr><br>
+                                                <div class="payment_section">
+                                                    <h3 class="titles payment_title">Step 5:<br> Payment Information</h3>
+                                                    <div class="form-row">
+                                                        <label for="card-element">
+                                                            <span class="credit_debit">Credit or debit card</span>
+                                                            <img style="margin-left:70px;" alt="Credit Card Logos" title="Credit Card Logos" src="http://www.credit-card-logos.com/images/multiple_credit-card-logos-1/credit_card_logos_10.gif" width="236" height="30" border="0" />
+                                                        </label>
+                                                        <div id="card-element">
+                                                            <!-- A Stripe Element will be inserted here. -->
+                                                        </div>
+
+                                                        <!-- Used to display form errors. -->
+                                                        <div id="card-errors" role="alert"></div>
+                                                    </div><br><br>
                                                 </div>
                                             </div>
-                                        </div>
-
-                                        <div class="modal-footer">
-                                            <div class="signature_pad_actions">
-                                                <button type="button" class="btn btn-warning clear_signature" data-action="clear">Clear</button>
-                                                <button type="button" class="btn btn-danger no_signature" data-dismiss="modal" data-action="save-png">No Signature Needed</button>
-                                                <button type="button" class="btn btn-success save_signature" data-dismiss="modal" data-action="save-png">Use Digital Signature</button>
+                                            <div class="pay_submit_section modal-footer">
+                                                <button disabled type="submit" class="btn btn-success pay_sign_submit" data-action="save-png">Pay and Submit Document</button>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
+
+
+
+
+
+
+                            </form>
                         </div>
                     </div>
                 </div>

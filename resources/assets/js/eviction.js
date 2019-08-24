@@ -1,28 +1,51 @@
-if (document.location.href.split('/')[3] == 'new-ltc' || document.location.href.split('/')[3] ==  'new-oop' || document.location.href.split('/')[3] ==  'new-civil-complaint') {
+if (document.location.href.split('/')[3] === 'new-file') {
     $(document).ready(function () {
+
+
+
+
+
 
         $('[data-toggle="tooltip"]').tooltip();
         var canvas = document.querySelector("canvas");
-        var signaturePad = new SignaturePad(canvas, {});
+        var signaturePad = new SignaturePad(canvas, {
+
+        });
 
         //Clear button to remove signature drawing
         $('.clear_signature').on('click', function() {
-            $('#pdf_download_btn').prop('disabled', true);
             // Clears the canvas
             signaturePad.clear();
         });
+        var text_max = 500;
+        $('#textarea_feedback').html(text_max + ' characters remaining');
 
-        $('.no_signature').on('click', function() {
+        $('#claim_description').on('keyup', function () {
+            var text_length = $('#claim_description').val().length;
+            var text_remaining = text_max - text_length;
+
+            $('#textarea_feedback').html(text_remaining + ' characters remaining');
+        });
+
+        $('.use_signature').on('click', function() {
+            $('.payment_section').css('display', 'initial');
+            $('.pay_submit_section').css('display', 'initial');
+        });
+
+        $('#legal_checkbox').on('change', function() {
             if ($('#legal_checkbox').is(':checked')) {
-                $('#pdf_download_btn').prop('disabled', false);
+                $('.use_signature').prop('disabled', false);
+                $('.pay_sign_submit').prop('disabled', false);
+            } else {
+                $('.use_signature').prop('disabled', true);
+                $('.pay_sign_submit').prop('disabled', true);
             }
         });
 
         //Save and use Signature
-        $('.save_signature').on('click', function(e) {
-            e.preventDefault();
+        $('.pay_sign_submit').on('click', function() {
             if ($('#legal_checkbox').is(':checked')) {
-                $('#pdf_download_btn').prop('disabled', false);
+                $('#rented_by_val').val($('input[name=rented_by]:checked').val());
             } else {
                 alert('You need to check the Signature checkbox above to agree to the digital terms in order to continue.')
             }
@@ -49,9 +72,17 @@ if (document.location.href.split('/')[3] == 'new-ltc' || document.location.href.
 
         map = new google.maps.Map(document.getElementById('map'), {
             center: {lat: 40.144128, lng: -76.311420},
-            zoom: 9,
+            zoom: 8,
             scaleControl: true
         });
+        function ResizeMap() {
+            google.maps.event.trigger(map, "resize");
+        }
+
+        $("#VehicleMovementModal").on('shown', function () {
+            ResizeMap();
+        });
+
         bounds = new google.maps.LatLngBounds();
         google.maps.event.addListenerOnce(map, 'tilesloaded', function (evt) {
 
@@ -87,35 +118,46 @@ if (document.location.href.split('/')[3] == 'new-ltc' || document.location.href.
             magNamesArray.push(magId);
             objArray.push(obj);
             magArray.push(magId);
-            magArray[count] = new google.maps.Polygon({
-                path: obj,
-                geodesic: true,
-                strokeColor: '#091096',
-                strokeOpacity: 1.0,
-                strokeWeight: 2,
-                fillColor: '#B1AAA9',
-                fillOpacity: 0.35,
-                areaName: magId,
-                courtId: value.court_number,
-                county: value.county,
-                township: value.township
-            });
+            if (quickEvict.userId === 'Administrator') {
+                magArray[count] = new google.maps.Polygon({
+                    path: obj,
+                    geodesic: true,
+                    strokeColor: '#091096',
+                    strokeOpacity: 1.0,
+                    strokeWeight: 2,
+                    fillColor: '#B1AAA9',
+                    fillOpacity: 0.35,
+                    areaName: magId,
+                    courtId: value.court_number,
+                    county: value.county,
+                    township: value.township
+                });
+            } else {
+                magArray[count] = new google.maps.Polygon({
+                    path: obj,
+                    geodesic: true,
+                    areaName: magId,
+                    courtId: value.court_number,
+                    county: value.county,
+                    township: value.township
+                });
+            }
             magArray[count].setMap(map);
 
+            if (quickEvict.userId === 'Administrator') {
+                google.maps.event.addListener(magArray[count], 'mouseover', function (e) {
+                    var magistrateId = $(this)[0].areaName.split('magistrate_');
+                    injectTooltip(e, magistrateId[1] + '<br>' + $(this)[0].county + '<br>' + $(this)[0].township);
+                });
 
-            google.maps.event.addListener(magArray[count], 'mouseover', function (e) {
-                var magistrateId = $(this)[0].areaName.split('magistrate_');
-                injectTooltip(e, magistrateId[1] + '<br>' + $(this)[0].county + '<br>' + $(this)[0].township);
-            });
+                google.maps.event.addListener(magArray[count], 'mousemove', function (e) {
+                    moveTooltip(e);
+                });
 
-            google.maps.event.addListener(magArray[count], 'mousemove', function (e) {
-                moveTooltip(e);
-            });
-
-            google.maps.event.addListener(magArray[count], 'mouseout', function (e) {
-                deleteTooltip(e);
-            });
-
+                google.maps.event.addListener(magArray[count], 'mouseout', function (e) {
+                    deleteTooltip(e);
+                });
+            }
             count++;
         });
         autocomplete.addListener('place_changed', function () {
@@ -139,7 +181,7 @@ if (document.location.href.split('/')[3] == 'new-ltc' || document.location.href.
             county = place.address_components[3].long_name;
             state = place.address_components[4].short_name;
 
-            if (place.address_components[6].short_name == 'US') {
+            if (place.address_components[6].short_name === 'US') {
                 zipcode = place.address_components[7].long_name;
             } else {
                 zipcode = place.address_components[6].long_name;
@@ -164,7 +206,7 @@ if (document.location.href.split('/')[3] == 'new-ltc' || document.location.href.
                     isFound = true;
                 }
             }
-            if (isFound == false) {
+            if (isFound === false) {
                 alert('Location outside all Zones');
                 $('.zipcode_div').css('display', 'none');
                 $('.unit_number_div').css('display', 'none');
@@ -173,22 +215,35 @@ if (document.location.href.split('/')[3] == 'new-ltc' || document.location.href.
                 $('.zipcode_div').css('display', 'block');
                 $('.unit_number_div').css('display', 'block');
                 $('.filing_form_div').css('display', 'block');
+                $.ajaxSetup({
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    }
+                });
+                 $.ajax({
+                     beforeSend: function (xhr) {
+                         xhr.setRequestHeader('X-CSRF-TOKEN', $("#token").attr('content'));
+                     },
+                     url : 'https://courtzip.com/get-signature-type',
+                     type : 'POST',
+                     data : {
+                         'courtNumber' : $('#court_number').val()
+                     },
+                     success : function(data) {
+                         console.log(data);
+                        if (data[0].digital_signature === 0) {
+                            $('#finalize_document').css('display', 'none');
+                        }
+                        if (data[0].online_submission === 0) {
+                            alert('Sorry, but this magistrate is currently not accepting online submissions');
+                            window.location.replace("http://courtzip.com/dashboard");
+                        }
+                     },
+                     error : function(data)
+                     {
 
-                // $.ajax({
-                //     url : '/get-signature-type',
-                //     type : 'GET',
-                //     data : {
-                //         'evictionId' : $('#court_number').val()
-                //     },
-                //     dataType:'json',
-                //     success : function(data) {
-                //         alert('Data: ' + data);
-                //     },
-                //     error : function(data)
-                //     {
-                //         alert("Request: "+JSON.stringify(data));
-                //     }
-                // });
+                     }
+                 });
             }
         });
 
@@ -324,12 +379,6 @@ if (document.location.href.split('/')[3] == 'new-ltc' || document.location.href.
            } else {
                $('#breached_details').prop('disabled', true);
            }
-        });
-
-
-        //On Submit
-        $('#pdf_download_btn').on('click', function () {
-            $('#rented_by_val').val($('input[name=rented_by]:checked').val());
         });
     });
 }

@@ -2,24 +2,17 @@
 @section('content')
     <meta name="csrf-token" id="token" content="{{ csrf_token() }}">
     <div class="container-fluid">
-        <div class="row justify-content-center">
-            <div class="col-md-10">
-                <div class="card" id="getting_started_panel" style="margin-bottom:3%;">
-                    <div class="card-body">
-                        <h2 class="titles">Start a Filing:</h2>
-                        <div class="button_panel">
-                            <a href="{{ url('new-ltc') }}"><button type="button" class="btn btn-primary home_btns" id="ltc_btn">Landlord-Tenant Complaint</button></a>
-                            <a href="{{ url('new-oop') }}"><button type="button" class="btn btn-primary home_btns" id="oop_btn">Order of Possession</button></a>
-                            <a href="{{ url('new-civil-complaint') }}"><button type="button" class="btn btn-primary home_btns" id="civil_complaint_btn">Civil Complaint</button></a>
-                        </div>
-                    </div>
+        <div class="row">
+            <div id="new_filing_container" class="col-md-3">
+                <div class="button_panel">
+                    <a href="{{ url('new-file') }}"><button type="button" class="btn btn-primary" id="new_file_btn">Start a new File</button></a><br>
                 </div>
             </div>
         </div>
         <div class="row justify-content-center">
-            <div class="col-md-10">
+            <div class="col-md-11">
                 <div class="card">
-                    <div class="card-body">
+                    <div class="card-body body_container">
                         <h2 class="titles">Welcome to Court<em>Zip</em>!</h2>
                         <div>CourtZip is the leader in combining technology and court filing expertise to improve the process for filing Complaints in Pennsylvania Magisterial District Courts. CourtZip makes it easy to file Civil Complaints under $12,000, Landlord-Tenant Complaints (for evictions), and Orders of Possession (for possession of property from eviction).</div>
 
@@ -41,5 +34,6 @@
                 </div>
             </div>
         </div>
-    </div>
+
+        </div>
 @endsection

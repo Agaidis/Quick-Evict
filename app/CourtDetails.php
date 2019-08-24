@@ -28,7 +28,8 @@ class CourtDetails extends Model
         'phone_number',
         'accept_e_signature',
         'township',
-        'digital_signature'
+        'digital_signature',
+        'online_submission'
     ];
 
     protected $table = 'court_details';

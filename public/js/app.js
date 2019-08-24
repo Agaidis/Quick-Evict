@@ -42740,29 +42740,44 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-if (document.location.href.split('/')[3] == 'new-ltc' || document.location.href.split('/')[3] == 'new-oop' || document.location.href.split('/')[3] == 'new-civil-complaint') {
+if (document.location.href.split('/')[3] === 'new-file') {
   $(document).ready(function () {
     $('[data-toggle="tooltip"]').tooltip();
     var canvas = document.querySelector("canvas");
     var signaturePad = new SignaturePad(canvas, {}); //Clear button to remove signature drawing
 
     $('.clear_signature').on('click', function () {
-      $('#pdf_download_btn').prop('disabled', true); // Clears the canvas
-
+      // Clears the canvas
       signaturePad.clear();
     });
-    $('.no_signature').on('click', function () {
+    var text_max = 500;
+    $('#textarea_feedback').html(text_max + ' characters remaining');
+    $('#claim_description').on('keyup', function () {
+      var text_length = $('#claim_description').val().length;
+      var text_remaining = text_max - text_length;
+      $('#textarea_feedback').html(text_remaining + ' characters remaining');
+    });
+    $('.use_signature').on('click', function () {
+      $('.payment_section').css('display', 'initial');
+      $('.pay_submit_section').css('display', 'initial');
+    });
+    $('#legal_checkbox').on('change', function () {
       if ($('#legal_checkbox').is(':checked')) {
-        $('#pdf_download_btn').prop('disabled', false);
+        $('.use_signature').prop('disabled', false);
+        $('.pay_sign_submit').prop('disabled', false);
+      } else {
+        $('.use_signature').prop('disabled', true);
+        $('.pay_sign_submit').prop('disabled', true);
       }
     }); //Save and use Signature
 
-    $('.save_signature').on('click', function () {
+    $('.pay_sign_submit').on('click', function () {
       if ($('#legal_checkbox').is(':checked')) {
-        $('#pdf_download_btn').prop('disabled', false);
+        $('#rented_by_val').val($('input[name=rented_by]:checked').val());
+      } else {
+        alert('You need to check the Signature checkbox above to agree to the digital terms in order to continue.');
       }
 
-      ;
       var dataURL = signaturePad.toDataURL(); // save image as PNG
 
       $('#signature_source').val(dataURL);
@@ -42785,8 +42800,16 @@ if (document.location.href.split('/')[3] == 'new-ltc' || document.location.href.
         lat: 40.144128,
         lng: -76.311420
       },
-      zoom: 9,
+      zoom: 8,
       scaleControl: true
+    });
+
+    function ResizeMap() {
+      google.maps.event.trigger(map, "resize");
+    }
+
+    $("#VehicleMovementModal").on('shown', function () {
+      ResizeMap();
     });
     bounds = new google.maps.LatLngBounds();
     google.maps.event.addListenerOnce(map, 'tilesloaded', function (evt) {
@@ -42819,30 +42842,47 @@ if (document.location.href.split('/')[3] == 'new-ltc' || document.location.href.
       magNamesArray.push(magId);
       objArray.push(obj);
       magArray.push(magId);
-      magArray[count] = new google.maps.Polygon({
-        path: obj,
-        geodesic: true,
-        strokeColor: '#091096',
-        strokeOpacity: 1.0,
-        strokeWeight: 2,
-        fillColor: '#B1AAA9',
-        fillOpacity: 0.35,
-        areaName: magId,
-        courtId: value.court_number,
-        county: value.county,
-        township: value.township
-      });
+
+      if (quickEvict.userId === 'Administrator') {
+        magArray[count] = new google.maps.Polygon({
+          path: obj,
+          geodesic: true,
+          strokeColor: '#091096',
+          strokeOpacity: 1.0,
+          strokeWeight: 2,
+          fillColor: '#B1AAA9',
+          fillOpacity: 0.35,
+          areaName: magId,
+          courtId: value.court_number,
+          county: value.county,
+          township: value.township
+        });
+      } else {
+        magArray[count] = new google.maps.Polygon({
+          path: obj,
+          geodesic: true,
+          areaName: magId,
+          courtId: value.court_number,
+          county: value.county,
+          township: value.township
+        });
+      }
+
       magArray[count].setMap(map);
-      google.maps.event.addListener(magArray[count], 'mouseover', function (e) {
-        var magistrateId = $(this)[0].areaName.split('magistrate_');
-        injectTooltip(e, magistrateId[1] + '<br>' + $(this)[0].county + '<br>' + $(this)[0].township);
-      });
-      google.maps.event.addListener(magArray[count], 'mousemove', function (e) {
-        moveTooltip(e);
-      });
-      google.maps.event.addListener(magArray[count], 'mouseout', function (e) {
-        deleteTooltip(e);
-      });
+
+      if (quickEvict.userId === 'Administrator') {
+        google.maps.event.addListener(magArray[count], 'mouseover', function (e) {
+          var magistrateId = $(this)[0].areaName.split('magistrate_');
+          injectTooltip(e, magistrateId[1] + '<br>' + $(this)[0].county + '<br>' + $(this)[0].township);
+        });
+        google.maps.event.addListener(magArray[count], 'mousemove', function (e) {
+          moveTooltip(e);
+        });
+        google.maps.event.addListener(magArray[count], 'mouseout', function (e) {
+          deleteTooltip(e);
+        });
+      }
+
       count++;
     });
     autocomplete.addListener('place_changed', function () {
@@ -42867,7 +42907,7 @@ if (document.location.href.split('/')[3] == 'new-ltc' || document.location.href.
       county = place.address_components[3].long_name;
       state = place.address_components[4].short_name;
 
-      if (place.address_components[6].short_name == 'US') {
+      if (place.address_components[6].short_name === 'US') {
         zipcode = place.address_components[7].long_name;
       } else {
         zipcode = place.address_components[6].long_name;
@@ -42893,7 +42933,7 @@ if (document.location.href.split('/')[3] == 'new-ltc' || document.location.href.
         }
       }
 
-      if (isFound == false) {
+      if (isFound === false) {
         alert('Location outside all Zones');
         $('.zipcode_div').css('display', 'none');
         $('.unit_number_div').css('display', 'none');
@@ -42901,21 +42941,35 @@ if (document.location.href.split('/')[3] == 'new-ltc' || document.location.href.
       } else {
         $('.zipcode_div').css('display', 'block');
         $('.unit_number_div').css('display', 'block');
-        $('.filing_form_div').css('display', 'block'); // $.ajax({
-        //     url : '/get-signature-type',
-        //     type : 'GET',
-        //     data : {
-        //         'evictionId' : $('#court_number').val()
-        //     },
-        //     dataType:'json',
-        //     success : function(data) {
-        //         alert('Data: ' + data);
-        //     },
-        //     error : function(data)
-        //     {
-        //         alert("Request: "+JSON.stringify(data));
-        //     }
-        // });
+        $('.filing_form_div').css('display', 'block');
+        $.ajaxSetup({
+          headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+          }
+        });
+        $.ajax({
+          beforeSend: function beforeSend(xhr) {
+            xhr.setRequestHeader('X-CSRF-TOKEN', $("#token").attr('content'));
+          },
+          url: 'https://courtzip.com/get-signature-type',
+          type: 'POST',
+          data: {
+            'courtNumber': $('#court_number').val()
+          },
+          success: function success(data) {
+            console.log(data);
+
+            if (data[0].digital_signature === 0) {
+              $('#finalize_document').css('display', 'none');
+            }
+
+            if (data[0].online_submission === 0) {
+              alert('Sorry, but this magistrate is currently not accepting online submissions');
+              window.location.replace("http://courtzip.com/dashboard");
+            }
+          },
+          error: function error(data) {}
+        });
       }
     });
     $(window).keydown(function (event) {
@@ -43039,10 +43093,6 @@ if (document.location.href.split('/')[3] == 'new-ltc' || document.location.href.
       } else {
         $('#breached_details').prop('disabled', true);
       }
-    }); //On Submit
-
-    $('#pdf_download_btn').on('click', function () {
-      $('#rented_by_val').val($('input[name=rented_by]:checked').val());
     });
   });
 }
@@ -43062,7 +43112,8 @@ if (document.location.href.split('/')[3] == 'new-ltc' || document.location.href.
 $(document).ready(function () {
   $('#court_date').datepicker();
   $('#court_time').timepicker({
-    step: 5
+    step: 5,
+    minuteStep: 5
   });
   $('.calendar_tooltip').tooltip();
   $('.court_calendar').on('click', function () {
@@ -43390,8 +43441,19 @@ $(document).ready(function () {
       $('#digital_signature').val(0);
     }
   });
+  $('#online_submission').val(1);
+  $('#is_online_submission_allowed').on('change', function () {
+    if (document.getElementById("is_online_submission_allowed").checked == true) {
+      $('#online_submission').val(1);
+    } else {
+      $('#online_submission').val(0);
+    }
+  });
   $('#edit_is_digital_signature_allowed').on('change', function () {
     $('#edit_digital_signature').val(document.getElementById("edit_is_digital_signature_allowed").checked);
+  });
+  $('#edit_is_online_submission_allowed').on('change', function () {
+    $('#edit_online_submission').val(document.getElementById("edit_is_online_submission_allowed").checked);
   });
   $('#magistrate_table').DataTable({
     "pagingType": "simple"
@@ -43466,10 +43528,13 @@ $(document).ready(function () {
         $('#edit_three_oop').val(data[1][0].three_defendant_out_of_pocket);
         $('#edit_additional_tenants').val(data[1][0].additional_tenant);
         $('#edit_geo_locations').val(data[0][0].geo_locations);
-        console.log(data[1][0].digital_signature);
 
         if (data[1][0].digital_signature == 1) {
           $('#edit_is_digital_signature_allowed').prop('checked', true);
+        }
+
+        if (data[1][0].online_submission == 1) {
+          $('#edit_is_online_submission_allowed').prop('checked', true);
         }
       },
       error: function error(data) {
@@ -43518,6 +43583,12 @@ $(document).ready(function () {
       $('#edit_digital_signature').val(0);
     }
 
+    if (document.getElementById("edit_is_online_submission_allowed").checked == true) {
+      $('#edit_online_submission').val(1);
+    } else {
+      $('#edit_online_submission').val(0);
+    }
+
     $.ajax({
       beforeSend: function beforeSend(xhr) {
         xhr.setRequestHeader('X-CSRF-TOKEN', $("#token").attr('content'));
@@ -43550,7 +43621,8 @@ $(document).ready(function () {
         threeOOP: $('#edit_three_oop').val(),
         additionalTenant: $('#edit_additional_tenants').val(),
         geoLocations: $('#edit_geo_locations').val(),
-        digitalSignature: $('#edit_digital_signature').val()
+        digitalSignature: $('#edit_digital_signature').val(),
+        onlineSubmission: $('#edit_online_submission').val()
       },
       success: function success(data) {},
       error: function error(data) {
@@ -43579,6 +43651,44 @@ $(document).ready(function () {
       }, 6000);
     }
   }
+});
+
+/***/ }),
+
+/***/ "./resources/assets/js/newFile.js":
+/*!****************************************!*\
+  !*** ./resources/assets/js/newFile.js ***!
+  \****************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+$(document).ready(function () {
+  $('#step_1_btn').on('click', function (e) {
+    var fileType = $('#file_type_select').val();
+    var county = $('#county_select').val();
+    var isFileValid = false;
+    var isCountyValid = false;
+
+    if (fileType === 'none') {
+      isFileValid = false;
+      $('#file_type_error').text('File Type cannot be Blank. Please select one of the options.');
+    } else {
+      $('#file_type_error').text('');
+      isFileValid = true;
+    }
+
+    if (county === 'none') {
+      isCountyValid = false;
+      $('#county_error').text('County cannot be Blank. Please select one of the options.');
+    } else {
+      $('#county_error').text('');
+      isCountyValid = true;
+    }
+
+    if (isFileValid === true && isCountyValid === true) {
+      $('#new_file_form').submit();
+    }
+  });
 });
 
 /***/ }),
@@ -49263,6 +49373,80 @@ function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterat
 
 /***/ }),
 
+/***/ "./resources/assets/js/stripe.js":
+/*!***************************************!*\
+  !*** ./resources/assets/js/stripe.js ***!
+  \***************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+// Create a Stripe client.
+var stripe = Stripe('pk_test_FTcQeimeSasisJpDTYgHEMTh'); // Create an instance of Elements.
+
+var elements = stripe.elements(); // Custom styling can be passed to options when creating an Element.
+// (Note that this demo uses a wider set of styles than the guide below.)
+
+var style = {
+  base: {
+    color: '#32325d',
+    fontFamily: '"Helvetica Neue", Helvetica, sans-serif',
+    fontSmoothing: 'antialiased',
+    fontSize: '16px',
+    '::placeholder': {
+      color: '#aab7c4'
+    }
+  },
+  invalid: {
+    color: '#fa755a',
+    iconColor: '#fa755a'
+  }
+}; // Create an instance of the card Element.
+
+var card = elements.create('card', {
+  style: style
+}); // Add an instance of the card Element into the `card-element` <div>.
+
+card.mount('#card-element'); // Handle real-time validation errors from the card Element.
+
+card.addEventListener('change', function (event) {
+  var displayError = document.getElementById('card-errors');
+
+  if (event.error) {
+    displayError.textContent = event.error.message;
+  } else {
+    displayError.textContent = '';
+  }
+}); // Handle form submission.
+
+var form = document.getElementById('eviction_form');
+form.addEventListener('submit', function (event) {
+  event.preventDefault();
+  stripe.createToken(card).then(function (result) {
+    if (result.error) {
+      // Inform the user if there was an error.
+      var errorElement = document.getElementById('card-errors');
+      errorElement.textContent = result.error.message;
+    } else {
+      // Send the token to your server.
+      stripeTokenHandler(result.token);
+    }
+  });
+}); // Submit the form with the token ID.
+
+function stripeTokenHandler(token) {
+  // Insert the token ID into the form so it gets submitted to the server
+  var form = document.getElementById('eviction_form');
+  var hiddenInput = document.createElement('input');
+  hiddenInput.setAttribute('type', 'hidden');
+  hiddenInput.setAttribute('name', 'stripeToken');
+  hiddenInput.setAttribute('value', token.id);
+  form.appendChild(hiddenInput); // Submit the form
+
+  form.submit();
+}
+
+/***/ }),
+
 /***/ "./resources/assets/js/timepicker.min.js":
 /*!***********************************************!*\
   !*** ./resources/assets/js/timepicker.min.js ***!
@@ -49982,9 +50166,9 @@ $(document).ready(function () {
 /***/ }),
 
 /***/ 0:
-/*!*********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** multi ./resources/assets/js/bootstrap.js ./resources/assets/js/json2.min.js ./resources/assets/js/timepicker.min.js ./resources/assets/js/datepicker-ui.min.js ./resources/assets/js/eviction.js ./resources/assets/js/datatables.min.js ./resources/assets/js/magistrateCreator.js ./resources/assets/js/home.js ./resources/assets/js/userManagement.js ./resources/assets/js/numeric-1.2.6.min.js ./resources/assets/js/bezier.js ./resources/assets/js/signaturepad.js ./resources/assets/js/bootstrap-timepicker.min.js ./resources/assets/sass/app.scss ***!
-  \*********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
+/*!**************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** multi ./resources/assets/js/bootstrap.js ./resources/assets/js/json2.min.js ./resources/assets/js/timepicker.min.js ./resources/assets/js/datepicker-ui.min.js ./resources/assets/js/eviction.js ./resources/assets/js/datatables.min.js ./resources/assets/js/magistrateCreator.js ./resources/assets/js/userManagement.js ./resources/assets/js/numeric-1.2.6.min.js ./resources/assets/js/bezier.js ./resources/assets/js/signaturepad.js ./resources/assets/js/bootstrap-timepicker.min.js ./resources/assets/js/home.js ./resources/assets/js/newFile.js ./resources/assets/js/stripe.js ./resources/assets/sass/app.scss ***!
+  \**************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -49995,12 +50179,14 @@ __webpack_require__(/*! /Users/andrewgaidis/projects/Quick-Evict/resources/asset
 __webpack_require__(/*! /Users/andrewgaidis/projects/Quick-Evict/resources/assets/js/eviction.js */"./resources/assets/js/eviction.js");
 __webpack_require__(/*! /Users/andrewgaidis/projects/Quick-Evict/resources/assets/js/datatables.min.js */"./resources/assets/js/datatables.min.js");
 __webpack_require__(/*! /Users/andrewgaidis/projects/Quick-Evict/resources/assets/js/magistrateCreator.js */"./resources/assets/js/magistrateCreator.js");
-__webpack_require__(/*! /Users/andrewgaidis/projects/Quick-Evict/resources/assets/js/home.js */"./resources/assets/js/home.js");
 __webpack_require__(/*! /Users/andrewgaidis/projects/Quick-Evict/resources/assets/js/userManagement.js */"./resources/assets/js/userManagement.js");
 __webpack_require__(/*! /Users/andrewgaidis/projects/Quick-Evict/resources/assets/js/numeric-1.2.6.min.js */"./resources/assets/js/numeric-1.2.6.min.js");
 __webpack_require__(/*! /Users/andrewgaidis/projects/Quick-Evict/resources/assets/js/bezier.js */"./resources/assets/js/bezier.js");
 __webpack_require__(/*! /Users/andrewgaidis/projects/Quick-Evict/resources/assets/js/signaturepad.js */"./resources/assets/js/signaturepad.js");
 __webpack_require__(/*! /Users/andrewgaidis/projects/Quick-Evict/resources/assets/js/bootstrap-timepicker.min.js */"./resources/assets/js/bootstrap-timepicker.min.js");
+__webpack_require__(/*! /Users/andrewgaidis/projects/Quick-Evict/resources/assets/js/home.js */"./resources/assets/js/home.js");
+__webpack_require__(/*! /Users/andrewgaidis/projects/Quick-Evict/resources/assets/js/newFile.js */"./resources/assets/js/newFile.js");
+__webpack_require__(/*! /Users/andrewgaidis/projects/Quick-Evict/resources/assets/js/stripe.js */"./resources/assets/js/stripe.js");
 module.exports = __webpack_require__(/*! /Users/andrewgaidis/projects/Quick-Evict/resources/assets/sass/app.scss */"./resources/assets/sass/app.scss");
 
 

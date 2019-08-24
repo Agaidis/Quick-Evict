@@ -10671,6 +10671,7 @@ a.text-dark:focus {
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */.bootstrap-timepicker{position:relative}.bootstrap-timepicker.pull-right .bootstrap-timepicker-widget.dropdown-menu{left:auto;right:0}.bootstrap-timepicker.pull-right .bootstrap-timepicker-widget.dropdown-menu:before{left:auto;right:12px}.bootstrap-timepicker.pull-right .bootstrap-timepicker-widget.dropdown-menu:after{left:auto;right:13px}.bootstrap-timepicker .input-group-addon{cursor:pointer}.bootstrap-timepicker .input-group-addon i{display:inline-block;width:16px;height:16px}.bootstrap-timepicker-widget.dropdown-menu{padding:4px}.bootstrap-timepicker-widget.dropdown-menu.open{display:inline-block}.bootstrap-timepicker-widget.dropdown-menu:before{border-bottom:7px solid rgba(0,0,0,0.2);border-left:7px solid transparent;border-right:7px solid transparent;content:"";display:inline-block;position:absolute}.bootstrap-timepicker-widget.dropdown-menu:after{border-bottom:6px solid #fff;border-left:6px solid transparent;border-right:6px solid transparent;content:"";display:inline-block;position:absolute}.bootstrap-timepicker-widget.timepicker-orient-left:before{left:6px}.bootstrap-timepicker-widget.timepicker-orient-left:after{left:7px}.bootstrap-timepicker-widget.timepicker-orient-right:before{right:6px}.bootstrap-timepicker-widget.timepicker-orient-right:after{right:7px}.bootstrap-timepicker-widget.timepicker-orient-top:before{top:-7px}.bootstrap-timepicker-widget.timepicker-orient-top:after{top:-6px}.bootstrap-timepicker-widget.timepicker-orient-bottom:before{bottom:-7px;border-bottom:0;border-top:7px solid #999}.bootstrap-timepicker-widget.timepicker-orient-bottom:after{bottom:-6px;border-bottom:0;border-top:6px solid #fff}.bootstrap-timepicker-widget a.btn,.bootstrap-timepicker-widget input{border-radius:4px}.bootstrap-timepicker-widget table{width:100%;margin:0}.bootstrap-timepicker-widget table td{text-align:center;height:30px;margin:0;padding:2px}.bootstrap-timepicker-widget table td:not(.separator){min-width:30px}.bootstrap-timepicker-widget table td span{width:100%}.bootstrap-timepicker-widget table td a{border:1px transparent solid;width:100%;display:inline-block;margin:0;padding:8px 0;outline:0;color:#333}.bootstrap-timepicker-widget table td a:hover{text-decoration:none;background-color:#eee;-webkit-border-radius:4px;-moz-border-radius:4px;border-radius:4px;border-color:#ddd}.bootstrap-timepicker-widget table td a i{margin-top:2px;font-size:18px}.bootstrap-timepicker-widget table td input{width:25px;margin:0;text-align:center}.bootstrap-timepicker-widget .modal-content{padding:4px}@media(min-width:767px){.bootstrap-timepicker-widget.modal{width:200px;margin-left:-100px}}@media(max-width:767px){.bootstrap-timepicker{width:100%}.bootstrap-timepicker .dropdown-menu{width:100%}}
+.ui-timepicker-wrapper{overflow-y:auto;max-height:150px;width:6.5em;background:#fff;border:1px solid #ddd;-webkit-box-shadow:0 5px 10px rgba(0,0,0,.2);-moz-box-shadow:0 5px 10px rgba(0,0,0,.2);box-shadow:0 5px 10px rgba(0,0,0,.2);outline:0;z-index: 9999;margin:0}.ui-timepicker-wrapper.ui-timepicker-with-duration{width:13em}.ui-timepicker-wrapper.ui-timepicker-with-duration.ui-timepicker-step-30,.ui-timepicker-wrapper.ui-timepicker-with-duration.ui-timepicker-step-60{width:11em}.ui-timepicker-list{margin:0;padding:0;list-style:none}.ui-timepicker-duration{margin-left:5px;color:#888}.ui-timepicker-list:hover .ui-timepicker-duration{color:#888}.ui-timepicker-list li{padding:3px 0 3px 5px;cursor:pointer;white-space:nowrap;color:#000;list-style:none;margin:0}.ui-timepicker-list:hover .ui-timepicker-selected{background:#fff;color:#000}li.ui-timepicker-selected,.ui-timepicker-list li:hover,.ui-timepicker-list .ui-timepicker-selected:hover{background:#1980EC;color:#fff}li.ui-timepicker-selected .ui-timepicker-duration,.ui-timepicker-list li:hover .ui-timepicker-duration{color:#ccc}.ui-timepicker-list li.ui-timepicker-disabled,.ui-timepicker-list li.ui-timepicker-disabled:hover,.ui-timepicker-list li.ui-timepicker-selected.ui-timepicker-disabled{color:#888;cursor:default}.ui-timepicker-list li.ui-timepicker-disabled:hover,.ui-timepicker-list li.ui-timepicker-selected.ui-timepicker-disabled{background:#f2f2f2}
 #login-logo {
     height:auto;
     margin-left:20%;
@@ -10731,29 +10732,66 @@ a.text-dark:focus {
 
 .titles {
     text-align: center;
+    color: #D9B08C;
+    font-weight:bold;
 }
-.button_panel {
-    text-align: center;
-    margin-top: 3%;
-    margin-left:80px;
+.urgency_dot {
+    height: 10px;
+    width: 10px;
+    border-radius: 50%;
+    display: inline-block;
 }
-.home_btns {
-    font-size:16px;
-    padding:2% 3% 2% 3%;
-    background-color: rgba(6, 84, 116, 0.96);
-    border-color: rgba(6, 84, 116, 0.96);
+#red_urgency {
+    background-color:red;
 }
-
-#oop_btn {
-    margin-left:3%;
-}
-
-#civil_complaint_btn {
-    margin-left:3%;
+#yellow_urgency {
+    background-color:yellow;
 }
 
+#new_file_btn {
+    font-size:22px;
+    margin-top:2%;
+    padding:3% 4% 3% 4%;
+    margin-bottom:4%;
+    font-family: verdana;
+    background-color:#116466;
+    border-color:#116466;
+    color:#d1e8e2;
+    box-shadow: 5px 10px #888888;
+
+}
+#new_file_btn:hover {
+    background-color: #318782;
+}
+
+#new_file_btn:active {
+    background-color: #0f6674;
+}
+#new_filing_container {
+    text-align:center;
+    margin-bottom:2%;
+}
+
+#back_to_step_1_btn {
+    border-radius: 10em 0 0 10em;
+}
+.eviction_table {
+    background-color:white;
+}
 body {
-    background-color: darkgrey;
+    /*background: rgb(209,232,226);*/
+    /*background: radial-gradient(circle, rgba(209,232,226,1) 8%, rgba(44,53,49,1) 100%);*/
+    background: rgb(176, 176, 176);
+    background: linear-gradient(101deg, rgba(176, 176, 176, 1) 11%, rgba(72, 72, 72, 1) 100%);
+    background-attachment: fixed;
+
+}
+.card {
+    border-radius: 2em;
+}
+.body_container {
+    background-color: #F5F5F5;
+    border-radius:2em;
 }
 
 .home_text {
@@ -10808,6 +10846,10 @@ form.eviction_form fieldset {
     height: 80%;
     width:80%;
     margin-left: 5%;
+    min-height: 500px;
+}
+.step_3_title {
+    margin-right: 18%;
 }
 
   html, body {
@@ -10915,7 +10957,6 @@ form.eviction_form fieldset {
 /*      SIGNATURE PAD    */
 #signature_pad {
     border-bottom: 3px solid black;
-    margin-left:-19px;
 }
 
 .description {
@@ -10975,8 +11016,34 @@ form.eviction_form fieldset {
     display:flex;
 }
 
-#finalize_document {
+#finalize_document, #step_1_btn {
+    box-shadow: 3px 5px #888888;
     margin-top: 15px;
+}
+
+.use_signature {
+    margin-left: 130px;
+    height: 43px;
+    box-shadow: 3px 5px #888888;
+}
+.clear_signature {
+    height: 43px;
+    box-shadow: 1px 3px #888888;
+}
+
+.pay_sign_submit {
+    box-shadow: 5px 10px #888888;
+    height: 45px;
+    margin-left: 200px;
+    margin-bottom: 15px;
+}
+
+.payment_section, .pay_submit_section {
+    display:none;
+}
+
+#county_error, #file_type_error {
+    color:red;
 }
 @font-face {
   font-family: 'Journal';
@@ -11191,4 +11258,41 @@ p.error {
   font-weight: bold;
 }
 
-.ui-timepicker-wrapper{overflow-y:auto;max-height:150px;width:6.5em;background:#fff;border:1px solid #ddd;-webkit-box-shadow:0 5px 10px rgba(0,0,0,.2);-moz-box-shadow:0 5px 10px rgba(0,0,0,.2);box-shadow:0 5px 10px rgba(0,0,0,.2);outline:0;z-index: 9999;margin:0}.ui-timepicker-wrapper.ui-timepicker-with-duration{width:13em}.ui-timepicker-wrapper.ui-timepicker-with-duration.ui-timepicker-step-30,.ui-timepicker-wrapper.ui-timepicker-with-duration.ui-timepicker-step-60{width:11em}.ui-timepicker-list{margin:0;padding:0;list-style:none}.ui-timepicker-duration{margin-left:5px;color:#888}.ui-timepicker-list:hover .ui-timepicker-duration{color:#888}.ui-timepicker-list li{padding:3px 0 3px 5px;cursor:pointer;white-space:nowrap;color:#000;list-style:none;margin:0}.ui-timepicker-list:hover .ui-timepicker-selected{background:#fff;color:#000}li.ui-timepicker-selected,.ui-timepicker-list li:hover,.ui-timepicker-list .ui-timepicker-selected:hover{background:#1980EC;color:#fff}li.ui-timepicker-selected .ui-timepicker-duration,.ui-timepicker-list li:hover .ui-timepicker-duration{color:#ccc}.ui-timepicker-list li.ui-timepicker-disabled,.ui-timepicker-list li.ui-timepicker-disabled:hover,.ui-timepicker-list li.ui-timepicker-selected.ui-timepicker-disabled{color:#888;cursor:default}.ui-timepicker-list li.ui-timepicker-disabled:hover,.ui-timepicker-list li.ui-timepicker-selected.ui-timepicker-disabled{background:#f2f2f2}
+/**
+ * The CSS shown here will not be introduced in the Quickstart guide, but shows
+ * how you can use CSS to style your Element's container.
+ */
+
+.payment_title, .signature_title {
+    text-align: center;
+}
+.credit_debit {
+    color: #c7c5c8;
+}
+.StripeElement {
+    box-sizing: border-box;
+
+    height: 40px;
+    width:100%;
+    padding: 10px 12px;
+
+    border: 1px solid transparent;
+    border-radius: 4px;
+    background-color: white;
+
+    box-shadow: 0 1px 3px 0 #e6ebf1;
+    -webkit-transition: box-shadow 150ms ease;
+    transition: box-shadow 150ms ease;
+}
+
+.StripeElement--focus {
+    box-shadow: 0 1px 3px 0 #cfd7df;
+}
+
+.StripeElement--invalid {
+    border-color: #fa755a;
+}
+
+.StripeElement--webkit-autofill {
+    background-color: #fefde5 !important;
+}

@@ -27,16 +27,17 @@ Route::post('/dashboard/delete', 'EvictionController@delete')->middleware('auth'
 Route::get('/dashboard/getCourtDate', 'DashboardController@getCourtDate')->middleware('auth');
 Route::post('/dashboard/storeCourtDate', 'DashboardController@storeCourtDate')->middleware('auth');
 
+/* New File */
+Route::get('/new-file', 'NewFileController@index')->middleware('auth');
+Route::post('/new-file', 'NewFileController@proceedToFileTypeWithSelectedCounty')->middleware('auth');
+
 /* Eviction Creator */
-Route::get('/new-ltc', 'EvictionController@index')->middleware('auth');
 Route::post('/new-ltc/pdf-data', 'EvictionController@formulatePDF')->middleware('auth');
 
 /* Order of Possession Creator */
-Route::get('/new-oop', 'OrderOfPossessionController@index')->middleware('auth');
 Route::post('/new-oop/pdf-data', 'OrderOfPossessionController@formulatePDF')->middleware('auth');
 
 /* Civil Complaint Creator */
-Route::get('/new-civil-complaint', 'CivilComplaintController@index')->middleware('auth');
 Route::post('/new-civil-complaint/pdf-data', 'CivilComplaintController@formulatePDF')->middleware('auth');
 
 /* Informational Pages */
@@ -59,7 +60,7 @@ Route::post('/userManagement/deleteUser', 'UserManagementController@deleteUser')
 Route::post('/userManagement/changeRole', 'UserManagementController@changeUserRole')->middleware('auth');
 Route::post('/userManagement/changeCourt', 'UserManagementController@changeCourt')->middleware('auth');
 
-Route::get('/get-signature-type', 'EvictionController@getDigitalSignature')->middleware('auth');
+Route::post('/get-signature-type', 'EvictionController@getDigitalSignature')->middleware('auth');
 
 
 

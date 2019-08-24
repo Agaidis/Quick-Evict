@@ -19,18 +19,21 @@ let mix = require('laravel-mix');
      'resources/assets/js/eviction.js',
      'resources/assets/js/datatables.min.js',
      'resources/assets/js/magistrateCreator.js',
-     'resources/assets/js/home.js',
      'resources/assets/js/userManagement.js',
      'resources/assets/js/numeric-1.2.6.min.js',
      'resources/assets/js/bezier.js',
      'resources/assets/js/signaturepad.js',
      'resources/assets/js/bootstrap-timepicker.min.js',
+     'resources/assets/js/home.js',
+     'resources/assets/js/newFile.js',
+     'resources/assets/js/stripe.js',
  ], 'public/js/app.js').version()
 //mix.js('resources/assets/js/app.js', 'public/js')
     .sass('resources/assets/sass/app.scss', 'public/css')
     .styles([
         'public/css/app.css',
         'resources/assets/css/bootstrap-timepicker.min.css',
+        'resources/assets/css/timepicker.min.css',
         'resources/assets/css/dashboard.css',
         'resources/assets/css/datatables.min.css',
         'resources/assets/css/datepicker.structure.min.css',
@@ -38,5 +41,6 @@ let mix = require('laravel-mix');
         'resources/assets/css/datepicker-ui.min.css',
         'resources/assets/css/eviction.css',
         'resources/assets/css/signaturepad.css',
-        'resources/assets/css/timepicker.min.css'
+        'resources/assets/css/stripe.css',
+
     ], 'public/css/app.css').version();

@@ -12,6 +12,10 @@ form.eviction_form fieldset {
     height: 80%;
     width:80%;
     margin-left: 5%;
+    min-height: 500px;
+}
+.step_3_title {
+    margin-right: 18%;
 }
 
   html, body {
@@ -119,7 +123,6 @@ form.eviction_form fieldset {
 /*      SIGNATURE PAD    */
 #signature_pad {
     border-bottom: 3px solid black;
-    margin-left:-19px;
 }
 
 .description {
@@ -179,6 +182,32 @@ form.eviction_form fieldset {
     display:flex;
 }
 
-#finalize_document {
+#finalize_document, #step_1_btn {
+    box-shadow: 3px 5px #888888;
     margin-top: 15px;
+}
+
+.use_signature {
+    margin-left: 130px;
+    height: 43px;
+    box-shadow: 3px 5px #888888;
+}
+.clear_signature {
+    height: 43px;
+    box-shadow: 1px 3px #888888;
+}
+
+.pay_sign_submit {
+    box-shadow: 5px 10px #888888;
+    height: 45px;
+    margin-left: 200px;
+    margin-bottom: 15px;
+}
+
+.payment_section, .pay_submit_section {
+    display:none;
+}
+
+#county_error, #file_type_error {
+    color:red;
 }

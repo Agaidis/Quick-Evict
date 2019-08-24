@@ -10,6 +10,7 @@ use Dompdf\Dompdf;
 use Illuminate\Support\Facades\DB;
 use App\Signature;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
 
 class DashboardController extends Controller
 {
@@ -70,7 +71,7 @@ class DashboardController extends Controller
             $errorDetails = 'DashboardController - error in store() method when attempting to store magistrate';
             $errorDetails .= PHP_EOL . 'File: ' . $e->getFile();
             $errorDetails .= PHP_EOL . 'Line #' . $e->getLine();
-            \Log::error($errorDetails . PHP_EOL . 'Error Message: ' . $e->getMessage() . PHP_EOL . 'Trace: ' . $e->getTraceAsString());
+            Log::error($errorDetails . PHP_EOL . 'Error Message: ' . $e->getMessage() . PHP_EOL . 'Trace: ' . $e->getTraceAsString());
             mail('andrew.gaidis@gmail.com', 'Changing Status', $errorDetails);
         }
     }
@@ -92,7 +93,7 @@ class DashboardController extends Controller
             $errorDetails = 'DashboardController - error in store() method when attempting to store court date';
             $errorDetails .= PHP_EOL . 'File: ' . $e->getFile();
             $errorDetails .= PHP_EOL . 'Line #' . $e->getLine();
-            \Log::error($errorDetails . PHP_EOL . 'Error Message: ' . $e->getMessage() . PHP_EOL . 'Trace: ' . $e->getTraceAsString());
+            Log::error($errorDetails . PHP_EOL . 'Error Message: ' . $e->getMessage() . PHP_EOL . 'Trace: ' . $e->getTraceAsString());
             mail('andrew.gaidis@gmail.com', 'store court date', $errorDetails);
         }
         return 'success';
@@ -105,7 +106,14 @@ class DashboardController extends Controller
             $evictionData = Evictions::where('id', $request->id)->first();
             mail('andrew.gaidis@gmail.com', 'evictionId', 'this is the magistrate id: ' . $evictionData->magistrate_id);
 
+
             $courtDetails = CourtDetails::where('magistrate_id', $evictionData->magistrate_id)->first();
+
+            if (Auth::user()->court_id == $evictionData->court_number) {
+                $evictionData->is_downloaded = 1;
+                $evictionData->save();
+            }
+
             $signature = Signature::where('eviction_id', $evictionData->id)->value('signature');
 
 
@@ -273,7 +281,7 @@ span.cls_008{font-family:Arial,serif;font-size:10.77px;color:rgb(0,0,0);font-wei
 <span style="position:absolute;left:55.40px;top:105.85px" class="cls_004"><span class="cls_004">MDJ Name: ' . $courtDetails->mdj_name . '</span></span><br>
 <span style="position:absolute;left:55.40px;top:120.05px" class="cls_004"><span class="cls_004">Address: ' . $courtAddressLine1 . '<br><span style="margin-left:45px;">' . $courtAddressLine2 . '</span></span></span><br>
 <span style="position:absolute;left:581.34px;top:183.90px" class="cls_006"><span class="cls_006">V.</span></span><br>
-<span style="position:absolute;left:447.28px;top:180.90px" class="cls_009"><span class="cls_009">DEFENDANT:</span><br><p style="margin-left:6px;">' . $tenantName . '<br>' . $defendantHouseNum . ' ' . $defendantStreetName . ' ' . $unitNum . '<br>' . $defendantTown . ',' . $defendantState . ' ' . $defendantZipcode . '  </p></span><br>
+<span style="position:absolute;left:447.28px;top:180.90px" class="cls_009"><span class="cls_009">DEFENDANT:</span><br><p style="margin-left:6px;">' . $tenantName . '<br>' . $defendantHouseNum . ' ' . $defendantStreetName . ' ' . $unitNum . '<br>' . $defendantTown . ', ' . $defendantState . ' ' . $defendantZipcode . '  </p></span><br>
 <span style="position:absolute;left:600.50px;top:180.00px" class="cls_005"><span class="cls_005">NAME and ADDRESS</span></span><br>
 <span style="position:absolute;left:55.40px;top:188.45px" class="cls_004"><span class="cls_004">Telephone: ' . $courtDetails->phone_number . '</span></span><br>
 <span style="position:absolute;left:195.45px;top:214.95px" class="cls_004"><span class="cls_004">AMOUNT</span></span><br>
@@ -350,7 +358,7 @@ span.cls_008{font-family:Arial,serif;font-size:10.77px;color:rgb(0,0,0);font-wei
 <span style = "position:absolute;left:55.40px;top:985.85px" class="cls_008" ><span class="cls_008" > AOPC 310A </span ></span ><br >
 <span style = "position:absolute;left:605.75px;top:985.50px" class="cls_008" ><span class="cls_008" > FREE INTERPRETER</span ></span ><br >
 <span style = "position:absolute;left:590.75px;top:1000.50px" class="cls_008" ><span class="cls_008" > www.pacourts.us/language-rights</span ></span ><br >
-<span style = "position:absolute;left:303.75px;top:985.50px" class="cls_008" ><span class="cls_008" > EvictionTech ID # ' . $evictionId . '</span ></span ><br >
+<span style = "position:absolute;left:303.75px;top:985.50px" class="cls_008" ><span class="cls_008" > CourtZip ID # ' . $evictionId . '</span ></span ><br >
 <span style = "position:absolute;left:120.65px;top:985.85px" class="cls_007" ><span class="cls_007" > </span >Filing Fee: $' . $filingFee . '</span ><br >
 </span ></body ></html>');
             } else if ($fileType == 'oop') {
@@ -377,7 +385,7 @@ span.cls_009{font-family:Arial,serif;font-size:9px;color:rgb(0,0,0);font-weight:
 <span style="position:absolute;left:51px;top:134px" class="cls_004"><span class="cls_004">MDJ Name: '. $courtDetails->mdj_name .'</span></span>
 <span style="position:absolute;left:445px;top:100px" class="cls_005"><span class="cls_005">PLANTIFF:</span><p style="margin-left:65px;">'. $plantiffName .'<br>'. $plantiffAddress1 .'<br>'. $plantiffAddress2 .'<br>'.$plantiffPhone.'</p></span>
 <span style="position:absolute;left:450px;top:185px" class="cls_005"><span class="cls_005">V.</span></span>
-<span style="position:absolute;left:450px;top:200px" class="cls_005"><span class="cls_005">DEFENDANT:</span><br><p style="margin-left:65px;">' . $tenantName . '<br>' . $defendantHouseNum . ' ' . $defendantStreetName . ' ' . $unitNum . '<br>' . $defendantTown . ',' . $defendantState . ' ' . $defendantZipcode . '  </p></span><br>
+<span style="position:absolute;left:450px;top:200px" class="cls_005"><span class="cls_005">DEFENDANT:</span><br><p style="margin-left:65px;">' . $tenantName . '<br>' . $defendantHouseNum . ' ' . $defendantStreetName . ' ' . $unitNum . '<br>' . $defendantTown . ', ' . $defendantState . ' ' . $defendantZipcode . '  </p></span><br>
 <span style="position:absolute;left:51px;top:165px" class="cls_004"><span class="cls_004">Address: '.$courtAddressLine1.'<p style="margin-left:49px; margin-top:-4px;">'.$courtAddressLine2.'</p></span></span>
 <span style="position:absolute;left:51px;top:205px" class="cls_004"><span class="cls_004">Telephone:</span>'.$courtDetails->phone_number.'</span>
 <span style="position:absolute;left:450px;top:310px" class="cls_004"><span class="cls_004">Docket No:</span> '. $docketNumber .'</span>
@@ -395,7 +403,7 @@ span.cls_009{font-family:Arial,serif;font-size:9px;color:rgb(0,0,0);font-weight:
 <span style="position:absolute;left:200px;top:490px" class="cls_004"><span class="cls_004">Total</span></span>
 <span style="position:absolute;left:235px;top:490px" class="cls_003"><span class="cls_003">$</span>'. $totalFees .'</span>
 <span style="position:absolute;left:50px;top:570px" class="cls_004"><span class="cls_004">TO THE MAGISTERIAL DISTRICT JUDGE:</span></span>
-<span style="position:absolute;left:50px;top:585px" class="cls_004"><span class="cls_004">The Plaintiff(s) named below, having obtained a judgment for possession of real property located at:</span><br>'.$defendantHouseNum.' '.$defendantStreetName.' '. $unitNum . '<br><br><span style="position:absolute; margin-top:-10px;">'.$defendantTown .',' . $defendantState.' '.$defendantZipcode.'  </span></span>
+<span style="position:absolute;left:50px;top:585px" class="cls_004"><span class="cls_004">The Plaintiff(s) named below, having obtained a judgment for possession of real property located at:</span><br>'.$defendantHouseNum.' '.$defendantStreetName.' '. $unitNum . '<br><br><span style="position:absolute; margin-top:-10px;">'.$defendantTown .', ' . $defendantState.' '.$defendantZipcode.'  </span></span>
 <span style="position:absolute;left:50px;top:665px" class="cls_004"><span class="cls_004">Address if any:</span></span>
 <span style="position:absolute;left:50px;top:720px" class="cls_004"><span class="cls_004">Requests that you issue an ORDER FOR POSSESSION for such property.</span></span>
 <span style="position:absolute;left:50px;top:745px" class="cls_004"><span class="cls_004">I certify that this filing complies with the provisions of the Case Records Public Access Policy of the Unified Judicial</span></span>
@@ -408,6 +416,7 @@ span.cls_009{font-family:Arial,serif;font-size:9px;color:rgb(0,0,0);font-weight:
 <span style="position:absolute;left:605px;top:985px" class="cls_008"><span class="cls_008">FREE INTERPRETER</span></span>
 <span style="position:absolute;left:590px;top:1000px" class="cls_009"><span class="cls_009">www.pacourts.us/language-rights</span></span><br>
 <span style = "position:absolute;left:270px;top:985px" class="cls_008" ><span class="cls_008" > CourtZip ID #'.$evictionId.' </span ></span ><br >
+<span style = "position:absolute;left:120.65px;top:985.85px" class="cls_007" ><span class="cls_007" > </span >Filing Fee: $' . $filingFee . '</span ><br >
 </span></body></html>
 ');
             } else if ($fileType == 'civil complaint') {
@@ -437,7 +446,7 @@ span.cls_011{font-family:Arial,serif;font-size:12px;color:rgb(0,0,0);font-weight
 <span style="position:absolute;left:55px;top:140px" class="cls_004"><span class="cls_004">MDJ Name: '. $courtDetails->mdj_name .'</span></span><br>
 <span style="position:absolute;left:55px;top:165px" class="cls_004"><span class="cls_004">Address: '.$courtAddressLine1.'<br><span style="margin-left:50px;">'.$courtAddressLine2.'</span></span></span><br>
 <span style="position:absolute;left:581px;top:190px" class="cls_006"><span class="cls_006">V.</span></span>
-<span style="position:absolute;left:450px;top:205px" class="cls_010"><span class="cls_010">DEFENDANT:</span><br><p style="margin-left:6px;">'.$tenantName.'<br>'.$defendantHouseNum.' '.$defendantStreetName.' '. $unitNum . '<br>'.$defendantTown .',' . $defendantState.' '.$defendantZipcode.'  </p></span><br>
+<span style="position:absolute;left:450px;top:205px" class="cls_010"><span class="cls_010">DEFENDANT:</span><br><p style="margin-left:6px;">'.$tenantName.'<br>'. $defendantState . '<br>'.$defendantZipcode.' </p></span><br>
 <span style="position:absolute;left:615px;top:205px" class="cls_005"><span class="cls_005">NAME and ADDRESS</span></span><br>
 <span style="position:absolute;left:55px;top:200px" class="cls_004"><span class="cls_004">Telephone: '.$courtDetails->phone_number.'</span></span><br>
 <span style="position:absolute;left:190px;top:240px" class="cls_004"><span class="cls_004">AMOUNT</span></span><br>
@@ -459,7 +468,7 @@ span.cls_011{font-family:Arial,serif;font-size:12px;color:rgb(0,0,0);font-weight
 <span style="position:absolute;left:55px;top:410px" class="cls_003"><span class="cls_003">To The Defendant:  The above named plaintiff(s) asks judgment against you for $__________________ together with costs</span></span>
 <span style="position:absolute;left:166px;top:425px" class="cls_003"><span class="cls_003">upon the following claim (Civil fines must include citation of the statute or ordinance violated):</span></span>
 <span style="position:absolute;left:60px;top:460px" class="cls_003">' . $claimDescription . ' </span>
-<span style="position:absolute;left:140px;top:600px" class="cls_003">'.$tenantName.'</span>
+<span style="position:absolute;left:140px;top:600px" class="cls_003">'.$plantiffName.'</span>
 <span style="position:absolute;left:55px;top:600px" class="cls_003"><span class="cls_003">I, ________________________________ verify that the facts set forth in this complaint are true and correct to the</span></span>
 <span style="position:absolute;left:55px;top:615px" class="cls_003"><span class="cls_003">best of my knowledge, information, and belief.  This statement is made subject to the penalties of Section 4904 of the</span></span>
 <span style="position:absolute;left:55px;top:645px" class="cls_003"><span class="cls_003">Crimes Code (18 PA. C.S. § 4904) related to unsworn falsification to authorities.</span></span>
@@ -495,12 +504,12 @@ span.cls_011{font-family:Arial,serif;font-size:12px;color:rgb(0,0,0);font-weight
             $dompdf->stream();
 
             return 'success';
-        } catch (\Exception $e) {
+        } catch (Exception $e) {
             $errorDetails = 'DashboardController - error in downloadpdf() method when attempting to download previous eviction';
             $errorDetails .= PHP_EOL . 'File: ' . $e->getFile();
             $errorDetails .= PHP_EOL . 'Line #' . $e->getLine();
             $errorDetails .= PHP_EOL . 'Message ' .  $e->getMessage();
-            \Log::error($errorDetails . PHP_EOL . 'Error Message: ' . $e->getMessage() . PHP_EOL . 'Trace: ' . $e->getTraceAsString());
+            Log::error($errorDetails . PHP_EOL . 'Error Message: ' . $e->getMessage() . PHP_EOL . 'Trace: ' . $e->getTraceAsString());
             mail('andrew.gaidis@gmail.com', 'Showing Dashboard Page', $errorDetails);
             return 'failure';
         }

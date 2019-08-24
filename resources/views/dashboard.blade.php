@@ -2,28 +2,30 @@
 @section('content')
     <meta name="csrf-token" id="token" content="{{ csrf_token() }}">
     <div class="container-fluid">
+        <div class="row">
+            <div id="new_filing_container" class="col-md-3">
+                <div class="button_panel">
+                    <a href="{{ url('new-file') }}"><button type="button" class="btn btn-primary" id="new_file_btn">Start a new File</button></a><br>
+                </div>
+            </div>
+        </div>
         <div class="row justify-content-center">
-            <div class="col-md-12">
+            <div class="col-md-11">
                 <div class="card">
-                    <div class="card-header">Dashboard</div>
-                    <div class="card-body">
+                    <div class="card-body body_container">
+                        <h2 class="titles" style="text-align:center;">Current Filings</h2>
                         @if (session('status'))
                             <div class="alert alert-success">
                                 {{ session('status') }}
                             </div>
                         @endif
-                            <h2 class="titles">Start a New Filing:</h2>
-                            <div style="margin-top:0!important;" class="button_panel">
-                                <a href="{{ url('new-ltc') }}"><button type="button" class="btn btn-primary home_btns" id="ltc_btn">Landlord-Tenant Complaint</button></a>
-                                <a href="{{ url('new-oop') }}"><button type="button" class="btn btn-primary home_btns" id="oop_btn">Order of Possession</button></a>
-                                <a href="{{ url('new-civil-complaint') }}"><button type="button" class="btn btn-primary home_btns" id="civil_complaint_btn">Civil Complaint</button></a>
-                            </div>
                         <form method="post" action="{{ action('DashboardController@downloadPDF') }}" enctype="multipart/form-data" id="dashboard_form">
                             <input type="hidden" name="_token" value="{{ Session::token() }}">
                             <table class="table table-hover table-responsive-md table-bordered eviction_table" id="eviction_table">
                                 <thead>
                                 <tr>
                                     <th style="width: 1%" class="text-center">Id</th>
+                                    <th>Download Status</th>
                                     <th style="width: 14%" class="text-center">Property Address</th>
                                     <th style="width: 9%" class="text-center">Owner</th>
                                     <th style="width: 9%" class="text-center">Tenant</th>
@@ -57,6 +59,13 @@
                                             'Locked Out Tenant');?>
                                     <tr>
                                         <td class="text-center">{{$eviction->id}}</td>
+                                        <td class="text-center">
+                                            @if ($eviction->is_downloaded == 0)
+                                                No
+                                            @else
+                                                Yes
+                                            @endif
+                                        </td>
                                         <td class="text-center">{{$propertyAddressArray[0]}} <br> {{str_replace('United States', '', $propertyAddressArray[1])}}</td>
                                         <td class="text-center">{{$eviction->owner_name}}</td>
                                         <td class="text-center">{{$eviction->tenant_name}}</td>

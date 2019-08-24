@@ -12,12 +12,12 @@
                             <div class="col-md-12">
                                 <form method="post" action="{{ action('CivilComplaintController@formulatePDF') }}" enctype="multipart/form-data" id="eviction_form">
                                     <input type="hidden" name="_token" value="{{ Session::token() }}">
-                                    <h2 style="text-align:center;" class="title">Defendant Location</h2>
-                                    <h3 style="text-align:center;" class="fs-subtitle">Enter the address the plaintiff alleges the complaint occurred.</h3>
+                                    <a href="{{'new-file'}}"><button type="button" id="back_to_step_1_btn" class="btn btn-primary">Back to Step 1</button></a>
+                                    <h2 style="text-align:center;" class="titles fs-subtitle">Step 2:<br> Enter the address the plaintiff alleges the complaint occurred.</h2>
                                     <div class="form-group">
                                         <div class="row">
                                             <div class="col-sm-6 col-md-8 col-lg-8 col-xl-8">
-                                                <input style="margin-left: 25%;" class="form-control" placeholder="Rental Street Address" type="text" id="pac-input"/>
+                                                <input style="margin-left: 25%;" class="form-control" placeholder="Enter Address of Complaint" type="text" id="pac-input"/>
                                             </div>
                                         </div>
                                     </div>
@@ -29,7 +29,7 @@
 
 
                                         <!-- ADDITIONAL INFORMATION ON PROPERTY -->
-                                        <h4 class="major_labels">Additional Info on Property.</h4>
+                                        <h2 class="titles major_labels step_3_title">Step 3:<br> Fill out information on the Incident</h2>
                                         <div id="additional_info_container">
                                             <div class="form-group">
                                                 <div class="row">
@@ -38,21 +38,29 @@
                                                     </div>
                                                 </div>
                                                 <div class="row">
-                                                    <div class="col-sm-6">
+                                                    <div class="col-sm-3">
                                                         <label class="labels" for="zipcode">Verify Zipcode: </label>
-                                                        <input type="text" class="form-control eviction_fields" placeholder="07753" id="zipcode" name="zipcode"/>
+                                                        <input type="text" class="form-control eviction_fields" placeholder="07753" id="zipcode" name="zipcode" maxlength="11"/>
                                                     </div>
                                                 </div>
                                                 <div class="row">
-                                                    <div class="col-sm-6">
+                                                    <div class="col-sm-4">
                                                         <label class="labels" for="unit_number">Additional Address Detail</label>
-                                                        <input type="text" class="form-control eviction_fields" placeholder="Example: Unit 3" id="unit_number" name="unit_number"/>
+                                                        <input type="text" class="form-control eviction_fields" placeholder="Example: Unit 3" id="unit_number" name="unit_number" maxlength="10"/>
                                                     </div>
                                                 </div>
                                                 <div class="row">
                                                     <div class="col-sm-6">
                                                         <label class="labels" for="tenant_name">Defendant Name</label>
-                                                        <input type="text" class="form-control eviction_fields" placeholder="" id="tenant_name" name="tenant_name"/>
+                                                        <input type="text" class="form-control eviction_fields" placeholder="" id="tenant_name" name="tenant_name" maxlength="20"/>
+                                                    </div>
+                                                    <div class="col-sm-8">
+                                                        <label class="labels">Defendant Street Mailing Address</label>
+                                                        <input class="form-control eviction_fields" placeholder="1234 Main Street" type="text" id="civil_defendant_address_1" name="civil_defendant_address_1" maxlength="30"/>
+                                                    </div>
+                                                    <div class="col-sm-8">
+                                                        <label class="labels">Defendant City, State, Zip Mailing Address </label>
+                                                        <input class="form-control eviction_fields" placeholder="Philadelphia, PA 17349" type="text" id="civil_defendant_address_2" name="civil_defendant_address_2" maxlength="30"/>
                                                     </div>
                                                 </div>
                                             </div>
@@ -65,19 +73,19 @@
                                                 <div class="row">
                                                     <div class="col-sm-6">
                                                         <label class="labels">Plaintiff Name</label>
-                                                        <input class="form-control eviction_fields" placeholder="Plaintiff Name" type="text" id="owner_name" name="owner_name"/>
+                                                        <input class="form-control eviction_fields" placeholder="Plaintiff Name" type="text" id="owner_name" name="owner_name" maxlength="30"/>
                                                     </div>
                                                     <div class="col-sm-6">
                                                         <label class="labels">Plaintiff Phone #</label>
-                                                        <input class="form-control eviction_fields" placeholder="(ext)-000-0000" type="text" id="owner_number" name="owner_phone"/>
+                                                        <input class="form-control eviction_fields" placeholder="(ext)-000-0000" type="text" id="owner_number" name="owner_phone" maxlength="15"/>
                                                     </div>
                                                     <div class="col-sm-8">
                                                         <label class="labels">Plaintiff Address Line 1</label>
-                                                        <input class="form-control eviction_fields" placeholder="1234 Main Street" type="text" id="owner_address_1" name="owner_address_1"/>
+                                                        <input class="form-control eviction_fields" placeholder="1234 Main Street" type="text" id="owner_address_1" name="owner_address_1" maxlength="30"/>
                                                     </div>
                                                     <div class="col-sm-8">
                                                         <label class="labels">Plaintiff Address Line 2 </label>
-                                                        <input class="form-control eviction_fields" placeholder="Philadelphia, PA 17349" type="text" id="owner_address_2" name="owner_address_2"/>
+                                                        <input class="form-control eviction_fields" placeholder="Philadelphia, PA 17349" type="text" id="owner_address_2" name="owner_address_2" maxlength="30"/>
                                                     </div>
                                                 </div>
                                             </div>
@@ -91,11 +99,11 @@
                                                 <div class="row">
                                                     <div class="col-sm-6">
                                                         <label class="labels" for="total_judgment">Total Judgment</label>
-                                                        <input type="text" class="form-control eviction_fields" id="total_judgment" name="total_judgment" placeholder="$" value="" />
+                                                        <input type="text" class="form-control eviction_fields" id="total_judgment" name="total_judgment" placeholder="$" value=""  maxlength="9"/>
                                                     </div>
                                                     <div class="col-sm-10">
-                                                        <label class="labels" for="total_judgment">Claim Description</label>
-                                                        <textarea style="height:150px;" class="form-control eviction_fields" id="claim_description" name="claim_description" placeholder="Broken Window"></textarea>
+                                                        <label class="labels" for="total_judgment">Claim Description</label><div id ="textarea_feedback"></div>
+                                                        <textarea style="height:150px;" class="form-control eviction_fields" id="claim_description" maxlength="500" name="claim_description" placeholder="Broken Window"></textarea>
                                                     </div>
                                                 </div>
                                             </div>
@@ -104,20 +112,12 @@
                                         <div class="form-group">
                                             <div class="row">
                                                 <div class="offset-4 col-sm-10">
-                                                    <button type="button" id="finalize_document" data-target="#modal_signature" data-toggle="modal" class="btn btn-primary">Finalize Document</button>
+                                                    <button type="button" id="finalize_document" data-target="#modal_signature" data-toggle="modal" class="btn btn-primary">Sign and Payment</button>
                                                 </div>
                                             </div>
                                         </div>
 
                                         <div id="status_msg"></div>
-
-                                        <div class="form-group">
-                                            <div class="row">
-                                                <div class="offset-4 col-sm-10">
-                                                    <button type="submit" id="pdf_download_btn" disabled class="btn btn-primary">Submit</button>
-                                                </div>
-                                            </div>
-                                        </div>
 
                                         <input type="hidden" id="signature_source" name="signature_source"/>
                                         <input type="hidden" id="state" name="state"/>
@@ -127,37 +127,63 @@
                                         <input type="hidden" id="town" name="town"/>
                                         <input type="hidden" id="court_number" name="court_number"/>
                                     </div>
-                                </form>
-                                <div class="modal fade" id="modal_signature">
-                                    <div class="modal-dialog" role="document">
-                                        <div class="modal_signature modal-content">
-                                            <div class="modal-header">
-                                                <h4 class="set_court_date_title">Signature: </h4>
-                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                    <span aria-hidden="true">&times;</span>
-                                                </button>
-                                            </div>
-                                            <div class="modal-body">
-                                                <div class="row">
-                                                    <div>
-                                                        <span id="legal_checkbox_container"><input type="checkbox" id="legal_checkbox"/><em><label for="legal_checkbox">By checking this box, I understand that my electronic signature constitutes a legal signature, <br>and that by entering my name above I acknowledge and warrant the accuracy of the information provided in this document.</label></em></span>
-                                                        <span style="font-size: 32px;">X</span> <canvas id="signature_pad" width="600" height="200" style="touch-action: none;"></canvas>
-                                                        <div class="signature_pad_footer">
+
+
+
+
+
+
+                                    <!-- PAY AND SIGN MODAL-->
+                                    <div class="modal fade" id="modal_signature">
+                                        <div class="modal-dialog" role="document">
+                                            <div class="modal_signature modal-content">
+                                                <div class="modal-header">
+                                                    <h4 class="set_court_date_title">Sign Document and Payment Process </h4>
+                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                        <span aria-hidden="true">&times;</span>
+                                                    </button>
+                                                </div>
+                                                <h3 class="titles signature_title">Step 4:<br> Signature</h3>
+                                                <div class="modal-body">
+                                                    <div class="row">
+                                                        <div>
+                                                            <span style="font-size: 32px;">X</span> <canvas id="signature_pad" width="600" height="200" style="touch-action: none;"></canvas>
+                                                            <div class="signature_pad_footer">
+                                                            </div>
+                                                            <span id="legal_checkbox_container"><input type="checkbox" id="legal_checkbox"/><em><label style="text-align:center" for="legal_checkbox">By checking this box, I understand that my electronic signature constitutes a legal signature, <br>and that by entering my name above I acknowledge and warrant the accuracy of the information provided in this document.</label></em></span>
+                                                            <button type="button" class="btn btn-warning clear_signature" data-action="clear">Clear Signature</button>
+                                                            <button disabled type="button" class="btn btn-primary use_signature" data-action="clear">Use Signature</button>
                                                         </div>
+                                                    </div><br><hr><br>
+                                                    <div class="payment_section">
+                                                        <h3 class="titles payment_title">Step 5:<br> Payment Information</h3>
+                                                        <div class="form-row">
+                                                            <label for="card-element">
+                                                                <span class="credit_debit">Credit or debit card</span>
+                                                                <img style="margin-left:70px;" alt="Credit Card Logos" title="Credit Card Logos" src="http://www.credit-card-logos.com/images/multiple_credit-card-logos-1/credit_card_logos_10.gif" width="236" height="30" border="0" />
+                                                            </label>
+                                                            <div id="card-element">
+                                                                <!-- A Stripe Element will be inserted here. -->
+                                                            </div>
+
+                                                            <!-- Used to display form errors. -->
+                                                            <div id="card-errors" role="alert"></div>
+                                                        </div><br><br>
                                                     </div>
                                                 </div>
-                                            </div>
-
-                                            <div class="modal-footer">
-                                                <div class="signature_pad_actions">
-                                                    <button type="button" class="btn btn-warning clear_signature" data-action="clear">Clear</button>
-                                                    <button type="button" class="btn btn-danger no_signature" data-dismiss="modal" data-action="save-png">No Signature Needed</button>
-                                                    <button type="button" class="btn btn-success save_signature" data-dismiss="modal" data-action="save-png">Use Digital Signature</button>
+                                                <div class="pay_submit_section modal-footer">
+                                                    <button disabled type="submit" class="btn btn-success pay_sign_submit" data-action="save-png">Pay and Submit Document</button>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
-                                </div>
+
+
+
+
+
+
+                                </form>
                             </div>
                         </div>
                     </div>
