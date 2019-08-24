@@ -38,10 +38,6 @@ class DashboardController extends Controller
 
             $userId = Auth::user()->id;
             $courtNumber = Auth::user()->court_id;
-            $notify = new NotificationController($courtNumber, Auth::user()->email);
-            $notify->notifyAdmin();
-            $notify->notifyJudge();
-            $notify->notifyMaker();
 
             if (Auth::user()->role == 'Administrator') {
                 $evictions = DB::table('evictions')->orderBy('id', 'desc')->get();
