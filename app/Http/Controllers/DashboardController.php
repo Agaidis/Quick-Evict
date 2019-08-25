@@ -35,7 +35,6 @@ class DashboardController extends Controller
 
         try {
 
-
             $userId = Auth::user()->id;
             $courtNumber = Auth::user()->court_id;
 

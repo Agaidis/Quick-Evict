@@ -281,10 +281,10 @@ class EvictionController extends Controller
                 }
 
                 try {
-//                    $notify = new NotificationController($courtNumber, Auth::user()->email);
-//                    $notify->notifyAdmin();
-//                    $notify->notifyJudge();
-//                    $notify->notifyMaker();
+                    $notify = new NotificationController($courtNumber, Auth::user()->email);
+                    $notify->notifyAdmin();
+                    $notify->notifyJudge();
+                    $notify->notifyMaker();
                 } catch ( Exception $e) {
                     $mailer->sendMail('andrew.gaidis@gmail.com', 'Notification Error' . Auth::user()->id, $e->getMessage());
                 }

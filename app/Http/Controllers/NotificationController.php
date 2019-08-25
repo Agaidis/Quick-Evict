@@ -45,7 +45,7 @@ class NotificationController extends Controller
             $this->mailer->sendMail($this->userEmail,  $subject, $message);
 
         } catch ( Exception $e) {
-            $this->mailer->sendMail('andrew.gaidis@gmail.com', 'Notification Error' . Auth::user()->id, $e->getMessage() );
+            $this->mailer->sendMail('andrew.gaidis@gmail.com', 'Notification Maker Error' . Auth::user()->id, $e->getMessage() );
         }
     }
 
@@ -64,20 +64,21 @@ CourtZip Customer Service Team';
 
             $this->mailer->sendMail($judgeEmail,  $subject, $message);
         } catch ( Exception $e) {
-            $this->mailer->sendMail('andrew.gaidis@gmail.com', 'Notification Error' . Auth::user()->id, $e->getMessage() );
+            $this->mailer->sendMail('andrew.gaidis@gmail.com', 'Notification Judge Error' . Auth::user()->id, $e->getMessage() );
         }
     }
 
     public function notifyAdmin() {
         try {
-            $adminEmails = $this->getAdminEmails();
+          //  $adminEmails = ['andrew.gaidis@gmail.com', 'chad@slatehousegroup.com', 'racheller@slatehousegroup.com', 'nate@slatehousegroup.com', 'amandaa@slatehousegroup.com'];
 
             $subject = 'CourtZip File Creation';
             $message = 'A CourtZip filing has been made by ' . $this->userEmail . ' under court id ' . $this->courtId;
 
-            $this->mailer->sendMail($adminEmails,  $subject, $message);
+            $this->mailer->sendMail('andrew.gaidis@gmail.com',  $subject, $message);
+
         } catch ( Exception $e) {
-            $this->mailer->sendMail('andrew.gaidis@gmail.com', 'Notification Error' . Auth::user()->id, $e->getMessage() );
+            $this->mailer->sendMail('andrew.gaidis@gmail.com', 'Notification Admin Error' . Auth::user()->id, $e->getMessage() );
         }
     }
 }

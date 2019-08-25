@@ -14,7 +14,7 @@ class Mailer
         $mg = Mailgun::create(env('MAIL_API_KEY')); // For US servers
 
         $mg->messages()->send('mg.courtzip.com', [
-            'from'    => 'Court Zip Administration <mailgun@mg.courtzip.com>',
+            'from'    => 'Court Zip Administration <service@courtzip.com>',
             'to'      => $mailTo,
             'subject' => $subject,
             'text'    => $message
