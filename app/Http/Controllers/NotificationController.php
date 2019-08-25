@@ -70,13 +70,14 @@ CourtZip Customer Service Team';
 
     public function notifyAdmin() {
         try {
-          //  $adminEmails = ['andrew.gaidis@gmail.com', 'chad@slatehousegroup.com', 'racheller@slatehousegroup.com', 'nate@slatehousegroup.com', 'amandaa@slatehousegroup.com'];
+            $adminEmails = ['andrew.gaidis@gmail.com', 'chad@slatehousegroup.com', 'racheller@slatehousegroup.com', 'nate@slatehousegroup.com', 'amandaa@slatehousegroup.com'];
 
             $subject = 'CourtZip File Creation';
             $message = 'A CourtZip filing has been made by ' . $this->userEmail . ' under court id ' . $this->courtId;
 
-            $this->mailer->sendMail('andrew.gaidis@gmail.com',  $subject, $message);
-
+            foreach ($adminEmails as $adminEmail) {
+                $this->mailer->sendMail($adminEmail, $subject, $message);
+            }
         } catch ( Exception $e) {
             $this->mailer->sendMail('andrew.gaidis@gmail.com', 'Notification Admin Error' . Auth::user()->id, $e->getMessage() );
         }
