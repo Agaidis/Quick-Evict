@@ -1,11 +1,6 @@
 if (document.location.href.split('/')[3] === 'new-file') {
     $(document).ready(function () {
 
-
-
-
-
-
         $('[data-toggle="tooltip"]').tooltip();
         var canvas = document.querySelector("canvas");
         var signaturePad = new SignaturePad(canvas, {
@@ -224,7 +219,7 @@ if (document.location.href.split('/')[3] === 'new-file') {
                      beforeSend: function (xhr) {
                          xhr.setRequestHeader('X-CSRF-TOKEN', $("#token").attr('content'));
                      },
-                     url : 'https://courtzip.com/get-signature-type',
+                     url : 'http://127.0.0.1:8000/get-signature-type',
                      type : 'POST',
                      data : {
                          'courtNumber' : $('#court_number').val()
@@ -234,16 +229,22 @@ if (document.location.href.split('/')[3] === 'new-file') {
                         if (data[0].digital_signature === 0) {
                             $('#finalize_document').css('display', 'none');
                         }
-                        if (data[0].online_submission === 0) {
+                        console.log(data[0].online_submission);
+                        console.log(quickEvict.userEmail);
+                        if (data[0].online_submission !== 'of' && quickEvict.userEmail.indexOf('slatehousegroup') === -1) {
                             alert('Sorry, but this magistrate is currently not accepting online submissions');
-                            window.location.replace("http://courtzip.com/dashboard");
+                            window.location.replace("http://127.0.0.1:8000/dashboard");
                         }
                      },
                      error : function(data)
                      {
 
-                     }
+                     },
+
+
                  });
+                console.log(data[0].online_submission);
+                console.log(quickEvict.userEmail);
             }
         });
 

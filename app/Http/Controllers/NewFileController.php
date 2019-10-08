@@ -46,7 +46,8 @@ class NewFileController extends Controller
 
                 JavaScript::put([
                     'geoData' => $geoData,
-                    'userId' => Auth::user()->role
+                    'userId' => Auth::user()->role,
+                    'userEmail' => Auth::user()->email
                 ]);
 
                 if ($request->fileType == 'ltc') {

@@ -42951,7 +42951,7 @@ if (document.location.href.split('/')[3] === 'new-file') {
           beforeSend: function beforeSend(xhr) {
             xhr.setRequestHeader('X-CSRF-TOKEN', $("#token").attr('content'));
           },
-          url: 'https://courtzip.com/get-signature-type',
+          url: 'http://127.0.0.1:8000/get-signature-type',
           type: 'POST',
           data: {
             'courtNumber': $('#court_number').val()
@@ -42963,13 +42963,18 @@ if (document.location.href.split('/')[3] === 'new-file') {
               $('#finalize_document').css('display', 'none');
             }
 
-            if (data[0].online_submission === 0) {
+            console.log(data[0].online_submission);
+            console.log(quickEvict.userEmail);
+
+            if (data[0].online_submission !== 'of' && quickEvict.userEmail.indexOf('slatehousegroup') === -1) {
               alert('Sorry, but this magistrate is currently not accepting online submissions');
-              window.location.replace("http://courtzip.com/dashboard");
+              window.location.replace("http://127.0.0.1:8000/dashboard");
             }
           },
           error: function error(data) {}
         });
+        console.log(data[0].online_submission);
+        console.log(quickEvict.userEmail);
       }
     });
     $(window).keydown(function (event) {
@@ -43441,19 +43446,8 @@ $(document).ready(function () {
       $('#digital_signature').val(0);
     }
   });
-  $('#online_submission').val(1);
-  $('#is_online_submission_allowed').on('change', function () {
-    if (document.getElementById("is_online_submission_allowed").checked == true) {
-      $('#online_submission').val(1);
-    } else {
-      $('#online_submission').val(0);
-    }
-  });
   $('#edit_is_digital_signature_allowed').on('change', function () {
     $('#edit_digital_signature').val(document.getElementById("edit_is_digital_signature_allowed").checked);
-  });
-  $('#edit_is_online_submission_allowed').on('change', function () {
-    $('#edit_online_submission').val(document.getElementById("edit_is_online_submission_allowed").checked);
   });
   $('#magistrate_table').DataTable({
     "pagingType": "simple"
@@ -43528,13 +43522,10 @@ $(document).ready(function () {
         $('#edit_three_oop').val(data[1][0].three_defendant_out_of_pocket);
         $('#edit_additional_tenants').val(data[1][0].additional_tenant);
         $('#edit_geo_locations').val(data[0][0].geo_locations);
+        $('#edit_online_submission').val(data[1][0].online_submission);
 
         if (data[1][0].digital_signature == 1) {
           $('#edit_is_digital_signature_allowed').prop('checked', true);
-        }
-
-        if (data[1][0].online_submission == 1) {
-          $('#edit_is_online_submission_allowed').prop('checked', true);
         }
       },
       error: function error(data) {
@@ -43581,12 +43572,6 @@ $(document).ready(function () {
       $('#edit_digital_signature').val(1);
     } else {
       $('#edit_digital_signature').val(0);
-    }
-
-    if (document.getElementById("edit_is_online_submission_allowed").checked == true) {
-      $('#edit_online_submission').val(1);
-    } else {
-      $('#edit_online_submission').val(0);
     }
 
     $.ajax({

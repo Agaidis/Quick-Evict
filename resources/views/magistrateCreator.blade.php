@@ -180,9 +180,13 @@
                                                 <input type="hidden" id="digital_signature" name="digital_signature" />
                                             </div>
                                             <div class="col-sm-12">
-                                                <input type="checkbox" checked id="is_online_submission_allowed" name="is_online_submission_allowed" />
-                                                <label for="is_online_submission_allowed">Is Online Submission Allowed?</label>
-                                                <input type="hidden" id="online_submission" name="online_submission" />
+                                                <label for="online_submission">Online Submission Status</label>
+                                                <select class="form-control" name="online_submission">
+                                                    <option selected disabled>Select Status</option>
+                                                    <option value="of">Online Filing</option>
+                                                    <option value="otp">Online to Print</option>
+                                                    <option value="nf">No Filing</option>
+                                                </select>
                                             </div>
                                         </div>
                                     </div>
@@ -338,9 +342,13 @@
                                                                 <input type="hidden" id="edit_digital_signature" name="edit_digital_signature" />
                                                             </div>
                                                             <div class="col-sm-12">
-                                                                <input type="checkbox" id="edit_is_online_submission_allowed" name="edit_is_online_submission_allowed" />
-                                                                <label for="edit_is_online_submission_allowed">Is Online Submission Allowed?</label>
-                                                                <input type="hidden" id="edit_online_submission" name="edit_online_submission" />
+                                                                <label for="edit_online_submission">Online Submission Status</label>
+                                                                <select class="form-control" name="edit_online_submission">
+                                                                    <option disabled>Select Status</option>
+                                                                    <option value="of">Online Filing</option>
+                                                                    <option value="otp">Online to Print</option>
+                                                                    <option value="nf">No Filing</option>
+                                                                </select>
                                                             </div>
                                                         </div>
                                                     </div>
