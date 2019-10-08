@@ -240,11 +240,7 @@ if (document.location.href.split('/')[3] === 'new-file') {
                      {
 
                      },
-
-
                  });
-                console.log(data[0].online_submission);
-                console.log(quickEvict.userEmail);
             }
         });
 
