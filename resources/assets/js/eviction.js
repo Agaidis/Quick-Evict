@@ -219,7 +219,7 @@ if (document.location.href.split('/')[3] === 'new-file') {
                      beforeSend: function (xhr) {
                          xhr.setRequestHeader('X-CSRF-TOKEN', $("#token").attr('content'));
                      },
-                     url : 'http://127.0.0.1:8000/get-signature-type',
+                     url : 'https://courtzip.com/get-signature-type',
                      type : 'POST',
                      data : {
                          'courtNumber' : $('#court_number').val()
@@ -233,7 +233,7 @@ if (document.location.href.split('/')[3] === 'new-file') {
                         console.log(quickEvict.userEmail);
                         if (data[0].online_submission !== 'of' && quickEvict.userEmail.indexOf('slatehousegroup') === -1) {
                             alert('Sorry, but this magistrate is currently not accepting online submissions');
-                            window.location.replace("http://127.0.0.1:8000/dashboard");
+                            window.location.replace("https://courtzip.com/dashboard");
                         }
                      },
                      error : function(data)
