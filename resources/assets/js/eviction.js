@@ -225,13 +225,12 @@ if (document.location.href.split('/')[3] === 'new-file') {
                          'courtNumber' : $('#court_number').val()
                      },
                      success : function(data) {
-                         console.log(data);
                         if (data[0].digital_signature === 0) {
                             $('#finalize_document').css('display', 'none');
                         }
-                        console.log(data[0].online_submission);
-                        console.log(quickEvict.userEmail);
-                        if (data[0].online_submission !== 'of' && quickEvict.userEmail.indexOf('slatehousegroup') === -1) {
+                         let validEmails = ['brc@saxtonstump.com', 'tiffanymitchell0202@gmail.com', 'sparkleclean85@gmail.com'];
+
+                        if (data[0].online_submission !== 'of' && (quickEvict.userEmail.indexOf('slatehousegroup') === -1 && validEmails.includes(quickEvict.userEmail) === false)) {
                             alert('Sorry, but this magistrate is currently not accepting online submissions');
                             window.location.replace("https://courtzip.com/dashboard");
                         }
