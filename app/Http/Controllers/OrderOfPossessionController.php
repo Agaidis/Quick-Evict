@@ -103,11 +103,11 @@ class OrderOfPossessionController extends Controller
             $totalFees = number_format($totalFees, 2);
 
             if ($noCommaTotalFees < 2000) {
-                $filingFee = $upTo2000 + $additionalTenantFee;
+                $filingFee = $oop + $additionalTenantFee;
             } else if ($noCommaTotalFees >= 2000 && $noCommaTotalFees <= 4000) {
-                $filingFee = $btn20014000 + $additionalTenantFee;
+                $filingFee = $oop + $additionalTenantFee;
             } else if ($noCommaTotalFees > 4000) {
-                $filingFee = $greaterThan4000 + $additionalTenantFee;
+                $filingFee = $oop + $additionalTenantFee;
             } else {
                 $filingFee = 'Didnt Work';
             }
