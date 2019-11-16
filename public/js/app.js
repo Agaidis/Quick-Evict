@@ -42951,20 +42951,16 @@ if (document.location.href.split('/')[3] === 'new-file') {
           beforeSend: function beforeSend(xhr) {
             xhr.setRequestHeader('X-CSRF-TOKEN', $("#token").attr('content'));
           },
-          url: 'http://127.0.0.1:8000/get-signature-type',
+          url: 'https://courtzip.com/get-signature-type',
           type: 'POST',
           data: {
             'courtNumber': $('#court_number').val()
           },
           success: function success(data) {
-            console.log(data);
-
             if (data[0].digital_signature === 0) {
               $('#finalize_document').css('display', 'none');
             }
 
-            console.log(data[0].online_submission);
-            console.log(quickEvict.userEmail);
             var validEmails = ['brc@saxtonstump.com', 'tiffanymitchell0202@gmail.com', 'sparkleclean85@gmail.com'];
 
             if (data[0].online_submission !== 'of' && quickEvict.userEmail.indexOf('slatehousegroup') === -1 && validEmails.includes(quickEvict.userEmail) === false) {
@@ -43083,9 +43079,9 @@ if (document.location.href.split('/')[3] === 'new-file') {
         var currentTenantObj = $('#tenant_name_' + i);
 
         if (currentTenantObj.length > 0) {
-          html += '<input class="form-control eviction_fields" placeholder="Tenant Name ' + i + '" type="text" id="tenant_name_' + i + '" name="tenant_name[]" value="' + currentTenantObj.val() + '"/><br>';
+          html += '<label class="labels" for="tenant_name_' + i + '" >Tenant Name ' + i + '</label><input class="form-control eviction_fields" placeholder="Tenant Name ' + i + '" type="text" id="tenant_name_' + i + '" name="tenant_name[]" value="' + currentTenantObj.val() + '"/><br>';
         } else {
-          html += '<input class="form-control eviction_fields" placeholder="Tenant Name ' + i + '" type="text" id="tenant_name_' + i + '" name="tenant_name[]" value=""/><br>';
+          html += '<label class="labels" for="tenant_name_' + i + '" >Tenant Name ' + i + '</label><input class="form-control eviction_fields" placeholder="Tenant Name ' + i + '" type="text" id="tenant_name_' + i + '" name="tenant_name[]" value=""/><br>';
         }
       }
 

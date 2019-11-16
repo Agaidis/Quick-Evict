@@ -7,7 +7,7 @@
         <div class="row justify-content-center">
             <div class="col-md-10">
                 <div class="card">
-                    <div class="card-header"><h2>New Order of Possession</h2></div>
+                    <div class="card-header"><h2>New Request for Order for Possession</h2></div>
                     <div class="card-body">
                         <div class="row">
                             <div class="col-md-12">
@@ -74,9 +74,16 @@
                                                 <input type="hidden" id="tenant_num" name="tenant_num" />
                                                 <div class="row">
                                                     <div class="col-sm-4">
-                                                        <label class="labels" for="docket_number">Docket Number</label>
-                                                        <input type="text" class="form-control eviction_fields" placeholder="" id="docket_number" name="docket_number" maxlength="5"/>
-                                                    </div>
+                                                        <label class="labels" for="docket_number">Docket Number</label><br>
+                                                        <div class="docket_number_ctr">
+                                                        <span class="docket_disabled">MJ-</span>
+                                                         <input type="text" class="docket_enabled form-control eviction_fields" placeholder="" id="docket_number_1" name="docket_number_1" maxlength="5"/>
+                                                        <span class="docket_disabled">-LT-</span>
+                                                        <input type="text" class="docket_enabled form-control eviction_fields" placeholder="" id="docket_number_2" name="docket_number_2" maxlength="7"/>
+                                                        <span class="docket_disabled">-</span>
+                                                        <input type="text" class="docket_enabled form-control eviction_fields" placeholder="" id="docket_number_3" name="docket_number_3" maxlength="4"/>
+                                                        </div>
+                                                        </div>
                                                 </div>
                                             </div>
                                         </div>
@@ -97,7 +104,7 @@
                                                     <div class="col-sm-6">
                                                         <div class="labels">Property Owner</div>
                                                         <input checked type="radio" id="rented_by_owner" value="rentedByOwner" name="rented_by">
-                                                        <label for="rented_by_owner">Property is Rented by Owner</label><br>
+                                                        <label for="rented_by_owner">Owner self-filing this request</label><br>
                                                         <div id="rented_by_owner_div">
                                                             <div class="col-sm-8">
                                                                 <label class="labels">Owner Address Line 1</label>
@@ -109,11 +116,11 @@
                                                             </div>
                                                         </div>
                                                         <input type="radio" id="rented_by_other" value="rentedByOther" name="rented_by">
-                                                        <label for="rented_by_other">Property Rented by 3rd Party</label>
+                                                        <label for="rented_by_other">Property Manager filing this request on behalf of owner.</label>
                                                         <div id="rented_by_other_div">
                                                             <div class="col-sm-12">
                                                                 <label class="labels" for="other_name">Property Management Company Name</label>
-                                                                <input class="form-control eviction_fields" placeholder="PM Company Name" type="text" id="other_name" name="other_name" value="" maxlength="30">
+                                                                <input class="form-control eviction_fields" placeholder="PM Company Name" type="text" id="other_name" name="other_name" value="" maxlength="50">
                                                             </div>
                                                             <div class="col-sm-12">
                                                                 <label class="labels" for="pm_name">Property Manager Name</label>
@@ -151,10 +158,6 @@
                                                             <div class="col-sm-10">
                                                                 <label for="attorney_fees">Costs in Original LT Proceeding</label>
                                                                 <input type="text" class="form-control eviction_fields" id="costs_original_lt_proceeding" name="costs_original_lt_proceeding" placeholder="$" value="" maxlength="9"/>
-                                                            </div>
-                                                            <div class="col-sm-10">
-                                                                <label for="unjust_damages">Costs in this Proceeding</label>
-                                                                <input type="text" class="form-control eviction_fields" id="costs_this_proceeding" name="costs_this_proceeding" placeholder="$" value="" maxlength="9" />
                                                             </div>
                                                             <div class="col-sm-10">
                                                                 <label for="attorney_fees">Attorney Fees</label>

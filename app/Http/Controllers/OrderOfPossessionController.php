@@ -96,7 +96,7 @@ class OrderOfPossessionController extends Controller
             $defendantStreetName = $_POST['streetName'];
             $defendantTown = $_POST['town'];
 
-            $totalFees = (float)$_POST['judgment_amount'] + (float)$_POST['costs_original_lt_proceeding'] + (float)$_POST['costs_this_proceeding'] + (float)$_POST['attorney_fees'];
+            $totalFees = (float)$_POST['judgment_amount'] + (float)$_POST['costs_original_lt_proceeding'] + $oop + (float)$_POST['attorney_fees'];
 
             $noCommaTotalFees = str_replace(',','', $totalFees);
 
@@ -116,13 +116,20 @@ class OrderOfPossessionController extends Controller
                 $isAmtGreaterThanZero = true;
             }
 
+            $docketNumber2 = $_POST['docket_number_2'];
+
+            while (strlen($docketNumber2) < 7) {
+                    $docketNumber2 = '0' . $docketNumber2;
+                }
+
+
             try {
                 $eviction = new Evictions();
                 $eviction->status = 'Created OOP';
                 $eviction->total_judgement = $totalFees;
                 $eviction->judgment_amount = $_POST['judgment_amount'];
                 $eviction->costs_original_lt_proceeding = $_POST['costs_original_lt_proceeding'];
-                $eviction->cost_this_proceeding = $_POST['costs_this_proceeding'];
+                $eviction->cost_this_proceeding = $oop;
                 $eviction->attorney_fees = $_POST['attorney_fees'];
                 $eviction->property_address = $defendanthouseNum.' '.$defendantStreetName.'-1'.$defendantTown .',' . $defendantState.' '.$defendantZipcode;
                 $eviction->defendant_state = $defendantState;
@@ -145,7 +152,7 @@ class OrderOfPossessionController extends Controller
                 $eviction->verify_name = $verifyName;
                 $eviction->unit_num = $_POST['unit_number'];
                 $eviction->user_id = Auth::user()->id;
-                $eviction->docket_number = $_POST['docket_number'];
+                $eviction->docket_number = 'MJ-' . $_POST['docket_number_1'] . '-LT' . $docketNumber2 . '-' . $_POST['docket_number_3'];
                 $eviction->date_of_oop = date("m/d/Y");
                 $eviction->court_filing_fee = '0';
                 $eviction->filing_fee = $filingFee;
@@ -173,6 +180,7 @@ class OrderOfPossessionController extends Controller
                     ]);
                 } catch ( Exception $e ) {
                     Log::info($e->getMessage());
+                    Log::info($e->getLine());
                     $mailer->sendMail('andrew.gaidis@gmail.com', 'OOP Error', $e->getMessage() );
                 }
 
@@ -184,11 +192,15 @@ class OrderOfPossessionController extends Controller
                 return redirect('dashboard')->with('status','Your OOP has been successfully made! You can see its progress in the table below.');
 
             } catch ( Exception $e ) {
-                $mailer->sendMail('andrew.gaidis@gmail.com', 'OOP Error', '' );
+                Log::info($e->getMessage());
+                Log::info($e->getLine());
+                $mailer->sendMail('andrew.gaidis@gmail.com', 'OOP Error', $e->getMessage() );
                 alert('It looks like there was an issue while making this LTC. the Development team has been notified and are aware that your having issues. They will update you as soon as possible.');
             }
         } catch ( Exception $e ) {
-            $mailer->sendMail('andrew.gaidis@gmail.com', 'OOP Error', '' );
+            Log::info($e->getMessage());
+            Log::info($e->getLine());
+            $mailer->sendMail('andrew.gaidis@gmail.com', 'OOP Error', $e->getMessage() );
            alert('It looks like there was an issue while making this LTC. the Development team has been notified and are aware that your having issues. They will update you as soon as possible.');
         }
     }

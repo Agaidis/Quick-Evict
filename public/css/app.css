@@ -11045,6 +11045,16 @@ form.eviction_form fieldset {
 #county_error, #file_type_error {
     color:red;
 }
+
+.docket_number_ctr {
+    width:65%;
+    display:inline-block;
+    white-space:nowrap;
+}
+
+.docket_disabled, .docket_enabled {
+    display: inline-block;
+}
 @font-face {
   font-family: 'Journal';
   src: url('journal.eot');

@@ -360,9 +360,9 @@ if (document.location.href.split('/')[3] === 'new-file') {
                 var currentTenantObj = $('#tenant_name_' + i);
 
                 if (currentTenantObj.length > 0) {
-                    html += '<input class="form-control eviction_fields" placeholder="Tenant Name '+ i +'" type="text" id="tenant_name_'+ i +'" name="tenant_name[]" value="' + currentTenantObj.val() + '"/><br>';
+                    html += '<label class="labels" for="tenant_name_'+ i +'" >Tenant Name '+ i +'</label><input class="form-control eviction_fields" placeholder="Tenant Name '+ i +'" type="text" id="tenant_name_'+ i +'" name="tenant_name[]" value="' + currentTenantObj.val() + '"/><br>';
                 } else {
-                    html += '<input class="form-control eviction_fields" placeholder="Tenant Name '+ i +'" type="text" id="tenant_name_'+ i +'" name="tenant_name[]" value=""/><br>';
+                    html += '<label class="labels" for="tenant_name_'+ i +'" >Tenant Name '+ i +'</label><input class="form-control eviction_fields" placeholder="Tenant Name '+ i +'" type="text" id="tenant_name_'+ i +'" name="tenant_name[]" value=""/><br>';
                 }
             }
 

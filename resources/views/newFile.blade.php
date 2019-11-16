@@ -16,7 +16,7 @@
                                     <select class="form-control" id="file_type_select" name="fileType">
                                         <option value="none">File type Select</option>
                                         <option value="ltc">Landlord Tenant-Complaint</option>
-                                        <option value="oop">Order of Possession</option>
+                                        <option value="oop">Request for Order of Possession</option>
                                         <option value="civil">Civil Complaint</option>
                                     </select>
                                     <span id="file_type_error"></span>

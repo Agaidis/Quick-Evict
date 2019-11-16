@@ -67,7 +67,7 @@
                                                 <div class="col-sm-6">
                                                     <div class="labels">Property Owner</div>
                                                     <input checked type="radio" id="rented_by_owner" value="rentedByOwner" name="rented_by">
-                                                    <label for="rented_by_owner">Property is Rented by Owner</label><br>
+                                                    <label for="rented_by_owner">Owner self-filing this request</label><br>
                                                     <div id="rented_by_owner_div">
                                                         <div class="col-sm-8">
                                                             <label class="labels">Owner Address Line 1</label>
@@ -79,11 +79,11 @@
                                                         </div>
                                                     </div>
                                                     <input type="radio" id="rented_by_other" value="rentedByOther" name="rented_by">
-                                                    <label for="rented_by_other">Property Rented by 3rd Party</label>
+                                                    <label for="rented_by_other">Property Manager filing this request on behalf of owner.</label>
                                                     <div id="rented_by_other_div">
                                                         <div class="col-sm-12">
                                                             <label class="labels" for="other_name">Property Management Company Name</label>
-                                                            <input class="form-control eviction_fields" placeholder="PM Company Name" type="text" id="other_name" name="other_name" value="" maxlength="30">
+                                                            <input class="form-control eviction_fields" placeholder="PM Company Name" type="text" id="other_name" name="other_name" value="" maxlength="50">
                                                         </div>
                                                         <div class="col-sm-12">
                                                             <label class="labels" for="pm_name">Property Manager Name</label>
