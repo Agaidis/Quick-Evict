@@ -143,7 +143,7 @@ class OrderOfPossessionController extends Controller
                 $eviction->verify_name = $verifyName;
                 $eviction->unit_num = $_POST['unit_number'];
                 $eviction->user_id = Auth::user()->id;
-                $eviction->docket_number = 'MJ-' . $_POST['docket_number_1'] . '-LT' . $docketNumber2 . '-' . $_POST['docket_number_3'];
+                $eviction->docket_number = 'MJ-' . $_POST['docket_number_1'] . '-LT-' . $docketNumber2 . '-' . $_POST['docket_number_3'];
                 $eviction->date_of_oop = date("m/d/Y");
                 $eviction->court_filing_fee = '0';
                 $eviction->filing_fee = number_format($filingFee, 2);
