@@ -287,7 +287,7 @@
                                             <div class="modal-body">
                                                 <div class="row">
                                                     <div>
-                                                        <span style="font-size: 32px;">X</span> <canvas id="signature_pad" width="600" height="200" style="touch-action: none;"></canvas>
+                                                        <span style="font-size: 32px;">X</span> <canvas id="signature_pad" width="600" height="100" style="touch-action: none;"></canvas>
                                                         <div class="signature_pad_footer">
                                                         </div>
                                                         <span id="legal_checkbox_container"><input type="checkbox" id="legal_checkbox"/><em><label style="text-align:center" for="legal_checkbox">By checking this box, I understand that my electronic signature constitutes a legal signature, <br>and that by entering my name above I acknowledge and warrant the accuracy of the information provided in this document.</label></em></span>

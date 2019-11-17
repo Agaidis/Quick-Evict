@@ -347,7 +347,7 @@ span.cls_008{font-family:Arial,serif;font-size:10.77px;color:rgb(0,0,0);font-wei
 <span style="position:absolute;left:55.40px;top:795.85px" class="cls_004"><span class="cls_004">true and correct to the best of my knowledge, information and belief. This statement is made subject to the penalties of Section 4904</span></span><br>
 <span style="position:absolute;left:55.40px;top:810.05px" class="cls_004"><span class="cls_004">of the Crimes Code (18 PA. C.S. § 4904) relating to unsworn falsification to authorities.</span></span><br>
 <span style="position:absolute;left:55.40px;top:820.90px" class="cls_004"><span class="cls_004">I certify this filing complies with the UJS Case Records Public Access Policy.</span></span><br>
-<span style="position:absolute;left:560.00px;top:870.80px" class="cls_004"><img style="position:absolute; top:-60px" width="160" height="65" src="' . $signature . '"/><span class="cls_004">(Signature of Plaintiff)</span></span><br>
+<span style="position:absolute;left:560.00px;top:870.80px" class="cls_004"><img style="position:absolute; top:-30px" width="160" height="65" src="' . $signature . '"/><span class="cls_004">(Signature of Plaintiff)</span></span><br>
 <span style="position:absolute;left:60.00px;top:890.40px" class="cls_004"><span class="cls_004">The plaintiff\'s attorney shall file an entry of appearance with the magisterial district court pursuant to Pa . R . C . P . M . D . J . 207.1 </span ></span ><br >
 <span style = "position:absolute;left:60.90px;top:905.15px" class="cls_005" ><span class="cls_005" >IF YOU HAVE A DEFENSE to this complaint you may present it at the hearing . IF YOU HAVE A CLAIM against the plaintiff arising out of the occupancy of the premises,</span ></span ><br >
 <span style = "position:absolute;left:60.90px;top:915.30px" class="cls_005" ><span class="cls_005" > which is in the magisterial district judge jurisdiction and which you intend to assert at the hearing, YOU MUST FILE it on the complaint form at the office BEFORE THE TIME </span ></span ><br >
@@ -411,7 +411,7 @@ span.cls_009{font-family:Arial,serif;font-size:9px;color:rgb(0,0,0);font-weight:
 <span style="position:absolute;left:50px;top:775px" class="cls_004"><span class="cls_004">information and documents.</span></span>
 <span style="position:absolute;left:50px;top:840px" class="cls_004"><span class="cls_004">Plaintiff:</span> '. $plantiffName .'</span>
 <span style="position:absolute;left:427.00px;top:840px" class="cls_004"><span class="cls_004">Date:</span> '. date("m/d/Y") .'</span>
-<span style="position:absolute;left:358.00px;top:865px" class="cls_004"><span class="cls_004">Plaintiff Signature:</span><img style="position:absolute; margin-top: -5px; margin-left:10px;" width="140" height="45" src="'.$signature.'"/></span>
+<span style="position:absolute;left:358.00px;top:865px" class="cls_004"><span class="cls_004">Plaintiff Signature:</span><img style="position:absolute; margin-top: -5px; margin-left:10px;" width="160" height="65" src="'.$signature.'"/></span>
 <span style="position:absolute;left:55px;top:985px" class="cls_007"><span class="cls_007">AOPC 311A</span></span>
 <span style="position:absolute;left:605px;top:985px" class="cls_008"><span class="cls_008">FREE INTERPRETER</span></span>
 <span style="position:absolute;left:590px;top:1000px" class="cls_009"><span class="cls_009">www.pacourts.us/language-rights</span></span><br>
@@ -475,7 +475,7 @@ span.cls_011{font-family:Arial,serif;font-size:12px;color:rgb(0,0,0);font-weight
 <span style="position:absolute;left:55px;top:675px" class="cls_003"><span class="cls_003">I certify that this filing complies with the provisions of the Case Records Public Access Policy of the Unified Judicial System</span></span>
 <span style="position:absolute;left:55px;top:690px" class="cls_003"><span class="cls_003">of Pennsylvania that require filing confidential information and documents differently than non-confidential information and</span></span>
 <span style="position:absolute;left:55px;top:705px" class="cls_003"><span class="cls_003">documents.</span></span>
-<span style="position:absolute;left:465px;top:765px" class="cls_004"><img style="position:absolute; top:-60px; left:40px;" width="160" height="65" src="'.$signature.'"/><span class="cls_004">(Signature of Plaintiff or Authorized Agent)</span></span>
+<span style="position:absolute;left:465px;top:765px" class="cls_004"><img style="position:absolute; top:-30px; left:40px;" width="160" height="65" src="'.$signature.'"/><span class="cls_004">(Signature of Plaintiff or Authorized Agent)</span></span>
 <span style="position:absolute;left:55px;top:800px" class="cls_004"><span class="cls_004">The plaintiff\'s attorney shall file an entry of appearance with the magisterial district court pursuant to Pa.R.C.P.M.D.J. 207.1</span></span>
 <span style="position:absolute;left:50px;top:845px" class="cls_007"><span class="cls_007">If you intend to enter a defense to this complaint, you should notify this office immediately at the above telephone number.  You</span></span>
 <span style="position:absolute;left:50px;top:860px" class="cls_007"><span class="cls_007">must appear at the hearing and present your defense.  Unless you do, judgment may be entered against you by default.</span></span>
