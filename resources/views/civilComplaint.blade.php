@@ -147,7 +147,7 @@
                                                 <div class="price_ctr col-md-6">
                                                     <label>Court Filing Fee: $</label><span id="filing_fee_display"></span><br>
                                                     <label>CourtZip Filing Fee: </label><span> $16.99</span><br>
-                                                    <label>Total: </label><span id="total"></span>
+                                                    <label>Total: $</label><span id="total"></span>
 
                                                 </div>
                                                 <div class="modal-body">
