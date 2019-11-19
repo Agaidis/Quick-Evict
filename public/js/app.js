@@ -42951,7 +42951,7 @@ if (document.location.href.split('/')[3] === 'new-file') {
           beforeSend: function beforeSend(xhr) {
             xhr.setRequestHeader('X-CSRF-TOKEN', $("#token").attr('content'));
           },
-          url: 'https://courtzip.com/get-signature-type',
+          url: 'http://127.0.0.1:8000/get-signature-type',
           type: 'POST',
           data: {
             'courtNumber': $('#court_number').val()
@@ -42965,7 +42965,7 @@ if (document.location.href.split('/')[3] === 'new-file') {
 
             if (data[0].online_submission !== 'of' && quickEvict.userEmail.indexOf('slatehousegroup') === -1 && validEmails.includes(quickEvict.userEmail) === false) {
               alert('Sorry, but this magistrate is currently not accepting online submissions');
-              window.location.replace("https://courtzip.com/dashboard");
+              window.location.replace("http://127.0.0.1:8000/dashboard");
             }
           },
           error: function error(data) {}
@@ -43096,14 +43096,11 @@ if (document.location.href.split('/')[3] === 'new-file') {
     });
   });
   $('#finalize_document').on('click', function () {
-    console.log($('#court_number').val());
-    console.log($('#tenant_num_select').val());
-    console.log($('#file_type').val());
     $.ajax({
       beforeSend: function beforeSend(xhr) {
         xhr.setRequestHeader('X-CSRF-TOKEN', $("#token").attr('content'));
       },
-      url: 'https://courtzip.com/new-file/get-court-fee',
+      url: 'http://127.0.0.1:8000/new-file/get-court-fee',
       type: 'GET',
       data: {
         'court_number': $('#court_number').val(),
@@ -43119,7 +43116,7 @@ if (document.location.href.split('/')[3] === 'new-file') {
       success: function success(data) {
         $('#filing_fee_display').text(data);
         var total = 16.99 + parseFloat(data);
-        $('#total').text(total);
+        $('#total').text(total.toFixed(2));
       },
       error: function error(data) {
         console.log(data);

@@ -89,8 +89,9 @@ class NewFileController extends Controller
                 $dueRent = str_replace($removeValues, '', $_GET['due_rent']);
                 $unjustDamages = str_replace($removeValues, '', $_GET['unjust_damages']);
                 $damageAmt = str_replace($removeValues, '', $_GET['damage_amt']);
+                Log::info($courtNumber[1]);
 
-                $courtDetails = CourtDetails::where('magistrate_id', $courtNumber[1])->get();
+                $courtDetails = CourtDetails::where('magistrate_id', $courtNumber[1])->first();
 
                 if ($tenantNum == 1) {
                     $upTo2000 = $courtDetails->two_defendant_up_to_2000;
@@ -149,7 +150,7 @@ class NewFileController extends Controller
                     $filingFee = 0;
                 }
             }
-            return $filingFee;
+            return  $filingFee = number_format((float)$filingFee, 2, '.', '');
 
 
 

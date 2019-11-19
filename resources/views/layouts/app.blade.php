@@ -17,7 +17,7 @@
     <script src="{{ mix('js/app.js') }}" defer></script>
 
     <script>
-        let environmentURL = env('APP_URL');
+        let environmentPath = '{!! env('APP_URL') !!}';
     </script>
 
 
