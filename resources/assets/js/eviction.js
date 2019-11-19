@@ -404,7 +404,7 @@ if (document.location.href.split('/')[3] === 'new-file') {
             success : function(data) {
                 $('#filing_fee_display').text(data);
                 let total = 16.99 + parseFloat(data);
-                $('#total').text('$' + total);
+                $('#total').text(total);
 
             },
             error : function(data)
