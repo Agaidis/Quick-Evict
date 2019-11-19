@@ -298,9 +298,10 @@
                                                 </div><br><hr><br>
                                                 <div class="payment_section">
                                                     <h3 class="titles payment_title">Step 5:<br> Payment Information</h3>
-                                                    <div class="form-row">
-                                                        <label>Court Filing Fee: </label><span id="filing_fee_display"></span><br>
-                                                        <label>CourtZip Filing Fee: </label><span>$16.99</span>
+                                                    <div class="price_ctr col-md-6">
+                                                        <label>Court Filing Fee: $</label><span id="filing_fee_display"></span><br>
+                                                        <label>CourtZip Filing Fee: </label><span> $16.99</span><br>
+                                                        <label>Total: </label><span id="total"></span>
 
                                                     </div>
                                                     <div class="form-row">

@@ -144,6 +144,12 @@
                                                     </button>
                                                 </div>
                                                 <h3 class="titles signature_title">Step 4:<br> Signature</h3>
+                                                <div class="price_ctr col-md-6">
+                                                    <label>Court Filing Fee: $</label><span id="filing_fee_display"></span><br>
+                                                    <label>CourtZip Filing Fee: </label><span> $16.99</span><br>
+                                                    <label>Total: </label><span id="total"></span>
+
+                                                </div>
                                                 <div class="modal-body">
                                                     <div class="row">
                                                         <input type="hidden" id="file_type" value="{{$fileType}}"/>
