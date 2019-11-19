@@ -146,6 +146,7 @@
                                                 <h3 class="titles signature_title">Step 4:<br> Signature</h3>
                                                 <div class="modal-body">
                                                     <div class="row">
+                                                        <input type="hidden" id="file_type" value="{{$fileType}}"/>
                                                         <div>
                                                             <span style="font-size: 32px;">X</span> <canvas id="signature_pad" width="600" height="100" style="touch-action: none;"></canvas>
                                                             <div class="signature_pad_footer">

@@ -30,6 +30,7 @@ Route::post('/dashboard/storeCourtDate', 'DashboardController@storeCourtDate')->
 /* New File */
 Route::get('/new-file', 'NewFileController@index')->middleware('auth');
 Route::post('/new-file', 'NewFileController@proceedToFileTypeWithSelectedCounty')->middleware('auth');
+Route::get('/new-file/get-court-fee', 'NewFileController@getFilingFee');
 
 /* Eviction Creator */
 Route::post('/new-ltc/pdf-data', 'EvictionController@formulatePDF')->middleware('auth');

@@ -146,6 +146,7 @@
                                                         </div>
                                                     </div>
                                                         <input type="hidden" id="tenant_num" name="tenant_num" />
+                                                    <input type="hidden" id="file_type" value="{{$fileType}}"/>
 
 
                                                     <div class="row">
@@ -297,6 +298,11 @@
                                                 </div><br><hr><br>
                                                 <div class="payment_section">
                                                     <h3 class="titles payment_title">Step 5:<br> Payment Information</h3>
+                                                    <div class="form-row">
+                                                        <label>Court Filing Fee: </label><span id="filing_fee_display"></span><br>
+                                                        <label>CourtZip Filing Fee: </label><span>$16.99</span>
+
+                                                    </div>
                                                     <div class="form-row">
                                                         <label for="card-element">
                                                             <span class="credit_debit">Credit or debit card</span>

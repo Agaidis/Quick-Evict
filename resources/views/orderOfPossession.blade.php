@@ -25,6 +25,7 @@
                                     <div class="offset-1">
                                         <div id="map"></div>
                                     </div>
+                                    <input type="hidden" id="file_type" value="{{$fileType}}"/>
                                     <div class="col-md-12 offset-1 filing_form_div">
 
                                         <!-- ADDITIONAL INFORMATION ON PROPERTY -->
@@ -217,6 +218,12 @@
                                                     </div><br><hr><br>
                                                     <div class="payment_section">
                                                         <h3 class="titles payment_title">Step 5:<br> Payment Information</h3>
+                                                        <div class="price_ctr col-md-6">
+                                                            <label>Court Filing Fee: $</label><span id="filing_fee_display"></span><br>
+                                                            <label>CourtZip Filing Fee: </label><span> $16.99</span><br>
+                                                            <label>Total: </label><span id="total"></span>
+
+                                                        </div>
                                                         <div class="form-row">
                                                             <label for="card-element">
                                                                 <span class="credit_debit">Credit or debit card</span>

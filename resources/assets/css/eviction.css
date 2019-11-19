@@ -221,3 +221,15 @@ form.eviction_form fieldset {
 .docket_disabled, .docket_enabled {
     display: inline-block;
 }
+
+.price_ctr {
+    text-align:center;
+    margin-left: 25%;
+    margin-bottom: 5%;
+    font-weight:bold;
+    font-family: initial;
+    font-size: 16px;
+    margin-top:3%;
+    border: 1px solid grey;
+    border-radius: 1em;
+}

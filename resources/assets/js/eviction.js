@@ -245,7 +245,7 @@ if (document.location.href.split('/')[3] === 'new-file') {
 
 
         $(window).keydown(function (event) {
-            if (event.keyCode == 13) {
+            if (event.keyCode === 13) {
                 event.preventDefault();
                 return false;
             }
@@ -253,7 +253,7 @@ if (document.location.href.split('/')[3] === 'new-file') {
 
         $('input[type=radio][name=rented_by]').change(function () {
 
-            if ($(this)[0].id == 'rented_by_other') {
+            if ($(this)[0].id === 'rented_by_other') {
                 $('#landlord').prop('hidden', false);
                 $('#rented_by_other_div').css('display', 'block');
                 $('#rented_by_owner_div').css('display', 'none');
@@ -267,7 +267,7 @@ if (document.location.href.split('/')[3] === 'new-file') {
 
         $('input[type=radio][name=addit_rent]').change(function () {
 
-            if ($(this)[0].id == 'addit_rent') {
+            if ($(this)[0].id === 'addit_rent') {
                 $('.additional_rent_amt_div').css('display', 'block');
 
             } else {
@@ -375,6 +375,42 @@ if (document.location.href.split('/')[3] === 'new-file') {
            } else {
                $('#breached_details').prop('disabled', true);
            }
+        });
+    });
+
+    $('#finalize_document').on('click', function() {
+        console.log($('#court_number').val());
+        console.log($('#tenant_num_select').val());
+        console.log($('#file_type').val());
+
+        $.ajax({
+            beforeSend: function (xhr) {
+                xhr.setRequestHeader('X-CSRF-TOKEN', $("#token").attr('content'));
+            },
+            url : 'https://courtzip.com/new-file/get-court-fee',
+            type : 'GET',
+            data : {
+                'court_number' : $('#court_number').val(),
+                'tenant_num_select': $('#tenant_num_select').val(),
+                'fileType': $('#file_type').val(),
+                'additional_rent_amt': $('#additional_rent_amt').val(),
+                'attorney_fees': $('#attorney_fees').val(),
+                'due_rent': $('#due_rent').val(),
+                'unjust_damages': $('#unjust_damages').val(),
+                'damage_amt': $('#damage_amt').val(),
+                'tenant_num': $('#tenant_num').val()
+
+            },
+            success : function(data) {
+                $('#filing_fee_display').text(data);
+                let total = 16.99 + parseFloat(data);
+                $('#total').text('$' + total);
+
+            },
+            error : function(data)
+            {
+                console.log(data);
+            },
         });
     });
 }
