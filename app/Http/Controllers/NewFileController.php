@@ -89,18 +89,17 @@ class NewFileController extends Controller
                 $dueRent = str_replace($removeValues, '', $_GET['due_rent']);
                 $unjustDamages = str_replace($removeValues, '', $_GET['unjust_damages']);
                 $damageAmt = str_replace($removeValues, '', $_GET['damage_amt']);
-                Log::info($courtNumber[1]);
 
                 $courtDetails = CourtDetails::where('magistrate_id', $courtNumber[1])->first();
 
                 if ($tenantNum == 1) {
-                    $upTo2000 = $courtDetails->two_defendant_up_to_2000;
-                    $btn20014000 = $courtDetails->two_defendant_between_2001_4000;
-                    $greaterThan4000 = $courtDetails->two_defendant_greater_than_4000;
-                } else if ($tenantNum == 2) {
                     $upTo2000 = $courtDetails->one_defendant_up_to_2000;
                     $btn20014000 = $courtDetails->one_defendant_between_2001_4000;
                     $greaterThan4000 = $courtDetails->one_defendant_greater_than_4000;
+                } else if ($tenantNum == 2) {
+                    $upTo2000 = $courtDetails->two_defendant_up_to_2000;
+                    $btn20014000 = $courtDetails->two_defendant_between_2001_4000;
+                    $greaterThan4000 = $courtDetails->two_defendant_greater_than_4000;
                 } else {
                     $upTo2000 = $courtDetails->three_defendant_up_to_2000;
                     $btn20014000 = $courtDetails->three_defendant_between_2001_4000;

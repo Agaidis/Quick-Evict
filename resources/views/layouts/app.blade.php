@@ -93,6 +93,15 @@
                 @endguest
             </div>
         </nav>
+        <div class="row">
+            <div id="new_filing_container" class="offset-4 col-md-4">
+                <div class="button_panel">
+                    @if (request()->path() != 'new-file' && request()->path() != 'login' && request()->path() != 'register')
+                        <a href="{{ url('new-file') }}"><button type="button" class="btn btn-primary" id="new_file_btn">Start a new File</button></a><br>
+                    @endif
+                </div>
+            </div>
+        </div>
 
         <main class="py-4">
             @yield('content')

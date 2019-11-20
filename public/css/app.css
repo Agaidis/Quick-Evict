@@ -10749,10 +10749,9 @@ a.text-dark:focus {
 }
 
 #new_file_btn {
-    font-size:22px;
-    margin-top:2%;
-    padding:3% 4% 3% 4%;
-    margin-bottom:4%;
+    font-size:26px;
+    margin-top:4%;
+    padding:35px 25px 35px 25px;
     font-family: verdana;
     background-color:#116466;
     border-color:#116466;
@@ -10769,7 +10768,6 @@ a.text-dark:focus {
 }
 #new_filing_container {
     text-align:center;
-    margin-bottom:2%;
 }
 
 #back_to_step_1_btn {
