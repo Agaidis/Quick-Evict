@@ -219,7 +219,7 @@ if (document.location.href.split('/')[3] === 'new-file') {
                      beforeSend: function (xhr) {
                          xhr.setRequestHeader('X-CSRF-TOKEN', $("#token").attr('content'));
                      },
-                     url : environmentPath + 'get-signature-type',
+                     url : '/get-signature-type',
                      type : 'POST',
                      data : {
                          'courtNumber' : $('#court_number').val()
@@ -232,7 +232,7 @@ if (document.location.href.split('/')[3] === 'new-file') {
 
                         if (data[0].online_submission !== 'of' && ((quickEvict.userEmail.indexOf('slatehousegroup') === -1) && validEmails.includes(quickEvict.userEmail) === false)) {
                             alert('Sorry, but this magistrate is currently not accepting online submissions');
-                            window.location.replace(environmentPath + "/dashboard");
+                            window.location.replace("/dashboard");
                         }
                      },
                      error : function(data)
@@ -383,7 +383,7 @@ if (document.location.href.split('/')[3] === 'new-file') {
             beforeSend: function (xhr) {
                 xhr.setRequestHeader('X-CSRF-TOKEN', $("#token").attr('content'));
             },
-            url : environmentPath + 'new-file/get-court-fee',
+            url : '/new-file/get-court-fee',
             type : 'GET',
             data : {
                 'court_number' : $('#court_number').val(),
