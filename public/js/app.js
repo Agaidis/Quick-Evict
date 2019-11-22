@@ -43181,7 +43181,8 @@ $(document).ready(function () {
   });
   $('#eviction_table').DataTable({
     "pagingType": "simple",
-    "aaSorting": []
+    "aaSorting": [],
+    "deferRender": true
   }).on('click', '.eviction-remove', function () {
     var id = $(this)[0].id;
     var splitId = id.split('_');
@@ -43473,7 +43474,8 @@ $(document).ready(function () {
     $('#edit_digital_signature').val(document.getElementById("edit_is_digital_signature_allowed").checked);
   });
   $('#magistrate_table').DataTable({
-    "pagingType": "simple"
+    "pagingType": "simple",
+    "aaSorting": []
   }).on('click', '.magistrate-remove', function () {
     var id = $(this)[0].id;
     var splitId = id.split('_');

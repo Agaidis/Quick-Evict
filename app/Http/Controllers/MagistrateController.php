@@ -27,7 +27,7 @@ class MagistrateController extends Controller
             return view('/login');
         } else {
             // Get all the series
-            $courtDetails = CourtDetails::all();
+            $courtDetails = CourtDetails::all()->sortBy("county");;
             $geoLocations = GeoLocation::all();
 
             return view('magistrateCreator', compact('courtDetails', 'geoLocations'));

@@ -19,7 +19,8 @@
         });
 
         $('#magistrate_table').DataTable( {
-            "pagingType": "simple"
+            "pagingType": "simple",
+            "aaSorting": []
         }).on('click', '.magistrate-remove', function () {
             var id = $(this)[0].id;
             var splitId = id.split('_');

@@ -26,7 +26,6 @@ class CourtDetails extends Model
         'out_of_pocket',
         'mailing_address',
         'phone_number',
-        'accept_e_signature',
         'township',
         'digital_signature',
         'online_submission'
