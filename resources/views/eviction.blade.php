@@ -67,7 +67,7 @@
                                                 <div class="col-sm-6">
                                                     <div class="labels">Property Owner</div>
                                                     <input checked type="radio" id="rented_by_owner" value="rentedByOwner" name="rented_by">
-                                                    <label for="rented_by_owner">Property is Rented by Owner</label><br>
+                                                    <label for="rented_by_owner">Owner self-filing this request</label><br>
                                                     <div id="rented_by_owner_div">
                                                         <div class="col-sm-8">
                                                             <label class="labels">Owner Address Line 1</label>
@@ -79,11 +79,11 @@
                                                         </div>
                                                     </div>
                                                     <input type="radio" id="rented_by_other" value="rentedByOther" name="rented_by">
-                                                    <label for="rented_by_other">Property Rented by 3rd Party</label>
+                                                    <label for="rented_by_other">Property Manager filing this request on behalf of owner.</label>
                                                     <div id="rented_by_other_div">
                                                         <div class="col-sm-12">
                                                             <label class="labels" for="other_name">Property Management Company Name</label>
-                                                            <input class="form-control eviction_fields" placeholder="PM Company Name" type="text" id="other_name" name="other_name" value="" maxlength="30">
+                                                            <input class="form-control eviction_fields" placeholder="PM Company Name" type="text" id="other_name" name="other_name" value="" maxlength="50">
                                                         </div>
                                                         <div class="col-sm-12">
                                                             <label class="labels" for="pm_name">Property Manager Name</label>
@@ -146,6 +146,7 @@
                                                         </div>
                                                     </div>
                                                         <input type="hidden" id="tenant_num" name="tenant_num" />
+                                                    <input type="hidden" id="file_type" value="{{$fileType}}"/>
 
 
                                                     <div class="row">
@@ -181,7 +182,7 @@
                                                                 <input type="checkbox" id="breached_conditions_lease" name="breached_conditions_lease">
                                                                 <label for="breached_conditions_lease">Tenant Breached Conditions of Lease</label><br>
                                                                 <b>Tenant Breached Details:</b>
-                                                                <input class="form-control" placeholder="Breached Details" type="text" id="breached_details" name="breached_details" disabled  maxlength="80"/>
+                                                                <input class="form-control" placeholder="Breached Details" type="text" id="breached_details" name="breached_details" disabled  maxlength="95"/>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -191,7 +192,7 @@
                                         <div id="amount_due_container" class="major_labels">
                                             <div class="form-group">
                                                 <div class="row">
-                                                    <div class="col-sm-10">
+                                                    <div class="col-sm-6">
                                                         <label for="due_rent">Rent that is Due at Filing Date</label>
                                                         <input type="text" class="form-control eviction_fields" id="due_rent" name="due_rent" placeholder="$" value=""  maxlength="9"/>
                                                     </div>
@@ -207,7 +208,7 @@
                                                             </div>
                                                             <div class="col-sm-12">
                                                                 <b>Property Damages Details:</b>
-                                                                <input class="form-control eviction_fields" type="text" id="damages_details" name="damages_details"  maxlength="9"/><br>
+                                                                <input class="form-control eviction_fields" type="text" id="damages_details" name="damages_details" maxlength="75"/><br>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -287,7 +288,7 @@
                                             <div class="modal-body">
                                                 <div class="row">
                                                     <div>
-                                                        <span style="font-size: 32px;">X</span> <canvas id="signature_pad" width="600" height="200" style="touch-action: none;"></canvas>
+                                                        <span style="font-size: 32px;">X</span> <canvas id="signature_pad" width="600" height="100" style="touch-action: none;"></canvas>
                                                         <div class="signature_pad_footer">
                                                         </div>
                                                         <span id="legal_checkbox_container"><input type="checkbox" id="legal_checkbox"/><em><label style="text-align:center" for="legal_checkbox">By checking this box, I understand that my electronic signature constitutes a legal signature, <br>and that by entering my name above I acknowledge and warrant the accuracy of the information provided in this document.</label></em></span>
@@ -297,6 +298,12 @@
                                                 </div><br><hr><br>
                                                 <div class="payment_section">
                                                     <h3 class="titles payment_title">Step 5:<br> Payment Information</h3>
+                                                    <div class="price_ctr col-md-6">
+                                                        <label>Court Filing Fee: $</label><span id="filing_fee_display"></span><br>
+                                                        <label>CourtZip Filing Fee: </label><span> $16.99</span><br>
+                                                        <label>Total: $</label><span id="total"></span>
+
+                                                    </div>
                                                     <div class="form-row">
                                                         <label for="card-element">
                                                             <span class="credit_debit">Credit or debit card</span>

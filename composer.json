@@ -11,11 +11,14 @@
         "dompdf/dompdf": "0.8.0 as 0.6.2",
         "farhanwazir/laravelgooglemaps": "^2.3",
         "fideloper/proxy": "^4.0",
+        "kriswallsmith/buzz": "^1.0",
         "laracasts/utilities": "^3.0",
         "laravel/cashier": "~7.0",
         "laravel/framework": "5.6.*",
         "laravel/tinker": "^1.0",
         "league/flysystem-aws-s3-v3": "^1.0",
+        "mailgun/mailgun-php": "^2.8",
+        "nyholm/psr7": "^1.2",
         "sociallydev/spaces-api": "dev-master"
     },
     "require-dev": {

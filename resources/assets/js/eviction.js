@@ -1,11 +1,6 @@
 if (document.location.href.split('/')[3] === 'new-file') {
     $(document).ready(function () {
 
-
-
-
-
-
         $('[data-toggle="tooltip"]').tooltip();
         var canvas = document.querySelector("canvas");
         var signaturePad = new SignaturePad(canvas, {
@@ -207,7 +202,7 @@ if (document.location.href.split('/')[3] === 'new-file') {
                 }
             }
             if (isFound === false) {
-                alert('Location outside all Zones');
+                alert('Address is either in a different county or outside all zones. Please go back to step 1 and verify you selected the right county.');
                 $('.zipcode_div').css('display', 'none');
                 $('.unit_number_div').css('display', 'none');
                 $('.filing_form_div').css('display', 'none');
@@ -224,32 +219,33 @@ if (document.location.href.split('/')[3] === 'new-file') {
                      beforeSend: function (xhr) {
                          xhr.setRequestHeader('X-CSRF-TOKEN', $("#token").attr('content'));
                      },
-                     url : 'https://courtzip.com/get-signature-type',
+                     url : '/get-signature-type',
                      type : 'POST',
                      data : {
                          'courtNumber' : $('#court_number').val()
                      },
                      success : function(data) {
-                         console.log(data);
                         if (data[0].digital_signature === 0) {
                             $('#finalize_document').css('display', 'none');
                         }
-                        if (data[0].online_submission === 0) {
+                         let validEmails = ['brc@saxtonstump.com', 'tiffanymitchell0202@gmail.com', 'sparkleclean85@gmail.com', 'andrew.gaidis@gmail.com'];
+
+                        if (data[0].online_submission !== 'of' && ((quickEvict.userEmail.indexOf('slatehousegroup') === -1) && validEmails.includes(quickEvict.userEmail) === false)) {
                             alert('Sorry, but this magistrate is currently not accepting online submissions');
-                            window.location.replace("http://courtzip.com/dashboard");
+                            window.location.replace("/dashboard");
                         }
                      },
                      error : function(data)
                      {
 
-                     }
+                     },
                  });
             }
         });
 
 
         $(window).keydown(function (event) {
-            if (event.keyCode == 13) {
+            if (event.keyCode === 13) {
                 event.preventDefault();
                 return false;
             }
@@ -257,7 +253,7 @@ if (document.location.href.split('/')[3] === 'new-file') {
 
         $('input[type=radio][name=rented_by]').change(function () {
 
-            if ($(this)[0].id == 'rented_by_other') {
+            if ($(this)[0].id === 'rented_by_other') {
                 $('#landlord').prop('hidden', false);
                 $('#rented_by_other_div').css('display', 'block');
                 $('#rented_by_owner_div').css('display', 'none');
@@ -271,7 +267,7 @@ if (document.location.href.split('/')[3] === 'new-file') {
 
         $('input[type=radio][name=addit_rent]').change(function () {
 
-            if ($(this)[0].id == 'addit_rent') {
+            if ($(this)[0].id === 'addit_rent') {
                 $('.additional_rent_amt_div').css('display', 'block');
 
             } else {
@@ -364,9 +360,9 @@ if (document.location.href.split('/')[3] === 'new-file') {
                 var currentTenantObj = $('#tenant_name_' + i);
 
                 if (currentTenantObj.length > 0) {
-                    html += '<input class="form-control eviction_fields" placeholder="Tenant Name '+ i +'" type="text" id="tenant_name_'+ i +'" name="tenant_name[]" value="' + currentTenantObj.val() + '"/><br>';
+                    html += '<label class="labels" for="tenant_name_'+ i +'" >Tenant Name '+ i +'</label><input class="form-control eviction_fields" placeholder="Tenant Name '+ i +'" type="text" id="tenant_name_'+ i +'" name="tenant_name[]" value="' + currentTenantObj.val() + '"/><br>';
                 } else {
-                    html += '<input class="form-control eviction_fields" placeholder="Tenant Name '+ i +'" type="text" id="tenant_name_'+ i +'" name="tenant_name[]" value=""/><br>';
+                    html += '<label class="labels" for="tenant_name_'+ i +'" >Tenant Name '+ i +'</label><input class="form-control eviction_fields" placeholder="Tenant Name '+ i +'" type="text" id="tenant_name_'+ i +'" name="tenant_name[]" value=""/><br>';
                 }
             }
 
@@ -379,6 +375,38 @@ if (document.location.href.split('/')[3] === 'new-file') {
            } else {
                $('#breached_details').prop('disabled', true);
            }
+        });
+    });
+
+    $('#finalize_document').on('click', function() {
+        $.ajax({
+            beforeSend: function (xhr) {
+                xhr.setRequestHeader('X-CSRF-TOKEN', $("#token").attr('content'));
+            },
+            url : '/new-file/get-court-fee',
+            type : 'GET',
+            data : {
+                'court_number' : $('#court_number').val(),
+                'tenant_num_select': $('#tenant_num_select').val(),
+                'fileType': $('#file_type').val(),
+                'additional_rent_amt': $('#additional_rent_amt').val(),
+                'attorney_fees': $('#attorney_fees').val(),
+                'due_rent': $('#due_rent').val(),
+                'unjust_damages': $('#unjust_damages').val(),
+                'damage_amt': $('#damage_amt').val(),
+                'tenant_num': $('#tenant_num').val()
+
+            },
+            success : function(data) {
+                $('#filing_fee_display').text(data);
+                let total = 16.99 + parseFloat(data);
+                $('#total').text(total.toFixed(2));
+
+            },
+            error : function(data)
+            {
+                console.log(data);
+            },
         });
     });
 }

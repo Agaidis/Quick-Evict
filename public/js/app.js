@@ -42934,7 +42934,7 @@ if (document.location.href.split('/')[3] === 'new-file') {
       }
 
       if (isFound === false) {
-        alert('Location outside all Zones');
+        alert('Address is either in a different county or outside all zones. Please go back to step 1 and verify you selected the right county.');
         $('.zipcode_div').css('display', 'none');
         $('.unit_number_div').css('display', 'none');
         $('.filing_form_div').css('display', 'none');
@@ -42951,21 +42951,21 @@ if (document.location.href.split('/')[3] === 'new-file') {
           beforeSend: function beforeSend(xhr) {
             xhr.setRequestHeader('X-CSRF-TOKEN', $("#token").attr('content'));
           },
-          url: 'https://courtzip.com/get-signature-type',
+          url: '/get-signature-type',
           type: 'POST',
           data: {
             'courtNumber': $('#court_number').val()
           },
           success: function success(data) {
-            console.log(data);
-
             if (data[0].digital_signature === 0) {
               $('#finalize_document').css('display', 'none');
             }
 
-            if (data[0].online_submission === 0) {
+            var validEmails = ['brc@saxtonstump.com', 'tiffanymitchell0202@gmail.com', 'sparkleclean85@gmail.com', 'andrew.gaidis@gmail.com'];
+
+            if (data[0].online_submission !== 'of' && quickEvict.userEmail.indexOf('slatehousegroup') === -1 && validEmails.includes(quickEvict.userEmail) === false) {
               alert('Sorry, but this magistrate is currently not accepting online submissions');
-              window.location.replace("http://courtzip.com/dashboard");
+              window.location.replace("/dashboard");
             }
           },
           error: function error(data) {}
@@ -42973,13 +42973,13 @@ if (document.location.href.split('/')[3] === 'new-file') {
       }
     });
     $(window).keydown(function (event) {
-      if (event.keyCode == 13) {
+      if (event.keyCode === 13) {
         event.preventDefault();
         return false;
       }
     });
     $('input[type=radio][name=rented_by]').change(function () {
-      if ($(this)[0].id == 'rented_by_other') {
+      if ($(this)[0].id === 'rented_by_other') {
         $('#landlord').prop('hidden', false);
         $('#rented_by_other_div').css('display', 'block');
         $('#rented_by_owner_div').css('display', 'none');
@@ -42990,7 +42990,7 @@ if (document.location.href.split('/')[3] === 'new-file') {
       }
     });
     $('input[type=radio][name=addit_rent]').change(function () {
-      if ($(this)[0].id == 'addit_rent') {
+      if ($(this)[0].id === 'addit_rent') {
         $('.additional_rent_amt_div').css('display', 'block');
       } else {
         $('.additional_rent_amt_div').css('display', 'none');
@@ -43079,9 +43079,9 @@ if (document.location.href.split('/')[3] === 'new-file') {
         var currentTenantObj = $('#tenant_name_' + i);
 
         if (currentTenantObj.length > 0) {
-          html += '<input class="form-control eviction_fields" placeholder="Tenant Name ' + i + '" type="text" id="tenant_name_' + i + '" name="tenant_name[]" value="' + currentTenantObj.val() + '"/><br>';
+          html += '<label class="labels" for="tenant_name_' + i + '" >Tenant Name ' + i + '</label><input class="form-control eviction_fields" placeholder="Tenant Name ' + i + '" type="text" id="tenant_name_' + i + '" name="tenant_name[]" value="' + currentTenantObj.val() + '"/><br>';
         } else {
-          html += '<input class="form-control eviction_fields" placeholder="Tenant Name ' + i + '" type="text" id="tenant_name_' + i + '" name="tenant_name[]" value=""/><br>';
+          html += '<label class="labels" for="tenant_name_' + i + '" >Tenant Name ' + i + '</label><input class="form-control eviction_fields" placeholder="Tenant Name ' + i + '" type="text" id="tenant_name_' + i + '" name="tenant_name[]" value=""/><br>';
         }
       }
 
@@ -43092,6 +43092,34 @@ if (document.location.href.split('/')[3] === 'new-file') {
         $('#breached_details').prop('disabled', false);
       } else {
         $('#breached_details').prop('disabled', true);
+      }
+    });
+  });
+  $('#finalize_document').on('click', function () {
+    $.ajax({
+      beforeSend: function beforeSend(xhr) {
+        xhr.setRequestHeader('X-CSRF-TOKEN', $("#token").attr('content'));
+      },
+      url: '/new-file/get-court-fee',
+      type: 'GET',
+      data: {
+        'court_number': $('#court_number').val(),
+        'tenant_num_select': $('#tenant_num_select').val(),
+        'fileType': $('#file_type').val(),
+        'additional_rent_amt': $('#additional_rent_amt').val(),
+        'attorney_fees': $('#attorney_fees').val(),
+        'due_rent': $('#due_rent').val(),
+        'unjust_damages': $('#unjust_damages').val(),
+        'damage_amt': $('#damage_amt').val(),
+        'tenant_num': $('#tenant_num').val()
+      },
+      success: function success(data) {
+        $('#filing_fee_display').text(data);
+        var total = 16.99 + parseFloat(data);
+        $('#total').text(total.toFixed(2));
+      },
+      error: function error(data) {
+        console.log(data);
       }
     });
   });
@@ -43153,7 +43181,8 @@ $(document).ready(function () {
   });
   $('#eviction_table').DataTable({
     "pagingType": "simple",
-    "aaSorting": []
+    "aaSorting": [],
+    "deferRender": true
   }).on('click', '.eviction-remove', function () {
     var id = $(this)[0].id;
     var splitId = id.split('_');
@@ -43441,22 +43470,12 @@ $(document).ready(function () {
       $('#digital_signature').val(0);
     }
   });
-  $('#online_submission').val(1);
-  $('#is_online_submission_allowed').on('change', function () {
-    if (document.getElementById("is_online_submission_allowed").checked == true) {
-      $('#online_submission').val(1);
-    } else {
-      $('#online_submission').val(0);
-    }
-  });
   $('#edit_is_digital_signature_allowed').on('change', function () {
     $('#edit_digital_signature').val(document.getElementById("edit_is_digital_signature_allowed").checked);
   });
-  $('#edit_is_online_submission_allowed').on('change', function () {
-    $('#edit_online_submission').val(document.getElementById("edit_is_online_submission_allowed").checked);
-  });
   $('#magistrate_table').DataTable({
-    "pagingType": "simple"
+    "pagingType": "simple",
+    "aaSorting": []
   }).on('click', '.magistrate-remove', function () {
     var id = $(this)[0].id;
     var splitId = id.split('_');
@@ -43528,13 +43547,10 @@ $(document).ready(function () {
         $('#edit_three_oop').val(data[1][0].three_defendant_out_of_pocket);
         $('#edit_additional_tenants').val(data[1][0].additional_tenant);
         $('#edit_geo_locations').val(data[0][0].geo_locations);
+        $('#edit_online_submission').val(data[1][0].online_submission);
 
         if (data[1][0].digital_signature == 1) {
           $('#edit_is_digital_signature_allowed').prop('checked', true);
-        }
-
-        if (data[1][0].online_submission == 1) {
-          $('#edit_is_online_submission_allowed').prop('checked', true);
         }
       },
       error: function error(data) {
@@ -43581,12 +43597,6 @@ $(document).ready(function () {
       $('#edit_digital_signature').val(1);
     } else {
       $('#edit_digital_signature').val(0);
-    }
-
-    if (document.getElementById("edit_is_online_submission_allowed").checked == true) {
-      $('#edit_online_submission').val(1);
-    } else {
-      $('#edit_online_submission').val(0);
     }
 
     $.ajax({

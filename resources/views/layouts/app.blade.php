@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="google-site-verification" content="ENAlyxpEGFLMVp5yi93Wi9JO3R_uVdJYwHxxhzbZfZg" />
+    <meta name="google-site-verification" content="0jSYAQbRlsmIYYEGPuRN2L-f9M3JsHtbTJugw_FA5bg" />
 
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
@@ -15,6 +15,10 @@
     <!-- Scripts -->
     <script src="https://js.stripe.com/v3/"></script>
     <script src="{{ mix('js/app.js') }}" defer></script>
+
+    <script>
+        let environmentPath = '{!! env('APP_URL') !!}';
+    </script>
 
 
     <!-- Fonts -->
@@ -89,6 +93,15 @@
                 @endguest
             </div>
         </nav>
+        <div class="row">
+            <div id="new_filing_container" class="offset-4 col-md-4">
+                <div class="button_panel">
+                    @if (request()->path() != 'new-file' && request()->path() != 'login' && request()->path() != 'register')
+                        <a href="{{ url('new-file') }}"><button type="button" class="btn btn-primary" id="new_file_btn">Start a new File</button></a><br>
+                    @endif
+                </div>
+            </div>
+        </div>
 
         <main class="py-4">
             @yield('content')

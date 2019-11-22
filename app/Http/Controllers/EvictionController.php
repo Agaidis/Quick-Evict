@@ -14,6 +14,7 @@ use Illuminate\Support\Facades\Log;
 use Stripe\Stripe;
 
 
+
 class EvictionController extends Controller
 {
 
@@ -101,17 +102,14 @@ class EvictionController extends Controller
                 $upTo2000 = $courtDetails->two_defendant_up_to_2000;
                 $btn20014000 = $courtDetails->two_defendant_between_2001_4000;
                 $greaterThan4000 = $courtDetails->two_defendant_greater_than_4000;
-                $oop = $courtDetails->two_defendant_out_of_pocket;
             } else if ($_POST['tenant_num'] == "1") {
                 $upTo2000 = $courtDetails->one_defendant_up_to_2000;
                 $btn20014000 = $courtDetails->one_defendant_between_2001_4000;
                 $greaterThan4000 = $courtDetails->one_defendant_greater_than_4000;
-                $oop = $courtDetails->one_defendant_out_of_pocket;
             } else {
                 $upTo2000 = $courtDetails->three_defendant_up_to_2000;
                 $btn20014000 = $courtDetails->three_defendant_between_2001_4000;
                 $greaterThan4000 = $courtDetails->three_defendant_greater_than_4000;
-                $oop = $courtDetails->three_defendant_out_of_pocket;
                 if ($courtDetails->additional_tenant != '' && $courtDetails->additional_tenant != 0 ) {
                     $additionalTenantAmt = $courtDetails->additional_tenant;
                 }
@@ -278,6 +276,16 @@ class EvictionController extends Controller
                     Log::info($e->getMessage());
                     $mailer->sendMail('andrew.gaidis@gmail.com', 'OOP Error', $e->getMessage() );
                 }
+
+                try {
+                    $notify = new NotificationController($courtNumber, Auth::user()->email);
+                    $notify->notifyAdmin();
+                    $notify->notifyJudge();
+                    $notify->notifyMaker();
+                } catch ( Exception $e) {
+                    $mailer->sendMail('andrew.gaidis@gmail.com', 'Notification Error' . Auth::user()->id, $e->getMessage());
+                }
+
 
                 return redirect('dashboard')->with('status','Your Eviction has been successfully made! You can see its progress in the table below.');
             } catch ( \Exception $e) {

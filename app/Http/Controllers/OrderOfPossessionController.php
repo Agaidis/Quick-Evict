@@ -47,19 +47,10 @@ class OrderOfPossessionController extends Controller
             $additionalTenantFee = 0;
 
             if ($_POST['tenant_num'] == "2") {
-                $upTo2000 = $courtDetails->two_defendant_up_to_2000;
-                $btn20014000 = $courtDetails->two_defendant_between_2001_4000;
-                $greaterThan4000 = $courtDetails->two_defendant_greater_than_4000;
                 $oop = $courtDetails->two_defendant_out_of_pocket;
             } else if ($_POST['tenant_num'] == "1") {
-                $upTo2000 = $courtDetails->one_defendant_up_to_2000;
-                $btn20014000 = $courtDetails->one_defendant_between_2001_4000;
-                $greaterThan4000 = $courtDetails->one_defendant_greater_than_4000;
                 $oop = $courtDetails->one_defendant_out_of_pocket;
             } else {
-                $upTo2000 = $courtDetails->three_defendant_up_to_2000;
-                $btn20014000 = $courtDetails->three_defendant_between_2001_4000;
-                $greaterThan4000 = $courtDetails->three_defendant_greater_than_4000;
                 $oop = $courtDetails->three_defendant_out_of_pocket;
                 if ($courtDetails->additional_tenant != '' && $courtDetails->additional_tenant != 0 ) {
                     $additionalTenantAmt = $courtDetails->additional_tenant;
@@ -96,18 +87,18 @@ class OrderOfPossessionController extends Controller
             $defendantStreetName = $_POST['streetName'];
             $defendantTown = $_POST['town'];
 
-            $totalFees = (float)$_POST['judgment_amount'] + (float)$_POST['costs_original_lt_proceeding'] + (float)$_POST['costs_this_proceeding'] + (float)$_POST['attorney_fees'];
+            $totalFees = (float)$_POST['judgment_amount'] + (float)$_POST['costs_original_lt_proceeding'] + $oop + (float)$_POST['attorney_fees'];
 
             $noCommaTotalFees = str_replace(',','', $totalFees);
 
             $totalFees = number_format($totalFees, 2);
 
             if ($noCommaTotalFees < 2000) {
-                $filingFee = $upTo2000 + $additionalTenantFee;
+                $filingFee = $oop + $additionalTenantFee;
             } else if ($noCommaTotalFees >= 2000 && $noCommaTotalFees <= 4000) {
-                $filingFee = $btn20014000 + $additionalTenantFee;
+                $filingFee = $oop + $additionalTenantFee;
             } else if ($noCommaTotalFees > 4000) {
-                $filingFee = $greaterThan4000 + $additionalTenantFee;
+                $filingFee = $oop + $additionalTenantFee;
             } else {
                 $filingFee = 'Didnt Work';
             }
@@ -116,13 +107,20 @@ class OrderOfPossessionController extends Controller
                 $isAmtGreaterThanZero = true;
             }
 
+            $docketNumber2 = $_POST['docket_number_2'];
+
+            while (strlen($docketNumber2) < 7) {
+                    $docketNumber2 = '0' . $docketNumber2;
+                }
+
+
             try {
                 $eviction = new Evictions();
                 $eviction->status = 'Created OOP';
                 $eviction->total_judgement = $totalFees;
                 $eviction->judgment_amount = $_POST['judgment_amount'];
                 $eviction->costs_original_lt_proceeding = $_POST['costs_original_lt_proceeding'];
-                $eviction->cost_this_proceeding = $_POST['costs_this_proceeding'];
+                $eviction->cost_this_proceeding = $oop;
                 $eviction->attorney_fees = $_POST['attorney_fees'];
                 $eviction->property_address = $defendanthouseNum.' '.$defendantStreetName.'-1'.$defendantTown .',' . $defendantState.' '.$defendantZipcode;
                 $eviction->defendant_state = $defendantState;
@@ -145,10 +143,10 @@ class OrderOfPossessionController extends Controller
                 $eviction->verify_name = $verifyName;
                 $eviction->unit_num = $_POST['unit_number'];
                 $eviction->user_id = Auth::user()->id;
-                $eviction->docket_number = $_POST['docket_number'];
+                $eviction->docket_number = 'MJ-' . $_POST['docket_number_1'] . '-LT-' . $docketNumber2 . '-' . $_POST['docket_number_3'];
                 $eviction->date_of_oop = date("m/d/Y");
                 $eviction->court_filing_fee = '0';
-                $eviction->filing_fee = $filingFee;
+                $eviction->filing_fee = number_format($filingFee, 2);
                 $eviction->file_type = 'oop';
 
                 $eviction->save();
@@ -173,18 +171,27 @@ class OrderOfPossessionController extends Controller
                     ]);
                 } catch ( Exception $e ) {
                     Log::info($e->getMessage());
+                    Log::info($e->getLine());
                     $mailer->sendMail('andrew.gaidis@gmail.com', 'OOP Error', $e->getMessage() );
                 }
 
+                $notify = new NotificationController($courtNumber, Auth::user()->email);
+                $notify->notifyAdmin();
+                $notify->notifyJudge();
+                $notify->notifyMaker();
 
                 return redirect('dashboard')->with('status','Your OOP has been successfully made! You can see its progress in the table below.');
 
             } catch ( Exception $e ) {
-                $mailer->sendMail('andrew.gaidis@gmail.com', 'OOP Error', '' );
+                Log::info($e->getMessage());
+                Log::info($e->getLine());
+                $mailer->sendMail('andrew.gaidis@gmail.com', 'OOP Error', $e->getMessage() );
                 alert('It looks like there was an issue while making this LTC. the Development team has been notified and are aware that your having issues. They will update you as soon as possible.');
             }
         } catch ( Exception $e ) {
-            $mailer->sendMail('andrew.gaidis@gmail.com', 'OOP Error', '' );
+            Log::info($e->getMessage());
+            Log::info($e->getLine());
+            $mailer->sendMail('andrew.gaidis@gmail.com', 'OOP Error', $e->getMessage() );
            alert('It looks like there was an issue while making this LTC. the Development team has been notified and are aware that your having issues. They will update you as soon as possible.');
         }
     }

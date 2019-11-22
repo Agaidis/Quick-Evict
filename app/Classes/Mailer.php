@@ -2,16 +2,22 @@
 
 
 namespace App\Classes;
+use Mailgun\Mailgun;
 
 
 class Mailer
 {
 
     public function sendMail($mailTo, $subject, $message) {
-        $headers = "MIME-Version: 1.0\r\n";
-        $headers .= "Content-type: text/html; charset=iso-8859-1\r\n";
-        $headers .= "From: CourtZip\r\n";
 
-        mail($mailTo, $subject, $message, $headers);
+        // First, instantiate the SDK with your API credentials
+        $mg = Mailgun::create(env('MAIL_API_KEY')); // For US servers
+
+        $mg->messages()->send('mg.courtzip.com', [
+            'from'    => 'Court Zip Administration <service@courtzip.com>',
+            'to'      => $mailTo,
+            'subject' => $subject,
+            'text'    => $message
+        ]);
     }
 }

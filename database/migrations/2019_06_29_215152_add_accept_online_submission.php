@@ -14,7 +14,7 @@ class AddAcceptOnlineSubmission extends Migration
     public function up()
     {
         Schema::table('court_details', function (Blueprint $table) {
-            $table->boolean('online_submission')->default(true);
+            $table->string('online_submission')->nullable();
         });
     }
 

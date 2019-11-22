@@ -144,10 +144,17 @@
                                                     </button>
                                                 </div>
                                                 <h3 class="titles signature_title">Step 4:<br> Signature</h3>
+                                                <div class="price_ctr col-md-6">
+                                                    <label>Court Filing Fee: $</label><span id="filing_fee_display"></span><br>
+                                                    <label>CourtZip Filing Fee: </label><span> $16.99</span><br>
+                                                    <label>Total: $</label><span id="total"></span>
+
+                                                </div>
                                                 <div class="modal-body">
                                                     <div class="row">
+                                                        <input type="hidden" id="file_type" value="{{$fileType}}"/>
                                                         <div>
-                                                            <span style="font-size: 32px;">X</span> <canvas id="signature_pad" width="600" height="200" style="touch-action: none;"></canvas>
+                                                            <span style="font-size: 32px;">X</span> <canvas id="signature_pad" width="600" height="100" style="touch-action: none;"></canvas>
                                                             <div class="signature_pad_footer">
                                                             </div>
                                                             <span id="legal_checkbox_container"><input type="checkbox" id="legal_checkbox"/><em><label style="text-align:center" for="legal_checkbox">By checking this box, I understand that my electronic signature constitutes a legal signature, <br>and that by entering my name above I acknowledge and warrant the accuracy of the information provided in this document.</label></em></span>

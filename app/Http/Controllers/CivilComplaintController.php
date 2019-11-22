@@ -68,7 +68,6 @@ class CivilComplaintController extends Controller
                 $eviction->defendant_street_name = $defendantStreetName;
                 $eviction->defendant_town = $defendantTown;
                 $eviction->total_judgement = $_POST['total_judgment'];
-                $eviction->court_filing_fee =
                 $eviction->pdf_download = 'true';
                 $eviction->court_number = $courtNumber;
                 $eviction->court_address_line_1 = $courtAddressLine1;
@@ -109,6 +108,11 @@ class CivilComplaintController extends Controller
                 Log::info($e->getMessage());
                 $mailer->sendMail('andrew.gaidis@gmail.com', 'OOP Error', $e->getMessage() );
             }
+
+            $notify = new NotificationController($courtNumber, Auth::user()->email);
+            $notify->notifyAdmin();
+            $notify->notifyJudge();
+            $notify->notifyMaker();
 
                 return redirect('dashboard')->with('status','Your Civil Complaint has been successfully made! You can see its progress in the table below.');
 

@@ -10749,10 +10749,9 @@ a.text-dark:focus {
 }
 
 #new_file_btn {
-    font-size:22px;
-    margin-top:2%;
-    padding:3% 4% 3% 4%;
-    margin-bottom:4%;
+    font-size:26px;
+    margin-top:4%;
+    padding:35px 25px 35px 25px;
     font-family: verdana;
     background-color:#116466;
     border-color:#116466;
@@ -10769,7 +10768,6 @@ a.text-dark:focus {
 }
 #new_filing_container {
     text-align:center;
-    margin-bottom:2%;
 }
 
 #back_to_step_1_btn {
@@ -10843,7 +10841,7 @@ form.eviction_form fieldset {
 }
 
 #map {
-    height: 80%;
+  /*  height: 80%; */
     width:80%;
     margin-left: 5%;
     min-height: 500px;
@@ -11044,6 +11042,28 @@ form.eviction_form fieldset {
 
 #county_error, #file_type_error {
     color:red;
+}
+
+.docket_number_ctr {
+    width:65%;
+    display:inline-block;
+    white-space:nowrap;
+}
+
+.docket_disabled, .docket_enabled {
+    display: inline-block;
+}
+
+.price_ctr {
+    text-align:center;
+    margin-left: 25%;
+    margin-bottom: 5%;
+    font-weight:bold;
+    font-family: initial;
+    font-size: 16px;
+    margin-top:3%;
+    border: 1px solid grey;
+    border-radius: 1em;
 }
 @font-face {
   font-family: 'Journal';

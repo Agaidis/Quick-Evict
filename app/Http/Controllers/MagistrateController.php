@@ -27,7 +27,7 @@ class MagistrateController extends Controller
             return view('/login');
         } else {
             // Get all the series
-            $courtDetails = CourtDetails::all();
+            $courtDetails = CourtDetails::all()->sortBy("county");;
             $geoLocations = GeoLocation::all();
 
             return view('magistrateCreator', compact('courtDetails', 'geoLocations'));
@@ -37,6 +37,7 @@ class MagistrateController extends Controller
     public function store(Request $request) {
         Log::info('Storing a Magistrate');
         Log::info(Auth::User()->id);
+        Log::info($request->online_submission);
         try {
             $isUnique = CourtDetails::where('magistrate_id', $request->magistrate_id)->first();
 

@@ -14,26 +14,13 @@
 
         });
 
-        $('#online_submission').val(1);
-        $('#is_online_submission_allowed').on('change', function () {
-            if (document.getElementById("is_online_submission_allowed").checked == true) {
-                $('#online_submission').val(1);
-            } else {
-                $('#online_submission').val(0);
-            }
-
-        });
-
         $('#edit_is_digital_signature_allowed').on('change', function () {
             $('#edit_digital_signature').val(document.getElementById("edit_is_digital_signature_allowed").checked);
         });
 
-        $('#edit_is_online_submission_allowed').on('change', function () {
-            $('#edit_online_submission').val(document.getElementById("edit_is_online_submission_allowed").checked);
-        });
-
         $('#magistrate_table').DataTable( {
-            "pagingType": "simple"
+            "pagingType": "simple",
+            "aaSorting": []
         }).on('click', '.magistrate-remove', function () {
             var id = $(this)[0].id;
             var splitId = id.split('_');
@@ -107,13 +94,10 @@
                     $('#edit_three_oop').val(data[1][0].three_defendant_out_of_pocket);
                     $('#edit_additional_tenants').val(data[1][0].additional_tenant);
                     $('#edit_geo_locations').val(data[0][0].geo_locations);
+                    $('#edit_online_submission').val(data[1][0].online_submission);
 
                     if (data[1][0].digital_signature == 1) {
                         $('#edit_is_digital_signature_allowed').prop('checked', true);
-                    }
-
-                    if (data[1][0].online_submission == 1) {
-                        $('#edit_is_online_submission_allowed').prop('checked', true);
                     }
                 },
                 error: function (data) {
@@ -168,13 +152,6 @@
             } else {
                 $('#edit_digital_signature').val(0);
             }
-
-            if (document.getElementById("edit_is_online_submission_allowed").checked == true) {
-                $('#edit_online_submission').val(1);
-            } else {
-                $('#edit_online_submission').val(0);
-            }
-
 
             $.ajax({
                 beforeSend: function (xhr) {
