@@ -122,5 +122,35 @@ $(document).ready(function () {
                     console.log(data);
                 }
             });
+    }).on('click', '.eviction-edit', function() {
+        let id = $(this)[0].id;
+        let splitId = id.split('_');
+        let evictionId = splitId[1];
+
+        $.ajax({
+            beforeSend: function (xhr) {
+                xhr.setRequestHeader('X-CSRF-TOKEN', $("#token").attr('content'));
+            },
+            type: "GET",
+            url: '/dashboard/edit-file',
+            dataType: 'json',
+            data: {id: evictionId},
+
+            success: function (data) {
+                if ( data.file_type === 'oop' ) {
+
+                } else if ( data.file_type === 'ltc' ) {
+
+                } else if ( data.file_type === 'civil' ) {
+
+                } else {
+                    alert('File Type not known, please contact the development team');
+                }
+                console.log(data);
+            },
+            error: function (data) {
+                console.log(data);
+            }
+        });
     });
 });

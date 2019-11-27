@@ -27,6 +27,10 @@ Route::post('/dashboard/delete', 'EvictionController@delete')->middleware('auth'
 Route::get('/dashboard/getCourtDate', 'DashboardController@getCourtDate')->middleware('auth');
 Route::post('/dashboard/storeCourtDate', 'DashboardController@storeCourtDate')->middleware('auth');
 
+Route::get('/dashboard/edit-file', 'DashboardController@getFileData')->middleware('auth');;
+Route::post('/dashboard/edit-oop', 'DashboardController@editOOP')->middleware('auth');;
+Route::post('/dashboard/edit-civil', 'DashboardController@editCivil')->middleware('auth');
+
 /* New File */
 Route::get('/new-file', 'NewFileController@index')->middleware('auth');
 Route::post('/new-file', 'NewFileController@proceedToFileTypeWithSelectedCounty')->middleware('auth');

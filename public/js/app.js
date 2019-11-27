@@ -43241,6 +43241,27 @@ $(document).ready(function () {
         console.log(data);
       }
     });
+  }).on('click', '.eviction-edit', function () {
+    var id = $(this)[0].id;
+    var splitId = id.split('_');
+    var evictionId = splitId[1];
+    $.ajax({
+      beforeSend: function beforeSend(xhr) {
+        xhr.setRequestHeader('X-CSRF-TOKEN', $("#token").attr('content'));
+      },
+      type: "GET",
+      url: '/dashboard/edit-file',
+      dataType: 'json',
+      data: {
+        id: evictionId
+      },
+      success: function success(data) {
+        console.log(data);
+      },
+      error: function error(data) {
+        console.log(data);
+      }
+    });
   });
 });
 

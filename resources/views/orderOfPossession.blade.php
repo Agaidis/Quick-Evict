@@ -49,7 +49,7 @@
                                                         <input type="text" class="form-control eviction_fields" placeholder="Example: Unit 3" id="unit_number" name="unit_number" maxlength="10"/>
                                                     </div>
                                                 </div>
-                                                <!-- Tenant Number Container -->
+                                                <!-- Tenant Number Container docket_number-->
                                                 <div class="row">
                                                     <div class="col-sm-8 tenant_num_container">
                                                         <div class="col-sm-6">
@@ -84,7 +84,7 @@
                                                         <span class="docket_disabled">-</span>
                                                         <input type="text" class="docket_enabled form-control eviction_fields" placeholder="" id="docket_number_3" name="docket_number_3" maxlength="4"/>
                                                         </div>
-                                                        </div>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
