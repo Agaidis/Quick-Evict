@@ -17,6 +17,7 @@ class PDFEditController extends Controller
         $pdfHtml = str_replace('__court-address-one__', $evictionData->court_address_line_1, $pdfHtml);
         $pdfHtml = str_replace('__court-address-two__', $evictionData->court_address_line_2, $pdfHtml);
         $pdfHtml = str_replace('__phone-number__', $courtDetails->phone_number, $pdfHtml);
+        $pdfHtml = str_replace('__date__', date("m/d/Y"), $pdfHtml);
         $pdfHtml = str_replace('__filing-fee__', $evictionData->filing_fee, $pdfHtml);
         $pdfHtml = str_replace('__signature__', $signature, $pdfHtml);
         $pdfHtml = str_replace('__eviction-id__', $evictionData->id, $pdfHtml);
