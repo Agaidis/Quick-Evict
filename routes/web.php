@@ -42,7 +42,7 @@ Route::get('/new-ltc/sample-pdf', 'EvictionController@showSamplePDF')->middlewar
 
 /* Order of Possession Creator */
 Route::post('/new-oop/pdf-data', 'OrderOfPossessionController@formulatePDF')->middleware('auth');
-Route::get('/new-oop/sample-pdf', 'OrderOfPossessionController@showSamplePDF')->middleware('auth');
+Route::post('/new-oop/sample-pdf', 'OrderOfPossessionController@showSamplePDF')->middleware('auth');
 
 /* Civil Complaint Creator */
 Route::post('/new-civil-complaint/pdf-data', 'CivilComplaintController@formulatePDF')->middleware('auth');

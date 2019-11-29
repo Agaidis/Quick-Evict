@@ -30,105 +30,114 @@ class OrderOfPossessionController extends Controller
     }
 
     public function showSamplePDF() {
-        $magistrateId = str_replace('magistrate_' , '', $_GET['court_number']);
-        $courtDetails = CourtDetails::where('magistrate_id', $magistrateId)->first();
-        $geoDetails = GeoLocation::where('magistrate_id', $magistrateId)->first();
-        $pdfHtml = PDF::where('name', 'oop')->first();
-        $pdfEditor = new PDFEditController();
-        $evictionData = new stdClass();
+        $mailer = new Mailer();
 
-        if ($_GET['rented_by_val'] == 'rentedByOwner') {
-            $plaintiffName = $_GET['owner_name'];
-            $plaintiffPhone = $_GET['owner_phone'];
-            $plaintiffAddress1 = $_GET['owner_address_1'];
-            $plaintiffAddress2 = $_GET['owner_address_2'];
-        } else {
-            $plaintiffName = $_GET['other_name'] . ' on behalf of ' . $_GET['owner_name'];
-            $plaintiffPhone = $_GET['pm_phone'];
-            $plaintiffAddress1 = $_GET['pm_address_1'];
-            $plaintiffAddress2 = $_GET['pm_address_2'];
-        }
+        try {
+            $magistrateId = str_replace('magistrate_' , '', $_POST['court_number']);
+            $courtDetails = CourtDetails::where('magistrate_id', $magistrateId)->first();
+            $geoDetails = GeoLocation::where('magistrate_id', $magistrateId)->first();
+            $pdfHtml = PDF::where('name', 'oop')->first();
+            $pdfEditor = new PDFEditController();
+            $evictionData = new stdClass();
 
-        $tenantName = implode(', ', $_GET['tenant_name']);
-        $plaintiffAddress = $plaintiffName .'<br>'. $plaintiffAddress1 .'<br>'. $plaintiffAddress2 .'<br>'. $plaintiffPhone;
-        $defendantAddress = $tenantName . '<br>' . $_GET['houseNum'] . ' ' . $_GET['streetName'] . ', ' . $_GET['unit_number'] .' '. $_GET['town'] .', '. $_GET['state'] .' '. $_GET['zipcode'];
-        $defendantAddress2 = $_GET['houseNum'] . ' ' . $_GET['streetName'] .' '. $_GET['unit_number'] . '<br><br><span style="position:absolute; margin-top:-10px;">'. $_GET['town'] .', ' . $_GET['state'] .' '. $_GET['zipcode'];
-        $docketNumber2 = $_GET['docket_number_2'];
-
-        while (strlen($docketNumber2) < 7) {
-            $docketNumber2 = '0' . $docketNumber2;
-        }
-
-        $additionalTenantAmt = 1;
-        $additionalTenantFee = 0;
-
-        $tenantNum = (int)$_GET['tenant_num'];
-
-        if ($tenantNum == 2) {
-            $oop = $courtDetails->two_defendant_out_of_pocket;
-        } else if ($_GET['tenant_num'] == 1) {
-            $oop = $courtDetails->one_defendant_out_of_pocket;
-        } else {
-            $oop = $courtDetails->three_defendant_out_of_pocket;
-            if ($courtDetails->additional_tenant != '' && $courtDetails->additional_tenant != 0 ) {
-                $additionalTenantAmt = $courtDetails->additional_tenant;
+            if ($_POST['rented_by_val'] == 'rentedByOwner') {
+                $plaintiffName = $_POST['owner_name'];
+                $plaintiffPhone = $_POST['owner_phone'];
+                $plaintiffAddress1 = $_POST['owner_address_1'];
+                $plaintiffAddress2 = $_POST['owner_address_2'];
+            } else {
+                $plaintiffName = $_POST['other_name'] . ' on behalf of ' . $_POST['owner_name'];
+                $plaintiffPhone = $_POST['pm_phone'];
+                $plaintiffAddress1 = $_POST['pm_address_1'];
+                $plaintiffAddress2 = $_POST['pm_address_2'];
             }
+
+            $tenantName = implode(', ', $_POST['tenant_name']);
+            $plaintiffAddress = $plaintiffName .'<br>'. $plaintiffAddress1 .'<br>'. $plaintiffAddress2 .'<br>'. $plaintiffPhone;
+            $defendantAddress = $tenantName . '<br>' . $_POST['houseNum'] . ' ' . $_POST['streetName'] . ', ' . $_POST['unit_number'] .' '. $_POST['town'] .', '. $_POST['state'] .' '. $_POST['zipcode'];
+            $defendantAddress2 = $_POST['houseNum'] . ' ' . $_POST['streetName'] .' '. $_POST['unit_number'] . '<br><br><span style="position:absolute; margin-top:-10px;">'. $_POST['town'] .', ' . $_POST['state'] .' '. $_POST['zipcode'];
+            $docketNumber2 = $_POST['docket_number_2'];
+
+            while (strlen($docketNumber2) < 7) {
+                $docketNumber2 = '0' . $docketNumber2;
+            }
+
+            $additionalTenantAmt = 1;
+            $additionalTenantFee = 0;
+
+            $tenantNum = (int)$_POST['tenant_num'];
+
+            if ($tenantNum == 2) {
+                $oop = $courtDetails->two_defendant_out_of_pocket;
+            } else if ($_POST['tenant_num'] == 1) {
+                $oop = $courtDetails->one_defendant_out_of_pocket;
+            } else {
+                $oop = $courtDetails->three_defendant_out_of_pocket;
+                if ($courtDetails->additional_tenant != '' && $courtDetails->additional_tenant != 0 ) {
+                    $additionalTenantAmt = $courtDetails->additional_tenant;
+                }
+            }
+
+            if ($tenantNum > 3) {
+                $multiplyBy = $tenantNum - 3;
+                $additionalTenantFee = (float)$additionalTenantAmt * $multiplyBy;
+            }
+
+            $totalFees = (float)$_POST['judgment_amount'] + (float)$_POST['costs_original_lt_proceeding'] + $oop + (float)$_POST['attorney_fees'];
+
+            $noCommaTotalFees = str_replace(',','', $totalFees);
+
+            $totalFees = number_format($totalFees, 2);
+
+            if ($noCommaTotalFees < 2000) {
+                $filingFee = $oop + $additionalTenantFee;
+            } else if ($noCommaTotalFees >= 2000 && $noCommaTotalFees <= 4000) {
+                $filingFee = $oop + $additionalTenantFee;
+            } else if ($noCommaTotalFees > 4000) {
+                $filingFee = $oop + $additionalTenantFee;
+            } else {
+                $filingFee = 'Didnt Work';
+            }
+
+            $evictionData->id = '-1';
+            $evictionData->plantiff_name = $plaintiffName;
+            $evictionData->court_address_line_1 = $geoDetails->address_line_one;
+            $evictionData->court_address_line_2 = $geoDetails->address_line_two;
+            $evictionData->total_judgement = $totalFees;
+            $evictionData->filing_fee = $filingFee;
+            $evictionData->docket_number = 'MJ-' . $_POST['docket_number_1'] . '-LT-' . $docketNumber2 . '-' . $_POST['docket_number_3'];
+            $evictionData->attorney_fees = $_POST['attorney_fees'];
+            $evictionData->judgment_amount = $_POST['judgment_amount'];
+            $evictionData->cost_this_proceeding = $oop;
+            $evictionData->costs_original_lt_proceeding = $_POST['costs_original_lt_proceeding'];
+
+            $pdfHtml = $pdfEditor->globalHtmlAttributes($pdfHtml, $courtDetails, $plaintiffAddress, $defendantAddress, $_POST['signature_source'], $evictionData);
+            $pdfHtml = $pdfEditor->localOOPAttributes($pdfHtml, $evictionData, $defendantAddress2);
+            $pdfHtml = $pdfEditor->addSampleWatermark($pdfHtml, true);
+            $domPdf = new Dompdf();
+            $options = new Options();
+
+            $options->setIsRemoteEnabled(true);
+            $domPdf->setOptions($options);
+            $domPdf->loadHtml($pdfHtml);
+
+            // (Optional) Setup the paper size and orientation
+            $domPdf->setPaper('A4', 'portrait');
+
+            // Render the HTML as PDF
+            $domPdf->render();
+
+            // Output the generated PDF to Browser
+            //$domPdf->stream();
+            $domPdf->stream("dompdf_out.pdf", array("Attachment" => false));
+
+            exit(0);
+
+        } catch ( Exception $e) {
+            Log::info($e->getMessage());
+            Log::info($e->getLine());
+            $mailer->sendMail('andrew.gaidis@gmail.com', 'OOP Preview Error', $e->getMessage() );
         }
-
-        if ($tenantNum > 3) {
-            $multiplyBy = $tenantNum - 3;
-            $additionalTenantFee = (float)$additionalTenantAmt * $multiplyBy;
-        }
-
-        $totalFees = (float)$_GET['judgment_amount'] + (float)$_GET['costs_original_lt_proceeding'] + $oop + (float)$_GET['attorney_fees'];
-
-        $noCommaTotalFees = str_replace(',','', $totalFees);
-
-        $totalFees = number_format($totalFees, 2);
-
-        if ($noCommaTotalFees < 2000) {
-            $filingFee = $oop + $additionalTenantFee;
-        } else if ($noCommaTotalFees >= 2000 && $noCommaTotalFees <= 4000) {
-            $filingFee = $oop + $additionalTenantFee;
-        } else if ($noCommaTotalFees > 4000) {
-            $filingFee = $oop + $additionalTenantFee;
-        } else {
-            $filingFee = 'Didnt Work';
-        }
-
-        $evictionData->id = '-1';
-        $evictionData->plantiff_name = $plaintiffName;
-        $evictionData->court_address_line_1 = $geoDetails->address_line_one;
-        $evictionData->court_address_line_2 = $geoDetails->address_line_two;
-        $evictionData->total_judgement = $totalFees;
-        $evictionData->filing_fee = $filingFee;
-        $evictionData->docket_number = 'MJ-' . $_GET['docket_number_1'] . '-LT-' . $docketNumber2 . '-' . $_GET['docket_number_3'];
-        $evictionData->attorney_fees = $_GET['attorney_fees'];
-        $evictionData->judgment_amount = $_GET['judgment_amount'];
-        $evictionData->cost_this_proceeding = $oop;
-        $evictionData->costs_original_lt_proceeding = $_GET['costs_original_lt_proceeding'];
-
-        $pdfHtml = $pdfEditor->globalHtmlAttributes($pdfHtml, $courtDetails, $plaintiffAddress, $defendantAddress, $_GET['signature_source'], $evictionData);
-        $pdfHtml = $pdfEditor->localOOPAttributes($pdfHtml, $evictionData, $defendantAddress2);
-        $pdfHtml = $pdfEditor->addSampleWatermark($pdfHtml, true);
-        $domPdf = new Dompdf();
-        $options = new Options();
-
-        $options->setIsRemoteEnabled(true);
-        $domPdf->setOptions($options);
-        $domPdf->loadHtml($pdfHtml);
-
-        // (Optional) Setup the paper size and orientation
-        $domPdf->setPaper('A4', 'portrait');
-
-        // Render the HTML as PDF
-        $domPdf->render();
-
-        // Output the generated PDF to Browser
-        //$domPdf->stream();
-        $domPdf->stream("dompdf_out.pdf", array("Attachment" => false));
-
-        exit(0);
     }
 
     public function formulatePDF()
