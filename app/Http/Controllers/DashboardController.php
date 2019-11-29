@@ -103,136 +103,43 @@ class DashboardController extends Controller
     public function downloadPDF(Request $request)
     {
         try {
+            $pdfEditor = new PDFEditController();
             $evictionData = Evictions::where('id', $request->id)->first();
             $courtDetails = CourtDetails::where('magistrate_id', $evictionData->magistrate_id)->first();
-
-            if (Auth::user()->court_id == $evictionData->court_number) {
-                $evictionData->is_downloaded = 1;
-                $evictionData->save();
-            }
-
             $signature = Signature::where('eviction_id', $evictionData->id)->value('signature');
             $plaintiffAddress = $evictionData->plantiff_name .'<br>'. $evictionData->plantiff_address_line_1 .'<br>'. $evictionData->plantiff_address_line_2 .'<br>'.$evictionData->plantiff_phone;
             $defendantAddress = $evictionData->tenant_name . '<br>' . $evictionData->defendant_house_num . ' ' .$evictionData->defendant_street_name . ', ' . $evictionData->unit_num .' '. $evictionData->defendant_town .', '. $evictionData->defendant_state .' '. $evictionData->defendant_zipcode;
 
             $dompdf = new Dompdf();
             $options = new Options();
+
             $options->setIsRemoteEnabled(true);
             $dompdf->setOptions($options);
 
-            $fileType = $evictionData->file_type;
+            if (Auth::user()->court_id == $evictionData->court_number) {
+                $evictionData->is_downloaded = 1;
+                $evictionData->save();
+            }
 
-            if ($fileType == 'eviction' || $fileType == '') {
+            if ($evictionData->file_type == 'eviction' || $evictionData->file_type == '') {
                 $pdfHtml = PDF::where('name', 'ltc')->first();
 
-                $pdfHtml = $this->globalHtmlAttributes($pdfHtml, $courtDetails, $plaintiffAddress, $defendantAddress, $signature, $evictionData);
-
-                $dueRent = $evictionData->due_rent;
-                $securityDeposit = $evictionData->security_deposit;
-                $monthlyRent = $evictionData->monthly_rent;
-                $breachedDetails = $evictionData->breached_details;
-                $propertyDamageDetails = $evictionData->property_damage_details;
-                $additionalRentAmt = $evictionData->additional_rent_amt;
-                $verifyName = $evictionData->verify_name;
-
-                /*                  EVICTION CHECK BOXES                    */
-                if ($evictionData->attorney_fees > 0) {
-                    $attorneyFeesCheckbox = '<input type="checkbox" checked/>';
-                } else {
-                    $attorneyFeesCheckbox = '<input type="checkbox"/>';
-                }
-
-                if ($evictionData->amt_greater_than_zero) {
-                    $amtGreaterThanZeroCheckbox = '<input type="checkbox" checked/>';
-                } else {
-                    $amtGreaterThanZeroCheckbox = '<input type="checkbox"/>';
-                }
-
-                if ($evictionData->damage_amt != '') {
-                    $damageAmtCheckbox = '<input type="checkbox" checked/>';
-                } else {
-                    $damageAmtCheckbox = '<input type="checkbox"/>';
-                }
-
-                if ($evictionData->unjust_damages != '') {
-                    $unjustDamagesCheckbox = '<input type="checkbox" checked/>';
-                } else {
-                    $unjustDamagesCheckbox = '<input type="checkbox"/>';
-                }
-
-                //Lease Type
-                if ($evictionData->is_residential) {
-                    $isResidential = '<input type="checkbox" checked/>';
-                    $isNotResidential = '<input type="checkbox"/>';
-                } else {
-                    $isResidential = '<input type="checkbox"/>';
-                    $isNotResidential = '<input type="checkbox" checked/>';
-                }
-
-                //Notice Status
-                if ($evictionData->no_quit_notice) {
-                    $noQuitNotice = '<input type="checkbox" checked/>';
-                    $quitNoticeGiven = '<input type="checkbox"/>';
-                } else {
-                    $noQuitNotice = '<input type="checkbox"/>';
-                    $quitNoticeGiven = '<input type="checkbox" checked/>';
-                }
-
-                //Lease Status
-                if ($evictionData->unsatisfied_lease) {
-                    $unsatisfiedLease = '<input type="checkbox" checked/>';
-                } else {
-                    $unsatisfiedLease = '<input type="checkbox"/>';
-                }
-                if ($evictionData->breached_conditions_lease) {
-                    $breachedConditionsLease = '<input type="checkbox" checked/>';
-                } else {
-                    $breachedConditionsLease = '<input type="checkbox"/>';
-                }
-
-                if ($evictionData->lease_ended) {
-                    $leaseEnded = '<input type="checkbox" checked/>';
-                } else {
-                    $leaseEnded = '<input type="checkbox"/>';
-                }
-
-                //Determination Request
-                if ($evictionData->is_determination_request) {
-                    $determinationRequestCheckbox = '<input type="checkbox" checked/>';
-                } else {
-                    $determinationRequestCheckbox = '<input type="checkbox"/>';
-                }
-
-                if ($evictionData->is_abandoned) {
-                    $abandonedCheckbox = '<input type="checkbox" checked/>';
-                } else {
-                    $abandonedCheckbox = '<input type="checkbox"/>';
-                }
-
-                if ($evictionData->is_additional_rent) {
-                    $additionalRentCheckbox = '<input type="checkbox" checked/>';
-                } else {
-                    $additionalRentCheckbox = '<input type="checkbox"/>';
-                }
+                $pdfHtml = $pdfEditor->globalHtmlAttributes($pdfHtml, $courtDetails, $plaintiffAddress, $defendantAddress, $signature, $evictionData);
+                $pdfHtml = $pdfEditor->localLTCAttributes($pdfHtml, $evictionData);
 
                 $dompdf->loadHtml($pdfHtml);
-            } else if ($fileType == 'oop') {
+            } else if ($evictionData->file_type == 'oop') {
                 $pdfHtml = PDF::where('name', 'oop')->first();
-                $pdfHtml = $this->globalHtmlAttributes($pdfHtml, $courtDetails, $plaintiffAddress, $defendantAddress, $signature, $evictionData);
-
-                // OOP UNIQUE
-                $pdfHtml = str_replace('__docket-number__', $evictionData->docket_number, $pdfHtml);
-                $pdfHtml = str_replace('__judgment-amount__', $evictionData->judgment_amount, $pdfHtml);
-                $pdfHtml = str_replace('__cost-this-proceeding__', $evictionData->cost_this_proceeding, $pdfHtml);
-                $pdfHtml = str_replace('__cost-original-lt-proceeding__', $evictionData->costs_original_lt_proceeding, $pdfHtml);
+                $pdfHtml = $pdfEditor->globalHtmlAttributes($pdfHtml, $courtDetails, $plaintiffAddress, $defendantAddress, $signature, $evictionData);
+                $defendantAddress2 = $evictionData->defendant_house_num . ' ' . $evictionData->defendant_street_name .' '. $evictionData->unit_num . '<br><br><span style="position:absolute; margin-top:-10px;">'. $evictionData->defendant_town .', ' . $evictionData->defendant_state .' '.$evictionData->defendant_zipcode;
+                $pdfHtml = $pdfEditor->localOOPAttributes($pdfHtml, $evictionData, $defendantAddress2);
 
                 $dompdf->loadHtml($pdfHtml);
-            } else if ($fileType == 'civil complaint') {
+            } else if ($evictionData->file_type == 'civil complaint') {
                 $pdfHtml = PDF::where('name', 'civil')->first();
-                $pdfHtml = $this->globalHtmlAttributes($pdfHtml, $courtDetails, $plaintiffAddress, $defendantAddress, $signature, $evictionData);
+                $pdfHtml = $pdfEditor->globalHtmlAttributes($pdfHtml, $courtDetails, $plaintiffAddress, $defendantAddress, $signature, $evictionData);
+                $pdfHtml = $pdfEditor->localCivilAttributes($pdfHtml, $evictionData);
 
-                // Civil Complaint Unique
-                $pdfHtml = str_replace('__claim-description__', $evictionData->claim_description, $pdfHtml);
 
                 $dompdf->loadHtml($pdfHtml);
             }
@@ -258,6 +165,7 @@ class DashboardController extends Controller
         }
     }
 
+
     public function getFileData () {
         try {
             $fileData = Evictions::where('id', $_GET['id'])->first();
@@ -268,23 +176,6 @@ class DashboardController extends Controller
             Log::info($e->getMessage());
             return false;
         }
-    }
-
-    public function globalHtmlAttributes ($pdfHtml, $courtDetails, $plaintiffAddress, $defendantAddress, $signature, $evictionData) {
-        $pdfHtml = str_replace('__str-upper-county__', strtoupper($courtDetails->county), $pdfHtml);
-        $pdfHtml = str_replace('__court-number__', $evictionData->court_number, $pdfHtml);
-        $pdfHtml = str_replace('__mdj-name__', $courtDetails->mdj_name, $pdfHtml);
-        $pdfHtml = str_replace('__plaintiff-address__', $plaintiffAddress, $pdfHtml);
-        $pdfHtml = str_replace('__defendant-address__', $defendantAddress, $pdfHtml);
-        $pdfHtml = str_replace('__court-address-one__', $evictionData->court_address_line_1, $pdfHtml);
-        $pdfHtml = str_replace('__court-address-two__', $evictionData->court_address_line_2, $pdfHtml);
-        $pdfHtml = str_replace('__phone-number__', $courtDetails->phone_number, $pdfHtml);
-        $pdfHtml = str_replace('__filing-fee__', $evictionData->filing_fee, $pdfHtml);
-        $pdfHtml = str_replace('__signature__', $signature, $pdfHtml);
-        $pdfHtml = str_replace('__eviction-id__', $evictionData->id, $pdfHtml);
-        $pdfHtml = str_replace('__total-fees__', $evictionData->total_judgement, $pdfHtml);
-
-        return $pdfHtml;
     }
 
     public function editLTC () {
@@ -315,120 +206,3 @@ class DashboardController extends Controller
         }
     }
 }
-
-
-
-
-
-
-
-
-
-
-//LTC
-//<html>
-//<head><meta http-equiv=Content-Type content="text/html; charset=UTF-8">
-//<style type="text/css">
-//<!--
-//input[type=checkbox] { display: inline!important; font-size: 9pt; margin:1%; }
-//span.cls_003{font-family:Arial,serif;font-size:13.30px;color:rgb(0,0,0);font-weight:normal;font-style:normal;text-decoration: none}
-//span.cls_002{font-family:Arial,serif;font-size:18.75px;color:rgb(0,0,0);font-weight:bold;font-style:normal;text-decoration: none}
-//span.cls_005{font-family:Arial,serif;font-size:9.31px;color:rgb(0,0,0);font-weight:normal;font-style:normal;text-decoration: none}
-//span.cls_004{font-family:Arial,serif;font-size:12.10px;color:rgb(0,0,0);font-weight:normal;font-style:normal;text-decoration: none}
-//span.cls_006{font-family:Arial,serif;font-size:7.98px;color:rgb(0,0,0);font-weight:normal;font-style:normal;text-decoration: none}
-//span.cls_009{font-family:Arial,serif;font-size:9.31px;color:rgb(0,0,0);font-weight:normal;font-style:normal;text-decoration: none}
-//span.cls_007{font-family:Arial,serif;font-size:10.77px;color:rgb(0,0,0);font-weight:bold;font-style:normal;text-decoration: none}
-//span.cls_008{font-family:Arial,serif;font-size:10.77px;color:rgb(0,0,0);font-weight:normal;font-style:normal;text-decoration: none}
-//
-//--></style></head><body>
-//<span style="position:absolute;margin-left:-44px;top:-22px;width:787px;height:1112px;overflow:hidden">
-//<span style="position:absolute;left:0px;top:0px"><img src="https://quickevict.nyc3.digitaloceanspaces.com/background1.jpg" width="800" height="1052"></span>
-//<span style="position:absolute;left:47.95px;top:16.85px" class="cls_003"><span class="cls_003">COMMONWEALTH OF PENNSYLVANIA</span></span><br>
-//<span style="position:absolute;left:460.45px;top:16.80px" class="cls_002"><span class="cls_002">LANDLORD/TENANT COMPLAINT</span></span><br>
-//<span style="position:absolute;left:47.95px;top:29.55px" class="cls_003"><span class="cls_003">COUNTY OF ' . strtoupper($courtDetails->county) . '</span></span><br>
-//<span style="position:absolute;left:447.28px;top:86.80px" class="cls_005"><span class="cls_005">PLAINTIFF:</span><br><p style="margin-left:6px;">' . $plantiffName . '<br>' . $plantiffAddress1 . '<br>' . $plantiffAddress2 . '<br>' . $plantiffPhone . '</p></span><br>
-//<span style="position:absolute;left:600.50px;top:86.80px" class="cls_005"><span class="cls_005">NAME and ADDRESS</span></span>
-//<span style="position:absolute;left:55.40px;top:92.36px" class="cls_004"><span class="cls_004">Mag. Dist. No: ' . $courtNumber . '</span></span><br>
-//<span style="position:absolute;left:55.40px;top:105.85px" class="cls_004"><span class="cls_004">MDJ Name: ' . $courtDetails->mdj_name . '</span></span><br>
-//<span style="position:absolute;left:55.40px;top:120.05px" class="cls_004"><span class="cls_004">Address: ' . $courtAddressLine1 . '<br><span style="margin-left:45px;">' . $courtAddressLine2 . '</span></span></span><br>
-//<span style="position:absolute;left:581.34px;top:183.90px" class="cls_006"><span class="cls_006">V.</span></span><br>
-//<span style="position:absolute;left:447.28px;top:180.90px" class="cls_009"><span class="cls_009">DEFENDANT:</span><br><p style="margin-left:6px;">' . $tenantName . '<br>' . $defendantHouseNum . ' ' . $defendantStreetName . ' ' . $unitNum . '<br>' . $defendantTown . ', ' . $defendantState . ' ' . $defendantZipcode . '  </p></span><br>
-//<span style="position:absolute;left:600.50px;top:180.00px" class="cls_005"><span class="cls_005">NAME and ADDRESS</span></span><br>
-//<span style="position:absolute;left:55.40px;top:188.45px" class="cls_004"><span class="cls_004">Telephone: ' . $courtDetails->phone_number . '</span></span><br>
-//<span style="position:absolute;left:195.45px;top:214.95px" class="cls_004"><span class="cls_004">AMOUNT</span></span><br>
-//<span style="position:absolute;left:293.35px;top:214.95px" class="cls_004"><span class="cls_004">DATE PAID</span></span><br>
-//<span style="position:absolute;left:55.40px;top:234.95px" class="cls_004"><span class="cls_004">FILING COSTS:</span></span><br>
-//<span style="position:absolute;left:152.00px;top:234.95px" class="cls_004"><span class="cls_004">$</span></span><br>
-//<span style="position:absolute;left:55.40px;top:252.95px" class="cls_004"><span class="cls_004">POSTAGE</span></span><br>
-//<span style="position:absolute;left:152.00px;top:252.95px" class="cls_004"><span class="cls_004">$</span></span><br>
-//<span style="position:absolute;left:480.55px;top:262.45px" class="cls_004"><span class="cls_004">Docket No: </span></span><br>
-//<span style="position:absolute;left:55.40px;top:270.95px" class="cls_004"><span class="cls_004">SERVICE COSTS</span></span><br>
-//<span style="position:absolute;left:152.00px;top:270.95px" class="cls_004"><span class="cls_004">$</span></span><br>
-//<span style="position:absolute;left:480.55px;top:272.95px" class="cls_004"><span class="cls_004">Case Filed:</span></span><br>
-//<span style="position:absolute;left:55.40px;top:288.95px" class="cls_004"><span class="cls_004">CONSTABLE ED.</span></span><br>
-//<span style="position:absolute;left:152.00px;top:288.95px" class="cls_004"><span class="cls_004">$</span></span><br>
-//<span style="position:absolute;left:55.40px;top:313.95px" class="cls_004"><span class="cls_004">TOTAL</span></span><br>
-//<span style="position:absolute;left:152.00px;top:313.95px" class="cls_004"><span class="cls_004">$</span></span><br>
-//<span style="position:absolute;left:55.40px;top:335.95px" class="cls_003"><span class="cls_003">Pa.R.C.P.M.D.J. No. 206 sets forth those costs recoverable by the prevailing party.</span></span><br>
-//<span style="position:absolute;left:60.40px;top:355.95px" class="cls_004"><span class="cls_004">TO THE DEFENDANT: The above named plaintiff(s) asks judgment together with costs against you for the possession of real</span></span><br>
-//<span style="position:absolute;left:82.77px;top:365.51px" class="cls_004"><span class="cls_004">property and for:</span></span><br>
-//<span style="position:absolute;left:90.87px;top:385.21px" class="cls_004"><span class="cls_004">Lease is</span><span style="margin-left:350px;">' . $monthlyRent . '</span></span><br>
-//<span style="position:absolute;left:165.25px;top:385.21px" class="cls_004"><span class="cls_004">' . $isResidential . 'Residential</span></span><br>
-//<span style="position:absolute;left:260.23px;top:385.21px" class="cls_004"><span class="cls_004">' . $isNotResidential . 'Nonresidential     Monthly Rent  $</span></span><br>
-//<span style="position:absolute;left:550.98px;top:385.21px" class="cls_004"><span class="cls_004">Security Deposit $</span><span style="margin-left:30px;">' . $securityDeposit . '</span></span><br>
-//<span style="position:absolute;left:55.40px;top:404.91px" class="cls_004"><span class="cls_004">' . $abandonedCheckbox . ' A determination that the manufactured home and property have been abandoned.</span></span><br>
-//<span style="position:absolute;left:55.40px;top:420.61px" class="cls_004"><span class="cls_004">' . $determinationRequestCheckbox . ' A Request for Determination of Abandonment (Form MDJS 334) must be completed and submitted with this complaint.</span></span><br>
-//<span style="position:absolute;left:55.40px;top:435.71px" class="cls_004"><span class="cls_004">' . $damageAmtCheckbox . ' Damages for injury to the real property, to wit: ___<span style="text-decoration:underline;">' . $propertyDamageDetails . '</span></span></span><br>
-//<span style="position:absolute;left:75.40px;top:454.21px" class="cls_004"><span class="cls_004">______________________________________________________________  in the amount of:</span></span><br>
-//<span style="position:absolute;left:600.40px;top:454.45px" class="cls_004"><span class="cls_004">$</span></span><br>
-//<span style="position:absolute;left:600.40px;top:454.21px" class="cls_004"><span style="text-decoration: underline;" class="cls_004">__________' . $damageAmt . '_________</span></span><br>
-//<span style="position:absolute;left:60.50px;top:474.95px" class="cls_004"><span class="cls_004">' . $unjustDamagesCheckbox . 'Damages for the unjust detention of the real property in the amount of</span></span><br>
-//<span style="position:absolute;left:600.40px;top:474.95px" class="cls_004"><span class="cls_004">$</span></span><br>
-//<span style="position:absolute;left:600.42px;top:474.95px" class="cls_004"><span style="text-decoration: underline;" class="cls_004">__________' . $unjustDamages . '_________</span></span><br>
-//<span style="position:absolute;left:60.50px;top:494.45px" class="cls_004"><span class="cls_004">' . $amtGreaterThanZeroCheckbox . ' Rent remaining due and unpaid on filing date in the amount of</span></span><br>
-//<span style="position:absolute;left:600.40px;top:494.45px" class="cls_004"><span class="cls_004">$</span></span><br>
-//<span style="position:absolute;left:600.40px;top:494.45px" class="cls_004"><span style="text-decoration: underline;" class="cls_004">__________' . $dueRent . '_________</span></span><br>
-//<span style="position:absolute;left:60.50px;top:514.95px" class="cls_004"><span class="cls_004">' . $additionalRentCheckbox . ' And additional rent remaining due and unpaid on hearing date</span></span><br>
-//<span style="position:absolute;left:600.40px;top:514.95px" class="cls_004"><span class="cls_004">$</span></span><br>
-//<span style="position:absolute;left:600.40px;top:514.95px" class="cls_004"><span class="cls_004">__________' . $additionalRentAmt . '_________</span></span><br>
-//<span style="position:absolute;left:60.50px;top:534.45px" class="cls_004"><span class="cls_004">' . $attorneyFeesCheckbox . ' Attorney fees in the amount of</span></span><br>
-//<span style="position:absolute;left:600.40px;top:534.45px" class="cls_004"><span class="cls_004">$</span></span><br>
-//<span style="position:absolute;left:600.40px;top:534.45px" class="cls_004"><span style="text-decoration: underline;" class="cls_004">__________' . $attorneyFees . '_________</span></span><br>
-//<span style="position:absolute;left:42.30px;top:567.20px" class="cls_004"><span class="cls_004">THE PLAINTIFF FURTHER ALLEGES THAT:</span></span><br>
-//<span style="position:absolute;left:570.40px;top:567.20px" class="cls_004"><span class="cls_004">Total:</span></span><br>
-//<span style="position:absolute;left:600.40px;top:567.20px" class="cls_004"><span class="cls_004">$</span></span><br>
-//<span style="position:absolute;left:600.40px;top:567.20px" class="cls_004"><span style="text-decoration: underline;" class="cls_004">__________' . $totalFees . '_________</span></span><br>
-//<span style="position:absolute;left:55.40px;top:590.15px" class="cls_004"><span class="cls_004">1. The location and the address, if any, of the real property is:</span></span><br>
-//<span style="position:absolute;left:393.85px;top:590.15px" class="cls_004"><span style="text-decoration: underline;" class="cls_004">' . $defendantAddress . '</span></span><br>
-//<span style="position:absolute;left:55.40px;top:610.05px" class="cls_004"><span class="cls_004">2. The plaintiff is the landlord of that property.</span></span><br>
-//<span style="position:absolute;left:55.40px;top:630.55px" class="cls_004"><span class="cls_004">3. The plaintiff leased or rented the property to you or to ___________________________________________under whom you claim</span></span><br>
-//<span style="position:absolute;left:55.40px;top:650.65px" class="cls_004"><span class="cls_004">4.</span></span><br>
-//<span style="position:absolute;left:65.60px;top:650.65px" class="cls_004"><span class="cls_004">' . $quitNoticeGiven . 'Notice to quit was given in accordance with law, or</span></span><br>
-//<span style="position:absolute;left:65.60px;top:665.15px" class="cls_004"><span class="cls_004">' . $noQuitNotice . 'No notice is required under the terms of the lease.</span></span><br>
-//<span style="position:absolute;left:55.40px;top:685.45px" class="cls_004"><span class="cls_004">5.</span></span><br>
-//<span style="position:absolute;left:77.30px;top:685.45px" class="cls_004"><span class="cls_004">' . $leaseEnded . 'The term for which the property was leased or rented is fully ended, or</span></span><br>
-//<span style="position:absolute;left:77.30px;top:700.35px" class="cls_004"><span class="cls_004">' . $breachedConditionsLease . 'A forfeiture has resulted by reason of a breach of the conditions of the lease, to wit:</span></span><br>
-//<span style="position:absolute;left:504.74px;top:700.35px" class="cls_004"></span>
-//<span style="position:absolute;left:77.30px;top:712.35px" class="cls_004"><span style="text-decoration: underline;" class="cls_004">' . $breachedDetails . '</span> or,</span><br>
-//<span style="position:absolute;left:77.30px;top:725.15px" class="cls_004"><span class="cls_004">___________________________________________________________________________________________________</span></span><br>
-//<span style="position:absolute;left:77.30px;top:740.55px" class="cls_004"><span class="cls_004">' . $unsatisfiedLease . 'Rent reserved and due has, upon demand, remained unsatisfied.</span></span><br>
-//<span style="position:absolute;left:55.40px;top:760.15px" class="cls_004"><span class="cls_004">6.</span></span><br>
-//<span style="position:absolute;left:65.50px;top:760.15px" class="cls_004"><span class="cls_004">You retain the real property and refuse to give up to its possession.</span></span><br>
-//<span style="position:absolute;left:55.40px;top:780.65px" class="cls_004"><span class="cls_004">I, <span style="text-decoration:underline;"> ' . $verifyName . ' </span> verify that the facts set forth in this complaint are</span></span><br>
-//<span style="position:absolute;left:55.40px;top:795.85px" class="cls_004"><span class="cls_004">true and correct to the best of my knowledge, information and belief. This statement is made subject to the penalties of Section 4904</span></span><br>
-//<span style="position:absolute;left:55.40px;top:810.05px" class="cls_004"><span class="cls_004">of the Crimes Code (18 PA. C.S. § 4904) relating to unsworn falsification to authorities.</span></span><br>
-//<span style="position:absolute;left:55.40px;top:820.90px" class="cls_004"><span class="cls_004">I certify this filing complies with the UJS Case Records Public Access Policy.</span></span><br>
-//<span style="position:absolute;left:560.00px;top:870.80px" class="cls_004"><img style="position:absolute; top:-65px" width="160" height="65" src="' . $signature . '"/><span class="cls_004">(Signature of Plaintiff)</span></span><br>
-//<span style="position:absolute;left:60.00px;top:890.40px" class="cls_004"><span class="cls_004">The plaintiff\'s attorney shall file an entry of appearance with the magisterial district court pursuant to Pa . R . C . P . M . D . J . 207.1 </span ></span ><br >
-//<span style = "position:absolute;left:60.90px;top:905.15px" class="cls_005" ><span class="cls_005" >IF YOU HAVE A DEFENSE to this complaint you may present it at the hearing . IF YOU HAVE A CLAIM against the plaintiff arising out of the occupancy of the premises,</span ></span ><br >
-//<span style = "position:absolute;left:60.90px;top:915.30px" class="cls_005" ><span class="cls_005" > which is in the magisterial district judge jurisdiction and which you intend to assert at the hearing, YOU MUST FILE it on the complaint form at the office BEFORE THE TIME </span ></span ><br >
-//<span style = "position:absolute;left:60.90px;top:925.45px" class="cls_005" ><span class="cls_005" > set for the hearing . IF YOU DO NOT APPEAR AT THE HEARING, a judgment for possession and costs, and for damages and rent if claimed, may nevertheless be entered </span ></span ><br >
-//<span style = "position:absolute;left:60.90px;top:935.60px" class="cls_005" ><span class="cls_005" > against you . A judgment against you for possession may result in your EVICTION from the premises .</span ></span ><br >
-//<span style = "position:absolute;left:60.90px;top:945.75px" class="cls_007" ><span class="cls_007" >If you are disabled and require a reasonable accommodation to gain access to the Magisterial District Court and its services, please </span ></span ><br >
-//<span style = "position:absolute;left:60.90px;top:955.35px" class="cls_007" ><span class="cls_007" > contact the Magisterial District Court at the above address or telephone number . We are unable to provide transportation .</span ></span ><br >
-//<span style = "position:absolute;left:55.40px;top:985.85px" class="cls_008" ><span class="cls_008" > AOPC 310A </span ></span ><br >
-//<span style = "position:absolute;left:605.75px;top:985.50px" class="cls_008" ><span class="cls_008" > FREE INTERPRETER</span ></span ><br >
-//<span style = "position:absolute;left:590.75px;top:1000.50px" class="cls_008" ><span class="cls_008" > www.pacourts.us/language-rights</span ></span ><br >
-//<span style = "position:absolute;left:303.75px;top:985.50px" class="cls_008" ><span class="cls_008" > CourtZip ID # ' . $evictionId . '</span ></span ><br >
-//<span style = "position:absolute;left:120.65px;top:985.85px" class="cls_007" ><span class="cls_007" > </span >Filing Fee: $' . $filingFee . '</span ><br >
-//</span ></body ></html>

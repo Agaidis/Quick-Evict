@@ -12,24 +12,67 @@ use App\Evictions;
 use App\Signature;
 use Illuminate\Support\Facades\Log;
 use Stripe\Stripe;
+use stdClass;
+use App\PDF;
+use Dompdf\Options;
+use Dompdf\Dompdf;
 
 class CivilComplaintController extends Controller
 {
     /**
      * Create a new controller instance.
      *
-     * @return void
+     *
      */
     public function __construct()
     {
         $this->middleware('auth');
     }
+    public function showSamplePDF() {
+        $magistrateId = str_replace('magistrate_' , '', $_POST['court_number']);
+        $courtDetails = CourtDetails::where('magistrate_id', $magistrateId)->first();
+        $geoDetails = GeoLocation::where('magistrate_id', $magistrateId)->first();
+        $pdfHtml = PDF::where('name', 'oop')->first();
+        $pdfEditor = new PDFEditController();
+        $evictionData = new stdClass();
+
+        $plaintiffName = $_POST['owner_name'];
+        $plaintiffPhone = $_POST['owner_phone'];
+        $plaintiffAddress1 = $_POST['owner_address_1'];
+        $plaintiffAddress2 = $_POST['owner_address_2'];
+
+        $plaintiffAddress = $plaintiffName .'<br>'. $plaintiffAddress1 .'<br>'. $plaintiffAddress2 .'<br>'. $plaintiffPhone;
+        $defendantAddress = $_POST['tenant_name'] . '<br>' . $_POST['houseNum'] . ' ' . $_POST['streetName'] . ', ' . $_POST['unit_number'] .' '. $_POST['town'] .', '. $_POST['state'] .' '. $_POST['zipcode'];
+
+        $evictionData->id = '-1';
+        $evictionData->plantiff_name = $plaintiffName;
+        $evictionData->court_address_line_1 = $geoDetails->address_line_one;
+        $evictionData->court_address_line_2 = $geoDetails->address_line_two;
+        $evictionData->claim_description = $_POST['claim_description'];
+
+        $pdfEditor->globalHtmlAttributes($pdfHtml, $courtDetails, $plaintiffAddress, $defendantAddress, $_POST['signature_source'], $evictionData);
+        $pdfHtml = $pdfEditor->localCivilAttributes($pdfHtml, $evictionData);
+        $domPdf = new Dompdf();
+        $options = new Options();
+
+        $options->setIsRemoteEnabled(true);
+        $domPdf->setOptions($options);
+        $domPdf->loadHtml($pdfHtml);
+
+        // (Optional) Setup the paper size and orientation
+        $domPdf->setPaper('A4', 'portrait');
+
+        // Render the HTML as PDF
+        $domPdf->render();
+
+        // Output the generated PDF to Browser
+        $domPdf->stream();
+    }
 
     public function formulatePDF()
     {
-       $mailer = new Mailer();
+        $mailer = new Mailer();
         try {
-            $removeValues = ['$', ','];
             $magistrateId = str_replace('magistrate_' , '', $_POST['court_number']);
             $courtDetails = CourtDetails::where('magistrate_id', $magistrateId)->first();
             $geoDetails = GeoLocation::where('magistrate_id', $magistrateId)->first();
@@ -41,13 +84,11 @@ class CivilComplaintController extends Controller
 
 
             $ownerName = $_POST['owner_name'];
-
-
-                $verifyName = $_POST['owner_name'];
-                $plantiffName = $_POST['owner_name'];
-                $plantiffPhone = $_POST['owner_phone'];
-                $plantiffAddress1 = $_POST['owner_address_1'];
-                $plantiffAddress2 = $_POST['owner_address_2'];
+            $verifyName = $_POST['owner_name'];
+            $plantiffName = $_POST['owner_name'];
+            $plantiffPhone = $_POST['owner_phone'];
+            $plantiffAddress1 = $_POST['owner_address_1'];
+            $plantiffAddress2 = $_POST['owner_address_2'];
 
 
             $defendantState = $_POST['state'];
@@ -58,41 +99,41 @@ class CivilComplaintController extends Controller
             $civilDefendantAddress1 = $_POST['civil_defendant_address_1'];
             $civilDefendantAddress2 = $_POST['civil_defendant_address_2'];
 
-                $eviction = new Evictions();
-                $eviction->status = 'Created Civil Complaint';
-                $eviction->property_address = $defendanthouseNum.' '.$defendantStreetName.'-1'.$defendantTown .', ' . $defendantState.' '.$defendantZipcode;
-                $eviction->tenant_name = $_POST['tenant_name'];
-                $eviction->defendant_state = $civilDefendantAddress1;
-                $eviction->defendant_zipcode = $civilDefendantAddress2;
-                $eviction->defendant_house_num = $defendanthouseNum;
-                $eviction->defendant_street_name = $defendantStreetName;
-                $eviction->defendant_town = $defendantTown;
-                $eviction->total_judgement = $_POST['total_judgment'];
-                $eviction->pdf_download = 'true';
-                $eviction->court_number = $courtNumber;
-                $eviction->court_address_line_1 = $courtAddressLine1;
-                $eviction->court_address_line_2 = $courtAddressLine2;
-                $eviction->owner_name = $ownerName;
-                $eviction->magistrate_id = $magistrateId;
-                $eviction->plantiff_name = $plantiffName;
-                $eviction->plantiff_phone = $plantiffPhone;
-                $eviction->plantiff_address_line_1 = $plantiffAddress1;
-                $eviction->plantiff_address_line_2 = $plantiffAddress2;
-                $eviction->verify_name = $verifyName;
-                $eviction->user_id = Auth::user()->id;
-                $eviction->court_filing_fee = '0';
-                $eviction->claim_description = $_POST['claim_description'];
-                $eviction->file_type = 'civil complaint';
+            $eviction = new Evictions();
+            $eviction->status = 'Created Civil Complaint';
+            $eviction->property_address = $defendanthouseNum.' '.$defendantStreetName.'-1'.$defendantTown .', ' . $defendantState.' '.$defendantZipcode;
+            $eviction->tenant_name = $_POST['tenant_name'];
+            $eviction->defendant_state = $civilDefendantAddress1;
+            $eviction->defendant_zipcode = $civilDefendantAddress2;
+            $eviction->defendant_house_num = $defendanthouseNum;
+            $eviction->defendant_street_name = $defendantStreetName;
+            $eviction->defendant_town = $defendantTown;
+            $eviction->total_judgement = $_POST['total_judgment'];
+            $eviction->pdf_download = 'true';
+            $eviction->court_number = $courtNumber;
+            $eviction->court_address_line_1 = $courtAddressLine1;
+            $eviction->court_address_line_2 = $courtAddressLine2;
+            $eviction->owner_name = $ownerName;
+            $eviction->magistrate_id = $magistrateId;
+            $eviction->plantiff_name = $plantiffName;
+            $eviction->plantiff_phone = $plantiffPhone;
+            $eviction->plantiff_address_line_1 = $plantiffAddress1;
+            $eviction->plantiff_address_line_2 = $plantiffAddress2;
+            $eviction->verify_name = $verifyName;
+            $eviction->user_id = Auth::user()->id;
+            $eviction->court_filing_fee = '0';
+            $eviction->claim_description = $_POST['claim_description'];
+            $eviction->file_type = 'civil complaint';
 
-                $eviction->save();
+            $eviction->save();
 
-                $evictionId = $eviction->id;
+            $evictionId = $eviction->id;
 
-                $signature = new Signature();
-                $signature->eviction_id = $evictionId;
-                $signature->signature = $_POST['signature_source'];
+            $signature = new Signature();
+            $signature->eviction_id = $evictionId;
+            $signature->signature = $_POST['signature_source'];
 
-                $signature->save();
+            $signature->save();
 
             try {
                 Stripe::setApiKey('sk_test_MnFhi1rY4EF5NDsAWyURCRND');
@@ -114,10 +155,10 @@ class CivilComplaintController extends Controller
             $notify->notifyJudge();
             $notify->notifyMaker();
 
-                return redirect('dashboard')->with('status','Your Civil Complaint has been successfully made! You can see its progress in the table below.');
+            return redirect('dashboard')->with('status','Your Civil Complaint has been successfully made! You can see its progress in the table below.');
 
-            } catch ( Exception $e ) {
-                $mailer->sendMail('andrew.gaidis@gmail.com, chad@slatehousegroup.com ', 'Civil Complaint Error', '
+        } catch ( Exception $e ) {
+            $mailer->sendMail('andrew.gaidis@gmail.com, chad@slatehousegroup.com ', 'Civil Complaint Error', '
 <html><body>
 <table><thead>
 <tr>
@@ -143,7 +184,7 @@ class CivilComplaintController extends Controller
 <tr><td>Claim Description</td><td>'.$_POST['claim_description'].'</td></tr>
 </tbody>
 </table></body></html>' );
-                alert('It looks like there was an issue while making this LTC. the Development team has been notified and are aware that your having issues. They will update you as soon as possible.');
+            alert('It looks like there was an issue while making this LTC. the Development team has been notified and are aware that your having issues. They will update you as soon as possible.');
 
         }
 
