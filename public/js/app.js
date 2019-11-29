@@ -42769,12 +42769,13 @@ if (document.location.href.split('/')[3] === 'new-file') {
         $('.use_signature').prop('disabled', true);
         $('.pay_sign_submit').prop('disabled', true);
       }
+    });
+    $('#preview_document').on('click', function () {
+      $('#rented_by_val').val($('input[name=rented_by]:checked').val());
     }); //Save and use Signature
 
     $('.pay_sign_submit').on('click', function () {
-      if ($('#legal_checkbox').is(':checked')) {
-        $('#rented_by_val').val($('input[name=rented_by]:checked').val());
-      } else {
+      if ($('#legal_checkbox').is(':checked')) {} else {
         alert('You need to check the Signature checkbox above to agree to the digital terms in order to continue.');
       }
 
@@ -43256,6 +43257,10 @@ $(document).ready(function () {
         id: evictionId
       },
       success: function success(data) {
+        if (data.file_type === 'oop') {} else if (data.file_type === 'ltc') {} else if (data.file_type === 'civil') {} else {
+          alert('File Type not known, please contact the development team');
+        }
+
         console.log(data);
       },
       error: function error(data) {
