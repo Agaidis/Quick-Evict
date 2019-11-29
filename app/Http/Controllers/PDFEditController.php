@@ -94,7 +94,7 @@ class PDFEditController extends Controller
         if ($isSample) {
             $pdfHtml = str_replace('__sample-src__', 'https://quickevict.nyc3.digitaloceanspaces.com/Sample.png', $pdfHtml);
         } else {
-            $pdfHtml = str_replace('__sample-src__', '', $pdfHtml);
+            $pdfHtml = str_replace('__sample-src__', 'https://quickevict.nyc3.digitaloceanspaces.com/Sample.png', $pdfHtml);
         }
 
         return $pdfHtml;

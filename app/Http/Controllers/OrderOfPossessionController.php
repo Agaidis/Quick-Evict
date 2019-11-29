@@ -106,7 +106,7 @@ class OrderOfPossessionController extends Controller
             $evictionData->court_address_line_1 = $geoDetails->address_line_one;
             $evictionData->court_address_line_2 = $geoDetails->address_line_two;
             $evictionData->total_judgement = $totalFees;
-            $evictionData->filing_fee = $filingFee;
+            $evictionData->filing_fee = number_format($filingFee, 2);
             $evictionData->docket_number = 'MJ-' . $_POST['docket_number_1'] . '-LT-' . $docketNumber2 . '-' . $_POST['docket_number_3'];
             $evictionData->attorney_fees = $_POST['attorney_fees'];
             $evictionData->judgment_amount = $_POST['judgment_amount'];
