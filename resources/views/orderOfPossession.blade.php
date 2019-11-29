@@ -11,7 +11,7 @@
                     <div class="card-body">
                         <div class="row">
                             <div class="col-md-12">
-                                <form method="post" action="{{ action('OrderOfPossessionController@showSamplePDF') }}" enctype="multipart/form-data" id="eviction_form">
+                                <form method="post" action="{{ action('OrderOfPossessionController@showSamplePDF') }}" enctype="multipart/form-data" id="eviction_form" target="_blank">
                                     <input type="hidden" name="_token" value="{{ Session::token() }}">
                                     <a href="{{'new-file'}}"><button type="button" id="back_to_step_1_btn" class="btn btn-primary">Back to Step 1</button></a>
                                     <h2 style="text-align:center;" class="titles fs-subtitle">Step 2:<br> Enter the address you plan on evicting.</h2>
@@ -225,27 +225,27 @@
                                                             <button disabled type="button" class="btn btn-primary use_signature" data-action="clear">Use Signature</button>
                                                         </div>
                                                     </div><br><hr><br>
-                                                    <div class="payment_section">
-                                                        <h3 class="titles payment_title">Step 5:<br> Payment Information</h3>
-                                                        <div class="price_ctr col-md-6">
-                                                            <label>Court Filing Fee: $</label><span id="filing_fee_display"></span><br>
-                                                            <label>CourtZip Filing Fee: </label><span> $16.99</span><br>
-                                                            <label>Total: $</label><span id="total"></span>
+{{--                                                    <div class="payment_section">--}}
+{{--                                                        <h3 class="titles payment_title">Step 5:<br> Payment Information</h3>--}}
+{{--                                                        <div class="price_ctr col-md-6">--}}
+{{--                                                            <label>Court Filing Fee: $</label><span id="filing_fee_display"></span><br>--}}
+{{--                                                            <label>CourtZip Filing Fee: </label><span> $16.99</span><br>--}}
+{{--                                                            <label>Total: $</label><span id="total"></span>--}}
 
-                                                        </div>
-                                                        <div class="form-row">
-                                                            <label for="card-element">
-                                                                <span class="credit_debit">Credit or debit card</span>
-                                                                <img style="margin-left:70px;" alt="Credit Card Logos" title="Credit Card Logos" src="http://www.credit-card-logos.com/images/multiple_credit-card-logos-1/credit_card_logos_10.gif" width="236" height="30" border="0" />
-                                                            </label>
-                                                            <div id="card-element">
-                                                                <!-- A Stripe Element will be inserted here. -->
-                                                            </div>
+{{--                                                        </div>--}}
+{{--                                                        <div class="form-row">--}}
+{{--                                                            <label for="card-element">--}}
+{{--                                                                <span class="credit_debit">Credit or debit card</span>--}}
+{{--                                                                <img style="margin-left:70px;" alt="Credit Card Logos" title="Credit Card Logos" src="http://www.credit-card-logos.com/images/multiple_credit-card-logos-1/credit_card_logos_10.gif" width="236" height="30" border="0" />--}}
+{{--                                                            </label>--}}
+{{--                                                            <div id="card-element">--}}
+{{--                                                                <!-- A Stripe Element will be inserted here. -->--}}
+{{--                                                            </div>--}}
 
-                                                            <!-- Used to display form errors. -->
-                                                            <div id="card-errors" role="alert"></div>
-                                                        </div><br><br>
-                                                    </div>
+{{--                                                            <!-- Used to display form errors. -->--}}
+{{--                                                            <div id="card-errors" role="alert"></div>--}}
+{{--                                                        </div><br><br>--}}
+{{--                                                    </div>--}}
                                                 </div>
                                                 <div class="pay_submit_section modal-footer">
 {{--                                                    <button disabled type="submit" class="btn btn-success pay_sign_submit" data-action="save-png">Pay and Submit Document</button>--}}
