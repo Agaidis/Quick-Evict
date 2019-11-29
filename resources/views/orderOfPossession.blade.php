@@ -11,7 +11,7 @@
                     <div class="card-body">
                         <div class="row">
                             <div class="col-md-12">
-                                <form method="post" action="{{ action('OrderOfPossessionController@showSamplePDF') }}" enctype="multipart/form-data" id="eviction_form">
+                                <form method="get" action="{{ action('OrderOfPossessionController@showSamplePDF') }}" enctype="multipart/form-data" id="eviction_form">
                                     <input type="hidden" name="_token" value="{{ Session::token() }}">
                                     <a href="{{'new-file'}}"><button type="button" id="back_to_step_1_btn" class="btn btn-primary">Back to Step 1</button></a>
                                     <h2 style="text-align:center;" class="titles fs-subtitle">Step 2:<br> Enter the address you plan on evicting.</h2>
@@ -166,6 +166,14 @@
                                                             </div>
                                                         </div>
                                                     </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <div class="row">
+                                                <div class="offset-4 col-sm-10">
+                                                    <button type="submit" id="preview_document" class="btn btn-warning">Preview</button>
                                                 </div>
                                             </div>
                                         </div>
