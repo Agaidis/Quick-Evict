@@ -16,6 +16,7 @@ use stdClass;
 use App\PDF;
 use Dompdf\Options;
 use Dompdf\Dompdf;
+use App\ErrorLog;
 
 class CivilComplaintController extends Controller
 {
@@ -158,6 +159,10 @@ class CivilComplaintController extends Controller
             return redirect('dashboard')->with('status','Your Civil Complaint has been successfully made! You can see its progress in the table below.');
 
         } catch ( Exception $e ) {
+            $errorMsg = new ErrorLog();
+            $errorMsg->payload = $e->getMessage();
+
+            $errorMsg->save();
             $mailer->sendMail('andrew.gaidis@gmail.com, chad@slatehousegroup.com ', 'Civil Complaint Error', '
 <html><body>
 <table><thead>

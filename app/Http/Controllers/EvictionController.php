@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\ErrorLog;
 use Exception;
 use Illuminate\Support\Facades\Auth;
 use App\GeoLocation;
@@ -36,6 +37,10 @@ class EvictionController extends Controller
             Evictions::destroy($dbId);
             return $dbId;
         } catch (\Exception $e) {
+            $errorMsg = new ErrorLog();
+            $errorMsg->payload = $e->getMessage();
+
+            $errorMsg->save();
             return 'failed';
         }
     }
@@ -273,7 +278,10 @@ class EvictionController extends Controller
                         'source' => $token,
                     ]);
                 } catch ( Exception $e ) {
-                    Log::info($e->getMessage());
+                    $errorMsg = new ErrorLog();
+                    $errorMsg->payload = $e->getMessage();
+
+                    $errorMsg->save();
                     $mailer->sendMail('andrew.gaidis@gmail.com', 'OOP Error', $e->getMessage() );
                 }
 
@@ -283,12 +291,20 @@ class EvictionController extends Controller
                     $notify->notifyJudge();
                     $notify->notifyMaker();
                 } catch ( Exception $e) {
+                    $errorMsg = new ErrorLog();
+                    $errorMsg->payload = $e->getMessage();
+
+                    $errorMsg->save();
                     $mailer->sendMail('andrew.gaidis@gmail.com', 'Notification Error' . Auth::user()->id, $e->getMessage());
                 }
 
 
                 return redirect('dashboard')->with('status','Your Eviction has been successfully made! You can see its progress in the table below.');
             } catch ( \Exception $e) {
+                $errorMsg = new ErrorLog();
+                $errorMsg->payload = $e->getMessage();
+
+                $errorMsg->save();
                 $mailer->sendMail('andrew.gaidis@gmail.com', 'LTC Error 1' . Auth::user()->id, '<html><body>
 <table><thead>
 <tr>
@@ -317,6 +333,10 @@ class EvictionController extends Controller
                 alert('It looks like there was an issue while making this LTC. the Development team has been notified and are aware that your having issues. They will update you as soon as possible.');
             }
         } catch ( \Exception $e) {
+            $errorMsg = new ErrorLog();
+            $errorMsg->payload = $e->getMessage();
+
+            $errorMsg->save();
             $mailer->sendMail('andrew.gaidis@gmail.com', 'LTC Error 2' . Auth::user()->id, $e->getMessage() );
             alert('It looks like there was an issue while making this LTC. the Development team has been notified and are aware that your having issues. They will update you as soon as possible.');
         }
@@ -329,6 +349,10 @@ class EvictionController extends Controller
             $isDigitalSignature = CourtDetails::where('magistrate_id', $courtNumber[1])->get();
             return $isDigitalSignature;
         } catch ( Exception $e ) {
+            $errorMsg = new ErrorLog();
+            $errorMsg->payload = $e->getMessage();
+
+            $errorMsg->save();
             $mailer->sendMail('andrew.gaidis@gmail.com', 'LTC Error 3' . Auth::user()->id, $e->getMessage() );
             alert('It looks like there was an issue while making this LTC. the Development team has been notified and are aware that your having issues. They will update you as soon as possible.');
         }

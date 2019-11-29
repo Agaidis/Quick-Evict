@@ -16,6 +16,7 @@ use Stripe\Stripe;
 use stdClass;
 use Dompdf\Options;
 use Dompdf\Dompdf;
+use App\ErrorLog;
 
 class OrderOfPossessionController extends Controller
 {
@@ -134,8 +135,12 @@ class OrderOfPossessionController extends Controller
             exit(0);
 
         } catch ( Exception $e) {
-            Log::info($e->getMessage());
-            Log::info($e->getLine());
+
+            $errorMsg = new ErrorLog();
+            $errorMsg->payload = $e->getMessage();
+
+            $errorMsg->save();
+
             $mailer->sendMail('andrew.gaidis@gmail.com', 'OOP Preview Error', $e->getMessage() );
         }
     }
@@ -283,8 +288,10 @@ class OrderOfPossessionController extends Controller
                         'source' => $token,
                     ]);
                 } catch ( Exception $e ) {
-                    Log::info($e->getMessage());
-                    Log::info($e->getLine());
+                    $errorMsg = new ErrorLog();
+                    $errorMsg->payload = $e->getMessage();
+
+                    $errorMsg->save();
                     $mailer->sendMail('andrew.gaidis@gmail.com', 'OOP Error', $e->getMessage() );
                 }
 
@@ -296,14 +303,18 @@ class OrderOfPossessionController extends Controller
                 return redirect('dashboard')->with('status','Your OOP has been successfully made! You can see its progress in the table below.');
 
             } catch ( Exception $e ) {
-                Log::info($e->getMessage());
-                Log::info($e->getLine());
+                $errorMsg = new ErrorLog();
+                $errorMsg->payload = $e->getMessage();
+
+                $errorMsg->save();
                 $mailer->sendMail('andrew.gaidis@gmail.com', 'OOP Error', $e->getMessage() );
                 alert('It looks like there was an issue while making this LTC. the Development team has been notified and are aware that your having issues. They will update you as soon as possible.');
             }
         } catch ( Exception $e ) {
-            Log::info($e->getMessage());
-            Log::info($e->getLine());
+            $errorMsg = new ErrorLog();
+            $errorMsg->payload = $e->getMessage();
+
+            $errorMsg->save();
             $mailer->sendMail('andrew.gaidis@gmail.com', 'OOP Error', $e->getMessage() );
             alert('It looks like there was an issue while making this LTC. the Development team has been notified and are aware that your having issues. They will update you as soon as possible.');
         }
