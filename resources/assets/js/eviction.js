@@ -37,10 +37,14 @@ if (document.location.href.split('/')[3] === 'new-file') {
             }
         });
 
+        $('#preview_document').on('click', function() {
+            $('#rented_by_val').val($('input[name=rented_by]:checked').val());
+        });
+
         //Save and use Signature
         $('.pay_sign_submit').on('click', function() {
             if ($('#legal_checkbox').is(':checked')) {
-                $('#rented_by_val').val($('input[name=rented_by]:checked').val());
+
             } else {
                 alert('You need to check the Signature checkbox above to agree to the digital terms in order to continue.')
             }
