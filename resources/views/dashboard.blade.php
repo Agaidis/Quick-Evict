@@ -22,13 +22,13 @@
                                     <th>Download Status</th>
                                     <th class="text-center">Property Address</th>
                                     <th class="text-center">Owner</th>
-                                    <th class="text-center">Tenant</th>
+                                    <th class="text-center" style="width:80px;">Tenant</th>
                                     <th class="text-center">Status</th>
                                     <th class="text-center">Court Date</th>
                                     <th class="text-center">LTC<br> Total<br> Judgement</th>
                                     <th class="text-center">Court Filing $</th>
                                     <th class="text-center">Completion Date</th>
-                                    <th class="text-center">Actions</th>
+                                    <th class="text-center" style="width:70px;">Actions</th>
                                 </tr>
                                 </thead>
                                 <tbody>
