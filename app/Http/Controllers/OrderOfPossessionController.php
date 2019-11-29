@@ -56,10 +56,10 @@ class OrderOfPossessionController extends Controller
             $tenantName = implode(', ', $_POST['tenant_name']);
 
             $plaintiffAddress = $plaintiffName .'<br>'. $plaintiffAddress1 .'<br>'. $plaintiffAddress2 .'<br>'. $plaintiffPhone;
-            $defendantAddress = $tenantName . '<br>' . $_POST['houseNum'] . ' ' . $_POST['streetName'] . ', ' . $_POST['unit_number'] .' '. $_POST['town'] .', '. $_POST['state'] .' '. $_POST['zipcode'];
+            $defendantAddress = $tenantName . '<br>' . $_POST['houseNum'] . ' ' . $_POST['streetName'] . ', ' . $_POST['unit_number'] .'<br> '. $_POST['town'] .', '. $_POST['state'] .' '. $_POST['zipcode'];
             $defendantAddress2 = $_POST['houseNum'] . ' ' . $_POST['streetName'] .' '. $_POST['unit_number'] . '<br><br><span style="position:absolute; margin-top:-10px;">'. $_POST['town'] .', ' . $_POST['state'] .' '. $_POST['zipcode'];
             $docketNumber2 = $_POST['docket_number_2'];
-            mail('andrew.gaidis@Gmail.com', 'plaintiff', $plaintiffAddress);
+            mail('andrew.gaidis@gmail.com', 'plaintiff', $plaintiffAddress);
             while (strlen($docketNumber2) < 7) {
                 $docketNumber2 = '0' . $docketNumber2;
             }
