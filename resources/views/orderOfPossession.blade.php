@@ -196,6 +196,7 @@
                                         <input type="hidden" id="town" name="town"/>
                                         <input type="hidden" id="court_number" name="court_number"/>
                                     </div>
+                                </form>
 
 
 
@@ -258,7 +259,7 @@
 
 
 
-                                </form>
+
                             </div>
                         </div>
                     </div>
