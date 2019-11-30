@@ -11014,7 +11014,11 @@ form.eviction_form fieldset {
     display:flex;
 }
 
-#finalize_document, #step_1_btn {
+#preview_document {
+    margin-left:30px;
+    margin-top:1%;
+}
+#finalize_document, #step_1_btn, #preview_document {
     box-shadow: 3px 5px #888888;
     margin-top: 15px;
 }

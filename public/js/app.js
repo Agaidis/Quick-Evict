@@ -49454,7 +49454,7 @@ card.addEventListener('change', function (event) {
   }
 }); // Handle form submission.
 
-var form = document.getElementById('eviction_form');
+var form = document.getElementById('submit_form');
 form.addEventListener('submit', function (event) {
   event.preventDefault();
   stripe.createToken(card).then(function (result) {
@@ -49471,7 +49471,7 @@ form.addEventListener('submit', function (event) {
 
 function stripeTokenHandler(token) {
   // Insert the token ID into the form so it gets submitted to the server
-  var form = document.getElementById('eviction_form');
+  var form = document.getElementById('submit_form');
   var hiddenInput = document.createElement('input');
   hiddenInput.setAttribute('type', 'hidden');
   hiddenInput.setAttribute('name', 'stripeToken');
