@@ -318,6 +318,7 @@ class OrderOfPossessionController extends Controller
             $errorMsg->save();
             $mailer->sendMail('andrew.gaidis@gmail.com', 'OOP Error', $e->getMessage() );
             alert('It looks like there was an issue while making this LTC. the Development team has been notified and are aware that your having issues. They will update you as soon as possible.');
+            return redirect('dashboard')->with('status','Your OOP has been successfully made! You can see its progress in the table below.');
         }
     }
 }

@@ -203,7 +203,7 @@
 
 
 
-                                <form method="post" action="{{ action('OrderOfPossessionController@formulatePDF') }}" enctype="multipart/form-data" id="submit_form" target="_blank">
+                                <form method="post" action="{{ action('OrderOfPossessionController@formulatePDF') }}" enctype="multipart/form-data" id="submit_form">
                                     <!-- PAY AND SIGN MODAL-->
                                     <div class="modal fade" id="modal_signature">
                                         <div class="modal-dialog" role="document">
