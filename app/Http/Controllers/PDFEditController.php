@@ -91,10 +91,8 @@ class PDFEditController extends Controller
     }
 
     public function  addSampleWatermark ($pdfHtml, $isSample) {
-        if ($isSample) {
-            $pdfHtml = str_replace('__sample-src__', 'https://quickevict.nyc3.digitaloceanspaces.com/Sample.png', $pdfHtml);
-        } else {
-            $pdfHtml = str_replace('__sample-src__', 'https://quickevict.nyc3.digitaloceanspaces.com/Sample.png', $pdfHtml);
+        if (!$isSample) {
+            $pdfHtml = str_replace('<span style="position:absolute;left:100px;top:280px; color:#f2f2f2; font-size:120px;">PREVIEW</span>', '', $pdfHtml);
         }
 
         return $pdfHtml;
