@@ -132,7 +132,7 @@ class OrderOfPossessionController extends Controller
 
             // Output the generated PDF to Browser
             //$domPdf->stream();
-            $domPdf->stream("dompdf_out.pdf", array("Attachment" => 0));
+            $domPdf->stream("sample_oop.pdf", array("Attachment" => 0));
 
             exit(0);
 

@@ -10,7 +10,6 @@ use GMaps;
 use App\CourtDetails;
 use App\Evictions;
 use App\Signature;
-use Illuminate\Support\Facades\Log;
 use Stripe\Stripe;
 use stdClass;
 use App\PDF;
@@ -30,44 +29,58 @@ class CivilComplaintController extends Controller
         $this->middleware('auth');
     }
     public function showSamplePDF() {
-        $magistrateId = str_replace('magistrate_' , '', $_POST['court_number']);
-        $courtDetails = CourtDetails::where('magistrate_id', $magistrateId)->first();
-        $geoDetails = GeoLocation::where('magistrate_id', $magistrateId)->first();
-        $pdfHtml = PDF::where('name', 'oop')->first();
-        $pdfEditor = new PDFEditController();
-        $evictionData = new stdClass();
+        $mailer = new Mailer();
 
-        $plaintiffName = $_POST['owner_name'];
-        $plaintiffPhone = $_POST['owner_phone'];
-        $plaintiffAddress1 = $_POST['owner_address_1'];
-        $plaintiffAddress2 = $_POST['owner_address_2'];
+        try {
+            $magistrateId = str_replace('magistrate_' , '', $_POST['court_number']);
+            $courtDetails = CourtDetails::where('magistrate_id', $magistrateId)->first();
+            $geoDetails = GeoLocation::where('magistrate_id', $magistrateId)->first();
+            $pdfHtml = PDF::where('name', 'oop')->first();
+            $pdfEditor = new PDFEditController();
+            $evictionData = new stdClass();
 
-        $plaintiffAddress = $plaintiffName .'<br>'. $plaintiffAddress1 .'<br>'. $plaintiffAddress2 .'<br>'. $plaintiffPhone;
-        $defendantAddress = $_POST['tenant_name'] . '<br>' . $_POST['houseNum'] . ' ' . $_POST['streetName'] . ', ' . $_POST['unit_number'] .' '. $_POST['town'] .', '. $_POST['state'] .' '. $_POST['zipcode'];
+            $plaintiffName = $_POST['owner_name'];
+            $plaintiffPhone = $_POST['owner_phone'];
+            $plaintiffAddress1 = $_POST['owner_address_1'];
+            $plaintiffAddress2 = $_POST['owner_address_2'];
 
-        $evictionData->id = '-1';
-        $evictionData->plantiff_name = $plaintiffName;
-        $evictionData->court_address_line_1 = $geoDetails->address_line_one;
-        $evictionData->court_address_line_2 = $geoDetails->address_line_two;
-        $evictionData->claim_description = $_POST['claim_description'];
+            $plaintiffAddress = $plaintiffName .'<br>'. $plaintiffAddress1 .'<br>'. $plaintiffAddress2 .'<br>'. $plaintiffPhone;
+            $defendantAddress = $_POST['tenant_name'] . '<br>' . $_POST['houseNum'] . ' ' . $_POST['streetName'] . ', ' . $_POST['unit_number'] .' '. $_POST['town'] .', '. $_POST['state'] .' '. $_POST['zipcode'];
 
-        $pdfEditor->globalHtmlAttributes($pdfHtml, $courtDetails, $plaintiffAddress, $defendantAddress, $_POST['signature_source'], $evictionData);
-        $pdfHtml = $pdfEditor->localCivilAttributes($pdfHtml, $evictionData);
-        $domPdf = new Dompdf();
-        $options = new Options();
+            $evictionData->id = '-1';
+            $evictionData->plantiff_name = $plaintiffName;
+            $evictionData->court_address_line_1 = $geoDetails->address_line_one;
+            $evictionData->court_address_line_2 = $geoDetails->address_line_two;
+            $evictionData->claim_description = $_POST['claim_description'];
 
-        $options->setIsRemoteEnabled(true);
-        $domPdf->setOptions($options);
-        $domPdf->loadHtml($pdfHtml);
+            $pdfEditor->globalHtmlAttributes($pdfHtml, $courtDetails, $plaintiffAddress, $defendantAddress, $_POST['signature_source'], $evictionData);
+            $pdfHtml = $pdfEditor->localCivilAttributes($pdfHtml, $evictionData);
+            $domPdf = new Dompdf();
+            $options = new Options();
 
-        // (Optional) Setup the paper size and orientation
-        $domPdf->setPaper('A4', 'portrait');
+            $options->setIsRemoteEnabled(true);
+            $domPdf->setOptions($options);
+            $domPdf->loadHtml($pdfHtml);
 
-        // Render the HTML as PDF
-        $domPdf->render();
+            // (Optional) Setup the paper size and orientation
+            $domPdf->setPaper('A4', 'portrait');
 
-        // Output the generated PDF to Browser
-        $domPdf->stream();
+            // Render the HTML as PDF
+            $domPdf->render();
+
+            // Output the generated PDF to Browser
+            $domPdf->stream("sample_civil.pdf", array("Attachment" => 0));
+
+        } catch ( Exception $e) {
+
+            $errorMsg = new ErrorLog();
+            $errorMsg->payload = $e->getMessage();
+
+            $errorMsg->save();
+
+            $mailer->sendMail('andrew.gaidis@gmail.com', 'Civil Preview Error', $e->getMessage() );
+        }
+
     }
 
     public function formulatePDF()
@@ -147,7 +160,10 @@ class CivilComplaintController extends Controller
                     'source' => $token,
                 ]);
             } catch ( Exception $e ) {
-                Log::info($e->getMessage());
+                $errorMsg = new ErrorLog();
+                $errorMsg->payload = $e->getMessage();
+
+                $errorMsg->save();
                 $mailer->sendMail('andrew.gaidis@gmail.com', 'OOP Error', $e->getMessage() );
             }
 

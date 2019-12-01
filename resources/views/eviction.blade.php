@@ -10,7 +10,7 @@
                 <div class="card-body">
                     <div class="row">
                         <div class="col-md-12">
-                            <form method="post" action="{{ action('EvictionController@formulatePDF') }}" enctype="multipart/form-data" id="eviction_form">
+                            <form method="post" action="{{ action('EvictionController@showSamplePDF') }}" enctype="multipart/form-data" id="eviction_form">
                                 <input type="hidden" name="_token" value="{{ Session::token() }}">
                                 <a href="{{'new-file'}}"><button type="button" id="back_to_step_1_btn" class="btn btn-primary">Back to Step 1</button></a>
                                 <h2 style="text-align:center;" class="titles fs-subtitle">Step 2:<br> Enter the address of your tenant.</h2>
@@ -268,12 +268,13 @@
                                     <input type="hidden" id="town" name="town"/>
                                     <input type="hidden" id="court_number" name="court_number"/>
                                 </div>
+                            </form>
 
 
 
 
 
-
+                                <form method="post" action="{{ action('EvictionController@formulatePDF') }}" enctype="multipart/form-data" id="submit_form">
                                 <!-- PAY AND SIGN MODAL-->
                                 <div class="modal fade" id="modal_signature">
                                     <div class="modal-dialog" role="document">
@@ -324,17 +325,19 @@
                                         </div>
                                     </div>
                                 </div>
+                                </form>
 
 
 
 
 
 
-                            </form>
+
                         </div>
                     </div>
                 </div>
             </div>
+            <div class="sending-modal"><!-- Place at bottom of page --></div>
         </div>
     </div>
 </div>

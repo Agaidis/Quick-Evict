@@ -45,6 +45,22 @@ class EvictionController extends Controller
         }
     }
 
+    public function showSamplePDF() {
+        $mailer = new Mailer();
+
+        try {
+
+        } catch ( Exception $e) {
+
+            $errorMsg = new ErrorLog();
+            $errorMsg->payload = $e->getMessage();
+
+            $errorMsg->save();
+
+            $mailer->sendMail('andrew.gaidis@gmail.com', 'Civil Preview Error', $e->getMessage() );
+        }
+    }
+
     public function formulatePDF() {
         $mailer = new Mailer();
         try {
@@ -282,7 +298,7 @@ class EvictionController extends Controller
                     $errorMsg->payload = $e->getMessage();
 
                     $errorMsg->save();
-                    $mailer->sendMail('andrew.gaidis@gmail.com', 'OOP Error', $e->getMessage() );
+                    $mailer->sendMail('andrew.gaidis@gmail.com', 'LTC Error', $e->getMessage() );
                 }
 
                 try {
@@ -314,7 +330,7 @@ class EvictionController extends Controller
 </tr>
 </thead>
 <tbody>
-<tr><td>Status</td><td>Created Civil Complaint</td><td>'.$e->getMessage().'</td></tr>
+<tr><td>Status</td><td>Created LTC</td><td>'.$e->getMessage().'</td></tr>
 <tr><td>Property Address</td><td>'.$defendanthouseNum.' '.$defendantStreetName.'<br>'.$defendantTown .', ' . $defendantState.' '.$defendantZipcode.'</td></tr>
 <tr><td>Tenant Name</td><td>'.$_POST['tenant_name'].'</td></tr>
 <tr><td>Total Judgment</td><td>'. $_POST['total_judgment'] .'</td></tr>

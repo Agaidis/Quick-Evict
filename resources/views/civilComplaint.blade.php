@@ -10,7 +10,7 @@
                     <div class="card-body">
                         <div class="row">
                             <div class="col-md-12">
-                                <form method="post" action="{{ action('CivilComplaintController@formulatePDF') }}" enctype="multipart/form-data" id="eviction_form">
+                                <form method="post" action="{{ action('CivilComplaintController@showSamplePDF') }}" enctype="multipart/form-data" id="eviction_form">
                                     <input type="hidden" name="_token" value="{{ Session::token() }}">
                                     <a href="{{'new-file'}}"><button type="button" id="back_to_step_1_btn" class="btn btn-primary">Back to Step 1</button></a>
                                     <h2 style="text-align:center;" class="titles fs-subtitle">Step 2:<br> Enter the address the plaintiff alleges the complaint occurred.</h2>
@@ -24,10 +24,7 @@
                                     <div class="offset-1">
                                         <div id="map"></div>
                                     </div>
-
                                     <div class="col-md-12 offset-1 filing_form_div">
-
-
                                         <!-- ADDITIONAL INFORMATION ON PROPERTY -->
                                         <h2 class="titles major_labels step_3_title">Step 3:<br> Fill out information on the Incident</h2>
                                         <div id="additional_info_container">
@@ -65,7 +62,6 @@
                                                 </div>
                                             </div>
                                         </div>
-
                                         <!-- OWNER INFORMATION -->
                                         <h4 class="major_labels">Plaintiff Information</h4>
                                         <div id="owner_container">
@@ -127,12 +123,13 @@
                                         <input type="hidden" id="town" name="town"/>
                                         <input type="hidden" id="court_number" name="court_number"/>
                                     </div>
+                                </form>
 
 
 
 
 
-
+                                <form method="post" action="{{ action('CivilComplaintController@formulatePDF') }}" enctype="multipart/form-data" id="submit_form">
                                     <!-- PAY AND SIGN MODAL-->
                                     <div class="modal fade" id="modal_signature">
                                         <div class="modal-dialog" role="document">
@@ -184,17 +181,12 @@
                                             </div>
                                         </div>
                                     </div>
-
-
-
-
-
-
                                 </form>
                             </div>
                         </div>
                     </div>
                 </div>
+                <div class="sending-modal"><!-- Place at bottom of page --></div>
             </div>
         </div>
     </div>
