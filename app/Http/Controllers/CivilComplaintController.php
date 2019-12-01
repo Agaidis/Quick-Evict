@@ -35,7 +35,7 @@ class CivilComplaintController extends Controller
             $magistrateId = str_replace('magistrate_' , '', $_POST['court_number']);
             $courtDetails = CourtDetails::where('magistrate_id', $magistrateId)->first();
             $geoDetails = GeoLocation::where('magistrate_id', $magistrateId)->first();
-            $pdfHtml = PDF::where('name', 'oop')->first();
+            $pdfHtml = PDF::where('name', 'civil')->value('html');
             $pdfEditor = new PDFEditController();
             $evictionData = new stdClass();
 
