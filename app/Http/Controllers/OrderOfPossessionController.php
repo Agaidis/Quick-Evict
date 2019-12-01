@@ -17,6 +17,7 @@ use stdClass;
 use Dompdf\Options;
 use Dompdf\Dompdf;
 use App\ErrorLog;
+use Illuminate\Support\Facades\Session;
 
 class OrderOfPossessionController extends Controller
 {
@@ -303,7 +304,9 @@ class OrderOfPossessionController extends Controller
                 $notify->notifyJudge();
                 $notify->notifyMaker();
 
-                return redirect('dashboard')->with('status','Your OOP has been successfully made! You can see its progress in the table below.');
+                Session::flash('status', 'Your OOP has been successfully made! You can see its progress in the table below.');
+
+                return 'success';
 
             } catch ( Exception $e ) {
                 $errorMsg = new ErrorLog();
