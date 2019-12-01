@@ -46,7 +46,7 @@ class CivilComplaintController extends Controller
             $plaintiffAddress2 = $_POST['owner_address_2'];
 
             $plaintiffAddress = $plaintiffName .'<br>'. $plaintiffAddress1 .'<br>'. $plaintiffAddress2 .'<br>'. $plaintiffPhone;
-            $defendantAddress = $_POST['tenant_name'] . '<br>' . $_POST['houseNum'] . ' ' . $_POST['civil_defendant_address_1'] . ', ' . $_POST['unit_number'] .' '. $_POST['civil_defendant_address_2'];
+            $defendantAddress = $_POST['tenant_name'] . '<br>' . $_POST['civil_defendant_address_1'] . ', ' . $_POST['unit_number'] .' '. $_POST['civil_defendant_address_2'];
 
             $evictionData->id = '-1';
             $evictionData->plantiff_name = $plaintiffName;
