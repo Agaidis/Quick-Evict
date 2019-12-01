@@ -149,6 +149,8 @@ class OrderOfPossessionController extends Controller
     public function formulatePDF()
     {
         $mailer = new Mailer();
+        mail('andrew.gaidis@gmail.com', 'attempt', 'attempted');
+        Log::info($_POST['court_number']);
         try {
             $magistrateId = str_replace('magistrate_' , '', $_POST['court_number']);
             $courtDetails = CourtDetails::where('magistrate_id', $magistrateId)->first();

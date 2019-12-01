@@ -205,6 +205,8 @@
 
                                 <form method="post" action="{{ action('OrderOfPossessionController@formulatePDF') }}" enctype="multipart/form-data" id="submit_form">
                                     <!-- PAY AND SIGN MODAL-->
+                                    <input type="hidden" name="_token" value="{{ Session::token() }}">
+
                                     <div class="modal fade" id="modal_signature">
                                         <div class="modal-dialog" role="document">
                                             <div class="modal_signature modal-content">
@@ -248,7 +250,7 @@
                                                     </div>
                                                 </div>
                                                 <div class="pay_submit_section modal-footer">
-                                                    <button disabled type="submit" class="btn btn-success pay_sign_submit" data-action="save-png">Pay and Submit Document</button>
+                                                    <button disabled type="button" class="btn btn-success pay_sign_submit" data-action="save-png">Pay and Submit Document</button>
                                                 </div>
                                             </div>
                                         </div>
