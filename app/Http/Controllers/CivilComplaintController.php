@@ -130,6 +130,7 @@ class CivilComplaintController extends Controller
             $eviction->court_address_line_2 = $courtAddressLine2;
             $eviction->owner_name = $ownerName;
             $eviction->magistrate_id = $magistrateId;
+            $eviction->unit_num = $_POST['unit_number'];
             $eviction->plantiff_name = $plantiffName;
             $eviction->plantiff_phone = $plantiffPhone;
             $eviction->plantiff_address_line_1 = $plantiffAddress1;
