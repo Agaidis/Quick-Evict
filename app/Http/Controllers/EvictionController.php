@@ -229,7 +229,6 @@ class EvictionController extends Controller
             $evictionData->total_judgement = $totalFees;
             $evictionData->filing_fee = number_format($filingFee, 2);
             $evictionData->attorney_fees = $_POST['attorney_fees'];
-            $evictionData->judgment_amount = $_POST['total_judgment'];
             $evictionData->due_rent = $dueRent;
             $evictionData->damage_amt = $damageAmt;
             $evictionData->unjust_damages = $unjustDamages;
