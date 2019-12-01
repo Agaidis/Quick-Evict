@@ -42788,6 +42788,8 @@ if (document.location.href.split('/')[3] === 'new-file') {
       }
 
       if ($('#legal_checkbox').is(':checked')) {
+        var $body = $("body");
+        $body.addClass("loading");
         var dataURL = signaturePad.toDataURL(); // save image as PNG
 
         $('#signature_source').val(dataURL);
@@ -42804,10 +42806,11 @@ if (document.location.href.split('/')[3] === 'new-file') {
           url: url,
           type: 'POST',
           data: formData,
-          success: function success(data) {},
+          success: function success(data) {
+            window.location.href = environmentPath + '/dashboard';
+          },
           error: function error(data) {}
         });
-        window.location.href = environmentPath + '/dashboard';
       } else {
         alert('You need to check the Signature checkbox above to agree to the digital terms in order to continue.');
       }

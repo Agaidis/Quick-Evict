@@ -54,6 +54,8 @@ if (document.location.href.split('/')[3] === 'new-file') {
                 alert('Error with finding File Type. Contact Support');
             }
             if ($('#legal_checkbox').is(':checked')) {
+                let $body = $("body");
+                $body.addClass("loading");
                 let dataURL = signaturePad.toDataURL(); // save image as PNG
                 $('#signature_source').val(dataURL);
 
@@ -71,10 +73,12 @@ if (document.location.href.split('/')[3] === 'new-file') {
                     url : url,
                     type : 'POST',
                     data : formData,
-                    success : function(data) {},
+                    success : function(data) {
+                        window.location.href = environmentPath + '/dashboard';
+                    },
                     error : function(data) {},
                 });
-                window.location.href = environmentPath + '/dashboard';
+
             } else {
                 alert('You need to check the Signature checkbox above to agree to the digital terms in order to continue.')
             }
