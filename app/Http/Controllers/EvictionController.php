@@ -15,6 +15,7 @@ use App\Evictions;
 use App\Signature;
 use App\Classes\Mailer;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Session;
 use stdClass;
 use Stripe\Stripe;
 
@@ -532,7 +533,10 @@ class EvictionController extends Controller
                 }
 
 
-                return redirect('dashboard')->with('status','Your Eviction has been successfully made! You can see its progress in the table below.');
+                Session::flash('status', 'Your LTC has been successfully made! You can see its progress in the table below.');
+
+                return 'success';
+
             } catch ( \Exception $e) {
                 $errorMsg = new ErrorLog();
                 $errorMsg->payload = $e->getMessage() . ' Line #: ' . $e->getLine();
