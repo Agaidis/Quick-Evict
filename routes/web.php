@@ -38,7 +38,7 @@ Route::get('/new-file/get-court-fee', 'NewFileController@getFilingFee')->middlew
 
 /* Eviction Creator */
 Route::post('/new-ltc/pdf-data', 'EvictionController@formulatePDF')->middleware('auth');
-Route::get('/new-ltc/sample-pdf', 'EvictionController@showSamplePDF')->middleware('auth');
+Route::post('/new-ltc/sample-pdf', 'EvictionController@showSamplePDF')->middleware('auth');
 
 /* Order of Possession Creator */
 Route::post('/new-oop/pdf-data', 'OrderOfPossessionController@formulatePDF')->middleware('auth');
@@ -46,7 +46,7 @@ Route::post('/new-oop/sample-pdf', 'OrderOfPossessionController@showSamplePDF')-
 
 /* Civil Complaint Creator */
 Route::post('/new-civil-complaint/pdf-data', 'CivilComplaintController@formulatePDF')->middleware('auth');
-Route::get('/new-civil-complaint/sample-pdf', 'CivilComplaintController@showSamplePDF')->middleware('auth');
+Route::post('/new-civil-complaint/sample-pdf', 'CivilComplaintController@showSamplePDF')->middleware('auth');
 
 /* Informational Pages */
 Route::get('/information', 'InfoController@index');
