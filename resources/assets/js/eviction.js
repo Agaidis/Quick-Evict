@@ -49,7 +49,7 @@ if (document.location.href.split('/')[3] === 'new-file') {
             } else if ( $('#file_type').val() === 'ltc' ) {
                 url = 'new-ltc/pdf-data';
             } else if ( $('#file_type').val() === 'civil' ) {
-                url = 'new-civil/pdf-data';
+                url = 'new-civil-complaint/pdf-data';
             } else {
                 alert('Error with finding File Type. Contact Support');
             }
