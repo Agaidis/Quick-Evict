@@ -72,7 +72,7 @@ if (document.location.href.split('/')[3] === 'new-file') {
                     type : 'POST',
                     data : formData,
                     success : function(data) {
-                        window.location.href = environmentPath + 'dashboard';
+                        window.location.href = environmentPath + '/dashboard';
                     },
                     error : function(data)
                     {
