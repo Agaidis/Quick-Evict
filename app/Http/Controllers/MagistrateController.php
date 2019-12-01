@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\CivilUnique;
 use App\CourtDetails;
 use App\GeoLocation;
 use Illuminate\Http\Request;
@@ -66,6 +67,26 @@ class MagistrateController extends Controller
                 $courtDetails->mdj_name = $request->mdj_name;
                 $courtDetails->phone_number = $request->court_number;
                 $courtDetails->save();
+
+                $civilUnique = new CivilUnique();
+                $civilUnique->court_details_id = $courtDetails->id;
+                $civilUnique->under_500_1_def_mail = $request->one_under_500_mailed;
+                $civilUnique->btn_500_2000_1_def_mail = $request->one_btn_500_2000_mailed;
+                $civilUnique->btn_2000_4000_1_def_mail = $request->one_btn_2000_4000_mailed;
+                $civilUnique->btn_4000_12000_1_def_mail = $request->one_btn_4000_12000_mailed;
+                $civilUnique->under_500_2_def_mail = $request->two_under_500_mailed;
+                $civilUnique->btn_500_2000_2_def_mail = $request->two_btn_500_2000_mailed;
+                $civilUnique->btn_2000_4000_2_def_mail = $request->two_btn_2000_4000_mailed;
+                $civilUnique->btn_4000_12000_2_def_mail = $request->two_btn_4000_12000_mailed;
+                $civilUnique->under_500_1_def_constable = $request->one_under_500_constable;
+                $civilUnique->btn_500_2000_1_def_constable = $request->one_btn_500_2000_constable;
+                $civilUnique->btn_2000_4000_1_def_constable = $request->one_btn_2000_4000_constable;
+                $civilUnique->btn_4000_12000_1_def_constable = $request->one_btn_4000_12000_constable;
+                $civilUnique->under_500_2_def_constable = $request->two_under_500_constable;
+                $civilUnique->btn_500_2000_2_def_constable = $request->two_btn_500_2000_constable;
+                $civilUnique->btn_2000_4000_2_def_constable = $request->two_btn_2000_4000_constable;
+                $civilUnique->btn_4000_12000_2_def_constable = $request->two_btn_4000_12000_constable;
+                $civilUnique->save();
 
                 $geoLocation = new GeoLocation();
                 $geoLocation->magistrate_id = $request->magistrate_id;
@@ -159,6 +180,26 @@ class MagistrateController extends Controller
                 $courtDetails->digital_signature = $request->digitalSignature;
                 $courtDetails->online_submission = $request->onlineSubmission;
                 $courtDetails->save();
+
+                $civilUnique = new CivilUnique();
+                $civilUnique->court_details_id = $request->dbCourtId;
+                $civilUnique->under_500_1_def_mail = $request->edit_one_under_500_mailed;
+                $civilUnique->btn_500_2000_1_def_mail = $request->edit_one_btn_500_2000_mailed;
+                $civilUnique->btn_2000_4000_1_def_mail = $request->edit_one_btn_2000_4000_mailed;
+                $civilUnique->btn_4000_12000_1_def_mail = $request->edit_one_btn_4000_12000_mailed;
+                $civilUnique->under_500_2_def_mail = $request->edit_two_under_500_mailed;
+                $civilUnique->btn_500_2000_2_def_mail = $request->edit_two_btn_500_2000_mailed;
+                $civilUnique->btn_2000_4000_2_def_mail = $request->edit_two_btn_2000_4000_mailed;
+                $civilUnique->btn_4000_12000_2_def_mail = $request->edit_two_btn_4000_12000_mailed;
+                $civilUnique->under_500_1_def_constable = $request->edit_one_under_500_constable;
+                $civilUnique->btn_500_2000_1_def_constable = $request->edit_one_btn_500_2000_constable;
+                $civilUnique->btn_2000_4000_1_def_constable = $request->edit_one_btn_2000_4000_constable;
+                $civilUnique->btn_4000_12000_1_def_constable = $request->edit_one_btn_4000_12000_constable;
+                $civilUnique->under_500_2_def_constable = $request->edit_two_under_500_constable;
+                $civilUnique->btn_500_2000_2_def_constable = $request->edit_two_btn_500_2000_constable;
+                $civilUnique->btn_2000_4000_2_def_constable = $request->edit_two_btn_2000_4000_constable;
+                $civilUnique->btn_4000_12000_2_def_constable = $request->edit_two_btn_4000_12000_constable;
+                $civilUnique->save();
 
 
                 $geoLocation = GeoLocation::find($request->dbGeoId);

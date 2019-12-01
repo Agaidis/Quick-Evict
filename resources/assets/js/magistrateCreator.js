@@ -96,6 +96,9 @@
                     $('#edit_geo_locations').val(data[0][0].geo_locations);
                     $('#edit_online_submission').val(data[1][0].online_submission);
 
+
+
+
                     if (data[1][0].digital_signature == 1) {
                         $('#edit_is_digital_signature_allowed').prop('checked', true);
                     }
