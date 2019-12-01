@@ -10,6 +10,7 @@ use GMaps;
 use App\CourtDetails;
 use App\Evictions;
 use App\Signature;
+use Illuminate\Support\Facades\Session;
 use Stripe\Stripe;
 use stdClass;
 use App\PDF;
@@ -172,7 +173,9 @@ class CivilComplaintController extends Controller
             $notify->notifyJudge();
             $notify->notifyMaker();
 
-            return redirect('dashboard')->with('status','Your Civil Complaint has been successfully made! You can see its progress in the table below.');
+            Session::flash('status', 'Your Civil Complaint has been successfully made! You can see its progress in the table below.');
+
+            return 'success';
 
         } catch ( Exception $e ) {
             $errorMsg = new ErrorLog();
