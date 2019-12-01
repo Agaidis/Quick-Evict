@@ -249,6 +249,14 @@
                                             </div>
                                         </div>
 
+                                    <div class="form-group">
+                                        <div class="row">
+                                            <div class="offset-4 col-sm-10">
+                                                <input type="submit" id="preview_document" class="btn btn-warning" value="Preview" />
+                                            </div>
+                                        </div>
+                                    </div>
+
 
                                     <div class="form-group">
                                         <div class="row">

@@ -108,6 +108,14 @@
                                         <div class="form-group">
                                             <div class="row">
                                                 <div class="offset-4 col-sm-10">
+                                                    <input type="submit" id="preview_document" class="btn btn-warning" value="Preview" />
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <div class="row">
+                                                <div class="offset-4 col-sm-10">
                                                     <button type="button" id="finalize_document" data-target="#modal_signature" data-toggle="modal" class="btn btn-primary">Sign and Payment</button>
                                                 </div>
                                             </div>
@@ -176,7 +184,7 @@
                                                     </div>
                                                 </div>
                                                 <div class="pay_submit_section modal-footer">
-                                                    <button disabled type="submit" class="btn btn-success pay_sign_submit" data-action="save-png">Pay and Submit Document</button>
+                                                    <button disabled type="button" class="btn btn-success pay_sign_submit" data-action="save-png">Pay and Submit Document</button>
                                                 </div>
                                             </div>
                                         </div>
