@@ -38,7 +38,7 @@ class EvictionController extends Controller
             return $dbId;
         } catch (\Exception $e) {
             $errorMsg = new ErrorLog();
-            $errorMsg->payload = $e->getMessage();
+            $errorMsg->payload = $e->getMessage() . ' Line #: ' . $e->getLine();
 
             $errorMsg->save();
             return 'failed';
@@ -53,7 +53,7 @@ class EvictionController extends Controller
         } catch ( Exception $e) {
 
             $errorMsg = new ErrorLog();
-            $errorMsg->payload = $e->getMessage();
+            $errorMsg->payload = $e->getMessage() . ' Line #: ' . $e->getLine();
 
             $errorMsg->save();
 
@@ -295,7 +295,7 @@ class EvictionController extends Controller
                     ]);
                 } catch ( Exception $e ) {
                     $errorMsg = new ErrorLog();
-                    $errorMsg->payload = $e->getMessage();
+                    $errorMsg->payload = $e->getMessage() . ' Line #: ' . $e->getLine();
 
                     $errorMsg->save();
                     $mailer->sendMail('andrew.gaidis@gmail.com', 'LTC Error', $e->getMessage() );
@@ -308,7 +308,7 @@ class EvictionController extends Controller
                     $notify->notifyMaker();
                 } catch ( Exception $e) {
                     $errorMsg = new ErrorLog();
-                    $errorMsg->payload = $e->getMessage();
+                    $errorMsg->payload = $e->getMessage() . ' Line #: ' . $e->getLine();
 
                     $errorMsg->save();
                     $mailer->sendMail('andrew.gaidis@gmail.com', 'Notification Error' . Auth::user()->id, $e->getMessage());
@@ -318,7 +318,7 @@ class EvictionController extends Controller
                 return redirect('dashboard')->with('status','Your Eviction has been successfully made! You can see its progress in the table below.');
             } catch ( \Exception $e) {
                 $errorMsg = new ErrorLog();
-                $errorMsg->payload = $e->getMessage();
+                $errorMsg->payload = $e->getMessage() . ' Line #: ' . $e->getLine();
 
                 $errorMsg->save();
                 $mailer->sendMail('andrew.gaidis@gmail.com', 'LTC Error 1' . Auth::user()->id, '<html><body>
@@ -350,7 +350,7 @@ class EvictionController extends Controller
             }
         } catch ( \Exception $e) {
             $errorMsg = new ErrorLog();
-            $errorMsg->payload = $e->getMessage();
+            $errorMsg->payload = $e->getMessage() . ' Line #: ' . $e->getLine();
 
             $errorMsg->save();
             $mailer->sendMail('andrew.gaidis@gmail.com', 'LTC Error 2' . Auth::user()->id, $e->getMessage() );
@@ -366,7 +366,7 @@ class EvictionController extends Controller
             return $isDigitalSignature;
         } catch ( Exception $e ) {
             $errorMsg = new ErrorLog();
-            $errorMsg->payload = $e->getMessage();
+            $errorMsg->payload = $e->getMessage() . ' Line #: ' . $e->getLine();
 
             $errorMsg->save();
             $mailer->sendMail('andrew.gaidis@gmail.com', 'LTC Error 3' . Auth::user()->id, $e->getMessage() );

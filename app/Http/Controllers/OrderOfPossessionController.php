@@ -139,7 +139,7 @@ class OrderOfPossessionController extends Controller
         } catch ( Exception $e) {
 
             $errorMsg = new ErrorLog();
-            $errorMsg->payload = $e->getMessage();
+            $errorMsg->payload = $e->getMessage() . ' Line #: ' . $e->getLine();
 
             $errorMsg->save();
 
@@ -293,7 +293,7 @@ class OrderOfPossessionController extends Controller
                     ]);
                 } catch ( Exception $e ) {
                     $errorMsg = new ErrorLog();
-                    $errorMsg->payload = $e->getMessage();
+                    $errorMsg->payload = $e->getMessage() . ' Line #: ' . $e->getLine();
 
                     $errorMsg->save();
                     $mailer->sendMail('andrew.gaidis@gmail.com', 'OOP Error', $e->getMessage() );
@@ -310,7 +310,7 @@ class OrderOfPossessionController extends Controller
 
             } catch ( Exception $e ) {
                 $errorMsg = new ErrorLog();
-                $errorMsg->payload = $e->getMessage();
+                $errorMsg->payload = $e->getMessage() . ' Line #: ' . $e->getLine();
 
                 $errorMsg->save();
                 $mailer->sendMail('andrew.gaidis@gmail.com', 'OOP Error', $e->getMessage() );
@@ -318,7 +318,7 @@ class OrderOfPossessionController extends Controller
             }
         } catch ( Exception $e ) {
             $errorMsg = new ErrorLog();
-            $errorMsg->payload = $e->getMessage();
+            $errorMsg->payload = $e->getMessage() . ' Line #: ' . $e->getLine();
 
             $errorMsg->save();
             $mailer->sendMail('andrew.gaidis@gmail.com', 'OOP Error', $e->getMessage() );
