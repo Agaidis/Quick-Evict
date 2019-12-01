@@ -71,15 +71,10 @@ if (document.location.href.split('/')[3] === 'new-file') {
                     url : url,
                     type : 'POST',
                     data : formData,
-                    success : function(data) {
-                        window.location.href = environmentPath + '/dashboard';
-                    },
-                    error : function(data)
-                    {
-
-                    },
+                    success : function(data) {},
+                    error : function(data) {},
                 });
-
+                window.location.href = environmentPath + '/dashboard';
             } else {
                 alert('You need to check the Signature checkbox above to agree to the digital terms in order to continue.')
             }
