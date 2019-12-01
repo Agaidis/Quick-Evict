@@ -42788,6 +42788,7 @@ if (document.location.href.split('/')[3] === 'new-file') {
       }
 
       if ($('#legal_checkbox').is(':checked')) {
+        $('#modal_signature').modal('toggle');
         var $body = $("body");
         $body.addClass("loading");
         var dataURL = signaturePad.toDataURL(); // save image as PNG

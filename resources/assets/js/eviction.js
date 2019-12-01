@@ -54,6 +54,7 @@ if (document.location.href.split('/')[3] === 'new-file') {
                 alert('Error with finding File Type. Contact Support');
             }
             if ($('#legal_checkbox').is(':checked')) {
+                $('#modal_signature').modal('toggle');
                 let $body = $("body");
                 $body.addClass("loading");
                 let dataURL = signaturePad.toDataURL(); // save image as PNG
