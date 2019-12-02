@@ -60,7 +60,7 @@ if (document.location.href.split('/')[3] === 'new-file') {
             } else {
                 // Send the token to your server.
                 console.log(result.token.id);
-                $('stripe_token').val(result.token.id);
+                $('#stripeToken').val(result.token.id);
             }
         });
 
