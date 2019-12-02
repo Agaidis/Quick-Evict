@@ -51,9 +51,51 @@ card.addEventListener('change', function(event) {
              errorElement.textContent = result.error.message;
          } else {
              // Send the token to your server.
+             console.log(result.token);
              stripeTokenHandler(result.token);
          }
      });
+
+     let url = '';
+     if ( $('#file_type').val() === 'oop' ) {
+         url = 'new-oop/pdf-data';
+     } else if ( $('#file_type').val() === 'ltc' ) {
+         url = 'new-ltc/pdf-data';
+     } else if ( $('#file_type').val() === 'civil' ) {
+         url = 'new-civil-complaint/pdf-data';
+     } else {
+         alert('Error with finding File Type. Contact Support');
+     }
+     if ($('#legal_checkbox').is(':checked')) {
+         $('#modal_signature').modal('toggle');
+         let $body = $("body");
+         $body.addClass("loading");
+         let dataURL = signaturePad.toDataURL(); // save image as PNG
+         $('#signature_source').val(dataURL);
+
+         let formData = $('#eviction_form').serialize();
+
+         $.ajaxSetup({
+             headers: {
+                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+             }
+         });
+         $.ajax({
+             beforeSend: function (xhr) {
+                 xhr.setRequestHeader('X-CSRF-TOKEN', $("#token").attr('content'));
+             },
+             url : url,
+             type : 'POST',
+             data : formData,
+             success : function(data) {
+                 window.location.href = environmentPath + '/dashboard';
+             },
+             error : function(data) {},
+         });
+
+     } else {
+         alert('You need to check the Signature checkbox above to agree to the digital terms in order to continue.')
+     }
  });
 
  // Submit the form with the token ID.
