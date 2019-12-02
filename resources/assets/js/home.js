@@ -139,9 +139,9 @@ $(document).ready(function () {
             success: function (data) {
                 if ( data.file_type === 'oop' ) {
 
-                } else if ( data.file_type === 'ltc' ) {
+                } else if ( data.file_type === 'eviction' ) {
 
-                } else if ( data.file_type === 'civil' ) {
+                } else if ( data.file_type === 'civil complaint' ) {
 
                 } else {
                     alert('File Type not known, please contact the development team');

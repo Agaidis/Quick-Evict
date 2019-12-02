@@ -328,19 +328,12 @@
                                                 </div>
                                             </div>
                                             <div class="pay_submit_section modal-footer">
-                                                <button disabled type="submit" class="btn btn-success pay_sign_submit" data-action="save-png">Pay and Submit Document</button>
+                                                <button disabled type="button" class="btn btn-success pay_sign_submit" data-action="save-png">Pay and Submit Document</button>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                                 </form>
-
-
-
-
-
-
-
                         </div>
                     </div>
                 </div>
