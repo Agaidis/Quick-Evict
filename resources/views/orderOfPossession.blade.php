@@ -195,6 +195,7 @@
                                         <input type="hidden" id="street_name" name="streetName"/>
                                         <input type="hidden" id="town" name="town"/>
                                         <input type="hidden" id="court_number" name="court_number"/>
+                                        <input type="hidden" id="stripe_token" name="stripeToken" />
                                     </div>
                                 </form>
 
