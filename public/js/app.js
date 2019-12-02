@@ -49493,9 +49493,12 @@ form.addEventListener('click', function (event) {
       type: 'POST',
       data: formData,
       success: function success(data) {
+        console.log(data);
         window.location.href = environmentPath + '/dashboard';
       },
-      error: function error(data) {}
+      error: function error(data) {
+        console.log(data);
+      }
     });
   } else {
     alert('You need to check the Signature checkbox above to agree to the digital terms in order to continue.');

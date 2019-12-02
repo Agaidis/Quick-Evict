@@ -88,9 +88,10 @@ card.addEventListener('change', function(event) {
              type : 'POST',
              data : formData,
              success : function(data) {
+                 console.log(data);
                  window.location.href = environmentPath + '/dashboard';
              },
-             error : function(data) {},
+             error : function(data) {console.log(data)},
          });
 
      } else {
