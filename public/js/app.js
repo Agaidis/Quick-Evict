@@ -49487,10 +49487,9 @@ card.addEventListener('change', function (event) {
   }
 }); // Handle form submission.
 
-var form = document.getElementById('submit_form');
-form.addEventListener('submit', function (event) {
+var form = document.getElementById('pay_sign_submit');
+form.addEventListener('click', function (event) {
   console.log('made it in here');
-  event.preventDefault();
   stripe.createToken(card).then(function (result) {
     if (result.error) {
       // Inform the user if there was an error.
@@ -49511,8 +49510,7 @@ function stripeTokenHandler(token) {
   hiddenInput.setAttribute('name', 'stripeToken');
   hiddenInput.setAttribute('value', token.id);
   form.appendChild(hiddenInput); // Submit the form
-
-  form.submit();
+  // form.submit();
 }
 
 /***/ }),
