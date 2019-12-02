@@ -1,4 +1,13 @@
+let canvas = document.querySelector("canvas");
+let signaturePad = new SignaturePad(canvas, {
 
+});
+
+//Clear button to remove signature drawing
+$('.clear_signature').on('click', function() {
+    // Clears the canvas
+    signaturePad.clear();
+});
 // Create a Stripe client.
 var stripe = Stripe('pk_test_FTcQeimeSasisJpDTYgHEMTh');
 

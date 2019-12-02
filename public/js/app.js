@@ -42743,13 +42743,6 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
 if (document.location.href.split('/')[3] === 'new-file') {
   $(document).ready(function () {
     $('[data-toggle="tooltip"]').tooltip();
-    var canvas = document.querySelector("canvas");
-    var signaturePad = new SignaturePad(canvas, {}); //Clear button to remove signature drawing
-
-    $('.clear_signature').on('click', function () {
-      // Clears the canvas
-      signaturePad.clear();
-    });
     var text_max = 500;
     $('#textarea_feedback').html(text_max + ' characters remaining');
     $('#claim_description').on('keyup', function () {
@@ -49408,7 +49401,14 @@ function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterat
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-// Create a Stripe client.
+var canvas = document.querySelector("canvas");
+var signaturePad = new SignaturePad(canvas, {}); //Clear button to remove signature drawing
+
+$('.clear_signature').on('click', function () {
+  // Clears the canvas
+  signaturePad.clear();
+}); // Create a Stripe client.
+
 var stripe = Stripe('pk_test_FTcQeimeSasisJpDTYgHEMTh'); // Create an instance of Elements.
 
 var elements = stripe.elements(); // Custom styling can be passed to options when creating an Element.

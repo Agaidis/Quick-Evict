@@ -2,16 +2,7 @@ if (document.location.href.split('/')[3] === 'new-file') {
     $(document).ready(function () {
 
         $('[data-toggle="tooltip"]').tooltip();
-        var canvas = document.querySelector("canvas");
-        var signaturePad = new SignaturePad(canvas, {
 
-        });
-
-        //Clear button to remove signature drawing
-        $('.clear_signature').on('click', function() {
-            // Clears the canvas
-            signaturePad.clear();
-        });
         var text_max = 500;
         $('#textarea_feedback').html(text_max + ' characters remaining');
 
