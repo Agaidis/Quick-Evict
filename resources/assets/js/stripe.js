@@ -109,16 +109,4 @@ if (document.location.href.split('/')[3] === 'new-file') {
             alert('You need to check the Signature checkbox above to agree to the digital terms in order to continue.')
         }
     });
-
-    // Submit the form with the token ID.
-    function stripeTokenHandler(token) {
-
-
-
-
-
-
-        // Submit the form
-        // form.submit();
-    }
 }

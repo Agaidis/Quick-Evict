@@ -49402,11 +49402,6 @@ function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterat
 /***/ (function(module, exports) {
 
 if (document.location.href.split('/')[3] === 'new-file') {
-  // Submit the form with the token ID.
-  var stripeTokenHandler = function stripeTokenHandler(token) {// Submit the form
-    // form.submit();
-  };
-
   var canvas = document.querySelector("canvas");
   var signaturePad = new SignaturePad(canvas, {}); //Clear button to remove signature drawing
 

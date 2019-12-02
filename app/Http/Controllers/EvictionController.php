@@ -505,7 +505,7 @@ class EvictionController extends Controller
                     Stripe::setApiKey('sk_test_MnFhi1rY4EF5NDsAWyURCRND');
 
                     $token = $_POST['stripeToken'];
-                    \Stripe\Charge::create([
+                    Stripe\Charge::create([
                         'amount' => 100,
                         'currency' => 'usd',
                         'description' => 'Eviction charge',
