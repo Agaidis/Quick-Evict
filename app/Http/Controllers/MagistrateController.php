@@ -128,6 +128,11 @@ class MagistrateController extends Controller
            $geoData = GeoLocation::where('magistrate_id', $request->magistrateId)->get();
            $courtData = CourtDetails::where('magistrate_id', $request->magistrateId)->get();
            $civilData = CivilUnique::where('court_details_id', $request->magistrateId)->get();
+           Log::info($civilData);
+
+           if ($civilData === null || $civilData->isEmpty()) {
+               $civilData = 'empty';
+           }
 
             $magistrate = [
                 $geoData,

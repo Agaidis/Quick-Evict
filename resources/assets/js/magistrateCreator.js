@@ -97,27 +97,26 @@
                     $('#edit_geo_locations').val(data[0][0].geo_locations);
                     $('#edit_online_submission').val(data[1][0].online_submission);
 
-
-                    if (data[2][0] > 0) {
+                    if (data[2] !== 'empty') {
+                        console.log('im in here');
                         $('#db_civil_id').val(data[2][0].id);
-                        $('#edit_one_under_500_mailed').val(data[2][0].edit_one_under_500_mailed);
-                        $('#edit_one_btn_500_2000_mailed').val(data[2][0].edit_one_btn_500_2000_mailed);
-                        $('#edit_one_btn_2000_4000_mailed').val(data[2][0].edit_one_btn_2000_4000_mailed);
-                        $('#edit_one_btn_4000_12000_mailed').val(data[2][0].edit_one_btn_4000_12000_mailed);
-                        $('#edit_two_under_500_mailed').val(data[2][0].edit_two_under_500_mailed);
-                        $('#edit_two_btn_500_2000_mailed').val(data[2][0].edit_two_btn_500_2000_mailed);
-                        $('#edit_two_btn_2000_4000_mailed').val(data[2][0].edit_two_btn_2000_4000_mailed);
-                        $('#edit_two_btn_4000_12000_mailed').val(data[2][0].edit_two_btn_4000_12000_mailed);
-                        $('#edit_one_under_500_constable').val(data[2][0].edit_one_under_500_constable);
-                        $('#edit_one_btn_500_2000_constable').val(data[2][0].edit_one_btn_500_2000_constable);
-                        $('#edit_one_btn_2000_4000_constable').val(data[2][0].edit_one_btn_2000_4000_constable);
-                        $('#edit_one_btn_4000_12000_constable').val(data[2][0].edit_one_btn_4000_12000_constable);
-                        $('#edit_two_under_500_constable').val(data[2][0].edit_two_under_500_constable);
-                        $('#edit_two_btn_500_2000_constable').val(data[2][0].edit_two_btn_500_2000_constable);
-                        $('#edit_two_btn_2000_4000_constable').val(data[2][0].edit_two_btn_2000_4000_constable);
-                        $('#edit_two_btn_4000_12000_constable').val(data[2][0].edit_two_btn_4000_12000_constable);
+                        $('#edit_one_under_500_mailed').val(data[2][0].under_500_1_def_mail);
+                        $('#edit_one_btn_500_2000_mailed').val(data[2][0].btn_500_2000_1_def_mail);
+                        $('#edit_one_btn_2000_4000_mailed').val(data[2][0].btn_2000_4000_1_def_mail);
+                        $('#edit_one_btn_4000_12000_mailed').val(data[2][0].btn_4000_12000_1_def_mail);
+                        $('#edit_two_under_500_mailed').val(data[2][0].under_500_2_def_mail);
+                        $('#edit_two_btn_500_2000_mailed').val(data[2][0].btn_500_2000_2_def_mail);
+                        $('#edit_two_btn_2000_4000_mailed').val(data[2][0].btn_2000_4000_2_def_mail);
+                        $('#edit_two_btn_4000_12000_mailed').val(data[2][0].btn_4000_12000_2_def_mail);
+                        $('#edit_one_under_500_constable').val(data[2][0].under_500_1_def_constable);
+                        $('#edit_one_btn_500_2000_constable').val(data[2][0].btn_500_2000_1_def_constable);
+                        $('#edit_one_btn_2000_4000_constable').val(data[2][0].btn_2000_4000_1_def_constable);
+                        $('#edit_one_btn_4000_12000_constable').val(data[2][0].btn_4000_12000_1_def_constable);
+                        $('#edit_two_under_500_constable').val(data[2][0].under_500_2_def_constable);
+                        $('#edit_two_btn_500_2000_constable').val(data[2][0].btn_500_2000_2_def_constable);
+                        $('#edit_two_btn_2000_4000_constable').val(data[2][0].btn_2000_4000_2_def_constable);
+                        $('#edit_two_btn_4000_12000_constable').val(data[2][0].btn_4000_12000_2_def_constable);
                     }
-
 
                     if (data[1][0].digital_signature == 1) {
                         $('#edit_is_digital_signature_allowed').prop('checked', true);
