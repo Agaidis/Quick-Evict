@@ -72,6 +72,7 @@
                     console.log(data);
                     $('#db_geo_id').val(data[0][0].id);
                     $('#db_court_id').val(data[1][0].id);
+                    $('#db_court_id').val(data[2][0].id);
                     $('#edit_court_id').val(data[1][0].court_number);
                     $('#edit_magistrate_id').val(data[1][0].magistrate_id);
                     $('#edit_township').val(data[1][0].township);
@@ -95,7 +96,22 @@
                     $('#edit_additional_tenants').val(data[1][0].additional_tenant);
                     $('#edit_geo_locations').val(data[0][0].geo_locations);
                     $('#edit_online_submission').val(data[1][0].online_submission);
-
+                    $('#edit_one_under_500_mailed').val(data[2][0].edit_one_under_500_mailed);
+                    $('#edit_one_btn_500_2000_mailed').val(data[2][0].edit_one_btn_500_2000_mailed);
+                    $('#edit_one_btn_2000_4000_mailed').val(data[2][0].edit_one_btn_2000_4000_mailed);
+                    $('#edit_one_btn_4000_12000_mailed').val(data[2][0].edit_one_btn_4000_12000_mailed);
+                    $('#edit_two_under_500_mailed').val(data[2][0].edit_two_under_500_mailed);
+                    $('#edit_two_btn_500_2000_mailed').val(data[2][0].edit_two_btn_500_2000_mailed);
+                    $('#edit_two_btn_2000_4000_mailed').val(data[2][0].edit_two_btn_2000_4000_mailed);
+                    $('#edit_two_btn_4000_12000_mailed').val(data[2][0].edit_two_btn_4000_12000_mailed);
+                    $('#edit_one_under_500_constable').val(data[2][0].edit_one_under_500_constable);
+                    $('#edit_one_btn_500_2000_constable').val(data[2][0].edit_one_btn_500_2000_constable);
+                    $('#edit_one_btn_2000_4000_constable').val(data[2][0].edit_one_btn_2000_4000_constable);
+                    $('#edit_one_btn_4000_12000_constable').val(data[2][0].edit_one_btn_4000_12000_constable);
+                    $('#edit_two_under_500_constable').val(data[2][0].edit_two_under_500_constable);
+                    $('#edit_two_btn_500_2000_constable').val(data[2][0].edit_two_btn_500_2000_constable);
+                    $('#edit_two_btn_2000_4000_constable').val(data[2][0].edit_two_btn_2000_4000_constable);
+                    $('#edit_two_btn_4000_12000_constable').val(data[2][0].edit_two_btn_4000_12000_constable);
 
 
 
@@ -166,6 +182,7 @@
                 data: {
                     dbCourtId: $('#db_court_id').val(),
                     dbGeoId: $('#db_geo_id').val(),
+                    dbCivilUniqueId: $('#db_civil_id').val(),
                     magistrateId: $('#edit_magistrate_id').val(),
                     township: $('#edit_township').val(),
                     courtId: $('#edit_court_id').val(),
@@ -189,7 +206,24 @@
                     additionalTenant: $('#edit_additional_tenants').val(),
                     geoLocations: $('#edit_geo_locations').val(),
                     digitalSignature: $('#edit_digital_signature').val(),
-                    onlineSubmission: $('#edit_online_submission').val()
+                    onlineSubmission: $('#edit_online_submission').val(),
+                    oneUnder500Mailed: $('#edit_one_under_500_mailed').val(),
+
+                oneBtn500And2000: $('#edit_one_btn_500_2000_mailed').val(),
+            oneBtn2000And4000Mailed: $('#edit_one_btn_2000_4000_mailed').val(),
+            oneBtn4000And12000Mailed: $('#edit_one_btn_4000_12000_mailed').val(),
+           twoUnder500Mailed:  $('#edit_two_under_500_mailed').val(),
+           twoBtn500And2000Mailed:  $('#edit_two_btn_500_2000_mailed').val(),
+            twoBtn2000And4000Mailed: $('#edit_two_btn_2000_4000_mailed').val(),
+            twoBtn4000And12000Mailed: $('#edit_two_btn_4000_12000_mailed').val(),
+           oneUnder500Constable: $('#edit_one_under_500_constable').val(),
+            oneBtn500And2000Constable: $('#edit_one_btn_500_2000_constable').val(),
+            oneBtn2000And4000Constable: $('#edit_one_btn_2000_4000_constable').val(),
+           oneBtn4000And12000Constable: $('#edit_one_btn_4000_12000_constable').val(),
+            twoUnder500Constable: $('#edit_two_under_500_constable').val(),
+            twoBtn500And2000Constable:  $('#edit_two_btn_500_2000_constable').val(),
+            twoBtn2000And4000Constable: $('#edit_two_btn_2000_4000_constable').val(),
+           twoBtn4000And12000Constable:  $('#edit_two_btn_4000_12000_constable').val()
                 },
                 success: function (data) {
 

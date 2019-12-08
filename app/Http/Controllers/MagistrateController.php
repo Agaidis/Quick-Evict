@@ -69,7 +69,7 @@ class MagistrateController extends Controller
                 $courtDetails->save();
 
                 $civilUnique = new CivilUnique();
-                $civilUnique->court_details_id = $courtDetails->id;
+                $civilUnique->court_details_id = $request->magistrate_id;
                 $civilUnique->under_500_1_def_mail = $request->one_under_500_mailed;
                 $civilUnique->btn_500_2000_1_def_mail = $request->one_btn_500_2000_mailed;
                 $civilUnique->btn_2000_4000_1_def_mail = $request->one_btn_2000_4000_mailed;
@@ -127,10 +127,12 @@ class MagistrateController extends Controller
         try {
            $geoData = GeoLocation::where('magistrate_id', $request->magistrateId)->get();
            $courtData = CourtDetails::where('magistrate_id', $request->magistrateId)->get();
+           $civilData = CivilUnique::where('magistrate', $request->magistrateId)->get();
 
             $magistrate = [
                 $geoData,
-                $courtData
+                $courtData,
+                $civilData
             ];
 
         } catch (\Exception $e) {
@@ -181,24 +183,24 @@ class MagistrateController extends Controller
                 $courtDetails->online_submission = $request->onlineSubmission;
                 $courtDetails->save();
 
-                $civilUnique = new CivilUnique();
+                $civilUnique = CivilUnique::find($request->dbCivilUniqueId);
                 $civilUnique->court_details_id = $request->dbCourtId;
-                $civilUnique->under_500_1_def_mail = $request->edit_one_under_500_mailed;
-                $civilUnique->btn_500_2000_1_def_mail = $request->edit_one_btn_500_2000_mailed;
-                $civilUnique->btn_2000_4000_1_def_mail = $request->edit_one_btn_2000_4000_mailed;
-                $civilUnique->btn_4000_12000_1_def_mail = $request->edit_one_btn_4000_12000_mailed;
-                $civilUnique->under_500_2_def_mail = $request->edit_two_under_500_mailed;
-                $civilUnique->btn_500_2000_2_def_mail = $request->edit_two_btn_500_2000_mailed;
-                $civilUnique->btn_2000_4000_2_def_mail = $request->edit_two_btn_2000_4000_mailed;
-                $civilUnique->btn_4000_12000_2_def_mail = $request->edit_two_btn_4000_12000_mailed;
-                $civilUnique->under_500_1_def_constable = $request->edit_one_under_500_constable;
-                $civilUnique->btn_500_2000_1_def_constable = $request->edit_one_btn_500_2000_constable;
-                $civilUnique->btn_2000_4000_1_def_constable = $request->edit_one_btn_2000_4000_constable;
-                $civilUnique->btn_4000_12000_1_def_constable = $request->edit_one_btn_4000_12000_constable;
-                $civilUnique->under_500_2_def_constable = $request->edit_two_under_500_constable;
-                $civilUnique->btn_500_2000_2_def_constable = $request->edit_two_btn_500_2000_constable;
-                $civilUnique->btn_2000_4000_2_def_constable = $request->edit_two_btn_2000_4000_constable;
-                $civilUnique->btn_4000_12000_2_def_constable = $request->edit_two_btn_4000_12000_constable;
+                $civilUnique->under_500_1_def_mail = $request->oneUnder500Mailed;
+                $civilUnique->btn_500_2000_1_def_mail = $request->oneBtn500And2000;
+                $civilUnique->btn_2000_4000_1_def_mail = $request->oneBtn2000And4000Mailed;
+                $civilUnique->btn_4000_12000_1_def_mail = $request->oneBtn4000And12000Mailed;
+                $civilUnique->under_500_2_def_mail = $request->twoUnder500Mailed;
+                $civilUnique->btn_500_2000_2_def_mail = $request->twoBtn500And2000Mailed;
+                $civilUnique->btn_2000_4000_2_def_mail = $request->twoBtn2000And4000Mailed;
+                $civilUnique->btn_4000_12000_2_def_mail = $request->twoBtn4000And12000Mailed;
+                $civilUnique->under_500_1_def_constable = $request->oneUnder500Constable;
+                $civilUnique->btn_500_2000_1_def_constable = $request->oneBtn500And2000Constable;
+                $civilUnique->btn_2000_4000_1_def_constable = $request->oneBtn2000And4000Constable;
+                $civilUnique->btn_4000_12000_1_def_constable = $request->oneBtn4000And12000Constable;
+                $civilUnique->under_500_2_def_constable = $request->twoUnder500Constable;
+                $civilUnique->btn_500_2000_2_def_constable = $request->twoBtn500And2000Constable;
+                $civilUnique->btn_2000_4000_2_def_constable = $request->twoBtn2000And4000Constable;
+                $civilUnique->btn_4000_12000_2_def_constable = $request->twoBtn4000And12000Constable;
                 $civilUnique->save();
 
 

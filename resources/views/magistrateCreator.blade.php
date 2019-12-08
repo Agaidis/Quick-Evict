@@ -543,6 +543,7 @@
                                                 </div>
                                                 <input type="hidden" id="db_geo_id" name="db_geo_id" />
                                                 <input type="hidden" id="db_court_id" name="db_court_id" />
+                                                <input type="hidden" id="db_civil_id" name="db_civil_id" />
                                             </div>
                                         </div>
                                     </div>
