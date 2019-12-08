@@ -183,25 +183,27 @@ class MagistrateController extends Controller
                 $courtDetails->online_submission = $request->onlineSubmission;
                 $courtDetails->save();
 
-                $civilUnique = CivilUnique::find($request->dbCivilUniqueId);
-                $civilUnique->court_details_id = $request->dbCourtId;
-                $civilUnique->under_500_1_def_mail = $request->oneUnder500Mailed;
-                $civilUnique->btn_500_2000_1_def_mail = $request->oneBtn500And2000;
-                $civilUnique->btn_2000_4000_1_def_mail = $request->oneBtn2000And4000Mailed;
-                $civilUnique->btn_4000_12000_1_def_mail = $request->oneBtn4000And12000Mailed;
-                $civilUnique->under_500_2_def_mail = $request->twoUnder500Mailed;
-                $civilUnique->btn_500_2000_2_def_mail = $request->twoBtn500And2000Mailed;
-                $civilUnique->btn_2000_4000_2_def_mail = $request->twoBtn2000And4000Mailed;
-                $civilUnique->btn_4000_12000_2_def_mail = $request->twoBtn4000And12000Mailed;
-                $civilUnique->under_500_1_def_constable = $request->oneUnder500Constable;
-                $civilUnique->btn_500_2000_1_def_constable = $request->oneBtn500And2000Constable;
-                $civilUnique->btn_2000_4000_1_def_constable = $request->oneBtn2000And4000Constable;
-                $civilUnique->btn_4000_12000_1_def_constable = $request->oneBtn4000And12000Constable;
-                $civilUnique->under_500_2_def_constable = $request->twoUnder500Constable;
-                $civilUnique->btn_500_2000_2_def_constable = $request->twoBtn500And2000Constable;
-                $civilUnique->btn_2000_4000_2_def_constable = $request->twoBtn2000And4000Constable;
-                $civilUnique->btn_4000_12000_2_def_constable = $request->twoBtn4000And12000Constable;
-                $civilUnique->save();
+                if ($request->dbCivilUniqueId != '') {
+                    $civilUnique = CivilUnique::find($request->dbCivilUniqueId);
+                    $civilUnique->court_details_id = $request->dbCourtId;
+                    $civilUnique->under_500_1_def_mail = $request->oneUnder500Mailed;
+                    $civilUnique->btn_500_2000_1_def_mail = $request->oneBtn500And2000;
+                    $civilUnique->btn_2000_4000_1_def_mail = $request->oneBtn2000And4000Mailed;
+                    $civilUnique->btn_4000_12000_1_def_mail = $request->oneBtn4000And12000Mailed;
+                    $civilUnique->under_500_2_def_mail = $request->twoUnder500Mailed;
+                    $civilUnique->btn_500_2000_2_def_mail = $request->twoBtn500And2000Mailed;
+                    $civilUnique->btn_2000_4000_2_def_mail = $request->twoBtn2000And4000Mailed;
+                    $civilUnique->btn_4000_12000_2_def_mail = $request->twoBtn4000And12000Mailed;
+                    $civilUnique->under_500_1_def_constable = $request->oneUnder500Constable;
+                    $civilUnique->btn_500_2000_1_def_constable = $request->oneBtn500And2000Constable;
+                    $civilUnique->btn_2000_4000_1_def_constable = $request->oneBtn2000And4000Constable;
+                    $civilUnique->btn_4000_12000_1_def_constable = $request->oneBtn4000And12000Constable;
+                    $civilUnique->under_500_2_def_constable = $request->twoUnder500Constable;
+                    $civilUnique->btn_500_2000_2_def_constable = $request->twoBtn500And2000Constable;
+                    $civilUnique->btn_2000_4000_2_def_constable = $request->twoBtn2000And4000Constable;
+                    $civilUnique->btn_4000_12000_2_def_constable = $request->twoBtn4000And12000Constable;
+                    $civilUnique->save();
+                }
 
 
                 $geoLocation = GeoLocation::find($request->dbGeoId);
