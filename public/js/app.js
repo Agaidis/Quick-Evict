@@ -43579,6 +43579,24 @@ $(document).ready(function () {
           $('#edit_two_btn_500_2000_constable').val(data[2][0].btn_500_2000_2_def_constable);
           $('#edit_two_btn_2000_4000_constable').val(data[2][0].btn_2000_4000_2_def_constable);
           $('#edit_two_btn_4000_12000_constable').val(data[2][0].btn_4000_12000_2_def_constable);
+        } else {
+          $('#db_civil_id').val('');
+          $('#edit_one_under_500_mailed').val('');
+          $('#edit_one_btn_500_2000_mailed').val('');
+          $('#edit_one_btn_2000_4000_mailed').val('');
+          $('#edit_one_btn_4000_12000_mailed').val('');
+          $('#edit_two_under_500_mailed').val('');
+          $('#edit_two_btn_500_2000_mailed').val('');
+          $('#edit_two_btn_2000_4000_mailed').val('');
+          $('#edit_two_btn_4000_12000_mailed').val('');
+          $('#edit_one_under_500_constable').val('');
+          $('#edit_one_btn_500_2000_constable').val('');
+          $('#edit_one_btn_2000_4000_constable').val('');
+          $('#edit_one_btn_4000_12000_constable').val('');
+          $('#edit_two_under_500_constable').val('');
+          $('#edit_two_btn_500_2000_constable').val('');
+          $('#edit_two_btn_2000_4000_constable').val('');
+          $('#edit_two_btn_4000_12000_constable').val('');
         }
 
         if (data[1][0].digital_signature == 1) {
