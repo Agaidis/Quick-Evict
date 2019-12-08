@@ -43536,7 +43536,6 @@ $(document).ready(function () {
         console.log(data);
         $('#db_geo_id').val(data[0][0].id);
         $('#db_court_id').val(data[1][0].id);
-        $('#db_court_id').val(data[2][0].id);
         $('#edit_court_id').val(data[1][0].court_number);
         $('#edit_magistrate_id').val(data[1][0].magistrate_id);
         $('#edit_township').val(data[1][0].township);
@@ -43560,22 +43559,26 @@ $(document).ready(function () {
         $('#edit_additional_tenants').val(data[1][0].additional_tenant);
         $('#edit_geo_locations').val(data[0][0].geo_locations);
         $('#edit_online_submission').val(data[1][0].online_submission);
-        $('#edit_one_under_500_mailed').val(data[2][0].edit_one_under_500_mailed);
-        $('#edit_one_btn_500_2000_mailed').val(data[2][0].edit_one_btn_500_2000_mailed);
-        $('#edit_one_btn_2000_4000_mailed').val(data[2][0].edit_one_btn_2000_4000_mailed);
-        $('#edit_one_btn_4000_12000_mailed').val(data[2][0].edit_one_btn_4000_12000_mailed);
-        $('#edit_two_under_500_mailed').val(data[2][0].edit_two_under_500_mailed);
-        $('#edit_two_btn_500_2000_mailed').val(data[2][0].edit_two_btn_500_2000_mailed);
-        $('#edit_two_btn_2000_4000_mailed').val(data[2][0].edit_two_btn_2000_4000_mailed);
-        $('#edit_two_btn_4000_12000_mailed').val(data[2][0].edit_two_btn_4000_12000_mailed);
-        $('#edit_one_under_500_constable').val(data[2][0].edit_one_under_500_constable);
-        $('#edit_one_btn_500_2000_constable').val(data[2][0].edit_one_btn_500_2000_constable);
-        $('#edit_one_btn_2000_4000_constable').val(data[2][0].edit_one_btn_2000_4000_constable);
-        $('#edit_one_btn_4000_12000_constable').val(data[2][0].edit_one_btn_4000_12000_constable);
-        $('#edit_two_under_500_constable').val(data[2][0].edit_two_under_500_constable);
-        $('#edit_two_btn_500_2000_constable').val(data[2][0].edit_two_btn_500_2000_constable);
-        $('#edit_two_btn_2000_4000_constable').val(data[2][0].edit_two_btn_2000_4000_constable);
-        $('#edit_two_btn_4000_12000_constable').val(data[2][0].edit_two_btn_4000_12000_constable);
+
+        if (data[2][0] > 0) {
+          $('#db_civil_id').val(data[2][0].id);
+          $('#edit_one_under_500_mailed').val(data[2][0].edit_one_under_500_mailed);
+          $('#edit_one_btn_500_2000_mailed').val(data[2][0].edit_one_btn_500_2000_mailed);
+          $('#edit_one_btn_2000_4000_mailed').val(data[2][0].edit_one_btn_2000_4000_mailed);
+          $('#edit_one_btn_4000_12000_mailed').val(data[2][0].edit_one_btn_4000_12000_mailed);
+          $('#edit_two_under_500_mailed').val(data[2][0].edit_two_under_500_mailed);
+          $('#edit_two_btn_500_2000_mailed').val(data[2][0].edit_two_btn_500_2000_mailed);
+          $('#edit_two_btn_2000_4000_mailed').val(data[2][0].edit_two_btn_2000_4000_mailed);
+          $('#edit_two_btn_4000_12000_mailed').val(data[2][0].edit_two_btn_4000_12000_mailed);
+          $('#edit_one_under_500_constable').val(data[2][0].edit_one_under_500_constable);
+          $('#edit_one_btn_500_2000_constable').val(data[2][0].edit_one_btn_500_2000_constable);
+          $('#edit_one_btn_2000_4000_constable').val(data[2][0].edit_one_btn_2000_4000_constable);
+          $('#edit_one_btn_4000_12000_constable').val(data[2][0].edit_one_btn_4000_12000_constable);
+          $('#edit_two_under_500_constable').val(data[2][0].edit_two_under_500_constable);
+          $('#edit_two_btn_500_2000_constable').val(data[2][0].edit_two_btn_500_2000_constable);
+          $('#edit_two_btn_2000_4000_constable').val(data[2][0].edit_two_btn_2000_4000_constable);
+          $('#edit_two_btn_4000_12000_constable').val(data[2][0].edit_two_btn_4000_12000_constable);
+        }
 
         if (data[1][0].digital_signature == 1) {
           $('#edit_is_digital_signature_allowed').prop('checked', true);
