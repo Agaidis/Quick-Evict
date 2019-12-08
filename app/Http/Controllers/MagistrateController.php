@@ -127,7 +127,7 @@ class MagistrateController extends Controller
         try {
            $geoData = GeoLocation::where('magistrate_id', $request->magistrateId)->get();
            $courtData = CourtDetails::where('magistrate_id', $request->magistrateId)->get();
-           $civilData = CivilUnique::where('magistrate', $request->magistrateId)->get();
+           $civilData = CivilUnique::where('court_details_id', $request->magistrateId)->get();
 
             $magistrate = [
                 $geoData,
