@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\CivilUnique;
 use App\CourtDetails;
+use App\ErrorLog;
 use App\GeoLocation;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -109,6 +110,11 @@ class MagistrateController extends Controller
             }
 
         } catch ( \Exception $e ) {
+            $errorMsg = new ErrorLog();
+            $errorMsg->payload = $e->getMessage() . ' Line #: ' . $e->getLine();
+
+            $errorMsg->save();
+
             $errorDetails = 'MagistrateController - error in store() method when attempting to store magistrate';
             $errorDetails .= PHP_EOL . 'File: ' . $e->getFile();
             $errorDetails .= PHP_EOL . 'Line #' . $e->getLine();
@@ -141,6 +147,10 @@ class MagistrateController extends Controller
             ];
 
         } catch (\Exception $e) {
+            $errorMsg = new ErrorLog();
+            $errorMsg->payload = $e->getMessage() . ' Line #: ' . $e->getLine();
+
+            $errorMsg->save();
             $errorDetails = 'MagistrateController - error in store() method when attempting to store magistrate';
             $errorDetails .= PHP_EOL . 'File: ' . $e->getFile();
             $errorDetails .= PHP_EOL . 'Line #' . $e->getLine();
@@ -252,17 +262,11 @@ class MagistrateController extends Controller
                 $response['messageDetails'] = 'Try Again';
                 return $response;
             }
-        } catch (\Exception $e) {
-            $errorDetails = 'MagistrateController - error in store() method when attempting to store magistrate';
-            $errorDetails .= PHP_EOL . 'File: ' . $e->getFile();
-            $errorDetails .= PHP_EOL . 'Line #' . $e->getLine();
-            \Log::error( $errorDetails . PHP_EOL . 'Error Message: ' . $e->getMessage() . PHP_EOL . 'Trace: ' . $e->getTraceAsString());
-            mail( 'andrew.gaidis@gmail.com',  'Adding Magistrate Error ' . Auth::User()->id, $errorDetails );
+        } catch (Exception $e) {
+            $errorMsg = new ErrorLog();
+            $errorMsg->payload = $e->getMessage() . ' Line #: ' . $e->getLine();
 
-            $returnArray['responseMessage'] = 'Bad Request';
-            $returnArray['responseCode'] = 400;
-            $returnArray['messageDetails'] = '' . $e->getMessage() . 'Tag could not be added to the database, please try again later';
-            return response()->json($returnArray);
+            $errorMsg->save();
         }
     }
 
@@ -274,6 +278,10 @@ class MagistrateController extends Controller
             GeoLocation::destroy($dbId);
             return $dbId;
         } catch (\Exception $e) {
+            $errorMsg = new ErrorLog();
+            $errorMsg->payload = $e->getMessage() . ' Line #: ' . $e->getLine();
+
+            $errorMsg->save();
             return 'failed';
         }
     }
