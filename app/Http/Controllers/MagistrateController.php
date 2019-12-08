@@ -188,6 +188,8 @@ class MagistrateController extends Controller
                 $courtDetails->online_submission = $request->onlineSubmission;
                 $courtDetails->save();
 
+                mail('andrew.gaidis@gmail.com','civil unique id', $request->dbCivilUniqueId);
+
                 if ($request->dbCivilUniqueId != '') {
                     $civilUnique = CivilUnique::find($request->dbCivilUniqueId);
                     $civilUnique->court_details_id = $request->dbCourtId;
