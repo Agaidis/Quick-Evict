@@ -52,7 +52,7 @@
                                                         <label for="mail_delivery_type">Mail</label>
                                                         <input checked type="radio" id="mail_delivery_type" value="mail" name="delivery_type"><br>
                                                         <label for="constable_delivery_type">Constable</label>
-                                                        <input type="radio" id="constable_delivery_type" value="constable" name="delivery_type"><br>
+                                                        <input type="radio" id="constable_delivery_type" value="constable" name="delivery_type">
                                                     </div>
                                                 </div>
                                                 <div class="row">
