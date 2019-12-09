@@ -45,8 +45,10 @@ class CivilComplaintController extends Controller
             $plaintiffAddress1 = $_POST['owner_address_1'];
             $plaintiffAddress2 = $_POST['owner_address_2'];
 
+            $tenantName = implode(', ', $_POST['tenant_name']);
+
             $plaintiffAddress = $plaintiffName .'<br>'. $plaintiffAddress1 .'<br>'. $plaintiffAddress2 .'<br>'. $plaintiffPhone;
-            $defendantAddress = $_POST['tenant_name'] . '<br>' . $_POST['civil_defendant_address_1'] . ', ' . $_POST['unit_number'] .'<br>'. $_POST['civil_defendant_address_2'];
+            $defendantAddress = $tenantName . '<br>' . $_POST['civil_defendant_address_1'] . ', ' . $_POST['unit_number'] .'<br>'. $_POST['civil_defendant_address_2'];
 
             $evictionData->id = '-1';
             $evictionData->plantiff_name = $plaintiffName;
@@ -97,6 +99,8 @@ class CivilComplaintController extends Controller
             $courtAddressLine1 = $geoDetails->address_line_one;
             $courtAddressLine2 = $geoDetails->address_line_two;
 
+            $tenantName = implode(', ', $_POST['tenant_name']);
+
 
             $ownerName = $_POST['owner_name'];
             $verifyName = $_POST['owner_name'];
@@ -117,7 +121,7 @@ class CivilComplaintController extends Controller
             $eviction = new Evictions();
             $eviction->status = 'Created Civil Complaint';
             $eviction->property_address = $defendanthouseNum.' '.$defendantStreetName.'-1'.$defendantTown .', ' . $defendantState.' '.$defendantZipcode;
-            $eviction->tenant_name = $_POST['tenant_name'];
+            $eviction->tenant_name = $tenantName;
             $eviction->defendant_state = $civilDefendantAddress1;
             $eviction->defendant_zipcode = $civilDefendantAddress2;
             $eviction->defendant_house_num = $defendanthouseNum;
