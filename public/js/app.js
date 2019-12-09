@@ -43535,50 +43535,50 @@ $(document).ready(function () {
       success: function success(data) {
         console.log(data);
         $('#db_geo_id').val(data[0][0].id);
-        $('#db_court_id').val(data[1][0].id);
-        $('#edit_court_id').val(data[1][0].court_number);
-        $('#edit_magistrate_id').val(data[1][0].magistrate_id);
-        $('#edit_township').val(data[1][0].township);
-        $('#edit_county').val(data[1][0].county);
-        $('#edit_mdj_name').val(data[1][0].mdj_name);
-        $('#edit_court_number').val(data[1][0].phone_number);
+        $('#db_court_id').val(data[1].id);
+        $('#edit_court_id').val(data[1].court_number);
+        $('#edit_magistrate_id').val(data[1].magistrate_id);
+        $('#edit_township').val(data[1].township);
+        $('#edit_county').val(data[1].county);
+        $('#edit_mdj_name').val(data[1].mdj_name);
+        $('#edit_court_number').val(data[1].phone_number);
         $('#edit_court_address_one').val(data[0][0].address_line_one);
         $('#edit_court_address_two').val(data[0][0].address_line_two);
-        $('#edit_one_under_2000').val(data[1][0].one_defendant_up_to_2000);
-        $('#edit_one_btn_2000_4001').val(data[1][0].one_defendant_between_2001_4000);
-        $('#edit_one_over_4000').val(data[1][0].one_defendant_greater_than_4000);
-        $('#edit_one_oop').val(data[1][0].one_defendant_out_of_pocket);
-        $('#edit_two_under_2000').val(data[1][0].two_defendant_up_to_2000);
-        $('#edit_two_btn_2000_4001').val(data[1][0].two_defendant_between_2001_4000);
-        $('#edit_two_over_4000').val(data[1][0].two_defendant_greater_than_4000);
-        $('#edit_two_oop').val(data[1][0].two_defendant_out_of_pocket);
-        $('#edit_three_under_2000').val(data[1][0].three_defendant_up_to_2000);
-        $('#edit_three_btn_2000_4001').val(data[1][0].three_defendant_between_2001_4000);
-        $('#edit_three_over_4000').val(data[1][0].three_defendant_greater_than_4000);
-        $('#edit_three_oop').val(data[1][0].three_defendant_out_of_pocket);
-        $('#edit_additional_tenants').val(data[1][0].additional_tenant);
+        $('#edit_one_under_2000').val(data[1].one_defendant_up_to_2000);
+        $('#edit_one_btn_2000_4001').val(data[1].one_defendant_between_2001_4000);
+        $('#edit_one_over_4000').val(data[1].one_defendant_greater_than_4000);
+        $('#edit_one_oop').val(data[1].one_defendant_out_of_pocket);
+        $('#edit_two_under_2000').val(data[1].two_defendant_up_to_2000);
+        $('#edit_two_btn_2000_4001').val(data[1].two_defendant_between_2001_4000);
+        $('#edit_two_over_4000').val(data[1].two_defendant_greater_than_4000);
+        $('#edit_two_oop').val(data[1].two_defendant_out_of_pocket);
+        $('#edit_three_under_2000').val(data[1].three_defendant_up_to_2000);
+        $('#edit_three_btn_2000_4001').val(data[1].three_defendant_between_2001_4000);
+        $('#edit_three_over_4000').val(data[1].three_defendant_greater_than_4000);
+        $('#edit_three_oop').val(data[1].three_defendant_out_of_pocket);
+        $('#edit_additional_tenants').val(data[1].additional_tenant);
         $('#edit_geo_locations').val(data[0][0].geo_locations);
-        $('#edit_online_submission').val(data[1][0].online_submission);
+        $('#edit_online_submission').val(data[1].online_submission);
 
         if (data[2] !== 'empty') {
           console.log('im in here');
-          $('#db_civil_id').val(data[2][0].id);
-          $('#edit_one_under_500_mailed').val(data[2][0].under_500_1_def_mail);
-          $('#edit_one_btn_500_2000_mailed').val(data[2][0].btn_500_2000_1_def_mail);
-          $('#edit_one_btn_2000_4000_mailed').val(data[2][0].btn_2000_4000_1_def_mail);
-          $('#edit_one_btn_4000_12000_mailed').val(data[2][0].btn_4000_12000_1_def_mail);
-          $('#edit_two_under_500_mailed').val(data[2][0].under_500_2_def_mail);
-          $('#edit_two_btn_500_2000_mailed').val(data[2][0].btn_500_2000_2_def_mail);
-          $('#edit_two_btn_2000_4000_mailed').val(data[2][0].btn_2000_4000_2_def_mail);
-          $('#edit_two_btn_4000_12000_mailed').val(data[2][0].btn_4000_12000_2_def_mail);
-          $('#edit_one_under_500_constable').val(data[2][0].under_500_1_def_constable);
-          $('#edit_one_btn_500_2000_constable').val(data[2][0].btn_500_2000_1_def_constable);
-          $('#edit_one_btn_2000_4000_constable').val(data[2][0].btn_2000_4000_1_def_constable);
-          $('#edit_one_btn_4000_12000_constable').val(data[2][0].btn_4000_12000_1_def_constable);
-          $('#edit_two_under_500_constable').val(data[2][0].under_500_2_def_constable);
-          $('#edit_two_btn_500_2000_constable').val(data[2][0].btn_500_2000_2_def_constable);
-          $('#edit_two_btn_2000_4000_constable').val(data[2][0].btn_2000_4000_2_def_constable);
-          $('#edit_two_btn_4000_12000_constable').val(data[2][0].btn_4000_12000_2_def_constable);
+          $('#db_civil_id').val(data[2].id);
+          $('#edit_one_under_500_mailed').val(data[2].under_500_1_def_mail);
+          $('#edit_one_btn_500_2000_mailed').val(data[2].btn_500_2000_1_def_mail);
+          $('#edit_one_btn_2000_4000_mailed').val(data[2].btn_2000_4000_1_def_mail);
+          $('#edit_one_btn_4000_12000_mailed').val(data[2].btn_4000_12000_1_def_mail);
+          $('#edit_two_under_500_mailed').val(data[2].under_500_2_def_mail);
+          $('#edit_two_btn_500_2000_mailed').val(data[2].btn_500_2000_2_def_mail);
+          $('#edit_two_btn_2000_4000_mailed').val(data[2].btn_2000_4000_2_def_mail);
+          $('#edit_two_btn_4000_12000_mailed').val(data[2].btn_4000_12000_2_def_mail);
+          $('#edit_one_under_500_constable').val(data[2].under_500_1_def_constable);
+          $('#edit_one_btn_500_2000_constable').val(data[2].btn_500_2000_1_def_constable);
+          $('#edit_one_btn_2000_4000_constable').val(data[2].btn_2000_4000_1_def_constable);
+          $('#edit_one_btn_4000_12000_constable').val(data[2].btn_4000_12000_1_def_constable);
+          $('#edit_two_under_500_constable').val(data[2].under_500_2_def_constable);
+          $('#edit_two_btn_500_2000_constable').val(data[2].btn_500_2000_2_def_constable);
+          $('#edit_two_btn_2000_4000_constable').val(data[2].btn_2000_4000_2_def_constable);
+          $('#edit_two_btn_4000_12000_constable').val(data[2].btn_4000_12000_2_def_constable);
         } else {
           $('#db_civil_id').val('');
           $('#edit_one_under_500_mailed').val('');
@@ -43599,7 +43599,7 @@ $(document).ready(function () {
           $('#edit_two_btn_4000_12000_constable').val('');
         }
 
-        if (data[1][0].digital_signature == 1) {
+        if (data[1].digital_signature == 1) {
           $('#edit_is_digital_signature_allowed').prop('checked', true);
         }
       },
@@ -43659,7 +43659,7 @@ $(document).ready(function () {
       data: {
         dbCourtId: $('#db_court_id').val(),
         dbGeoId: $('#db_geo_id').val(),
-        dbCivilUniqueId: $('#db_civil_id').val(),
+        dbCivilId: $('#db_civil_id').val(),
         magistrateId: $('#edit_magistrate_id').val(),
         township: $('#edit_township').val(),
         courtId: $('#edit_court_id').val(),

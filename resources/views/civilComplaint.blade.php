@@ -47,10 +47,35 @@
                                                     </div>
                                                 </div>
                                                 <div class="row">
-                                                    <div class="col-sm-6">
-                                                        <label class="labels" for="tenant_name">Defendant Name</label>
-                                                        <input type="text" class="form-control eviction_fields" placeholder="" id="tenant_name" name="tenant_name" maxlength="20"/>
+                                                    <div class="col-md-6">
+                                                        <label for="mail_delivery_type">Mail</label><br>
+                                                        <input type="radio" id="mail_delivery_type" value="mail" name="delivery_type">
+                                                        <label for="constable_delivery_type">Constable</label><br>
+                                                        <input checked type="radio" id="constable_delivery_type" value="constable" name="delivery_type">
                                                     </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-sm-8 tenant_num_container">
+                                                        <div class="col-sm-6">
+                                                            <label for="tenant_num_select" class="labels">Number of Defendants</label>
+                                                            <span class="fa fa-question-circle" data-placement="right" data-toggle="tooltip" title="Select the number of defendants that are present, and put 1 name for each field that appears."></span>
+                                                            <select class="form-control" id="tenant_num_select">
+                                                                <option value="" selected disabled>Select # of Defendants</option>
+                                                                <option value="1">1</option>
+                                                                <option value="2">2</option>
+                                                                <option value="3">3</option>
+                                                                <option value="4">4</option>
+                                                                <option value="5">5</option>
+                                                                <option value="6">6</option>
+                                                                <option value="7">7</option>
+                                                                <option value="8">8</option>
+                                                                <option value="9">9</option>
+                                                                <option value="10">10</option>
+                                                            </select>
+                                                        </div><br>
+                                                        <div class="col-sm-10" id="tenant_input_container"></div>
+                                                    </div>
+                                                    <input type="hidden" id="tenant_num" name="tenant_num" />
                                                     <div class="col-sm-8">
                                                         <label class="labels">Defendant Street Mailing Address</label>
                                                         <input class="form-control eviction_fields" placeholder="1234 Main Street" type="text" id="civil_defendant_address_1" name="civil_defendant_address_1" maxlength="30"/>

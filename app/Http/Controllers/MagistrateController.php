@@ -131,14 +131,13 @@ class MagistrateController extends Controller
 
     public function getMagistrate(Request $request) {
         try {
-           $geoData = GeoLocation::where('magistrate_id', $request->magistrateId)->get();
-           $courtData = CourtDetails::where('magistrate_id', $request->magistrateId)->get();
-           $civilData = CivilUnique::where('court_details_id', $request->magistrateId)->get();
-           Log::info($civilData);
+            $geoData = GeoLocation::where('magistrate_id', $request->magistrateId)->get();
+            $courtData = CourtDetails::where('magistrate_id', $request->magistrateId)->first();
+            $civilData = CivilUnique::where('court_details_id', $courtData->id)->first();
 
-           if ($civilData === null || $civilData->isEmpty()) {
-               $civilData = 'empty';
-           }
+            if ($civilData === null || $civilData === '') {
+                $civilData = 'empty';
+            }
 
             $magistrate = [
                 $geoData,
@@ -166,8 +165,6 @@ class MagistrateController extends Controller
     }
 
     public function editMagistrate(Request $request) {
-        Log::info('Editing a Magistrate');
-        Log::info(Auth::User()->id);
 
         try {
 
@@ -198,8 +195,8 @@ class MagistrateController extends Controller
                 $courtDetails->online_submission = $request->onlineSubmission;
                 $courtDetails->save();
 
-                if ($request->dbCivilUniqueId != '') {
-                    $civilUnique = CivilUnique::find($request->dbCivilUniqueId);
+                if ($request->dbCivilId != '') {
+                    $civilUnique = CivilUnique::find($request->dbCivilId);
                     $civilUnique->court_details_id = $request->dbCourtId;
                     $civilUnique->under_500_1_def_mail = $request->oneUnder500Mailed;
                     $civilUnique->btn_500_2000_1_def_mail = $request->oneBtn500And2000;
@@ -220,7 +217,7 @@ class MagistrateController extends Controller
                     $civilUnique->save();
                 } else {
                     $civilUnique = new CivilUnique();
-                    $civilUnique->court_details_id = $request->magistrateId;
+                    $civilUnique->court_details_id = $request->dbCourtId;
                     $civilUnique->under_500_1_def_mail = $request->oneUnder500Mailed;
                     $civilUnique->btn_500_2000_1_def_mail = $request->oneBtn500And2000;
                     $civilUnique->btn_2000_4000_1_def_mail = $request->oneBtn2000And4000Mailed;
