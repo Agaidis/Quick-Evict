@@ -135,7 +135,7 @@ form.eviction_form fieldset {
 
 
 /* Eviction Containers  */
-.tenant_num_container {
+.tenant_num_container, .civil_delivery_type_container {
     border: 1px solid gainsboro;
     border-radius:2em;
     margin:3%;

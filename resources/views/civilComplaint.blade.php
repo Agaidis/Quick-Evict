@@ -47,11 +47,11 @@
                                                     </div>
                                                 </div>
                                                 <div class="row">
-                                                    <div class="col-md-6">
-                                                        <label for="mail_delivery_type">Mail</label><br>
-                                                        <input type="radio" id="mail_delivery_type" value="mail" name="delivery_type">
-                                                        <label for="constable_delivery_type">Constable</label><br>
-                                                        <input checked type="radio" id="constable_delivery_type" value="constable" name="delivery_type">
+                                                    <div class="civil_delivery_type_container col-md-6">
+                                                        <label for="mail_delivery_type">Mail</label>
+                                                        <input type="radio" id="mail_delivery_type" value="mail" name="delivery_type"><br>
+                                                        <label for="constable_delivery_type">Constable</label>
+                                                        <input checked type="radio" id="constable_delivery_type" value="constable" name="delivery_type"><br>
                                                     </div>
                                                 </div>
                                                 <div class="row">
