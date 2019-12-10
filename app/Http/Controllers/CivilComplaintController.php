@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\CivilUnique;
 use App\Classes\Mailer;
 use Exception;
 use Illuminate\Support\Facades\Auth;
@@ -33,10 +34,15 @@ class CivilComplaintController extends Controller
         $mailer = new Mailer();
 
         try {
+            $removeValues = [' ', '$', ','];
             $magistrateId = str_replace('magistrate_' , '', $_POST['court_number']);
             $courtDetails = CourtDetails::where('magistrate_id', $magistrateId)->first();
             $geoDetails = GeoLocation::where('magistrate_id', $magistrateId)->first();
+            $civilDetails = CivilUnique::where('court_details_id', $courtDetails->id)->first();
+
             $pdfHtml = PDF::where('name', 'civil')->value('html');
+            $filingFee = '';
+            $totalJudgment = str_replace($removeValues,['', '', ''], $_POST['total_judgment']);
             $pdfEditor = new PDFEditController();
             $evictionData = new stdClass();
 
@@ -45,13 +51,65 @@ class CivilComplaintController extends Controller
             $plaintiffAddress1 = $_POST['owner_address_1'];
             $plaintiffAddress2 = $_POST['owner_address_2'];
 
+
             $tenantName = implode(', ', $_POST['tenant_name']);
+
+            $tenantNum = (int)$_POST['tenant_num'];
+
+            if ($tenantNum > 1) {
+                if ($_POST['delivery_type'] == 'mail') {
+                    if ($totalJudgment <= 500) {
+                        $filingFee = $civilDetails->under_500_2_def_mail;
+                    } else if ($totalJudgment > 500 && $totalJudgment <= 2000) {
+                        $filingFee = $civilDetails->btn_500_2000_2_def_mail;
+                    } else if ($totalJudgment > 2000 && $totalJudgment < 4001) {
+                        $filingFee = $civilDetails->btn_2000_4000_2_def_mail;
+                    } else if ($totalJudgment > 4000 && $totalJudgment < 12001) {
+                        $filingFee = $civilDetails->btn_4000_12000_2_def_mail;
+                    }
+                } else if ($_POST['delivery_type'] == 'constable') {
+                    if ($totalJudgment <= 500) {
+                        $filingFee = $civilDetails->under_500_2_def_constable;
+                    } else if ($totalJudgment > 500 && $totalJudgment <= 2000) {
+                        $filingFee = $civilDetails->btn_500_2000_2_def_constable;
+                    } else if ($totalJudgment > 2000 && $totalJudgment < 4001) {
+                        $filingFee = $civilDetails->btn_2000_4000_2_def_constable;
+                    } else if ($totalJudgment > 4000 && $totalJudgment < 12001) {
+                        $filingFee = $civilDetails->btn_4000_12000_2_def_constable;
+                    }
+                }
+            } else {
+                if ($_POST['delivery_type'] == 'mail') {
+                    if ($totalJudgment <= 500) {
+                        $filingFee = $civilDetails->under_500_1_def_constable;
+                    } else if ($totalJudgment > 500 && $totalJudgment <= 2000) {
+                        $filingFee = $civilDetails->btn_500_2000_1_def_constable;
+                    } else if ($totalJudgment > 2000 && $totalJudgment < 4001) {
+                        $filingFee = $civilDetails->btn_2000_4000_1_def_constable;
+                    } else if ($totalJudgment > 4000 && $totalJudgment < 12001) {
+                        $filingFee = $civilDetails->btn_4000_12000_1_def_constable;
+                    }
+                } else if ($_POST['delivery_type'] == 'constable') {
+                    if ($totalJudgment <= 500) {
+                        $filingFee = $civilDetails->under_500_1_def_constable;
+                    } else if ($totalJudgment > 500 && $totalJudgment <= 2000) {
+                        $filingFee = $civilDetails->btn_500_2000_1_def_constable;
+                    } else if ($totalJudgment > 2000 && $totalJudgment < 4001) {
+                        $filingFee = $civilDetails->btn_2000_4000_1_def_constable;
+                    } else if ($totalJudgment > 4000 && $totalJudgment < 12001) {
+                        $filingFee = $civilDetails->btn_4000_12000_1_def_constable;
+                    }
+                }
+            }
+
+            $filingFee = number_format($filingFee, 2);
 
             $plaintiffAddress = $plaintiffName .'<br>'. $plaintiffAddress1 .'<br>'. $plaintiffAddress2 .'<br>'. $plaintiffPhone;
             $defendantAddress = $tenantName . '<br>' . $_POST['civil_defendant_address_1'] . ', ' . $_POST['unit_number'] .'<br>'. $_POST['civil_defendant_address_2'];
 
             $evictionData->id = '-1';
             $evictionData->plantiff_name = $plaintiffName;
+            $evictionData->filing_fee = $filingFee;
             $evictionData->court_address_line_1 = $geoDetails->address_line_one;
             $evictionData->court_address_line_2 = $geoDetails->address_line_two;
             $evictionData->claim_description = $_POST['claim_description'];
@@ -93,6 +151,7 @@ class CivilComplaintController extends Controller
             $magistrateId = str_replace('magistrate_' , '', $_POST['court_number']);
             $courtDetails = CourtDetails::where('magistrate_id', $magistrateId)->first();
             $geoDetails = GeoLocation::where('magistrate_id', $magistrateId)->first();
+            $civilDetails = CivilUnique::where('court_details_id', $courtDetails->id)->first();
 
             $courtNumber = $courtDetails->court_number;
 
@@ -100,6 +159,26 @@ class CivilComplaintController extends Controller
             $courtAddressLine2 = $geoDetails->address_line_two;
 
             $tenantName = implode(', ', $_POST['tenant_name']);
+
+            $tenantNum = (int)$_POST['tenant_num'];
+
+            if ($tenantNum > 1) {
+                if ($_POST['delivery_type'] == 'mail') {
+
+                } else if ($_POST['delivery_type'] == 'constable') {
+
+                } else {
+
+                }
+            } else {
+                if ($_POST['delivery_type'] == 'mail') {
+
+                } else if ($_POST['delivery_type'] == 'constable') {
+
+                } else {
+
+                }
+            }
 
 
             $ownerName = $_POST['owner_name'];

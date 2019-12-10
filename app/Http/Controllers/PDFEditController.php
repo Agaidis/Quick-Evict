@@ -20,6 +20,7 @@ class PDFEditController extends Controller
         $pdfHtml = str_replace('__date__', date("m/d/Y"), $pdfHtml);
         $pdfHtml = str_replace('__signature__', $signature, $pdfHtml);
         $pdfHtml = str_replace('__eviction-id__', $evictionData->id, $pdfHtml);
+        $pdfHtml = str_replace('__filing-fee__', $evictionData->filing_fee, $pdfHtml);
 
         return $pdfHtml;
     }
@@ -32,7 +33,6 @@ class PDFEditController extends Controller
         $pdfHtml = str_replace('__judgment-amount__', $evictionData->judgment_amount, $pdfHtml);
         $pdfHtml = str_replace('__cost-this-proceeding__', $evictionData->cost_this_proceeding, $pdfHtml);
         $pdfHtml = str_replace('__cost-original-lt-proceeding__', $evictionData->costs_original_lt_proceeding, $pdfHtml);
-        $pdfHtml = str_replace('__filing-fee__', $evictionData->filing_fee, $pdfHtml);
         $pdfHtml = str_replace('__total-fees__', $evictionData->total_judgement, $pdfHtml);
 
         return $pdfHtml;
@@ -41,7 +41,6 @@ class PDFEditController extends Controller
     public function localCivilAttributes ($pdfHtml, $evictionData) {
 
         $pdfHtml = str_replace('__claim-description__', $evictionData->claim_description, $pdfHtml);
-        $pdfHtml = str_replace('__filing-fee__', '', $pdfHtml);
         $pdfHtml = str_replace('__total-fees__', '', $pdfHtml);
 
         return $pdfHtml;
@@ -58,7 +57,6 @@ class PDFEditController extends Controller
         $pdfHtml = str_replace('__property-damage-details__', $evictionData->property_damage_details, $pdfHtml);
         $pdfHtml = str_replace('__verify-name__', $evictionData->verify_name, $pdfHtml);
         $pdfHtml = str_replace('__attorney-fees__', $evictionData->attorney_fees, $pdfHtml);
-        $pdfHtml = str_replace('__filing-fee__', $evictionData->filing_fee, $pdfHtml);
         $pdfHtml = str_replace('__total-fees__', $evictionData->total_judgement, $pdfHtml);
 
         $isResidential = $evictionData->is_residential == true ? '<input type="checkbox" checked/>' : '<input type="checkbox"/>';
