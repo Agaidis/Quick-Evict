@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\CivilUnique;
+use App\ErrorLog;
 use App\GeoLocation;
 use Illuminate\Http\Request;
 use App\CourtDetails;
@@ -192,6 +193,10 @@ class NewFileController extends Controller
             return  $filingFee = number_format((float)$filingFee, 2, '.', '');
 
         } catch ( Exception $e ) {
+            $errorMsg = new ErrorLog();
+            $errorMsg->payload = $e->getMessage() . ' Line #: ' . $e->getLine();
+
+            $errorMsg->save();
             $errorDetails = 'NewFileController - error in getFilingFee() method when attempting to get filing fee';
             $errorDetails .= PHP_EOL . 'File: ' . $e->getFile();
             $errorDetails .= PHP_EOL . 'Line #' . $e->getLine();
