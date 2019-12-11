@@ -81,7 +81,7 @@ class NewFileController extends Controller
             $filingFee = '';
             $additionalTenantFee = 0;
             $additionalTenantAmt = 1;
-            $removeValues = ['$', ','];
+            $removeValues = [' ', '$', ','];
             $tenantNum = (int)$_GET['tenant_num'];
             $courtDetails = CourtDetails::where('magistrate_id', $courtNumber[1])->first();
 
@@ -142,49 +142,50 @@ class NewFileController extends Controller
                     $filingFee = CourtDetails::where('magistrate_id', $courtNumber[1])->value('three_defendant_out_of_pocket');
                 }
             } else if ($fileType === 'civil') {
+                $totalJudgment = str_replace($removeValues,['', '', ''], $_GET['total_judgment']);
                 $civilDetails = CivilUnique::where('court_details_id', $courtDetails->id)->first();
+
                 if ($tenantNum > 1) {
                     if ($_GET['delivery_type'] == 'mail') {
-                        if ($_GET['total_judgment'] <= 500) {
+                        if ($totalJudgment <= 500) {
                             $filingFee = $civilDetails->under_500_2_def_mail;
-                        } else if ($_GET['total_judgment'] > 500 && $_GET['total_judgment'] <= 2000) {
+                        } else if ($totalJudgment > 500 && $totalJudgment <= 2000) {
                             $filingFee = $civilDetails->btn_500_2000_2_def_mail;
-                        } else if ($_GET['total_judgment'] > 2000 && $_GET['total_judgment'] < 4001) {
+                        } else if ($totalJudgment > 2000 && $totalJudgment < 4001) {
                             $filingFee = $civilDetails->btn_2000_4000_2_def_mail;
-                        } else if ($_GET['total_judgment'] > 4000 && $_GET['total_judgment'] < 12001) {
+                        } else if ($totalJudgment > 4000 && $totalJudgment < 12001) {
                             $filingFee = $civilDetails->btn_4000_12000_2_def_mail;
                         }
                     } else if ($_GET['delivery_type'] == 'constable') {
-                        if ($_GET['total_judgment'] <= 500) {
+                        if ($totalJudgment <= 500) {
                             $filingFee = $civilDetails->under_500_2_def_constable;
-                        } else if ($_GET['total_judgment'] > 500 && $_GET['total_judgment'] <= 2000) {
+                        } else if ($totalJudgment > 500 && $totalJudgment <= 2000) {
                             $filingFee = $civilDetails->btn_500_2000_2_def_constable;
-                        } else if ($_GET['total_judgment'] > 2000 && $_GET['total_judgment'] < 4001) {
+                        } else if ($totalJudgment > 2000 && $totalJudgment < 4001) {
                             $filingFee = $civilDetails->btn_2000_4000_2_def_constable;
-                        } else if ($_GET['total_judgment'] > 4000 && $_GET['total_judgment'] < 12001) {
+                        } else if ($totalJudgment > 4000 && $totalJudgment < 12001) {
                             $filingFee = $civilDetails->btn_4000_12000_2_def_constable;
                         }
                     }
-
                 } else {
                     if ($_GET['delivery_type'] == 'mail') {
-                        if ($_GET['total_judgment'] <= 500) {
+                        if ($totalJudgment <= 500) {
                             $filingFee = $civilDetails->under_500_1_def_constable;
-                        } else if ($_GET['total_judgment'] > 500 && $_GET['total_judgment'] <= 2000) {
+                        } else if ($totalJudgment > 500 && $totalJudgment <= 2000) {
                             $filingFee = $civilDetails->btn_500_2000_1_def_constable;
-                        } else if ($_GET['total_judgment'] > 2000 && $_GET['total_judgment'] < 4001) {
+                        } else if ($totalJudgment > 2000 && $totalJudgment < 4001) {
                             $filingFee = $civilDetails->btn_2000_4000_1_def_constable;
-                        } else if ($_GET['total_judgment'] > 4000 && $_GET['total_judgment'] < 12001) {
+                        } else if ($totalJudgment > 4000 && $totalJudgment < 12001) {
                             $filingFee = $civilDetails->btn_4000_12000_1_def_constable;
                         }
                     } else if ($_GET['delivery_type'] == 'constable') {
-                        if ($_GET['total_judgment'] <= 500) {
+                        if ($totalJudgment <= 500) {
                             $filingFee = $civilDetails->under_500_1_def_constable;
-                        } else if ($_GET['total_judgment'] > 500 && $_GET['total_judgment'] <= 2000) {
+                        } else if ($totalJudgment > 500 && $totalJudgment <= 2000) {
                             $filingFee = $civilDetails->btn_500_2000_1_def_constable;
-                        } else if ($_GET['total_judgment'] > 2000 && $_GET['total_judgment'] < 4001) {
+                        } else if ($totalJudgment > 2000 && $totalJudgment < 4001) {
                             $filingFee = $civilDetails->btn_2000_4000_1_def_constable;
-                        } else if ($_GET['total_judgment'] > 4000 && $_GET['total_judgment'] < 12001) {
+                        } else if ($totalJudgment > 4000 && $totalJudgment < 12001) {
                             $filingFee = $civilDetails->btn_4000_12000_1_def_constable;
                         }
                     }
