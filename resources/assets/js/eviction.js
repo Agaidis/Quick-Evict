@@ -372,9 +372,10 @@ if (document.location.href.split('/')[3] === 'new-file') {
         let deliveryType = '';
         $('#finalize_document').on('click', function() {
 
+            console.log($('#file_type').val());
             if ($('#file_type').val() === 'civil') {
                 totalJudgment = $('#total_judgment').val();
-                deliveryType = $('#delivery_type').val()
+                deliveryType = $("input[name=delivery_type]:checked").val()
             }
 
             $.ajax({
