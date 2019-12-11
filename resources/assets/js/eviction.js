@@ -1,6 +1,7 @@
 if (document.location.href.split('/')[3] === 'new-file') {
     $(document).ready(function () {
 
+
         $('[data-toggle="tooltip"]').tooltip();
 
         var text_max = 500;
@@ -366,37 +367,50 @@ if (document.location.href.split('/')[3] === 'new-file') {
                $('#breached_details').prop('disabled', true);
            }
         });
-    });
 
-    $('#finalize_document').on('click', function() {
-        $.ajax({
-            beforeSend: function (xhr) {
-                xhr.setRequestHeader('X-CSRF-TOKEN', $("#token").attr('content'));
-            },
-            url : '/new-file/get-court-fee',
-            type : 'GET',
-            data : {
-                'court_number' : $('#court_number').val(),
-                'tenant_num_select': $('#tenant_num_select').val(),
-                'fileType': $('#file_type').val(),
-                'additional_rent_amt': $('#additional_rent_amt').val(),
-                'attorney_fees': $('#attorney_fees').val(),
-                'due_rent': $('#due_rent').val(),
-                'unjust_damages': $('#unjust_damages').val(),
-                'damage_amt': $('#damage_amt').val(),
-                'tenant_num': $('#tenant_num').val()
+        let totalJudgment = '';
+        let deliveryType = '';
+        $('#finalize_document').on('click', function() {
 
-            },
-            success : function(data) {
-                $('#filing_fee_display').text(data);
-                let total = 16.99 + parseFloat(data);
-                $('#total').text(total.toFixed(2));
+            if ($('#file_type').val() === 'civil complaint') {
+                totalJudgment = $('#total_judgment').val();
+                deliveryType = $('#delivery_type').val()
+            }
 
-            },
-            error : function(data)
-            {
-                console.log(data);
-            },
+            $.ajax({
+                beforeSend: function (xhr) {
+                    xhr.setRequestHeader('X-CSRF-TOKEN', $("#token").attr('content'));
+                },
+                url : '/new-file/get-court-fee',
+                type : 'GET',
+                data : {
+                    'court_number' : $('#court_number').val(),
+                    'tenant_num_select': $('#tenant_num_select').val(),
+                    'fileType': $('#file_type').val(),
+                    'additional_rent_amt': $('#additional_rent_amt').val(),
+                    'attorney_fees': $('#attorney_fees').val(),
+                    'due_rent': $('#due_rent').val(),
+                    'unjust_damages': $('#unjust_damages').val(),
+                    'damage_amt': $('#damage_amt').val(),
+                    'tenant_num': $('#tenant_num').val(),
+                    'total_judgment': totalJudgment,
+                    'delivery_type': deliveryType
+
+                },
+                success : function(data) {
+                    $('#filing_fee_display').text(data);
+                    let total = 16.99 + parseFloat(data);
+                    $('#total').text(total.toFixed(2));
+
+                },
+                error : function(data)
+                {
+                    console.log(data);
+                },
+            });
         });
+
     });
+
+
 }

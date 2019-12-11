@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\CivilUnique;
 use App\GeoLocation;
 use Illuminate\Http\Request;
 use App\CourtDetails;
@@ -81,6 +82,7 @@ class NewFileController extends Controller
             $additionalTenantAmt = 1;
             $removeValues = ['$', ','];
             $tenantNum = (int)$_GET['tenant_num'];
+            $courtDetails = CourtDetails::where('magistrate_id', $courtNumber[1])->first();
 
             if ($fileType == 'ltc') {
 
@@ -89,8 +91,6 @@ class NewFileController extends Controller
                 $dueRent = str_replace($removeValues, '', $_GET['due_rent']);
                 $unjustDamages = str_replace($removeValues, '', $_GET['unjust_damages']);
                 $damageAmt = str_replace($removeValues, '', $_GET['damage_amt']);
-
-                $courtDetails = CourtDetails::where('magistrate_id', $courtNumber[1])->first();
 
                 if ($tenantNum == 1) {
                     $upTo2000 = $courtDetails->one_defendant_up_to_2000;
@@ -140,19 +140,56 @@ class NewFileController extends Controller
                 } else if ((int)$tenantNum >= 3 ) {
                     $filingFee = CourtDetails::where('magistrate_id', $courtNumber[1])->value('three_defendant_out_of_pocket');
                 }
-            } else if ($fileType === 'civil') {
-                if ($tenantNum == 1) {
-                    $filingFee = 0;
-                } else if ($tenantNum == 2) {
-                    $filingFee = 0;
-                } else if ((int)$tenantNum >= 3 ) {
-                    $filingFee = 0;
+            } else if ($fileType === 'civil complaint') {
+                $civilDetails = CivilUnique::where('court_details_id', $courtDetails->id)->first();
+                if ($tenantNum > 1) {
+                    if ($_GET['delivery_type'] == 'mail') {
+                        if ($_GET['total_judgment'] <= 500) {
+                            $filingFee = $civilDetails->under_500_2_def_mail;
+                        } else if ($_GET['total_judgment'] > 500 && $_GET['total_judgment'] <= 2000) {
+                            $filingFee = $civilDetails->btn_500_2000_2_def_mail;
+                        } else if ($_GET['total_judgment'] > 2000 && $_GET['total_judgment'] < 4001) {
+                            $filingFee = $civilDetails->btn_2000_4000_2_def_mail;
+                        } else if ($_GET['total_judgment'] > 4000 && $_GET['total_judgment'] < 12001) {
+                            $filingFee = $civilDetails->btn_4000_12000_2_def_mail;
+                        }
+                    } else if ($_GET['delivery_type'] == 'constable') {
+                        if ($_GET['total_judgment'] <= 500) {
+                            $filingFee = $civilDetails->under_500_2_def_constable;
+                        } else if ($_GET['total_judgment'] > 500 && $_GET['total_judgment'] <= 2000) {
+                            $filingFee = $civilDetails->btn_500_2000_2_def_constable;
+                        } else if ($_GET['total_judgment'] > 2000 && $_GET['total_judgment'] < 4001) {
+                            $filingFee = $civilDetails->btn_2000_4000_2_def_constable;
+                        } else if ($_GET['total_judgment'] > 4000 && $_GET['total_judgment'] < 12001) {
+                            $filingFee = $civilDetails->btn_4000_12000_2_def_constable;
+                        }
+                    }
+
+                } else {
+                    if ($_GET['delivery_type'] == 'mail') {
+                        if ($_GET['total_judgment'] <= 500) {
+                            $filingFee = $civilDetails->under_500_1_def_constable;
+                        } else if ($_GET['total_judgment'] > 500 && $_GET['total_judgment'] <= 2000) {
+                            $filingFee = $civilDetails->btn_500_2000_1_def_constable;
+                        } else if ($_GET['total_judgment'] > 2000 && $_GET['total_judgment'] < 4001) {
+                            $filingFee = $civilDetails->btn_2000_4000_1_def_constable;
+                        } else if ($_GET['total_judgment'] > 4000 && $_GET['total_judgment'] < 12001) {
+                            $filingFee = $civilDetails->btn_4000_12000_1_def_constable;
+                        }
+                    } else if ($_GET['delivery_type'] == 'constable') {
+                        if ($_GET['total_judgment'] <= 500) {
+                            $filingFee = $civilDetails->under_500_1_def_constable;
+                        } else if ($_GET['total_judgment'] > 500 && $_GET['total_judgment'] <= 2000) {
+                            $filingFee = $civilDetails->btn_500_2000_1_def_constable;
+                        } else if ($_GET['total_judgment'] > 2000 && $_GET['total_judgment'] < 4001) {
+                            $filingFee = $civilDetails->btn_2000_4000_1_def_constable;
+                        } else if ($_GET['total_judgment'] > 4000 && $_GET['total_judgment'] < 12001) {
+                            $filingFee = $civilDetails->btn_4000_12000_1_def_constable;
+                        }
+                    }
                 }
             }
             return  $filingFee = number_format((float)$filingFee, 2, '.', '');
-
-
-
 
         } catch ( Exception $e ) {
             $errorDetails = 'NewFileController - error in getFilingFee() method when attempting to get filing fee';
