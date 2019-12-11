@@ -140,7 +140,7 @@ class NewFileController extends Controller
                 } else if ((int)$tenantNum >= 3 ) {
                     $filingFee = CourtDetails::where('magistrate_id', $courtNumber[1])->value('three_defendant_out_of_pocket');
                 }
-            } else if ($fileType === 'civil complaint') {
+            } else if ($fileType === 'civil') {
                 $civilDetails = CivilUnique::where('court_details_id', $courtDetails->id)->first();
                 if ($tenantNum > 1) {
                     if ($_GET['delivery_type'] == 'mail') {

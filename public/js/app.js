@@ -43083,7 +43083,7 @@ if (document.location.href.split('/')[3] === 'new-file') {
     var totalJudgment = '';
     var deliveryType = '';
     $('#finalize_document').on('click', function () {
-      if ($('#file_type').val() === 'civil complaint') {
+      if ($('#file_type').val() === 'civil') {
         totalJudgment = $('#total_judgment').val();
         deliveryType = $('#delivery_type').val();
       }
