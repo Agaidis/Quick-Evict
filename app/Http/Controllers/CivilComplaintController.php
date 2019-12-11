@@ -102,6 +102,7 @@ class CivilComplaintController extends Controller
                 }
             }
 
+            $totalJudgment = number_format($totalJudgment, 2);
             $filingFee = number_format($filingFee, 2);
 
             $plaintiffAddress = $plaintiffName .'<br>'. $plaintiffAddress1 .'<br>'. $plaintiffAddress2 .'<br>'. $plaintiffPhone;
@@ -110,6 +111,7 @@ class CivilComplaintController extends Controller
             $evictionData->id = '-1';
             $evictionData->plantiff_name = $plaintiffName;
             $evictionData->filing_fee = $filingFee;
+            $evictionData->total_judgment = $totalJudgment;
             $evictionData->court_address_line_1 = $geoDetails->address_line_one;
             $evictionData->court_address_line_2 = $geoDetails->address_line_two;
             $evictionData->claim_description = $_POST['claim_description'];
@@ -217,6 +219,7 @@ class CivilComplaintController extends Controller
                 }
             }
 
+            $totalJudgment = number_format($totalJudgment, 2);
             $filingFee = number_format($filingFee, 2);
 
 
@@ -237,7 +240,7 @@ class CivilComplaintController extends Controller
             $eviction->defendant_house_num = $defendanthouseNum;
             $eviction->defendant_street_name = $defendantStreetName;
             $eviction->defendant_town = $defendantTown;
-            $eviction->total_judgement = $_POST['total_judgment'];
+            $eviction->total_judgement = $totalJudgment;
             $eviction->pdf_download = 'true';
             $eviction->court_number = $courtNumber;
             $eviction->court_address_line_1 = $courtAddressLine1;
