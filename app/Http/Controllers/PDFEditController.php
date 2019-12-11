@@ -41,7 +41,7 @@ class PDFEditController extends Controller
     public function localCivilAttributes ($pdfHtml, $evictionData) {
 
         $pdfHtml = str_replace('__claim-description__', $evictionData->claim_description, $pdfHtml);
-        $pdfHtml = str_replace('__total-judgment__', $evictionData->total_judgment, $pdfHtml);
+        $pdfHtml = str_replace('__total-judgment__', $evictionData->total_judgement, $pdfHtml);
 
         return $pdfHtml;
     }
