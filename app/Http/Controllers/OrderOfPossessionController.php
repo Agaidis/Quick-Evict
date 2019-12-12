@@ -44,6 +44,7 @@ class OrderOfPossessionController extends Controller
 
             if ($_POST['rented_by_val'] == 'rentedByOwner') {
                 $plaintiffName = $_POST['owner_name'];
+                $btmPlaintiffName = $_POST['owner_name'];
                 $plaintiffPhone = $_POST['owner_phone'];
                 $plaintiffAddress1 = $_POST['owner_address_1'];
                 $plaintiffAddress2 = $_POST['owner_address_2'];
@@ -52,6 +53,7 @@ class OrderOfPossessionController extends Controller
                 $plaintiffPhone = $_POST['pm_phone'];
                 $plaintiffAddress1 = $_POST['pm_address_1'];
                 $plaintiffAddress2 = $_POST['pm_address_2'];
+                $btmPlaintiffName = $_POST['other_name'] . ',<br>' . 'On behalf of ' . $_POST['owner_name'] . '<br>' . $plaintiffPhone;
             }
 
             $tenantName = implode(', ', $_POST['tenant_name']);
@@ -60,7 +62,7 @@ class OrderOfPossessionController extends Controller
             $defendantAddress = $tenantName . '<br>' . $_POST['houseNum'] . ' ' . $_POST['streetName'] . ', ' . $_POST['unit_number'] .'<br> '. $_POST['town'] .', '. $_POST['state'] .' '. $_POST['zipcode'];
             $defendantAddress2 = $_POST['houseNum'] . ' ' . $_POST['streetName'] .' '. $_POST['unit_number'] . '<br><br><span style="position:absolute; margin-top:-10px;">'. $_POST['town'] .', ' . $_POST['state'] .' '. $_POST['zipcode'];
             $docketNumber2 = $_POST['docket_number_2'];
-            mail('andrew.gaidis@gmail.com', 'plaintiff', $plaintiffAddress);
+
             while (strlen($docketNumber2) < 7) {
                 $docketNumber2 = '0' . $docketNumber2;
             }
@@ -103,7 +105,7 @@ class OrderOfPossessionController extends Controller
             }
 
             $evictionData->id = '-1';
-            $evictionData->plantiff_name = $plaintiffName;
+            $evictionData->plantiff_name = $btmPlaintiffName;
             $evictionData->court_address_line_1 = $geoDetails->address_line_one;
             $evictionData->court_address_line_2 = $geoDetails->address_line_two;
             $evictionData->total_judgement = $totalFees;
