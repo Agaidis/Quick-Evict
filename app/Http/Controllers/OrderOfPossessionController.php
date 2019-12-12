@@ -273,6 +273,7 @@ class OrderOfPossessionController extends Controller
                 $eviction->date_of_oop = date("m/d/Y");
                 $eviction->court_filing_fee = '0';
                 $eviction->filing_fee = number_format($filingFee, 2);
+                $eviction->pm_company_name = $_POST['other_name'];
                 $eviction->file_type = 'oop';
 
                 $eviction->save();
