@@ -53,7 +53,7 @@ class OrderOfPossessionController extends Controller
                 $plaintiffPhone = $_POST['pm_phone'];
                 $plaintiffAddress1 = $_POST['pm_address_1'];
                 $plaintiffAddress2 = $_POST['pm_address_2'];
-                $btmPlaintiffName = $pmName = $_POST['pm_name'] . '<br>' . $_POST['other_name'] . ',<br>' . 'On behalf of ' . $_POST['owner_name'] . '<br>' . $plaintiffPhone;
+                $btmPlaintiffName = $_POST['pm_name'] . ',<br>' . $_POST['other_name'] . ',<br>' . 'On behalf of ' . $_POST['owner_name'] . '<br>' . $plaintiffPhone;
             }
 
             $tenantName = implode(', ', $_POST['tenant_name']);
@@ -264,6 +264,8 @@ class OrderOfPossessionController extends Controller
                 $eviction->plantiff_phone = $plantiffPhone;
                 $eviction->plantiff_address_line_1 = $plantiffAddress1;
                 $eviction->plantiff_address_line_2 = $plantiffAddress2;
+                $eviction->pm_name = $_POST['pm_name'];
+                $eviction->pm_phone = $_POST['pm_phone'];
                 $eviction->verify_name = $verifyName;
                 $eviction->unit_num = $_POST['unit_number'];
                 $eviction->user_id = Auth::user()->id;
@@ -316,7 +318,6 @@ class OrderOfPossessionController extends Controller
 
                 $errorMsg->save();
                 $mailer->sendMail('andrew.gaidis@gmail.com', 'OOP Error', $e->getMessage() );
-                alert('It looks like there was an issue while making this LTC. the Development team has been notified and are aware that your having issues. They will update you as soon as possible.');
             }
         } catch ( Exception $e ) {
             $errorMsg = new ErrorLog();
@@ -324,7 +325,6 @@ class OrderOfPossessionController extends Controller
 
             $errorMsg->save();
             $mailer->sendMail('andrew.gaidis@gmail.com', 'OOP Error', $e->getMessage() );
-            alert('It looks like there was an issue while making this LTC. the Development team has been notified and are aware that your having issues. They will update you as soon as possible.');
             return redirect('dashboard')->with('status','Your OOP has been successfully made! You can see its progress in the table below.');
         }
     }

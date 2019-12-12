@@ -257,6 +257,7 @@ class CivilComplaintController extends Controller
             $eviction->court_filing_fee = '0';
             $eviction->claim_description = $_POST['claim_description'];
             $eviction->file_type = 'civil complaint';
+            $eviction->civil_delivery_type = $_POST['delivery_type'];
             $eviction->filing_fee = $filingFee;
 
             $eviction->save();
