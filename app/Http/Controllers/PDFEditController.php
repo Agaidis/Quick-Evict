@@ -25,7 +25,7 @@ class PDFEditController extends Controller
         return $pdfHtml;
     }
 
-    public function localOOPAttributes ($pdfHtml, $evictionData, $defendantAddress2) {
+    public function localOOPAttributes ($pdfHtml, $evictionData, $defendantAddress2, $btmPlaintiffName) {
 
         $pdfHtml = str_replace('__docket-number__', $evictionData->docket_number, $pdfHtml);
         $pdfHtml = str_replace('__attorney-fees__', $evictionData->attorney_fees, $pdfHtml);
@@ -34,6 +34,7 @@ class PDFEditController extends Controller
         $pdfHtml = str_replace('__cost-this-proceeding__', $evictionData->cost_this_proceeding, $pdfHtml);
         $pdfHtml = str_replace('__cost-original-lt-proceeding__', $evictionData->costs_original_lt_proceeding, $pdfHtml);
         $pdfHtml = str_replace('__total-fees__', $evictionData->total_judgement, $pdfHtml);
+        $pdfHtml = str_replace('__btm-plaintiff-name__', $btmPlaintiffName, $pdfHtml);
 
         return $pdfHtml;
     }
