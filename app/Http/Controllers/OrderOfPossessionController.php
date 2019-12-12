@@ -53,7 +53,7 @@ class OrderOfPossessionController extends Controller
                 $plaintiffPhone = $_POST['pm_phone'];
                 $plaintiffAddress1 = $_POST['pm_address_1'];
                 $plaintiffAddress2 = $_POST['pm_address_2'];
-                $btmPlaintiffName = $_POST['other_name'] . ',<br>' . 'On behalf of ' . $_POST['owner_name'] . '<br>' . $plaintiffPhone;
+                $btmPlaintiffName = $pmName = $_POST['pm_name'] . '<br>' . $_POST['other_name'] . ',<br>' . 'On behalf of ' . $_POST['owner_name'] . '<br>' . $plaintiffPhone;
             }
 
             $tenantName = implode(', ', $_POST['tenant_name']);
