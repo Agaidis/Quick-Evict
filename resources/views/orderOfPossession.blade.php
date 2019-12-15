@@ -219,7 +219,7 @@
                                                 <h3 class="titles signature_title">Step 4:<br> Signature</h3>
                                                 <div class="modal-body">
                                                     <div class="row">
-                                                        <div>
+                                                        <div class="col-md-12">
                                                             <span style="font-size: 32px;">X</span> <canvas id="signature_pad" width="600" height="100" style="touch-action: none;"></canvas>
                                                             <div class="signature_pad_footer">
                                                             </div>
