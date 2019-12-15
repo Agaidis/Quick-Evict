@@ -24,16 +24,6 @@ console.log('im in eviction.js');
             }
         });
 
-        $('#legal_checkbox').on('change', function() {
-            if ($('#legal_checkbox').is(':checked')) {
-                $('.use_signature').prop('disabled', false);
-                $('.pay_sign_submit').prop('disabled', false);
-            } else {
-                $('.use_signature').prop('disabled', true);
-                $('.pay_sign_submit').prop('disabled', true);
-            }
-        });
-
         $('#preview_document').on('click', function() {
             $('#rented_by_val').val($('input[name=rented_by]:checked').val());
         });
