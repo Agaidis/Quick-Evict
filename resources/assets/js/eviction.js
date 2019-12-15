@@ -14,16 +14,14 @@ console.log('im in eviction.js');
             $('#textarea_feedback').html(text_remaining + ' characters remaining');
         });
 
-        $('.use_signature').on('click', function() {
-            $('.payment_section').css('display', 'initial');
-            $('.pay_submit_section').css('display', 'initial');
-
+        $('.use_signature').on('click', function(e) {
             if ($('#legal_checkbox').is(':checked') === false) {
                 $('#legal_checkbox_container').text('You must accept to the terms of agreement. Check the box above.');
             } else {
                 $('#legal_checkbox_container').text('');
+                $('.payment_section').css('display', 'initial');
+                $('.pay_submit_section').css('display', 'initial');
             }
-
         });
 
         $('#legal_checkbox').on('change', function() {
