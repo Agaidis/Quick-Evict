@@ -50,7 +50,6 @@ if (document.location.href.split('/')[3] === 'new-file') {
 // Handle form submission.
     let form = document.getElementById('pay_sign_submit');
     form.addEventListener('click', function (event) {
-        console.log('made it in here');
 
         stripe.createToken(card).then(function (result) {
             if (result.error) {
@@ -59,10 +58,13 @@ if (document.location.href.split('/')[3] === 'new-file') {
                 errorElement.textContent = result.error.message;
             } else {
                 // Send the token to your server.
-                console.log(result.token.id);
-                $('#stripeToken').val(result.token.id);
-                console.log('Here is the stripe token input field');
-                console.log($('#stripeToken').val());
+                let mainForm = document.getElementById('eviction_form');
+                let hiddenInput = document.createElement('input');
+                hiddenInput.setAttribute('type', 'hidden');
+                hiddenInput.setAttribute('name', 'stripeToken');
+                hiddenInput.setAttribute('value', result.token.id);
+                mainForm.appendChild(hiddenInput);
+
             }
         });
 
@@ -77,7 +79,6 @@ if (document.location.href.split('/')[3] === 'new-file') {
             alert('Error with finding File Type. Contact Support');
         }
         if ($('#legal_checkbox').is(':checked')) {
-            console.log($('#eviction_form').serialize());
             $('#modal_signature').modal('toggle');
             let $body = $("body");
             $body.addClass("loading");
@@ -85,6 +86,7 @@ if (document.location.href.split('/')[3] === 'new-file') {
             $('#signature_source').val(dataURL);
 
             let formData = $('#eviction_form').serialize();
+            console.log('ajax is started');
 
             $.ajaxSetup({
                 headers: {

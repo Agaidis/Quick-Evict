@@ -49517,7 +49517,6 @@ if (document.location.href.split('/')[3] === 'new-file') {
 
   var form = document.getElementById('pay_sign_submit');
   form.addEventListener('click', function (event) {
-    console.log('made it in here');
     stripe.createToken(card).then(function (result) {
       if (result.error) {
         // Inform the user if there was an error.
@@ -49525,10 +49524,12 @@ if (document.location.href.split('/')[3] === 'new-file') {
         errorElement.textContent = result.error.message;
       } else {
         // Send the token to your server.
-        console.log(result.token.id);
-        $('#stripeToken').val(result.token.id);
-        console.log('Here is the stripe token input field');
-        console.log($('#stripeToken').val());
+        var mainForm = document.getElementById('eviction_form');
+        var hiddenInput = document.createElement('input');
+        hiddenInput.setAttribute('type', 'hidden');
+        hiddenInput.setAttribute('name', 'stripeToken');
+        hiddenInput.setAttribute('value', result.token.id);
+        mainForm.appendChild(hiddenInput);
       }
     });
     var url = '';
@@ -49544,7 +49545,6 @@ if (document.location.href.split('/')[3] === 'new-file') {
     }
 
     if ($('#legal_checkbox').is(':checked')) {
-      console.log($('#eviction_form').serialize());
       $('#modal_signature').modal('toggle');
       var $body = $("body");
       $body.addClass("loading");
@@ -49552,6 +49552,7 @@ if (document.location.href.split('/')[3] === 'new-file') {
 
       $('#signature_source').val(dataURL);
       var formData = $('#eviction_form').serialize();
+      console.log('ajax is started');
       $.ajaxSetup({
         headers: {
           'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
