@@ -508,7 +508,7 @@ class EvictionController extends Controller
                     \Stripe\Charge::create([
                         'amount' => 100,
                         'currency' => 'usd',
-                        'description' => 'Eviction charge',
+                        'description' => 'CourtZip',
                         'source' => $token,
                     ]);
                 } catch ( Exception $e ) {

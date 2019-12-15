@@ -277,7 +277,7 @@ class CivilComplaintController extends Controller
                 \Stripe\Charge::create([
                     'amount' => 100,
                     'currency' => 'usd',
-                    'description' => 'Civil Complaint charge',
+                    'description' => 'CourtZip',
                     'source' => $token,
                 ]);
             } catch ( Exception $e ) {

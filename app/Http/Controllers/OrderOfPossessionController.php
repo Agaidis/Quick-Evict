@@ -297,7 +297,7 @@ class OrderOfPossessionController extends Controller
                     \Stripe\Charge::create([
                         'amount' => 100,
                         'currency' => 'usd',
-                        'description' => 'Order of Possession charge',
+                        'description' => 'CourtZip',
                         'source' => $token,
                     ]);
                 } catch ( Exception $e ) {

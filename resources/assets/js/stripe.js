@@ -97,11 +97,9 @@ if (document.location.href.split('/')[3] === 'new-file') {
                         type: 'POST',
                         data: formData,
                         success: function (data) {
-                            console.log(data);
                             window.location.href = environmentPath + '/dashboard';
                         },
                         error: function (data) {
-                            console.log(data)
                         },
                     });
 
