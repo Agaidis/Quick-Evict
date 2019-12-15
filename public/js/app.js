@@ -49527,6 +49527,8 @@ if (document.location.href.split('/')[3] === 'new-file') {
         // Send the token to your server.
         console.log(result.token.id);
         $('#stripeToken').val(result.token.id);
+        console.log('Here is the stripe token input field');
+        console.log($('#stripeToken').val());
       }
     });
     var url = '';
