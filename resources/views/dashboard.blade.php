@@ -91,7 +91,7 @@
                                             {{date('h:i A', strtotime('-5 hour', strtotime($eviction->created_at)))}}</td>
                                         <td class="text-center">
                                             <button type="submit" id="download_id_{{$eviction->id}}" class="pdf_download_btn_dashboard btn-sm btn-primary fas fa-cloud-download-alt"></button>
-                                            @if ($eviction->is_downloaded == 0)
+                                            @if ($eviction->is_downloaded == 2)
                                                 <button type="button" id="edit_{{$eviction->id}}" data-target="#modal_edit_file" data-toggle="modal" class="fa fa-edit btn-sm btn-success eviction-edit"></button>
                                             @endif
                                             <button type="button" id="id_{{$eviction->id}}_{{$propertyAddressArray[0]}}" class="fa fa-trash btn-sm btn-danger eviction-remove"></button>
