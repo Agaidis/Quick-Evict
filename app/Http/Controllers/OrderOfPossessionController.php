@@ -288,6 +288,10 @@ class OrderOfPossessionController extends Controller
 
                 try {
                     Stripe::setApiKey(env('STRIPE_SECRET_KEY'));
+                    $errorMsg = new ErrorLog();
+                    $errorMsg->payload = $_POST['stripeToken'];
+
+                    $errorMsg->save();
 
                     $token = $_POST['stripeToken'];
                     \Stripe\Charge::create([
