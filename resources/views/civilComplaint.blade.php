@@ -191,7 +191,7 @@
                                                             <span id="legal_checkbox_container"><input type="checkbox" id="legal_checkbox"/><em><label style="text-align:center" for="legal_checkbox">By checking this box, I understand that my electronic signature constitutes a legal signature, <br>and that by entering my name above I acknowledge and warrant the accuracy of the information provided in this document.</label></em></span>
                                                             <button type="button" class="btn btn-warning clear_signature" data-action="clear">Clear Signature</button>
                                                             <button type="button" class="btn btn-primary use_signature" data-action="clear">Use Signature</button><br><br>
-                                                            <span style="color:red;" id="terms_of_agreement_error_msg"></span>
+                                                            <span id="terms_of_agreement_error_msg"></span>
                                                         </div>
                                                     </div><br><hr><br>
                                                     <div class="payment_section">

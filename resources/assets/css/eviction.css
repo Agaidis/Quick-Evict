@@ -238,6 +238,11 @@ form.eviction_form fieldset {
     border-radius: 1em;
 }
 
+#terms_of_agreement_error_msg {
+    color:red;
+    margin-left: 17%;
+}
+
 /* Start by setting display:none to make this hidden.
    Then we position it in relation to the viewport window
    with position:fixed. Width, height, top and left speak
