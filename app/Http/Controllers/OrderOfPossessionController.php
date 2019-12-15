@@ -287,7 +287,7 @@ class OrderOfPossessionController extends Controller
                 $signature->save();
 
                 try {
-                    Stripe::setApiKey('sk_test_MnFhi1rY4EF5NDsAWyURCRND');
+                    Stripe::setApiKey(env('STRIPE_SECRET_KEY'));
 
                     $token = $_POST['stripeToken'];
                     \Stripe\Charge::create([

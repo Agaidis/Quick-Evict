@@ -8,14 +8,14 @@ if (document.location.href.split('/')[3] === 'new-file') {
         signaturePad.clear();
     });
 // Create a Stripe client.
-    var stripe = Stripe('pk_test_FTcQeimeSasisJpDTYgHEMTh');
+    let stripe = Stripe('pk_live_FProm7L9gLEjNsFLawYCp32x');
 
 // Create an instance of Elements.
-    var elements = stripe.elements();
+    let elements = stripe.elements();
 
 // Custom styling can be passed to options when creating an Element.
 // (Note that this demo uses a wider set of styles than the guide below.)
-    var style = {
+    let style = {
         base: {
             color: '#32325d',
             fontFamily: '"Helvetica Neue", Helvetica, sans-serif',
@@ -32,14 +32,14 @@ if (document.location.href.split('/')[3] === 'new-file') {
     };
 
 // Create an instance of the card Element.
-    var card = elements.create('card', {style: style});
+    let card = elements.create('card', {style: style});
 
 // Add an instance of the card Element into the `card-element` <div>.
     card.mount('#card-element');
 
 // Handle real-time validation errors from the card Element.
     card.addEventListener('change', function (event) {
-        var displayError = document.getElementById('card-errors');
+        let displayError = document.getElementById('card-errors');
         if (event.error) {
             displayError.textContent = event.error.message;
         } else {
