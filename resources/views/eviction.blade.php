@@ -317,7 +317,7 @@
                                                     <div class="form-row">
                                                         <label for="card-element">
                                                             <span class="credit_debit">Credit or debit card</span>
-                                                            <img style="margin-left:70px;" alt="Credit Card Logos" title="Credit Card Logos" src="http://www.credit-card-logos.com/images/multiple_credit-card-logos-1/credit_card_logos_10.gif" width="236" height="30" border="0" />
+                                                            <img style="margin-left:70px;" alt="Credit Card Logos" title="Credit Card Logos" src="https://www.credit-card-logos.com/images/multiple_credit-card-logos-1/credit_card_logos_10.gif" width="236" height="30" border="0" />
                                                         </label>
                                                         <div id="card-element">
                                                             <!-- A Stripe Element will be inserted here. -->

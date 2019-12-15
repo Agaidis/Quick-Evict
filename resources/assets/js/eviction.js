@@ -1,6 +1,6 @@
 if (document.location.href.split('/')[3] === 'new-file') {
     $(document).ready(function () {
-
+console.log('im in eviction.js');
 
         $('[data-toggle="tooltip"]').tooltip();
 

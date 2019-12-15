@@ -42742,6 +42742,7 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
 
 if (document.location.href.split('/')[3] === 'new-file') {
   $(document).ready(function () {
+    console.log('im in eviction.js');
     $('[data-toggle="tooltip"]').tooltip();
     var text_max = 500;
     $('#textarea_feedback').html(text_max + ' characters remaining');
