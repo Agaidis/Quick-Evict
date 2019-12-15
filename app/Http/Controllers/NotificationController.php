@@ -54,12 +54,12 @@ class NotificationController extends Controller
             $judgeEmail = $this->getJudgeEmail();
             $subject = 'CourtZip File Creation';
             $message = 'Hello,<br>
-This email is just a notice that a filing was just submitted via CourtZip for your court.<br>
-Please log-in to CourtZip.com, click Dashboard, and you\'ll see the latest filing at the top of the screen.<br>
-To print it out, click the blue download button, which will download the filing on your computer.  Then you can print it out and complete the filing using the CourtZip card.<br>  
-If you forgot your password, please click "Forgot your password"<br>
-If you have any questions or issues, please call CourtZip customer service at 717-413-6976.<br><br>
-Thank you,<br>
+This email is just a notice that a filing was just submitted via CourtZip for your court.
+Please log-in to CourtZip.com, click Dashboard, and you\'ll see the latest filing at the top of the screen.
+To print it out, click the blue download button, which will download the filing on your computer.  Then you can print it out and complete the filing using the CourtZip card.  
+If you forgot your password, please click "Forgot your password"
+If you have any questions or issues, please call CourtZip customer service at 717-413-6976.
+Thank you,
 CourtZip Customer Service Team';
 
             $this->mailer->sendMail($judgeEmail,  $subject, $message);
