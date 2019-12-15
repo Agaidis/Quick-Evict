@@ -17,6 +17,13 @@ console.log('im in eviction.js');
         $('.use_signature').on('click', function() {
             $('.payment_section').css('display', 'initial');
             $('.pay_submit_section').css('display', 'initial');
+
+            if ($('#legal_checkbox').is(':checked') === false) {
+                $('#legal_checkbox_container').text('You must accept to the terms of agreement. Check the box above.');
+            } else {
+                $('#legal_checkbox_container').text('');
+            }
+
         });
 
         $('#legal_checkbox').on('change', function() {
