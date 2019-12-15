@@ -42753,9 +42753,9 @@ if (document.location.href.split('/')[3] === 'new-file') {
     });
     $('.use_signature').on('click', function (e) {
       if ($('#legal_checkbox').is(':checked') === false) {
-        $('#legal_checkbox_container').text('You must accept to the terms of agreement. Check the box above.');
+        $('#terms_of_agreement_error_msg').text('You must accept to the terms of agreement. Check the box above.');
       } else {
-        $('#legal_checkbox_container').text('');
+        $('#terms_of_agreement_error_msg').text('');
         $('.payment_section').css('display', 'initial');
         $('.pay_submit_section').css('display', 'initial');
       }
