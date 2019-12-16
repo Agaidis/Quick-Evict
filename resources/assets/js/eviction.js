@@ -386,6 +386,7 @@ if (document.location.href.split('/')[3] === 'new-file') {
                     $('#filing_fee_display').text(data);
                     let total = 16.99 + parseFloat(data);
                     $('#total').text(total.toFixed(2));
+                    $('#total_input').val(total.toFixed(2));
 
                 },
                 error : function(data)

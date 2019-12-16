@@ -272,12 +272,19 @@ class CivilComplaintController extends Controller
 
             try {
                 if (strpos(Auth::user()->email, 'slatehousegroup') === false) {
-                    Stripe::setApiKey(env('STRIPE_SECRET_TEST_KEY'));
-                } else {
                     Stripe::setApiKey(env('STRIPE_SECRET_KEY'));
+                } else {
+                    Stripe::setApiKey(env('STRIPE_SECRET_TEST_KEY'));
                 }
 
                 $token = $_POST['stripeToken'];
+
+                if (isset($_POST['total'])) {
+                    $errorMsg = new ErrorLog();
+                    $errorMsg->payload = $_POST['total'];
+
+                    $errorMsg->save();
+                }
                 \Stripe\Charge::create([
                     'amount' => 100,
                     'currency' => 'usd',
