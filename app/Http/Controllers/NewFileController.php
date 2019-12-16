@@ -52,23 +52,22 @@ class NewFileController extends Controller
                     'userId' => Auth::user()->role,
                     'userEmail' => Auth::user()->email
                 ]);
+                $userEmail = Auth::user()->email;
 
                 if ($request->fileType == 'ltc') {
-                    return view('eviction', compact('map', 'fileType'));
+                    return view('eviction', compact('map', 'fileType', 'userEmail'));
                 } else if ($request->fileType == 'oop') {
-                    return view('orderOfPossession', compact('map', 'fileType'));
+                    return view('orderOfPossession', compact('map', 'fileType', 'userEmail'));
                 } else if ($request->fileType == 'civil') {
-                    return view('civilComplaint', compact('map', 'fileType'));
+                    return view('civilComplaint', compact('map', 'fileType', 'userEmail'));
                 } else {
                     return view('dashboard');
                 }
             } catch (Exception $e) {
-                $errorDetails = 'NewFileController - error in proceedToFileTypeWithSelectedCounty() method when attempting to navigate user';
-                $errorDetails .= PHP_EOL . 'File: ' . $e->getFile();
-                $errorDetails .= PHP_EOL . 'Line #' . $e->getLine();
-                $errorDetails .= PHP_EOL . 'Message ' . $e->getMessage();
-                Log::error($errorDetails . PHP_EOL . 'Error Message: ' . $e->getMessage() . PHP_EOL . 'Trace: ' . $e->getTraceAsString());
-                mail('andrew.gaidis@gmail.com', 'Proceeding to File Type', $errorDetails);
+                $errorMsg = new ErrorLog();
+                $errorMsg->payload = $e->getMessage() . ' Line #: ' . $e->getLine();
+
+                $errorMsg->save();
                 return 'failure';
             }
         }

@@ -1,6 +1,5 @@
 if (document.location.href.split('/')[3] === 'new-file') {
     $(document).ready(function () {
-console.log('im in eviction.js');
 
         $('[data-toggle="tooltip"]').tooltip();
 
@@ -26,13 +25,6 @@ console.log('im in eviction.js');
 
         $('#preview_document').on('click', function() {
             $('#rented_by_val').val($('input[name=rented_by]:checked').val());
-        });
-
-        //Save and use Signature
-        $('.pay_sign_submit').on('click', function(e) {
-
-
-
         });
 
         $('#filing_date').val(new Date());
@@ -405,8 +397,5 @@ console.log('im in eviction.js');
                 },
             });
         });
-
     });
-
-
 }

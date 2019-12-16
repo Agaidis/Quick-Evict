@@ -195,6 +195,7 @@
                                         <input type="hidden" id="street_name" name="streetName"/>
                                         <input type="hidden" id="town" name="town"/>
                                         <input type="hidden" id="court_number" name="court_number"/>
+                                        <input type="hidden" id="user_email" name="user_email" value="{{$userEmail}}"/>
                                     </div>
                                 </form>
 

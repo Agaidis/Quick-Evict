@@ -42742,7 +42742,6 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
 
 if (document.location.href.split('/')[3] === 'new-file') {
   $(document).ready(function () {
-    console.log('im in eviction.js');
     $('[data-toggle="tooltip"]').tooltip();
     var text_max = 500;
     $('#textarea_feedback').html(text_max + ' characters remaining');
@@ -42762,9 +42761,7 @@ if (document.location.href.split('/')[3] === 'new-file') {
     });
     $('#preview_document').on('click', function () {
       $('#rented_by_val').val($('input[name=rented_by]:checked').val());
-    }); //Save and use Signature
-
-    $('.pay_sign_submit').on('click', function (e) {});
+    });
     $('#filing_date').val(new Date());
     $('#landlord').prop('hidden', true);
     var map;
@@ -49468,18 +49465,17 @@ function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterat
 if (document.location.href.split('/')[3] === 'new-file') {
   var canvas = document.querySelector("canvas");
   var signaturePad = new SignaturePad(canvas, {});
-  var isSlateHouse = QuickEvict.userEmail;
-  console.log(isSlateHouse); //Clear button to remove signature drawing
+  var isSlateHouse = $('#user_email').val(); //Clear button to remove signature drawing
 
   $('.clear_signature').on('click', function () {
     // Clears the canvas
     signaturePad.clear();
   }); // Create a Stripe client.
 
-  if (isSlateHouse) {
-    var _stripe = Stripe('pk_test_FTcQeimeSasisJpDTYgHEMTh');
+  if (isSlateHouse.indexOf('slatehousegroup') === -1) {
+    stripe = Stripe('pk_test_FTcQeimeSasisJpDTYgHEMTh');
   } else {
-    var _stripe2 = Stripe('pk_live_FProm7L9gLEjNsFLawYCp32x');
+    stripe = Stripe('pk_live_FProm7L9gLEjNsFLawYCp32x');
   } // Create an instance of Elements.
 
 
