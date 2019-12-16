@@ -19,6 +19,7 @@
                             <table class="table table-hover table-bordered eviction_table" style="width:1475px;" id="eviction_table">
                                 <thead>
                                 <tr>
+                                    <th class="text-center">Id</th>
                                     <th>Download Status</th>
                                     <th class="text-center">Property Address</th>
                                     <th class="text-center" style="width:80px;">Owner</th>
@@ -52,6 +53,7 @@
                                             'Case Withdrawn',
                                             'Locked Out Tenant');?>
                                     <tr>
+                                        <td class="text-center">{{$eviction->id}}</td>
                                         <td class="text-center">
                                             @if ($eviction->is_downloaded == 0)
                                                 No
