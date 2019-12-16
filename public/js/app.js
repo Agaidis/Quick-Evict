@@ -49473,10 +49473,13 @@ if (document.location.href.split('/')[3] === 'new-file') {
   }); // Create a Stripe client.
 
   console.log(isSlateHouse);
+  console.log(isSlateHouse.indexOf('slatehousegroup'));
 
   if (isSlateHouse.indexOf('slatehousegroup') === -1) {
+    console.log('im in live');
     stripe = Stripe('pk_live_FProm7L9gLEjNsFLawYCp32x');
   } else {
+    console.log('im in test');
     stripe = Stripe('pk_test_FTcQeimeSasisJpDTYgHEMTh');
   } // Create an instance of Elements.
 
