@@ -145,7 +145,7 @@ class OrderOfPossessionController extends Controller
 
             $errorMsg->save();
 
-            $mailer->sendMail('andrew.gaidis@gmail.com', 'OOP Preview Error', $e->getMessage() );
+            $mailer->sendMail('andrew.gaidis@gmail.com', 'OOP Preview Error', $e->getMessage(),  $e->getMessage() );
         }
     }
 
@@ -311,7 +311,7 @@ class OrderOfPossessionController extends Controller
                     $errorMsg->payload = $e->getMessage() . ' Line #: ' . $e->getLine();
 
                     $errorMsg->save();
-                    $mailer->sendMail('andrew.gaidis@gmail.com', 'OOP Error', $e->getMessage() );
+                    $mailer->sendMail('andrew.gaidis@gmail.com', 'OOP Error', $e->getMessage(),  $e->getMessage() );
                 }
 
                 $notify = new NotificationController($courtNumber, Auth::user()->email);
@@ -328,14 +328,14 @@ class OrderOfPossessionController extends Controller
                 $errorMsg->payload = $e->getMessage() . ' Line #: ' . $e->getLine();
 
                 $errorMsg->save();
-                $mailer->sendMail('andrew.gaidis@gmail.com', 'OOP Error', $e->getMessage() );
+                $mailer->sendMail('andrew.gaidis@gmail.com', 'OOP Error', $e->getMessage(),  $e->getMessage() );
             }
         } catch ( Exception $e ) {
             $errorMsg = new ErrorLog();
             $errorMsg->payload = $e->getMessage() . ' Line #: ' . $e->getLine();
 
             $errorMsg->save();
-            $mailer->sendMail('andrew.gaidis@gmail.com', 'OOP Error', $e->getMessage() );
+            $mailer->sendMail('andrew.gaidis@gmail.com', 'OOP Error', $e->getMessage(),  $e->getMessage() );
             return redirect('dashboard')->with('status','Your OOP has been successfully made! You can see its progress in the table below.');
         }
     }

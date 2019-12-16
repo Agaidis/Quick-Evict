@@ -141,7 +141,7 @@ class CivilComplaintController extends Controller
 
             $errorMsg->save();
 
-            $mailer->sendMail('andrew.gaidis@gmail.com', 'Civil Preview Error', $e->getMessage() );
+            $mailer->sendMail('andrew.gaidis@gmail.com', 'Civil Preview Error', $e->getMessage(),  $e->getMessage() );
         }
 
     }
@@ -296,7 +296,7 @@ class CivilComplaintController extends Controller
                 $errorMsg->payload = $e->getMessage() . ' Line #: ' . $e->getLine();
 
                 $errorMsg->save();
-                $mailer->sendMail('andrew.gaidis@gmail.com', 'OOP Error', $e->getMessage() );
+                $mailer->sendMail('andrew.gaidis@gmail.com', 'OOP Error', $e->getMessage(),  $e->getMessage() );
             }
 
             $notify = new NotificationController($courtNumber, Auth::user()->email);

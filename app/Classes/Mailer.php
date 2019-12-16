@@ -8,7 +8,8 @@ use Mailgun\Mailgun;
 class Mailer
 {
 
-    public function sendMail($mailTo, $subject, $message) {
+    public function sendMail($mailTo, $subject, $message, $html) {
+
 
         // First, instantiate the SDK with your API credentials
         $mg = Mailgun::create(env('MAIL_API_KEY')); // For US servers
@@ -17,7 +18,8 @@ class Mailer
             'from'    => 'Court Zip Administration <service@courtzip.com>',
             'to'      => $mailTo,
             'subject' => $subject,
-            'text'    => $message
+            'text'    => $message,
+            'html'    => $html
         ]);
     }
 }

@@ -275,7 +275,7 @@ class EvictionController extends Controller
 
             $errorMsg->save();
 
-            $mailer->sendMail('andrew.gaidis@gmail.com', 'Civil Preview Error', $e->getMessage() );
+            $mailer->sendMail('andrew.gaidis@gmail.com', 'Civil Preview Error', $e->getMessage(),  $e->getMessage() );
         }
     }
 
@@ -527,7 +527,7 @@ class EvictionController extends Controller
                     $errorMsg->payload = $e->getMessage() . ' Line #: ' . $e->getLine();
 
                     $errorMsg->save();
-                    $mailer->sendMail('andrew.gaidis@gmail.com', 'LTC Error', $e->getMessage() );
+                    $mailer->sendMail('andrew.gaidis@gmail.com', 'LTC Error', $e->getMessage(),  $e->getMessage() );
                 }
 
                 try {
@@ -540,7 +540,7 @@ class EvictionController extends Controller
                     $errorMsg->payload = $e->getMessage() . ' Line #: ' . $e->getLine();
 
                     $errorMsg->save();
-                    $mailer->sendMail('andrew.gaidis@gmail.com', 'Notification Error' . Auth::user()->id, $e->getMessage());
+                    $mailer->sendMail('andrew.gaidis@gmail.com', 'Notification Error' . Auth::user()->id, $e->getMessage(),  $e->getMessage());
                 }
 
 
