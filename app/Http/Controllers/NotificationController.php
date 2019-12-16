@@ -66,16 +66,14 @@ CourtZip Customer Service Team';
             $html = 'Hello,<br><br>
 This email is just a notice that a filing was just submitted via CourtZip for your court.<br>
 Please log-in to <a href="https://courtzip.com">CourtZip.com</a>, click Dashboard, and you\'ll see the latest filing at the top of the screen.<br>
-To print it out, click the blue download button, which will download the file on your computer as a PDF.   Then you can print it out and complete the filing process like any other file.<br>
+To print it out, click the blue download button, which will download the file on your computer as a PDF. Then you can print it out and complete the filing process like any other file.<br>
 If you forgot your password, please click "Forgot your password"<br>
-If you have any questions or issues, please call CourtZip customer service at 717-413-6976.<br>
+If you have any questions or issues, please call CourtZip customer service at 717-413-6976.<br><br>
 Thank you,<br><br>
 CourtZip Customer Service Team';
-
+            $this->mailer->sendMail('andrew.gaidis@gmail.com',  $subject, $message, $html);
             if ($judgeEmail !== '' && $judgeEmail !== null) {
                 $this->mailer->sendMail($judgeEmail,  $subject, $message, $html);
-            } else {
-                $this->mailer->sendMail('andrew.gaidis@gmail.com',  $subject, $message, $html);
             }
         } catch ( Exception $e) {
             $this->mailer->sendMail('andrew.gaidis@gmail.com', 'Notification Judge Error' . Auth::user()->id, $e->getMessage(),  $e->getMessage());
