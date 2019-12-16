@@ -9,6 +9,7 @@ if (document.location.href.split('/')[3] === 'new-file') {
         signaturePad.clear();
     });
 // Create a Stripe client.
+    console.log(isSlateHouse);
 
     if (isSlateHouse.indexOf('slatehousegroup') === -1) {
         stripe = Stripe('pk_live_FProm7L9gLEjNsFLawYCp32x');
