@@ -11,9 +11,9 @@ if (document.location.href.split('/')[3] === 'new-file') {
 // Create a Stripe client.
 
     if (isSlateHouse.indexOf('slatehousegroup') === -1) {
-         stripe = Stripe('pk_test_FTcQeimeSasisJpDTYgHEMTh');
+        stripe = Stripe('pk_live_FProm7L9gLEjNsFLawYCp32x');
     } else {
-         stripe = Stripe('pk_live_FProm7L9gLEjNsFLawYCp32x');
+        stripe = Stripe('pk_test_FTcQeimeSasisJpDTYgHEMTh');
     }
 
 
