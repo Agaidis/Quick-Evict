@@ -49467,14 +49467,21 @@ function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterat
 
 if (document.location.href.split('/')[3] === 'new-file') {
   var canvas = document.querySelector("canvas");
-  var signaturePad = new SignaturePad(canvas, {}); //Clear button to remove signature drawing
+  var signaturePad = new SignaturePad(canvas, {});
+  var isSlateHouse = QuickEvict.userEmail;
+  console.log(isSlateHouse); //Clear button to remove signature drawing
 
   $('.clear_signature').on('click', function () {
     // Clears the canvas
     signaturePad.clear();
   }); // Create a Stripe client.
 
-  var stripe = Stripe('pk_live_FProm7L9gLEjNsFLawYCp32x'); // Create an instance of Elements.
+  if (isSlateHouse) {
+    var _stripe = Stripe('pk_test_FTcQeimeSasisJpDTYgHEMTh');
+  } else {
+    var _stripe2 = Stripe('pk_live_FProm7L9gLEjNsFLawYCp32x');
+  } // Create an instance of Elements.
+
 
   var elements = stripe.elements(); // Custom styling can be passed to options when creating an Element.
   // (Note that this demo uses a wider set of styles than the guide below.)

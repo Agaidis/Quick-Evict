@@ -1,6 +1,8 @@
 if (document.location.href.split('/')[3] === 'new-file') {
     let canvas = document.querySelector("canvas");
     let signaturePad = new SignaturePad(canvas, {});
+    let isSlateHouse = QuickEvict.userEmail;
+    console.log(isSlateHouse);
 
 //Clear button to remove signature drawing
     $('.clear_signature').on('click', function () {
@@ -8,7 +10,13 @@ if (document.location.href.split('/')[3] === 'new-file') {
         signaturePad.clear();
     });
 // Create a Stripe client.
-    let stripe = Stripe('pk_live_FProm7L9gLEjNsFLawYCp32x');
+
+    if (isSlateHouse) {
+        let stripe = Stripe('pk_test_FTcQeimeSasisJpDTYgHEMTh');
+    } else {
+        let stripe = Stripe('pk_live_FProm7L9gLEjNsFLawYCp32x');
+    }
+
 
 // Create an instance of Elements.
     let elements = stripe.elements();

@@ -287,12 +287,11 @@ class OrderOfPossessionController extends Controller
                 $signature->save();
 
                 try {
-                    Stripe::setApiKey(env('STRIPE_SECRET_KEY'));
-                    $errorMsg = new ErrorLog();
-                    $errorMsg->payload = $_POST['stripeToken'];
-
-                    $errorMsg->save();
-
+                    if (strpos(Auth::user()->email, 'slatehousegroup') === false) {
+                        Stripe::setApiKey(env('STRIPE_SECRET_TEST_KEY'));
+                    } else {
+                        Stripe::setApiKey(env('STRIPE_SECRET_KEY'));
+                    }
                     $token = $_POST['stripeToken'];
                     \Stripe\Charge::create([
                         'amount' => 100,
