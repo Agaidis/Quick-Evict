@@ -56,7 +56,7 @@ class NotificationController extends Controller
             $message = 'Hello,
 This email is just a notice that a filing was just submitted via CourtZip for your court.
 Please log-in to CourtZip.com, click Dashboard, and you\'ll see the latest filing at the top of the screen.
-To print it out, click the blue download button, which will download the filing on your computer.  Then you can print it out and complete the filing using the CourtZip card.  
+To print it out, click the blue download button, which will download the file on your computer as a PDF.   Then you can print it out and complete the filing process like any other file.
 If you forgot your password, please click "Forgot your password"
 If you have any questions or issues, please call CourtZip customer service at 717-413-6976.
 Thank you,
