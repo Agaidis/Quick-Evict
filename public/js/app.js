@@ -42813,7 +42813,6 @@ if (document.location.href.split('/')[3] === 'new-file') {
       magId = 'magistrate_' + value.magistrate_id;
       var geoPoints = value.geo_locations.replace(/\s/g, '').replace(/},/g, '},dd').split(',dd');
       var obj = [];
-      console.log(magId);
 
       for (var i in geoPoints) {
         obj.push(JSON.parse(geoPoints[i]));
@@ -43077,8 +43076,6 @@ if (document.location.href.split('/')[3] === 'new-file') {
     var totalJudgment = '';
     var deliveryType = '';
     $('#finalize_document').on('click', function () {
-      console.log($('#file_type').val());
-
       if ($('#file_type').val() === 'civil') {
         totalJudgment = $('#total_judgment').val();
         deliveryType = $("input[name=delivery_type]:checked").val();
@@ -43108,9 +43105,7 @@ if (document.location.href.split('/')[3] === 'new-file') {
           var total = 16.99 + parseFloat(data);
           $('#total').text(total.toFixed(2));
         },
-        error: function error(data) {
-          console.log(data);
-        }
+        error: function error(data) {}
       });
     });
   });
@@ -49472,14 +49467,9 @@ if (document.location.href.split('/')[3] === 'new-file') {
     signaturePad.clear();
   }); // Create a Stripe client.
 
-  console.log(isSlateHouse);
-  console.log(isSlateHouse.indexOf('slatehousegroup'));
-
   if (isSlateHouse.indexOf('slatehousegroup') === -1) {
-    console.log('im in live');
     stripe = Stripe('pk_live_FProm7L9gLEjNsFLawYCp32x');
   } else {
-    console.log('im in test');
     stripe = Stripe('pk_test_FTcQeimeSasisJpDTYgHEMTh');
   } // Create an instance of Elements.
 
