@@ -53,7 +53,7 @@ class NotificationController extends Controller
         try {
             $judgeEmail = $this->getJudgeEmail();
             $subject = 'CourtZip File Creation';
-            $message = 'Hello,<br>
+            $message = 'Hello,
 This email is just a notice that a filing was just submitted via CourtZip for your court.
 Please log-in to CourtZip.com, click Dashboard, and you\'ll see the latest filing at the top of the screen.
 To print it out, click the blue download button, which will download the filing on your computer.  Then you can print it out and complete the filing using the CourtZip card.  
@@ -62,7 +62,11 @@ If you have any questions or issues, please call CourtZip customer service at 71
 Thank you,
 CourtZip Customer Service Team';
 
-            $this->mailer->sendMail($judgeEmail,  $subject, $message);
+            if ($judgeEmail !== '' && $judgeEmail !== null) {
+                $this->mailer->sendMail($judgeEmail,  $subject, $message);
+            } else {
+                $this->mailer->sendMail('andrew.gaidis@gmail.com',  $subject, $message);
+            }
         } catch ( Exception $e) {
             $this->mailer->sendMail('andrew.gaidis@gmail.com', 'Notification Judge Error' . Auth::user()->id, $e->getMessage() );
         }
