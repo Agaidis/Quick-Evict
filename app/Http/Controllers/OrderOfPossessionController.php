@@ -292,7 +292,7 @@ class OrderOfPossessionController extends Controller
                         $amount = $filingFee + 16.99;
                     } else {
                         Stripe::setApiKey(env('STRIPE_SECRET_TEST_KEY'));
-                        $amount = 100;
+                        $amount = $filingFee + 16.99;
                     }
                     $stringAmt = strval($amount);
 
