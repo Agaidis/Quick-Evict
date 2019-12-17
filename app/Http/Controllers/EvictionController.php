@@ -519,7 +519,7 @@ class EvictionController extends Controller
                         $errorMsg->save();
                     }
                     \Stripe\Charge::create([
-                        'amount' => $amount,
+                        'amount' => number_format($amount),
                         'currency' => 'usd',
                         'description' => 'CourtZip',
                         'source' => $token,
