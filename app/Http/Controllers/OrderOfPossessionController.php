@@ -302,14 +302,13 @@ class OrderOfPossessionController extends Controller
 
                     $token = $_POST['stripeToken'];
 
+                    $errorMsg = new ErrorLog();
+                    $errorMsg->payload = $integerAmt;
 
-                        $errorMsg = new ErrorLog();
-                        $errorMsg->payload = $integerAmt;
-
-                        $errorMsg->save();
+                    $errorMsg->save();
 
                     \Stripe\Charge::create([
-                        'amount' => $amount,
+                        'amount' => $integerAmt,
                         'currency' => 'usd',
                         'description' => 'CourtZip',
                         'source' => $token,
