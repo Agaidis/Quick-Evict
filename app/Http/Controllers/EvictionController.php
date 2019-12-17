@@ -517,12 +517,12 @@ class EvictionController extends Controller
 
                     $token = $_POST['stripeToken'];
 
-                    if (isset($_POST['total'])) {
-                        $errorMsg = new ErrorLog();
-                        $errorMsg->payload = $_POST['total'];
 
-                        $errorMsg->save();
-                    }
+                    $errorMsg = new ErrorLog();
+                    $errorMsg->payload = $integerAmt;
+
+                    $errorMsg->save();
+
                     \Stripe\Charge::create([
                         'amount' => $integerAmt,
                         'currency' => 'usd',
