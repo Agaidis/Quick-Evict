@@ -295,16 +295,13 @@ class OrderOfPossessionController extends Controller
 
                         $errorMsg->save();
                     } else {
-                        $errorMsg = new ErrorLog();
-                        $errorMsg->payload = 'in the test';
 
-                        $errorMsg->save();
                         Stripe::setApiKey(env('STRIPE_SECRET_TEST_KEY'));
                         $amount = $filingFee + 16.99;
                     }
                     $stringAmt = strval($amount);
 
-                    str_replace('.', '', $stringAmt);
+                    $stringAmt = str_replace('.', '', $stringAmt);
 
                     $integerAmt = intval($stringAmt);
 
