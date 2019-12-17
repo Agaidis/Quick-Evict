@@ -289,8 +289,10 @@ class OrderOfPossessionController extends Controller
                 try {
                     if (strpos(Auth::user()->email, 'slatehousegroup') === false) {
                         Stripe::setApiKey(env('STRIPE_SECRET_KEY'));
+                        $amount = $filingFee + 16.99;
                     } else {
                         Stripe::setApiKey(env('STRIPE_SECRET_TEST_KEY'));
+                        $amount = 100;
                     }
                     $token = $_POST['stripeToken'];
 
@@ -301,7 +303,7 @@ class OrderOfPossessionController extends Controller
                         $errorMsg->save();
                     }
                     \Stripe\Charge::create([
-                        'amount' => 100,
+                        'amount' => $amount,
                         'currency' => 'usd',
                         'description' => 'CourtZip',
                         'source' => $token,
