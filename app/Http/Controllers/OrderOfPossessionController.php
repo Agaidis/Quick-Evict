@@ -290,7 +290,15 @@ class OrderOfPossessionController extends Controller
                     if (strpos(Auth::user()->email, 'slatehousegroup') === false) {
                         Stripe::setApiKey(env('STRIPE_SECRET_KEY'));
                         $amount = $filingFee + 16.99;
+                        $errorMsg = new ErrorLog();
+                        $errorMsg->payload = 'in the live';
+
+                        $errorMsg->save();
                     } else {
+                        $errorMsg = new ErrorLog();
+                        $errorMsg->payload = 'in the test';
+
+                        $errorMsg->save();
                         Stripe::setApiKey(env('STRIPE_SECRET_TEST_KEY'));
                         $amount = $filingFee + 16.99;
                     }
