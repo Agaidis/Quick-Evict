@@ -509,6 +509,11 @@ class EvictionController extends Controller
                         Stripe::setApiKey(env('STRIPE_SECRET_TEST_KEY'));
                         $amount = 100;
                     }
+                    $stringAmt = strval($amount);
+
+                    str_replace('.', '', $stringAmt);
+
+                    $integerAmt = intval($stringAmt);
 
                     $token = $_POST['stripeToken'];
 
@@ -519,7 +524,7 @@ class EvictionController extends Controller
                         $errorMsg->save();
                     }
                     \Stripe\Charge::create([
-                        'amount' => number_format($amount),
+                        'amount' => $integerAmt,
                         'currency' => 'usd',
                         'description' => 'CourtZip',
                         'source' => $token,
