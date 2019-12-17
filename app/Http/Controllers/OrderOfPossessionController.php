@@ -287,30 +287,18 @@ class OrderOfPossessionController extends Controller
                 $signature->save();
 
                 try {
+                    $token = $_POST['stripeToken'];
+
                     if (strpos(Auth::user()->email, 'slatehousegroup') === false) {
                         Stripe::setApiKey(env('STRIPE_SECRET_KEY'));
                         $amount = $filingFee + 16.99;
-                        $errorMsg = new ErrorLog();
-                        $errorMsg->payload = 'in the live';
-
-                        $errorMsg->save();
                     } else {
-
                         Stripe::setApiKey(env('STRIPE_SECRET_TEST_KEY'));
                         $amount = $filingFee + 16.99;
                     }
                     $stringAmt = strval($amount);
-
                     $stringAmt = str_replace('.', '', $stringAmt);
-
                     $integerAmt = intval($stringAmt);
-
-                    $token = $_POST['stripeToken'];
-
-                    $errorMsg = new ErrorLog();
-                    $errorMsg->payload = $integerAmt;
-
-                    $errorMsg->save();
 
                     \Stripe\Charge::create([
                         'amount' => $integerAmt,
