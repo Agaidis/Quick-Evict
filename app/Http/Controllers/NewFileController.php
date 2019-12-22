@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\CivilUnique;
+use App\ErrorLog;
 use App\GeoLocation;
 use Illuminate\Http\Request;
 use App\CourtDetails;
@@ -50,23 +52,22 @@ class NewFileController extends Controller
                     'userId' => Auth::user()->role,
                     'userEmail' => Auth::user()->email
                 ]);
+                $userEmail = Auth::user()->email;
 
                 if ($request->fileType == 'ltc') {
-                    return view('eviction', compact('map', 'fileType'));
+                    return view('eviction', compact('map', 'fileType', 'userEmail'));
                 } else if ($request->fileType == 'oop') {
-                    return view('orderOfPossession', compact('map', 'fileType'));
+                    return view('orderOfPossession', compact('map', 'fileType', 'userEmail'));
                 } else if ($request->fileType == 'civil') {
-                    return view('civilComplaint', compact('map', 'fileType'));
+                    return view('civilComplaint', compact('map', 'fileType', 'userEmail'));
                 } else {
                     return view('dashboard');
                 }
             } catch (Exception $e) {
-                $errorDetails = 'NewFileController - error in proceedToFileTypeWithSelectedCounty() method when attempting to navigate user';
-                $errorDetails .= PHP_EOL . 'File: ' . $e->getFile();
-                $errorDetails .= PHP_EOL . 'Line #' . $e->getLine();
-                $errorDetails .= PHP_EOL . 'Message ' . $e->getMessage();
-                Log::error($errorDetails . PHP_EOL . 'Error Message: ' . $e->getMessage() . PHP_EOL . 'Trace: ' . $e->getTraceAsString());
-                mail('andrew.gaidis@gmail.com', 'Proceeding to File Type', $errorDetails);
+                $errorMsg = new ErrorLog();
+                $errorMsg->payload = $e->getMessage() . ' Line #: ' . $e->getLine();
+
+                $errorMsg->save();
                 return 'failure';
             }
         }
@@ -79,8 +80,9 @@ class NewFileController extends Controller
             $filingFee = '';
             $additionalTenantFee = 0;
             $additionalTenantAmt = 1;
-            $removeValues = ['$', ','];
+            $removeValues = [' ', '$', ','];
             $tenantNum = (int)$_GET['tenant_num'];
+            $courtDetails = CourtDetails::where('magistrate_id', $courtNumber[1])->first();
 
             if ($fileType == 'ltc') {
 
@@ -89,8 +91,6 @@ class NewFileController extends Controller
                 $dueRent = str_replace($removeValues, '', $_GET['due_rent']);
                 $unjustDamages = str_replace($removeValues, '', $_GET['unjust_damages']);
                 $damageAmt = str_replace($removeValues, '', $_GET['damage_amt']);
-
-                $courtDetails = CourtDetails::where('magistrate_id', $courtNumber[1])->first();
 
                 if ($tenantNum == 1) {
                     $upTo2000 = $courtDetails->one_defendant_up_to_2000;
@@ -141,20 +141,62 @@ class NewFileController extends Controller
                     $filingFee = CourtDetails::where('magistrate_id', $courtNumber[1])->value('three_defendant_out_of_pocket');
                 }
             } else if ($fileType === 'civil') {
-                if ($tenantNum == 1) {
-                    $filingFee = 0;
-                } else if ($tenantNum == 2) {
-                    $filingFee = 0;
-                } else if ((int)$tenantNum >= 3 ) {
-                    $filingFee = 0;
+                $totalJudgment = str_replace($removeValues,['', '', ''], $_GET['total_judgment']);
+                $civilDetails = CivilUnique::where('court_details_id', $courtDetails->id)->first();
+
+                if ($tenantNum > 1) {
+                    if ($_GET['delivery_type'] == 'mail') {
+                        if ($totalJudgment <= 500) {
+                            $filingFee = $civilDetails->under_500_2_def_mail;
+                        } else if ($totalJudgment > 500 && $totalJudgment <= 2000) {
+                            $filingFee = $civilDetails->btn_500_2000_2_def_mail;
+                        } else if ($totalJudgment > 2000 && $totalJudgment < 4001) {
+                            $filingFee = $civilDetails->btn_2000_4000_2_def_mail;
+                        } else if ($totalJudgment > 4000 && $totalJudgment < 12001) {
+                            $filingFee = $civilDetails->btn_4000_12000_2_def_mail;
+                        }
+                    } else if ($_GET['delivery_type'] == 'constable') {
+                        if ($totalJudgment <= 500) {
+                            $filingFee = $civilDetails->under_500_2_def_constable;
+                        } else if ($totalJudgment > 500 && $totalJudgment <= 2000) {
+                            $filingFee = $civilDetails->btn_500_2000_2_def_constable;
+                        } else if ($totalJudgment > 2000 && $totalJudgment < 4001) {
+                            $filingFee = $civilDetails->btn_2000_4000_2_def_constable;
+                        } else if ($totalJudgment > 4000 && $totalJudgment < 12001) {
+                            $filingFee = $civilDetails->btn_4000_12000_2_def_constable;
+                        }
+                    }
+                } else {
+                    if ($_GET['delivery_type'] == 'mail') {
+                        if ($totalJudgment <= 500) {
+                            $filingFee = $civilDetails->under_500_1_def_constable;
+                        } else if ($totalJudgment > 500 && $totalJudgment <= 2000) {
+                            $filingFee = $civilDetails->btn_500_2000_1_def_constable;
+                        } else if ($totalJudgment > 2000 && $totalJudgment < 4001) {
+                            $filingFee = $civilDetails->btn_2000_4000_1_def_constable;
+                        } else if ($totalJudgment > 4000 && $totalJudgment < 12001) {
+                            $filingFee = $civilDetails->btn_4000_12000_1_def_constable;
+                        }
+                    } else if ($_GET['delivery_type'] == 'constable') {
+                        if ($totalJudgment <= 500) {
+                            $filingFee = $civilDetails->under_500_1_def_constable;
+                        } else if ($totalJudgment > 500 && $totalJudgment <= 2000) {
+                            $filingFee = $civilDetails->btn_500_2000_1_def_constable;
+                        } else if ($totalJudgment > 2000 && $totalJudgment < 4001) {
+                            $filingFee = $civilDetails->btn_2000_4000_1_def_constable;
+                        } else if ($totalJudgment > 4000 && $totalJudgment < 12001) {
+                            $filingFee = $civilDetails->btn_4000_12000_1_def_constable;
+                        }
+                    }
                 }
             }
             return  $filingFee = number_format((float)$filingFee, 2, '.', '');
 
-
-
-
         } catch ( Exception $e ) {
+            $errorMsg = new ErrorLog();
+            $errorMsg->payload = $e->getMessage() . ' Line #: ' . $e->getLine();
+
+            $errorMsg->save();
             $errorDetails = 'NewFileController - error in getFilingFee() method when attempting to get filing fee';
             $errorDetails .= PHP_EOL . 'File: ' . $e->getFile();
             $errorDetails .= PHP_EOL . 'Line #' . $e->getLine();

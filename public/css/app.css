@@ -10967,7 +10967,7 @@ form.eviction_form fieldset {
 
 
 /* Eviction Containers  */
-.tenant_num_container {
+.tenant_num_container, .civil_delivery_type_container {
     border: 1px solid gainsboro;
     border-radius:2em;
     margin:3%;
@@ -11014,7 +11014,11 @@ form.eviction_form fieldset {
     display:flex;
 }
 
-#finalize_document, #step_1_btn {
+#preview_document {
+    margin-left:30px;
+    margin-top:1%;
+}
+#finalize_document, #step_1_btn, #preview_document {
     box-shadow: 3px 5px #888888;
     margin-top: 15px;
 }
@@ -11064,6 +11068,42 @@ form.eviction_form fieldset {
     margin-top:3%;
     border: 1px solid grey;
     border-radius: 1em;
+}
+
+#terms_of_agreement_error_msg {
+    color:red;
+    margin-left: 17%;
+}
+
+/* Start by setting display:none to make this hidden.
+   Then we position it in relation to the viewport window
+   with position:fixed. Width, height, top and left speak
+   for themselves. Background we set to 80% white with
+   our animation centered, and no-repeating */
+.sending-modal {
+    display:    none;
+    position:   fixed;
+    z-index:    1000;
+    top:        0;
+    left:       0;
+    height:     100%;
+    width:      100%;
+    background: rgba( 255, 255, 255, .8 )
+    url('https://i.stack.imgur.com/FhHRx.gif')
+    50% 50%
+    no-repeat;
+}
+
+/* When the body has the loading class, we turn
+   the scrollbar off with overflow:hidden */
+body.loading {
+    overflow: hidden;
+}
+
+/* Anytime the body has the loading class, our
+   modal element will be visible */
+body.loading .sending-modal {
+    display: block;
 }
 @font-face {
   font-family: 'Journal';

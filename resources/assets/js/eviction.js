@@ -2,67 +2,45 @@ if (document.location.href.split('/')[3] === 'new-file') {
     $(document).ready(function () {
 
         $('[data-toggle="tooltip"]').tooltip();
-        var canvas = document.querySelector("canvas");
-        var signaturePad = new SignaturePad(canvas, {
 
-        });
-
-        //Clear button to remove signature drawing
-        $('.clear_signature').on('click', function() {
-            // Clears the canvas
-            signaturePad.clear();
-        });
-        var text_max = 500;
+        let text_max = 500;
         $('#textarea_feedback').html(text_max + ' characters remaining');
 
         $('#claim_description').on('keyup', function () {
-            var text_length = $('#claim_description').val().length;
-            var text_remaining = text_max - text_length;
+            let text_length = $('#claim_description').val().length;
+            let text_remaining = text_max - text_length;
 
             $('#textarea_feedback').html(text_remaining + ' characters remaining');
         });
 
-        $('.use_signature').on('click', function() {
-            $('.payment_section').css('display', 'initial');
-            $('.pay_submit_section').css('display', 'initial');
-        });
-
-        $('#legal_checkbox').on('change', function() {
-            if ($('#legal_checkbox').is(':checked')) {
-                $('.use_signature').prop('disabled', false);
-                $('.pay_sign_submit').prop('disabled', false);
+        $('.use_signature').on('click', function(e) {
+            if ($('#legal_checkbox').is(':checked') === false) {
+                $('#terms_of_agreement_error_msg').text('You must accept to the terms of agreement. Check the box above.');
             } else {
-                $('.use_signature').prop('disabled', true);
-                $('.pay_sign_submit').prop('disabled', true);
+                $('#terms_of_agreement_error_msg').text('');
+                $('.payment_section').css('display', 'initial');
+                $('.pay_submit_section').css('display', 'initial');
             }
         });
 
-        //Save and use Signature
-        $('.pay_sign_submit').on('click', function() {
-            if ($('#legal_checkbox').is(':checked')) {
-                $('#rented_by_val').val($('input[name=rented_by]:checked').val());
-            } else {
-                alert('You need to check the Signature checkbox above to agree to the digital terms in order to continue.')
-            }
-
-            var dataURL = signaturePad.toDataURL(); // save image as PNG
-            $('#signature_source').val(dataURL);
+        $('#preview_document').on('click', function() {
+            $('#rented_by_val').val($('input[name=rented_by]:checked').val());
         });
 
         $('#filing_date').val(new Date());
         $('#landlord').prop('hidden', true);
 
-        var map;
-        var marker;
-        var bounds;
-        var houseNum;
-        var streetName;
-        var town;
-        var county;
-        var zipcode;
-        var state;
+        let map;
+        let marker;
+        let bounds;
+        let houseNum;
+        let streetName;
+        let town;
+        let county;
+        let zipcode;
+        let state;
 
-        var center = new google.maps.LatLng(40.149660, -76.306370);
+        let center = new google.maps.LatLng(40.149660, -76.306370);
         //Create the areas for magistrates
 
         map = new google.maps.Map(document.getElementById('map'), {
@@ -88,26 +66,24 @@ if (document.location.href.split('/')[3] === 'new-file') {
         });
 
 
-        var input = /** @type {!HTMLInputElement} */(
+        let input = /** @type {!HTMLInputElement} */(
             document.getElementById('pac-input'));
-        var types = document.getElementById('type-selector');
+        let types = document.getElementById('type-selector');
         map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
         map.controls[google.maps.ControlPosition.TOP_LEFT].push(types);
 
-        var autocomplete = new google.maps.places.Autocomplete(input);
-        var magArray = [];
-        var objArray = [];
-        var magNamesArray = [];
-        var count = 0;
+        let autocomplete = new google.maps.places.Autocomplete(input);
+        let magArray = [];
+        let objArray = [];
+        let magNamesArray = [];
+        let count = 0;
 
         $.each(quickEvict.geoData, function(key, value) {
             magId = 'magistrate_' + value.magistrate_id;
-            var geoPoints = value.geo_locations.replace(/\s/g, '').replace(/},/g, '},dd').split(',dd');
-            var obj = [];
+            let geoPoints = value.geo_locations.replace(/\s/g, '').replace(/},/g, '},dd').split(',dd');
+            let obj = [];
 
-            console.log(magId);
-
-            for (var i in geoPoints) {
+            for (let i in geoPoints) {
                 obj.push(JSON.parse(geoPoints[i]));
             }
             magNamesArray.push(magId);
@@ -141,7 +117,7 @@ if (document.location.href.split('/')[3] === 'new-file') {
 
             if (quickEvict.userId === 'Administrator') {
                 google.maps.event.addListener(magArray[count], 'mouseover', function (e) {
-                    var magistrateId = $(this)[0].areaName.split('magistrate_');
+                    let magistrateId = $(this)[0].areaName.split('magistrate_');
                     injectTooltip(e, magistrateId[1] + '<br>' + $(this)[0].county + '<br>' + $(this)[0].township);
                 });
 
@@ -157,7 +133,7 @@ if (document.location.href.split('/')[3] === 'new-file') {
         });
         autocomplete.addListener('place_changed', function () {
             marker.setMap(null);
-            var place = autocomplete.getPlace();
+            let place = autocomplete.getPlace();
             newBounds = bounds;
             if (!place.geometry) {
                 window.alert("Returned place contains no geometry");
@@ -194,8 +170,8 @@ if (document.location.href.split('/')[3] === 'new-file') {
             marker.setMap(map);
             newBounds.extend(place.geometry.location);
             map.fitBounds(newBounds);
-            var isFound = false;
-            for (var k = 0; k < magArray.length; k++) {
+            let isFound = false;
+            for (let k = 0; k < magArray.length; k++) {
                 if (google.maps.geometry.poly.containsLocation(place.geometry.location, magArray[k])) {
                     $('#court_number').val(magArray[k].areaName);
                     isFound = true;
@@ -277,15 +253,15 @@ if (document.location.href.split('/')[3] === 'new-file') {
 
 
         //create a global variable that will point to the tooltip in the DOM
-        var tipObj = null;
+        let tipObj = null;
 
 //offset along x and y in px
-        var offset = {
+        let offset = {
             x: 6,
             y: -300
         };
 
-        var coordPropName = null;
+        let coordPropName = null;
 
         function injectTooltip(event, data) {
             if (!tipObj && event) {
@@ -305,8 +281,8 @@ if (document.location.href.split('/')[3] === 'new-file') {
                 eventPropNames = Object.keys(event);
                 if(!coordPropName){
                     //discover the name of the prop with MouseEvent
-                    for(var i in eventPropNames){
-                        var name = eventPropNames[i];
+                    for(let i in eventPropNames){
+                        let name = eventPropNames[i];
                         if(event[name] instanceof MouseEvent){
                             coordPropName = name;
                             break;
@@ -351,18 +327,18 @@ if (document.location.href.split('/')[3] === 'new-file') {
         }
 
         $('#tenant_num_select').on('change', function() {
-            var tenantNum = $(this)[0].value;
-            var html = '';
+            let tenantNum = $(this)[0].value;
+            let html = '';
 
             $('#tenant_num').val(tenantNum);
 
-            for (var i = 1; i <= tenantNum; i++) {
-                var currentTenantObj = $('#tenant_name_' + i);
+            for (let i = 1; i <= tenantNum; i++) {
+                let currentTenantObj = $('#tenant_name_' + i);
 
                 if (currentTenantObj.length > 0) {
-                    html += '<label class="labels" for="tenant_name_'+ i +'" >Tenant Name '+ i +'</label><input class="form-control eviction_fields" placeholder="Tenant Name '+ i +'" type="text" id="tenant_name_'+ i +'" name="tenant_name[]" value="' + currentTenantObj.val() + '"/><br>';
+                    html += '<label class="labels" for="tenant_name_'+ i +'" >Name '+ i +'</label><input class="form-control eviction_fields" placeholder="Name '+ i +'" type="text" id="tenant_name_'+ i +'" name="tenant_name[]" value="' + currentTenantObj.val() + '"/><br>';
                 } else {
-                    html += '<label class="labels" for="tenant_name_'+ i +'" >Tenant Name '+ i +'</label><input class="form-control eviction_fields" placeholder="Tenant Name '+ i +'" type="text" id="tenant_name_'+ i +'" name="tenant_name[]" value=""/><br>';
+                    html += '<label class="labels" for="tenant_name_'+ i +'" >Name '+ i +'</label><input class="form-control eviction_fields" placeholder="Name '+ i +'" type="text" id="tenant_name_'+ i +'" name="tenant_name[]" value=""/><br>';
                 }
             }
 
@@ -376,37 +352,46 @@ if (document.location.href.split('/')[3] === 'new-file') {
                $('#breached_details').prop('disabled', true);
            }
         });
-    });
 
-    $('#finalize_document').on('click', function() {
-        $.ajax({
-            beforeSend: function (xhr) {
-                xhr.setRequestHeader('X-CSRF-TOKEN', $("#token").attr('content'));
-            },
-            url : '/new-file/get-court-fee',
-            type : 'GET',
-            data : {
-                'court_number' : $('#court_number').val(),
-                'tenant_num_select': $('#tenant_num_select').val(),
-                'fileType': $('#file_type').val(),
-                'additional_rent_amt': $('#additional_rent_amt').val(),
-                'attorney_fees': $('#attorney_fees').val(),
-                'due_rent': $('#due_rent').val(),
-                'unjust_damages': $('#unjust_damages').val(),
-                'damage_amt': $('#damage_amt').val(),
-                'tenant_num': $('#tenant_num').val()
+        let totalJudgment = '';
+        let deliveryType = '';
+        $('#finalize_document').on('click', function() {
 
-            },
-            success : function(data) {
-                $('#filing_fee_display').text(data);
-                let total = 16.99 + parseFloat(data);
-                $('#total').text(total.toFixed(2));
+            if ($('#file_type').val() === 'civil') {
+                totalJudgment = $('#total_judgment').val();
+                deliveryType = $("input[name=delivery_type]:checked").val()
+            }
 
-            },
-            error : function(data)
-            {
-                console.log(data);
-            },
+            $.ajax({
+                beforeSend: function (xhr) {
+                    xhr.setRequestHeader('X-CSRF-TOKEN', $("#token").attr('content'));
+                },
+                url : '/new-file/get-court-fee',
+                type : 'GET',
+                data : {
+                    'court_number' : $('#court_number').val(),
+                    'tenant_num_select': $('#tenant_num_select').val(),
+                    'fileType': $('#file_type').val(),
+                    'additional_rent_amt': $('#additional_rent_amt').val(),
+                    'attorney_fees': $('#attorney_fees').val(),
+                    'due_rent': $('#due_rent').val(),
+                    'unjust_damages': $('#unjust_damages').val(),
+                    'damage_amt': $('#damage_amt').val(),
+                    'tenant_num': $('#tenant_num').val(),
+                    'total_judgment': totalJudgment,
+                    'delivery_type': deliveryType
+
+                },
+                success : function(data) {
+                    $('#filing_fee_display').text(data);
+                    let total = 16.99 + parseFloat(data);
+                    $('#total').text(total.toFixed(2));
+                    $('#total_input').val(total.toFixed(2));
+
+                },
+                error : function(data)
+                {},
+            });
         });
     });
 }

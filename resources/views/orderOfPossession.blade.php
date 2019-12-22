@@ -11,7 +11,7 @@
                     <div class="card-body">
                         <div class="row">
                             <div class="col-md-12">
-                                <form method="post" action="{{ action('OrderOfPossessionController@formulatePDF') }}" enctype="multipart/form-data" id="eviction_form">
+                                <form method="post" action="{{ action('OrderOfPossessionController@showSamplePDF') }}" enctype="multipart/form-data" id="eviction_form" target="_blank">
                                     <input type="hidden" name="_token" value="{{ Session::token() }}">
                                     <a href="{{'new-file'}}"><button type="button" id="back_to_step_1_btn" class="btn btn-primary">Back to Step 1</button></a>
                                     <h2 style="text-align:center;" class="titles fs-subtitle">Step 2:<br> Enter the address you plan on evicting.</h2>
@@ -49,7 +49,7 @@
                                                         <input type="text" class="form-control eviction_fields" placeholder="Example: Unit 3" id="unit_number" name="unit_number" maxlength="10"/>
                                                     </div>
                                                 </div>
-                                                <!-- Tenant Number Container -->
+                                                <!-- Tenant Number Container docket_number-->
                                                 <div class="row">
                                                     <div class="col-sm-8 tenant_num_container">
                                                         <div class="col-sm-6">
@@ -84,7 +84,7 @@
                                                         <span class="docket_disabled">-</span>
                                                         <input type="text" class="docket_enabled form-control eviction_fields" placeholder="" id="docket_number_3" name="docket_number_3" maxlength="4"/>
                                                         </div>
-                                                        </div>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
@@ -173,6 +173,14 @@
                                         <div class="form-group">
                                             <div class="row">
                                                 <div class="offset-4 col-sm-10">
+                                                    <input type="submit" id="preview_document" class="btn btn-warning" value="Preview" />
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <div class="row">
+                                                <div class="offset-4 col-sm-10">
                                                     <button type="button" id="finalize_document" data-target="#modal_signature" data-toggle="modal" class="btn btn-primary">Sign and Payment</button>
                                                 </div>
                                             </div>
@@ -187,14 +195,20 @@
                                         <input type="hidden" id="street_name" name="streetName"/>
                                         <input type="hidden" id="town" name="town"/>
                                         <input type="hidden" id="court_number" name="court_number"/>
+                                        <input type="hidden" id="user_email" name="user_email" value="{{$userEmail}}"/>
+                                        <input type="hidden" id="total_input" name="total"/>
                                     </div>
+                                </form>
 
 
 
 
 
 
+                                <form method="post" action="{{ action('OrderOfPossessionController@formulatePDF') }}" enctype="multipart/form-data" id="submit_form">
                                     <!-- PAY AND SIGN MODAL-->
+                                    <input type="hidden" name="_token" value="{{ Session::token() }}">
+
                                     <div class="modal fade" id="modal_signature">
                                         <div class="modal-dialog" role="document">
                                             <div class="modal_signature modal-content">
@@ -213,7 +227,8 @@
                                                             </div>
                                                             <span id="legal_checkbox_container"><input type="checkbox" id="legal_checkbox"/><em><label style="text-align:center" for="legal_checkbox">By checking this box, I understand that my electronic signature constitutes a legal signature, <br>and that by entering my name above I acknowledge and warrant the accuracy of the information provided in this document.</label></em></span>
                                                             <button type="button" class="btn btn-warning clear_signature" data-action="clear">Clear Signature</button>
-                                                            <button disabled type="button" class="btn btn-primary use_signature" data-action="clear">Use Signature</button>
+                                                            <button type="button" class="btn btn-primary use_signature" data-action="clear">Use Signature</button><br><br>
+                                                            <span id="terms_of_agreement_error_msg"></span>
                                                         </div>
                                                     </div><br><hr><br>
                                                     <div class="payment_section">
@@ -222,12 +237,11 @@
                                                             <label>Court Filing Fee: $</label><span id="filing_fee_display"></span><br>
                                                             <label>CourtZip Filing Fee: </label><span> $16.99</span><br>
                                                             <label>Total: $</label><span id="total"></span>
-
                                                         </div>
                                                         <div class="form-row">
                                                             <label for="card-element">
                                                                 <span class="credit_debit">Credit or debit card</span>
-                                                                <img style="margin-left:70px;" alt="Credit Card Logos" title="Credit Card Logos" src="http://www.credit-card-logos.com/images/multiple_credit-card-logos-1/credit_card_logos_10.gif" width="236" height="30" border="0" />
+                                                                <img style="margin-left:70px;" alt="Credit Card Logos" title="Credit Card Logos" src="https://www.credit-card-logos.com/images/multiple_credit-card-logos-1/credit_card_logos_10.gif" width="236" height="30" border="0" />
                                                             </label>
                                                             <div id="card-element">
                                                                 <!-- A Stripe Element will be inserted here. -->
@@ -239,22 +253,17 @@
                                                     </div>
                                                 </div>
                                                 <div class="pay_submit_section modal-footer">
-                                                    <button disabled type="submit" class="btn btn-success pay_sign_submit" data-action="save-png">Pay and Submit Document</button>
+                                                    <button type="button" class="btn btn-success pay_sign_submit" id="pay_sign_submit" data-action="save-png">Pay and Submit Document</button>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
-
-
-
-
-
-
                                 </form>
                             </div>
                         </div>
                     </div>
                 </div>
+                <div class="sending-modal"><!-- Place at bottom of page --></div>
             </div>
         </div>
     </div>

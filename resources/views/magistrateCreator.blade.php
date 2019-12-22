@@ -167,6 +167,96 @@
                                                 <input placeholder="$" type="text" class="form-control" id="three_oop" name="three_oop" value="" /></div>
                                         </div>
                                     </div>
+                            </div>
+                                    <h3 style="text-align: center;">CIVIL COMPLAINT UNIQUE</h3>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <h4 class="major_labels">One Defendant Mailed</h4>
+                                            <div class="one_defendant_container">
+                                                <div class="col-sm-12">
+                                                    <label for="one_under_2000">Under 500 </label>
+                                                    <input placeholder="$" type="text" class="form-control" id="one_under_500_mailed" name="one_under_500_mailed" value="" />
+                                                </div>
+                                                <div class="col-sm-12">
+                                                    <label for="one_btn_2000_4001">Between 500 and 2,000</label>
+                                                    <input placeholder="$" type="text" class="form-control" id="one_btn_500_2000_mailed" name="one_btn_500_2000_mailed" value="" />
+                                                </div>
+                                                <div class="col-sm-12">
+                                                    <label for="one_over_4000">Between 2,000 and 4,000</label>
+                                                    <input placeholder="$" type="text" class="form-control" id="one_btn_2000_4000_mailed" name="one_btn_2000_4000_mailed" value="" />
+                                                </div>
+                                                <div class="col-sm-12">
+                                                    <label for="one_oop">Between 4,000 and 12,000</label>
+                                                    <input placeholder="$" type="text" class="form-control" id="one_btn_4000_12000_mailed" name="one_btn_4000_12000_mailed" value="" />
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <h4 class="major_labels">Two Defendants Mailed</h4>
+                                            <div class="two_defendant_container">
+                                                <div class="col-sm-12">
+                                                    <label for="one_under_2000">Under 500 </label>
+                                                    <input placeholder="$" type="text" class="form-control" id="two_under_500_mailed" name="two_under_500_mailed" value="" />
+                                                </div>
+                                                <div class="col-sm-12">
+                                                    <label for="one_btn_2000_4001">Between 500 and 2,000</label>
+                                                    <input placeholder="$" type="text" class="form-control" id="two_btn_500_2000_mailed" name="two_btn_500_2000_mailed" value="" />
+                                                </div>
+                                                <div class="col-sm-12">
+                                                    <label for="one_over_4000">Between 2,000 and 4,000</label>
+                                                    <input placeholder="$" type="text" class="form-control" id="two_btn_2000_4000_mailed" name="two_btn_2000_4000_mailed" value="" />
+                                                </div>
+                                                <div class="col-sm-12">
+                                                    <label for="one_oop">Between 4,000 and 12,000</label>
+                                                    <input placeholder="$" type="text" class="form-control" id="two_btn_4000_12000_mailed" name="two_btn_4000_12000_mailed" value="" />
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <h4 class="major_labels">One Defendant Constable</h4>
+                                        <div class="one_defendant_container">
+                                            <div class="col-sm-12">
+                                                <label for="one_under_2000">Under 500 </label>
+                                                <input placeholder="$" type="text" class="form-control" id="one_under_500_constable" name="one_under_500_constable" value="" />
+                                            </div>
+                                            <div class="col-sm-12">
+                                                <label for="one_btn_2000_4001">Between 500 and 2,000</label>
+                                                <input placeholder="$" type="text" class="form-control" id="one_btn_500_2000_constable" name="one_btn_500_2000_constable" value="" />
+                                            </div>
+                                            <div class="col-sm-12">
+                                                <label for="one_over_4000">Between 2,000 and 4,000</label>
+                                                <input placeholder="$" type="text" class="form-control" id="one_btn_2000_4000_constable" name="one_btn_2000_4000_constable" value="" />
+                                            </div>
+                                            <div class="col-sm-12">
+                                                <label for="one_oop">Between 4,000 and 12,000</label>
+                                                <input placeholder="$" type="text" class="form-control" id="one_btn_4000_12000_constable" name="one_btn_4000_12000_constable" value="" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                        <div class="col-md-6">
+                                            <h4 class="major_labels">Two Defendants Constable</h4>
+                                            <div class="two_defendant_container">
+                                                <div class="col-sm-12">
+                                                    <label for="one_under_2000">Under 500 </label>
+                                                    <input placeholder="$" type="text" class="form-control" id="two_under_500_constable" name="two_under_500_constable" value="" />
+                                                </div>
+                                                <div class="col-sm-12">
+                                                    <label for="one_btn_2000_4001">Between 500 and 2,000</label>
+                                                    <input placeholder="$" type="text" class="form-control" id="two_btn_500_2000_constable" name="two_btn_500_2000_constable" value="" />
+                                                </div>
+                                                <div class="col-sm-12">
+                                                    <label for="one_over_4000">Between 2,000 and 4,000</label>
+                                                    <input placeholder="$" type="text" class="form-control" id="two_btn_2000_4000_constable" name="two_btn_2000_4000_constable" value="" />
+                                                </div>
+                                                <div class="col-sm-12">
+                                                    <label for="one_oop">Between 4,000 and 12,000</label>
+                                                    <input placeholder="$" type="text" class="form-control" id="two_btn_4000_12000_constable" name="two_btn_4000_12000_constable" value="" />
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
                                     <div class="col-md-10">
                                         <h4 class="major_labels">Additional Info</h4>
                                         <div class="three_defendant_container">
@@ -190,7 +280,6 @@
                                             </div>
                                         </div>
                                     </div>
-                                </div>
                                 <div class="row">
                                     <div class="col-md-12">
                                         <h4 class="major_labels">Geo Locations</h4>
@@ -353,6 +442,95 @@
                                                         </div>
                                                     </div>
                                                 </div>
+                                                <h3>CIVIL COMPLAINT UNIQUE</h3>
+                                                <div class="row">
+                                                    <div class="col-md-6">
+                                                        <h4 class="major_labels">One Defendant Mailed</h4>
+                                                        <div class="one_defendant_container">
+                                                            <div class="col-sm-12">
+                                                                <label for="one_under_2000">Under 500 </label>
+                                                                <input placeholder="$" type="text" class="form-control" id="edit_one_under_500_mailed" name="edit_one_under_500_mailed" value="" />
+                                                            </div>
+                                                            <div class="col-sm-12">
+                                                                <label for="one_btn_2000_4001">Between 500 and 2,000</label>
+                                                                <input placeholder="$" type="text" class="form-control" id="edit_one_btn_500_2000_mailed" name="edit_one_btn_500_2000_mailed" value="" />
+                                                            </div>
+                                                            <div class="col-sm-12">
+                                                                <label for="one_over_4000">Between 2,000 and 4,000</label>
+                                                                <input placeholder="$" type="text" class="form-control" id="edit_one_btn_2000_4000_mailed" name="edit_one_btn_2000_4000_mailed" value="" />
+                                                            </div>
+                                                            <div class="col-sm-12">
+                                                                <label for="one_oop">Between 4,000 and 12,000</label>
+                                                                <input placeholder="$" type="text" class="form-control" id="edit_one_btn_4000_12000_mailed" name="edit_one_btn_4000_12000_mailed" value="" />
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <h4 class="major_labels">Two Defendants Mailed</h4>
+                                                        <div class="two_defendant_container">
+                                                            <div class="col-sm-12">
+                                                                <label for="one_under_2000">Under 500 </label>
+                                                                <input placeholder="$" type="text" class="form-control" id="edit_two_under_500_mailed" name="edit_two_under_500_mailed" value="" />
+                                                            </div>
+                                                            <div class="col-sm-12">
+                                                                <label for="one_btn_2000_4001">Between 500 and 2,000</label>
+                                                                <input placeholder="$" type="text" class="form-control" id="edit_two_btn_500_2000_mailed" name="edit_two_btn_500_2000_mailed" value="" />
+                                                            </div>
+                                                            <div class="col-sm-12">
+                                                                <label for="one_over_4000">Between 2,000 and 4,000</label>
+                                                                <input placeholder="$" type="text" class="form-control" id="edit_two_btn_2000_4000_mailed" name="edit_two_btn_2000_4000_mailed" value="" />
+                                                            </div>
+                                                            <div class="col-sm-12">
+                                                                <label for="one_oop">Between 4,000 and 12,000</label>
+                                                                <input placeholder="$" type="text" class="form-control" id="edit_two_btn_4000_12000_mailed" name="edit_two_btn_4000_12000_mailed" value="" />
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-md-6">
+                                                        <h4 class="major_labels">One Defendant Constable</h4>
+                                                        <div class="one_defendant_container">
+                                                            <div class="col-sm-12">
+                                                                <label for="one_under_2000">Under 500 </label>
+                                                                <input placeholder="$" type="text" class="form-control" id="edit_one_under_500_constable" name="edit_one_under_500_constable" value="" />
+                                                            </div>
+                                                            <div class="col-sm-12">
+                                                                <label for="one_btn_2000_4001">Between 500 and 2,000</label>
+                                                                <input placeholder="$" type="text" class="form-control" id="edit_one_btn_500_2000_constable" name="edit_one_btn_500_2000_constable" value="" />
+                                                            </div>
+                                                            <div class="col-sm-12">
+                                                                <label for="one_over_4000">Between 2,000 and 4,000</label>
+                                                                <input placeholder="$" type="text" class="form-control" id="edit_one_btn_2000_4000_constable" name="edit_one_btn_2000_4000_constable" value="" />
+                                                            </div>
+                                                            <div class="col-sm-12">
+                                                                <label for="one_oop">Between 4,000 and 12,000</label>
+                                                                <input placeholder="$" type="text" class="form-control" id="edit_one_btn_4000_12000_constable" name="edit_one_btn_4000_12000_constable" value="" />
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <h4 class="major_labels">Two Defendants Constable</h4>
+                                                        <div class="two_defendant_container">
+                                                            <div class="col-sm-12">
+                                                                <label for="one_under_2000">Under 500 </label>
+                                                                <input placeholder="$" type="text" class="form-control" id="edit_two_under_500_constable" name="edit_two_under_500_constable" value="" />
+                                                            </div>
+                                                            <div class="col-sm-12">
+                                                                <label for="one_btn_2000_4001">Between 500 and 2,000</label>
+                                                                <input placeholder="$" type="text" class="form-control" id="edit_two_btn_500_2000_constable" name="edit_two_btn_500_2000_constable" value="" />
+                                                            </div>
+                                                            <div class="col-sm-12">
+                                                                <label for="one_over_4000">Between 2,000 and 4,000</label>
+                                                                <input placeholder="$" type="text" class="form-control" id="edit_two_btn_2000_4000_constable" name="edit_two_btn_2000_4000_constable" value="" />
+                                                            </div>
+                                                            <div class="col-sm-12">
+                                                                <label for="one_oop">Between 4,000 and 12,000</label>
+                                                                <input placeholder="$" type="text" class="form-control" id="edit_two_btn_4000_12000_constable" name="edit_two_btn_4000_12000_constable" value="" />
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
                                                 <div class="row">
                                                     <div class="col-md-12">
                                                         <h4 class="major_labels">Geo Locations 2.0</h4>
@@ -365,6 +543,7 @@
                                                 </div>
                                                 <input type="hidden" id="db_geo_id" name="db_geo_id" />
                                                 <input type="hidden" id="db_court_id" name="db_court_id" />
+                                                <input type="hidden" id="db_civil_id" name="db_civil_id" />
                                             </div>
                                         </div>
                                     </div>

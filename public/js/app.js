@@ -42743,13 +42743,6 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
 if (document.location.href.split('/')[3] === 'new-file') {
   $(document).ready(function () {
     $('[data-toggle="tooltip"]').tooltip();
-    var canvas = document.querySelector("canvas");
-    var signaturePad = new SignaturePad(canvas, {}); //Clear button to remove signature drawing
-
-    $('.clear_signature').on('click', function () {
-      // Clears the canvas
-      signaturePad.clear();
-    });
     var text_max = 500;
     $('#textarea_feedback').html(text_max + ' characters remaining');
     $('#claim_description').on('keyup', function () {
@@ -42757,30 +42750,17 @@ if (document.location.href.split('/')[3] === 'new-file') {
       var text_remaining = text_max - text_length;
       $('#textarea_feedback').html(text_remaining + ' characters remaining');
     });
-    $('.use_signature').on('click', function () {
-      $('.payment_section').css('display', 'initial');
-      $('.pay_submit_section').css('display', 'initial');
+    $('.use_signature').on('click', function (e) {
+      if ($('#legal_checkbox').is(':checked') === false) {
+        $('#terms_of_agreement_error_msg').text('You must accept to the terms of agreement. Check the box above.');
+      } else {
+        $('#terms_of_agreement_error_msg').text('');
+        $('.payment_section').css('display', 'initial');
+        $('.pay_submit_section').css('display', 'initial');
+      }
     });
-    $('#legal_checkbox').on('change', function () {
-      if ($('#legal_checkbox').is(':checked')) {
-        $('.use_signature').prop('disabled', false);
-        $('.pay_sign_submit').prop('disabled', false);
-      } else {
-        $('.use_signature').prop('disabled', true);
-        $('.pay_sign_submit').prop('disabled', true);
-      }
-    }); //Save and use Signature
-
-    $('.pay_sign_submit').on('click', function () {
-      if ($('#legal_checkbox').is(':checked')) {
-        $('#rented_by_val').val($('input[name=rented_by]:checked').val());
-      } else {
-        alert('You need to check the Signature checkbox above to agree to the digital terms in order to continue.');
-      }
-
-      var dataURL = signaturePad.toDataURL(); // save image as PNG
-
-      $('#signature_source').val(dataURL);
+    $('#preview_document').on('click', function () {
+      $('#rented_by_val').val($('input[name=rented_by]:checked').val());
     });
     $('#filing_date').val(new Date());
     $('#landlord').prop('hidden', true);
@@ -42833,7 +42813,6 @@ if (document.location.href.split('/')[3] === 'new-file') {
       magId = 'magistrate_' + value.magistrate_id;
       var geoPoints = value.geo_locations.replace(/\s/g, '').replace(/},/g, '},dd').split(',dd');
       var obj = [];
-      console.log(magId);
 
       for (var i in geoPoints) {
         obj.push(JSON.parse(geoPoints[i]));
@@ -43079,9 +43058,9 @@ if (document.location.href.split('/')[3] === 'new-file') {
         var currentTenantObj = $('#tenant_name_' + i);
 
         if (currentTenantObj.length > 0) {
-          html += '<label class="labels" for="tenant_name_' + i + '" >Tenant Name ' + i + '</label><input class="form-control eviction_fields" placeholder="Tenant Name ' + i + '" type="text" id="tenant_name_' + i + '" name="tenant_name[]" value="' + currentTenantObj.val() + '"/><br>';
+          html += '<label class="labels" for="tenant_name_' + i + '" >Name ' + i + '</label><input class="form-control eviction_fields" placeholder="Name ' + i + '" type="text" id="tenant_name_' + i + '" name="tenant_name[]" value="' + currentTenantObj.val() + '"/><br>';
         } else {
-          html += '<label class="labels" for="tenant_name_' + i + '" >Tenant Name ' + i + '</label><input class="form-control eviction_fields" placeholder="Tenant Name ' + i + '" type="text" id="tenant_name_' + i + '" name="tenant_name[]" value=""/><br>';
+          html += '<label class="labels" for="tenant_name_' + i + '" >Name ' + i + '</label><input class="form-control eviction_fields" placeholder="Name ' + i + '" type="text" id="tenant_name_' + i + '" name="tenant_name[]" value=""/><br>';
         }
       }
 
@@ -43094,33 +43073,41 @@ if (document.location.href.split('/')[3] === 'new-file') {
         $('#breached_details').prop('disabled', true);
       }
     });
-  });
-  $('#finalize_document').on('click', function () {
-    $.ajax({
-      beforeSend: function beforeSend(xhr) {
-        xhr.setRequestHeader('X-CSRF-TOKEN', $("#token").attr('content'));
-      },
-      url: '/new-file/get-court-fee',
-      type: 'GET',
-      data: {
-        'court_number': $('#court_number').val(),
-        'tenant_num_select': $('#tenant_num_select').val(),
-        'fileType': $('#file_type').val(),
-        'additional_rent_amt': $('#additional_rent_amt').val(),
-        'attorney_fees': $('#attorney_fees').val(),
-        'due_rent': $('#due_rent').val(),
-        'unjust_damages': $('#unjust_damages').val(),
-        'damage_amt': $('#damage_amt').val(),
-        'tenant_num': $('#tenant_num').val()
-      },
-      success: function success(data) {
-        $('#filing_fee_display').text(data);
-        var total = 16.99 + parseFloat(data);
-        $('#total').text(total.toFixed(2));
-      },
-      error: function error(data) {
-        console.log(data);
+    var totalJudgment = '';
+    var deliveryType = '';
+    $('#finalize_document').on('click', function () {
+      if ($('#file_type').val() === 'civil') {
+        totalJudgment = $('#total_judgment').val();
+        deliveryType = $("input[name=delivery_type]:checked").val();
       }
+
+      $.ajax({
+        beforeSend: function beforeSend(xhr) {
+          xhr.setRequestHeader('X-CSRF-TOKEN', $("#token").attr('content'));
+        },
+        url: '/new-file/get-court-fee',
+        type: 'GET',
+        data: {
+          'court_number': $('#court_number').val(),
+          'tenant_num_select': $('#tenant_num_select').val(),
+          'fileType': $('#file_type').val(),
+          'additional_rent_amt': $('#additional_rent_amt').val(),
+          'attorney_fees': $('#attorney_fees').val(),
+          'due_rent': $('#due_rent').val(),
+          'unjust_damages': $('#unjust_damages').val(),
+          'damage_amt': $('#damage_amt').val(),
+          'tenant_num': $('#tenant_num').val(),
+          'total_judgment': totalJudgment,
+          'delivery_type': deliveryType
+        },
+        success: function success(data) {
+          $('#filing_fee_display').text(data);
+          var total = 16.99 + parseFloat(data);
+          $('#total').text(total.toFixed(2));
+          $('#total_input').val(total.toFixed(2));
+        },
+        error: function error(data) {}
+      });
     });
   });
 }
@@ -43235,6 +43222,31 @@ $(document).ready(function () {
         status: status
       },
       success: function success(data) {
+        console.log(data);
+      },
+      error: function error(data) {
+        console.log(data);
+      }
+    });
+  }).on('click', '.eviction-edit', function () {
+    var id = $(this)[0].id;
+    var splitId = id.split('_');
+    var evictionId = splitId[1];
+    $.ajax({
+      beforeSend: function beforeSend(xhr) {
+        xhr.setRequestHeader('X-CSRF-TOKEN', $("#token").attr('content'));
+      },
+      type: "GET",
+      url: '/dashboard/edit-file',
+      dataType: 'json',
+      data: {
+        id: evictionId
+      },
+      success: function success(data) {
+        if (data.file_type === 'oop') {} else if (data.file_type === 'eviction') {} else if (data.file_type === 'civil complaint') {} else {
+          alert('File Type not known, please contact the development team');
+        }
+
         console.log(data);
       },
       error: function error(data) {
@@ -43524,32 +43536,71 @@ $(document).ready(function () {
       success: function success(data) {
         console.log(data);
         $('#db_geo_id').val(data[0][0].id);
-        $('#db_court_id').val(data[1][0].id);
-        $('#edit_court_id').val(data[1][0].court_number);
-        $('#edit_magistrate_id').val(data[1][0].magistrate_id);
-        $('#edit_township').val(data[1][0].township);
-        $('#edit_county').val(data[1][0].county);
-        $('#edit_mdj_name').val(data[1][0].mdj_name);
-        $('#edit_court_number').val(data[1][0].phone_number);
+        $('#db_court_id').val(data[1].id);
+        $('#edit_court_id').val(data[1].court_number);
+        $('#edit_magistrate_id').val(data[1].magistrate_id);
+        $('#edit_township').val(data[1].township);
+        $('#edit_county').val(data[1].county);
+        $('#edit_mdj_name').val(data[1].mdj_name);
+        $('#edit_court_number').val(data[1].phone_number);
         $('#edit_court_address_one').val(data[0][0].address_line_one);
         $('#edit_court_address_two').val(data[0][0].address_line_two);
-        $('#edit_one_under_2000').val(data[1][0].one_defendant_up_to_2000);
-        $('#edit_one_btn_2000_4001').val(data[1][0].one_defendant_between_2001_4000);
-        $('#edit_one_over_4000').val(data[1][0].one_defendant_greater_than_4000);
-        $('#edit_one_oop').val(data[1][0].one_defendant_out_of_pocket);
-        $('#edit_two_under_2000').val(data[1][0].two_defendant_up_to_2000);
-        $('#edit_two_btn_2000_4001').val(data[1][0].two_defendant_between_2001_4000);
-        $('#edit_two_over_4000').val(data[1][0].two_defendant_greater_than_4000);
-        $('#edit_two_oop').val(data[1][0].two_defendant_out_of_pocket);
-        $('#edit_three_under_2000').val(data[1][0].three_defendant_up_to_2000);
-        $('#edit_three_btn_2000_4001').val(data[1][0].three_defendant_between_2001_4000);
-        $('#edit_three_over_4000').val(data[1][0].three_defendant_greater_than_4000);
-        $('#edit_three_oop').val(data[1][0].three_defendant_out_of_pocket);
-        $('#edit_additional_tenants').val(data[1][0].additional_tenant);
+        $('#edit_one_under_2000').val(data[1].one_defendant_up_to_2000);
+        $('#edit_one_btn_2000_4001').val(data[1].one_defendant_between_2001_4000);
+        $('#edit_one_over_4000').val(data[1].one_defendant_greater_than_4000);
+        $('#edit_one_oop').val(data[1].one_defendant_out_of_pocket);
+        $('#edit_two_under_2000').val(data[1].two_defendant_up_to_2000);
+        $('#edit_two_btn_2000_4001').val(data[1].two_defendant_between_2001_4000);
+        $('#edit_two_over_4000').val(data[1].two_defendant_greater_than_4000);
+        $('#edit_two_oop').val(data[1].two_defendant_out_of_pocket);
+        $('#edit_three_under_2000').val(data[1].three_defendant_up_to_2000);
+        $('#edit_three_btn_2000_4001').val(data[1].three_defendant_between_2001_4000);
+        $('#edit_three_over_4000').val(data[1].three_defendant_greater_than_4000);
+        $('#edit_three_oop').val(data[1].three_defendant_out_of_pocket);
+        $('#edit_additional_tenants').val(data[1].additional_tenant);
         $('#edit_geo_locations').val(data[0][0].geo_locations);
-        $('#edit_online_submission').val(data[1][0].online_submission);
+        $('#edit_online_submission').val(data[1].online_submission);
 
-        if (data[1][0].digital_signature == 1) {
+        if (data[2] !== 'empty') {
+          console.log('im in here');
+          $('#db_civil_id').val(data[2].id);
+          $('#edit_one_under_500_mailed').val(data[2].under_500_1_def_mail);
+          $('#edit_one_btn_500_2000_mailed').val(data[2].btn_500_2000_1_def_mail);
+          $('#edit_one_btn_2000_4000_mailed').val(data[2].btn_2000_4000_1_def_mail);
+          $('#edit_one_btn_4000_12000_mailed').val(data[2].btn_4000_12000_1_def_mail);
+          $('#edit_two_under_500_mailed').val(data[2].under_500_2_def_mail);
+          $('#edit_two_btn_500_2000_mailed').val(data[2].btn_500_2000_2_def_mail);
+          $('#edit_two_btn_2000_4000_mailed').val(data[2].btn_2000_4000_2_def_mail);
+          $('#edit_two_btn_4000_12000_mailed').val(data[2].btn_4000_12000_2_def_mail);
+          $('#edit_one_under_500_constable').val(data[2].under_500_1_def_constable);
+          $('#edit_one_btn_500_2000_constable').val(data[2].btn_500_2000_1_def_constable);
+          $('#edit_one_btn_2000_4000_constable').val(data[2].btn_2000_4000_1_def_constable);
+          $('#edit_one_btn_4000_12000_constable').val(data[2].btn_4000_12000_1_def_constable);
+          $('#edit_two_under_500_constable').val(data[2].under_500_2_def_constable);
+          $('#edit_two_btn_500_2000_constable').val(data[2].btn_500_2000_2_def_constable);
+          $('#edit_two_btn_2000_4000_constable').val(data[2].btn_2000_4000_2_def_constable);
+          $('#edit_two_btn_4000_12000_constable').val(data[2].btn_4000_12000_2_def_constable);
+        } else {
+          $('#db_civil_id').val('');
+          $('#edit_one_under_500_mailed').val('');
+          $('#edit_one_btn_500_2000_mailed').val('');
+          $('#edit_one_btn_2000_4000_mailed').val('');
+          $('#edit_one_btn_4000_12000_mailed').val('');
+          $('#edit_two_under_500_mailed').val('');
+          $('#edit_two_btn_500_2000_mailed').val('');
+          $('#edit_two_btn_2000_4000_mailed').val('');
+          $('#edit_two_btn_4000_12000_mailed').val('');
+          $('#edit_one_under_500_constable').val('');
+          $('#edit_one_btn_500_2000_constable').val('');
+          $('#edit_one_btn_2000_4000_constable').val('');
+          $('#edit_one_btn_4000_12000_constable').val('');
+          $('#edit_two_under_500_constable').val('');
+          $('#edit_two_btn_500_2000_constable').val('');
+          $('#edit_two_btn_2000_4000_constable').val('');
+          $('#edit_two_btn_4000_12000_constable').val('');
+        }
+
+        if (data[1].digital_signature == 1) {
           $('#edit_is_digital_signature_allowed').prop('checked', true);
         }
       },
@@ -43609,6 +43660,7 @@ $(document).ready(function () {
       data: {
         dbCourtId: $('#db_court_id').val(),
         dbGeoId: $('#db_geo_id').val(),
+        dbCivilId: $('#db_civil_id').val(),
         magistrateId: $('#edit_magistrate_id').val(),
         township: $('#edit_township').val(),
         courtId: $('#edit_court_id').val(),
@@ -43632,7 +43684,23 @@ $(document).ready(function () {
         additionalTenant: $('#edit_additional_tenants').val(),
         geoLocations: $('#edit_geo_locations').val(),
         digitalSignature: $('#edit_digital_signature').val(),
-        onlineSubmission: $('#edit_online_submission').val()
+        onlineSubmission: $('#edit_online_submission').val(),
+        oneUnder500Mailed: $('#edit_one_under_500_mailed').val(),
+        oneBtn500And2000: $('#edit_one_btn_500_2000_mailed').val(),
+        oneBtn2000And4000Mailed: $('#edit_one_btn_2000_4000_mailed').val(),
+        oneBtn4000And12000Mailed: $('#edit_one_btn_4000_12000_mailed').val(),
+        twoUnder500Mailed: $('#edit_two_under_500_mailed').val(),
+        twoBtn500And2000Mailed: $('#edit_two_btn_500_2000_mailed').val(),
+        twoBtn2000And4000Mailed: $('#edit_two_btn_2000_4000_mailed').val(),
+        twoBtn4000And12000Mailed: $('#edit_two_btn_4000_12000_mailed').val(),
+        oneUnder500Constable: $('#edit_one_under_500_constable').val(),
+        oneBtn500And2000Constable: $('#edit_one_btn_500_2000_constable').val(),
+        oneBtn2000And4000Constable: $('#edit_one_btn_2000_4000_constable').val(),
+        oneBtn4000And12000Constable: $('#edit_one_btn_4000_12000_constable').val(),
+        twoUnder500Constable: $('#edit_two_under_500_constable').val(),
+        twoBtn500And2000Constable: $('#edit_two_btn_500_2000_constable').val(),
+        twoBtn2000And4000Constable: $('#edit_two_btn_2000_4000_constable').val(),
+        twoBtn4000And12000Constable: $('#edit_two_btn_4000_12000_constable').val()
       },
       success: function success(data) {},
       error: function error(data) {
@@ -49390,69 +49458,116 @@ function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterat
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-// Create a Stripe client.
-var stripe = Stripe('pk_test_FTcQeimeSasisJpDTYgHEMTh'); // Create an instance of Elements.
+if (document.location.href.split('/')[3] === 'new-file') {
+  var canvas = document.querySelector("canvas");
+  var signaturePad = new SignaturePad(canvas, {});
+  var isSlateHouse = $('#user_email').val(); //Clear button to remove signature drawing
 
-var elements = stripe.elements(); // Custom styling can be passed to options when creating an Element.
-// (Note that this demo uses a wider set of styles than the guide below.)
+  $('.clear_signature').on('click', function () {
+    // Clears the canvas
+    signaturePad.clear();
+  }); // Create a Stripe client.
 
-var style = {
-  base: {
-    color: '#32325d',
-    fontFamily: '"Helvetica Neue", Helvetica, sans-serif',
-    fontSmoothing: 'antialiased',
-    fontSize: '16px',
-    '::placeholder': {
-      color: '#aab7c4'
-    }
-  },
-  invalid: {
-    color: '#fa755a',
-    iconColor: '#fa755a'
-  }
-}; // Create an instance of the card Element.
-
-var card = elements.create('card', {
-  style: style
-}); // Add an instance of the card Element into the `card-element` <div>.
-
-card.mount('#card-element'); // Handle real-time validation errors from the card Element.
-
-card.addEventListener('change', function (event) {
-  var displayError = document.getElementById('card-errors');
-
-  if (event.error) {
-    displayError.textContent = event.error.message;
+  if (isSlateHouse.indexOf('slatehousegroup') === -1) {
+    stripe = Stripe('pk_live_FProm7L9gLEjNsFLawYCp32x');
   } else {
-    displayError.textContent = '';
-  }
-}); // Handle form submission.
+    stripe = Stripe('pk_test_FTcQeimeSasisJpDTYgHEMTh');
+  } // Create an instance of Elements.
 
-var form = document.getElementById('eviction_form');
-form.addEventListener('submit', function (event) {
-  event.preventDefault();
-  stripe.createToken(card).then(function (result) {
-    if (result.error) {
-      // Inform the user if there was an error.
-      var errorElement = document.getElementById('card-errors');
-      errorElement.textContent = result.error.message;
-    } else {
-      // Send the token to your server.
-      stripeTokenHandler(result.token);
+
+  var elements = stripe.elements(); // Custom styling can be passed to options when creating an Element.
+  // (Note that this demo uses a wider set of styles than the guide below.)
+
+  var style = {
+    base: {
+      color: '#32325d',
+      fontFamily: '"Helvetica Neue", Helvetica, sans-serif',
+      fontSmoothing: 'antialiased',
+      fontSize: '16px',
+      '::placeholder': {
+        color: '#aab7c4'
+      }
+    },
+    invalid: {
+      color: '#fa755a',
+      iconColor: '#fa755a'
     }
+  }; // Create an instance of the card Element.
+
+  var card = elements.create('card', {
+    style: style
+  }); // Add an instance of the card Element into the `card-element` <div>.
+
+  card.mount('#card-element'); // Handle real-time validation errors from the card Element.
+
+  card.addEventListener('change', function (event) {
+    var displayError = document.getElementById('card-errors');
+
+    if (event.error) {
+      displayError.textContent = event.error.message;
+    } else {
+      displayError.textContent = '';
+    }
+  }); // Handle form submission.
+
+  var form = document.getElementById('pay_sign_submit');
+  form.addEventListener('click', function (event) {
+    stripe.createToken(card).then(function (result) {
+      if (result.error) {
+        // Inform the user if there was an error.
+        var errorElement = document.getElementById('card-errors');
+        errorElement.textContent = result.error.message;
+      } else {
+        // Send the token to your server.
+        var mainForm = document.getElementById('eviction_form');
+        var hiddenInput = document.createElement('input');
+        hiddenInput.setAttribute('type', 'hidden');
+        hiddenInput.setAttribute('name', 'stripeToken');
+        hiddenInput.setAttribute('value', result.token.id);
+        mainForm.appendChild(hiddenInput);
+        var url = '';
+
+        if ($('#file_type').val() === 'oop') {
+          url = 'new-oop/pdf-data';
+        } else if ($('#file_type').val() === 'ltc') {
+          url = 'new-ltc/pdf-data';
+        } else if ($('#file_type').val() === 'civil') {
+          url = 'new-civil-complaint/pdf-data';
+        } else {
+          alert('Error with finding File Type. Contact Support');
+        }
+
+        if ($('#legal_checkbox').is(':checked')) {
+          $('#modal_signature').modal('toggle');
+          var $body = $("body");
+          $body.addClass("loading");
+          var dataURL = signaturePad.toDataURL(); // save image as PNG
+
+          $('#signature_source').val(dataURL);
+          var formData = $('#eviction_form').serialize();
+          $.ajaxSetup({
+            headers: {
+              'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+          });
+          $.ajax({
+            beforeSend: function beforeSend(xhr) {
+              xhr.setRequestHeader('X-CSRF-TOKEN', $("#token").attr('content'));
+            },
+            url: url,
+            type: 'POST',
+            data: formData,
+            success: function success(data) {
+              window.location.href = environmentPath + '/dashboard';
+            },
+            error: function error(data) {}
+          });
+        } else {
+          alert('You need to check the Signature checkbox above to agree to the digital terms in order to continue.');
+        }
+      }
+    });
   });
-}); // Submit the form with the token ID.
-
-function stripeTokenHandler(token) {
-  // Insert the token ID into the form so it gets submitted to the server
-  var form = document.getElementById('eviction_form');
-  var hiddenInput = document.createElement('input');
-  hiddenInput.setAttribute('type', 'hidden');
-  hiddenInput.setAttribute('name', 'stripeToken');
-  hiddenInput.setAttribute('value', token.id);
-  form.appendChild(hiddenInput); // Submit the form
-
-  form.submit();
 }
 
 /***/ }),

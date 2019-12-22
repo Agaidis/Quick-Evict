@@ -27,19 +27,26 @@ Route::post('/dashboard/delete', 'EvictionController@delete')->middleware('auth'
 Route::get('/dashboard/getCourtDate', 'DashboardController@getCourtDate')->middleware('auth');
 Route::post('/dashboard/storeCourtDate', 'DashboardController@storeCourtDate')->middleware('auth');
 
+Route::get('/dashboard/edit-file', 'DashboardController@getFileData')->middleware('auth');;
+Route::post('/dashboard/edit-oop', 'DashboardController@editOOP')->middleware('auth');;
+Route::post('/dashboard/edit-civil', 'DashboardController@editCivil')->middleware('auth');
+
 /* New File */
 Route::get('/new-file', 'NewFileController@index')->middleware('auth');
 Route::post('/new-file', 'NewFileController@proceedToFileTypeWithSelectedCounty')->middleware('auth');
-Route::get('/new-file/get-court-fee', 'NewFileController@getFilingFee');
+Route::get('/new-file/get-court-fee', 'NewFileController@getFilingFee')->middleware('auth');
 
 /* Eviction Creator */
 Route::post('/new-ltc/pdf-data', 'EvictionController@formulatePDF')->middleware('auth');
+Route::post('/new-ltc/sample-pdf', 'EvictionController@showSamplePDF')->middleware('auth');
 
 /* Order of Possession Creator */
 Route::post('/new-oop/pdf-data', 'OrderOfPossessionController@formulatePDF')->middleware('auth');
+Route::post('/new-oop/sample-pdf', 'OrderOfPossessionController@showSamplePDF')->middleware('auth');
 
 /* Civil Complaint Creator */
 Route::post('/new-civil-complaint/pdf-data', 'CivilComplaintController@formulatePDF')->middleware('auth');
+Route::post('/new-civil-complaint/sample-pdf', 'CivilComplaintController@showSamplePDF')->middleware('auth');
 
 /* Informational Pages */
 Route::get('/information', 'InfoController@index');
