@@ -71,6 +71,9 @@ Route::post('/userManagement/changeCourt', 'UserManagementController@changeCourt
 Route::post('/get-signature-type', 'EvictionController@getDigitalSignature')->middleware('auth');
 
 
+Route::get('/store', 'FileStorageController@testFile')->middleware('auth');
+
+
 
 Route::get('command/migrate', function () {
     $exitCode = \Artisan::call('migrate');
