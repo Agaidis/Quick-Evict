@@ -19,7 +19,7 @@
         "league/flysystem-aws-s3-v3": "^1.0",
         "mailgun/mailgun-php": "^2.8",
         "nyholm/psr7": "^1.2",
-        "sociallydev/spaces-api": "dev-master"
+        "sociallydev/spaces-api": "dev-master",
     },
     "require-dev": {
         "filp/whoops": "^2.0",

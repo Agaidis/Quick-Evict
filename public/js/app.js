@@ -43109,6 +43109,43 @@ if (document.location.href.split('/')[3] === 'new-file') {
         error: function error(data) {}
       });
     });
+    $('#file').on('change', function () {
+      console.log($(this));
+
+      if ($(this).val() !== '') {
+        upload(this);
+      }
+    });
+
+    function upload(img) {
+      var form_data = new FormData();
+      form_data.append('file', img.files[0]);
+      form_data.append('csrf-token', '{{csrf_token()}}');
+      $.ajaxSetup({
+        headers: {
+          'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+      });
+      $.ajax({
+        beforeSend: function beforeSend(xhr) {
+          xhr.setRequestHeader('X-CSRF-TOKEN', $("#token").attr('content'));
+        },
+        url: '/file-upload',
+        data: form_data,
+        type: 'POST',
+        contentType: false,
+        processData: false,
+        success: function success(data) {
+          if (data !== '') {
+            $('#file_container').append($('<input type="hidden" name="file_address_ids[]" id="file_address_ids" value="' + data + '"/>'));
+          }
+        },
+        error: function error(xhr, status, _error) {
+          console.log(_error);
+          console.log(status);
+        }
+      });
+    }
   });
 }
 
@@ -43197,10 +43234,31 @@ $(document).ready(function () {
       });
     } else {}
   }).on('click', '.pdf_download_btn_dashboard', function () {
-    console.log('this is it' + $(this)[0].id);
     var id = $(this)[0].id;
     var splitId = id.split('_');
     $('#download_id').val(splitId[2]);
+    $.ajaxSetup({
+      headers: {
+        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+      }
+    });
+    $.ajax({
+      beforeSend: function beforeSend(xhr) {
+        xhr.setRequestHeader('X-CSRF-TOKEN', $("#token").attr('content'));
+      },
+      type: "GET",
+      url: '/get-filings',
+      dataType: 'json',
+      data: {
+        id: splitId[1]
+      },
+      success: function success(data) {
+        console.log(data);
+      },
+      error: function error(data) {
+        console.log(data);
+      }
+    });
   }).on('change', '.status_select', function () {
     var id = $(this)[0].id;
     var splitId = id.split('_');

@@ -18,6 +18,7 @@ use App\PDF;
 use Dompdf\Options;
 use Dompdf\Dompdf;
 use App\ErrorLog;
+use Illuminate\Support\Facades\DB;
 
 class CivilComplaintController extends Controller
 {
@@ -150,6 +151,8 @@ class CivilComplaintController extends Controller
     {
         $mailer = new Mailer();
         try {
+
+
             $removeValues = [' ', '$', ','];
             $magistrateId = str_replace('magistrate_' , '', $_POST['court_number']);
             $courtDetails = CourtDetails::where('magistrate_id', $magistrateId)->first();
@@ -269,6 +272,12 @@ class CivilComplaintController extends Controller
             $signature->signature = $_POST['signature_source'];
 
             $signature->save();
+
+            foreach ($_POST['file_address_ids'] as $fileAddressId) {
+                DB::table('file_addresses')
+                    ->where('id', $fileAddressId)
+                    ->update(['filing_id' => $evictionId]);
+            }
 
             try {
                 $token = $_POST['stripeToken'];

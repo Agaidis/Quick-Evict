@@ -86,16 +86,40 @@ $(document).ready(function () {
 
         }
     }).on('click', '.pdf_download_btn_dashboard', function () {
-        console.log('this is it' + $(this)[0].id);
-        var id = $(this)[0].id;
-        var splitId = id.split('_');
+        let id = $(this)[0].id;
+        let splitId = id.split('_');
 
         $('#download_id').val(splitId[2]);
 
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+
+        $.ajax({
+            beforeSend: function (xhr) {
+                xhr.setRequestHeader('X-CSRF-TOKEN', $("#token").attr('content'));
+            },
+            type: "GET",
+            url: '/get-filings',
+            dataType: 'json',
+            data: {
+                id: splitId[1]
+            },
+
+            success: function (data) {
+                console.log(data);
+            },
+            error: function (data) {
+                console.log(data);
+            }
+        });
+
     }).on('change', '.status_select', function() {
-        var id = $(this)[0].id;
-        var splitId = id.split('_');
-        var status = $('#status_' + splitId[1]).val();
+        let id = $(this)[0].id;
+        let splitId = id.split('_');
+        let status = $('#status_' + splitId[1]).val();
 
         $.ajaxSetup({
                 headers: {

@@ -13,7 +13,7 @@
                                 {{ session('status') }}
                             </div>
                         @endif
-                        <form method="post" action="{{ action('DashboardController@downloadPDF') }}" enctype="multipart/form-data" id="dashboard_form">
+                        <form method="post" action="{{ action('FileStorageController@getFilings') }}" enctype="multipart/form-data" id="dashboard_form">
                             <input type="hidden" name="_token" value="{{ Session::token() }}">
                             <div style="overflow-x:auto;">
                             <table class="table table-hover table-bordered eviction_table" style="width:1475px;" id="eviction_table">
@@ -93,6 +93,7 @@
                                             {{date('h:i A', strtotime('-5 hour', strtotime($eviction->created_at)))}}</td>
                                         <td class="text-center">
                                             <button type="submit" id="download_id_{{$eviction->id}}" class="pdf_download_btn_dashboard btn-sm btn-primary fas fa-cloud-download-alt"></button>
+                                            <button type="button" id="get_filings_{{$eviction->id}}" data-target="#modal_get_filings" data-toggle="modal" class="get_filings btn-success fas fa-cloud-download-alt"></button>
                                             @if ($eviction->is_downloaded == 2)
                                                 <button type="button" id="edit_{{$eviction->id}}" data-target="#modal_edit_file" data-toggle="modal" class="fa fa-edit btn-sm btn-success eviction-edit"></button>
                                             @endif
@@ -133,6 +134,8 @@
                                     </div>
                                 </div>
                             </div>
+
+
 
 
                         <div class="modal fade" id="modal_edit_file">

@@ -183,6 +183,16 @@ class DashboardController extends Controller
         }
     }
 
+    public function getFiles () {
+        try {
+
+        } catch ( Exception $e ) {
+            mail('andrew.gaidis@gmail.com', 'Error Getting File to Edit', $e->getMessage());
+            Log::info($e->getMessage());
+            return false;
+        }
+    }
+
     public function editLTC () {
         try {
 

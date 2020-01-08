@@ -393,5 +393,43 @@ if (document.location.href.split('/')[3] === 'new-file') {
                 {},
             });
         });
+
+        $('#file').on('change', function() {
+            console.log($(this));
+            if ($(this).val() !== '') {
+                upload(this);
+            }
+        });
+
+        function upload(img) {
+            let form_data = new FormData();
+            form_data.append('file', img.files[0]);
+            form_data.append('csrf-token', '{{csrf_token()}}');
+
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+            $.ajax({
+                beforeSend: function (xhr) {
+                    xhr.setRequestHeader('X-CSRF-TOKEN', $("#token").attr('content'));
+                },
+                url: '/file-upload',
+                data: form_data,
+                type: 'POST',
+                contentType: false,
+                processData: false,
+                success: function (data) {
+                    if (data !== '') {
+                        $('#file_container').append($('<input type="hidden" name="file_address_ids[]" id="file_address_ids" value="'+data+'"/>'));
+                    }
+                },
+                error: function (xhr, status, error) {
+                    console.log(error);
+                    console.log(status);
+                },
+            });
+        }
     });
 }
