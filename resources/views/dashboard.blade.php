@@ -143,6 +143,7 @@
                             <input type="hidden" name="_token" value="{{ Session::token() }}">
                             <input type="hidden" name="filing_id" id="filing_id"/>
                             <input type="hidden" name="filing_original_name" id="filing_original_name"/>
+                            <input type="hidden" name="main_filing_id" id="main_filing_id" value="" />
                             <div class="modal fade" id="modal_get_filings">
                                 <div class="modal-dialog" role="document">
                                     <div class="get_files_modal modal-content">

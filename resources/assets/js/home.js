@@ -114,11 +114,23 @@ $(document).ready(function () {
             },
 
             success: function (data) {
-                let tableRow = '';
-                for (let i = 0; i < data.length; i++) {
+                let fileType = '';
+                if (data.mainFiling.file_type === 'oop') {
+                     fileType = 'Order of Possession';
+                } else if (data.mainFiling.file_type === 'ltc'){
+                     fileType = 'Eviction';
+                } else {
+                     fileType = 'Civil Complaint';
+                }
+
+                let tableRow = '<tr>' +
+                    '<td class="text-center">' + data.mainFiling.id + '</td> ' +
+                    '<td class="text-center"><button type="submit" class="get_file btn btn-primary" id="main_file_'+data.mainFiling.id+'">' + fileType + '</button></td> ' +
+                    '</tr>';
+                for (let i = 0; i < data.filings.length; i++) {
                     tableRow += '<tr>' +
-                        '<td class="text-center">' + data[i].id + '</td> ' +
-                        '<td class="text-center"><button type="submit" class="get_file btn btn-primary" id="file_address_'+data[i].file_address+'">' + data[i].original_file_name + '</button></td> ' +
+                        '<td class="text-center">' + data.filings[i].id + '</td> ' +
+                        '<td class="text-center"><button type="submit" class="get_file btn btn-primary" id="file_address_'+data.filings[i].file_address+'">' + data.filings[i].original_file_name + '</button></td> ' +
                         '</tr>';
                 }
                 $('.get_files_title').empty().text('Filings: ');
@@ -195,6 +207,10 @@ $(document).ready(function () {
          let id = $(this)[0].id;
          let splitId = id.split('_');
          let filingName = splitId[2];
+         if (splitId[0] === 'main') {
+             console.log(splitId);
+             $('#main_filing_id').val(filingName);
+         }
 
          $('#filing_original_name').val(filingName);
      });
