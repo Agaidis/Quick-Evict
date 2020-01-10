@@ -38,7 +38,7 @@ class FileStorageController extends Controller {
             Log::info($_POST['filing_id']);
             $filings = FileAddress::where('file_address', $_POST['filing_original_name'])->first();
 
-            return Response::download(storage_path("app/public/" . $filings->file_address));
+            return Response::download(storage_path("app/public/extra_files/" . $filings->file_address));
            // return Storage::disk('public')->download(storage_path("app/public/".$filings->filing_address));
 
         } catch ( Exception $e ) {
@@ -54,7 +54,7 @@ class FileStorageController extends Controller {
             $md5Name = md5_file($request->file('file')->getRealPath());
             $guessExtension = $request->file('file')->guessExtension();
             $fileAddress = $request->file('file')->getClientOriginalName() .'-' . rand() . '-' .$md5Name.'.'.$guessExtension;
-            $request->file('file')->storeAs('app/public', $fileAddress );
+            $request->file('file')->storeAs('extra_files', $fileAddress );
 
             $newFiling = new FileAddress();
             $newFiling->file_address = $fileAddress;
