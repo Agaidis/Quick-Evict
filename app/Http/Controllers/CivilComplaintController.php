@@ -274,11 +274,15 @@ class CivilComplaintController extends Controller
 
             $signature->save();
 
-            foreach ($_POST['file_address_ids'] as $fileAddressId) {
-                DB::table('file_addresses')
-                    ->where('id', $fileAddressId)
-                    ->update(['filing_id' => $evictionId]);
+            if (isset($_POST['file_address_ids'])) {
+                foreach ($_POST['file_address_ids'] as $fileAddressId) {
+                    DB::table('file_addresses')
+                        ->where('id', $fileAddressId)
+                        ->update(['filing_id' => $evictionId]);
+                }
             }
+
+
 
             try {
                 $token = $_POST['stripeToken'];

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\ErrorLog;
 use Illuminate\Http\Request;
 use App\Evictions;
 use Dompdf\Options;
@@ -51,11 +52,10 @@ class DashboardController extends Controller
 
             return view('dashboard' , compact('evictions'));
         } catch (\Exception $e) {
-            $errorDetails = 'DashboardController - error in store() method when attempting to store magistrate';
-            $errorDetails .= PHP_EOL . 'File: ' . $e->getFile();
-            $errorDetails .= PHP_EOL . 'Line #' . $e->getLine();
-            \Log::error($errorDetails . PHP_EOL . 'Error Message: ' . $e->getMessage() . PHP_EOL . 'Trace: ' . $e->getTraceAsString());
-            mail('andrew.gaidis@gmail.com', 'Showing Home Page', $errorDetails);
+            $errorMsg = new ErrorLog();
+            $errorMsg->payload = $e->getMessage() . ' Line #: ' . $e->getLine();
+
+            $errorMsg->save();
         }
 
     }
@@ -69,11 +69,10 @@ class DashboardController extends Controller
 
             return 'success';
         } catch (\Exception $e) {
-            $errorDetails = 'DashboardController - error in store() method when attempting to store magistrate';
-            $errorDetails .= PHP_EOL . 'File: ' . $e->getFile();
-            $errorDetails .= PHP_EOL . 'Line #' . $e->getLine();
-            Log::error($errorDetails . PHP_EOL . 'Error Message: ' . $e->getMessage() . PHP_EOL . 'Trace: ' . $e->getTraceAsString());
-            mail('andrew.gaidis@gmail.com', 'Changing Status', $errorDetails);
+            $errorMsg = new ErrorLog();
+            $errorMsg->payload = $e->getMessage() . ' Line #: ' . $e->getLine();
+
+            $errorMsg->save();
         }
     }
 
@@ -91,11 +90,10 @@ class DashboardController extends Controller
             return 'success';
 
         } catch (\Exception $e) {
-            $errorDetails = 'DashboardController - error in store() method when attempting to store court date';
-            $errorDetails .= PHP_EOL . 'File: ' . $e->getFile();
-            $errorDetails .= PHP_EOL . 'Line #' . $e->getLine();
-            Log::error($errorDetails . PHP_EOL . 'Error Message: ' . $e->getMessage() . PHP_EOL . 'Trace: ' . $e->getTraceAsString());
-            mail('andrew.gaidis@gmail.com', 'store court date', $errorDetails);
+            $errorMsg = new ErrorLog();
+            $errorMsg->payload = $e->getMessage() . ' Line #: ' . $e->getLine();
+
+            $errorMsg->save();
         }
         return 'success';
     }
@@ -160,13 +158,10 @@ class DashboardController extends Controller
 
             return 'success';
         } catch (Exception $e) {
-            $errorDetails = 'DashboardController - error in downloadpdf() method when attempting to download previous eviction';
-            $errorDetails .= PHP_EOL . 'File: ' . $e->getFile();
-            $errorDetails .= PHP_EOL . 'Line #' . $e->getLine();
-            $errorDetails .= PHP_EOL . 'Message ' .  $e->getMessage();
-            Log::error($errorDetails . PHP_EOL . 'Error Message: ' . $e->getMessage() . PHP_EOL . 'Trace: ' . $e->getTraceAsString());
-            mail('andrew.gaidis@gmail.com', 'Showing Dashboard Page', $errorDetails);
-            return 'failure';
+            $errorMsg = new ErrorLog();
+            $errorMsg->payload = $e->getMessage() . ' Line #: ' . $e->getLine();
+
+            $errorMsg->save();
         }
     }
 

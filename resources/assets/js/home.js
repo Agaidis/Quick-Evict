@@ -85,6 +85,12 @@ $(document).ready(function () {
         } else {
 
         }
+    }).on('click', '.pdf_download_btn_dashboard', function () {
+        let id = $(this)[0].id;
+        let splitId = id.split('_');
+        console.log(splitId);
+
+        $('#download_id').val(splitId[2]);
     }).on('click', '.get_filings', function () {
         let id = $(this)[0].id;
         let splitId = id.split('_');

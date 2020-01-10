@@ -43234,6 +43234,11 @@ $(document).ready(function () {
         }
       });
     } else {}
+  }).on('click', '.pdf_download_btn_dashboard', function () {
+    var id = $(this)[0].id;
+    var splitId = id.split('_');
+    console.log(splitId);
+    $('#download_id').val(splitId[2]);
   }).on('click', '.get_filings', function () {
     var id = $(this)[0].id;
     var splitId = id.split('_');
