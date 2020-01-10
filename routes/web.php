@@ -70,12 +70,11 @@ Route::post('/userManagement/changeCourt', 'UserManagementController@changeCourt
 
 Route::post('/get-signature-type', 'EvictionController@getDigitalSignature')->middleware('auth');
 
-
 Route::get('/store', 'FileStorageController@testFile')->middleware('auth');
-
 Route::post('/get-filings', 'FileStorageController@getFilings')->middleware('auth');
 Route::post('/download-filings', 'FileStorageController@downloadFilings')->middleware('auth');
 Route::post('/file-upload', 'FileStorageController@storeFile')->middleware('auth');
+
 
 Route::get('command/migrate', function () {
     $exitCode = \Artisan::call('migrate');
