@@ -43137,6 +43137,7 @@ if (document.location.href.split('/')[3] === 'new-file') {
         processData: false,
         success: function success(data) {
           if (data !== '') {
+            $('#is_extra_filing').val(1);
             $('#file_container').append($('<input type="hidden" name="file_address_ids[]" id="file_address_ids" value="' + data + '"/>'));
           }
         },
@@ -43233,7 +43234,7 @@ $(document).ready(function () {
         }
       });
     } else {}
-  }).on('click', '.pdf_download_btn_dashboard', function () {
+  }).on('click', '.get_filings', function () {
     var id = $(this)[0].id;
     var splitId = id.split('_');
     $('#download_id').val(splitId[2]);
@@ -43246,14 +43247,20 @@ $(document).ready(function () {
       beforeSend: function beforeSend(xhr) {
         xhr.setRequestHeader('X-CSRF-TOKEN', $("#token").attr('content'));
       },
-      type: "GET",
+      type: "POST",
       url: '/get-filings',
-      dataType: 'json',
       data: {
-        id: splitId[1]
+        id: splitId[2]
       },
       success: function success(data) {
-        console.log(data);
+        var tableRow = '';
+
+        for (var i = 0; i < data.length; i++) {
+          tableRow += '<tr>' + '<td class="text-center">' + data[i].id + '</td> ' + '<td class="text-center"><button type="submit" class="get_file btn btn-primary" id="file_address_' + data[i].file_address + '">' + data[i].original_file_name + '</button></td> ' + '</tr>';
+        }
+
+        $('.get_files_title').empty().text('Filings: ');
+        $('#filing_body').empty().append(tableRow);
       },
       error: function error(data) {
         console.log(data);
@@ -43311,6 +43318,12 @@ $(document).ready(function () {
         console.log(data);
       }
     });
+  });
+  $('#filing_body').on('click', '.get_file', function () {
+    var id = $(this)[0].id;
+    var splitId = id.split('_');
+    var filingName = splitId[2];
+    $('#filing_original_name').val(filingName);
   });
 });
 

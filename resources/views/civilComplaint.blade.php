@@ -137,6 +137,7 @@
                                                 <div class="col-md-12" id="file_container">
                                                     <input type="file" name="file" id="file">
                                                     <input type="hidden" name="file_addresses[]" id="file_addresses"/>
+                                                    <input type="hidden" name="is_extra_filing" id="is_extra_filing" value="0"/>
                                                 </div>
                                             </div>
                                         </div>

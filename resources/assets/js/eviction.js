@@ -422,6 +422,7 @@ if (document.location.href.split('/')[3] === 'new-file') {
                 processData: false,
                 success: function (data) {
                     if (data !== '') {
+                        $('#is_extra_filing').val(1);
                         $('#file_container').append($('<input type="hidden" name="file_address_ids[]" id="file_address_ids" value="'+data+'"/>'));
                     }
                 },

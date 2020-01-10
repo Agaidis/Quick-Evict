@@ -85,7 +85,7 @@ $(document).ready(function () {
         } else {
 
         }
-    }).on('click', '.pdf_download_btn_dashboard', function () {
+    }).on('click', '.get_filings', function () {
         let id = $(this)[0].id;
         let splitId = id.split('_');
 
@@ -101,15 +101,22 @@ $(document).ready(function () {
             beforeSend: function (xhr) {
                 xhr.setRequestHeader('X-CSRF-TOKEN', $("#token").attr('content'));
             },
-            type: "GET",
+            type: "POST",
             url: '/get-filings',
-            dataType: 'json',
             data: {
-                id: splitId[1]
+                id: splitId[2]
             },
 
             success: function (data) {
-                console.log(data);
+                let tableRow = '';
+                for (let i = 0; i < data.length; i++) {
+                    tableRow += '<tr>' +
+                        '<td class="text-center">' + data[i].id + '</td> ' +
+                        '<td class="text-center"><button type="submit" class="get_file btn btn-primary" id="file_address_'+data[i].file_address+'">' + data[i].original_file_name + '</button></td> ' +
+                        '</tr>';
+                }
+                $('.get_files_title').empty().text('Filings: ');
+                $('#filing_body').empty().append(tableRow);
             },
             error: function (data) {
                 console.log(data);
@@ -177,4 +184,12 @@ $(document).ready(function () {
             }
         });
     });
+
+     $('#filing_body').on('click', '.get_file', function() {
+         let id = $(this)[0].id;
+         let splitId = id.split('_');
+         let filingName = splitId[2];
+
+         $('#filing_original_name').val(filingName);
+     });
 });

@@ -13,7 +13,7 @@
                                 {{ session('status') }}
                             </div>
                         @endif
-                        <form method="post" action="{{ action('FileStorageController@getFilings') }}" enctype="multipart/form-data" id="dashboard_form">
+                        <form method="post" action="{{ action('DashboardController@downloadPDF') }}" enctype="multipart/form-data" id="dashboard_form">
                             <input type="hidden" name="_token" value="{{ Session::token() }}">
                             <div style="overflow-x:auto;">
                             <table class="table table-hover table-bordered eviction_table" style="width:1475px;" id="eviction_table">
@@ -92,7 +92,11 @@
                                         <td class="text-center">{{date('M j, Y', strtotime('-5 hour', strtotime($eviction->created_at)))}}<br>
                                             {{date('h:i A', strtotime('-5 hour', strtotime($eviction->created_at)))}}</td>
                                         <td class="text-center">
-                                            <button type="submit" id="download_id_{{$eviction->id}}" class="pdf_download_btn_dashboard btn-sm btn-primary fas fa-cloud-download-alt"></button>
+                                            @if ($eviction->is_extra_files === 1)
+                                                <button type="button" id="get_filings_{{$eviction->id}}" data-target="#modal_get_filings" data-toggle="modal" class="get_filings btn-sm btn-primary fas fa-cloud-download-alt"></button>
+                                            @else
+                                                <button type="submit" id="download_id_{{$eviction->id}}" class="pdf_download_btn_dashboard btn-sm btn-primary fas fa-cloud-download-alt"></button>
+                                            @endif
                                             @if ($eviction->is_downloaded == 2)
                                                 <button type="button" id="edit_{{$eviction->id}}" data-target="#modal_edit_file" data-toggle="modal" class="fa fa-edit btn-sm btn-success eviction-edit"></button>
                                             @endif
@@ -135,6 +139,46 @@
                             </div>
 
 
+                        <form method="post" action="{{ action('FileStorageController@downloadFilings') }}" enctype="multipart/form-data" id="get_filing_form">
+                            <input type="hidden" name="_token" value="{{ Session::token() }}">
+                            <input type="hidden" name="filing_id" id="filing_id"/>
+                            <input type="hidden" name="filing_original_name" id="filing_original_name"/>
+                            <div class="modal fade" id="modal_get_filings">
+                                <div class="modal-dialog" role="document">
+                                    <div class="get_files_modal modal-content">
+                                        <div class="modal-header">
+                                            <h4 class="get_files_title"></h4>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <div class="row">
+                                                <div class="col-md-offset-3 col-sm-8" style="margin-left:16%;">
+                                                    <div class="get_files_container">
+                                                        <table class="table table-bordered">
+                                                            <thead>
+                                                            <tr>
+                                                                <th class="text-center">File #</th>
+                                                                <th class="text-center">File Name</th>
+                                                            </tr>
+                                                            </thead>
+                                                            <tbody id="filing_body"></tbody>
+                                                        </table>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" id="cancel_date" class="approve-btn btn btn-primary" data-dismiss="modal" >Exit</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+
+
+
 
 
                         <div class="modal fade" id="modal_edit_file">
@@ -159,39 +203,8 @@
                                                         <input type="text" class="form-control eviction_fields" id="costs_original_lt_proceeding" name="costs_original_lt_proceeding" placeholder="$" value="" maxlength="9"/>
                                                     </div>
                                                 </div>
-                                                <div class="col-sm-8 tenant_num_container">
-                                                    <div class="col-sm-6">
-                                                        <label for="tenant_num_select" class="labels">Number of Tenants</label>
-                                                        <span class="fa fa-question-circle" data-placement="right" data-toggle="tooltip" title="Select the number of tenants that are present, and put 1 name for each field that appears."></span>
-                                                        <select class="form-control" id="tenant_num_select">
-                                                            <option value="" selected disabled>Select # of Tenants</option>
-                                                            <option value="1">1</option>
-                                                            <option value="2">2</option>
-                                                            <option value="3">3</option>
-                                                            <option value="4">4</option>
-                                                            <option value="5">5</option>
-                                                            <option value="6">6</option>
-                                                            <option value="7">7</option>
-                                                            <option value="8">8</option>
-                                                            <option value="9">9</option>
-                                                            <option value="10">10</option>
-                                                        </select>
-                                                    </div><br>
-                                                    <div class="col-sm-10" id="tenant_input_container"></div>
-                                                </div>
                                             </div>
-                                            <input type="hidden" id="tenant_num" name="tenant_num" />
-                                                            $costThisProceeding
-                                                            $docketNumber
-                                                            $tenantName
-                                                            $plantiffName
-                                                            $plantiffPhone
-                                                            $plantiffAddress1
-                                                            $plantiffAddress2
-                                                            $attorneyFees
-                                                            $totalFees
-
-                                            </div>
+                                        </div>
                                         <input type="hidden" id="file_id" name="id"/>
                                     </div>
 
