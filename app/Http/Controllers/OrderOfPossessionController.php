@@ -10,6 +10,7 @@ use GMaps;
 use App\CourtDetails;
 use App\Evictions;
 use App\Signature;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use Exception;
 use Stripe\Stripe;
@@ -275,6 +276,7 @@ class OrderOfPossessionController extends Controller
                 $eviction->filing_fee = number_format($filingFee, 2);
                 $eviction->pm_company_name = $_POST['other_name'];
                 $eviction->file_type = 'oop';
+                $eviction->is_extra_files = $_POST['is_extra_filing'];
 
                 $eviction->save();
 
@@ -285,6 +287,14 @@ class OrderOfPossessionController extends Controller
                 $signature->signature = $_POST['signature_source'];
 
                 $signature->save();
+
+                if (isset($_POST['file_address_ids'])) {
+                    foreach ($_POST['file_address_ids'] as $fileAddressId) {
+                        DB::table('file_addresses')
+                            ->where('id', $fileAddressId)
+                            ->update(['filing_id' => $evictionId]);
+                    }
+                }
 
                 try {
                     $token = $_POST['stripeToken'];

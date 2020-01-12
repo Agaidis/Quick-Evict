@@ -14,6 +14,7 @@ use App\CourtDetails;
 use App\Evictions;
 use App\Signature;
 use App\Classes\Mailer;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Session;
 use stdClass;
@@ -490,6 +491,7 @@ class EvictionController extends Controller
                 $eviction->verify_name = $verifyName;
                 $eviction->user_id = Auth::user()->id;
                 $eviction->file_type = 'eviction';
+                $eviction->is_extra_files = $_POST['is_extra_filing'];
 
                 $eviction->save();
 
@@ -500,6 +502,14 @@ class EvictionController extends Controller
                 $signature->signature = $_POST['signature_source'];
 
                 $signature->save();
+
+                if (isset($_POST['file_address_ids'])) {
+                    foreach ($_POST['file_address_ids'] as $fileAddressId) {
+                        DB::table('file_addresses')
+                            ->where('id', $fileAddressId)
+                            ->update(['filing_id' => $evictionId]);
+                    }
+                }
 
                 try {
                     $token = $_POST['stripeToken'];
