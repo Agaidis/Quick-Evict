@@ -79,8 +79,8 @@ class OrderOfPossessionController extends Controller
                 $oop = $courtDetails->one_defendant_out_of_pocket;
             } else {
                 $oop = $courtDetails->three_defendant_out_of_pocket;
-                if ($courtDetails->additional_tenant != '' && $courtDetails->additional_tenant != 0 ) {
-                    $additionalTenantAmt = $courtDetails->additional_tenant;
+                if ($courtDetails->oop_additional_tenant_fee != '' && $courtDetails->oop_additional_tenant_fee != 0 ) {
+                    $additionalTenantAmt = $courtDetails->oop_additional_tenant_fee;
                 }
             }
 
