@@ -261,9 +261,21 @@
                                         <h4 class="major_labels">Additional Info</h4>
                                         <div class="three_defendant_container">
                                             <div class="col-sm-12">
-                                                <label for="additional_tenants">Additional Tenant $</label>
+                                                <label for="additional_tenants">LTC Additional Tenant $</label>
                                                 <input placeholder="$" type="text" class="form-control" id="additional_tenants" name="additional_tenants" value="" />
                                             </div>
+                                            <div class="col-md-12">
+                                                <label for="additional_tenants">OOP Additional Tenant $</label>
+                                                <input placeholder="$" type="text" class="form-control" id="oop_additional_tenant_fee" name="oop_additional_tenant_fee" value="" />
+                                            </div>
+                                            <div class="col-md-12">
+                                                <label for="additional_tenants">CIVIL MAIL Additional Tenant $</label>
+                                                <input placeholder="$" type="text" class="form-control" id="civil_mail_additional_tenant_fee" name="civil_mail_additional_tenant_fee" value="" />
+
+                                                <label for="additional_tenants">CIVIL CONSTABLE Additional Tenant $</label>
+                                                <input placeholder="$" type="text" class="form-control" id="civil_constable_additional_tenant_fee" name="civil_constable_additional_tenant_fee" value="" />
+                                            </div>
+
                                             <div class="col-sm-12"><br><br>
                                                 <input type="checkbox" checked id="is_digital_signature_allowed" name="is_digital_signature_allowed" />
                                                 <label for="is_digital_signature_allowed">Is Digital Signature Allowed?</label>
@@ -424,6 +436,17 @@
                                                             <div class="col-sm-12">
                                                                 <label for="additional_tenants">Additional Tenant $</label>
                                                                 <input placeholder="$" type="text" class="form-control" id="edit_additional_tenants" name="edit_additional_tenants" value="" />
+                                                            </div>
+                                                            <div class="col-md-12">
+                                                                <label for="additional_tenants">OOP Additional Tenant $</label>
+                                                                <input placeholder="$" type="text" class="form-control" id="edit_oop_additional_tenant_fee" name="edit_oop_additional_tenant_fee" value="" />
+                                                            </div>
+                                                            <div class="col-md-12">
+                                                                <label for="additional_tenants">CIVIL MAIL Additional Tenant $</label>
+                                                                <input placeholder="$" type="text" class="form-control" id="edit_civil_mail_additional_tenant_fee" name="edit_civil_mail_additional_tenant_fee" value="" />
+
+                                                                <label for="additional_tenants">CIVIL CONSTABLE Additional Tenant $</label>
+                                                                <input placeholder="$" type="text" class="form-control" id="edit_civil_constable_additional_tenant_fee" name="edit_civil_constable_additional_tenant_fee" value="" />
                                                             </div>
                                                             <div class="col-sm-12"><br><br>
                                                                 <input type="checkbox" id="edit_is_digital_signature_allowed" name="edit_is_digital_signature_allowed" />
