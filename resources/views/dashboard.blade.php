@@ -36,22 +36,33 @@
                                 @if (isset($evictions))
                                 @foreach ($evictions as $eviction)
                                     <?php $propertyAddressArray = explode('-1', $eviction->property_address);
-                                        $statusArray = array('Created LTC', 'Created OOP', 'Created Civil Complaint',
-                                            'LTC Mailed',
-                                            'LTC Submitted Online',
-                                            'Waiting on AOR',
-                                            'Court Hearing Scheduled',
-                                            'Court Hearing Extended',
-                                            'Court Hearing Rescheduled',
-                                            'Judgement Issued in Favor of Owner',
-                                            'Judgement Denied by Court',
-                                            'Tenant Filed Appeal',
-                                            'OOP Scheduled',
-                                            'OOP Mailed',
-                                            'OOP Submitted Online',
-                                            'Paid Judgement',
-                                            'Case Withdrawn',
-                                            'Locked Out Tenant');?>
+                                    $ltcStatusArray = array('Created LTC',
+                                        'LTC Mailed',
+                                        'LTC Submitted Online',
+                                        'Court Hearing Scheduled',
+                                        'Court Hearing Extended',
+                                        'Court Hearing Rescheduled',
+                                        'Judgement Issued in Favor of Owner',
+                                        'Judgement Denied by Court','Tenant Filed Appeal',
+                                        'OOP Submitted Online',
+                                        'Paid Judgement',
+                                        'Case Withdrawn');
+
+                                    $oopStatusArray = array('Created OOP',
+                                        'OOP Mailed',
+                                        'OOP Submitted Online',
+                                        'Lockout Scheduled',
+                                        'Locked Out Tenant',
+                                        'Paid Judgement',
+                                        'Case Withdrawn');
+
+                                    $civilStatusArray = array('Civil Filed Online',
+                                        'Civil Hearing Scheduled',
+                                        'Civil Hearing Rescheduled',
+                                        'Civil Hearing Extended',
+                                        'Judgment Issued');
+
+                                        ?>
                                     <tr>
                                         <td class="text-center">{{$eviction->id}}</td>
                                         <td class="text-center">
@@ -66,13 +77,32 @@
                                         <td class="text-center">{{$eviction->tenant_name}}</td>
                                         <td style="width:150px;">
                                             <select title="status" class="form-control status_select" id="status_{{$eviction->id}}">
-                                            @foreach ($statusArray as $status)
-                                                @if ($status == $eviction->status)
-                                                        <option value="{{$status}}" selected>{{$status}}</option>
-                                                    @else
-                                                        <option value="{{$status}}">{{$status}}</option>
-                                                    @endif
-                                                @endforeach
+                                                @if ($eviction->file_type == 'eviction')
+                                                    @foreach ($ltcStatusArray as $status)
+                                                        @if ($status == $eviction->status)
+                                                            <option value="{{$status}}" selected>{{$status}}</option>
+                                                        @else
+                                                            <option value="{{$status}}">{{$status}}</option>
+                                                        @endif
+                                                    @endforeach
+                                                @elseif ($eviction->file_type === 'civil')
+                                                    @foreach ($civilStatusArray as $status)
+                                                        @if ($status == $eviction->status)
+                                                            <option value="{{$status}}" selected>{{$status}}</option>
+                                                        @else
+                                                            <option value="{{$status}}">{{$status}}</option>
+                                                        @endif
+                                                    @endforeach
+                                                @elseif ($eviction->file_type === 'oop')
+                                                    @foreach ($oopStatusArray as $status)
+                                                        @if ($status == $eviction->status)
+                                                            <option value="{{$status}}" selected>{{$status}}</option>
+                                                        @else
+                                                            <option value="{{$status}}">{{$status}}</option>
+                                                        @endif
+                                                    @endforeach
+                                                @endif
+
                                             </select>
                                         </td>
                                         <td class="text-center">
@@ -100,7 +130,10 @@
                                             @if ($eviction->is_downloaded == 2)
                                                 <button type="button" id="edit_{{$eviction->id}}" data-target="#modal_edit_file" data-toggle="modal" class="fa fa-edit btn-sm btn-success eviction-edit"></button>
                                             @endif
-                                            <button type="button" id="id_{{$eviction->id}}_{{$propertyAddressArray[0]}}" class="fa fa-trash btn-sm btn-danger eviction-remove"></button>
+
+                                                @if ($userRole != 'Court')
+                                                    <button type="button" id="id_{{$eviction->id}}_{{$propertyAddressArray[0]}}" class="fa fa-trash btn-sm btn-danger eviction-remove"></button>
+                                                @endif
                                         </td>
 
                                     </tr>

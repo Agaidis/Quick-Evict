@@ -37,12 +37,7 @@
                                                         <h4 class="address_display_div"><b>Address</b>: <span id="display_address"></span></h4>
                                                     </div>
                                                 </div>
-                                                <div class="row">
-                                                    <div class="col-sm-3">
-                                                        <label class="labels" for="zipcode">Verify Zipcode: </label>
-                                                        <input type="text" class="form-control eviction_fields" placeholder="07753" id="zipcode" name="zipcode" maxlength="11"/>
-                                                    </div>
-                                                </div>
+                                                <input type="hidden" id="zipcode" name="zipcode"/>
                                                 <div class="row">
                                                     <div class="col-sm-4">
                                                         <label class="labels" for="unit_number">Additional Address Detail</label>
@@ -54,7 +49,7 @@
                                                     <div class="col-sm-8 tenant_num_container">
                                                         <div class="col-sm-6">
                                                             <label for="tenant_num_select" class="labels">Number of Tenants</label>
-                                                            <span class="fa fa-question-circle" data-placement="right" data-toggle="tooltip" title="Select the number of tenants that are present, and put 1 name for each field that appears."></span>
+                                                            <span class="fa fa-question-circle" data-placement="right" data-toggle="tooltip" title="Select the Number of Tenants, and put 1 name in each field that appears."></span>
                                                             <select class="form-control" id="tenant_num_select">
                                                                 <option value="" selected disabled>Select # of Tenants</option>
                                                                 <option value="1">1</option>
@@ -105,7 +100,7 @@
                                                     <div class="col-sm-6">
                                                         <div class="labels">Property Owner</div>
                                                         <input checked type="radio" id="rented_by_owner" value="rentedByOwner" name="rented_by">
-                                                        <label for="rented_by_owner">Owner self-filing this request</label><br>
+                                                        <label for="rented_by_owner">Owner self-filing</label><br>
                                                         <div id="rented_by_owner_div">
                                                             <div class="col-sm-8">
                                                                 <label class="labels">Owner Address Line 1</label>
@@ -157,7 +152,7 @@
                                                                 <input type="text" class="form-control eviction_fields" id="judgment_amount" name="judgment_amount" placeholder="$" value="" maxlength="9" />
                                                             </div>
                                                             <div class="col-sm-10">
-                                                                <label for="attorney_fees">Costs in Original LT Proceeding</label>
+                                                                <label for="attorney_fees">Filing Fees in Original LTC</label>
                                                                 <input type="text" class="form-control eviction_fields" id="costs_original_lt_proceeding" name="costs_original_lt_proceeding" placeholder="$" value="" maxlength="9"/>
                                                             </div>
                                                             <div class="col-sm-10">

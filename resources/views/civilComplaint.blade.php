@@ -34,12 +34,7 @@
                                                         <h4 class="address_display_div"><b>Address</b>: <span id="display_address"></span></h4>
                                                     </div>
                                                 </div>
-                                                <div class="row">
-                                                    <div class="col-sm-3">
-                                                        <label class="labels" for="zipcode">Verify Zipcode: </label>
-                                                        <input type="text" class="form-control eviction_fields" placeholder="07753" id="zipcode" name="zipcode" maxlength="11"/>
-                                                    </div>
-                                                </div>
+                                                <input type="hidden" id="zipcode" name="zipcode"/>
                                                 <div class="row">
                                                     <div class="col-sm-4">
                                                         <label class="labels" for="unit_number">Additional Address Detail</label>
@@ -48,7 +43,7 @@
                                                 </div>
                                                 <div class="row">
                                                     <div class="civil_delivery_type_container col-md-6">
-                                                        <h4>How was the Complaint Delivered?</h4>
+                                                        <h4>How would you like complaint served?</h4>
                                                         <label for="mail_delivery_type">Mail</label>
                                                         <input checked type="radio" id="mail_delivery_type" value="mail" name="delivery_type"><br>
                                                         <label for="constable_delivery_type">Constable</label>
