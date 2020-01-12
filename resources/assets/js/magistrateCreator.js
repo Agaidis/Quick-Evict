@@ -70,6 +70,7 @@ $(document).ready(function () {
 
             success: function (data) {
                 console.log(data);
+                console.log(data[1].oop_additional_tenant_fee);
                 $('#db_geo_id').val(data[0][0].id);
                 $('#db_court_id').val(data[1].id);
 

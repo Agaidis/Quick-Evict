@@ -43627,6 +43627,7 @@ $(document).ready(function () {
       },
       success: function success(data) {
         console.log(data);
+        console.log(data[1].oop_additional_tenant_fee);
         $('#db_geo_id').val(data[0][0].id);
         $('#db_court_id').val(data[1].id);
         $('#edit_court_id').val(data[1].court_number);
@@ -43652,6 +43653,9 @@ $(document).ready(function () {
         $('#edit_additional_tenants').val(data[1].additional_tenant);
         $('#edit_geo_locations').val(data[0][0].geo_locations);
         $('#edit_online_submission').val(data[1].online_submission);
+        $('#edit_oop_additional_tenant_fee').val(data[1].oop_additional_tenant_fee);
+        $('#edit_civil_mail_additional_tenant_fee').val(data[1].civil_mail_additional_tenant_fee);
+        $('#edit_civil_constable_additional_tenant_fee').val(data[1].civil_constable_additional_tenant_fee);
 
         if (data[2] !== 'empty') {
           console.log('im in here');
@@ -43774,6 +43778,9 @@ $(document).ready(function () {
         threeOver4000: $('#edit_three_over_4000').val(),
         threeOOP: $('#edit_three_oop').val(),
         additionalTenant: $('#edit_additional_tenants').val(),
+        oopAdditionalTenant: $('#edit_oop_additional_tenant_fee').val(),
+        civilMailedAdditionalTenant: $('#edit_civil_mail_additional_tenant_fee').val(),
+        civilConstableAdditionalTenant: $('#edit_civil_constable_additional_tenant_fee').val(),
         geoLocations: $('#edit_geo_locations').val(),
         digitalSignature: $('#edit_digital_signature').val(),
         onlineSubmission: $('#edit_online_submission').val(),
