@@ -434,7 +434,7 @@
                                                         <h4 class="major_labels">Additional Info</h4>
                                                         <div class="three_defendant_container">
                                                             <div class="col-sm-12">
-                                                                <label for="additional_tenants">Additional Tenant $</label>
+                                                                <label for="additional_tenants">LTC Additional Tenant $</label>
                                                                 <input placeholder="$" type="text" class="form-control" id="edit_additional_tenants" name="edit_additional_tenants" value="" />
                                                             </div>
                                                             <div class="col-md-12">
