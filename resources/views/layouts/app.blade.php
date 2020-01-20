@@ -9,7 +9,7 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'Eviction Tech') }}</title>
+    <title>{{ config('app.name', 'CourtZip') }}</title>
     <link rel="icon" href="https://quickevict.nyc3.digitaloceanspaces.com/ziplogo.png"/>
 
     <!-- Scripts -->
@@ -77,6 +77,7 @@
                             <div style="margin-left:-15px;" class="dropdown-menu" aria-labelledby="navbarDropdown">
                                 @if (Auth::user()->role == 'Administrator')
                                 <a class="dropdown-item" href="{{ url('magistrateCreator') }}" id="magistrate_btn">Magistrate Creator</a>
+                                    <a class="dropdown-item" href="{{ url('generalAdmin') }}" id="admin_btn">General Admin</a>
                                     <a class="dropdown-item" href="{{ url('userManagement') }}" id="user_management_btn">Manage Users</a>
                                 @endif
                                 <a class="dropdown-item" href="{{ route('logout') }}"

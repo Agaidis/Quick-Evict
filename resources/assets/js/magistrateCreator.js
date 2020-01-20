@@ -4,6 +4,8 @@
 
 $(document).ready(function () {
 
+
+    //      DIGITAL SIGNATURE
     $('#digital_signature').val(1);
     $('#is_digital_signature_allowed').on('change', function () {
         if (document.getElementById("is_digital_signature_allowed").checked == true) {
@@ -17,6 +19,25 @@ $(document).ready(function () {
     $('#edit_is_digital_signature_allowed').on('change', function () {
         $('#edit_digital_signature').val(document.getElementById("edit_is_digital_signature_allowed").checked);
     });
+    /*              END DIGITAL SIGNATURE           */
+
+
+
+    //      DRIVING FEE
+    $('#driving_fee').val(0);
+    $('#is_driving_fee_allowed').on('change', function () {
+        if (document.getElementById("is_driving_fee_allowed").checked == true) {
+            $('#driving_fee').val(1);
+        } else {
+            $('#driving_fee').val(0);
+        }
+
+    });
+
+    $('#edit_is_driving_fee_allowed').on('change', function () {
+        $('#edit_driving_fee').val(document.getElementById("edit_is_driving_fee_allowed").checked);
+    });
+    /*              END DRIVING FEE         */
 
     $('#magistrate_table').DataTable( {
         "pagingType": "simple",
@@ -143,6 +164,10 @@ $(document).ready(function () {
                 if (data[1].digital_signature == 1) {
                     $('#edit_is_digital_signature_allowed').prop('checked', true);
                 }
+
+                if (data[1].driving_fee == 1) {
+                    $('#edit_is_driving_fee_allowed').prop('checked', true);
+                }
             },
             error: function (data) {
                 console.log(data);
@@ -191,11 +216,20 @@ $(document).ready(function () {
         });
 
 
-            if (document.getElementById("edit_is_digital_signature_allowed").checked == true) {
-                $('#edit_digital_signature').val(1);
-            } else {
-                $('#edit_digital_signature').val(0);
-            }
+
+        if (document.getElementById("edit_is_digital_signature_allowed").checked == true) {
+            $('#edit_digital_signature').val(1);
+        } else {
+            $('#edit_digital_signature').val(0);
+        }
+
+        if (document.getElementById("edit_is_driving_fee_allowed").checked == true) {
+            $('#edit_driving_fee').val(1);
+        } else {
+            $('#edit_driving_fee').val(0);
+        }
+
+
 
         $.ajax({
             beforeSend: function (xhr) {

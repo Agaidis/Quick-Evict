@@ -277,6 +277,11 @@
                                             </div>
 
                                             <div class="col-sm-12"><br><br>
+                                                <input type="checkbox" id="is_driving_fee_allowed" name="is_driving_fee_allowed" />
+                                                <label for="is_driving_fee_allowed">Is Driving Fee Included?</label>
+                                                <input type="hidden" id="driving_fee" name="driving_fee" />
+                                            </div>
+                                            <div class="col-sm-12"><br><br>
                                                 <input type="checkbox" checked id="is_digital_signature_allowed" name="is_digital_signature_allowed" />
                                                 <label for="is_digital_signature_allowed">Is Digital Signature Allowed?</label>
                                                 <input type="hidden" id="digital_signature" name="digital_signature" />
@@ -447,6 +452,11 @@
 
                                                                 <label for="additional_tenants">CIVIL CONSTABLE Additional Tenant $</label>
                                                                 <input placeholder="$" type="text" class="form-control" id="edit_civil_constable_additional_tenant_fee" name="edit_civil_constable_additional_tenant_fee" value="" />
+                                                            </div>
+                                                            <div class="col-sm-12"><br><br>
+                                                                <input type="checkbox" id="edit_is_driving_fee_allowed" name="edit_is_driving_fee_allowed" />
+                                                                <label for="edit_is_driving_fee_allowed">Is Driving Fee Allowed?</label>
+                                                                <input type="hidden" id="edit_driving_fee" name="edit_driving_fee" />
                                                             </div>
                                                             <div class="col-sm-12"><br><br>
                                                                 <input type="checkbox" id="edit_is_digital_signature_allowed" name="edit_is_digital_signature_allowed" />
