@@ -241,6 +241,7 @@
                                                         <h3 class="titles payment_title">Step 5:<br> Payment Information</h3>
                                                         <div class="price_ctr col-md-6">
                                                             <label>Court Filing Fee: $</label><span id="filing_fee_display"></span><br>
+                                                            <span id="distance_fee_container"><label>Calculated Distance Fee: $</label><span id="distance_fee_display"></span><br></span>
                                                             <label>CourtZip Filing Fee: </label><span> $16.99</span><br>
                                                             <label>Total: $</label><span id="total"></span>
                                                         </div>

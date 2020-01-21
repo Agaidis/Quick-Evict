@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\CivilUnique;
 use App\ErrorLog;
+use App\GeneralAdmin;
 use App\GeoLocation;
 use Illuminate\Http\Request;
 use App\CourtDetails;
@@ -83,6 +84,8 @@ class NewFileController extends Controller
             $removeValues = [' ', '$', ','];
             $tenantNum = (int)$_GET['tenant_num'];
             $courtDetails = CourtDetails::where('magistrate_id', $courtNumber[1])->first();
+
+            Log::info($courtDetails);
 
             if ($fileType == 'ltc') {
 
@@ -190,7 +193,34 @@ class NewFileController extends Controller
                     }
                 }
             }
-            return  $filingFee = number_format((float)$filingFee, 2, '.', '');
+
+            if ($courtDetails->is_distance_fee === 1) {
+                $geoData = GeoLocation::where('magistrate_id', $courtNumber[1])->first();
+
+                $courtAddress = $geoData->address_line_one . ' ' . $geoData->address_line_two;
+
+                $userAddress = $_GET['userAddress'];
+
+                $distance = $this->getDistance( $courtAddress, $userAddress );
+
+                $mileFee = GeneralAdmin::where('name', 'mile_fee')->value('value');
+
+                $calculatedFee = $distance * $mileFee;
+                $calculatedFee = number_format($calculatedFee, 2);
+            } else {
+                $courtAddress = '';
+                $mileFee = '';
+                $calculatedFee = '';
+            }
+
+            $response = array(
+                'filingFee' => number_format((float)$filingFee, 2, '.', ''),
+                'courtAddress' => $courtAddress,
+                'mileFee' => $mileFee,
+                'calculatedFee' => $calculatedFee
+            );
+
+            return $response;
 
         } catch ( Exception $e ) {
             $errorMsg = new ErrorLog();
@@ -204,6 +234,94 @@ class NewFileController extends Controller
             Log::error($errorDetails . PHP_EOL . 'Error Message: ' . $e->getMessage() . PHP_EOL . 'Trace: ' . $e->getTraceAsString());
             mail('andrew.gaidis@gmail.com', 'Get Filing Fee', $errorDetails);
             return 'failure';
+        }
+    }
+
+    public function getLatLngOfAddress($address) {
+
+        try {
+            // url encode the address
+            $address = urlencode($address);
+
+            // google map geocode api url
+            $url = "https://maps.googleapis.com/maps/api/geocode/json?address={$address}&key=AIzaSyAfPLSbGAHZkEd-8DDB0FcGSlhrV9LQMGM";
+
+            // get the json response
+            $resp_json = file_get_contents($url);
+
+            // decode the json
+            $resp = json_decode($resp_json, true);
+
+            Log::info($resp);
+
+            // response status will be 'OK', if able to geocode given address
+            if($resp['status']=='OK'){
+
+                // get the important data
+                $lati = isset($resp['results'][0]['geometry']['location']['lat']) ? $resp['results'][0]['geometry']['location']['lat'] : "";
+                $longi = isset($resp['results'][0]['geometry']['location']['lng']) ? $resp['results'][0]['geometry']['location']['lng'] : "";
+                $formatted_address = isset($resp['results'][0]['formatted_address']) ? $resp['results'][0]['formatted_address'] : "";
+
+                // verify if data is complete
+                if($lati && $longi && $formatted_address){
+
+                    // put the data in the array
+                    $data_arr = array();
+
+                    array_push(
+                        $data_arr,
+                        $lati,
+                        $longi,
+                        $formatted_address
+                    );
+
+                    return $data_arr;
+
+                } else{
+                    return false;
+                }
+
+            }
+
+            else{
+                echo "<strong>ERROR: {$resp['status']}</strong>";
+                return false;
+            }
+        } catch ( Exception $e ) {
+            $errorMsg = new ErrorLog();
+            $errorMsg->payload = $e->getMessage() . ' Line #: ' . $e->getLine();
+
+            $errorMsg->save();
+        }
+
+    }
+
+    public function getDistance($courtAddress, $userAddress) {
+
+        try {
+            // url encode the address
+            $courtAddress = urlencode($courtAddress);
+            $userAddress = urlencode($userAddress);
+
+            // google map geocode api url
+            $url = "https://maps.googleapis.com/maps/api/distancematrix/json?units=imperial&origins=".$courtAddress."&destinations=".$userAddress."&key=AIzaSyAfPLSbGAHZkEd-8DDB0FcGSlhrV9LQMGM";
+
+            // get the json response
+            $resp_json = file_get_contents($url);
+
+            // decode the json
+            $resp = json_decode($resp_json, true);
+
+            $mileage = $resp['rows'][0]['elements'][0]['distance']['text'];
+            $mileage = str_replace(' mi', '', $mileage);
+
+            return $mileage;
+
+        } catch( Exception $e ) {
+            $errorMsg = new ErrorLog();
+            $errorMsg->payload = $e->getMessage() . ' Line #: ' . $e->getLine();
+
+            $errorMsg->save();
         }
     }
 }

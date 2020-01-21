@@ -20,6 +20,15 @@
         let environmentPath = '{!! env('APP_URL') !!}';
     </script>
 
+    <script type="text/javascript">
+        function initMap(srcLocation, dstLocation){
+            srcLocation = new google.maps.LatLng(19.075984, 72.877656);
+            dstLocation = new google.maps.LatLng(12.971599, 77.594563);
+            var distance = google.maps.geometry.spherical.computeDistanceBetween(srcLocation, dstLocation)
+            console.log(distance/1000); // Distance in Kms.
+        }
+    </script>
+
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="https://fonts.gstatic.com">
@@ -97,7 +106,7 @@
         <div class="row">
             <div id="new_filing_container" class="offset-4 col-md-4">
                 <div class="button_panel">
-                    @if (request()->path() != 'new-file' && request()->path() != 'login' && request()->path() != 'register')
+                    @if (request()->path() != 'new-file' && request()->path() != 'login' && request()->path() != 'register' && request()->path() != 'generalAdmin' && request()->path() != 'magistrateCreator' && request()->path() != 'userManagement')
                         <a href="{{ url('new-file') }}"><button type="button" class="btn btn-primary" id="new_file_btn">Start a new File</button></a><br>
                     @endif
                 </div>

@@ -6,7 +6,7 @@ use App\ErrorLog;
 use App\GeneralAdmin;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Request;
+use Illuminate\Http\Request;
 
 class GeneralAdminController extends Controller
 {
@@ -24,9 +24,17 @@ class GeneralAdminController extends Controller
         if (Auth::guest()) {
             return view('/login');
         } else {
-            $drivingFee = GeneralAdmin::where('name', 'mile_fee')->first();
 
-            return view('generalAdmin', compact('drivingFee'));
+            try {
+                $drivingFee = GeneralAdmin::where('name', 'mile_fee')->first();
+
+                return view('generalAdmin', compact('drivingFee'));
+            } catch ( \Exception $e ) {
+                $errorMsg = new ErrorLog();
+                $errorMsg->payload = $e->getMessage() . ' Line #: ' . $e->getLine();
+
+                $errorMsg->save();
+            }
         }
     }
 

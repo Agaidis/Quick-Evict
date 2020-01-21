@@ -42914,6 +42914,7 @@ if (document.location.href.split('/')[3] === 'new-file') {
 
       if (isFound === false) {
         alert('Address is either in a different county or outside all zones. Please go back to step 1 and verify you selected the right county.');
+        alert('Address is either in a different county or outside all zones. Please go back to step 1 and verify you selected the right county.');
         $('.zipcode_div').css('display', 'none');
         $('.unit_number_div').css('display', 'none');
         $('.filing_form_div').css('display', 'none');
@@ -43076,6 +43077,9 @@ if (document.location.href.split('/')[3] === 'new-file') {
     var totalJudgment = '';
     var deliveryType = '';
     $('#finalize_document').on('click', function () {
+      var userAddress = houseNum + ' ' + streetName + ' ' + town + ' ' + 'PA ' + county + ', ' + zipcode;
+      console.log(userAddress);
+
       if ($('#file_type').val() === 'civil') {
         totalJudgment = $('#total_judgment').val();
         deliveryType = $("input[name=delivery_type]:checked").val();
@@ -43098,15 +43102,29 @@ if (document.location.href.split('/')[3] === 'new-file') {
           'damage_amt': $('#damage_amt').val(),
           'tenant_num': $('#tenant_num').val(),
           'total_judgment': totalJudgment,
-          'delivery_type': deliveryType
+          'delivery_type': deliveryType,
+          'userAddress': userAddress
         },
         success: function success(data) {
-          $('#filing_fee_display').text(data);
-          var total = 16.99 + parseFloat(data);
+          console.log(data);
+          var total = '';
+
+          if (data['calculatedFee'] !== '') {
+            total = 16.99 + parseFloat(data['filingFee']) + parseFloat(data['calculatedFee']);
+            $('#distance_fee_display').text(data['calculatedFee']);
+            $('#distance_fee_container').css('display', 'initial');
+          } else {
+            total = 16.99 + parseFloat(data['filingFee']);
+            $('#distance_fee_container').css('display', 'none');
+          }
+
+          $('#filing_fee_display').text(data['filingFee']);
           $('#total').text(total.toFixed(2));
           $('#total_input').val(total.toFixed(2));
         },
-        error: function error(data) {}
+        error: function error(data) {
+          console.log(data);
+        }
       });
     });
     $('#file').on('change', function () {
@@ -43149,6 +43167,20 @@ if (document.location.href.split('/')[3] === 'new-file') {
     }
   });
 }
+
+/***/ }),
+
+/***/ "./resources/assets/js/generalAdmin.js":
+/*!*********************************************!*\
+  !*** ./resources/assets/js/generalAdmin.js ***!
+  \*********************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+/**
+ * Created by andrew on 10/8/18.
+ */
+$(document).ready(function () {});
 
 /***/ }),
 
@@ -43717,7 +43749,7 @@ $(document).ready(function () {
           $('#edit_is_digital_signature_allowed').prop('checked', true);
         }
 
-        if (data[1].driving_fee == 1) {
+        if (data[1].is_distance_fee == 1) {
           $('#edit_is_driving_fee_allowed').prop('checked', true);
         }
       },
@@ -43810,6 +43842,7 @@ $(document).ready(function () {
         civilConstableAdditionalTenant: $('#edit_civil_constable_additional_tenant_fee').val(),
         geoLocations: $('#edit_geo_locations').val(),
         digitalSignature: $('#edit_digital_signature').val(),
+        drivingFee: $('#edit_driving_fee').val(),
         onlineSubmission: $('#edit_online_submission').val(),
         oneUnder500Mailed: $('#edit_one_under_500_mailed').val(),
         oneBtn500And2000: $('#edit_one_btn_500_2000_mailed').val(),
@@ -50417,9 +50450,9 @@ $(document).ready(function () {
 /***/ }),
 
 /***/ 0:
-/*!**************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** multi ./resources/assets/js/bootstrap.js ./resources/assets/js/json2.min.js ./resources/assets/js/timepicker.min.js ./resources/assets/js/datepicker-ui.min.js ./resources/assets/js/eviction.js ./resources/assets/js/datatables.min.js ./resources/assets/js/magistrateCreator.js ./resources/assets/js/userManagement.js ./resources/assets/js/numeric-1.2.6.min.js ./resources/assets/js/bezier.js ./resources/assets/js/signaturepad.js ./resources/assets/js/bootstrap-timepicker.min.js ./resources/assets/js/home.js ./resources/assets/js/newFile.js ./resources/assets/js/stripe.js ./resources/assets/sass/app.scss ***!
-  \**************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
+/*!****************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** multi ./resources/assets/js/bootstrap.js ./resources/assets/js/json2.min.js ./resources/assets/js/timepicker.min.js ./resources/assets/js/datepicker-ui.min.js ./resources/assets/js/eviction.js ./resources/assets/js/datatables.min.js ./resources/assets/js/magistrateCreator.js ./resources/assets/js/userManagement.js ./resources/assets/js/numeric-1.2.6.min.js ./resources/assets/js/bezier.js ./resources/assets/js/signaturepad.js ./resources/assets/js/bootstrap-timepicker.min.js ./resources/assets/js/home.js ./resources/assets/js/newFile.js ./resources/assets/js/stripe.js ./resources/assets/js/generalAdmin.js ./resources/assets/sass/app.scss ***!
+  \****************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -50438,6 +50471,7 @@ __webpack_require__(/*! /Users/andrewgaidis/projects/Quick-Evict/resources/asset
 __webpack_require__(/*! /Users/andrewgaidis/projects/Quick-Evict/resources/assets/js/home.js */"./resources/assets/js/home.js");
 __webpack_require__(/*! /Users/andrewgaidis/projects/Quick-Evict/resources/assets/js/newFile.js */"./resources/assets/js/newFile.js");
 __webpack_require__(/*! /Users/andrewgaidis/projects/Quick-Evict/resources/assets/js/stripe.js */"./resources/assets/js/stripe.js");
+__webpack_require__(/*! /Users/andrewgaidis/projects/Quick-Evict/resources/assets/js/generalAdmin.js */"./resources/assets/js/generalAdmin.js");
 module.exports = __webpack_require__(/*! /Users/andrewgaidis/projects/Quick-Evict/resources/assets/sass/app.scss */"./resources/assets/sass/app.scss");
 
 

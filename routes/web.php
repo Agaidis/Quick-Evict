@@ -78,6 +78,8 @@ Route::post('/file-upload', 'FileStorageController@storeFile')->middleware('auth
 /* General Admin */
 Route::get('/generalAdmin', 'GeneralAdminController@index')->middleware('auth');
 
+Route::post('/generalAdmin', 'GeneralAdminController@updateDrivingFee')->middleware('auth');
+
 
 Route::get('command/migrate', function () {
     $exitCode = \Artisan::call('migrate');

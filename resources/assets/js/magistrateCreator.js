@@ -165,7 +165,7 @@ $(document).ready(function () {
                     $('#edit_is_digital_signature_allowed').prop('checked', true);
                 }
 
-                if (data[1].driving_fee == 1) {
+                if (data[1].is_distance_fee == 1) {
                     $('#edit_is_driving_fee_allowed').prop('checked', true);
                 }
             },
@@ -268,6 +268,7 @@ $(document).ready(function () {
                 civilConstableAdditionalTenant: $('#edit_civil_constable_additional_tenant_fee').val(),
                 geoLocations: $('#edit_geo_locations').val(),
                 digitalSignature: $('#edit_digital_signature').val(),
+                drivingFee: $('#edit_driving_fee').val(),
                 onlineSubmission: $('#edit_online_submission').val(),
                 oneUnder500Mailed: $('#edit_one_under_500_mailed').val(),
 

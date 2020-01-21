@@ -66,6 +66,7 @@ class MagistrateController extends Controller
                 $courtDetails->civil_mail_additional_tenant_fee = $request->civil_mail_additional_tenant_fee;
                 $courtDetails->civil_constable_additional_tenant_fee = $request->civil_constable_additional_tenant_fee;
                 $courtDetails->digital_signature = $request->digital_signature;
+                $courtDetails->is_distance_fee = $request->driving_fee;
                 $courtDetails->online_submission = $request->online_submission;
 
                 $courtDetails->mdj_name = $request->mdj_name;
@@ -198,6 +199,7 @@ class MagistrateController extends Controller
                 $courtDetails->civil_mail_additional_tenant_fee = $request->civilMailedAdditionalTenant;
                 $courtDetails->civil_constable_additional_tenant_fee = $request->civilConstableAdditionalTenant;
                 $courtDetails->digital_signature = $request->digitalSignature;
+                $courtDetails->is_distance_fee = $request->drivingFee;
                 $courtDetails->online_submission = $request->onlineSubmission;
                 $courtDetails->save();
 
