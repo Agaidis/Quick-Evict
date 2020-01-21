@@ -26,7 +26,7 @@ class NewFileController extends Controller
         if (Auth::guest()) {
             return view('/login');
         } else {
-            $counties = CourtDetails::distinct()->get(['county']);
+            $counties = CourtDetails::distinct()->orderBy('county')->get(['county']);
 
             return view('newFile', compact('counties'));
         }
