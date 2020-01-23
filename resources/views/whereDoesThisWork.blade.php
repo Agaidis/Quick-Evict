@@ -18,8 +18,6 @@
                     </div> <!-- end .flash-message -->
                         <span id="where_does_this_work_content" style="text-align: center;"><div style="font-weight:bold">Thanks for your interest in CourtZip.</div>
                         <div>The goal for CourtZip is to eventually make filing evictions, order of possessions, and civil complaints easier for everyone in all communities in the United States.</div>
-                            <div>Currently CourtZip will be live in Lancaster County, PA on Dec 1, 2019 and York County, PA on Jan 1, 2020</div></span><br /><br />
-                        <div>More counties will be rolling out shortly.</div>
                         <div>If you would like updates as more counties are rolled out, please submit your email here:</div><br>
                     <form method="post" action="{{ action('WhereDoesThisWorkController@store') }}" id="where_does_this_work_form">
                         <input type="hidden" name="_token" value="{{ Session::token() }}">
