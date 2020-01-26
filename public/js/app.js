@@ -43634,7 +43634,7 @@ $(document).ready(function () {
     var splitId = id.split('_');
     var conf = confirm('Are you sure you want to Delete ' + splitId[2]);
 
-    if (conf == true) {
+    if (conf === true) {
       var magistrateId = splitId[2];
       $.ajax({
         beforeSend: function beforeSend(xhr) {

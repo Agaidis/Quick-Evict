@@ -275,10 +275,14 @@ class MagistrateController extends Controller
 
     public function delete(Request $request) {
         try {
-            $dbId = CourtDetails::where('magistrate_id', $request->id)->value('id');
-            CourtDetails::destroy($dbId);
+            $courtDetailsId = CourtDetails::where('magistrate_id', $request->id)->value('id');
+            $civilUniqueId = CivilUnique::where('court_details_id', $courtDetailsId)->value('id');
             $dbId = GeoLocation::where('magistrate_id', $request->id)->value('id');
+
+            CivilUnique::destroy($civilUniqueId);
             GeoLocation::destroy($dbId);
+            CourtDetails::destroy($courtDetailsId);
+
             return $dbId;
         } catch (\Exception $e) {
             $errorMsg = new ErrorLog();

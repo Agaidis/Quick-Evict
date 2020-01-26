@@ -43,13 +43,13 @@ $(document).ready(function () {
         "pagingType": "simple",
         "aaSorting": []
     }).on('click', '.magistrate-remove', function () {
-        var id = $(this)[0].id;
-        var splitId = id.split('_');
-        var conf = confirm('Are you sure you want to Delete ' + splitId[2]);
+        let id = $(this)[0].id;
+        let splitId = id.split('_');
+        let conf = confirm('Are you sure you want to Delete ' + splitId[2]);
 
-        if (conf == true) {
+        if (conf === true) {
 
-            var magistrateId = splitId[2];
+            let magistrateId = splitId[2];
             $.ajax({
                 beforeSend: function (xhr) {
                     xhr.setRequestHeader('X-CSRF-TOKEN', $("#token").attr('content'));
