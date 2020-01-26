@@ -105,6 +105,8 @@ class OrderOfPossessionController extends Controller
                 $filingFee = 'Didnt Work';
             }
 
+            $filingFee = number_format($filingFee, 2);
+
             $evictionData->id = '-1';
             $evictionData->plantiff_name = $btmPlaintiffName;
             $evictionData->court_address_line_1 = $geoDetails->address_line_one;

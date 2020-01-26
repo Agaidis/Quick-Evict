@@ -219,6 +219,8 @@ class EvictionController extends Controller
                 $filingFee = 'Didnt Work';
             }
 
+            $filingFee = number_format($filingFee, 2);
+
             if ($noCommaTotalFees > 0) {
                 $isAmtGreaterThanZero = true;
             }
