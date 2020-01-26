@@ -316,11 +316,11 @@ class NewFileController extends Controller
             $mileage = str_replace(' mi', '', $mileage);
 
             if ($fileType === 'civil') {
-                $mileage = $mileage * 2;
+                $mileage = number_format($mileage, 2) * 2;
             } else if ($fileType === 'oop') {
-                $mileage = $mileage * 4;
+                $mileage = number_format($mileage, 2) * 4;
             } else if ($fileType === 'eviction') {
-                $mileage = $mileage * 2;
+                $mileage = number_format($mileage, 2) * 2;
             }
 
             return $mileage;

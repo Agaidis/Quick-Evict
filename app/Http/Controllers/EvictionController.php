@@ -188,13 +188,6 @@ class EvictionController extends Controller
                 $isAbandoned = true;
             }
 
-
-            $defendantState = $_POST['state'];
-            $defendantZipcode = $_POST['zipcode'];
-            $defendanthouseNum = $_POST['houseNum'];
-            $defendantStreetName = $_POST['streetName'];
-            $defendantTown = $_POST['town'];
-
             if (is_numeric($_POST['additional_rent_amt'])) {
                 $totalFees = (float)$additionalRentAmt + (float)$attorneyFees + (float)$dueRent + (float)$unjustDamages + (float)$damageAmt;
             } else {
@@ -217,6 +210,10 @@ class EvictionController extends Controller
                 $filingFee = $greaterThan4000 + $additionalTenantFee;
             } else {
                 $filingFee = 'Didnt Work';
+            }
+
+            if (isset($_POST['distance_fee'])) {
+                $filingFee = $filingFee + (float)$_POST['distance_fee'];
             }
 
             $filingFee = number_format($filingFee, 2);

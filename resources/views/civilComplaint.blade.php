@@ -164,6 +164,7 @@
                                         <input type="hidden" id="court_number" name="court_number"/>
                                         <input type="hidden" id="user_email" name="user_email" value="{{$userEmail}}"/>
                                         <input type="hidden" id="total_input" name="total"/>
+                                        <input type="hidden" name="distance_fee" id="distance_fee" />
                                     </div>
                                 </form>
 

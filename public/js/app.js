@@ -43112,6 +43112,7 @@ if (document.location.href.split('/')[3] === 'new-file') {
           if (data['calculatedFee'] !== '') {
             total = 16.99 + parseFloat(data['filingFee']) + parseFloat(data['calculatedFee']);
             $('#distance_fee_display').text(data['calculatedFee']);
+            $('#distance_fee').val(data['calculatedFee']);
             $('#distance_fee_container').css('display', 'initial');
           } else {
             total = 16.99 + parseFloat(data['filingFee']);

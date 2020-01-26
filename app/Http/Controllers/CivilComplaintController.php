@@ -238,6 +238,11 @@ class CivilComplaintController extends Controller
             }
 
             $totalJudgment = number_format($totalJudgment, 2);
+
+            if (isset($_POST['distance_fee'])) {
+                $filingFee = $filingFee + (float)$_POST['distance_fee'];
+            }
+
             $filingFee = number_format($filingFee, 2);
 
 

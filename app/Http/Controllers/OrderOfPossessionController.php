@@ -241,6 +241,10 @@ class OrderOfPossessionController extends Controller
                 $docketNumber2 = '0' . $docketNumber2;
             }
 
+            if (isset($_POST['distance_fee'])) {
+                $filingFee = $filingFee + (float)$_POST['distance_fee'];
+            }
+
             $filingFee = number_format($filingFee, 2);
 
             try {
