@@ -43648,13 +43648,13 @@ $(document).ready(function () {
         },
         success: function success(data) {
           console.log(data);
-          location.reload();
         },
         error: function error(data) {
           console.log(data);
         }
       });
-    } else {}
+      location.reload();
+    }
   }).on('click', '.magistrate-edit', function () {
     var id = $(this)[0].id;
     var splitId = id.split('_');

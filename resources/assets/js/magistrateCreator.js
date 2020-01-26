@@ -61,13 +61,13 @@ $(document).ready(function () {
 
                 success: function (data) {
                     console.log(data);
-                    location.reload();
+
                 },
                 error: function (data) {
                     console.log(data);
                 }
-            });
-        } else {
+
+            }); location.reload();
 
         }
     }).on('click', '.magistrate-edit', function () {
