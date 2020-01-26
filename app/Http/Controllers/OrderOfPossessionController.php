@@ -239,6 +239,7 @@ class OrderOfPossessionController extends Controller
                 $docketNumber2 = '0' . $docketNumber2;
             }
 
+            $filingFee = number_format($filingFee, 2);
 
             try {
                 $eviction = new Evictions();

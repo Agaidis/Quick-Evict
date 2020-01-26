@@ -446,6 +446,8 @@ class EvictionController extends Controller
                 $isAmtGreaterThanZero = true;
             }
 
+            $filingFee = number_format($filingFee, 2);
+
             try {
                 $eviction = new Evictions();
                 $eviction->status = 'Created LTC';
