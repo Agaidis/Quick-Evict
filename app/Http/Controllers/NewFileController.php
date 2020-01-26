@@ -315,7 +315,6 @@ class NewFileController extends Controller
             $mileage = $resp['rows'][0]['elements'][0]['distance']['text'];
             $mileage = str_replace(' mi', '', $mileage);
 
-            Log::info($fileType);
             if ($fileType === 'civil') {
                 $mileage = $mileage * 2;
             } else if ($fileType === 'oop') {
