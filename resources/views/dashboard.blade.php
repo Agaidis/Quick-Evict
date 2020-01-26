@@ -36,17 +36,33 @@
                                 @if (isset($evictions))
                                 @foreach ($evictions as $eviction)
                                     <?php $propertyAddressArray = explode('-1', $eviction->property_address);
-                                    $ltcStatusArray = array('Created LTC',
+                                    if (strpos(Auth::user()->email, 'slatehouse') != false)
+                                        $ltcStatusArray = array('Created LTC',
                                         'LTC Mailed',
                                         'LTC Submitted Online',
                                         'Court Hearing Scheduled',
                                         'Court Hearing Extended',
                                         'Court Hearing Rescheduled',
+                                        'Waiting on AOR',
                                         'Judgement Issued in Favor of Owner',
                                         'Judgement Denied by Court','Tenant Filed Appeal',
                                         'OOP Submitted Online',
                                         'Paid Judgement',
                                         'Case Withdrawn');
+
+                                    else {
+                                        $ltcStatusArray = array('Created LTC',
+                                            'LTC Mailed',
+                                            'LTC Submitted Online',
+                                            'Court Hearing Scheduled',
+                                            'Court Hearing Extended',
+                                            'Court Hearing Rescheduled',
+                                            'Judgement Issued in Favor of Owner',
+                                            'Judgement Denied by Court','Tenant Filed Appeal',
+                                            'OOP Submitted Online',
+                                            'Paid Judgement',
+                                            'Case Withdrawn');
+                                    }
 
                                     $oopStatusArray = array('Created OOP',
                                         'OOP Mailed',
