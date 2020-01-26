@@ -201,7 +201,7 @@ class NewFileController extends Controller
 
                 $userAddress = $_GET['userAddress'];
 
-                $distance = $this->getDistance( $courtAddress, $userAddress );
+                $distance = $this->getDistance( $courtAddress, $userAddress, $_GET['fileType'] );
 
                 $mileFee = GeneralAdmin::where('name', 'mile_fee')->value('value');
 
@@ -296,7 +296,7 @@ class NewFileController extends Controller
 
     }
 
-    public function getDistance($courtAddress, $userAddress) {
+    public function getDistance($courtAddress, $userAddress, $fileType) {
 
         try {
             // url encode the address
@@ -314,6 +314,15 @@ class NewFileController extends Controller
 
             $mileage = $resp['rows'][0]['elements'][0]['distance']['text'];
             $mileage = str_replace(' mi', '', $mileage);
+
+            Log::info($fileType);
+            if ($fileType === 'civil') {
+                $mileage = $mileage * 2;
+            } else if ($fileType === 'oop') {
+                $mileage = $mileage * 4;
+            } else if ($fileType === 'eviction') {
+                $mileage = $mileage * 2;
+            }
 
             return $mileage;
 
