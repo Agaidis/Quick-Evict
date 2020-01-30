@@ -179,6 +179,7 @@ if (document.location.href.split('/')[3] === 'new-file') {
             }
             if (isFound === false) {
                 alert('Address is either in a different county or outside all zones. Please go back to step 1 and verify you selected the right county.');
+                alert('Address is either in a different county or outside all zones. Please go back to step 1 and verify you selected the right county.');
                 $('.zipcode_div').css('display', 'none');
                 $('.unit_number_div').css('display', 'none');
                 $('.filing_form_div').css('display', 'none');
@@ -357,6 +358,9 @@ if (document.location.href.split('/')[3] === 'new-file') {
         let deliveryType = '';
         $('#finalize_document').on('click', function() {
 
+            let userAddress = houseNum + ' ' + streetName + ' ' + town + ' ' + 'PA ' + county + ', ' + zipcode;
+            console.log(userAddress);
+
             if ($('#file_type').val() === 'civil') {
                 totalJudgment = $('#total_judgment').val();
                 deliveryType = $("input[name=delivery_type]:checked").val()
@@ -379,19 +383,72 @@ if (document.location.href.split('/')[3] === 'new-file') {
                     'damage_amt': $('#damage_amt').val(),
                     'tenant_num': $('#tenant_num').val(),
                     'total_judgment': totalJudgment,
-                    'delivery_type': deliveryType
+                    'delivery_type': deliveryType,
+                    'userAddress': userAddress
 
                 },
                 success : function(data) {
-                    $('#filing_fee_display').text(data);
-                    let total = 16.99 + parseFloat(data);
+                    console.log(data);
+                    let total = '';
+
+                    if (data['calculatedFee'] !== '' ) {
+                        total = 16.99 + parseFloat(data['filingFee']) + parseFloat(data['calculatedFee']);
+                        $('#distance_fee_display').text(data['calculatedFee']);
+                        $('#distance_fee').val(data['calculatedFee']);
+                        $('#distance_fee_container').css('display', 'initial');
+                    } else {
+                        total = 16.99 + parseFloat(data['filingFee']);
+                        $('#distance_fee_container').css('display', 'none');
+                    }
+
+                    $('#filing_fee_display').text(data['filingFee']);
                     $('#total').text(total.toFixed(2));
                     $('#total_input').val(total.toFixed(2));
 
                 },
-                error : function(data)
-                {},
+                error : function(data) {
+                    console.log(data)
+                },
             });
         });
+
+        $('#file').on('change', function() {
+            console.log($(this));
+            if ($(this).val() !== '') {
+                upload(this);
+            }
+        });
+
+        function upload(img) {
+            let form_data = new FormData();
+            form_data.append('file', img.files[0]);
+            form_data.append('csrf-token', '{{csrf_token()}}');
+
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+            $.ajax({
+                beforeSend: function (xhr) {
+                    xhr.setRequestHeader('X-CSRF-TOKEN', $("#token").attr('content'));
+                },
+                url: '/file-upload',
+                data: form_data,
+                type: 'POST',
+                contentType: false,
+                processData: false,
+                success: function (data) {
+                    if (data !== '') {
+                        $('#is_extra_filing').val(1);
+                        $('#file_container').append($('<input type="hidden" name="file_address_ids[]" id="file_address_ids" value="'+data+'"/>'));
+                    }
+                },
+                error: function (xhr, status, error) {
+                    console.log(error);
+                    console.log(status);
+                },
+            });
+        }
     });
 }

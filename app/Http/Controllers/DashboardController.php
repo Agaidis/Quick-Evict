@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\ErrorLog;
 use Illuminate\Http\Request;
 use App\Evictions;
 use Dompdf\Options;
@@ -38,6 +39,7 @@ class DashboardController extends Controller
 
             $userId = Auth::user()->id;
             $courtNumber = Auth::user()->court_id;
+            $userRole = Auth::user()->role;
 
             if (Auth::user()->role == 'Administrator') {
                 $evictions = DB::table('evictions')->orderBy('id', 'desc')->get();
@@ -49,13 +51,12 @@ class DashboardController extends Controller
                 $evictions = DB::select('select * from evictions ORDER BY FIELD(status, "Created LTC", "LTC Mailed", "LTC Submitted Online", "Court Hearing Scheduled", "Court Hearing Extended", "Judgement Issued in Favor of Owner", "Judgement Denied by Court", "Tenant Filed Appeal", "OOP Mailed", "OOP Submitted Online", "Paid Judgement", "Locked Out Tenant"), id DESC');
             }
 
-            return view('dashboard' , compact('evictions'));
+            return view('dashboard' , compact('evictions', 'userRole'));
         } catch (\Exception $e) {
-            $errorDetails = 'DashboardController - error in store() method when attempting to store magistrate';
-            $errorDetails .= PHP_EOL . 'File: ' . $e->getFile();
-            $errorDetails .= PHP_EOL . 'Line #' . $e->getLine();
-            \Log::error($errorDetails . PHP_EOL . 'Error Message: ' . $e->getMessage() . PHP_EOL . 'Trace: ' . $e->getTraceAsString());
-            mail('andrew.gaidis@gmail.com', 'Showing Home Page', $errorDetails);
+            $errorMsg = new ErrorLog();
+            $errorMsg->payload = $e->getMessage() . ' Line #: ' . $e->getLine();
+
+            $errorMsg->save();
         }
 
     }
@@ -69,11 +70,10 @@ class DashboardController extends Controller
 
             return 'success';
         } catch (\Exception $e) {
-            $errorDetails = 'DashboardController - error in store() method when attempting to store magistrate';
-            $errorDetails .= PHP_EOL . 'File: ' . $e->getFile();
-            $errorDetails .= PHP_EOL . 'Line #' . $e->getLine();
-            Log::error($errorDetails . PHP_EOL . 'Error Message: ' . $e->getMessage() . PHP_EOL . 'Trace: ' . $e->getTraceAsString());
-            mail('andrew.gaidis@gmail.com', 'Changing Status', $errorDetails);
+            $errorMsg = new ErrorLog();
+            $errorMsg->payload = $e->getMessage() . ' Line #: ' . $e->getLine();
+
+            $errorMsg->save();
         }
     }
 
@@ -91,11 +91,10 @@ class DashboardController extends Controller
             return 'success';
 
         } catch (\Exception $e) {
-            $errorDetails = 'DashboardController - error in store() method when attempting to store court date';
-            $errorDetails .= PHP_EOL . 'File: ' . $e->getFile();
-            $errorDetails .= PHP_EOL . 'Line #' . $e->getLine();
-            Log::error($errorDetails . PHP_EOL . 'Error Message: ' . $e->getMessage() . PHP_EOL . 'Trace: ' . $e->getTraceAsString());
-            mail('andrew.gaidis@gmail.com', 'store court date', $errorDetails);
+            $errorMsg = new ErrorLog();
+            $errorMsg->payload = $e->getMessage() . ' Line #: ' . $e->getLine();
+
+            $errorMsg->save();
         }
         return 'success';
     }
@@ -160,13 +159,10 @@ class DashboardController extends Controller
 
             return 'success';
         } catch (Exception $e) {
-            $errorDetails = 'DashboardController - error in downloadpdf() method when attempting to download previous eviction';
-            $errorDetails .= PHP_EOL . 'File: ' . $e->getFile();
-            $errorDetails .= PHP_EOL . 'Line #' . $e->getLine();
-            $errorDetails .= PHP_EOL . 'Message ' .  $e->getMessage();
-            Log::error($errorDetails . PHP_EOL . 'Error Message: ' . $e->getMessage() . PHP_EOL . 'Trace: ' . $e->getTraceAsString());
-            mail('andrew.gaidis@gmail.com', 'Showing Dashboard Page', $errorDetails);
-            return 'failure';
+            $errorMsg = new ErrorLog();
+            $errorMsg->payload = $e->getMessage() . ' Line #: ' . $e->getLine();
+
+            $errorMsg->save();
         }
     }
 
@@ -176,6 +172,16 @@ class DashboardController extends Controller
             $fileData = Evictions::where('id', $_GET['id'])->first();
 
             return $fileData;
+        } catch ( Exception $e ) {
+            mail('andrew.gaidis@gmail.com', 'Error Getting File to Edit', $e->getMessage());
+            Log::info($e->getMessage());
+            return false;
+        }
+    }
+
+    public function getFiles () {
+        try {
+
         } catch ( Exception $e ) {
             mail('andrew.gaidis@gmail.com', 'Error Getting File to Edit', $e->getMessage());
             Log::info($e->getMessage());

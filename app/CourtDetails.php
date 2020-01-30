@@ -28,7 +28,10 @@ class CourtDetails extends Model
         'phone_number',
         'township',
         'digital_signature',
-        'online_submission'
+        'online_submission',
+        'oop_additional_tenant_fee',
+        'civil_mail_additional_tenant_fee',
+        'civil_constable_additional_tenant_fee'
     ];
 
     protected $table = 'court_details';

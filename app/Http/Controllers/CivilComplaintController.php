@@ -18,6 +18,7 @@ use App\PDF;
 use Dompdf\Options;
 use Dompdf\Dompdf;
 use App\ErrorLog;
+use Illuminate\Support\Facades\DB;
 
 class CivilComplaintController extends Controller
 {
@@ -45,6 +46,7 @@ class CivilComplaintController extends Controller
             $totalJudgment = str_replace($removeValues,['', '', ''], $_POST['total_judgment']);
             $pdfEditor = new PDFEditController();
             $evictionData = new stdClass();
+            $additionalTenantAmt = 0;
 
             $plaintiffName = $_POST['owner_name'];
             $plaintiffPhone = $_POST['owner_phone'];
@@ -67,6 +69,12 @@ class CivilComplaintController extends Controller
                     } else if ($totalJudgment > 4000 && $totalJudgment < 12001) {
                         $filingFee = $civilDetails->btn_4000_12000_2_def_mail;
                     }
+
+                    if ($tenantNum > 2) {
+                        if ($courtDetails->civil_mail_additional_tenant_fee != '' && $courtDetails->civil_mail_additional_tenant_fee != 0 ) {
+                            $additionalTenantAmt = $courtDetails->civil_mail_additional_tenant_fee;
+                        }
+                    }
                 } else if ($_POST['delivery_type'] == 'constable') {
                     if ($totalJudgment <= 500) {
                         $filingFee = $civilDetails->under_500_2_def_constable;
@@ -77,7 +85,15 @@ class CivilComplaintController extends Controller
                     } else if ($totalJudgment > 4000 && $totalJudgment < 12001) {
                         $filingFee = $civilDetails->btn_4000_12000_2_def_constable;
                     }
+
+                    if ($tenantNum > 2) {
+                        if ($courtDetails->civil_constable_additional_tenant_fee != '' && $courtDetails->civil_constable_additional_tenant_fee != 0 ) {
+                            $additionalTenantAmt = $courtDetails->civil_constable_additional_tenant_fee;
+                        }
+                    }
                 }
+
+
             } else {
                 if ($_POST['delivery_type'] == 'mail') {
                     if ($totalJudgment <= 500) {
@@ -103,7 +119,7 @@ class CivilComplaintController extends Controller
             }
 
             $totalJudgment = number_format($totalJudgment, 2);
-            $filingFee = number_format($filingFee, 2);
+            $filingFee = number_format($filingFee, 2) + $additionalTenantAmt;
 
             $plaintiffAddress = $plaintiffName .'<br>'. $plaintiffAddress1 .'<br>'. $plaintiffAddress2 .'<br>'. $plaintiffPhone;
             $defendantAddress = $tenantName . '<br>' . $_POST['civil_defendant_address_1'] . ', ' . $_POST['unit_number'] .'<br>'. $_POST['civil_defendant_address_2'];
@@ -150,6 +166,8 @@ class CivilComplaintController extends Controller
     {
         $mailer = new Mailer();
         try {
+
+
             $removeValues = [' ', '$', ','];
             $magistrateId = str_replace('magistrate_' , '', $_POST['court_number']);
             $courtDetails = CourtDetails::where('magistrate_id', $magistrateId)->first();
@@ -220,6 +238,11 @@ class CivilComplaintController extends Controller
             }
 
             $totalJudgment = number_format($totalJudgment, 2);
+
+            if (isset($_POST['distance_fee'])) {
+                $filingFee = $filingFee + (float)$_POST['distance_fee'];
+            }
+
             $filingFee = number_format($filingFee, 2);
 
 
@@ -259,6 +282,7 @@ class CivilComplaintController extends Controller
             $eviction->file_type = 'civil complaint';
             $eviction->civil_delivery_type = $_POST['delivery_type'];
             $eviction->filing_fee = $filingFee;
+            $eviction->is_extra_files = $_POST['is_extra_filing'];
 
             $eviction->save();
 
@@ -269,6 +293,16 @@ class CivilComplaintController extends Controller
             $signature->signature = $_POST['signature_source'];
 
             $signature->save();
+
+            if (isset($_POST['file_address_ids'])) {
+                foreach ($_POST['file_address_ids'] as $fileAddressId) {
+                    DB::table('file_addresses')
+                        ->where('id', $fileAddressId)
+                        ->update(['filing_id' => $evictionId]);
+                }
+            }
+
+
 
             try {
                 $token = $_POST['stripeToken'];

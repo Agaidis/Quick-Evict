@@ -86,16 +86,65 @@ $(document).ready(function () {
 
         }
     }).on('click', '.pdf_download_btn_dashboard', function () {
-        console.log('this is it' + $(this)[0].id);
-        var id = $(this)[0].id;
-        var splitId = id.split('_');
+        let id = $(this)[0].id;
+        let splitId = id.split('_');
+        console.log(splitId);
+
+        $('#download_id').val(splitId[2]);
+    }).on('click', '.get_filings', function () {
+        let id = $(this)[0].id;
+        let splitId = id.split('_');
 
         $('#download_id').val(splitId[2]);
 
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+
+        $.ajax({
+            beforeSend: function (xhr) {
+                xhr.setRequestHeader('X-CSRF-TOKEN', $("#token").attr('content'));
+            },
+            type: "POST",
+            url: '/get-filings',
+            data: {
+                id: splitId[2]
+            },
+
+            success: function (data) {
+                let fileType = '';
+                if (data.mainFiling.file_type === 'oop') {
+                     fileType = 'Order of Possession';
+                } else if (data.mainFiling.file_type === 'ltc'){
+                     fileType = 'Eviction';
+                } else {
+                     fileType = 'Civil Complaint';
+                }
+
+                let tableRow = '<tr>' +
+                    '<td class="text-center">' + data.mainFiling.id + '</td> ' +
+                    '<td class="text-center"><button type="submit" class="get_file btn btn-primary" id="main_file_'+data.mainFiling.id+'">' + fileType + '</button></td> ' +
+                    '</tr>';
+                for (let i = 0; i < data.filings.length; i++) {
+                    tableRow += '<tr>' +
+                        '<td class="text-center">' + data.filings[i].id + '</td> ' +
+                        '<td class="text-center"><button type="submit" class="get_file btn btn-primary" id="file_address_'+data.filings[i].file_address+'">' + data.filings[i].original_file_name + '</button></td> ' +
+                        '</tr>';
+                }
+                $('.get_files_title').empty().text('Filings: ');
+                $('#filing_body').empty().append(tableRow);
+            },
+            error: function (data) {
+                console.log(data);
+            }
+        });
+
     }).on('change', '.status_select', function() {
-        var id = $(this)[0].id;
-        var splitId = id.split('_');
-        var status = $('#status_' + splitId[1]).val();
+        let id = $(this)[0].id;
+        let splitId = id.split('_');
+        let status = $('#status_' + splitId[1]).val();
 
         $.ajaxSetup({
                 headers: {
@@ -153,4 +202,16 @@ $(document).ready(function () {
             }
         });
     });
+
+     $('#filing_body').on('click', '.get_file', function() {
+         let id = $(this)[0].id;
+         let splitId = id.split('_');
+         let filingName = splitId[2];
+         if (splitId[0] === 'main') {
+             console.log(splitId);
+             $('#main_filing_id').val(filingName);
+         }
+
+         $('#filing_original_name').val(filingName);
+     });
 });
