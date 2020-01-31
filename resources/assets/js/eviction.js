@@ -359,7 +359,6 @@ if (document.location.href.split('/')[3] === 'new-file') {
         $('#finalize_document').on('click', function() {
 
             let userAddress = houseNum + ' ' + streetName + ' ' + town + ' ' + 'PA ' + county + ', ' + zipcode;
-            console.log(userAddress);
 
             if ($('#file_type').val() === 'civil') {
                 totalJudgment = $('#total_judgment').val();

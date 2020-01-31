@@ -19,7 +19,6 @@ Route::get('/password/email', 'HomeController@index')->name('home');
 Route::get('/', 'HomeController@index')->name('home');
 Route::get('/home', 'HomeController@index')->name('home');
 
-
 Route::get('/dashboard', 'DashboardController@index')->middleware('auth');
 Route::post('/dashboard/download', 'DashboardController@downloadPDF')->middleware('auth');
 Route::post('/dashboard/statusChange', 'DashboardController@statusChange')->middleware('auth');
@@ -79,6 +78,10 @@ Route::post('/file-upload', 'FileStorageController@storeFile')->middleware('auth
 Route::get('/generalAdmin', 'GeneralAdminController@index')->middleware('auth');
 
 Route::post('/generalAdmin', 'GeneralAdminController@updateDrivingFee')->middleware('auth');
+
+Route::post('get-file-fee', 'GetFileFeeController@index')->middleware('auth');
+
+Route::post('get-file-fee/fee', 'GetFileFeeController@getFilingFee')->middleware('auth');
 
 
 Route::get('command/migrate', function () {

@@ -43078,7 +43078,6 @@ if (document.location.href.split('/')[3] === 'new-file') {
     var deliveryType = '';
     $('#finalize_document').on('click', function () {
       var userAddress = houseNum + ' ' + streetName + ' ' + town + ' ' + 'PA ' + county + ', ' + zipcode;
-      console.log(userAddress);
 
       if ($('#file_type').val() === 'civil') {
         totalJudgment = $('#total_judgment').val();
@@ -43182,6 +43181,184 @@ if (document.location.href.split('/')[3] === 'new-file') {
  * Created by andrew on 10/8/18.
  */
 $(document).ready(function () {});
+
+/***/ }),
+
+/***/ "./resources/assets/js/getFileFee.js":
+/*!*******************************************!*\
+  !*** ./resources/assets/js/getFileFee.js ***!
+  \*******************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+if (document.location.href.split('/')[3] === 'get-file-fee') {
+  $(document).ready(function () {
+    $('[data-toggle="tooltip"]').tooltip();
+    var map;
+    var marker;
+    var bounds;
+    var houseNum;
+    var streetName;
+    var town;
+    var county;
+    var zipcode;
+    var state;
+    var center = new google.maps.LatLng(40.149660, -76.306370); //Create the areas for magistrates
+
+    map = new google.maps.Map(document.getElementById('map'), {
+      center: {
+        lat: 40.144128,
+        lng: -76.311420
+      },
+      zoom: 8,
+      scaleControl: true
+    });
+
+    function ResizeMap() {
+      google.maps.event.trigger(map, "resize");
+    }
+
+    $("#VehicleMovementModal").on('shown', function () {
+      ResizeMap();
+    });
+    bounds = new google.maps.LatLngBounds();
+    google.maps.event.addListenerOnce(map, 'tilesloaded', function (evt) {
+      bounds = map.getBounds();
+    });
+    marker = new google.maps.Marker({
+      position: center
+    });
+    var input =
+    /** @type {!HTMLInputElement} */
+    document.getElementById('pac-input');
+    var types = document.getElementById('type-selector');
+    map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
+    map.controls[google.maps.ControlPosition.TOP_LEFT].push(types);
+    var autocomplete = new google.maps.places.Autocomplete(input);
+    var magArray = [];
+    var objArray = [];
+    var magNamesArray = [];
+    var count = 0;
+    $.each(quickEvict.geoData, function (key, value) {
+      magId = 'magistrate_' + value.magistrate_id;
+      var geoPoints = value.geo_locations.replace(/\s/g, '').replace(/},/g, '},dd').split(',dd');
+      var obj = [];
+
+      for (var i in geoPoints) {
+        obj.push(JSON.parse(geoPoints[i]));
+      }
+
+      magNamesArray.push(magId);
+      objArray.push(obj);
+      magArray.push(magId);
+
+      if (quickEvict.userId === 'Administrator') {
+        magArray[count] = new google.maps.Polygon({
+          path: obj,
+          geodesic: true,
+          strokeColor: '#091096',
+          strokeOpacity: 1.0,
+          strokeWeight: 2,
+          fillColor: '#B1AAA9',
+          fillOpacity: 0.35,
+          areaName: magId,
+          courtId: value.court_number,
+          county: value.county,
+          township: value.township
+        });
+      } else {
+        magArray[count] = new google.maps.Polygon({
+          path: obj,
+          geodesic: true,
+          areaName: magId,
+          courtId: value.court_number,
+          county: value.county,
+          township: value.township
+        });
+      }
+
+      magArray[count].setMap(map);
+      count++;
+    });
+    autocomplete.addListener('place_changed', function () {
+      marker.setMap(null);
+      var place = autocomplete.getPlace();
+      newBounds = bounds;
+
+      if (!place.geometry) {
+        window.alert("Returned place contains no geometry");
+        return;
+      }
+
+      houseNum = place.address_components[0].long_name;
+      streetName = place.address_components[1].long_name;
+
+      if (place.address_components[3].types[0].indexOf('administrative') >= 0) {
+        town = place.address_components[2].long_name;
+      } else {
+        town = place.address_components[3].long_name;
+      }
+
+      county = place.address_components[3].long_name;
+      state = place.address_components[4].short_name;
+
+      if (place.address_components[6].short_name === 'US') {
+        zipcode = place.address_components[7].long_name;
+      } else {
+        zipcode = place.address_components[6].long_name;
+      }
+
+      marker.setPosition(place.geometry.location);
+      marker.setMap(map);
+      newBounds.extend(place.geometry.location);
+      map.fitBounds(newBounds);
+      var isFound = false;
+
+      for (var k = 0; k < magArray.length; k++) {
+        if (google.maps.geometry.poly.containsLocation(place.geometry.location, magArray[k])) {
+          console.log(magArray[k].areaName);
+          $('#court_number').val(magArray[k].areaName);
+          isFound = true;
+        }
+      }
+
+      if (isFound === false) {
+        alert('Address is either in a different county or outside all zones. Please go back to step 1 and verify you selected the right county.');
+      } else {}
+    });
+    $('#calculate_file_fee').on('click', function () {
+      var splitCourtNumber = $('#court_number').val().split('_');
+      var userAddress = houseNum + ' ' + streetName + ' ' + town + ' ' + 'PA ' + county + ', ' + zipcode;
+      console.log(userAddress);
+      $.ajaxSetup({
+        headers: {
+          'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+      });
+      $.ajax({
+        beforeSend: function beforeSend(xhr) {
+          xhr.setRequestHeader('X-CSRF-TOKEN', $("#token").attr('content'));
+        },
+        url: '/get-file-fee/fee',
+        type: 'POST',
+        data: {
+          courtNumber: splitCourtNumber[1],
+          numDefs: $('#num_defendants').val(),
+          fileType: $('#file_type_select').val(),
+          totalJudgment: $('#total_judgment').val(),
+          userAddress: userAddress
+        },
+        success: function success(data) {
+          $('#filing_fee').val(data).text(data);
+          console.log(data);
+        },
+        error: function error(data) {
+          console.log(data);
+        }
+      });
+    });
+  });
+}
 
 /***/ }),
 
@@ -50451,9 +50628,9 @@ $(document).ready(function () {
 /***/ }),
 
 /***/ 0:
-/*!****************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** multi ./resources/assets/js/bootstrap.js ./resources/assets/js/json2.min.js ./resources/assets/js/timepicker.min.js ./resources/assets/js/datepicker-ui.min.js ./resources/assets/js/eviction.js ./resources/assets/js/datatables.min.js ./resources/assets/js/magistrateCreator.js ./resources/assets/js/userManagement.js ./resources/assets/js/numeric-1.2.6.min.js ./resources/assets/js/bezier.js ./resources/assets/js/signaturepad.js ./resources/assets/js/bootstrap-timepicker.min.js ./resources/assets/js/home.js ./resources/assets/js/newFile.js ./resources/assets/js/stripe.js ./resources/assets/js/generalAdmin.js ./resources/assets/sass/app.scss ***!
-  \****************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
+/*!****************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** multi ./resources/assets/js/bootstrap.js ./resources/assets/js/json2.min.js ./resources/assets/js/timepicker.min.js ./resources/assets/js/datepicker-ui.min.js ./resources/assets/js/eviction.js ./resources/assets/js/datatables.min.js ./resources/assets/js/magistrateCreator.js ./resources/assets/js/userManagement.js ./resources/assets/js/numeric-1.2.6.min.js ./resources/assets/js/bezier.js ./resources/assets/js/signaturepad.js ./resources/assets/js/bootstrap-timepicker.min.js ./resources/assets/js/home.js ./resources/assets/js/newFile.js ./resources/assets/js/getFileFee.js ./resources/assets/js/stripe.js ./resources/assets/js/generalAdmin.js ./resources/assets/sass/app.scss ***!
+  \****************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -50471,6 +50648,7 @@ __webpack_require__(/*! /Users/andrewgaidis/projects/Quick-Evict/resources/asset
 __webpack_require__(/*! /Users/andrewgaidis/projects/Quick-Evict/resources/assets/js/bootstrap-timepicker.min.js */"./resources/assets/js/bootstrap-timepicker.min.js");
 __webpack_require__(/*! /Users/andrewgaidis/projects/Quick-Evict/resources/assets/js/home.js */"./resources/assets/js/home.js");
 __webpack_require__(/*! /Users/andrewgaidis/projects/Quick-Evict/resources/assets/js/newFile.js */"./resources/assets/js/newFile.js");
+__webpack_require__(/*! /Users/andrewgaidis/projects/Quick-Evict/resources/assets/js/getFileFee.js */"./resources/assets/js/getFileFee.js");
 __webpack_require__(/*! /Users/andrewgaidis/projects/Quick-Evict/resources/assets/js/stripe.js */"./resources/assets/js/stripe.js");
 __webpack_require__(/*! /Users/andrewgaidis/projects/Quick-Evict/resources/assets/js/generalAdmin.js */"./resources/assets/js/generalAdmin.js");
 module.exports = __webpack_require__(/*! /Users/andrewgaidis/projects/Quick-Evict/resources/assets/sass/app.scss */"./resources/assets/sass/app.scss");

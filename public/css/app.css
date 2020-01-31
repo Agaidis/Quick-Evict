@@ -10797,6 +10797,30 @@ body {
     margin-left: 6%;
     margin-right: 6%;
 }
+
+#get_file_Fee_container {
+    font-size:16px;
+    margin-top:4%;
+    text-align:center;
+    padding:10px 5px 10px 5px;
+    font-family: verdana;
+    background-color:#116466;
+    border-color:#116466;
+    color:#d1e8e2;
+
+}
+
+#get_file_fee_btn {
+    width:150px;
+}
+
+#get_file_fields_container {
+    border: 1px solid gainsboro;
+    padding: 25px;
+    -webkit-border-radius: 2em;
+    -moz-border-radius: 2em;
+    border-radius: 2em;
+}
 /*
  * This combined file was created by the DataTables downloader builder:
  *   https://datatables.net/download
