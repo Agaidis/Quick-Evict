@@ -134,6 +134,15 @@ if (document.location.href.split('/')[3] === 'get-file-fee') {
 
             }
         });
+
+        $('#file_type_select').on('change', function() {
+            console.log($(this).val());
+           if ($(this).val() === 'civil') {
+               $('.send_method_container').css('display', 'block');
+           } else {
+               $('.send_method_container').css('display', 'none');
+           }
+        });
         $('#calculate_file_fee').on('click', function() {
             let splitCourtNumber = $('#court_number').val().split('_');
             let userAddress = houseNum + ' ' + streetName + ' ' + town + ' ' + 'PA ' + county + ', ' + zipcode;
@@ -155,7 +164,8 @@ if (document.location.href.split('/')[3] === 'get-file-fee') {
                     numDefs: $('#num_defendants').val(),
                     fileType: $('#file_type_select').val(),
                     totalJudgment: $('#total_judgment').val(),
-                    userAddress: userAddress
+                    userAddress: userAddress,
+                    deliveryType: $('#send_method').val()
                 },
                 success : function(data) {
                     $('#filing_fee').val(data).text(data);

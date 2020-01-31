@@ -17,7 +17,7 @@
                         <div class="row">
                             <div class="offset-1 col-md-5">
                                 <h2 class="titles" style="margin-right:20%; text-align:center;">Step 1: Put in the Address</h2>
-                                <div style="margin-left:0; height:400px;" id="map"></div>
+                                <div style="margin-left:0; height:400px; width:90%" id="map"></div>
                                 <input type="hidden" id="court_number" name="court_number" />
                             </div>
                             <div class="col-md-5">
@@ -26,11 +26,19 @@
                                 <div class="row col-sm-10">
                                     <label class="labels" for="file_type_select">File Type: </label>
                                         <select class="form-control" id="file_type_select" name="fileType">
-                                            <option value="none">File type Select</option>
+                                            <option value="none">File type</option>
                                             <option value="ltc">Landlord Tenant-Complaint</option>
                                             <option value="oop">Request for Order of Possession</option>
                                             <option value="civil">Civil Complaint</option>
                                         </select>
+                                </div>
+                                <div style="display:none;" class="send_method_container row col-sm-10">
+                                    <label class="labels" for="send_method">Delivery Method: </label>
+                                    <select class="form-control" id="send_method" name="sendMethod">
+                                        <option value="none">Delivery Method</option>
+                                        <option value="mail">Mail</option>
+                                        <option value="constable">Constable</option>
+                                    </select>
                                 </div>
                                 <div class="row col-sm-10">
                                     <label for="num_defendants" class="labels">Number of Defendants</label>

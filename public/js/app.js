@@ -43326,6 +43326,15 @@ if (document.location.href.split('/')[3] === 'get-file-fee') {
         alert('Address is either in a different county or outside all zones. Please go back to step 1 and verify you selected the right county.');
       } else {}
     });
+    $('#file_type_select').on('change', function () {
+      console.log($(this).val());
+
+      if ($(this).val() === 'civil') {
+        $('.send_method_container').css('display', 'block');
+      } else {
+        $('.send_method_container').css('display', 'none');
+      }
+    });
     $('#calculate_file_fee').on('click', function () {
       var splitCourtNumber = $('#court_number').val().split('_');
       var userAddress = houseNum + ' ' + streetName + ' ' + town + ' ' + 'PA ' + county + ', ' + zipcode;
@@ -43346,7 +43355,8 @@ if (document.location.href.split('/')[3] === 'get-file-fee') {
           numDefs: $('#num_defendants').val(),
           fileType: $('#file_type_select').val(),
           totalJudgment: $('#total_judgment').val(),
-          userAddress: userAddress
+          userAddress: userAddress,
+          deliveryType: $('#send_method').val()
         },
         success: function success(data) {
           $('#filing_fee').val(data).text(data);
