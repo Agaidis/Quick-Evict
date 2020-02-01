@@ -43337,7 +43337,7 @@ if (document.location.href.split('/')[3] === 'get-file-fee') {
     });
     $('#calculate_file_fee').on('click', function () {
       var splitCourtNumber = $('#court_number').val().split('_');
-      var userAddress = houseNum + ' ' + streetName + ' ' + town + ' ' + 'PA ' + county + ', ' + zipcode;
+      var userAddress = houseNum + ' ' + streetName + ' ' + town + ' ' + state + ' ' + county + ', ' + zipcode;
       console.log(userAddress);
       $.ajaxSetup({
         headers: {

@@ -145,7 +145,7 @@ if (document.location.href.split('/')[3] === 'get-file-fee') {
         });
         $('#calculate_file_fee').on('click', function() {
             let splitCourtNumber = $('#court_number').val().split('_');
-            let userAddress = houseNum + ' ' + streetName + ' ' + town + ' ' + 'PA ' + county + ', ' + zipcode;
+            let userAddress = houseNum + ' ' + streetName + ' ' + town + ' ' + state + ' ' + county + ', ' + zipcode;
             console.log(userAddress);
 
             $.ajaxSetup({
