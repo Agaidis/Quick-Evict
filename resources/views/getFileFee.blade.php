@@ -78,10 +78,10 @@
                                         <input type="text" disabled class="form-control" id="filing_fee" name="filing_fee"/>
                                     </div>
                                 </div>
-                                <span style="color:red;" class="error_msgs" id="map_error_msg"></span>
-                                <span style="color:red;" class="error_msgs" id="file_type_error_msg"></span>
-                                <span style="color:red;" class="error_msgs" id="num_def_error_msg"></span>
-                                <span style="color:red;" class="error_msgs" id="total_judgment_error_msg"></span>
+                                <p style="color:red;" class="error_msgs" id="map_error_msg"></p>
+                                <p style="color:red;" class="error_msgs" id="file_type_error_msg"></p>
+                                <p style="color:red;" class="error_msgs" id="num_def_error_msg"></p>
+                                <p style="color:red;" class="error_msgs" id="total_judgment_error_msg"></p>
                             </div>
                             </div>
                         </div>
