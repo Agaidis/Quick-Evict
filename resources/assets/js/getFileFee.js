@@ -164,7 +164,7 @@ if (document.location.href.split('/')[3] === 'get-file-fee') {
                 $('#total_judgment_error_msg').text('Fill in a total judgment');
             }
 
-            if ( numDefendants === 'none' ) {
+            if ( numDefendants === 'none' || numDefendants === null ) {
                 $('#num_def_error_msg').text('Select a number of Defendants');
             }
 
