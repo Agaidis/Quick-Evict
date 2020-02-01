@@ -113,7 +113,7 @@
                 <a href="{{ url('new-file') }}"><button type="button" class="btn btn-primary" id="new_file_btn">Start a new File</button></a>
             </div>
             @if (Auth::check())
-            @if (Auth::user()->email == 'andrew.gaidis@gmail.com' || Auth::user()->email == 'andrew@slatehousegroup.com')
+            @if (Auth::user()->role == 'Court' || Auth::user()->role == 'Administrator')
             <div class="col-offset-2 col-md-3">
                 <form method="post" action="{{ action('GetFileFeeController@index') }}" enctype="multipart/form-data" id="dashboard_form">
                     <input type="hidden" name="_token" value="{{ Session::token() }}">
