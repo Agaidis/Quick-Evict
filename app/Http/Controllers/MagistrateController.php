@@ -9,6 +9,7 @@ use App\GeoLocation;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\DB;
 
 
 class MagistrateController extends Controller
@@ -28,11 +29,13 @@ class MagistrateController extends Controller
         if (Auth::guest()) {
             return view('/login');
         } else {
-            // Get all the series
-            $courtDetails = CourtDetails::all()->sortBy("county");
-            $geoLocations = GeoLocation::all();
 
-            return view('magistrateCreator', compact('courtDetails', 'geoLocations'));
+            $courtDetails = DB::table('court_details')
+                ->leftJoin('civil_unique', 'court_details.id', '=', 'civil_unique.court_details_id')
+                ->orderBy('court_details.county')
+                ->get();
+
+            return view('magistrateCreator', compact('courtDetails'));
         }
     }
 

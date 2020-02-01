@@ -16,7 +16,8 @@
                                     <p class="alert alert-danger">{{ Session::get('alert-danger') }} <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a></p>
                                 @endif
                         </div> <!-- end .flash-message -->
-                        <table class="table table-hover table-responsive-lg table-bordered magistrate_table" id="magistrate_table">
+                        <div style="overflow-x:auto;">
+                        <table class="table table-hover table-responsive-lg table-bordered magistrate_table" style="width:2000px;" id="magistrate_table">
                                     <thead>
                                     <tr>
                                         <th>Magistrate Unique Id</th>
@@ -25,10 +26,14 @@
                                         <th>County</th>
                                         <th>MDJ Name</th>
                                         <th>Phone #</th>
-                                        <th>(1) Under 2k<br>(2) Under 2k<br>(3) Under 2k</th>
-                                        <th>(1) Btn 2k - 4k<br>(2) Btn 2k - 4k<br>(3) Btn 2k - 4k</th>
-                                        <th>(1) Over 4k<br>(2) Over 4k<br>(3) Over 4k</th>
-                                        <th>(1) OOP<br>(2) OOP<br>(3) OOP</th>
+                                        <th class="magistrate_th">(1) Under 2k<br>(2) Under 2k<br>(3) Under 2k</th>
+                                        <th class="magistrate_th">(1) Btn 2k - 4k<br>(2) Btn 2k - 4k<br>(3) Btn 2k - 4k</th>
+                                        <th class="magistrate_th">(1) Over 4k<br>(2) Over 4k<br>(3) Over 4k</th>
+                                        <th class="magistrate_th">(1) OOP<br>(2) OOP<br>(3) OOP</th>
+                                        <th class="magistrate_civil_th">(1) - Civil Mail<br> Under 500<br>btn 500 - 2k<br>btn 2k - 4k<br>btn 4k - 12k</th>
+                                        <th class="magistrate_civil_th">(2) - Civil Mail<br> Under 500<br>btn 500 - 2k<br>btn 2k - 4k<br>btn 4k - 12k</th>
+                                        <th class="magistrate_civil_th">(1) - Civil Constable<br> Under 500<br>btn 500 - 2k<br>btn 2k - 4k<br>btn 4k - 12k</th>
+                                        <th class="magistrate_civil_th">(2) - Civil Constable<br> Under 500<br>btn 500 - 2k<br>btn 2k - 4k<br>btn 4k - 12k</th>
                                         <th>Additional Tenant $</th>
                                         <th class="text-center">Edit</th>
                                         <th class="text-center">Remove</th>
@@ -47,6 +52,12 @@
                                         <td>{{$courtDetail->one_defendant_between_2001_4000}}<br>{{$courtDetail->two_defendant_between_2001_4000}}<br>{{$courtDetail->three_defendant_between_2001_4000}}</td>
                                         <td>{{$courtDetail->one_defendant_greater_than_4000}}<br>{{$courtDetail->two_defendant_greater_than_4000}}<br>{{$courtDetail->three_defendant_greater_than_4000}}</td>
                                         <td>{{$courtDetail->one_defendant_out_of_pocket}}<br>{{$courtDetail->two_defendant_out_of_pocket}}<br>{{$courtDetail->three_defendant_out_of_pocket}}</td>
+
+                                        <td>{{$courtDetail->under_500_1_def_mail}}<br>{{$courtDetail->btn_500_2000_1_def_mail}}<br>{{$courtDetail->btn_2000_4000_1_def_mail}}<br>{{$courtDetail->btn_4000_12000_1_def_mail}}</td>
+                                        <td>{{$courtDetail->under_500_2_def_mail}}<br>{{$courtDetail->btn_500_2000_2_def_mail}}<br>{{$courtDetail->btn_2000_4000_2_def_mail}}<br>{{$courtDetail->btn_4000_12000_2_def_mail}}</td>
+                                        <td>{{$courtDetail->under_500_1_def_constable}}<br>{{$courtDetail->btn_500_2000_1_def_constable}}<br>{{$courtDetail->btn_2000_4000_1_def_constable}}<br>{{$courtDetail->btn_4000_12000_1_def_constable}}</td>
+                                        <td>{{$courtDetail->under_500_2_def_constable}}<br>{{$courtDetail->btn_500_2000_2_def_constable}}<br>{{$courtDetail->btn_2000_4000_2_def_constable}}<br>{{$courtDetail->btn_4000_12000_2_def_constable}}</td>
+
                                         <td>{{$courtDetail->additional_tenant}}</td>
 
                                         <td class="text-center"><button type="button" data-target="#modal_edit_magistrate" data-toggle="modal" id="id_{{$courtDetail->id}}_{{$courtDetail->magistrate_id}}" class=" magistrate-edit">Edit</button></td>
@@ -55,6 +66,7 @@
                                     @endforeach
                                     </tbody>
                                 </table>
+                        </div>
                         <form id="magistrate_form">
                         <div class="row">
                             <div class="col-sm-12">

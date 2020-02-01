@@ -10784,6 +10784,16 @@ body {
     background-attachment: fixed;
 
 }
+
+.magistrate_th {
+    width:80px;
+    text-align: center;
+}
+
+.magistrate_civil_th {
+    width:120px;
+    text-align: center;
+}
 .card {
     border-radius: 2em;
 }
