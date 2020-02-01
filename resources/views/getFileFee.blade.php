@@ -19,7 +19,7 @@
                                 <h2 class="titles" style="margin-right:20%; text-align:center;">Step 1: Put in the Address</h2>
                                 <div style="margin-left:0; height:400px; width:90%" id="map"></div>
                                 <input type="hidden" id="court_number" name="court_number" />
-                            </div>
+                            </div><p style="color:red;" class="error_msgs" id="map_error_msg"></p>
                             <div class="col-md-5">
                                 <h2 class="titles" style="text-align:center;">Step 2: Fill in the Fields Below</h2>
                             <div id="get_file_fields_container">
@@ -31,7 +31,7 @@
                                             <option value="oop">Request for Order of Possession</option>
                                             <option value="civil">Civil Complaint</option>
                                         </select>
-                                </div>
+                                </div><p style="color:red;" class="error_msgs" id="file_type_error_msg"></p>
                                 <div style="display:none;" class="send_method_container row col-sm-10">
                                     <label class="labels" for="send_method">Delivery Method: </label>
                                     <select class="form-control" id="send_method" name="sendMethod">
@@ -66,22 +66,18 @@
                                         <option value="19">19</option>
                                         <option value="20">20</option>
                                     </select>
-                                </div>
+                                </div><p style="color:red;" class="error_msgs" id="num_def_error_msg"></p>
 
                                 <div class="row col-sm-10">
                                     <label class="labels" for="total_judgment">Total Judgment</label>
                                     <input type="text" class="form-control eviction_fields" id="total_judgment" name="total_judgment" placeholder="$" value=""  maxlength="9"/>
-                                </div><br>
+                                </div><p style="color:red;" class="error_msgs" id="total_judgment_error_msg"></p><br>
                                 <div class="row col-md-12">
                                     <button id="calculate_file_fee" class="btn btn-primary">Calculate Filing Fee!</button><br>
                                     <div class="col-md-6">
                                         <input type="text" disabled class="form-control" id="filing_fee" name="filing_fee"/>
                                     </div>
                                 </div>
-                                <p style="color:red;" class="error_msgs" id="map_error_msg"></p>
-                                <p style="color:red;" class="error_msgs" id="file_type_error_msg"></p>
-                                <p style="color:red;" class="error_msgs" id="num_def_error_msg"></p>
-                                <p style="color:red;" class="error_msgs" id="total_judgment_error_msg"></p>
                             </div>
                             </div>
                         </div>
