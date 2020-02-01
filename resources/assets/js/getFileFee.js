@@ -148,6 +148,7 @@ if (document.location.href.split('/')[3] === 'get-file-fee') {
             let fileType = $('#file_type_select').val();
             let totalJudgment = $('#total_judgment').val();
             let numDefendants = $('#num_defendants').val();
+            console.log(numDefendants);
 
             $('.error_msgs').text('');
 

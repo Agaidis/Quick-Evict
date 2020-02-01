@@ -41,7 +41,7 @@
                                     </select>
                                 </div>
                                 <div class="row col-sm-10">
-                                    <label for="num_defendants" class="labels">Number of Defendants</label>
+                                    <label for="num_defendants" class="labels">Number of Defendants</label><span style="color:red;" class="error_msgs" id="num_def_error_msg"></span>
                                     <span class="fa fa-question-circle" data-placement="right" data-toggle="tooltip" title="Select the Number of Defendants"></span>
                                     <select class="form-control" id="num_defendants">
                                         <option value="none" selected disabled>Select # of Defendants</option>
@@ -66,7 +66,7 @@
                                         <option value="19">19</option>
                                         <option value="20">20</option>
                                     </select>
-                                </div><span style="color:red;" class="error_msgs" id="num_def_error_msg"></span>
+                                </div>
 
                                 <div class="row col-sm-10">
                                     <label class="labels" for="total_judgment">Total Judgment</label>
