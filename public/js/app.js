@@ -43339,6 +43339,7 @@ if (document.location.href.split('/')[3] === 'get-file-fee') {
       var fileType = $('#file_type_select').val();
       var totalJudgment = $('#total_judgment').val();
       var numDefendants = $('#num_defendants').val();
+      console.log(numDefendants);
       $('.error_msgs').text('');
 
       if (streetName === undefined) {
