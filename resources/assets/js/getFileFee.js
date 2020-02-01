@@ -148,6 +148,10 @@ if (document.location.href.split('/')[3] === 'get-file-fee') {
             let userAddress = houseNum + ' ' + streetName + ' ' + town + ' ' + state + ' ' + county + ', ' + zipcode;
             console.log(userAddress);
 
+            if (streetName === undefined ) {
+                $('#error_msg').text('Enter an Address of the location of filing in the map.');
+            }
+
             $.ajaxSetup({
                 headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')

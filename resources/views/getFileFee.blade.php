@@ -78,6 +78,7 @@
                                         <input type="text" disabled class="form-control" id="filing_fee" name="filing_fee"/>
                                     </div>
                                 </div>
+                                <span style="color:red;" id="error_msg"></span>
                             </div>
                             </div>
                         </div>
