@@ -70,7 +70,7 @@
                                 <div class="row col-sm-10">
                                     <label class="labels" for="total_judgment">Total Judgment</label><span style="color:red; margin-left:21%" class="error_msgs" id="total_judgment_error_msg"></span>
                                     <input type="text" class="form-control eviction_fields" id="total_judgment" name="total_judgment" placeholder="$" value=""  maxlength="9"/>
-                                </div>
+                                </div><br>
                                 <div class="row col-md-12">
                                     <button id="calculate_file_fee" class="btn btn-primary">Calculate Filing Fee!</button><br>
                                     <div class="col-md-6">
