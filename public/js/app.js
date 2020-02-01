@@ -43342,7 +43342,7 @@ if (document.location.href.split('/')[3] === 'get-file-fee') {
       $('.error_msgs').text('');
 
       if (streetName === undefined) {
-        $('#map_error_msg').text('Don\'t forget to enter an address of the location you are filing for in the map.');
+        alert('Don\'t forget to enter an address of the location you are filing for in the map.');
       }
 
       if (fileType === 'none') {

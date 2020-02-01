@@ -19,7 +19,7 @@
                                 <h2 class="titles" style="margin-right:20%; text-align:center;">Step 1: Put in the Address</h2>
                                 <div style="margin-left:0; height:400px; width:90%" id="map"></div>
                                 <input type="hidden" id="court_number" name="court_number" />
-                            </div><span style="color:red;" class="error_msgs" id="map_error_msg"></span>
+                            </div>
                             <div class="col-md-5">
                                 <h2 class="titles" style="text-align:center;">Step 2: Fill in the Fields Below</h2>
                             <div id="get_file_fields_container">
