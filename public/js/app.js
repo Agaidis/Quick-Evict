@@ -43327,8 +43327,6 @@ if (document.location.href.split('/')[3] === 'get-file-fee') {
       } else {}
     });
     $('#file_type_select').on('change', function () {
-      console.log($(this).val());
-
       if ($(this).val() === 'civil') {
         $('.send_method_container').css('display', 'block');
       } else {
@@ -43338,10 +43336,25 @@ if (document.location.href.split('/')[3] === 'get-file-fee') {
     $('#calculate_file_fee').on('click', function () {
       var splitCourtNumber = $('#court_number').val().split('_');
       var userAddress = houseNum + ' ' + streetName + ' ' + town + ' ' + state + ' ' + county + ', ' + zipcode;
-      console.log(userAddress);
+      var fileType = $('#file_type_select').val();
+      var totalJudgment = $('#total_judgment').val();
+      var numDefendants = $('#num_defendants').val();
+      $('.error_msgs').text('');
 
       if (streetName === undefined) {
-        $('#error_msg').text('Enter an Address of the location of filing in the map.');
+        $('#map_error_msg').text('Don\'t forget to enter an address of the location you are filing for in the map.');
+      }
+
+      if (fileType === 'none') {
+        $('#file_type_error_msg').text('Select a File Type.');
+      }
+
+      if (totalJudgment === '') {
+        $('#total_judgment_error_msg').text('Fill in a total judgment');
+      }
+
+      if (numDefendants === 'none') {
+        $('#num_def_error_msg').text('Select a number of Defendants');
       }
 
       $.ajaxSetup({
@@ -43357,9 +43370,9 @@ if (document.location.href.split('/')[3] === 'get-file-fee') {
         type: 'POST',
         data: {
           courtNumber: splitCourtNumber[1],
-          numDefs: $('#num_defendants').val(),
-          fileType: $('#file_type_select').val(),
-          totalJudgment: $('#total_judgment').val(),
+          numDefs: numDefendants,
+          fileType: fileType,
+          totalJudgment: totalJudgment,
           userAddress: userAddress,
           deliveryType: $('#send_method').val()
         },

@@ -44,7 +44,7 @@
                                     <label for="num_defendants" class="labels">Number of Defendants</label>
                                     <span class="fa fa-question-circle" data-placement="right" data-toggle="tooltip" title="Select the Number of Defendants"></span>
                                     <select class="form-control" id="num_defendants">
-                                        <option value="" selected disabled>Select # of Defendants</option>
+                                        <option value="none" selected disabled>Select # of Defendants</option>
                                         <option value="1">1</option>
                                         <option value="2">2</option>
                                         <option value="3">3</option>
@@ -78,7 +78,10 @@
                                         <input type="text" disabled class="form-control" id="filing_fee" name="filing_fee"/>
                                     </div>
                                 </div>
-                                <span style="color:red;" id="error_msg"></span>
+                                <span style="color:red;" class="error_msgs" id="map_error_msg"></span>
+                                <span style="color:red;" class="error_msgs" id="file_type_error_msg"></span>
+                                <span style="color:red;" class="error_msgs" id="num_def_error_msg"></span>
+                                <span style="color:red;" class="error_msgs" id="total_judgment_error_msg"></span>
                             </div>
                             </div>
                         </div>
