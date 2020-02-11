@@ -34,20 +34,19 @@
                                 </thead>
                                 <tbody>
                                 @if (isset($evictions))
-                                @foreach ($evictions as $eviction)
-                                    <?php $propertyAddressArray = explode('-1', $eviction->property_address);
 
+                                    <?php
                                     $ltcStatusArray = array('Created LTC',
-                                            'LTC Mailed',
-                                            'LTC Submitted Online',
-                                            'Court Hearing Scheduled',
-                                            'Court Hearing Extended',
-                                            'Court Hearing Rescheduled',
-                                            'Judgement Issued in Favor of Owner',
-                                            'Judgement Denied by Court','Tenant Filed Appeal',
-                                            'OOP Submitted Online',
-                                            'Paid Judgement',
-                                            'Case Withdrawn');
+                                        'LTC Mailed',
+                                        'LTC Submitted Online',
+                                        'Court Hearing Scheduled',
+                                        'Court Hearing Extended',
+                                        'Court Hearing Rescheduled',
+                                        'Judgement Issued in Favor of Owner',
+                                        'Judgement Denied by Court','Tenant Filed Appeal',
+                                        'OOP Submitted Online',
+                                        'Paid Judgement',
+                                        'Case Withdrawn');
 
                                     $oopStatusArray = array('Created OOP',
                                         'OOP Mailed',
@@ -63,7 +62,9 @@
                                         'Civil Hearing Extended',
                                         'Judgment Issued');
 
-                                        ?>
+                                    ?>
+                                @foreach ($evictions as $eviction)
+                                    <?php $propertyAddressArray = explode('-1', $eviction->property_address); ?>
                                     <tr>
                                         <td class="text-center">{{$eviction->id}}</td>
                                         <td class="text-center">

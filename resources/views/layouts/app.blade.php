@@ -1,3 +1,7 @@
+<?php
+    use App\CourtDetails;
+    $counties = CourtDetails::distinct()->orderBy('county')->get(['county']);
+?>
 <!DOCTYPE html>
 <html lang="{{ app()->getLocale() }}">
 <head>
@@ -103,15 +107,35 @@
                 @endguest
             </div>
         </nav>
-        <div class="row">
-            <div id="new_filing_container" class="offset-4 col-md-4">
-                <div class="button_panel">
-                    @if (request()->path() != 'new-file' && request()->path() != 'login' && request()->path() != 'register' && request()->path() != 'generalAdmin' && request()->path() != 'magistrateCreator' && request()->path() != 'userManagement')
-                        <a href="{{ url('new-file') }}"><button type="button" class="btn btn-primary" id="new_file_btn">Start a new File</button></a><br>
-                    @endif
-                </div>
+        @if (request()->path() != 'new-file' && request()->path() != 'login' && request()->path() != 'register' && request()->path() != 'generalAdmin' && request()->path() != 'magistrateCreator' && request()->path() != 'userManagement' && request()->path() != 'get-file-fee')
+        <div class="row justify-content-center">
+            <div id="new_filing_container" class="col-offset-2 col-md-4">
+                <a href="{{ url('new-file') }}"><button type="button" class="btn btn-primary" id="new_file_btn">Start a new File</button></a>
             </div>
+            @if (Auth::check())
+            @if (Auth::user()->role == 'Court' || Auth::user()->role == 'Administrator')
+            <div class="col-offset-2 col-md-3">
+                <form method="post" action="{{ action('GetFileFeeController@index') }}" enctype="multipart/form-data" id="dashboard_form">
+                    <input type="hidden" name="_token" value="{{ Session::token() }}">
+                    <div id="get_file_Fee_container">
+                        <label style="align-content:center; text-align:center;" class="labels">Quick Fee Assessment!</label><br>
+                        <div class="col-md-12">
+                            <label class="labels" for="county_select">Choose a County</label>
+                            <select class="form-control" id="county_select" name="county">
+                                <option value="none">County Select</option>
+                                @foreach ($counties as $county)
+                                    <option value="{{$county->county}}">{{$county->county}}</option>
+                                @endforeach
+                            </select><br>
+                            <button type="submit" class="btn btn-primary" id="get_file_fee_btn">Go!</button>
+                        </div>
+                    </div><br>
+                </form>
+            </div>
+            @endif
+                @endif
         </div>
+        @endif
 
         <main class="py-4">
             @yield('content')

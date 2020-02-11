@@ -12,10 +12,10 @@ $(document).ready(function () {
     $('.calendar_tooltip').tooltip();
 
     $('.court_calendar').on('click', function() {
-        var id = $(this)[0].id.split('_');
+        let id = $(this)[0].id.split('_');
         $('#id_court_date').val(id[2]);
 
-        var splitCourtDate = $('#court_date_' + id[2]).text().split(' ');
+        let splitCourtDate = $('#court_date_' + id[2]).text().split(' ');
 
         $('#court_date').val('').datepicker('setDate', new Date(splitCourtDate[0]));
         $('#court_time').val('').timepicker('setTime', splitCourtDate[1] + splitCourtDate[2]);

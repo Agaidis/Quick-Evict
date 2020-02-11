@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\ErrorLog;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Exception;
 
 class AboutUsController extends Controller
 {
@@ -14,6 +16,14 @@ class AboutUsController extends Controller
      */
     public function index()
     {
-        return view('aboutUs');
+        try {
+            return view('aboutUs');
+        } catch ( Exception $e ) {
+            $errorMsg = new ErrorLog();
+            $errorMsg->payload = $e->getMessage() . ' Line #: ' . $e->getLine();
+
+            $errorMsg->save();
+        }
+
     }
 }

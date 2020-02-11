@@ -26,6 +26,7 @@ let mix = require('laravel-mix');
      'resources/assets/js/bootstrap-timepicker.min.js',
      'resources/assets/js/home.js',
      'resources/assets/js/newFile.js',
+     'resources/assets/js/getFileFee.js',
      'resources/assets/js/stripe.js',
      'resources/assets/js/generalAdmin.js',
  ], 'public/js/app.js').version()
