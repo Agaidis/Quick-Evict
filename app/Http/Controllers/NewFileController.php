@@ -28,7 +28,7 @@ class NewFileController extends Controller
         } else {
             $counties = CourtDetails::distinct()->orderBy('county')->get(['county']);
 
-            return view('newFile', compact('counties'));
+            return view('home', compact('counties'));
         }
     }
 
