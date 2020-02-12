@@ -19,9 +19,10 @@
                                 <div class="form-group col-4">
                                     <select class="form-control" id="file_type_select" name="fileType">
                                         <option value="none">Select a File Type</option>
+                                        <option value="civil">Civil Complaint</option>
                                         <option value="ltc">Landlord Tenant-Complaint</option>
                                         <option value="oop">Request for Order of Possession</option>
-                                        <option value="civil">Civil Complaint</option>
+
                                     </select>
                                 </div>
                                 <div class="form-group col-4">
@@ -91,6 +92,22 @@
     <section class="showcase bg-light">
         <div class="container-fluid p-0">
             <div class="row no-gutters">
+                <div class="col-lg-6 text-white showcase-img">
+                    <div style="display:block; font-size:50px; color:black; margin-left:16%; margin-top:4%;" class="fas fa-file-alt"><span style="font-weight: normal; margin-left:5%; font-size:28px;">Contract Disputes</span></div>
+                    <div style="display:block; font-size:50px; color:black; margin-left:15%; margin-top:4%;" class="fa fa-home"><span style="font-weight: normal; margin-left:5%; font-size:28px;">Property Disputes</span></div>
+                    <div style="display:block; font-size:50px; color:black; margin-left:15%; margin-top:4%;" class="fas fa-balance-scale"><span style="font-weight: normal; margin-left:5%; font-size:28px;">Torts</span></div>
+                    <div style="display:block; font-size:50px; color:black; margin-left:15%; margin-top:4%;" class="fas fa-handshake"><span style="font-weight: normal; margin-left:5%; font-size:28px;">Collections</span></div>
+                </div>
+                <div class="col-lg-6 showcase-text">
+                    <h1>Civil Complaints</h1>
+                    <p class="lead mb-0"></p>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="showcase">
+        <div class="container-fluid p-0">
+            <div class="row no-gutters">
                 <div class="col-lg-6 order-lg-6 text-white showcase-img">
             <div style="display:block; font-size:50px; color:black; margin-left:10%; margin-top:5%;" class="fa fa-home"><span style="font-weight: normal; margin-left:5%; font-size:28px;">Residential</span></div>
             <div style="display:block; font-size:50px; color:black; margin-left:10%; margin-top:5%;" class="fas fa-building"><span style="font-weight: normal; margin-left:5%; font-size:28px;">Commercial</span></div>
@@ -103,22 +120,7 @@
             </div>
         </div>
     </section>
-    <section class="showcase">
-        <div class="container-fluid p-0">
-            <div class="row no-gutters">
-                <div class="col-lg-6 text-white showcase-img">
-                    <div style="display:block; font-size:50px; color:black; margin-left:16%; margin-top:4%;" class="fas fa-file-alt"><span style="font-weight: normal; margin-left:5%; font-size:28px;">Contract Disputes</span></div>
-                    <div style="display:block; font-size:50px; color:black; margin-left:15%; margin-top:4%;" class="fa fa-home"><span style="font-weight: normal; margin-left:5%; font-size:28px;">Property Disputes</span></div>
-                    <div style="display:block; font-size:50px; color:black; margin-left:15%; margin-top:4%;" class="fas fa-balance-scale"><span style="font-weight: normal; margin-left:5%; font-size:28px;">Torts</span></div>
-                    <div style="display:block; font-size:50px; color:black; margin-left:15%; margin-top:4%;" class="fas fa-handshake"><span style="font-weight: normal; margin-left:5%; font-size:28px;">Collections</span></div>
-                </div>
-                    <div class="col-lg-6 showcase-text">
-                    <h1>Civil Complaints</h1>
-                    <p class="lead mb-0"></p>
-                </div>
-            </div>
-        </div>
-    </section>
+
 
 
         <!-- Testimonials -->
@@ -161,9 +163,10 @@
                         <div class="form-group col-4">
                             <select class="form-control" id="file_type_select" name="fileType">
                                 <option value="none">Select a File Type</option>
+                                <option value="civil">Civil Complaint</option>
                                 <option value="ltc">Landlord Tenant-Complaint</option>
                                 <option value="oop">Request for Order of Possession</option>
-                                <option value="civil">Civil Complaint</option>
+
                             </select>
                         </div>
                         <div class="form-group col-4">

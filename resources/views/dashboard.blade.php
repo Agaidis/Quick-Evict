@@ -13,9 +13,10 @@
                                 <div class="form-group col-4">
                                     <select class="form-control" id="file_type_select" name="fileType">
                                         <option value="none">Select a File Type</option>
+                                        <option value="civil">Civil Complaint</option>
                                         <option value="ltc">Landlord Tenant-Complaint</option>
                                         <option value="oop">Request for Order of Possession</option>
-                                        <option value="civil">Civil Complaint</option>
+
                                     </select>
                                 </div>
                                 <div class="form-group col-4">
@@ -53,7 +54,7 @@
                                     <th class="text-center" style="width:80px;">Tenant</th>
                                     <th class="text-center">Status</th>
                                     <th class="text-center">Court Date</th>
-                                    <th class="text-center">LTC<br> Total<br> Judgement</th>
+                                    <th class="text-center">Total<br> Claim<br> Amount</th>
                                     <th class="text-center">Court Filing $</th>
                                     <th class="text-center">Completion Date</th>
                                     <th class="text-center" style="width:100px;">Actions</th>
