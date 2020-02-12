@@ -60,10 +60,10 @@
                     <div class="col-lg-3">
                         <div class="features-icons-item mx-auto mb-5 mb-lg-0 mb-lg-3">
                             <div class="features-icons-icon d-flex">
-                                <i class="fas fa-clock m-auto text-primary"></i>
+                                <i class="fas fa-phone-slash m-auto text-primary"></i>
                             </div>
                             <h3>Simple</h3>
-                            <p class="lead mb-0">File in 5 minutes!</p>
+                            <p class="lead mb-0">Eliminate phone tag with the courts</p>
                         </div>
                     </div>
                     <div class="col-lg-3">
@@ -72,16 +72,16 @@
                                 <i class="fas fa-bullseye m-auto text-primary"></i>
                             </div>
                             <h3>Accurate</h3>
-                            <p class="lead mb-0">Eliminate filing with inaccurate amounts!</p>
+                            <p class="lead mb-0">Eliminate inaccurate filing fees</p>
                         </div>
                     </div>
                     <div class="col-lg-3">
                         <div class="features-icons-item mx-auto mb-0 mb-lg-3">
                             <div class="features-icons-icon d-flex">
-                                <i class="fas fa-fast-forward m-auto text-primary"></i>
+                                <i class="fas fa-clock m-auto text-primary"></i>
                             </div>
                             <h3>Quick</h3>
-                            <p class="lead mb-0">File transmitted online to court, Avoid Postage delays</p>
+                            <p class="lead mb-0">Create and file electronically with Court in 5 minutes! Avoid mail hassle and delay</p>
                         </div>
                     </div>
                 </div>
