@@ -50,13 +50,13 @@
                                     <th class="text-center">Id</th>
                                     <th>Download Status</th>
                                     <th class="text-center">Property Address</th>
-                                    <th class="text-center" style="width:80px;">Owner</th>
-                                    <th class="text-center" style="width:80px;">Tenant</th>
+                                    <th class="text-center" style="width:80px;">Plaintiff</th>
+                                    <th class="text-center" style="width:80px;">Defendant</th>
                                     <th class="text-center">Status</th>
                                     <th class="text-center">Court Date</th>
                                     <th class="text-center">Total<br> Claim<br> Amount</th>
                                     <th class="text-center">Court Filing $</th>
-                                    <th class="text-center">Completion Date</th>
+                                    <th class="text-center">Submission Date</th>
                                     <th class="text-center" style="width:100px;">Actions</th>
                                 </tr>
                                 </thead>
