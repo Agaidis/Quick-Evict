@@ -170,3 +170,6 @@ html, body {
 .form-row {
     margin-left: 56px !important;
 }
+.bg-light {
+    background-color: #cccccc !important;
+}
