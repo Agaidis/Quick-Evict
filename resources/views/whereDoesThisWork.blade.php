@@ -2,10 +2,10 @@
 @extends('layouts.app')
 @section('content')
 <meta name="csrf-token" id="token" content="{{ csrf_token() }}">
-<header class="subhead text-center">
+<header class="subhead">
     <div class="overlay"></div>
-<div class="container-fluid">
-    <div class="row justify-content-center">
+<div class="container">
+    <div class="row">
         <div class="col-md-12 col-lg-10 col-xl-10 mx-auto">
             <h2 class="titles" style="text-align:center;">Where does this work?</h2>
             <div class="flash-message">
