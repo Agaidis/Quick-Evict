@@ -1,11 +1,38 @@
 @extends('layouts.app')
 @section('content')
     <meta name="csrf-token" id="token" content="{{ csrf_token() }}">
-    <div class="container-fluid">
-
+    <header style="padding:2%;" class="text-center">
+        <div class="overlay"></div>
+    <div class="container">
         <div class="row justify-content-center">
-            <div class="col-md-11">
-                <div class="card">
+            <div class="col-md-12 col-lg-8 col-xl-7 mx-auto">
+                        <form method="post" class="form-horizontal" action="{{ action('NewFileController@proceedToFileTypeWithSelectedCounty') }}" id="new_file_form">
+                            <input type="hidden" name="_token" value="{{ Session::token() }}">
+                            <h3>Start a new File</h3>
+                            <div class="form-row">
+                                <div class="form-group col-4">
+                                    <select class="form-control" id="file_type_select" name="fileType">
+                                        <option value="none">Select a File Type</option>
+                                        <option value="ltc">Landlord Tenant-Complaint</option>
+                                        <option value="oop">Request for Order of Possession</option>
+                                        <option value="civil">Civil Complaint</option>
+                                    </select>
+                                </div>
+                                <div class="form-group col-4">
+                                    <select class="form-control" id="county_select" name="county" style="padding-bottom: 5px;">
+                                        <option value="none">Select the County</option>
+                                        @foreach ($counties as $county)
+                                            <option value="{{$county->county}}">{{$county->county}}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                                <div class="form-group col-md-3">
+                                    <button type="submit" class="btn btn-block btn-lg btn-primary">Go!</button>
+                                </div>
+                                <span id="file_type_error"></span>
+                            </div>
+                        </form>
+                    </div>
                     <div class="card-body body_container">
                         <h2 class="titles" style="text-align:center;">Current Filings</h2>
                         @if (session('status'))
@@ -252,8 +279,9 @@
                             </div>
                         </div>
                     </div>
-                </div>
-            </div>
+
+
         </div>
     </div>
+    </header>
 @endsection

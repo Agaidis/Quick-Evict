@@ -14,6 +14,8 @@ let mix = require('laravel-mix');
  mix.js([
      'resources/assets/js/bootstrap.js',
      'resources/assets/js/json2.min.js',
+     'resources/assets/js/bootstrap.bundle.min.js',
+     'resources/assets/js/jquery.slim.min.js',
      'resources/assets/js/timepicker.min.js',
      'resources/assets/js/datepicker-ui.min.js',
      'resources/assets/js/eviction.js',
@@ -35,6 +37,9 @@ let mix = require('laravel-mix');
     .styles([
         'public/css/app.css',
         'resources/assets/css/bootstrap-timepicker.min.css',
+        'resources/assets/css/bootstrap-reboot.min.css',
+        'resources/assets/css/landing-page.min.css',
+        'resources/assets/css/simple-line-icons.css',
         'resources/assets/css/timepicker.min.css',
         'resources/assets/css/dashboard.css',
         'resources/assets/css/datatables.min.css',

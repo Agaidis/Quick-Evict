@@ -33,10 +33,9 @@ class NewFileController extends Controller
     }
 
     public function proceedToFileTypeWithSelectedCounty(Request $request) {
-        if (Auth::guest()) {
-            return view('/login');
-        } else {
+
             try {
+                Log::info($request->county);
                 $geoData = GeoLocation::where('county', $request->county)->orderBy('magistrate_id', 'ASC')->get();
                 $map = new GMaps;
                 $fileType = $request->fileType;
@@ -71,7 +70,6 @@ class NewFileController extends Controller
                 $errorMsg->save();
                 return 'failure';
             }
-        }
     }
     public function getFilingFee() {
 

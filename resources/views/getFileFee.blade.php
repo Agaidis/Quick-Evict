@@ -1,6 +1,8 @@
 @extends('layouts.app')
 @section('content')
     <meta name="csrf-token" id="token" content="{{ csrf_token() }}">
+    <header class="subhead text-center">
+        <div class="overlay"></div>
     <div class="container-fluid">
         <div class="row justify-content-center">
             <div class="col-md-12">
@@ -86,4 +88,5 @@
         </div>
     </div>
     </div>
+    </header>
 @endsection

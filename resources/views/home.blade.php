@@ -1,33 +1,186 @@
 @extends('layouts.app')
 @section('content')
     <meta name="csrf-token" id="token" content="{{ csrf_token() }}">
-    <div class="container-fluid">
+        <!-- Masthead -->
+        <header class="masthead text-white text-center">
+            <div class="overlay"></div>
+            <div style="margin-top:-5%;" class="container">
+                <div class="row" style="margin-bottom:10%;">
+                    <div style="margin-bottom:1%;" class="col-xl-9 mx-auto">
+                        <img src="https://quickevict.nyc3.digitaloceanspaces.com/courtzipbluenobackground.png" width="320" height="70">
+                        <h2 style="color:#595959; margin-bottom:2%;">Simplify court filing at the local level</h2>
 
-        <div class="row justify-content-center">
-            <div class="col-md-11">
-                <div class="card">
-                    <div class="card-body body_container">
-                        <h2 class="titles">Welcome to Court<em>Zip</em>!</h2>
-                        <div>CourtZip is the leader in combining technology and court filing expertise to improve the process for filing Complaints in Pennsylvania Magisterial District Courts. CourtZip makes it easy to file Civil Complaints under $12,000, Landlord-Tenant Complaints (for evictions), and Orders of Possession (for possession of property from eviction).</div>
-
-                        <div>Prior to CourtZip, the filing process was outdated. Filing in the District Court required extra manual work and delays for everyone involved. CourtZip results from a collaboration of innovative judges, attorneys, government officials, property managers, real estate owners, and web developers to create a better solution.</div>
-
-                        <div>CourtZip solves the following problems:</div>
-
-                        <ul>
-                            <li><strong>Which Court to File My Complaint: </strong>Civil Complaints (under $12,000 at issue) &nbsp;and Landlord-Tenant Complaints must be filed in the correct Magisterial District Court, which is often confusing as most counties have numerous Magisterial District Courts with irregular boundaries. CourtZip has geo-coded each Pennsylvania address into the specific Court to be filed. The user types in the address and CourtZip identifies the proper court.&nbsp; You never again have to call different Courts, search cumbersome websites, or file in the wrong Court.</li>
-                            <li><strong>How Much is Filing Fee:</strong> Each Court has different filing fees based on different variables, which generally require a call to the proper Court to determine. CourtZip built a database, updated routinely, of every fee for each Court. You never have to call a Court again to ascertain the fees. Just type in the basic filing info and CourtZip populates the specific filing fee for you, saving time for the Court staff and filers.</li>
-                            <li><strong>Creating a Typed Civil Complaint, Landlord-Tenant Complaint, or Order of </strong><strong>Possession:</strong> Whether you are filing one complaint or you file hundreds each month, CourtZip can make it easier and faster for you to draft them.</li>
-                            <li><strong>Faster Delivery of Filing: </strong>Landlord-Tenant, Order of Possession, and Civil Complaints are currently filed by mail (or in person), which causes delays and inaccuracies in filing. CourtZip enables you to file immediately online, eliminating delays and errors. Each Court has its own CourtZip dashboard where its staff and assigned Magisterial District Judge can access the filing and can set-up a hearing date.</li>
-                            <li><strong>Easier Payment</strong>: CourtZip accepts debit or credit cards to make it easy for anyone to pay for the filing fee.</li>
-                        </ul>
-                        <p>CourtZip is constantly growing -- click here to see where CourtZip is live:&nbsp;<u><a href="https://courtzip.com/where-does-this-work" data-saferedirecturl="https://www.google.com/url?q=https://courtzip.com/where-does-this-work&amp;source=gmail&amp;ust=1552678182363000&amp;usg=AFQjCNEzs8xrrhkzKG6qWWWw7u29nIRo9g">Locations</a></u></p>
-                        <p>To get more info --- contact CourtZip here:&nbsp;<u><a href="mailto:Info@courtzip.com">Info@courtzip.com</a></u></p><br><br>
-                        <p style="font-size:10px; text-align:center;">DISCLAIMER:  This website is created and maintained<br> by CourtZip, a private entity, and is not owned, operated, or maintained by the Commonwealth of Pennsylvania or the Administrative Office of Pennsylvania Courts.</p>
+                    </div>
+                    <div class="col-md-12 col-lg-8 col-xl-7 mx-auto">
+                        <form method="post" class="form-horizontal" action="{{ action('NewFileController@proceedToFileTypeWithSelectedCounty') }}" id="new_file_form">
+                            <input type="hidden" name="_token" value="{{ Session::token() }}">
+                            <h3>File online today!</h3>
+                            <div class="form-row">
+                                <div class="form-group col-4">
+                                    <select class="form-control" id="file_type_select" name="fileType">
+                                        <option value="none">Select a File Type</option>
+                                        <option value="ltc">Landlord Tenant-Complaint</option>
+                                        <option value="oop">Request for Order of Possession</option>
+                                        <option value="civil">Civil Complaint</option>
+                                    </select>
+                                </div>
+                                <div class="form-group col-4">
+                                    <select class="form-control" id="county_select" name="county" style="padding-bottom: 5px;">
+                                            <option value="none">Select the County</option>
+                                            @foreach ($counties as $county)
+                                                <option value="{{$county->county}}">{{$county->county}}</option>
+                                            @endforeach
+                                        </select>
+                                </div>
+                                <div class="form-group col-md-3">
+                                    <button type="submit" class="btn btn-block btn-lg btn-primary">Go!</button>
+                                </div>
+                                <span id="file_type_error"></span>
+                            </div>
+                        </form>
                     </div>
                 </div>
             </div>
+        </header>
+
+        <!-- Icons Grid -->
+        <section class="features-icons text-center">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-3">
+                        <div class="features-icons-item mx-auto mb-5 mb-lg-0 mb-lg-3">
+                            <div class="features-icons-icon d-flex">
+                                <i class="fa fa-laptop m-auto text-primary"></i>
+                            </div>
+                            <h3>Online Submission</h3>
+                            <p class="lead mb-0">File online from anywhere!<br>24/7/365</p>
+                        </div>
+                    </div>
+                    <div class="col-lg-3">
+                        <div class="features-icons-item mx-auto mb-5 mb-lg-0 mb-lg-3">
+                            <div class="features-icons-icon d-flex">
+                                <i class="fas fa-clock m-auto text-primary"></i>
+                            </div>
+                            <h3>Simple</h3>
+                            <p class="lead mb-0">File in 5 minutes!</p>
+                        </div>
+                    </div>
+                    <div class="col-lg-3">
+                        <div class="features-icons-item mx-auto mb-5 mb-lg-0 mb-lg-3">
+                            <div class="features-icons-icon d-flex">
+                                <i class="fas fa-bullseye m-auto text-primary"></i>
+                            </div>
+                            <h3>Accurate</h3>
+                            <p class="lead mb-0">Eliminate filing with inaccurate amounts!</p>
+                        </div>
+                    </div>
+                    <div class="col-lg-3">
+                        <div class="features-icons-item mx-auto mb-0 mb-lg-3">
+                            <div class="features-icons-icon d-flex">
+                                <i class="fas fa-fast-forward m-auto text-primary"></i>
+                            </div>
+                            <h3>Quick</h3>
+                            <p class="lead mb-0">File transmitted online to court, Avoid Postage delays</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    <!-- Image Showcases -->
+    <section class="showcase bg-light">
+        <div class="container-fluid p-0">
+            <div class="row no-gutters">
+                <div class="col-lg-6 order-lg-6 text-white showcase-img">
+            <div style="display:block; font-size:50px; color:black; margin-left:10%; margin-top:5%;" class="fa fa-home"><span style="font-weight: normal; margin-left:5%; font-size:28px;">Residential</span></div>
+            <div style="display:block; font-size:50px; color:black; margin-left:10%; margin-top:5%;" class="fas fa-building"><span style="font-weight: normal; margin-left:5%; font-size:28px;">Commercial</span></div>
+            <div style="display:block; font-size:50px; color:black; margin-left:10%; margin-top:5%;" class="fas fa-file-alt"><span style="font-weight: normal; margin-left:5%; font-size:28px;">Order of Possession</span></div>
+                </div>
+                <div class="col-lg-6 order-lg-1 showcase-text">
+                    <h1>Landlord/Tenant Complaints</h1>
+                    <p class="lead mb-0"></p>
+                </div>
+            </div>
         </div>
+    </section>
+    <section class="showcase">
+        <div class="container-fluid p-0">
+            <div class="row no-gutters">
+                <div class="col-lg-6 text-white showcase-img">
+                    <div style="display:block; font-size:50px; color:black; margin-left:16%; margin-top:4%;" class="fas fa-file-alt"><span style="font-weight: normal; margin-left:5%; font-size:28px;">Contract Disputes</span></div>
+                    <div style="display:block; font-size:50px; color:black; margin-left:15%; margin-top:4%;" class="fa fa-home"><span style="font-weight: normal; margin-left:5%; font-size:28px;">Property Disputes</span></div>
+                    <div style="display:block; font-size:50px; color:black; margin-left:15%; margin-top:4%;" class="fas fa-balance-scale"><span style="font-weight: normal; margin-left:5%; font-size:28px;">Torts</span></div>
+                    <div style="display:block; font-size:50px; color:black; margin-left:15%; margin-top:4%;" class="fas fa-handshake"><span style="font-weight: normal; margin-left:5%; font-size:28px;">Collections</span></div>
+                </div>
+                    <div class="col-lg-6 showcase-text">
+                    <h1>Civil Complaints</h1>
+                    <p class="lead mb-0"></p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+        <!-- Testimonials -->
+        <section class="testimonials text-center bg-light">
+            <div class="container">
+                <h2 class="mb-5">What people are saying...</h2>
+                <div class="row">
+                    <div class="col-lg-4">
+                        <div class="testimonial-item mx-auto mb-5 mb-lg-0">
+                            <img class="img-fluid rounded-circle mb-3" src="https://quickevict.nyc3.digitaloceanspaces.com/stars.jpg" alt="">
+                            <h5>Margaret R.</h5>
+                            <p class="font-weight-light mb-0">"This is fantastic! Thanks so much guys!"</p>
+                        </div>
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="testimonial-item mx-auto mb-5 mb-lg-0">
+                            <img class="img-fluid rounded-circle mb-3" src="https://quickevict.nyc3.digitaloceanspaces.com/stars.jpg" alt="">
+                            <h5>Luke M.</h5>
+                            <p class="font-weight-light mb-0">"Fast and Efficient."</p>
+                        </div>
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="testimonial-item mx-auto mb-5 mb-lg-0">
+                            <img class="img-fluid rounded-circle mb-3" src="https://quickevict.nyc3.digitaloceanspaces.com/stars.jpg" alt="">
+                            <h5>Mark G.</h5>
+                            <p class="font-weight-light mb-0">"Thanks so much for making this process online and stress free!"</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    <!-- Testimonials -->
+    <section class="testimonials text-center">
+        <div class="container">
+                <form method="post" class="form-horizontal" action="{{ action('NewFileController@proceedToFileTypeWithSelectedCounty') }}" id="new_file_form">
+                    <input type="hidden" name="_token" value="{{ Session::token() }}">
+                    <h3>File online today!</h3><br>
+                    <div class="form-row">
+                        <div class="form-group col-4">
+                            <select class="form-control" id="file_type_select" name="fileType">
+                                <option value="none">Select a File Type</option>
+                                <option value="ltc">Landlord Tenant-Complaint</option>
+                                <option value="oop">Request for Order of Possession</option>
+                                <option value="civil">Civil Complaint</option>
+                            </select>
+                        </div>
+                        <div class="form-group col-4">
+                            <select class="form-control" id="county_select" name="county" style="padding-bottom: 5px;">
+                                <option value="none">Select the County</option>
+                                @foreach ($counties as $county)
+                                    <option value="{{$county->county}}">{{$county->county}}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                        <div class="form-group col-md-3">
+                            <button type="submit" class="btn btn-block btn-lg btn-primary">Go!</button>
+                        </div>
+                        <span id="file_type_error"></span>
+                    </div>
+                </form>
 
         </div>
+    </section>
 @endsection

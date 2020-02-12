@@ -40,6 +40,7 @@ class DashboardController extends Controller
             $userId = Auth::user()->id;
             $courtNumber = Auth::user()->court_id;
             $userRole = Auth::user()->role;
+            $counties = CourtDetails::distinct()->orderBy('county')->get(['county']);
 
             if (Auth::user()->role == 'Administrator') {
                 $evictions = DB::table('evictions')->orderBy('id', 'desc')->get();
@@ -51,7 +52,7 @@ class DashboardController extends Controller
                 $evictions = DB::select('select * from evictions ORDER BY FIELD(status, "Created LTC", "LTC Mailed", "LTC Submitted Online", "Court Hearing Scheduled", "Court Hearing Extended", "Judgement Issued in Favor of Owner", "Judgement Denied by Court", "Tenant Filed Appeal", "OOP Mailed", "OOP Submitted Online", "Paid Judgement", "Locked Out Tenant"), id DESC');
             }
 
-            return view('dashboard' , compact('evictions', 'userRole'));
+            return view('dashboard' , compact('evictions', 'userRole', 'counties'));
         } catch (\Exception $e) {
             $errorMsg = new ErrorLog();
             $errorMsg->payload = $e->getMessage() . ' Line #: ' . $e->getLine();

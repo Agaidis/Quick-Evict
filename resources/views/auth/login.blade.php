@@ -4,8 +4,8 @@
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
-            <img id="login-logo" src="https://quickevict.nyc3.digitaloceanspaces.com/ziplogo.png" alt="login Logo">
-            <div class="card">
+            <img style="margin-top:5%; margin-bottom: 5%; width:100%" src="https://quickevict.nyc3.digitaloceanspaces.com/courtZipBlue.png" alt="login Logo">
+            <div style="margin-bottom:20%;" class="card">
                 <div class="card-header">{{ __('Login') }}</div>
 
                 <div class="card-body">

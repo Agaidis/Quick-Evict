@@ -1,6 +1,5 @@
 @extends('civilComplaint')
 @section('signature')
-    <p>hahaahaha</p>
     <div class="modal fade" id="modal_set_court_date">
         <div class="modal-dialog" role="document">
             <div class="set_court_date_modal modal-content">
