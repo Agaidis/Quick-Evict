@@ -14,7 +14,7 @@ let mix = require('laravel-mix');
  mix.js([
      'resources/assets/js/bootstrap.js',
      'resources/assets/js/json2.min.js',
-     'resources/assets/js/bootstrap.bundle.min.js',
+     // 'resources/assets/js/bootstrap.bundle.min.js',
      'resources/assets/js/jquery.slim.min.js',
      'resources/assets/js/timepicker.min.js',
      'resources/assets/js/datepicker-ui.min.js',
