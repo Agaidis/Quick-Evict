@@ -63,9 +63,6 @@ class EvictionController extends Controller
             $pdfEditor = new PDFEditController();
             $evictionData = new stdClass();
 
-            $courtAddressLine1 = $geoDetails->address_line_one;
-            $courtAddressLine2 = $geoDetails->address_line_two;
-
             $additionalRentAmt = str_replace($removeValues, '', $_POST['additional_rent_amt']);
 
             //Attorney Fees

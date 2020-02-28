@@ -79,7 +79,7 @@ if (document.location.href.split('/')[3] === 'new-file') {
         let count = 0;
 
         $.each(quickEvict.geoData, function(key, value) {
-            magId = 'magistrate_' + value.magistrate_id;
+             magId = 'magistrate_' + value.magistrate_id;
             let geoPoints = value.geo_locations.replace(/\s/g, '').replace(/},/g, '},dd').split(',dd');
             let obj = [];
 
@@ -164,7 +164,7 @@ if (document.location.href.split('/')[3] === 'new-file') {
             $('#house_num').val(houseNum);
             $('#street_name').val(streetName);
             $('#town').val(town);
-            $('#display_address').text(houseNum + ' ' + streetName + ' ' + town + ' ' + 'PA');
+            $('#incident_display_address').html(houseNum + ' ' + streetName + '<br><span id="incident_second_line" style="margin-left:43%;"> ' + town + ', ' + 'PA' + ' ' + zipcode + '</span>');
 
             marker.setPosition(place.geometry.location);
             marker.setMap(map);
@@ -178,7 +178,6 @@ if (document.location.href.split('/')[3] === 'new-file') {
                 }
             }
             if (isFound === false) {
-                alert('Address is either in a different county or outside all zones. Please go back to step 1 and verify you selected the right county.');
                 alert('Address is either in a different county or outside all zones. Please go back to step 1 and verify you selected the right county.');
                 $('.zipcode_div').css('display', 'none');
                 $('.unit_number_div').css('display', 'none');
@@ -225,6 +224,59 @@ if (document.location.href.split('/')[3] === 'new-file') {
             if (event.keyCode === 13) {
                 event.preventDefault();
                 return false;
+            }
+        });
+
+        let residedHouseNum;
+        let residedStreetName;
+        let residedTown;
+        let residedCounty;
+        let residedState;
+        let residedZipcode;
+
+        $('input[type=radio][name=does_tenant_reside]').change(function () {
+
+            if ($(this)[0].id === 'tenant_resides') {
+                $('#incident_address_descriptor').text('Incident/Tenant Address: ');
+                $('#tenant_resides_other_address_div').css('display', 'none');
+                $('#incident_display_address').html(houseNum + ' ' + streetName + '<br><span id="incident_second_line" style="margin-left:43%;"> ' + town + ', ' + 'PA' + ' ' + zipcode + '</span>');
+            } else {
+                $('#incident_address_descriptor').text('Incident Address: ');
+                $('#incident_second_line').css('margin-left', '30%');
+                let input = document.getElementById('reside_address');
+                let autocompleteResideAddress = new google.maps.places.Autocomplete(input);
+
+                autocompleteResideAddress.addListener('place_changed', function () {
+                    let residedPlace = autocompleteResideAddress.getPlace();
+
+                    residedHouseNum = residedPlace.address_components[0].long_name;
+                    residedStreetName = residedPlace.address_components[1].long_name;
+
+                    if (residedPlace.address_components[3].types[0].indexOf('administrative') >= 0) {
+                        residedTown = residedPlace.address_components[2].long_name;
+                    } else {
+                        residedTown = residedPlace.address_components[3].long_name;
+                    }
+
+                    residedCounty = residedPlace.address_components[3].long_name;
+                    residedState = residedPlace.address_components[4].short_name;
+
+                    if (residedPlace.address_components[6].short_name === 'US') {
+                        residedZipcode = residedPlace.address_components[7].long_name;
+                    } else {
+                        residedZipcode = residedPlace.address_components[6].long_name;
+                    }
+
+                    $('#resided_zipcode').val(zipcode);
+                    $('#resided_county').val(county);
+                    $('#resided_house_num').val(houseNum);
+                    $('#resided_street_name').val(streetName);
+                    $('#resided_town').val(town);
+                    $('#tenant_display_address').html('<span style="font-weight:bold;">Tenant Address</span>: <span style="font-weight:normal;" id="tenant_display_address">' +
+                        '' + residedHouseNum + ' ' +   residedStreetName + '<br><span style="margin-left:28%;"> ' + residedTown + ', ' + residedState + ' ' + residedZipcode + '</span></span>');
+                });
+
+                $('#tenant_resides_other_address_div').css('display', 'block');
             }
         });
 

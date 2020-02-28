@@ -28,7 +28,7 @@ form.eviction_form fieldset {
       overflow:scroll;
   }
 
-  #address_container, #general_information_container, #amount_due_container, #owner_container, #additional_info_container  {
+  #address_container, #general_information_container, #amount_due_container, #owner_container, #additional_info_container, #tenant_resides_other_address_div  {
       border: 1px solid darkgrey;
       padding: 10px;
       border-radius: 10px;
@@ -107,7 +107,7 @@ form.eviction_form fieldset {
     font-size:12px;
 }
 
-#rented_by_other_div {
+#rented_by_other_div, #tenant_resides_other_address_div {
     display:none;
 }
 
@@ -115,7 +115,7 @@ form.eviction_form fieldset {
     display:none;
 }
 
-.address_display_div, .unit_number_div, .zipcode_div {
+.unit_number_div, .zipcode_div {
     text-align:center;
 }
 

@@ -26,6 +26,7 @@
                                         <th>County</th>
                                         <th>MDJ Name</th>
                                         <th>Phone #</th>
+                                        <th class="magistrate_th">(1) LTC<br>(2) OOP<br>(3) CIVIL M<br>(4) CIVIL C<br>Additional Defendant $</th>
                                         <th class="magistrate_th">(1) Under 2k<br>(2) Under 2k<br>(3) Under 2k</th>
                                         <th class="magistrate_th">(1) Btn 2k - 4k<br>(2) Btn 2k - 4k<br>(3) Btn 2k - 4k</th>
                                         <th class="magistrate_th">(1) Over 4k<br>(2) Over 4k<br>(3) Over 4k</th>
@@ -34,7 +35,7 @@
                                         <th class="magistrate_civil_th">(2) - Civil Mail<br> Under 500<br>btn 500 - 2k<br>btn 2k - 4k<br>btn 4k - 12k</th>
                                         <th class="magistrate_civil_th">(1) - Civil Constable<br> Under 500<br>btn 500 - 2k<br>btn 2k - 4k<br>btn 4k - 12k</th>
                                         <th class="magistrate_civil_th">(2) - Civil Constable<br> Under 500<br>btn 500 - 2k<br>btn 2k - 4k<br>btn 4k - 12k</th>
-                                        <th>Additional Tenant $</th>
+
                                         <th class="text-center">Edit</th>
                                         <th class="text-center">Remove</th>
                                     </tr>
@@ -48,6 +49,7 @@
                                         <td>{{$courtDetail->county}}</td>
                                         <td>{{$courtDetail->mdj_name}}</td>
                                         <td>{{$courtDetail->phone_number}}</td>
+                                        <td>{{$courtDetail->additional_tenant}}<br>{{$courtDetail->oop_additional_tenant_fee}}<br>{{$courtDetail->civil_mail_additional_tenant_fee}}<br>{{$courtDetail->civil_constable_additional_tenant_fee}}</td>
                                         <td>{{$courtDetail->one_defendant_up_to_2000}}<br>{{$courtDetail->two_defendant_up_to_2000}}<br>{{$courtDetail->three_defendant_up_to_2000}}</td>
                                         <td>{{$courtDetail->one_defendant_between_2001_4000}}<br>{{$courtDetail->two_defendant_between_2001_4000}}<br>{{$courtDetail->three_defendant_between_2001_4000}}</td>
                                         <td>{{$courtDetail->one_defendant_greater_than_4000}}<br>{{$courtDetail->two_defendant_greater_than_4000}}<br>{{$courtDetail->three_defendant_greater_than_4000}}</td>
@@ -58,7 +60,7 @@
                                         <td>{{$courtDetail->under_500_1_def_constable}}<br>{{$courtDetail->btn_500_2000_1_def_constable}}<br>{{$courtDetail->btn_2000_4000_1_def_constable}}<br>{{$courtDetail->btn_4000_12000_1_def_constable}}</td>
                                         <td>{{$courtDetail->under_500_2_def_constable}}<br>{{$courtDetail->btn_500_2000_2_def_constable}}<br>{{$courtDetail->btn_2000_4000_2_def_constable}}<br>{{$courtDetail->btn_4000_12000_2_def_constable}}</td>
 
-                                        <td>{{$courtDetail->additional_tenant}}</td>
+
 
                                         <td class="text-center"><button type="button" data-target="#modal_edit_magistrate" data-toggle="modal" id="id_{{$courtDetail->id}}_{{$courtDetail->magistrate_id}}" class=" magistrate-edit">Edit</button></td>
                                         <td class="text-center"><button type="button" id="id_{{$courtDetail->id}}_{{$courtDetail->magistrate_id}}" class="text-danger magistrate-remove">Delete</button></td>
@@ -290,7 +292,7 @@
 
                                             <div class="col-sm-12"><br>
                                                 <input type="checkbox" id="is_driving_fee_allowed" name="is_driving_fee_allowed" />
-                                                <label for="is_driving_fee_allowed">Is Driving Fee Included?</label>
+                                                <label for="is_driving_fee_allowed">Add Calculated Mileage</label>
                                                 <input type="hidden" id="driving_fee" name="driving_fee" />
                                             </div>
                                             <div class="col-sm-12"><br>

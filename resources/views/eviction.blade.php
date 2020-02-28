@@ -10,13 +10,13 @@
                 <div class="col-md-12">
                     <form method="post" action="{{ action('EvictionController@showSamplePDF') }}" enctype="multipart/form-data" id="eviction_form" target="_blank">
                         <input type="hidden" name="_token" value="{{ Session::token() }}">
-                        <h2 style="text-align:center;" class="titles fs-subtitle">Step 2:<br> Enter the address of your tenant.</h2>
+                        <h2 style="text-align:center;" class="titles fs-subtitle">Step 2:<br> Enter the address of the incident.</h2>
                         <div class="form-group">
                             <div class="row">
                                 <div class="col-sm-6 col-md-8 col-lg-8 col-xl-8">
                                     <input style="margin-left: 25%;" class="form-control" placeholder="Rental Street Address" type="text" id="pac-input"/>
                                 </div>
-                            </div><!-- test -->
+                            </div>
                         </div>
                         <div class="offset-1">
                             <div id="map"></div>
@@ -24,18 +24,45 @@
                         <div class="col-md-12 offset-1 filing_form_div">
                             <!-- ADDITIONAL INFORMATION ON PROPERTY -->
                             <h2 class="titles major_labels step_3_title">Step 3:<br> Fill out information on the Incident</h2>
+                            <!-- Tenant Address INFORMATION -->
+                            <h4 class="major_labels">Tenant Address Details</h4>
                             <div id="additional_info_container">
                                 <div class="form-group">
                                     <div class="row">
-                                        <div class="col-sm-12">
-                                            <h4 class="address_display_div"><b>Address</b>: <span id="display_address"></span></h4>
+                                        <div class="col-sm-6 offset-4">
+                                            <h4 class="incident_address_display_div"><span id="incident_address_descriptor">Incident/Tenant Address:</span> <span style="font-weight:normal;" id="incident_display_address"></span> </h4>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-sm-6 offset-4">
+                                            <h4 class="tenant_address_display_div"><span style="font-weight:normal;" id="tenant_display_address"></span></h4>
+                                        </div>
+                                        <div class="col-sm-4">
+                                            <label class="labels" for="incident_addit_address_detail">Additional Incident Address Detail</label>
+                                            <input type="text" class="form-control eviction_fields" placeholder="Example: Unit 3" id="incident_addit_address_detail" name="incident_addit_address_detail" maxlength="10"/>
                                         </div>
                                     </div>
                                     <input type="hidden" id="zipcode" name="zipcode"/>
+
                                     <div class="row">
-                                        <div class="col-sm-4">
-                                            <label class="labels" for="unit_number">Additional Address Detail</label>
-                                            <input type="text" class="form-control eviction_fields" placeholder="Example: Unit 3" id="unit_number" name="unit_number" maxlength="10"/>
+                                        <div class="col-sm-10">
+
+                                            <div class="labels">Does tenant reside at this address?</div>
+                                            <input checked type="radio" id="tenant_resides" value="tenantResides" name="does_tenant_reside">
+                                            <label for="tenant_resides">Yes</label><br>
+
+                                            <input type="radio" id="tenant_does_not_reside" value="tenantDoesNotReside" name="does_tenant_reside">
+                                            <label for="tenant_does_not_reside">No</label>
+                                            <div id="tenant_resides_other_address_div">
+                                                <div class="col-sm-8">
+                                                    <div class="labels">Enter separate address where tenant resides</div>
+                                                    <input class="form-control" placeholder="Tenant Street Address" type="text" id="reside_address"/>
+                                                </div>
+                                                <div class="col-sm-6">
+                                                    <label class="labels" for="tenant_addit_address_detail">Additional Tenant Address Detail</label>
+                                                    <input type="text" class="form-control eviction_fields" placeholder="Example: Unit 3" id="tenant_addit_address_detail" name="tenant_addit_address_detail" maxlength="10"/>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -97,7 +124,7 @@
                                 </div>
                             </div>
                             <h4 class="major_labels">General Information</h4>
-                            <div id="general_information_container" class="major_labels">
+                            <div id="general_information_container">
                                 <div class="form-group">
                                     <div class="row">
                                         <div class="col-sm-4">
@@ -172,7 +199,7 @@
                                 </div>
                             </div>
                             <h4 class="major_labels">Amount Due:</h4>
-                            <div id="amount_due_container" class="major_labels">
+                            <div id="amount_due_container">
                                 <div class="form-group">
                                     <div class="row">
                                         <div class="col-sm-6">
