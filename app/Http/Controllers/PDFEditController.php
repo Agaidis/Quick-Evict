@@ -47,7 +47,7 @@ class PDFEditController extends Controller
         return $pdfHtml;
     }
 
-    public function localLTCAttributes ($pdfHtml, $evictionData) {
+    public function localLTCAttributes ($pdfHtml, $evictionData, $defendantAddress2) {
         $pdfHtml = str_replace('[due-rent]', $evictionData->due_rent, $pdfHtml);
         $pdfHtml = str_replace('[damage-amt]', $evictionData->damage_amt, $pdfHtml);
         $pdfHtml = str_replace('[unjust-damages]', $evictionData->unjust_damages, $pdfHtml);
