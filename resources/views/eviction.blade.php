@@ -42,7 +42,6 @@
                                             <input type="text" class="form-control eviction_fields" placeholder="Example: Unit 3" id="incident_addit_address_detail" name="incident_addit_address_detail" maxlength="10"/>
                                         </div>
                                     </div>
-                                    <input type="hidden" id="zipcode" name="zipcode"/>
 
                                     <div class="row">
                                         <div class="col-sm-10">
@@ -276,11 +275,23 @@
                             </div>
                             <div id="status_msg"></div>
                             <input type="hidden" id="signature_source" name="signature_source"/>
+
+                            <!-- INCIDENT ADDRESS -->
                             <input type="hidden" id="state" name="state"/>
                             <input type="hidden" id="county" name="county"/>
                             <input type="hidden" id="house_num" name="houseNum"/>
                             <input type="hidden" id="street_name" name="streetName"/>
                             <input type="hidden" id="town" name="town"/>
+                            <input type="hidden" id="zipcode" name="zipcode"/>
+
+                            <!-- RESIDED ADDRESS ELEMENTS -->
+                            <input type="hidden" id="resided_state" name="residedState"/>
+                            <input type="hidden" id="resided_county" name="residedCounty"/>
+                            <input type="hidden" id="resided_house_num" name="residedHouseNum"/>
+                            <input type="hidden" id="resided_street_name" name="residedStreetName"/>
+                            <input type="hidden" id="resided_town" name="residedTown"/>
+                            <input type="hidden" id="resided_zipcode" name="residedZipcode"/>
+
                             <input type="hidden" id="court_number" name="court_number"/>
                             <input type="hidden" id="user_email" name="user_email" value="{{$userEmail}}"/>
                             <input type="hidden" id="total_input" name="total"/>

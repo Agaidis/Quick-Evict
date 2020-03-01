@@ -89,8 +89,6 @@ class EvictionController extends Controller
             $pmName = $_POST['pm_name'];
             $ownerName = $_POST['owner_name'];
 
-
-
             if ($_POST['rented_by_val'] == 'rentedByOwner') {
                 $verifyName = $_POST['owner_name'];
                 $plaintiffName = $_POST['owner_name'];
@@ -196,8 +194,16 @@ class EvictionController extends Controller
             $totalFees = number_format($totalFees, 2);
 
             $plaintiffAddress = $plaintiffName .'<br>'. $plaintiffAddress1 .'<br>'. $plaintiffAddress2 .'<br>'. $plaintiffPhone;
-            $defendantAddress = $tenantName . '<br>' . $_POST['houseNum'] . ' ' . $_POST['streetName'] . ', ' . $_POST['unit_number'] .'<br> '. $_POST['town'] .', '. $_POST['state'] .' '. $_POST['zipcode'];
-            $defendantAddress2 = $_POST['houseNum'] . ' ' . $_POST['streetName'] .' '. $_POST['unit_number'] . '<br><br><span style="position:absolute; margin-top:-10px;">'. $_POST['town'] .', ' . $_POST['state'] .' '. $_POST['zipcode'];
+
+
+            //Tenant lives at incident address, do not change anything
+            if ($_POST['does_tenant_reside'] == 'tenantResides') {
+                $defendantAddress = $tenantName . '<br>' . $_POST['houseNum'] . ' ' . $_POST['streetName'] . ', ' . $_POST['unit_number'] .'<br> '. $_POST['town'] .', '. $_POST['state'] .' '. $_POST['zipcode'];
+                $defendantAddress2 = $_POST['houseNum'] . ' ' . $_POST['streetName'] .' '. $_POST['unit_number'] . '<br><br><span style="position:absolute; margin-top:-10px;">'. $_POST['town'] .', ' . $_POST['state'] .' '. $_POST['zipcode'];
+            } else {
+                $defendantAddress = $tenantName . '<br>' . $_POST['residedHouseNum'] . ' ' . $_POST['residedStreetName'] . ', ' . $_POST['tenant_addit_address_detail'] .'<br> '. $_POST['residedTown'] .', '. $_POST['residedState'] .' '. $_POST['residedZipcode'];
+                $defendantAddress2 = $_POST['residedHouseNum'] . ' ' . $_POST['residedStreetName'] .' '. $_POST['tenant_addit_address_detail'] . '<br><br><span style="position:absolute; margin-top:-10px;">'. $_POST['residedTown'] .', ' . $_POST['residedState'] .' '. $_POST['residedZipcode'];
+            }
 
             if ($noCommaTotalFees < 2000) {
                 $filingFee = $upTo2000 + $additionalTenantFee;
