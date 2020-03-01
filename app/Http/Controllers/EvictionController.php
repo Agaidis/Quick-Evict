@@ -202,7 +202,7 @@ class EvictionController extends Controller
                 $defendantAddress2 = $_POST['houseNum'] . ' ' . $_POST['streetName'] .' '. $_POST['incident_addit_address_detail'] . '<br><br><span style="position:absolute; margin-top:-10px;">'. $_POST['town'] .', ' . $_POST['state'] .' '. $_POST['zipcode'];
             } else {
                 $defendantAddress = $tenantName . '<br>' . $_POST['residedHouseNum'] . ' ' . $_POST['residedStreetName'] . ', ' . $_POST['tenant_addit_address_detail'] .'<br> '. $_POST['residedTown'] .', '. $_POST['residedState'] .' '. $_POST['residedZipcode'];
-                $defendantAddress2 = $_POST['residedHouseNum'] . ' ' . $_POST['residedStreetName'] .' '. $_POST['tenant_addit_address_detail'] . '<br><br><span style="position:absolute; margin-top:-10px;">'. $_POST['residedTown'] .', ' . $_POST['residedState'] .' '. $_POST['residedZipcode'];
+                $defendantAddress2 = $_POST['houseNum'] . ' ' . $_POST['streetName'] .' '. $_POST['incident_addit_address_detail'] . '<br><br><span style="position:absolute; margin-top:-10px;">'. $_POST['town'] .', ' . $_POST['state'] .' '. $_POST['zipcode'];
             }
 
             if ($noCommaTotalFees < 2000) {
