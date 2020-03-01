@@ -53189,6 +53189,7 @@ if (document.location.href.split('/')[3] === 'new-file') {
 
   var form = document.getElementById('pay_sign_submit');
   form.addEventListener('click', function (event) {
+    $('#rented_by_val').val($('input[name=rented_by]:checked').val());
     stripe.createToken(card).then(function (result) {
       if (result.error) {
         // Inform the user if there was an error.
