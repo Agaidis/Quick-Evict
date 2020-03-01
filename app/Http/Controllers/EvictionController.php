@@ -198,8 +198,8 @@ class EvictionController extends Controller
 
             //Tenant lives at incident address, do not change anything
             if ($_POST['does_tenant_reside'] == 'tenantResides') {
-                $defendantAddress = $tenantName . '<br>' . $_POST['houseNum'] . ' ' . $_POST['streetName'] . ', ' . $_POST['unit_number'] .'<br> '. $_POST['town'] .', '. $_POST['state'] .' '. $_POST['zipcode'];
-                $defendantAddress2 = $_POST['houseNum'] . ' ' . $_POST['streetName'] .' '. $_POST['unit_number'] . '<br><br><span style="position:absolute; margin-top:-10px;">'. $_POST['town'] .', ' . $_POST['state'] .' '. $_POST['zipcode'];
+                $defendantAddress = $tenantName . '<br>' . $_POST['houseNum'] . ' ' . $_POST['streetName'] . ', ' . $_POST['incident_addit_address_detail'] .'<br> '. $_POST['town'] .', '. $_POST['state'] .' '. $_POST['zipcode'];
+                $defendantAddress2 = $_POST['houseNum'] . ' ' . $_POST['streetName'] .' '. $_POST['incident_addit_address_detail'] . '<br><br><span style="position:absolute; margin-top:-10px;">'. $_POST['town'] .', ' . $_POST['state'] .' '. $_POST['zipcode'];
             } else {
                 $defendantAddress = $tenantName . '<br>' . $_POST['residedHouseNum'] . ' ' . $_POST['residedStreetName'] . ', ' . $_POST['tenant_addit_address_detail'] .'<br> '. $_POST['residedTown'] .', '. $_POST['residedState'] .' '. $_POST['residedZipcode'];
                 $defendantAddress2 = $_POST['residedHouseNum'] . ' ' . $_POST['residedStreetName'] .' '. $_POST['tenant_addit_address_detail'] . '<br><br><span style="position:absolute; margin-top:-10px;">'. $_POST['residedTown'] .', ' . $_POST['residedState'] .' '. $_POST['residedZipcode'];
@@ -486,7 +486,7 @@ class EvictionController extends Controller
                 $eviction->filing_fee = $filingFee;
                 $eviction->is_abandoned = $isAbandoned;
                 $eviction->is_determination_request = $isDeterminationRequest;
-                $eviction->unit_num = $_POST['unit_number'];
+                $eviction->unit_num = $_POST['incident_addit_address_detail'];
                 $eviction->additional_rent_amt = $_POST['additional_rent_amt'];
                 $eviction->plantiff_name = $plantiffName;
                 $eviction->plantiff_phone = $plantiffPhone;
