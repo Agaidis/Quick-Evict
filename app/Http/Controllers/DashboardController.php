@@ -127,13 +127,10 @@ class DashboardController extends Controller
                 $pdfHtml = PDF::where('name', 'ltc')->value('html');
 
                 if ($evictionData->is_resided == 'yes') {
-                    $defendantAddress2 = '';
+                    $defendantAddress2 = $defendantAddress;
                 } else if ( $evictionData->is_resided == 'no') {
                     $defendantAddress2 = $evictionData->resided_address;
                 }
-
-
-
 
                 $pdfHtml = $pdfEditor->globalHtmlAttributes($pdfHtml, $courtDetails, $plaintiffAddress, $defendantAddress, $signature, $evictionData);
                 $pdfHtml = $pdfEditor->localLTCAttributes($pdfHtml, $evictionData, $defendantAddress2);
