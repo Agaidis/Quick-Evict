@@ -418,11 +418,7 @@ class EvictionController extends Controller
             }
 
 
-            $defendantState = $_POST['state'];
-            $defendantZipcode = $_POST['zipcode'];
-            $defendanthouseNum = $_POST['houseNum'];
-            $defendantStreetName = $_POST['streetName'];
-            $defendantTown = $_POST['town'];
+
 
             if (is_numeric($_POST['additional_rent_amt'])) {
                 $totalFees = (float)$additionalRentAmt + (float)$attorneyFees + (float)$dueRent + (float)$unjustDamages + (float)$damageAmt;
@@ -450,11 +446,40 @@ class EvictionController extends Controller
 
             $filingFee = number_format($filingFee, 2);
 
+            $defendantState = $_POST['state'];
+            $defendantZipCode = $_POST['zipcode'];
+            $defendantHouseNum = $_POST['houseNum'];
+            $defendantStreetName = $_POST['streetName'];
+            $defendantTown = $_POST['town'];
+            $reside = 'yes';
+
+
+            //Tenant lives at incident address, do not change anything
+            if ($_POST['does_tenant_reside'] === 'tenantResides') {
+                $reside = 'yes';
+                $defendantResidedState = $_POST['state'];
+                $defendantResidedZipcode = $_POST['zipcode'];
+                $defendantResidedHouseNum = $_POST['houseNum'];
+                $defendantResidedStreetName = $_POST['streetName'];
+                $defendantResidedTown = $_POST['town'];
+            } else if ($_POST['does_tenant_reside'] === 'tenantDoesNotReside') {
+                $reside = 'no';
+                $defendantResidedState = $_POST['residedState'];
+                $defendantResidedZipcode = $_POST['residedZipcode'];
+                $defendantResidedHouseNum = $_POST['residedHouseNum'];
+                $defendantResidedStreetName = $_POST['residedStreetName'];
+                $defendantResidedTown = $_POST['residedTown'];
+            }
+
+
+
             try {
                 $eviction = new Evictions();
                 $eviction->status = 'Created LTC';
                 $eviction->total_judgement = $totalFees;
-                $eviction->property_address = $defendanthouseNum.' '.$defendantStreetName.'-1'.$defendantTown .',' . $defendantState.' '.$defendantZipcode;
+                $eviction->property_address = $defendantHouseNum.' '.$defendantStreetName.'-1'.$defendantTown .',' . $defendantState.' '.$defendantZipCode;
+                $eviction->is_resided = $reside;
+                $eviction->resided_address = $defendantResidedHouseNum.' '.$defendantResidedStreetName.'-1'.$defendantResidedTown .',' . $defendantResidedState.' '.$defendantResidedZipcode;
                 $eviction->tenant_name = $tenantName;
                 $eviction->court_filing_fee = $filingFee;
                 $eviction->pdf_download = 'true';
@@ -479,8 +504,8 @@ class EvictionController extends Controller
                 $eviction->lease_ended = $isLeaseEnded;
                 $eviction->is_additional_rent = $isAdditionalRent;
                 $eviction->defendant_state = $defendantState;
-                $eviction->defendant_zipcode = $defendantZipcode;
-                $eviction->defendant_house_num = $defendanthouseNum;
+                $eviction->defendant_zipcode = $defendantZipCode;
+                $eviction->defendant_house_num = $defendantHouseNum;
                 $eviction->defendant_street_name = $defendantStreetName;
                 $eviction->defendant_town = $defendantTown;
                 $eviction->filing_fee = $filingFee;
