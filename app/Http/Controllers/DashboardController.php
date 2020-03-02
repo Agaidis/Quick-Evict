@@ -126,9 +126,9 @@ class DashboardController extends Controller
             if ($evictionData->file_type == 'eviction' || $evictionData->file_type == '') {
                 $pdfHtml = PDF::where('name', 'ltc')->value('html');
 
-                if ($evictionData->is_resided == 'yes') {
+                if ($evictionData->is_resided == 'yes' || $evictionData->is_resided == null) {
                     $defendantAddress2 = $defendantAddress;
-                } else if ( $evictionData->is_resided == 'no') {
+                } else {
                     $defendantAddress2 = str_replace('-1', '<br>', $evictionData->resided_address);
                 }
 
