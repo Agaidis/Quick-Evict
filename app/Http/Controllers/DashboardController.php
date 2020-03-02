@@ -109,6 +109,7 @@ class DashboardController extends Controller
             $signature = Signature::where('eviction_id', $evictionData->id)->value('signature');
             $plaintiffAddress = $evictionData->plantiff_name .'<br>'. $evictionData->plantiff_address_line_1 .'<br>'. $evictionData->plantiff_address_line_2 .'<br>'.$evictionData->plantiff_phone;
             $defendantAddress = $evictionData->tenant_name . '<br>' . $evictionData->defendant_house_num . ' ' .$evictionData->defendant_street_name . ', ' . $evictionData->unit_num .'<br>'. $evictionData->defendant_town .', '. $evictionData->defendant_state .' '. $evictionData->defendant_zipcode;
+
             $civilDefendantAddress = $evictionData->tenant_name . '<br>' . $evictionData->defendant_state  . ', ' . $evictionData->unit_num .'<br>'.$evictionData->defendant_zipcode;
 
             $dompdf = new Dompdf();
@@ -125,8 +126,17 @@ class DashboardController extends Controller
             if ($evictionData->file_type == 'eviction' || $evictionData->file_type == '') {
                 $pdfHtml = PDF::where('name', 'ltc')->value('html');
 
+                if ($evictionData->is_resided == 'yes') {
+                    $defendantAddress2 = '';
+                } else if ( $evictionData->is_resided == 'no') {
+                    $defendantAddress2 = $evictionData->resided_address;
+                }
+
+
+
+
                 $pdfHtml = $pdfEditor->globalHtmlAttributes($pdfHtml, $courtDetails, $plaintiffAddress, $defendantAddress, $signature, $evictionData);
-                $pdfHtml = $pdfEditor->localLTCAttributes($pdfHtml, $evictionData);
+                $pdfHtml = $pdfEditor->localLTCAttributes($pdfHtml, $evictionData, $defendantAddress2);
                 $pdfHtml = $pdfEditor->addSampleWatermark($pdfHtml, false);
 
                 $dompdf->loadHtml($pdfHtml);
