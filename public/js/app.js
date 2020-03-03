@@ -42940,7 +42940,7 @@ if (document.location.href.split('/')[3] === 'new-file') {
               $('#finalize_document').css('display', 'none');
             }
 
-            var validEmails = ['brc@saxtonstump.com', 'tiffanymitchell0202@gmail.com', 'sparkleclean85@gmail.com', 'andrew.gaidis@gmail.com'];
+            var validEmails = ['brc@saxtonstump.com', 'tiffanymitchell0202@gmail.com', 'sparkleclean85@gmail.com', 'andrew.gaidis@gmail.com', 'erin@courtzip.com'];
 
             if (data[0].online_submission !== 'of' && quickEvict.userEmail.indexOf('slatehousegroup') === -1 && validEmails.includes(quickEvict.userEmail) === false) {
               alert('Sorry, but this magistrate is currently not accepting online submissions');
@@ -53146,7 +53146,7 @@ if (document.location.href.split('/')[3] === 'new-file') {
     signaturePad.clear();
   }); // Create a Stripe client.
 
-  if (isSlateHouse.indexOf('slatehousegroup') === -1) {
+  if (isSlateHouse.indexOf('slatehousegroup') === -1 || isSlateHouse === 'erin@courtzip.com') {
     stripe = Stripe('pk_live_FProm7L9gLEjNsFLawYCp32x');
   } else {
     stripe = Stripe('pk_test_FTcQeimeSasisJpDTYgHEMTh');
