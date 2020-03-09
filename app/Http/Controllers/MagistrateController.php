@@ -43,6 +43,7 @@ class MagistrateController extends Controller
         try {
             $isUnique = CourtDetails::where('magistrate_id', $request->magistrate_id)->first();
 
+            Log::info($request->is_oop_driving_fee_allowed);
             if ($isUnique === null) {
                 $courtDetails = new CourtDetails;
                 $courtDetails->county = $request->county;
@@ -65,8 +66,10 @@ class MagistrateController extends Controller
                 $courtDetails->oop_additional_tenant_fee = $request->oop_additional_tenant_fee;
                 $courtDetails->civil_mail_additional_tenant_fee = $request->civil_mail_additional_tenant_fee;
                 $courtDetails->civil_constable_additional_tenant_fee = $request->civil_constable_additional_tenant_fee;
-                $courtDetails->digital_signature = $request->digital_signature;
-                $courtDetails->is_distance_fee = $request->driving_fee;
+                $courtDetails->digital_signature = $request->is_digital_signature_allowed === 'on' ? 1 : 0;
+                $courtDetails->is_distance_fee = $request->is_ltc_driving_fee_allowed === 'on' ? 1 : 0;
+                $courtDetails->oop_distance_fee = $request->is_oop_driving_fee_allowed === 'on' ? 1 : 0 ;
+                $courtDetails->civil_distance_fee = $request->is_civil_driving_fee_allowed === 'on' ? 1 : 0;
                 $courtDetails->online_submission = $request->online_submission;
 
                 $courtDetails->mdj_name = $request->mdj_name;
@@ -122,7 +125,6 @@ class MagistrateController extends Controller
             $errorDetails = 'MagistrateController - error in store() method when attempting to store magistrate';
             $errorDetails .= PHP_EOL . 'File: ' . $e->getFile();
             $errorDetails .= PHP_EOL . 'Line #' . $e->getLine();
-            \Log::error( $errorDetails . PHP_EOL . 'Error Message: ' . $e->getMessage() . PHP_EOL . 'Trace: ' . $e->getTraceAsString());
             mail( 'andrew.gaidis@gmail.com',  'Adding Magistrate Error ' . Auth::User()->id, $errorDetails );
 
             $returnArray['responseMessage'] = 'Bad Request';
@@ -157,7 +159,7 @@ class MagistrateController extends Controller
             $errorDetails = 'MagistrateController - error in store() method when attempting to store magistrate';
             $errorDetails .= PHP_EOL . 'File: ' . $e->getFile();
             $errorDetails .= PHP_EOL . 'Line #' . $e->getLine();
-            \Log::error( $errorDetails . PHP_EOL . 'Error Message: ' . $e->getMessage() . PHP_EOL . 'Trace: ' . $e->getTraceAsString());
+
             mail( 'andrew.gaidis@gmail.com',  'Adding Magistrate Error ' . Auth::User()->id, $errorDetails );
 
             $returnArray['responseMessage'] = 'Bad Request';
@@ -198,8 +200,10 @@ class MagistrateController extends Controller
                 $courtDetails->oop_additional_tenant_fee = $request->oopAdditionalTenant;
                 $courtDetails->civil_mail_additional_tenant_fee = $request->civilMailedAdditionalTenant;
                 $courtDetails->civil_constable_additional_tenant_fee = $request->civilConstableAdditionalTenant;
-                $courtDetails->digital_signature = $request->digitalSignature;
-                $courtDetails->is_distance_fee = $request->drivingFee;
+                $courtDetails->digital_signature = $request->digitalSignature  === 'true' ? 1 : 0;
+                $courtDetails->is_distance_fee = $request->drivingFee  === 'true' ? 1 : 0;
+                $courtDetails->oop_distance_fee = $request->oopDrivingFee  === 'true' ? 1 : 0;
+                $courtDetails->civil_distance_fee = $request->civilDrivingFee  === 'true' ? 1 : 0;
                 $courtDetails->online_submission = $request->onlineSubmission;
                 $courtDetails->save();
 

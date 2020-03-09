@@ -47117,34 +47117,6 @@ if (!this.JSON) {
  * Created by andrew on 10/8/18.
  */
 $(document).ready(function () {
-  //      DIGITAL SIGNATURE
-  $('#digital_signature').val(1);
-  $('#is_digital_signature_allowed').on('change', function () {
-    if (document.getElementById("is_digital_signature_allowed").checked == true) {
-      $('#digital_signature').val(1);
-    } else {
-      $('#digital_signature').val(0);
-    }
-  });
-  $('#edit_is_digital_signature_allowed').on('change', function () {
-    $('#edit_digital_signature').val(document.getElementById("edit_is_digital_signature_allowed").checked);
-  });
-  /*              END DIGITAL SIGNATURE           */
-  //      DRIVING FEE
-
-  $('#driving_fee').val(0);
-  $('#is_driving_fee_allowed').on('change', function () {
-    if (document.getElementById("is_driving_fee_allowed").checked == true) {
-      $('#driving_fee').val(1);
-    } else {
-      $('#driving_fee').val(0);
-    }
-  });
-  $('#edit_is_driving_fee_allowed').on('change', function () {
-    $('#edit_driving_fee').val(document.getElementById("edit_is_driving_fee_allowed").checked);
-  });
-  /*              END DRIVING FEE         */
-
   $('#magistrate_table').DataTable({
     "pagingType": "simple",
     "aaSorting": []
@@ -47175,6 +47147,7 @@ $(document).ready(function () {
       location.reload();
     }
   }).on('click', '.magistrate-edit', function () {
+    console.log($('#edit_is_digital_signature_allowed').val());
     var id = $(this)[0].id;
     var splitId = id.split('_');
     var magistrateId = splitId[2];
@@ -47194,8 +47167,6 @@ $(document).ready(function () {
         magistrateId: magistrateId
       },
       success: function success(data) {
-        console.log(data);
-        console.log(data[1].oop_additional_tenant_fee);
         $('#db_geo_id').val(data[0][0].id);
         $('#db_court_id').val(data[1].id);
         $('#edit_court_id').val(data[1].court_number);
@@ -47264,12 +47235,20 @@ $(document).ready(function () {
           $('#edit_two_btn_4000_12000_constable').val('');
         }
 
-        if (data[1].digital_signature == 1) {
+        if (data[1].digital_signature === 1) {
           $('#edit_is_digital_signature_allowed').prop('checked', true);
         }
 
-        if (data[1].is_distance_fee == 1) {
-          $('#edit_is_driving_fee_allowed').prop('checked', true);
+        if (data[1].is_distance_fee === 1) {
+          $('#edit_ltc_is_driving_fee_allowed').prop('checked', true);
+        }
+
+        if (data[1].oop_distance_fee === 1) {
+          $('#edit_oop_is_driving_fee_allowed').prop('checked', true);
+        }
+
+        if (data[1].civil_distance_fee === 1) {
+          $('#edit_civil_is_driving_fee_allowed').prop('checked', true);
         }
       },
       error: function error(data) {
@@ -47293,7 +47272,7 @@ $(document).ready(function () {
       dataType: 'json',
       data: data,
       success: function success(data) {
-        if (data.messageDetails == 'All Good') {
+        if (data.messageDetails === 'All Good') {
           alertMsgCreate(true, data.responseMessage);
           location.reload();
         } else {
@@ -47311,19 +47290,6 @@ $(document).ready(function () {
         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
       }
     });
-
-    if (document.getElementById("edit_is_digital_signature_allowed").checked == true) {
-      $('#edit_digital_signature').val(1);
-    } else {
-      $('#edit_digital_signature').val(0);
-    }
-
-    if (document.getElementById("edit_is_driving_fee_allowed").checked == true) {
-      $('#edit_driving_fee').val(1);
-    } else {
-      $('#edit_driving_fee').val(0);
-    }
-
     $.ajax({
       beforeSend: function beforeSend(xhr) {
         xhr.setRequestHeader('X-CSRF-TOKEN', $("#token").attr('content'));
@@ -47360,8 +47326,10 @@ $(document).ready(function () {
         civilMailedAdditionalTenant: $('#edit_civil_mail_additional_tenant_fee').val(),
         civilConstableAdditionalTenant: $('#edit_civil_constable_additional_tenant_fee').val(),
         geoLocations: $('#edit_geo_locations').val(),
-        digitalSignature: $('#edit_digital_signature').val(),
-        drivingFee: $('#edit_driving_fee').val(),
+        digitalSignature: $('#edit_is_digital_signature_allowed')[0].checked,
+        drivingFee: $('#edit_ltc_is_driving_fee_allowed')[0].checked,
+        oopDrivingFee: $('#edit_oop_is_driving_fee_allowed')[0].checked,
+        civilDrivingFee: $('#edit_civil_is_driving_fee_allowed')[0].checked,
         onlineSubmission: $('#edit_online_submission').val(),
         oneUnder500Mailed: $('#edit_one_under_500_mailed').val(),
         oneBtn500And2000: $('#edit_one_btn_500_2000_mailed').val(),

@@ -291,14 +291,20 @@
                                             </div>
 
                                             <div class="col-sm-12"><br>
-                                                <input type="checkbox" id="is_driving_fee_allowed" name="is_driving_fee_allowed" />
-                                                <label for="is_driving_fee_allowed">Add Calculated Mileage</label>
-                                                <input type="hidden" id="driving_fee" name="driving_fee" />
+                                                <input type="checkbox" id="is_ltc_driving_fee_allowed" name="is_ltc_driving_fee_allowed" />
+                                                <label for="is_ltc_driving_fee_allowed">Add LTC Calculated Mileage</label>
+                                            </div>
+                                            <div class="col-sm-12"><br>
+                                                <input type="checkbox" id="is_oop_driving_fee_allowed" name="is_oop_driving_fee_allowed" />
+                                                <label for="is_oop_driving_fee_allowed">Add OOP Calculated Mileage</label>
+                                            </div>
+                                            <div class="col-sm-12"><br>
+                                                <input type="checkbox" id="is_civil_driving_fee_allowed" name="is_civil_driving_fee_allowed" />
+                                                <label for="is_civil_driving_fee_allowed">Add Civil Calculated Mileage</label>
                                             </div>
                                             <div class="col-sm-12"><br>
                                                 <input type="checkbox" checked id="is_digital_signature_allowed" name="is_digital_signature_allowed" />
                                                 <label for="is_digital_signature_allowed">Is Digital Signature Allowed?</label>
-                                                <input type="hidden" id="digital_signature" name="digital_signature" />
                                             </div><br>
                                             <div class="col-sm-12">
                                                 <label for="online_submission">Online Submission Status</label>
@@ -468,14 +474,20 @@
                                                                 <input placeholder="$" type="text" class="form-control" id="edit_civil_constable_additional_tenant_fee" name="edit_civil_constable_additional_tenant_fee" value="" />
                                                             </div>
                                                             <div class="col-sm-12"><br>
-                                                                <input type="checkbox" id="edit_is_driving_fee_allowed" name="edit_is_driving_fee_allowed" />
-                                                                <label for="edit_is_driving_fee_allowed">Is Driving Fee Allowed?</label>
-                                                                <input type="hidden" id="edit_driving_fee" name="edit_driving_fee" />
+                                                                <input type="checkbox" id="edit_ltc_is_driving_fee_allowed" name="edit_ltc_is_driving_fee_allowed" />
+                                                                <label for="edit_ltc_is_driving_fee_allowed">Is LTC Driving Fee Allowed?</label>
+                                                            </div>
+                                                            <div class="col-sm-12"><br>
+                                                                <input type="checkbox" id="edit_oop_is_driving_fee_allowed" name="edit_oop_is_driving_fee_allowed" />
+                                                                <label for="edit_oop_is_driving_fee_allowed">Is OOP Driving Fee Allowed?</label>
+                                                            </div>
+                                                            <div class="col-sm-12"><br>
+                                                                <input type="checkbox" id="edit_civil_is_driving_fee_allowed" name="edit_civil_is_driving_fee_allowed" />
+                                                                <label for="edit_civil_is_driving_fee_allowed">Is Civil Driving Fee Allowed?</label>
                                                             </div>
                                                             <div class="col-sm-12"><br>
                                                                 <input type="checkbox" id="edit_is_digital_signature_allowed" name="edit_is_digital_signature_allowed" />
                                                                 <label for="edit_is_digital_signature_allowed">Is Digital Signature Allowed?</label>
-                                                                <input type="hidden" id="edit_digital_signature" name="edit_digital_signature" />
                                                             </div><br>
                                                             <div class="col-sm-12">
                                                                 <label for="edit_online_submission">Online Submission Status</label>

@@ -146,7 +146,7 @@ class GetFileFeeController extends Controller
                     $filingFee = 'Didnt Work';
                 }
 
-                if ($courtDetails->is_distance_fee === 1) {
+                if ($courtDetails->oop_distance_fee === 1) {
                     $newFile = new NewFileController();
                     $geoData = GeoLocation::where('magistrate_id', $request->courtNumber)->first();
 
@@ -217,7 +217,7 @@ class GetFileFeeController extends Controller
                     }
                 }
 
-                if ($courtDetails->is_distance_fee === 1) {
+                if ($courtDetails->civil_distance_fee === 1) {
                     $newFile = new NewFileController();
                     $geoData = GeoLocation::where('magistrate_id', $request->courtNumber)->first();
 
