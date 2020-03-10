@@ -42892,7 +42892,7 @@ if (document.location.href.split('/')[3] === 'new-file') {
         zipcode = place.address_components[6].long_name;
       }
 
-      $('#state').val(state);
+      $('#state').val('PA');
       $('#zipcode').val(zipcode);
       $('#county').val(county);
       $('#house_num').val(houseNum);

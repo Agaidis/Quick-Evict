@@ -158,7 +158,7 @@ if (document.location.href.split('/')[3] === 'new-file') {
                 zipcode = place.address_components[6].long_name;
             }
 
-            $('#state').val(state);
+            $('#state').val('PA');
             $('#zipcode').val(zipcode);
             $('#county').val(county);
             $('#house_num').val(houseNum);
@@ -272,7 +272,7 @@ if (document.location.href.split('/')[3] === 'new-file') {
                     $('#resided_house_num').val(residedHouseNum);
                     $('#resided_street_name').val(residedStreetName);
                     $('#resided_town').val(residedTown);
-                    $('#resided_state').val(residedState);
+                    $('#resided_state').val();
                     $('#tenant_display_address').html('<span style="font-weight:bold;">Tenant Address</span>: <span style="font-weight:normal;" id="tenant_display_address">' +
                         '' + residedHouseNum + ' ' +   residedStreetName + '<br><span style="margin-left:28%;"> ' + residedTown + ', ' + residedState + ' ' + residedZipcode + '</span></span>');
                 });
