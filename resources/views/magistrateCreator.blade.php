@@ -475,15 +475,15 @@
                                                             </div>
                                                             <div class="col-sm-12"><br>
                                                                 <input type="checkbox" id="edit_ltc_is_driving_fee_allowed" name="edit_ltc_is_driving_fee_allowed" />
-                                                                <label for="edit_ltc_is_driving_fee_allowed">Is LTC Driving Fee Allowed?</label>
+                                                                <label for="edit_ltc_is_driving_fee_allowed">Add LTC Calculated Mileage</label>
                                                             </div>
                                                             <div class="col-sm-12"><br>
                                                                 <input type="checkbox" id="edit_oop_is_driving_fee_allowed" name="edit_oop_is_driving_fee_allowed" />
-                                                                <label for="edit_oop_is_driving_fee_allowed">Is OOP Driving Fee Allowed?</label>
+                                                                <label for="edit_oop_is_driving_fee_allowed">Add OOP Calculated Mileage</label>
                                                             </div>
                                                             <div class="col-sm-12"><br>
                                                                 <input type="checkbox" id="edit_civil_is_driving_fee_allowed" name="edit_civil_is_driving_fee_allowed" />
-                                                                <label for="edit_civil_is_driving_fee_allowed">Is Civil Driving Fee Allowed?</label>
+                                                                <label for="edit_civil_is_driving_fee_allowed">Add Civil Calculated Mileage</label>
                                                             </div>
                                                             <div class="col-sm-12"><br>
                                                                 <input type="checkbox" id="edit_is_digital_signature_allowed" name="edit_is_digital_signature_allowed" />

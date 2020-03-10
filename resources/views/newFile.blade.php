@@ -17,7 +17,7 @@
                                         <option value="none">File type Select</option>
                                         <option value="ltc">Landlord Tenant-Complaint</option>
                                         <option value="oop">Request for Order of Possession</option>
-                                        <option value="civil">Civil Complaint</option>
+{{--                                        <option value="civil">Civil Complaint</option>--}}
                                     </select>
                                     <span id="file_type_error"></span>
                                 </div>
