@@ -14,6 +14,7 @@ use JavaScript;
 use GMaps;
 use Illuminate\Support\Facades\Log;
 
+
 class GetFileFeeController extends Controller
 {
     //
@@ -22,12 +23,20 @@ class GetFileFeeController extends Controller
      * @param $request
      * @return \Illuminate\Http\Response
      */
+
+    public function view() {
+
+        $counties = CourtDetails::distinct()->orderBy('county')->get(['county']);
+        return view('getFileFee', compact('counties'));
+    }
     public function index(Request $request )
     {
         if (Auth::guest()) {
             return view('/login');
         } else {
             try {
+                $selectedCounty = $request->county;
+                $counties = CourtDetails::distinct()->orderBy('county')->get(['county']);
                 $geoData = GeoLocation::where('county', $request->county)->orderBy('magistrate_id', 'ASC')->get();
                 $map = new GMaps;
 
@@ -37,7 +46,7 @@ class GetFileFeeController extends Controller
                     'userEmail' => Auth::user()->email
                 ]);
 
-                return view('getFileFee', compact('map'));
+                return view('getFileFee', compact('map', 'counties', 'selectedCounty'));
 
             } catch (Exception $e) {
                 $errorMsg = new ErrorLog();

@@ -1,7 +1,4 @@
-<?php
-    use App\CourtDetails;
-    $counties = CourtDetails::distinct()->orderBy('county')->get(['county']);
-?>
+
 <!DOCTYPE html>
 <html lang="{{ app()->getLocale() }}">
 <head>
@@ -68,6 +65,9 @@
                             <li><a href="{{ url('FAQ') }}" id="faq_btn">FAQ</a></li>
                             <li><a href="{{ url('where-does-this-work') }}" id="where_work_btn">Where Does this Work?</a></li>
                             <li><a href="{{ url('about-us') }}" id="about_us_btn">About Us</a></li>
+                            @if (Auth::user()->role == 'Court' || Auth::user()->role == 'Administrator')
+                                <li><a href="{{ url('getFileFee') }}" id="about_us_btn">Fee Calculator</a></li>
+                                @endif
                     @else
                             <li><a href="{{ url('information') }}" id="eviction_info_btn">Information</a></li>
                             <li><a href="{{ url('FAQ') }}" id="faq_btn">FAQ</a></li>
@@ -108,28 +108,6 @@
                 @endguest
             </div>
         </nav>
-        @if (Auth::check())
-            @if (Auth::user()->role == 'Court' || Auth::user()->role == 'Administrator')
-{{--                <div class="col-offset-2 col-md-3">--}}
-{{--                    <form method="post" action="{{ action('GetFileFeeController@index') }}" enctype="multipart/form-data" id="dashboard_form">--}}
-{{--                        <input type="hidden" name="_token" value="{{ Session::token() }}">--}}
-{{--                        <div id="get_file_Fee_container">--}}
-{{--                            <label style="align-content:center; text-align:center;" class="labels">Quick Fee Assessment!</label><br>--}}
-{{--                            <div class="col-md-12">--}}
-{{--                                <label class="labels" for="county_select">Choose a County</label>--}}
-{{--                                <select class="form-control" id="county_select" name="county">--}}
-{{--                                    <option value="none">County Select</option>--}}
-{{--                                    @foreach ($counties as $county)--}}
-{{--                                        <option value="{{$county->county}}">{{$county->county}}</option>--}}
-{{--                                    @endforeach--}}
-{{--                                </select><br>--}}
-{{--                                <button type="submit" class="btn btn-primary" id="get_file_fee_btn">Go!</button>--}}
-{{--                            </div>--}}
-{{--                        </div><br>--}}
-{{--                    </form>--}}
-{{--                </div>--}}
-            @endif
-        @endif
     </div>
     <main>
         @yield('content')
