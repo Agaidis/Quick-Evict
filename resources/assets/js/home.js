@@ -119,7 +119,7 @@ $(document).ready(function () {
                 if (data.mainFiling.file_type === 'oop') {
                      fileType = 'Order of Possession';
                 } else if (data.mainFiling.file_type === 'eviction'){
-                     fileType = 'Eviction';
+                     fileType = 'LTC';
                 } else {
                      fileType = 'Civil Complaint';
                 }
