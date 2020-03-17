@@ -5,7 +5,7 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-md-12 col-lg-10 col-xl-10 mx-auto">
-                    <h2 class="titles" style="margin-top:5%; text-align:center;">Filing Fee Calculator</h2>
+                    <h2 class="titles" style="margin-top:3%; margin-bottom:3%; text-align:center;">Filing Fee Calculator</h2>
                     <div class="offset-1 col-md-4">
                         <h2 class="titles">Step 1: Select a County</h2>
                         <form method="post" action="{{ action('GetFileFeeController@index') }}" enctype="multipart/form-data" id="dashboard_form">
@@ -28,6 +28,11 @@
                             </div><br>
                         </form>
                     </div>
+                    @if ($isStep2)
+                    <div>
+                    @else
+                    <div style="display:none;">
+                    @endif
                     <div class="form-group">
                         <div class="row">
                             <div class="col-sm-8 col-md-8 col-lg-8 col-xl-8">
@@ -35,6 +40,7 @@
                             </div>
                         </div><!-- test -->
                     </div>
+
                     <div class="row">
                         <div class="offset-1 col-md-5">
                             <h2 class="titles" style="margin-right:20%; text-align:center;">Step 2: Put in the Address</h2>
@@ -99,6 +105,7 @@
                                 </div>
                             </div>
                         </div>
+                    </div>
                     </div>
                 </div>
             </div>

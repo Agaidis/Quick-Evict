@@ -11740,6 +11740,10 @@ html, body {
     display: flex;
     flex-direction: column;
 }
+
+.footer {
+    margin-top:10%;
+}
 .header, .footer {
     background: silver;
 }

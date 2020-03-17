@@ -27,7 +27,9 @@ class GetFileFeeController extends Controller
     public function view() {
 
         $counties = CourtDetails::distinct()->orderBy('county')->get(['county']);
-        return view('getFileFee', compact('counties'));
+        $isStep2 = false;
+
+        return view('getFileFee', compact('counties','isStep2'));
     }
     public function index(Request $request )
     {
@@ -35,6 +37,7 @@ class GetFileFeeController extends Controller
             return view('/login');
         } else {
             try {
+                $isStep2 = true;
                 $selectedCounty = $request->county;
                 $counties = CourtDetails::distinct()->orderBy('county')->get(['county']);
                 $geoData = GeoLocation::where('county', $request->county)->orderBy('magistrate_id', 'ASC')->get();
@@ -46,7 +49,7 @@ class GetFileFeeController extends Controller
                     'userEmail' => Auth::user()->email
                 ]);
 
-                return view('getFileFee', compact('map', 'counties', 'selectedCounty'));
+                return view('getFileFee', compact('map', 'counties', 'selectedCounty', 'isStep2'));
 
             } catch (Exception $e) {
                 $errorMsg = new ErrorLog();
