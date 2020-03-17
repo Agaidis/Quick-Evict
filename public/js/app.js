@@ -43543,6 +43543,7 @@ $(document).ready(function () {
         id: splitId[2]
       },
       success: function success(data) {
+        console.log(data);
         var fileType = '';
 
         if (data.mainFiling.file_type === 'oop') {

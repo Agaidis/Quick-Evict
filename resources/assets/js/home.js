@@ -114,6 +114,7 @@ $(document).ready(function () {
             },
 
             success: function (data) {
+                console.log(data);
                 let fileType = '';
                 if (data.mainFiling.file_type === 'oop') {
                      fileType = 'Order of Possession';
