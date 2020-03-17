@@ -143,6 +143,7 @@ if (document.location.href.split('/')[3] === 'get-file-fee') {
            }
         });
         $('#calculate_file_fee').on('click', function() {
+            console.log($('#total_judgment').val());
             let splitCourtNumber = $('#court_number').val().split('_');
             let userAddress = houseNum + ' ' + streetName + ' ' + town + ' ' + state + ' ' + county + ', ' + zipcode;
             let fileType = $('#file_type_select').val();

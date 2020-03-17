@@ -67,6 +67,11 @@ class GetFileFeeController extends Controller
             $tenantNum = (int)$request->numDefs;
             $additionalTenantAmt = 1;
             $additionalTenantFee = 0;
+            Log::info($request->fileType);
+            Log::info($request->numDefs);
+            Log::info($request->userAddress);
+            Log::info($request->courtNumber);
+            Log::info($request->totalJudgment);
 
             if ($request->fileType == 'ltc') {
 
@@ -94,7 +99,7 @@ class GetFileFeeController extends Controller
                     $additionalTenantFee = (float)$additionalTenantAmt * $multiplyBy;
                 }
 
-                $noCommaTotalFees = str_replace([',', '$',' '],['', '', ''], $request->total_judgment);
+                $noCommaTotalFees = str_replace([',', '$',' '],['', '', ''], $request->totalJudgment);
 
                 if ($noCommaTotalFees < 2000) {
                     $filingFee = $upTo2000 + $additionalTenantFee;
@@ -144,7 +149,7 @@ class GetFileFeeController extends Controller
                     $additionalTenantFee = (float)$additionalTenantAmt * $multiplyBy;
                 }
 
-                $totalFees = (float)$request->total_judgment;
+                $totalFees = (float)$request->totalJudgment;
 
                 $noCommaTotalFees = str_replace(['$',',',' '],['','',''], $totalFees);
 
@@ -181,7 +186,7 @@ class GetFileFeeController extends Controller
                 /*                  CIVIL COMPLAINT             */
 
                 $civilDetails = CivilUnique::where('court_details_id', $courtDetails->id)->first();
-                $totalJudgment = str_replace([' ', ',', '$'],['', '', ''], $request->total_judgment);
+                $totalJudgment = str_replace([' ', ',', '$'],['', '', ''], $request->totalJudgment);
 
                 if ($tenantNum > 1) {
                     if ($request->deliveryType == 'mail') {
