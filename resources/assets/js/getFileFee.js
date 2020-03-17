@@ -123,7 +123,6 @@ if (document.location.href.split('/')[3] === 'get-file-fee') {
             let isFound = false;
             for (let k = 0; k < magArray.length; k++) {
                 if (google.maps.geometry.poly.containsLocation(place.geometry.location, magArray[k])) {
-                    console.log(magArray[k].areaName);
                     $('#court_number').val(magArray[k].areaName);
                     isFound = true;
                 }
@@ -143,13 +142,11 @@ if (document.location.href.split('/')[3] === 'get-file-fee') {
            }
         });
         $('#calculate_file_fee').on('click', function() {
-            console.log($('#total_judgment').val());
             let splitCourtNumber = $('#court_number').val().split('_');
             let userAddress = houseNum + ' ' + streetName + ' ' + town + ' ' + state + ' ' + county + ', ' + zipcode;
             let fileType = $('#file_type_select').val();
             let totalJudgment = $('#total_judgment').val();
             let numDefendants = $('#num_defendants').val();
-            console.log(numDefendants);
 
             $('.error_msgs').text('');
 
