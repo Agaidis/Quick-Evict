@@ -69,8 +69,14 @@ class FileStorageController extends Controller {
                 if ($evictionData->file_type == 'eviction' || $evictionData->file_type == '') {
                     $pdfHtml = PDF::where('name', 'ltc')->value('html');
 
+                    if ($evictionData->is_resided == 'yes' || $evictionData->is_resided == null) {
+                        $defendantAddress2 = $defendantAddress;
+                    } else {
+                        $defendantAddress2 = str_replace('-1', '<br>', $evictionData->resided_address);
+                    }
+
                     $pdfHtml = $pdfEditor->globalHtmlAttributes($pdfHtml, $courtDetails, $plaintiffAddress, $defendantAddress, $signature, $evictionData);
-                    $pdfHtml = $pdfEditor->localLTCAttributes($pdfHtml, $evictionData);
+                    $pdfHtml = $pdfEditor->localLTCAttributes($pdfHtml, $evictionData, $defendantAddress2);
                     $pdfHtml = $pdfEditor->addSampleWatermark($pdfHtml, false);
 
                     $dompdf->loadHtml($pdfHtml);
