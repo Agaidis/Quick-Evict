@@ -1,7 +1,10 @@
 {
     "name": "laravel/laravel",
     "description": "The Laravel Framework.",
-    "keywords": ["framework", "laravel"],
+    "keywords": [
+        "framework",
+        "laravel"
+    ],
     "license": "MIT",
     "type": "project",
     "require": {
@@ -13,8 +16,8 @@
         "fideloper/proxy": "^4.0",
         "kriswallsmith/buzz": "^1.0",
         "laracasts/utilities": "^3.0",
-        "laravel/cashier": "~7.0",
-        "laravel/framework": "5.6.*",
+        "laravel/cashier": "^9.0.1",
+        "laravel/framework": "^5.8.0",
         "laravel/tinker": "^1.0",
         "league/flysystem-aws-s3-v3": "^1.0",
         "mailgun/mailgun-php": "^2.8",
@@ -45,8 +48,7 @@
     },
     "extra": {
         "laravel": {
-            "dont-discover": [
-            ]
+            "dont-discover": []
         }
     },
     "scripts": {
