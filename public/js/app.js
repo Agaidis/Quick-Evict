@@ -43628,6 +43628,8 @@ $(document).ready(function () {
     if (splitId[0] === 'main') {
       console.log(splitId);
       $('#main_filing_id').val(filingName);
+    } else {
+      $('#main_filing_id').val('');
     }
 
     $('#filing_original_name').val(filingName);
