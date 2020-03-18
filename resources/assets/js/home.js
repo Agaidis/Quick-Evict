@@ -208,8 +208,10 @@ $(document).ready(function () {
          let id = $(this)[0].id;
          let splitId = id.split('_');
          let filingName = splitId[2];
+         console.log(filingName);
+         console.log(splitId);
          if (splitId[0] === 'main') {
-             console.log(splitId);
+
              $('#main_filing_id').val(filingName);
          } else {
              $('#main_filing_id').val('');

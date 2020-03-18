@@ -43624,9 +43624,10 @@ $(document).ready(function () {
     var id = $(this)[0].id;
     var splitId = id.split('_');
     var filingName = splitId[2];
+    console.log(filingName);
+    console.log(splitId);
 
     if (splitId[0] === 'main') {
-      console.log(splitId);
       $('#main_filing_id').val(filingName);
     } else {
       $('#main_filing_id').val('');
