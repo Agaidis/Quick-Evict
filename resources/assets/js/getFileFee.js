@@ -143,6 +143,9 @@ if (document.location.href.split('/')[3] === 'get-file-fee') {
         });
         $('#calculate_file_fee').on('click', function() {
             let splitCourtNumber = $('#court_number').val().split('_');
+            let splitCourtNumberDisplay = splitCourtNumber[1].split('-');
+
+            $('#court_number_display').text(splitCourtNumberDisplay[0] + '-' + splitCourtNumberDisplay[1] + '-' + splitCourtNumberDisplay[2]).val(splitCourtNumberDisplay[0] + '-' + splitCourtNumberDisplay[1] + '-' + splitCourtNumberDisplay[2]);
             let userAddress = houseNum + ' ' + streetName + ' ' + town + ' ' + state + ' ' + county + ', ' + zipcode;
             let fileType = $('#file_type_select').val();
             let totalJudgment = $('#total_judgment').val();

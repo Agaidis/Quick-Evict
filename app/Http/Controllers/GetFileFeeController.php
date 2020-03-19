@@ -67,11 +67,6 @@ class GetFileFeeController extends Controller
             $tenantNum = (int)$request->numDefs;
             $additionalTenantAmt = 1;
             $additionalTenantFee = 0;
-            Log::info($request->fileType);
-            Log::info($request->numDefs);
-            Log::info($request->userAddress);
-            Log::info($request->courtNumber);
-            Log::info($request->totalJudgment);
 
             if ($request->fileType == 'ltc') {
 

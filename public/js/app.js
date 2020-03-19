@@ -43382,6 +43382,8 @@ if (document.location.href.split('/')[3] === 'get-file-fee') {
     });
     $('#calculate_file_fee').on('click', function () {
       var splitCourtNumber = $('#court_number').val().split('_');
+      var splitCourtNumberDisplay = splitCourtNumber[1].split('-');
+      $('#court_number_display').text(splitCourtNumberDisplay[0] + '-' + splitCourtNumberDisplay[1] + '-' + splitCourtNumberDisplay[2]).val(splitCourtNumberDisplay[0] + '-' + splitCourtNumberDisplay[1] + '-' + splitCourtNumberDisplay[2]);
       var userAddress = houseNum + ' ' + streetName + ' ' + town + ' ' + state + ' ' + county + ', ' + zipcode;
       var fileType = $('#file_type_select').val();
       var totalJudgment = $('#total_judgment').val();

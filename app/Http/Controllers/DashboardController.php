@@ -47,7 +47,7 @@ class DashboardController extends Controller
             } else if (Auth::user()->role == 'General User') {
                 $evictions = DB::select('select * from evictions WHERE user_id = '. $userId .' ORDER BY FIELD(status, "Created LTC", "LTC Mailed", "LTC Submitted Online", "Court Hearing Scheduled", "Court Hearing Extended", "Judgement Issued in Favor of Owner", "Judgement Denied by Court", "Tenant Filed Appeal", "OOP Mailed", "OOP Submitted Online", "Paid Judgement", "Locked Out Tenant"), id DESC');
             } else if (Auth::user()->role == 'Court') {
-                $evictions = DB::table('evictions')->where('court_number', $courtNumber )->orderBy('id', 'desc')->get();
+                $evictions = DB::table('evictions')->where('court_number', $courtNumber )->where('is_online_filing', 1)->orderBy('id', 'desc')->get();
             } else {
                 $evictions = DB::select('select * from evictions ORDER BY FIELD(status, "Created LTC", "LTC Mailed", "LTC Submitted Online", "Court Hearing Scheduled", "Court Hearing Extended", "Judgement Issued in Favor of Owner", "Judgement Denied by Court", "Tenant Filed Appeal", "OOP Mailed", "OOP Submitted Online", "Paid Judgement", "Locked Out Tenant"), id DESC');
             }
