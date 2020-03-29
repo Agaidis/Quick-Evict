@@ -491,8 +491,8 @@
                                                             </div><br>
                                                             <div class="col-sm-12">
                                                                 <label for="edit_online_submission">Online Submission Status</label>
-                                                                <select class="form-control" name="edit_online_submission">
-                                                                    <option disabled>Select Status</option>
+                                                                <select class="form-control" id="edit_online_submission" name="edit_online_submission">
+                                                                    <option selected disabled>Select Status</option>
                                                                     <option value="of">Online Filing</option>
                                                                     <option value="otp">Online to Print</option>
                                                                     <option value="nf">No Filing</option>
