@@ -15,6 +15,7 @@ let mix = require('laravel-mix');
  mix.js([
      'resources/assets/js/bootstrap.js',
      'resources/assets/js/json2.min.js',
+     'node_modules/select2/dist/js/select2.js',
      // 'resources/assets/js/bootstrap.bundle.min.js',
      'resources/assets/js/jquery.slim.min.js',
      'resources/assets/js/timepicker.min.js',
@@ -52,5 +53,6 @@ let mix = require('laravel-mix');
         'resources/assets/css/eviction.css',
         'resources/assets/css/signaturepad.css',
         'resources/assets/css/stripe.css',
+        'node_modules/select2/dist/css/select2.css'
 
     ], 'public/css/app.css').version();

@@ -1,4 +1,4 @@
-<title>General Admin</title>
+<title>Fee Duplicator</title>
 @extends('layouts.app')
 @section('content')
     <meta name="csrf-token" id="token" content="{{ csrf_token() }}">
@@ -30,14 +30,20 @@
                                             @endforeach
                                         </select><br>
                                     </div><br>
-                                    <div class="offset-5 col-md-4">
-                                        <label class="labels" for="fee_duplicate_magistrate_select">Select Magistrates</label>
-                                        <select class="form-control" id="fee_duplicate_magistrate_select" name="magistrates">
+                                    <div class="offset-4 col-md-6">
+                                        <label class="labels" for="fee_duplicate_magistrate_select">Select Magistrates to duplicate from <span style="color:#b4b472;" id="first_magistrate"></span></label>
+                                        <select disabled multiple="multiple" class="form-control" id="fee_duplicate_magistrate_select" name="magistrates[]">
                                             <option value="none">Select Magistrates</option>
                                         </select><br>
                                     </div><br>
 
-                                    <button type="submit" class="btn btn-primary">Submit</button>
+                                    <input type="hidden" id="duplicated_magistrate" name="duplicated_magistrate" />
+
+                                    <div class="offset-4 col-md-6">
+                                        <button style="padding:1em 1em 1em 1em" type="submit" class="btn btn-primary">Duplicate!</button>
+                                    </div><br>
+
+
                                 </div>
                             </form>
                         </div>
