@@ -100,7 +100,7 @@ class FeeDuplicatorController extends Controller
                     $civilUnique->btn_4000_12000_2_def_constable = $civilFees->btn_4000_12000_2_def_constable;
                     $civilUnique->save();
                 } else {
-                    CivilUnique::where('court_details_id', $updateCourtDetails->id)->update(
+                    CivilUnique::where('court_details_id', $magistrateId)->update(
                         [
                             'under_500_1_def_mail' => $civilFees->under_500_1_def_mail,
                             'btn_500_2000_1_def_mail' => $civilFees->btn_500_2000_1_def_mail,
