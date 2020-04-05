@@ -90,7 +90,8 @@
 
                             <div style="margin-left:-15px;" class="dropdown-menu" aria-labelledby="navbarDropdown">
                                 @if (Auth::user()->role == 'Administrator')
-                                <a class="dropdown-item" href="{{ url('magistrateCreator') }}" id="magistrate_btn">Magistrate Creator</a>
+                                    <a class="dropdown-item" href="{{ url('magistrateCreator') }}" id="magistrate_btn">Magistrate Creator</a>
+                                    <a class="dropdown-item" href="{{ url('feeDuplicator') }}" id="fee_duplicator_btn">Fee Duplicator</a>
                                     <a class="dropdown-item" href="{{ url('generalAdmin') }}" id="admin_btn">General Admin</a>
                                     <a class="dropdown-item" href="{{ url('userManagement') }}" id="user_management_btn">Manage Users</a>
                                 @endif

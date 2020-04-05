@@ -87,6 +87,11 @@ Route::post('get-file-fee', 'GetFileFeeController@index')->middleware('auth');
 
 Route::post('get-file-fee/fee', 'GetFileFeeController@getFilingFee')->middleware('auth');
 
+/* Fee Duplicator */
+Route::get('/feeDuplicator', 'FeeDuplicatorController@index')->middleware('auth');
+Route::get('/feeDuplicator/getMagistrates', 'FeeDuplicatorController@getSelectedCourtMagistrates')->middleware('auth');
+Route::post('/feeDuplicator', 'FeeDuplicatorController@duplicateFees')->middleware('auth');
+
 
 Route::get('command/migrate', function () {
     $exitCode = \Artisan::call('migrate');
