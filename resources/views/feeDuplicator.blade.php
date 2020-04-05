@@ -22,7 +22,7 @@
                                 <input type="hidden" name="_token" value="{{ Session::token() }}">
                                 <div class="col-md-10">
                                     <div class="offset-5 col-md-4">
-                                        <label class="labels" for="fee_duplicate_court_select">Choose a County</label>
+                                        <label class="labels" for="fee_duplicate_court_select">Choose a Magistrate</label>
                                         <select class="form-control" id="fee_duplicate_court_select" name="court_number">
                                             <option value="none">Court Select</option>
                                             @foreach ($courts as $court)
@@ -31,7 +31,7 @@
                                         </select><br>
                                     </div><br>
                                     <div class="offset-4 col-md-6">
-                                        <label class="labels" for="fee_duplicate_magistrate_select">Select Magistrates to duplicate from <span style="color:#b4b472;" id="first_magistrate"></span></label>
+                                        <label class="labels" for="fee_duplicate_magistrate_select">Select Unique ID(s) to duplicate to <span style="color:#b4b472;" id="first_magistrate"></span></label>
                                         <select disabled multiple="multiple" class="form-control" id="fee_duplicate_magistrate_select" name="magistrates[]">
                                             <option value="none">Select Magistrates</option>
                                         </select><br>
