@@ -73,7 +73,13 @@ class FeeDuplicatorController extends Controller
                         'additional_tenant' => $courtFees->additional_tenant,
                         'oop_additional_tenant_fee' => $courtFees->oop_additional_tenant_fee,
                         'civil_mail_additional_tenant_fee' => $courtFees->civil_mail_additional_tenant_fee,
-                        'civil_constable_additional_tenant_fee' => $courtFees->civil_constable_additional_tenant_fee
+                        'civil_constable_additional_tenant_fee' => $courtFees->civil_constable_additional_tenant_fee,
+                        'is_distance_fee' => $courtFees->is_distance_fee,
+                        'oop_distance_fee' => $courtFees->oop_distance_fee,
+                        'civil_distance_fee' => $courtFees->civil_distance_fee,
+                        'digital_signature' => $courtFees->digital_signature,
+                        'online_submission' => $courtFees->online_submission
+
                     ]
                 );
 
