@@ -43,7 +43,6 @@ class MagistrateController extends Controller
         try {
             $isUnique = CourtDetails::where('magistrate_id', $request->magistrate_id)->first();
 
-            Log::info($request->is_oop_driving_fee_allowed);
             if ($isUnique === null) {
                 $courtDetails = new CourtDetails;
                 $courtDetails->county = $request->county;
@@ -77,7 +76,7 @@ class MagistrateController extends Controller
                 $courtDetails->save();
 
                 $civilUnique = new CivilUnique();
-                $civilUnique->court_details_id = $request->magistrate_id;
+                $civilUnique->court_details_id = $courtDetails->id;
                 $civilUnique->under_500_1_def_mail = $request->one_under_500_mailed;
                 $civilUnique->btn_500_2000_1_def_mail = $request->one_btn_500_2000_mailed;
                 $civilUnique->btn_2000_4000_1_def_mail = $request->one_btn_2000_4000_mailed;
