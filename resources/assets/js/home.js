@@ -90,8 +90,9 @@ $(document).ready(function () {
         let splitId = id.split('_');
         console.log(splitId);
 
-        $('#download_status_' + splitId[2]).text('Yes');
-
+        if ($('#user_role').val() === 'Court') {
+            $('#download_status_' + splitId[2]).text('Yes');
+        }
         $('#download_id').val(splitId[2]);
     }).on('click', '.get_filings', function () {
         let id = $(this)[0].id;

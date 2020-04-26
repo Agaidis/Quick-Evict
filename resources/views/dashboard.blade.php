@@ -1,6 +1,7 @@
 @extends('layouts.app')
 @section('content')
     <meta name="csrf-token" id="token" content="{{ csrf_token() }}">
+    <input type="hidden" id="user_role" value="{{ $userRole }}"/>
     <header style="padding:2%;" class="text-center">
         <div class="overlay"></div>
     <div class="container">

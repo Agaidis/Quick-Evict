@@ -49678,6 +49678,11 @@ $(document).ready(function () {
     var id = $(this)[0].id;
     var splitId = id.split('_');
     console.log(splitId);
+
+    if ($('#user_role').val() === 'Court') {
+      $('#download_status_' + splitId[2]).text('Yes');
+    }
+
     $('#download_id').val(splitId[2]);
   }).on('click', '.get_filings', function () {
     var id = $(this)[0].id;
