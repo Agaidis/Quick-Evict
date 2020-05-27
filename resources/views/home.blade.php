@@ -122,6 +122,22 @@
         </div>
     </section>
 
+    <!-- Icons Grid -->
+    <section style="padding-bottom:4rem;" class="text-center">
+        <div class="container">
+            <div class="row">
+                <div class="offset-1 col-lg-9">
+                    <h1>Watch how it works.</h1>
+                    <video width="620" height="440" controls="controls">
+                        <source src="https://quickevict.nyc3.cdn.digitaloceanspaces.com/courtzip%20demo.mp4" type="video/mp4" >
+                        Your browser does not support the video tag.
+                    </video>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
 
 
         <!-- Testimonials -->
@@ -132,21 +148,21 @@
                     <div class="col-lg-4">
                         <div class="testimonial-item mx-auto mb-5 mb-lg-0">
                             <img class="img-fluid rounded-circle mb-3" src="https://quickevict.nyc3.digitaloceanspaces.com/stars.jpg" alt="">
-                            <h5>Margaret R.</h5>
+                            <h5>Shane O.</h5>
                             <p class="font-weight-light mb-0">"This is fantastic! Thanks so much guys!"</p>
                         </div>
                     </div>
                     <div class="col-lg-4">
                         <div class="testimonial-item mx-auto mb-5 mb-lg-0">
                             <img class="img-fluid rounded-circle mb-3" src="https://quickevict.nyc3.digitaloceanspaces.com/stars.jpg" alt="">
-                            <h5>Luke M.</h5>
+                            <h5>Stephen K.</h5>
                             <p class="font-weight-light mb-0">"Fast and Efficient."</p>
                         </div>
                     </div>
                     <div class="col-lg-4">
                         <div class="testimonial-item mx-auto mb-5 mb-lg-0">
                             <img class="img-fluid rounded-circle mb-3" src="https://quickevict.nyc3.digitaloceanspaces.com/stars.jpg" alt="">
-                            <h5>Mark G.</h5>
+                            <h5>Chris C.</h5>
                             <p class="font-weight-light mb-0">"Thanks so much for making this process online and stress free!"</p>
                         </div>
                     </div>
