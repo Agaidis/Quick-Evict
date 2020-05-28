@@ -117,19 +117,10 @@ class GetFileFeeController extends Controller
                     $mileFee = GeneralAdmin::where('name', 'mile_fee')->value('value');
 
                     $calculatedFee = $distance * $mileFee;
-                    Log::info('Distance...');
-                    Log::info($distance);
-
-                    Log::info('MileFee...');
-                    Log::info($mileFee);
-
-                    Log::info('Calculated Fee...');
-                    Log::info($calculatedFee);
 
                     $calculatedFee = number_format($calculatedFee, 3);
                     $filingFee = $filingFee + $calculatedFee;
 
-                    Log::info($filingFee);
                 }
 
                 $filingFee = number_format($filingFee, 3);
