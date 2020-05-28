@@ -117,11 +117,11 @@ class GetFileFeeController extends Controller
                     $mileFee = GeneralAdmin::where('name', 'mile_fee')->value('value');
 
                     $calculatedFee = $distance * $mileFee;
-                    $calculatedFee = number_format($calculatedFee, 2);
+                    $calculatedFee = number_format($calculatedFee, 3);
                     $filingFee = $filingFee + $calculatedFee;
                 }
 
-                $filingFee = number_format($filingFee, 2);
+                $filingFee = number_format($filingFee, 3);
 
                 return $filingFee;
             } else if ($request->fileType === 'oop') {
