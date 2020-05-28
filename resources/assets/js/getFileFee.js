@@ -189,7 +189,9 @@ if (document.location.href.split('/')[3] === 'get-file-fee') {
                     deliveryType: $('#send_method').val()
                 },
                 success : function(data) {
-                    $('#filing_fee').val(data).text(data);
+                    $('#filing_fee').val(data['filingFee']).text(data['filingFee']);
+                    $('#distance').val(data['distance']).text(data['distance']);
+                    $('#calculated_fee').val(data['calculatedFee']).text(data['calculatedFee']);
                     console.log(data);
                 },
                 error : function(data) {

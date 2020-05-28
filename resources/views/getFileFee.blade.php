@@ -100,11 +100,26 @@
                                 <div class="row col-sm-4">
                                     <label class="labels" for="total_judgment">Court ID</label>
                                     <input disabled type="text" class="form-control eviction_fields" id="court_number_display" name="court_number_display"/>
-                                </div><br>
-                                <div class="row col-md-12">
-                                    <button id="calculate_file_fee" class="btn btn-primary">Calculate Filing Fee!</button><br>
-                                    <div class="col-md-6">
-                                        <input type="text" disabled class="form-control" id="filing_fee" name="filing_fee"/>
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-4">
+                                        <label class="labels" for="total_judgment">Mileage</label>
+                                        <input disabled type="text" class="form-control eviction_fields" id="distance"/>
+                                    </div>
+
+                                    <div class="col-sm-4">
+                                        <label class="labels" for="total_judgment">Calculated Distance Fee</label>
+                                        <input disabled type="text" class="form-control eviction_fields" id="calculated_fee"/>
+                                    </div>
+
+                                </div><br><hr>
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <button id="calculate_file_fee" class="btn btn-primary">Calculate Filing Fee!</button>
+                                    </div>
+                                        <div class="col-md-4">
+                                            <input type="text" disabled class="form-control" id="filing_fee" name="filing_fee"/>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -112,6 +127,7 @@
                     </div>
                     </div>
                 </div>
+            </div>
             </div>
         </div>
 @endsection

@@ -106,6 +106,9 @@ class GetFileFeeController extends Controller
                     $filingFee = 'Didnt Work';
                 }
 
+                $distance = 0;
+                $calculatedFee = 0;
+
                 if ($courtDetails->is_distance_fee === 1) {
                     $newFile = new NewFileController();
                     $geoData = GeoLocation::where('magistrate_id', $request->courtNumber)->first();
@@ -118,14 +121,16 @@ class GetFileFeeController extends Controller
 
                     $calculatedFee = $distance * $mileFee;
 
-                    $calculatedFee = number_format($calculatedFee, 3);
+                    $calculatedFee = number_format($calculatedFee, 2);
                     $filingFee = $filingFee + $calculatedFee;
 
                 }
 
-                $filingFee = number_format($filingFee, 3);
+                $filingFee = number_format($filingFee, 2);
 
-                return $filingFee;
+                $returnArray = array('filingFee' => $filingFee, 'distance' => $distance, 'calculatedFee' => $calculatedFee);
+
+                return $returnArray;
             } else if ($request->fileType === 'oop') {
 
                 /*                      ORDER OF POSSESSION                 */

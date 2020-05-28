@@ -353,11 +353,11 @@ class NewFileController extends Controller
             $mileage = str_replace(' mi', '', $mileage);
 
             if ($fileType === 'civil') {
-                $mileage = number_format($mileage, 3) * 2;
+                $mileage = number_format($mileage, 2) * 2;
             } else if ($fileType === 'oop') {
-                $mileage = number_format($mileage, 3) * 4;
+                $mileage = number_format($mileage, 2) * 4;
             } else if ($fileType === 'ltc') {
-                $mileage = number_format($mileage, 3) * 2;
+                $mileage = number_format($mileage, 2) * 2;
             }
 
 
