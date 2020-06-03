@@ -236,6 +236,9 @@ class GetFileFeeController extends Controller
                     }
                 }
 
+                $distance = 0;
+                $calculatedFee = 0;
+
                 if ($courtDetails->civil_distance_fee === 1) {
                     $newFile = new NewFileController();
                     $geoData = GeoLocation::where('magistrate_id', $request->courtNumber)->first();
@@ -253,7 +256,9 @@ class GetFileFeeController extends Controller
 
                 $filingFee = number_format($filingFee, 2);
 
-                return $filingFee;
+                $returnArray = array('filingFee' => $filingFee, 'distance' => $distance, 'calculatedFee' => $calculatedFee);
+
+                return $returnArray;
 
             } else if ($request->fileType === 'none') {
                 return 'Failed to Choose File Type';
