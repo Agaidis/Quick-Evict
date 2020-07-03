@@ -106,7 +106,7 @@
                                 @foreach ($evictions as $eviction)
                                     <?php $propertyAddressArray = explode('-1', $eviction->property_address); ?>
                                     <tr>
-                                        <td style="width:150px;">
+                                        <td style="width:200px;">
                                             @if ($eviction->status == 'LTC Submitted, $$ needs del' || $eviction->status == 'LTC Submitted, $$ & file needs DEL' || $eviction->status == 'OOP Submitted, $$ needs del' || $eviction->status == 'OOP Submitted, $$ & file needs DEL')
                                                 <select title="status" class="form-control status_select orange" id="status_{{$eviction->id}}">
                                             @elseif ($eviction->status == 'LTC, to be Mailed' || $eviction->status == 'OOP, to be Mailed')
