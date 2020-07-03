@@ -48,12 +48,12 @@
                             <table class="table table-hover table-bordered eviction_table" style="width:1475px;" id="eviction_table">
                                 <thead>
                                 <tr>
+                                    <th class="text-center">Status</th>
                                     <th class="text-center">Id</th>
                                     <th>Download Status</th>
                                     <th class="text-center">Property Address</th>
                                     <th class="text-center" style="width:80px;">Plaintiff</th>
                                     <th class="text-center" style="width:80px;">Defendant</th>
-                                    <th class="text-center">Status</th>
                                     <th class="text-center">Court Date</th>
                                     <th class="text-center">Total<br> Claim<br> Amount</th>
                                     <th class="text-center">Court Filing $</th>
@@ -65,9 +65,12 @@
                                 @if (isset($evictions))
 
                                     <?php
-                                    $ltcStatusArray = array('Created LTC',
+                                    $ltcStatusArray = array('LTC, to be Mailed',
                                         'LTC Mailed',
-                                        'LTC Submitted Online',
+                                        'LTC Submitted, $$ needs del',
+                                        'LTC Submitted, $$ delivered',
+                                        'LTC Submitted, $$ & file needs DEL',
+                                        'LTC Submitted, $$ & file delivered',
                                         'Court Hearing Scheduled',
                                         'Court Hearing Extended',
                                         'Court Hearing Rescheduled',
@@ -77,15 +80,23 @@
                                         'Paid Judgement',
                                         'Case Withdrawn');
 
-                                    $oopStatusArray = array('Created OOP',
+                                    $oopStatusArray = array('OOP, to be Mailed',
                                         'OOP Mailed',
-                                        'OOP Submitted Online',
+                                        'OOP Submitted, $$ needs del',
+                                        'OOP Submitted, $$ delivered',
+                                        'OOP Submitted, $$ & file needs DEL',
+                                        'OOP Submitted, $$ & file delivered',
                                         'Lockout Scheduled',
                                         'Locked Out Tenant',
                                         'Paid Judgement',
                                         'Case Withdrawn');
 
-                                    $civilStatusArray = array('Civil Filed Online',
+                                    $civilStatusArray = array('Civil, to be Mailed',
+                                        'Civil Mailed',
+                                        'Civil Submitted, $$ needs del',
+                                        'Civil Submitted, $$ delivered',
+                                        'Civil Submitted, $$ & file needs DEL',
+                                        'Civil Submitted, $$ & file delivered',
                                         'Civil Hearing Scheduled',
                                         'Civil Hearing Rescheduled',
                                         'Civil Hearing Extended',
@@ -95,19 +106,15 @@
                                 @foreach ($evictions as $eviction)
                                     <?php $propertyAddressArray = explode('-1', $eviction->property_address); ?>
                                     <tr>
-                                        <td class="text-center">{{$eviction->id}}</td>
-                                        <td class="text-center">
-                                            @if ($eviction->is_downloaded == 0)
-                                                <span id="download_status_{{$eviction->id}}">No</span>
-                                            @else
-                                                <span id="download_status_{{$eviction->id}}">Yes</span>
-                                            @endif
-                                        </td>
-                                        <td class="text-center">{{$propertyAddressArray[0]}} <br> {{str_replace('United States', '', $propertyAddressArray[1])}}</td>
-                                        <td class="text-center">{{$eviction->owner_name}}</td>
-                                        <td class="text-center">{{$eviction->tenant_name}}</td>
                                         <td style="width:150px;">
-                                            <select title="status" class="form-control status_select" id="status_{{$eviction->id}}">
+                                            @if ($status == 'LTC Submitted, $$ needs del' || $status == 'LTC Submitted, $$ & file needs DEL' || $status == 'OOP Submitted, $$ needs del' || $status == 'OOP Submitted, $$ & file needs DEL')
+                                                <select title="status" class="form-control status_select orange" id="status_{{$eviction->id}}">
+                                            @elseif ($status == 'LTC, to be Mailed' || $status == 'OOP, to be Mailed')
+                                                <select title="status" class="form-control status_select yellow" id="status_{{$eviction->id}}">
+                                            @else
+                                                        <select title="status" class="form-control status_select" id="status_{{$eviction->id}}">
+                                            @endif
+
                                                 @if ($eviction->file_type == 'eviction')
                                                     @foreach ($ltcStatusArray as $status)
                                                         @if ($status == $eviction->status)
@@ -136,6 +143,18 @@
 
                                             </select>
                                         </td>
+                                        <td class="text-center">{{$eviction->id}}</td>
+                                        <td class="text-center">
+                                            @if ($eviction->is_downloaded == 0)
+                                                <span id="download_status_{{$eviction->id}}">No</span>
+                                            @else
+                                                <span id="download_status_{{$eviction->id}}">Yes</span>
+                                            @endif
+                                        </td>
+                                        <td class="text-center">{{$propertyAddressArray[0]}} <br> {{str_replace('United States', '', $propertyAddressArray[1])}}</td>
+                                        <td class="text-center">{{$eviction->owner_name}}</td>
+                                        <td class="text-center">{{$eviction->tenant_name}}</td>
+
                                         <td class="text-center">
                                             <span data-toggle="tooltip" data-placement="right" title="Set Court Date" class="calendar_tooltip">
                                                 <span id="court_date_{{$eviction->id}}_btn" data-target="#modal_set_court_date" data-toggle="modal" class="court_calendar">

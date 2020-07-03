@@ -311,7 +311,8 @@
                                                 <select class="form-control" name="online_submission">
                                                     <option selected disabled>Select Status</option>
                                                     <option value="of">Online Filing</option>
-                                                    <option value="otp">Online to Print</option>
+                                                    <option value="otp">Online to Print & Deliver</option>
+                                                    <option value="otm">Online to Mail</option>
                                                     <option value="nf">No Filing</option>
                                                 </select>
                                             </div>

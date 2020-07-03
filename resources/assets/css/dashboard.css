@@ -175,3 +175,11 @@ html, body {
 .bg-light {
     background-color: #cccccc !important;
 }
+
+.orange {
+    background-color: #ee9040;
+}
+
+.yellow {
+    background-color: #eee148;
+}
