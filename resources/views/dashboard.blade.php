@@ -107,9 +107,9 @@
                                     <?php $propertyAddressArray = explode('-1', $eviction->property_address); ?>
                                     <tr>
                                         <td style="width:150px;">
-                                            @if ($status == 'LTC Submitted, $$ needs del' || $status == 'LTC Submitted, $$ & file needs DEL' || $status == 'OOP Submitted, $$ needs del' || $status == 'OOP Submitted, $$ & file needs DEL')
+                                            @if ($eviction->status == 'LTC Submitted, $$ needs del' || $eviction->status == 'LTC Submitted, $$ & file needs DEL' || $eviction->status == 'OOP Submitted, $$ needs del' || $eviction->status == 'OOP Submitted, $$ & file needs DEL')
                                                 <select title="status" class="form-control status_select orange" id="status_{{$eviction->id}}">
-                                            @elseif ($status == 'LTC, to be Mailed' || $status == 'OOP, to be Mailed')
+                                            @elseif ($eviction->status == 'LTC, to be Mailed' || $eviction->status == 'OOP, to be Mailed')
                                                 <select title="status" class="form-control status_select yellow" id="status_{{$eviction->id}}">
                                             @else
                                                         <select title="status" class="form-control status_select" id="status_{{$eviction->id}}">
