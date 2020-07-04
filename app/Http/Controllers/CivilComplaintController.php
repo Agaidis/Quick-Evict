@@ -177,6 +177,13 @@ class CivilComplaintController extends Controller
 
             if ($courtDetails->online_submission == 'of') {
                 $isOnline = 1;
+                $status = 'Civil Submitted, $$ needs del';
+            } else if ($courtDetails->online_submission === 'otm' ) {
+                $status = 'Civil, to be mailed';
+            } else if ($courtDetails->online_submission === 'otp') {
+                $status = 'Civil Submitted, $$ & file needs DEL';
+            } else {
+                $status = '';
             }
 
             $courtNumber = $courtDetails->court_number;
@@ -259,7 +266,7 @@ class CivilComplaintController extends Controller
             $civilDefendantAddress2 = $_POST['civil_defendant_address_2'];
 
             $eviction = new Evictions();
-            $eviction->status = 'Created Civil Complaint';
+            $eviction->status = $status;
             $eviction->property_address = $defendanthouseNum.' '.$defendantStreetName.'-1'.$defendantTown .', ' . $defendantState.' '.$defendantZipcode;
             $eviction->tenant_name = $tenantName;
             $eviction->defendant_state = $civilDefendantAddress1;

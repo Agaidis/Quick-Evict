@@ -293,6 +293,13 @@ class EvictionController extends Controller
 
             if ($courtDetails->online_submission == 'of') {
                 $isOnline = 1;
+                $status = 'LTC Submitted, $$ needs del';
+            } else if ($courtDetails->online_submission === 'otm' ) {
+                $status = 'LTC, to be mailed';
+            } else if ($courtDetails->online_submission === 'otp') {
+                $status = 'LTC Submitted, $$ & file needs DEL';
+            } else {
+                $status = '';
             }
 
             $courtNumber = $courtDetails->court_number;
@@ -478,9 +485,10 @@ class EvictionController extends Controller
 
 
 
+
             try {
                 $eviction = new Evictions();
-                $eviction->status = 'Created LTC';
+                $eviction->status = $status;
                 $eviction->total_judgement = $totalFees;
                 $eviction->property_address = $defendantHouseNum.' '.$defendantStreetName.'-1'.$defendantTown .',' . $defendantState.' '.$defendantZipCode;
                 $eviction->is_resided = $reside;

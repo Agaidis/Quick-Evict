@@ -164,7 +164,16 @@ class OrderOfPossessionController extends Controller
 
             if ($courtDetails->online_submission == 'of') {
                 $isOnline = 1;
+                $status = 'OOP Submitted, $$ needs del';
+            } else if ($courtDetails->online_submission === 'otm' ) {
+                $status = 'OOP, to be mailed';
+            } else if ($courtDetails->online_submission === 'otp') {
+                $status = 'OOP Submitted, $$ & file needs DEL';
+            } else {
+                $status = '';
             }
+
+
 
             $courtNumber = $courtDetails->court_number;
 
@@ -253,7 +262,7 @@ class OrderOfPossessionController extends Controller
 
             try {
                 $eviction = new Evictions();
-                $eviction->status = 'Created OOP';
+                $eviction->status = $status;
                 $eviction->total_judgement = $totalFees;
                 $eviction->judgment_amount = $_POST['judgment_amount'];
                 $eviction->costs_original_lt_proceeding = $_POST['costs_original_lt_proceeding'];
