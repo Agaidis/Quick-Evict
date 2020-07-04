@@ -65,7 +65,10 @@
                                 @if (isset($evictions))
 
                                     <?php
-                                    $ltcStatusArray = array('LTC, to be Mailed',
+                                    $ltcStatusArray = array('Created LTC',
+                                        'LTC Mailed',
+                                        'LTC Submitted Online',
+                                        'LTC, to be Mailed',
                                         'LTC Mailed',
                                         'LTC Submitted, $$ needs del',
                                         'LTC Submitted, $$ delivered',
@@ -80,7 +83,10 @@
                                         'Paid Judgement',
                                         'Case Withdrawn');
 
-                                    $oopStatusArray = array('OOP, to be Mailed',
+                                    $oopStatusArray = array('Created OOP',
+                                        'OOP Mailed',
+                                        'OOP Submitted Online',
+                                        'OOP, to be Mailed',
                                         'OOP Mailed',
                                         'OOP Submitted, $$ needs del',
                                         'OOP Submitted, $$ delivered',
@@ -91,7 +97,8 @@
                                         'Paid Judgement',
                                         'Case Withdrawn');
 
-                                    $civilStatusArray = array('Civil, to be Mailed',
+                                    $civilStatusArray = array('Civil Filed Online',
+                                        'Civil, to be Mailed',
                                         'Civil Mailed',
                                         'Civil Submitted, $$ needs del',
                                         'Civil Submitted, $$ delivered',
