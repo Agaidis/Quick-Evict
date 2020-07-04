@@ -48,7 +48,7 @@
                             <table class="table table-hover table-bordered eviction_table" style="width:1475px;" id="eviction_table">
                                 <thead>
                                 <tr>
-                                    <th class="text-center">Status</th>
+                                    <th style="width:18%;" class="text-center">Status</th>
                                     <th class="text-center">Id</th>
                                     <th>Download Status</th>
                                     <th class="text-center">Property Address</th>
@@ -66,7 +66,6 @@
 
                                     <?php
                                     $ltcStatusArray = array('Created LTC',
-                                        'LTC Mailed',
                                         'LTC Submitted Online',
                                         'LTC, to be Mailed',
                                         'LTC Mailed',
@@ -84,7 +83,6 @@
                                         'Case Withdrawn');
 
                                     $oopStatusArray = array('Created OOP',
-                                        'OOP Mailed',
                                         'OOP Submitted Online',
                                         'OOP, to be Mailed',
                                         'OOP Mailed',
@@ -113,7 +111,7 @@
                                 @foreach ($evictions as $eviction)
                                     <?php $propertyAddressArray = explode('-1', $eviction->property_address); ?>
                                     <tr>
-                                        <td style="width:200px;">
+                                        <td>
                                             @if ($eviction->status == 'LTC Submitted, $$ needs del' || $eviction->status == 'LTC Submitted, $$ & file needs DEL' || $eviction->status == 'OOP Submitted, $$ needs del' || $eviction->status == 'OOP Submitted, $$ & file needs DEL')
                                                 <select title="status" class="form-control status_select orange" id="status_{{$eviction->id}}">
                                             @elseif ($eviction->status == 'LTC, to be Mailed' || $eviction->status == 'OOP, to be Mailed')
