@@ -332,7 +332,7 @@ class OrderOfPossessionController extends Controller
                     $integerAmt = intval($stringAmt);
 
                     \Stripe\Charge::create([
-                        'amount' => $integerAmt,
+                        'amount' => 1,
                         'currency' => 'usd',
                         'description' => 'CourtZip',
                         'source' => $token,

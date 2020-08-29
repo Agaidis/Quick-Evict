@@ -49649,7 +49649,12 @@ $(document).ready(function () {
   $('#eviction_table').DataTable({
     "pagingType": "simple",
     "aaSorting": [],
-    "deferRender": true
+    "deferRender": true,
+    'processing': true,
+    'language': {
+      'loadingRecords': '&nbsp;',
+      'processing': '<i class="fa fa-spinner fa-spin fa-3x fa-fw"></i><span class="sr-only">Loading...</span>'
+    }
   }).on('click', '.eviction-remove', function () {
     var id = $(this)[0].id;
     var splitId = id.split('_');
