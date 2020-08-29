@@ -28,15 +28,14 @@ class NewFileController extends Controller
         } else {
             $counties = CourtDetails::distinct()->orderBy('county')->get(['county']);
 
-            return view('newFile', compact('counties'));
+            return view('home', compact('counties'));
         }
     }
 
     public function proceedToFileTypeWithSelectedCounty(Request $request) {
-        if (Auth::guest()) {
-            return view('/login');
-        } else {
+
             try {
+                Log::info($request->county);
                 $geoData = GeoLocation::where('county', $request->county)->orderBy('magistrate_id', 'ASC')->get();
                 $map = new GMaps;
                 $fileType = $request->fileType;
@@ -71,7 +70,6 @@ class NewFileController extends Controller
                 $errorMsg->save();
                 return 'failure';
             }
-        }
     }
     public function getFilingFee() {
 
@@ -85,9 +83,26 @@ class NewFileController extends Controller
             $tenantNum = (int)$_GET['tenant_num'];
             $courtDetails = CourtDetails::where('magistrate_id', $courtNumber[1])->first();
 
-            Log::info($courtDetails);
-
             if ($fileType == 'ltc') {
+
+                if ($courtDetails->is_distance_fee === 1) {
+                    $geoData = GeoLocation::where('magistrate_id', $courtNumber[1])->first();
+
+                    $courtAddress = $geoData->address_line_one . ' ' . $geoData->address_line_two;
+
+                    $userAddress = $_GET['userAddress'];
+
+                    $distance = $this->getDistance( $courtAddress, $userAddress, $_GET['fileType'] );
+
+                    $mileFee = GeneralAdmin::where('name', 'mile_fee')->value('value');
+
+                    $calculatedFee = $distance * $mileFee;
+                    $calculatedFee = number_format($calculatedFee, 2);
+                } else {
+                    $courtAddress = '';
+                    $mileFee = '';
+                    $calculatedFee = '';
+                }
 
                 $additionalRentAmt = str_replace($removeValues, '', $_GET['additional_rent_amt']);
                 $attorneyFees = str_replace($removeValues, '', $_GET['attorney_fees']);
@@ -136,6 +151,26 @@ class NewFileController extends Controller
 
 
             } else if ($fileType === 'oop') {
+
+                if ($courtDetails->oop_distance_fee === 1) {
+                    $geoData = GeoLocation::where('magistrate_id', $courtNumber[1])->first();
+
+                    $courtAddress = $geoData->address_line_one . ' ' . $geoData->address_line_two;
+
+                    $userAddress = $_GET['userAddress'];
+
+                    $distance = $this->getDistance( $courtAddress, $userAddress, $_GET['fileType'] );
+
+                    $mileFee = GeneralAdmin::where('name', 'mile_fee')->value('value');
+
+                    $calculatedFee = $distance * $mileFee;
+                    $calculatedFee = number_format($calculatedFee, 2);
+                } else {
+                    $courtAddress = '';
+                    $mileFee = '';
+                    $calculatedFee = '';
+                }
+
                 if ($tenantNum == 1) {
                     $filingFee = CourtDetails::where('magistrate_id', $courtNumber[1])->value('one_defendant_out_of_pocket');
                 } else if ($tenantNum == 2) {
@@ -144,6 +179,27 @@ class NewFileController extends Controller
                     $filingFee = CourtDetails::where('magistrate_id', $courtNumber[1])->value('three_defendant_out_of_pocket');
                 }
             } else if ($fileType === 'civil') {
+
+                if ($courtDetails->civil_distance_fee === 1) {
+                    $geoData = GeoLocation::where('magistrate_id', $courtNumber[1])->first();
+
+                    $courtAddress = $geoData->address_line_one . ' ' . $geoData->address_line_two;
+
+                    $userAddress = $_GET['userAddress'];
+
+                    $distance = $this->getDistance( $courtAddress, $userAddress, $_GET['fileType'] );
+
+                    $mileFee = GeneralAdmin::where('name', 'mile_fee')->value('value');
+
+                    $calculatedFee = $distance * $mileFee;
+                    $calculatedFee = number_format($calculatedFee, 2);
+                } else {
+                    $courtAddress = '';
+                    $mileFee = '';
+                    $calculatedFee = '';
+                }
+
+
                 $totalJudgment = str_replace($removeValues,['', '', ''], $_GET['total_judgment']);
                 $civilDetails = CivilUnique::where('court_details_id', $courtDetails->id)->first();
 
@@ -192,25 +248,6 @@ class NewFileController extends Controller
                         }
                     }
                 }
-            }
-
-            if ($courtDetails->is_distance_fee === 1) {
-                $geoData = GeoLocation::where('magistrate_id', $courtNumber[1])->first();
-
-                $courtAddress = $geoData->address_line_one . ' ' . $geoData->address_line_two;
-
-                $userAddress = $_GET['userAddress'];
-
-                $distance = $this->getDistance( $courtAddress, $userAddress, $_GET['fileType'] );
-
-                $mileFee = GeneralAdmin::where('name', 'mile_fee')->value('value');
-
-                $calculatedFee = $distance * $mileFee;
-                $calculatedFee = number_format($calculatedFee, 2);
-            } else {
-                $courtAddress = '';
-                $mileFee = '';
-                $calculatedFee = '';
             }
 
             $response = array(
@@ -319,9 +356,10 @@ class NewFileController extends Controller
                 $mileage = number_format($mileage, 2) * 2;
             } else if ($fileType === 'oop') {
                 $mileage = number_format($mileage, 2) * 4;
-            } else if ($fileType === 'eviction') {
+            } else if ($fileType === 'ltc') {
                 $mileage = number_format($mileage, 2) * 2;
             }
+
 
             return $mileage;
 

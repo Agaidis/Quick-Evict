@@ -90,6 +90,9 @@ $(document).ready(function () {
         let splitId = id.split('_');
         console.log(splitId);
 
+        if ($('#user_role').val() === 'Court') {
+            $('#download_status_' + splitId[2]).text('Yes');
+        }
         $('#download_id').val(splitId[2]);
     }).on('click', '.get_filings', function () {
         let id = $(this)[0].id;
@@ -114,11 +117,12 @@ $(document).ready(function () {
             },
 
             success: function (data) {
+                console.log(data);
                 let fileType = '';
                 if (data.mainFiling.file_type === 'oop') {
                      fileType = 'Order of Possession';
-                } else if (data.mainFiling.file_type === 'ltc'){
-                     fileType = 'Eviction';
+                } else if (data.mainFiling.file_type === 'eviction'){
+                     fileType = 'LTC';
                 } else {
                      fileType = 'Civil Complaint';
                 }
@@ -207,11 +211,15 @@ $(document).ready(function () {
          let id = $(this)[0].id;
          let splitId = id.split('_');
          let filingName = splitId[2];
+         console.log(filingName);
+         console.log(splitId);
          if (splitId[0] === 'main') {
-             console.log(splitId);
-             $('#main_filing_id').val(filingName);
-         }
 
+             $('#main_filing_id').val(filingName);
+         } else {
+             $('#main_filing_id').val('');
+         }
+//
          $('#filing_original_name').val(filingName);
      });
 });

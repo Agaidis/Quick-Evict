@@ -40,18 +40,19 @@ class DashboardController extends Controller
             $userId = Auth::user()->id;
             $courtNumber = Auth::user()->court_id;
             $userRole = Auth::user()->role;
+            $counties = CourtDetails::distinct()->orderBy('county')->get(['county']);
 
             if (Auth::user()->role == 'Administrator') {
                 $evictions = DB::table('evictions')->orderBy('id', 'desc')->get();
             } else if (Auth::user()->role == 'General User') {
                 $evictions = DB::select('select * from evictions WHERE user_id = '. $userId .' ORDER BY FIELD(status, "Created LTC", "LTC Mailed", "LTC Submitted Online", "Court Hearing Scheduled", "Court Hearing Extended", "Judgement Issued in Favor of Owner", "Judgement Denied by Court", "Tenant Filed Appeal", "OOP Mailed", "OOP Submitted Online", "Paid Judgement", "Locked Out Tenant"), id DESC');
             } else if (Auth::user()->role == 'Court') {
-                $evictions = DB::table('evictions')->where('court_number', $courtNumber )->orderBy('id', 'desc')->get();
+                $evictions = DB::table('evictions')->where('court_number', $courtNumber )->where('is_online_filing', 1)->orderBy('id', 'desc')->get();
             } else {
                 $evictions = DB::select('select * from evictions ORDER BY FIELD(status, "Created LTC", "LTC Mailed", "LTC Submitted Online", "Court Hearing Scheduled", "Court Hearing Extended", "Judgement Issued in Favor of Owner", "Judgement Denied by Court", "Tenant Filed Appeal", "OOP Mailed", "OOP Submitted Online", "Paid Judgement", "Locked Out Tenant"), id DESC');
             }
 
-            return view('dashboard' , compact('evictions', 'userRole'));
+            return view('dashboard' , compact('evictions', 'userRole', 'counties'));
         } catch (\Exception $e) {
             $errorMsg = new ErrorLog();
             $errorMsg->payload = $e->getMessage() . ' Line #: ' . $e->getLine();
@@ -108,6 +109,7 @@ class DashboardController extends Controller
             $signature = Signature::where('eviction_id', $evictionData->id)->value('signature');
             $plaintiffAddress = $evictionData->plantiff_name .'<br>'. $evictionData->plantiff_address_line_1 .'<br>'. $evictionData->plantiff_address_line_2 .'<br>'.$evictionData->plantiff_phone;
             $defendantAddress = $evictionData->tenant_name . '<br>' . $evictionData->defendant_house_num . ' ' .$evictionData->defendant_street_name . ', ' . $evictionData->unit_num .'<br>'. $evictionData->defendant_town .', '. $evictionData->defendant_state .' '. $evictionData->defendant_zipcode;
+
             $civilDefendantAddress = $evictionData->tenant_name . '<br>' . $evictionData->defendant_state  . ', ' . $evictionData->unit_num .'<br>'.$evictionData->defendant_zipcode;
 
             $dompdf = new Dompdf();
@@ -124,8 +126,14 @@ class DashboardController extends Controller
             if ($evictionData->file_type == 'eviction' || $evictionData->file_type == '') {
                 $pdfHtml = PDF::where('name', 'ltc')->value('html');
 
+                if ($evictionData->is_resided == 'yes' || $evictionData->is_resided == null) {
+                    $defendantAddress2 = $defendantAddress;
+                } else {
+                    $defendantAddress2 = str_replace('-1', '<br>', $evictionData->resided_address);
+                }
+
                 $pdfHtml = $pdfEditor->globalHtmlAttributes($pdfHtml, $courtDetails, $plaintiffAddress, $defendantAddress, $signature, $evictionData);
-                $pdfHtml = $pdfEditor->localLTCAttributes($pdfHtml, $evictionData);
+                $pdfHtml = $pdfEditor->localLTCAttributes($pdfHtml, $evictionData, $defendantAddress2);
                 $pdfHtml = $pdfEditor->addSampleWatermark($pdfHtml, false);
 
                 $dompdf->loadHtml($pdfHtml);

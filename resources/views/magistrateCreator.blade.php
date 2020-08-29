@@ -26,6 +26,7 @@
                                         <th>County</th>
                                         <th>MDJ Name</th>
                                         <th>Phone #</th>
+                                        <th class="magistrate_th">(1) LTC<br>(2) OOP<br>(3) CIVIL M<br>(4) CIVIL C<br>Additional Defendant $</th>
                                         <th class="magistrate_th">(1) Under 2k<br>(2) Under 2k<br>(3) Under 2k</th>
                                         <th class="magistrate_th">(1) Btn 2k - 4k<br>(2) Btn 2k - 4k<br>(3) Btn 2k - 4k</th>
                                         <th class="magistrate_th">(1) Over 4k<br>(2) Over 4k<br>(3) Over 4k</th>
@@ -34,7 +35,7 @@
                                         <th class="magistrate_civil_th">(2) - Civil Mail<br> Under 500<br>btn 500 - 2k<br>btn 2k - 4k<br>btn 4k - 12k</th>
                                         <th class="magistrate_civil_th">(1) - Civil Constable<br> Under 500<br>btn 500 - 2k<br>btn 2k - 4k<br>btn 4k - 12k</th>
                                         <th class="magistrate_civil_th">(2) - Civil Constable<br> Under 500<br>btn 500 - 2k<br>btn 2k - 4k<br>btn 4k - 12k</th>
-                                        <th>Additional Tenant $</th>
+
                                         <th class="text-center">Edit</th>
                                         <th class="text-center">Remove</th>
                                     </tr>
@@ -48,6 +49,7 @@
                                         <td>{{$courtDetail->county}}</td>
                                         <td>{{$courtDetail->mdj_name}}</td>
                                         <td>{{$courtDetail->phone_number}}</td>
+                                        <td>{{$courtDetail->additional_tenant}}<br>{{$courtDetail->oop_additional_tenant_fee}}<br>{{$courtDetail->civil_mail_additional_tenant_fee}}<br>{{$courtDetail->civil_constable_additional_tenant_fee}}</td>
                                         <td>{{$courtDetail->one_defendant_up_to_2000}}<br>{{$courtDetail->two_defendant_up_to_2000}}<br>{{$courtDetail->three_defendant_up_to_2000}}</td>
                                         <td>{{$courtDetail->one_defendant_between_2001_4000}}<br>{{$courtDetail->two_defendant_between_2001_4000}}<br>{{$courtDetail->three_defendant_between_2001_4000}}</td>
                                         <td>{{$courtDetail->one_defendant_greater_than_4000}}<br>{{$courtDetail->two_defendant_greater_than_4000}}<br>{{$courtDetail->three_defendant_greater_than_4000}}</td>
@@ -58,7 +60,7 @@
                                         <td>{{$courtDetail->under_500_1_def_constable}}<br>{{$courtDetail->btn_500_2000_1_def_constable}}<br>{{$courtDetail->btn_2000_4000_1_def_constable}}<br>{{$courtDetail->btn_4000_12000_1_def_constable}}</td>
                                         <td>{{$courtDetail->under_500_2_def_constable}}<br>{{$courtDetail->btn_500_2000_2_def_constable}}<br>{{$courtDetail->btn_2000_4000_2_def_constable}}<br>{{$courtDetail->btn_4000_12000_2_def_constable}}</td>
 
-                                        <td>{{$courtDetail->additional_tenant}}</td>
+
 
                                         <td class="text-center"><button type="button" data-target="#modal_edit_magistrate" data-toggle="modal" id="id_{{$courtDetail->id}}_{{$courtDetail->magistrate_id}}" class=" magistrate-edit">Edit</button></td>
                                         <td class="text-center"><button type="button" id="id_{{$courtDetail->id}}_{{$courtDetail->magistrate_id}}" class="text-danger magistrate-remove">Delete</button></td>
@@ -289,21 +291,28 @@
                                             </div>
 
                                             <div class="col-sm-12"><br>
-                                                <input type="checkbox" id="is_driving_fee_allowed" name="is_driving_fee_allowed" />
-                                                <label for="is_driving_fee_allowed">Is Driving Fee Included?</label>
-                                                <input type="hidden" id="driving_fee" name="driving_fee" />
+                                                <input type="checkbox" id="is_ltc_driving_fee_allowed" name="is_ltc_driving_fee_allowed" />
+                                                <label for="is_ltc_driving_fee_allowed">Add LTC Calculated Mileage</label>
+                                            </div>
+                                            <div class="col-sm-12"><br>
+                                                <input type="checkbox" id="is_oop_driving_fee_allowed" name="is_oop_driving_fee_allowed" />
+                                                <label for="is_oop_driving_fee_allowed">Add OOP Calculated Mileage</label>
+                                            </div>
+                                            <div class="col-sm-12"><br>
+                                                <input type="checkbox" id="is_civil_driving_fee_allowed" name="is_civil_driving_fee_allowed" />
+                                                <label for="is_civil_driving_fee_allowed">Add Civil Calculated Mileage</label>
                                             </div>
                                             <div class="col-sm-12"><br>
                                                 <input type="checkbox" checked id="is_digital_signature_allowed" name="is_digital_signature_allowed" />
                                                 <label for="is_digital_signature_allowed">Is Digital Signature Allowed?</label>
-                                                <input type="hidden" id="digital_signature" name="digital_signature" />
                                             </div><br>
                                             <div class="col-sm-12">
                                                 <label for="online_submission">Online Submission Status</label>
                                                 <select class="form-control" name="online_submission">
                                                     <option selected disabled>Select Status</option>
                                                     <option value="of">Online Filing</option>
-                                                    <option value="otp">Online to Print</option>
+                                                    <option value="otp">Online to Print & Deliver</option>
+                                                    <option value="otm">Online to Mail</option>
                                                     <option value="nf">No Filing</option>
                                                 </select>
                                             </div>
@@ -466,19 +475,25 @@
                                                                 <input placeholder="$" type="text" class="form-control" id="edit_civil_constable_additional_tenant_fee" name="edit_civil_constable_additional_tenant_fee" value="" />
                                                             </div>
                                                             <div class="col-sm-12"><br>
-                                                                <input type="checkbox" id="edit_is_driving_fee_allowed" name="edit_is_driving_fee_allowed" />
-                                                                <label for="edit_is_driving_fee_allowed">Is Driving Fee Allowed?</label>
-                                                                <input type="hidden" id="edit_driving_fee" name="edit_driving_fee" />
+                                                                <input type="checkbox" id="edit_ltc_is_driving_fee_allowed" name="edit_ltc_is_driving_fee_allowed" />
+                                                                <label for="edit_ltc_is_driving_fee_allowed">Add LTC Calculated Mileage</label>
+                                                            </div>
+                                                            <div class="col-sm-12"><br>
+                                                                <input type="checkbox" id="edit_oop_is_driving_fee_allowed" name="edit_oop_is_driving_fee_allowed" />
+                                                                <label for="edit_oop_is_driving_fee_allowed">Add OOP Calculated Mileage</label>
+                                                            </div>
+                                                            <div class="col-sm-12"><br>
+                                                                <input type="checkbox" id="edit_civil_is_driving_fee_allowed" name="edit_civil_is_driving_fee_allowed" />
+                                                                <label for="edit_civil_is_driving_fee_allowed">Add Civil Calculated Mileage</label>
                                                             </div>
                                                             <div class="col-sm-12"><br>
                                                                 <input type="checkbox" id="edit_is_digital_signature_allowed" name="edit_is_digital_signature_allowed" />
                                                                 <label for="edit_is_digital_signature_allowed">Is Digital Signature Allowed?</label>
-                                                                <input type="hidden" id="edit_digital_signature" name="edit_digital_signature" />
                                                             </div><br>
                                                             <div class="col-sm-12">
                                                                 <label for="edit_online_submission">Online Submission Status</label>
-                                                                <select class="form-control" name="edit_online_submission">
-                                                                    <option disabled>Select Status</option>
+                                                                <select class="form-control" id="edit_online_submission" name="edit_online_submission">
+                                                                    <option selected disabled>Select Status</option>
                                                                     <option value="of">Online Filing</option>
                                                                     <option value="otp">Online to Print</option>
                                                                     <option value="nf">No Filing</option>

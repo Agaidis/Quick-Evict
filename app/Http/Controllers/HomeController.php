@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Support\Facades\Auth;
+use App\CourtDetails;
 
 class HomeController extends Controller
 {
@@ -13,7 +14,9 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        $counties = CourtDetails::distinct()->orderBy('county')->get(['county']);
+
+        return view('home', compact('counties'));
     }
 }
 

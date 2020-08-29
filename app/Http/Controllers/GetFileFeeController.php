@@ -14,6 +14,7 @@ use JavaScript;
 use GMaps;
 use Illuminate\Support\Facades\Log;
 
+
 class GetFileFeeController extends Controller
 {
     //
@@ -22,12 +23,23 @@ class GetFileFeeController extends Controller
      * @param $request
      * @return \Illuminate\Http\Response
      */
+
+    public function view() {
+
+        $counties = CourtDetails::distinct()->orderBy('county')->get(['county']);
+        $isStep2 = false;
+
+        return view('getFileFee', compact('counties','isStep2'));
+    }
     public function index(Request $request )
     {
         if (Auth::guest()) {
             return view('/login');
         } else {
             try {
+                $isStep2 = true;
+                $selectedCounty = $request->county;
+                $counties = CourtDetails::distinct()->orderBy('county')->get(['county']);
                 $geoData = GeoLocation::where('county', $request->county)->orderBy('magistrate_id', 'ASC')->get();
                 $map = new GMaps;
 
@@ -37,7 +49,7 @@ class GetFileFeeController extends Controller
                     'userEmail' => Auth::user()->email
                 ]);
 
-                return view('getFileFee', compact('map'));
+                return view('getFileFee', compact('map', 'counties', 'selectedCounty', 'isStep2'));
 
             } catch (Exception $e) {
                 $errorMsg = new ErrorLog();
@@ -82,7 +94,7 @@ class GetFileFeeController extends Controller
                     $additionalTenantFee = (float)$additionalTenantAmt * $multiplyBy;
                 }
 
-                $noCommaTotalFees = str_replace([',', '$',' '],['', '', ''], $request->total_judgment);
+                $noCommaTotalFees = str_replace([',', '$',' '],['', '', ''], $request->totalJudgment);
 
                 if ($noCommaTotalFees < 2000) {
                     $filingFee = $upTo2000 + $additionalTenantFee;
@@ -93,6 +105,9 @@ class GetFileFeeController extends Controller
                 } else {
                     $filingFee = 'Didnt Work';
                 }
+
+                $distance = 0;
+                $calculatedFee = 0;
 
                 if ($courtDetails->is_distance_fee === 1) {
                     $newFile = new NewFileController();
@@ -105,13 +120,17 @@ class GetFileFeeController extends Controller
                     $mileFee = GeneralAdmin::where('name', 'mile_fee')->value('value');
 
                     $calculatedFee = $distance * $mileFee;
+
                     $calculatedFee = number_format($calculatedFee, 2);
                     $filingFee = $filingFee + $calculatedFee;
+
                 }
 
                 $filingFee = number_format($filingFee, 2);
 
-                return $filingFee;
+                $returnArray = array('filingFee' => $filingFee, 'distance' => $distance, 'calculatedFee' => $calculatedFee);
+
+                return $returnArray;
             } else if ($request->fileType === 'oop') {
 
                 /*                      ORDER OF POSSESSION                 */
@@ -132,7 +151,7 @@ class GetFileFeeController extends Controller
                     $additionalTenantFee = (float)$additionalTenantAmt * $multiplyBy;
                 }
 
-                $totalFees = (float)$request->total_judgment;
+                $totalFees = (float)$request->totalJudgment;
 
                 $noCommaTotalFees = str_replace(['$',',',' '],['','',''], $totalFees);
 
@@ -146,7 +165,7 @@ class GetFileFeeController extends Controller
                     $filingFee = 'Didnt Work';
                 }
 
-                if ($courtDetails->is_distance_fee === 1) {
+                if ($courtDetails->oop_distance_fee === 1) {
                     $newFile = new NewFileController();
                     $geoData = GeoLocation::where('magistrate_id', $request->courtNumber)->first();
 
@@ -169,7 +188,7 @@ class GetFileFeeController extends Controller
                 /*                  CIVIL COMPLAINT             */
 
                 $civilDetails = CivilUnique::where('court_details_id', $courtDetails->id)->first();
-                $totalJudgment = str_replace([' ', ',', '$'],['', '', ''], $request->total_judgment);
+                $totalJudgment = str_replace([' ', ',', '$'],['', '', ''], $request->totalJudgment);
 
                 if ($tenantNum > 1) {
                     if ($request->deliveryType == 'mail') {
@@ -217,7 +236,10 @@ class GetFileFeeController extends Controller
                     }
                 }
 
-                if ($courtDetails->is_distance_fee === 1) {
+                $distance = 0;
+                $calculatedFee = 0;
+
+                if ($courtDetails->civil_distance_fee === 1) {
                     $newFile = new NewFileController();
                     $geoData = GeoLocation::where('magistrate_id', $request->courtNumber)->first();
 
@@ -234,7 +256,9 @@ class GetFileFeeController extends Controller
 
                 $filingFee = number_format($filingFee, 2);
 
-                return $filingFee;
+                $returnArray = array('filingFee' => $filingFee, 'distance' => $distance, 'calculatedFee' => $calculatedFee);
+
+                return $returnArray;
 
             } else if ($request->fileType === 'none') {
                 return 'Failed to Choose File Type';

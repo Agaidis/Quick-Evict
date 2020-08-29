@@ -1,7 +1,4 @@
-<?php
-    use App\CourtDetails;
-    $counties = CourtDetails::distinct()->orderBy('county')->get(['county']);
-?>
+
 <!DOCTYPE html>
 <html lang="{{ app()->getLocale() }}">
 <head>
@@ -14,7 +11,7 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <title>{{ config('app.name', 'CourtZip') }}</title>
-    <link rel="icon" href="https://quickevict.nyc3.digitaloceanspaces.com/ziplogo.png"/>
+    <link rel="icon" href="https://quickevict.nyc3.digitaloceanspaces.com/zipLogo.png"/>
 
     <!-- Scripts -->
     <script src="https://js.stripe.com/v3/"></script>
@@ -34,6 +31,7 @@
     </script>
 
 
+
     <!-- Fonts -->
     <link rel="dns-prefetch" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Raleway:300,400,600" rel="stylesheet" type="text/css">
@@ -48,7 +46,7 @@
         <nav class="navbar navbar-expand-md navbar-light navbar-laravel">
             <div class="container-fluid">
                 <a class="navbar-brand" style="padding: 8px 14px!important;" href="{{ url('/home') }}">
-                    <img src="https://quickevict.nyc3.digitaloceanspaces.com/courtzip.png" width="150" height="30">
+                    <img src="https://quickevict.nyc3.digitaloceanspaces.com/courtZipBlue.png" width="150" height="30">
                 </a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
@@ -67,6 +65,9 @@
                             <li><a href="{{ url('FAQ') }}" id="faq_btn">FAQ</a></li>
                             <li><a href="{{ url('where-does-this-work') }}" id="where_work_btn">Where Does this Work?</a></li>
                             <li><a href="{{ url('about-us') }}" id="about_us_btn">About Us</a></li>
+                            @if (Auth::user()->role == 'Court' || Auth::user()->role == 'Administrator')
+                                <li><a href="{{ url('getFileFee') }}" id="about_us_btn">Fee Calculator</a></li>
+                                @endif
                     @else
                             <li><a href="{{ url('information') }}" id="eviction_info_btn">Information</a></li>
                             <li><a href="{{ url('FAQ') }}" id="faq_btn">FAQ</a></li>
@@ -89,7 +90,8 @@
 
                             <div style="margin-left:-15px;" class="dropdown-menu" aria-labelledby="navbarDropdown">
                                 @if (Auth::user()->role == 'Administrator')
-                                <a class="dropdown-item" href="{{ url('magistrateCreator') }}" id="magistrate_btn">Magistrate Creator</a>
+                                    <a class="dropdown-item" href="{{ url('magistrateCreator') }}" id="magistrate_btn">Magistrate Creator</a>
+                                    <a class="dropdown-item" href="{{ url('feeDuplicator') }}" id="fee_duplicator_btn">Fee Duplicator</a>
                                     <a class="dropdown-item" href="{{ url('generalAdmin') }}" id="admin_btn">General Admin</a>
                                     <a class="dropdown-item" href="{{ url('userManagement') }}" id="user_management_btn">Manage Users</a>
                                 @endif
@@ -107,42 +109,14 @@
                 @endguest
             </div>
         </nav>
-        @if (request()->path() != 'new-file' && request()->path() != 'login' && request()->path() != 'register' && request()->path() != 'generalAdmin' && request()->path() != 'magistrateCreator' && request()->path() != 'userManagement' && request()->path() != 'get-file-fee')
-        <div class="row justify-content-center">
-            <div id="new_filing_container" class="col-offset-2 col-md-4">
-                <a href="{{ url('new-file') }}"><button type="button" class="btn btn-primary" id="new_file_btn">Start a new File</button></a>
-            </div>
-            @if (Auth::check())
-            @if (Auth::user()->role == 'Court' || Auth::user()->role == 'Administrator')
-            <div class="col-offset-2 col-md-3">
-                <form method="post" action="{{ action('GetFileFeeController@index') }}" enctype="multipart/form-data" id="dashboard_form">
-                    <input type="hidden" name="_token" value="{{ Session::token() }}">
-                    <div id="get_file_Fee_container">
-                        <label style="align-content:center; text-align:center;" class="labels">Quick Fee Assessment!</label><br>
-                        <div class="col-md-12">
-                            <label class="labels" for="county_select">Choose a County</label>
-                            <select class="form-control" id="county_select" name="county">
-                                <option value="none">County Select</option>
-                                @foreach ($counties as $county)
-                                    <option value="{{$county->county}}">{{$county->county}}</option>
-                                @endforeach
-                            </select><br>
-                            <button type="submit" class="btn btn-primary" id="get_file_fee_btn">Go!</button>
-                        </div>
-                    </div><br>
-                </form>
-            </div>
-            @endif
-                @endif
-        </div>
-        @endif
-
-        <main class="py-4">
-            @yield('content')
-        </main>
     </div>
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAfPLSbGAHZkEd-8DDB0FcGSlhrV9LQMGM&libraries=places" defer></script>
+    <main>
+        @yield('content')
+    </main>
+     @extends('layouts.footer')
 
+
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAfPLSbGAHZkEd-8DDB0FcGSlhrV9LQMGM&libraries=places" defer></script>
     <script src="https://cdn.jsdelivr.net/npm/signature_pad@2.3.2/dist/signature_pad.min.js"></script>
 </body>
 </html>

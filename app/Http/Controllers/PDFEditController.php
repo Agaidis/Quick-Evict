@@ -47,7 +47,7 @@ class PDFEditController extends Controller
         return $pdfHtml;
     }
 
-    public function localLTCAttributes ($pdfHtml, $evictionData) {
+    public function localLTCAttributes ($pdfHtml, $evictionData, $defendantAddress2) {
         $pdfHtml = str_replace('[due-rent]', $evictionData->due_rent, $pdfHtml);
         $pdfHtml = str_replace('[damage-amt]', $evictionData->damage_amt, $pdfHtml);
         $pdfHtml = str_replace('[unjust-damages]', $evictionData->unjust_damages, $pdfHtml);
@@ -59,6 +59,7 @@ class PDFEditController extends Controller
         $pdfHtml = str_replace('__verify-name__', $evictionData->verify_name, $pdfHtml);
         $pdfHtml = str_replace('__attorney-fees__', $evictionData->attorney_fees, $pdfHtml);
         $pdfHtml = str_replace('__total-fees__', $evictionData->total_judgement, $pdfHtml);
+        $pdfHtml = str_replace('__defendant-address-2__', $defendantAddress2, $pdfHtml);
 
         $isResidential = $evictionData->is_residential == true ? '<input type="checkbox" checked/>' : '<input type="checkbox"/>';
         $isNotResidential = $evictionData->is_residential == true ? '<input type="checkbox"/>' : '<input type="checkbox" checked/>';

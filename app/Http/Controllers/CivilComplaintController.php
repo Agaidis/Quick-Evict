@@ -167,13 +167,24 @@ class CivilComplaintController extends Controller
         $mailer = new Mailer();
         try {
 
-
             $removeValues = [' ', '$', ','];
             $magistrateId = str_replace('magistrate_' , '', $_POST['court_number']);
             $courtDetails = CourtDetails::where('magistrate_id', $magistrateId)->first();
             $geoDetails = GeoLocation::where('magistrate_id', $magistrateId)->first();
             $civilDetails = CivilUnique::where('court_details_id', $courtDetails->id)->first();
             $totalJudgment = str_replace($removeValues,['', '', ''], $_POST['total_judgment']);
+            $isOnline = 0;
+
+            if ($courtDetails->online_submission == 'of') {
+                $isOnline = 1;
+                $status = 'Civil Submitted, $$ needs del';
+            } else if ($courtDetails->online_submission === 'otm' ) {
+                $status = 'Civil, to be mailed';
+            } else if ($courtDetails->online_submission === 'otp') {
+                $status = 'Civil Submitted, $$ & file needs DEL';
+            } else {
+                $status = '';
+            }
 
             $courtNumber = $courtDetails->court_number;
 
@@ -255,7 +266,7 @@ class CivilComplaintController extends Controller
             $civilDefendantAddress2 = $_POST['civil_defendant_address_2'];
 
             $eviction = new Evictions();
-            $eviction->status = 'Created Civil Complaint';
+            $eviction->status = $status;
             $eviction->property_address = $defendanthouseNum.' '.$defendantStreetName.'-1'.$defendantTown .', ' . $defendantState.' '.$defendantZipcode;
             $eviction->tenant_name = $tenantName;
             $eviction->defendant_state = $civilDefendantAddress1;
@@ -283,6 +294,7 @@ class CivilComplaintController extends Controller
             $eviction->civil_delivery_type = $_POST['delivery_type'];
             $eviction->filing_fee = $filingFee;
             $eviction->is_extra_files = $_POST['is_extra_filing'];
+            $eviction->is_online_filing = $isOnline;
 
             $eviction->save();
 
@@ -334,7 +346,9 @@ class CivilComplaintController extends Controller
 
             $notify = new NotificationController($courtNumber, Auth::user()->email);
             $notify->notifyAdmin();
-            $notify->notifyJudge();
+            if ($isOnline === 1) {
+                $notify->notifyJudge();
+            }
             $notify->notifyMaker();
 
             Session::flash('status', 'Your Civil Complaint has been successfully made! You can see its progress in the table below.');

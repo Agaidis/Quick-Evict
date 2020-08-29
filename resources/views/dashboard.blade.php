@@ -1,11 +1,40 @@
 @extends('layouts.app')
 @section('content')
     <meta name="csrf-token" id="token" content="{{ csrf_token() }}">
-    <div class="container-fluid">
-
+    <input type="hidden" id="user_role" value="{{ $userRole }}"/>
+    <header style="padding:2%;" class="text-center">
+        <div class="overlay"></div>
+    <div class="container">
         <div class="row justify-content-center">
-            <div class="col-md-11">
-                <div class="card">
+            <div class="col-md-12 col-lg-8 col-xl-7 mx-auto">
+                        <form method="post" class="form-horizontal" action="{{ action('NewFileController@proceedToFileTypeWithSelectedCounty') }}" id="new_file_form">
+                            <input type="hidden" name="_token" value="{{ Session::token() }}">
+                            <h3>Start a new File</h3>
+                            <div class="form-row">
+                                <div class="form-group col-4">
+                                    <select class="form-control" id="file_type_select" name="fileType">
+                                        <option value="none">Select a File Type</option>
+                                        <option value="civil">Civil Complaint</option>
+                                        <option value="ltc">Landlord Tenant-Complaint</option>
+                                        <option value="oop">Request for Order of Possession</option>
+
+                                    </select>
+                                </div>
+                                <div class="form-group col-4">
+                                    <select class="form-control" id="county_select" name="county" style="padding-bottom: 5px;">
+                                        <option value="none">Select the County</option>
+                                        @foreach ($counties as $county)
+                                            <option value="{{$county->county}}">{{$county->county}}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                                <div class="form-group col-md-3">
+                                    <button type="submit" class="btn btn-block btn-lg btn-primary">Go!</button>
+                                </div>
+                                <span id="file_type_error"></span>
+                            </div>
+                        </form>
+                    </div>
                     <div class="card-body body_container">
                         <h2 class="titles" style="text-align:center;">Current Filings</h2>
                         @if (session('status'))
@@ -19,16 +48,16 @@
                             <table class="table table-hover table-bordered eviction_table" style="width:1475px;" id="eviction_table">
                                 <thead>
                                 <tr>
+                                    <th style="width:18%;" class="text-center">Status</th>
                                     <th class="text-center">Id</th>
                                     <th>Download Status</th>
                                     <th class="text-center">Property Address</th>
-                                    <th class="text-center" style="width:80px;">Owner</th>
-                                    <th class="text-center" style="width:80px;">Tenant</th>
-                                    <th class="text-center">Status</th>
+                                    <th class="text-center" style="width:80px;">Plaintiff</th>
+                                    <th class="text-center" style="width:80px;">Defendant</th>
                                     <th class="text-center">Court Date</th>
-                                    <th class="text-center">LTC<br> Total<br> Judgement</th>
+                                    <th class="text-center">Total<br> Claim<br> Amount</th>
                                     <th class="text-center">Court Filing $</th>
-                                    <th class="text-center">Completion Date</th>
+                                    <th class="text-center">Submission Date</th>
                                     <th class="text-center" style="width:100px;">Actions</th>
                                 </tr>
                                 </thead>
@@ -37,8 +66,13 @@
 
                                     <?php
                                     $ltcStatusArray = array('Created LTC',
-                                        'LTC Mailed',
                                         'LTC Submitted Online',
+                                        'LTC, to be Mailed',
+                                        'LTC Mailed',
+                                        'LTC Submitted, $$ needs del',
+                                        'LTC Submitted, $$ delivered',
+                                        'LTC Submitted, $$ & file needs DEL',
+                                        'LTC Submitted, $$ & file delivered',
                                         'Court Hearing Scheduled',
                                         'Court Hearing Extended',
                                         'Court Hearing Rescheduled',
@@ -49,14 +83,25 @@
                                         'Case Withdrawn');
 
                                     $oopStatusArray = array('Created OOP',
-                                        'OOP Mailed',
                                         'OOP Submitted Online',
+                                        'OOP, to be Mailed',
+                                        'OOP Mailed',
+                                        'OOP Submitted, $$ needs del',
+                                        'OOP Submitted, $$ delivered',
+                                        'OOP Submitted, $$ & file needs DEL',
+                                        'OOP Submitted, $$ & file delivered',
                                         'Lockout Scheduled',
                                         'Locked Out Tenant',
                                         'Paid Judgement',
                                         'Case Withdrawn');
 
                                     $civilStatusArray = array('Civil Filed Online',
+                                        'Civil, to be Mailed',
+                                        'Civil Mailed',
+                                        'Civil Submitted, $$ needs del',
+                                        'Civil Submitted, $$ delivered',
+                                        'Civil Submitted, $$ & file needs DEL',
+                                        'Civil Submitted, $$ & file delivered',
                                         'Civil Hearing Scheduled',
                                         'Civil Hearing Rescheduled',
                                         'Civil Hearing Extended',
@@ -66,19 +111,15 @@
                                 @foreach ($evictions as $eviction)
                                     <?php $propertyAddressArray = explode('-1', $eviction->property_address); ?>
                                     <tr>
-                                        <td class="text-center">{{$eviction->id}}</td>
-                                        <td class="text-center">
-                                            @if ($eviction->is_downloaded == 0)
-                                                No
+                                        <td>
+                                            @if ($eviction->status == 'LTC Submitted, $$ needs del' || $eviction->status == 'LTC Submitted, $$ & file needs DEL' || $eviction->status == 'OOP Submitted, $$ needs del' || $eviction->status == 'OOP Submitted, $$ & file needs DEL' || $eviction->status == 'Civil Submitted, $$ needs del' || $eviction->status == 'Civil Submitted, $$ & file needs DEL')
+                                                <select title="status" class="form-control status_select orange" id="status_{{$eviction->id}}">
+                                            @elseif ($eviction->status == 'LTC, to be Mailed' || $eviction->status == 'OOP, to be Mailed' || $eviction->status == 'Civil, to be Mailed')
+                                                <select title="status" class="form-control status_select yellow" id="status_{{$eviction->id}}">
                                             @else
-                                                Yes
+                                                        <select title="status" class="form-control status_select" id="status_{{$eviction->id}}">
                                             @endif
-                                        </td>
-                                        <td class="text-center">{{$propertyAddressArray[0]}} <br> {{str_replace('United States', '', $propertyAddressArray[1])}}</td>
-                                        <td class="text-center">{{$eviction->owner_name}}</td>
-                                        <td class="text-center">{{$eviction->tenant_name}}</td>
-                                        <td style="width:150px;">
-                                            <select title="status" class="form-control status_select" id="status_{{$eviction->id}}">
+
                                                 @if ($eviction->file_type == 'eviction')
                                                     @foreach ($ltcStatusArray as $status)
                                                         @if ($status == $eviction->status)
@@ -107,6 +148,18 @@
 
                                             </select>
                                         </td>
+                                        <td class="text-center">{{$eviction->id}}</td>
+                                        <td class="text-center">
+                                            @if ($eviction->is_downloaded == 0)
+                                                <span id="download_status_{{$eviction->id}}">No</span>
+                                            @else
+                                                <span id="download_status_{{$eviction->id}}">Yes</span>
+                                            @endif
+                                        </td>
+                                        <td class="text-center">{{$propertyAddressArray[0]}} <br> {{str_replace('United States', '', $propertyAddressArray[1])}}</td>
+                                        <td class="text-center">{{$eviction->owner_name}}</td>
+                                        <td class="text-center">{{$eviction->tenant_name}}</td>
+
                                         <td class="text-center">
                                             <span data-toggle="tooltip" data-placement="right" title="Set Court Date" class="calendar_tooltip">
                                                 <span id="court_date_{{$eviction->id}}_btn" data-target="#modal_set_court_date" data-toggle="modal" class="court_calendar">
@@ -179,6 +232,7 @@
                             <input type="hidden" name="filing_id" id="filing_id"/>
                             <input type="hidden" name="filing_original_name" id="filing_original_name"/>
                             <input type="hidden" name="main_filing_id" id="main_filing_id" value="" />
+                            <input type="hidden" name="is_main_file" id="is_main_file" value="" />
                             <div class="modal fade" id="modal_get_filings">
                                 <div class="modal-dialog" role="document">
                                     <div class="get_files_modal modal-content">
@@ -252,8 +306,9 @@
                             </div>
                         </div>
                     </div>
-                </div>
-            </div>
+
+
         </div>
     </div>
+    </header>
 @endsection

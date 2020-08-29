@@ -63,9 +63,6 @@ class EvictionController extends Controller
             $pdfEditor = new PDFEditController();
             $evictionData = new stdClass();
 
-            $courtAddressLine1 = $geoDetails->address_line_one;
-            $courtAddressLine2 = $geoDetails->address_line_two;
-
             $additionalRentAmt = str_replace($removeValues, '', $_POST['additional_rent_amt']);
 
             //Attorney Fees
@@ -91,8 +88,6 @@ class EvictionController extends Controller
 
             $pmName = $_POST['pm_name'];
             $ownerName = $_POST['owner_name'];
-
-
 
             if ($_POST['rented_by_val'] == 'rentedByOwner') {
                 $verifyName = $_POST['owner_name'];
@@ -199,8 +194,16 @@ class EvictionController extends Controller
             $totalFees = number_format($totalFees, 2);
 
             $plaintiffAddress = $plaintiffName .'<br>'. $plaintiffAddress1 .'<br>'. $plaintiffAddress2 .'<br>'. $plaintiffPhone;
-            $defendantAddress = $tenantName . '<br>' . $_POST['houseNum'] . ' ' . $_POST['streetName'] . ', ' . $_POST['unit_number'] .'<br> '. $_POST['town'] .', '. $_POST['state'] .' '. $_POST['zipcode'];
-            $defendantAddress2 = $_POST['houseNum'] . ' ' . $_POST['streetName'] .' '. $_POST['unit_number'] . '<br><br><span style="position:absolute; margin-top:-10px;">'. $_POST['town'] .', ' . $_POST['state'] .' '. $_POST['zipcode'];
+
+
+            //Tenant lives at incident address, do not change anything
+            if ($_POST['does_tenant_reside'] === 'tenantResides') {
+                $defendantAddress = $tenantName . '<br>' . $_POST['houseNum'] . ' ' . $_POST['streetName'] . ', ' . $_POST['incident_addit_address_detail'] .'<br> '. $_POST['town'] .', '. $_POST['state'] .' '. $_POST['zipcode'];
+                $defendantAddress2 = $_POST['houseNum'] . ' ' . $_POST['streetName'] .' '. $_POST['incident_addit_address_detail'] . '<br><br><span style="position:absolute; margin-top:-10px;">'. $_POST['town'] .', ' . $_POST['state'] .' '. $_POST['zipcode'] . '</span>';
+            } else if ($_POST['does_tenant_reside'] === 'tenantDoesNotReside') {
+                $defendantAddress = $tenantName . '<br>' . $_POST['residedHouseNum'] . ' ' . $_POST['residedStreetName'] . ', ' . $_POST['tenant_addit_address_detail'] .'<br> '. $_POST['residedTown'] .', '. $_POST['residedState'] .' '. $_POST['residedZipcode'];
+                $defendantAddress2 = $_POST['houseNum'] . ' ' . $_POST['streetName'] .' '. $_POST['incident_addit_address_detail'] . '<br><br><span style="position:absolute; margin-top:-10px;">'. $_POST['town'] .', ' . $_POST['state'] .' '. $_POST['zipcode'] . '</span>';
+            }
 
             if ($noCommaTotalFees < 2000) {
                 $filingFee = $upTo2000 + $additionalTenantFee;
@@ -286,6 +289,18 @@ class EvictionController extends Controller
             $magistrateId = str_replace('magistrate_' , '', $_POST['court_number']);
             $courtDetails = CourtDetails::where('magistrate_id', $magistrateId)->first();
             $geoDetails = GeoLocation::where('magistrate_id', $magistrateId)->first();
+            $isOnline = 0;
+
+            if ($courtDetails->online_submission == 'of') {
+                $isOnline = 1;
+                $status = 'LTC Submitted, $$ needs del';
+            } else if ($courtDetails->online_submission === 'otm' ) {
+                $status = 'LTC, to be mailed';
+            } else if ($courtDetails->online_submission === 'otp') {
+                $status = 'LTC Submitted, $$ & file needs DEL';
+            } else {
+                $status = '';
+            }
 
             $courtNumber = $courtDetails->court_number;
 
@@ -415,11 +430,7 @@ class EvictionController extends Controller
             }
 
 
-            $defendantState = $_POST['state'];
-            $defendantZipcode = $_POST['zipcode'];
-            $defendanthouseNum = $_POST['houseNum'];
-            $defendantStreetName = $_POST['streetName'];
-            $defendantTown = $_POST['town'];
+
 
             if (is_numeric($_POST['additional_rent_amt'])) {
                 $totalFees = (float)$additionalRentAmt + (float)$attorneyFees + (float)$dueRent + (float)$unjustDamages + (float)$damageAmt;
@@ -447,11 +458,41 @@ class EvictionController extends Controller
 
             $filingFee = number_format($filingFee, 2);
 
+            $defendantState = $_POST['state'];
+            $defendantZipCode = $_POST['zipcode'];
+            $defendantHouseNum = $_POST['houseNum'];
+            $defendantStreetName = $_POST['streetName'];
+            $defendantTown = $_POST['town'];
+            $reside = 'yes';
+
+
+            //Tenant lives at incident address, do not change anything
+            if ($_POST['does_tenant_reside'] === 'tenantResides') {
+                $reside = 'yes';
+                $defendantResidedState = $_POST['state'];
+                $defendantResidedZipcode = $_POST['zipcode'];
+                $defendantResidedHouseNum = $_POST['houseNum'];
+                $defendantResidedStreetName = $_POST['streetName'];
+                $defendantResidedTown = $_POST['town'];
+            } else if ($_POST['does_tenant_reside'] === 'tenantDoesNotReside') {
+                $reside = 'no';
+                $defendantResidedState = $_POST['residedState'];
+                $defendantResidedZipcode = $_POST['residedZipcode'];
+                $defendantResidedHouseNum = $_POST['residedHouseNum'];
+                $defendantResidedStreetName = $_POST['residedStreetName'];
+                $defendantResidedTown = $_POST['residedTown'];
+            }
+
+
+
+
             try {
                 $eviction = new Evictions();
-                $eviction->status = 'Created LTC';
+                $eviction->status = $status;
                 $eviction->total_judgement = $totalFees;
-                $eviction->property_address = $defendanthouseNum.' '.$defendantStreetName.'-1'.$defendantTown .',' . $defendantState.' '.$defendantZipcode;
+                $eviction->property_address = $defendantHouseNum.' '.$defendantStreetName.'-1'.$defendantTown .',' . $defendantState.' '.$defendantZipCode;
+                $eviction->is_resided = $reside;
+                $eviction->resided_address = $defendantResidedHouseNum.' '.$defendantResidedStreetName.'-1'.$defendantResidedTown .',' . $defendantResidedState.' '.$defendantResidedZipcode;
                 $eviction->tenant_name = $tenantName;
                 $eviction->court_filing_fee = $filingFee;
                 $eviction->pdf_download = 'true';
@@ -476,14 +517,14 @@ class EvictionController extends Controller
                 $eviction->lease_ended = $isLeaseEnded;
                 $eviction->is_additional_rent = $isAdditionalRent;
                 $eviction->defendant_state = $defendantState;
-                $eviction->defendant_zipcode = $defendantZipcode;
-                $eviction->defendant_house_num = $defendanthouseNum;
+                $eviction->defendant_zipcode = $defendantZipCode;
+                $eviction->defendant_house_num = $defendantHouseNum;
                 $eviction->defendant_street_name = $defendantStreetName;
                 $eviction->defendant_town = $defendantTown;
                 $eviction->filing_fee = $filingFee;
                 $eviction->is_abandoned = $isAbandoned;
                 $eviction->is_determination_request = $isDeterminationRequest;
-                $eviction->unit_num = $_POST['unit_number'];
+                $eviction->unit_num = $_POST['incident_addit_address_detail'];
                 $eviction->additional_rent_amt = $_POST['additional_rent_amt'];
                 $eviction->plantiff_name = $plantiffName;
                 $eviction->plantiff_phone = $plantiffPhone;
@@ -493,6 +534,7 @@ class EvictionController extends Controller
                 $eviction->user_id = Auth::user()->id;
                 $eviction->file_type = 'eviction';
                 $eviction->is_extra_files = $_POST['is_extra_filing'];
+                $eviction->is_online_filing = $isOnline;
 
                 $eviction->save();
 
@@ -543,7 +585,9 @@ class EvictionController extends Controller
                 try {
                     $notify = new NotificationController($courtNumber, Auth::user()->email);
                     $notify->notifyAdmin();
-                    $notify->notifyJudge();
+                    if ($isOnline === 1) {
+                        $notify->notifyJudge();
+                    }
                     $notify->notifyMaker();
                 } catch ( Exception $e) {
                     $errorMsg = new ErrorLog();

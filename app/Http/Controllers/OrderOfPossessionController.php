@@ -155,12 +155,25 @@ class OrderOfPossessionController extends Controller
     public function formulatePDF()
     {
         $mailer = new Mailer();
-        mail('andrew.gaidis@gmail.com', 'attempt', 'attempted');
-        Log::info($_POST['court_number']);
+
         try {
             $magistrateId = str_replace('magistrate_' , '', $_POST['court_number']);
             $courtDetails = CourtDetails::where('magistrate_id', $magistrateId)->first();
             $geoDetails = GeoLocation::where('magistrate_id', $magistrateId)->first();
+            $isOnline = 0;
+
+            if ($courtDetails->online_submission == 'of') {
+                $isOnline = 1;
+                $status = 'OOP Submitted, $$ needs del';
+            } else if ($courtDetails->online_submission === 'otm' ) {
+                $status = 'OOP, to be mailed';
+            } else if ($courtDetails->online_submission === 'otp') {
+                $status = 'OOP Submitted, $$ & file needs DEL';
+            } else {
+                $status = '';
+            }
+
+
 
             $courtNumber = $courtDetails->court_number;
 
@@ -249,7 +262,7 @@ class OrderOfPossessionController extends Controller
 
             try {
                 $eviction = new Evictions();
-                $eviction->status = 'Created OOP';
+                $eviction->status = $status;
                 $eviction->total_judgement = $totalFees;
                 $eviction->judgment_amount = $_POST['judgment_amount'];
                 $eviction->costs_original_lt_proceeding = $_POST['costs_original_lt_proceeding'];
@@ -284,6 +297,7 @@ class OrderOfPossessionController extends Controller
                 $eviction->pm_company_name = $_POST['other_name'];
                 $eviction->file_type = 'oop';
                 $eviction->is_extra_files = $_POST['is_extra_filing'];
+                $eviction->is_online_filing = $isOnline;
 
                 $eviction->save();
 
@@ -333,7 +347,9 @@ class OrderOfPossessionController extends Controller
 
                 $notify = new NotificationController($courtNumber, Auth::user()->email);
                 $notify->notifyAdmin();
-                $notify->notifyJudge();
+                if ($isOnline === 1) {
+                    $notify->notifyJudge();
+                }
                 $notify->notifyMaker();
 
                 Session::flash('status', 'Your OOP has been successfully made! You can see its progress in the table below.');

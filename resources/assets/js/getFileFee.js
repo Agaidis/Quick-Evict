@@ -123,7 +123,6 @@ if (document.location.href.split('/')[3] === 'get-file-fee') {
             let isFound = false;
             for (let k = 0; k < magArray.length; k++) {
                 if (google.maps.geometry.poly.containsLocation(place.geometry.location, magArray[k])) {
-                    console.log(magArray[k].areaName);
                     $('#court_number').val(magArray[k].areaName);
                     isFound = true;
                 }
@@ -144,11 +143,13 @@ if (document.location.href.split('/')[3] === 'get-file-fee') {
         });
         $('#calculate_file_fee').on('click', function() {
             let splitCourtNumber = $('#court_number').val().split('_');
+            let splitCourtNumberDisplay = splitCourtNumber[1].split('-');
+
+            $('#court_number_display').text(splitCourtNumberDisplay[0] + '-' + splitCourtNumberDisplay[1] + '-' + splitCourtNumberDisplay[2]).val(splitCourtNumberDisplay[0] + '-' + splitCourtNumberDisplay[1] + '-' + splitCourtNumberDisplay[2]);
             let userAddress = houseNum + ' ' + streetName + ' ' + town + ' ' + state + ' ' + county + ', ' + zipcode;
             let fileType = $('#file_type_select').val();
             let totalJudgment = $('#total_judgment').val();
             let numDefendants = $('#num_defendants').val();
-            console.log(numDefendants);
 
             $('.error_msgs').text('');
 
@@ -188,7 +189,9 @@ if (document.location.href.split('/')[3] === 'get-file-fee') {
                     deliveryType: $('#send_method').val()
                 },
                 success : function(data) {
-                    $('#filing_fee').val(data).text(data);
+                    $('#filing_fee').val(data['filingFee']).text(data['filingFee']);
+                    $('#distance').val(data['distance']).text(data['distance']);
+                    $('#calculated_fee').val(data['calculatedFee']).text(data['calculatedFee']);
                     console.log(data);
                 },
                 error : function(data) {

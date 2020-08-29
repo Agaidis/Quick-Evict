@@ -35,6 +35,7 @@ Route::get('/new-file', 'NewFileController@index')->middleware('auth');
 Route::post('/new-file', 'NewFileController@proceedToFileTypeWithSelectedCounty')->middleware('auth');
 Route::get('/new-file/get-court-fee', 'NewFileController@getFilingFee')->middleware('auth');
 
+
 /* Eviction Creator */
 Route::post('/new-ltc/pdf-data', 'EvictionController@formulatePDF')->middleware('auth');
 Route::post('/new-ltc/sample-pdf', 'EvictionController@showSamplePDF')->middleware('auth');
@@ -53,6 +54,7 @@ Route::get('/FAQ', 'FAQController@index');
 Route::get('/where-does-this-work', 'WhereDoesThisWorkController@index');
 Route::post('/where-does-this-work', 'WhereDoesThisWorkController@store');
 Route::get('/about-us', 'AboutUsController@index');
+
 
 /* Magistrate Creator */
 Route::get('/magistrateCreator', 'MagistrateController@index')->middleware('auth');
@@ -79,9 +81,16 @@ Route::get('/generalAdmin', 'GeneralAdminController@index')->middleware('auth');
 
 Route::post('/generalAdmin', 'GeneralAdminController@updateDrivingFee')->middleware('auth');
 
+Route::get('/getFileFee', 'GetFileFeeController@view');
+
 Route::post('get-file-fee', 'GetFileFeeController@index')->middleware('auth');
 
 Route::post('get-file-fee/fee', 'GetFileFeeController@getFilingFee')->middleware('auth');
+
+/* Fee Duplicator */
+Route::get('/feeDuplicator', 'FeeDuplicatorController@index')->middleware('auth');
+Route::get('/feeDuplicator/getMagistrates', 'FeeDuplicatorController@getSelectedCourtMagistrates')->middleware('auth');
+Route::post('/feeDuplicator', 'FeeDuplicatorController@duplicateFees')->middleware('auth');
 
 
 Route::get('command/migrate', function () {

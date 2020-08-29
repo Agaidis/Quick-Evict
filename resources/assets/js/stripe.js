@@ -10,7 +10,7 @@ if (document.location.href.split('/')[3] === 'new-file') {
     });
 // Create a Stripe client.
 
-    if (isSlateHouse.indexOf('slatehousegroup') === -1) {
+    if (isSlateHouse.indexOf('slatehousegroup') === -1 || isSlateHouse === 'erin@courtzip.com') {
         stripe = Stripe('pk_live_FProm7L9gLEjNsFLawYCp32x');
     } else {
         stripe = Stripe('pk_test_FTcQeimeSasisJpDTYgHEMTh');
@@ -57,6 +57,7 @@ if (document.location.href.split('/')[3] === 'new-file') {
 // Handle form submission.
     let form = document.getElementById('pay_sign_submit');
     form.addEventListener('click', function (event) {
+        $('#rented_by_val').val($('input[name=rented_by]:checked').val());
 
         stripe.createToken(card).then(function (result) {
             if (result.error) {

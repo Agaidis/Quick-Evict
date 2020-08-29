@@ -102,14 +102,6 @@
 .eviction_table {
     background-color:white;
 }
-body {
-    /*background: rgb(209,232,226);*/
-    /*background: radial-gradient(circle, rgba(209,232,226,1) 8%, rgba(44,53,49,1) 100%);*/
-    background: rgb(176, 176, 176);
-    background: linear-gradient(101deg, rgba(176, 176, 176, 1) 11%, rgba(72, 72, 72, 1) 100%);
-    background-attachment: fixed;
-
-}
 
 .magistrate_th {
     width:80px;
@@ -139,10 +131,8 @@ body {
     margin-top:4%;
     text-align:center;
     padding:10px 5px 10px 5px;
-    font-family: verdana;
-    background-color:#116466;
-    border-color:#116466;
-    color:#d1e8e2;
+    border: 1px solid gainsboro;
+    border-radius:2em;
 
 }
 
@@ -156,4 +146,40 @@ body {
     -webkit-border-radius: 2em;
     -moz-border-radius: 2em;
     border-radius: 2em;
+}
+
+html, body {
+    height: 100%;
+    margin: 0;
+}
+.wrapper {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.footer {
+    margin-top:10%;
+}
+.header, .footer {
+    background: silver;
+}
+.content {
+    flex: 1;
+    overflow: auto;
+    background: pink;
+}
+.form-row {
+    margin-left: 56px !important;
+}
+.bg-light {
+    background-color: #cccccc !important;
+}
+
+.orange {
+    background-color: #ee9040;
+}
+
+.yellow {
+    background-color: #eee148;
 }

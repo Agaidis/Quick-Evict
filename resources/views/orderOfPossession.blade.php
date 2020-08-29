@@ -5,15 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <div class="container-fluid">
         <div class="row justify-content-center">
-            <div class="col-md-10">
-                <div class="card">
-                    <div class="card-header"><h2>New Request for Order for Possession</h2></div>
-                    <div class="card-body">
+            <div class="col-md-12">
+                <div class="card-header"><h2>New Request for Order for Possession</h2></div>
+
                         <div class="row">
                             <div class="col-md-12">
                                 <form method="post" action="{{ action('OrderOfPossessionController@showSamplePDF') }}" enctype="multipart/form-data" id="eviction_form" target="_blank">
                                     <input type="hidden" name="_token" value="{{ Session::token() }}">
-                                    <a href="{{'new-file'}}"><button type="button" id="back_to_step_1_btn" class="btn btn-primary">Back to Step 1</button></a>
                                     <h2 style="text-align:center;" class="titles fs-subtitle">Step 2:<br> Enter the address you plan on evicting.</h2>
                                     <div class="form-group">
                                         <div class="row">
@@ -267,12 +265,11 @@
                                         </div>
                                     </div>
                                 </form>
-                            </div>
+
                         </div>
                     </div>
                 </div>
                 <div class="sending-modal"><!-- Place at bottom of page --></div>
-            </div>
         </div>
     </div>
 @endsection
