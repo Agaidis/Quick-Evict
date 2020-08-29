@@ -438,7 +438,7 @@ class EvictionController extends Controller
                     $stringAmt = strval($amount);
                     $stringAmt = str_replace('.', '', $stringAmt);
                     $integerAmt = intval($stringAmt);
-
+//
                     \Stripe\Charge::create([
                         'amount' => 100,
                         'currency' => 'usd',
