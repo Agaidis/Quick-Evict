@@ -440,7 +440,7 @@ class EvictionController extends Controller
                     $integerAmt = intval($stringAmt);
 //
                     \Stripe\Charge::create([
-                        'amount' => 100,
+                        'amount' => $integerAmt,
                         'currency' => 'usd',
                         'description' => 'CourtZip',
                         'source' => $token,

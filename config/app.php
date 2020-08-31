@@ -150,6 +150,7 @@ return [
         GoogleMaps\ServiceProvider\GoogleMapsServiceProvider::class,
         Barryvdh\DomPDF\ServiceProvider::class,
         'Laracasts\Utilities\JavaScript\JavaScriptServiceProvider',
+        Barryvdh\Debugbar\ServiceProvider::class,
         //Chumper\Zipper\ZipperServiceProvider::class,
 
         /*
