@@ -127,6 +127,7 @@ class FileStorageController extends Controller {
             $md5Name = md5_file($request->file('file')->getRealPath());
             $guessExtension = $request->file('file')->guessExtension();
             $fileAddress = $request->file('file')->getClientOriginalName() .'-' . rand() . '-' .$md5Name.'.'.$guessExtension;
+            $fileAddress = str_replace('_', ' ', $fileAddress);
             $request->file('file')->storeAs('extra_files', $fileAddress );
 
             $newFiling = new FileAddress();
