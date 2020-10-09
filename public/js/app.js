@@ -49648,6 +49648,7 @@ $(document).ready(function () {
   });
   $('#eviction_table').DataTable({
     "pagingType": "simple",
+    "pageLength": 50,
     "aaSorting": [],
     "deferRender": true,
     'processing': true,
