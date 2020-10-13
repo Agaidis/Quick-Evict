@@ -116,10 +116,19 @@ class FileStorageController extends Controller {
                 return 'success';
 
             } else if ($_POST['file_type'] === 'civil') {
+                $errorMsg = new ErrorLog();
+                $errorMsg->payload = 'Im in the right if part of it at least';
+
+                $errorMsg->save();
                 $options->setIsRemoteEnabled(true);
                 $dompdf->setOptions($options);
 
                 $pdfHtml = PDF::where('name', 'affidavit')->value('html');
+
+                $errorMsg = new ErrorLog();
+                $errorMsg->payload = $pdfHtml;
+
+                $errorMsg->save();
                 $civilFiling = CivilRelief::where('id', $_POST['main_filing_id'])->first();
 
                 $pdfHtml = $pdfEditor->createCivilReliefActPDF($pdfHtml, $civilFiling);
