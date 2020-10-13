@@ -11957,6 +11957,9 @@ form.eviction_form fieldset {
     padding:3%;
 }
 
+#tenant_input_container {
+    font-size:12px;
+}
 .property_damages_container {
     border: 1px solid gainsboro;
     border-radius:2em;

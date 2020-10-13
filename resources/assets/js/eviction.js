@@ -399,7 +399,7 @@ if (document.location.href.split('/')[3] === 'new-file') {
                         '<label class="military_label" for="is_not_military_' + i + '">I have personal knowledge that the defendant named above is not in the military service.</label><br>' +
                         '<input type="radio" class="unable_determine_military" id="unable_determine_military_' + i + '" name="tenant_military_' + i + '" value="unable determine military" />' +
                         '<label class="military_label" for="unable_determine_military_' + i + '">I am unable to determine whether the defendant named above is in the military service.</label><br>' +
-                    '<div class="tenant_explanation_div">The following facts support the above statement (explain how you know the defendant is or is not in military service, or, if unable to make a determination, the steps you took to inverstigate the defendant;s military status):</div>' +
+                    '<div class="tenant_explanation_div">The following facts support the above statement (explain how you know the defendant is or is not in military service, or, if unable to make a determination, the steps you took to investigate the defendant\'s military status):</div>' +
                     '<textarea class="form-control tenant_military_explanation" name="tenant_military_explanation_' + i + '" style="height:120px; width:70%;"></textarea><hr/>';
                 } else {
                     html += '<label class="labels" for="tenant_name_'+ i +'" >Name '+ i +'</label>' +
@@ -411,7 +411,7 @@ if (document.location.href.split('/')[3] === 'new-file') {
                         '<label class="military_label" for="is_not_military_' + i + '">I have personal knowledge that the defendant named above is not in the military service.</label><br>' +
                         '<input type="radio" class="unable_determine_military" id="unable_determine_military_' + i + '" name="tenant_military_' + i + '" value="unable determine military" />' +
                         '<label class="military_label" for="unable_determine_military_' + i + '">I am unable to determine whether the defendant named above is in the military service.</label><br>' +
-                        '<div class="tenant_explanation_div">The following facts support the above statement (explain how you know the defendant is or is not in military service, or, if unable to make a determination, the steps you took to inverstigate the defendant;s military status):</div>' +
+                        '<div class="tenant_explanation_div">The following facts support the above statement (explain how you know the defendant is or is not in military service, or, if unable to make a determination, the steps you took to investigate the defendant\'s military status):</div>' +
                         '<textarea class="form-control tenant_military_explanation" name="tenant_military_explanation_' + i + '" style="height:120px; width:70%;"></textarea><hr/>';
                 }
             }
