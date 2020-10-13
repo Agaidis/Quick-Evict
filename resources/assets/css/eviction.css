@@ -135,7 +135,7 @@ form.eviction_form fieldset {
 
 
 .is_military, .is_not_military, .unable_determine_military, .military_label {
-    margin-left:3%;
+    margin-left:1%;
 }
 
 .tenant_explanation_div, .tenant_military_explanation {
