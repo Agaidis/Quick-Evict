@@ -394,7 +394,7 @@ if (document.location.href.split('/')[3] === 'new-file') {
                         '<input class="form-control eviction_fields" placeholder="Name '+ i +'" type="text" id="tenant_name_'+ i +'" name="tenant_name[]" value="' + currentTenantObj.val() + '"/><br>' +
                         '<h5>Servicemembers Civil Relief Act Affidavit (link to website)</h5>' +
                         '<input type="radio" class="is_military" id="is_military_' + i + '" name="tenant_military_' + i + '" value="military" />' +
-                        '<label class="military_label" for="is_military_' + i + '">I have personal knowledge that the defendant named abocve is in military service.</label><br> ' +
+                        '<label class="military_label" for="is_military_' + i + '">I have personal knowledge that the defendant named above is in military service.</label><br> ' +
                         '<input type="radio" class="is_not_military" id="is_not_military_' + i + '" name="tenant_military_' + i + '" value="not military" />' +
                         '<label class="military_label" for="is_not_military_' + i + '">I have personal knowledge that the defendant named above is not in the military service.</label><br>' +
                         '<input type="radio" class="unable_determine_military" id="unable_determine_military_' + i + '" name="tenant_military_' + i + '" value="unable determine military" />' +
@@ -406,7 +406,7 @@ if (document.location.href.split('/')[3] === 'new-file') {
                         '<input class="form-control eviction_fields" placeholder="Name '+ i +'" type="text" id="tenant_name_'+ i +'" name="tenant_name[]" value=""/><br>' +
                         '<h5>Servicemembers Civil Relief Act Affidavit (link to website)</h5>' +
                         '<input type="radio" class="is_military" id="is_military_' + i + '" name="tenant_military_' + i + '" value="military" />' +
-                        '<label class="military_label" for="is_military_' + i + '">I have personal knowledge that the defendant named abocve is in military service.</label><br> ' +
+                        '<label class="military_label" for="is_military_' + i + '">I have personal knowledge that the defendant named above is in military service.</label><br> ' +
                         '<input type="radio" class="is_not_military" id="is_not_military_' + i + '" name="tenant_military_' + i + '" value="not military" />' +
                         '<label class="military_label" for="is_not_military_' + i + '">I have personal knowledge that the defendant named above is not in the military service.</label><br>' +
                         '<input type="radio" class="unable_determine_military" id="unable_determine_military_' + i + '" name="tenant_military_' + i + '" value="unable determine military" />' +
