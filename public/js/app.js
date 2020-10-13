@@ -49722,6 +49722,7 @@ $(document).ready(function () {
           fileType = 'Civil Complaint';
         }
 
+        $('#main_filing_id').val(data.mainFiling.id);
         var tableRow = '<tr>' + '<td class="text-center">' + data.mainFiling.id + '</td> ' + '<td class="text-center"><button type="submit" class="get_file btn btn-primary" id="main_file_' + data.mainFiling.id + '">' + fileType + '</button></td> ' + '</tr>';
 
         for (var i = 0; i < data.filings.length; i++) {
@@ -49796,20 +49797,18 @@ $(document).ready(function () {
   $('#filing_body').on('click', '.get_file', function () {
     var id = $(this)[0].id;
     var splitId = id.split('_');
-    var filingName = splitId[2];
+    var filingid = splitId[2];
 
     if (splitId[0] === 'main') {
-      $('#main_filing_id').val(filingName);
       $('#file_type').val('main');
     } else if (splitId[0] === 'civil') {
-      $('#main_filing_id').val(filingName);
+      $('#civil_relief_filing_id').val(filingid);
       $('#file_type').val('civil');
     } else {
-      $('#main_filing_id').val('');
       $('#file_type').val('file');
     }
 
-    $('#filing_original_name').val(filingName);
+    $('#filing_original_name').val(filingid);
   });
 });
 
