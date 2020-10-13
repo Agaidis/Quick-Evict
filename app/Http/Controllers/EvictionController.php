@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\CivilRelief;
 use App\ErrorLog;
 use App\PDF;
 use Dompdf\Dompdf;
@@ -416,6 +417,17 @@ class EvictionController extends Controller
                 $signature->signature = $_POST['signature_source'];
 
                 $signature->save();
+
+                for ($i = 1; $i <= count($_POST['tenant_name']); $i++) {
+                    $civilRelief = new CivilRelief();
+
+                    $civilRelief->name = $_POST['tenant_name'][$i - 1];
+                    $civilRelief->filing_id = $evictionId;
+                    $civilRelief->military_awareness = $_POST['tenant_military_' . $i];
+                    $civilRelief->military_description = $_POST['tenant_military_explanation_' . $i];
+
+                    $civilRelief->save();
+                }
 
                 if (isset($_POST['file_address_ids'])) {
                     foreach ($_POST['file_address_ids'] as $fileAddressId) {
