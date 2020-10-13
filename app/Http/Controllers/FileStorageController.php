@@ -117,9 +117,9 @@ class FileStorageController extends Controller {
 
             } else if ($_POST['file_type'] === 'civil') {
                 $pdfHtml = PDF::where('name', 'affidavit')->value('html');
-                $evictionData = Evictions::where('id', $_POST['main_filing_id'])->first();
+                $civilFiling = CivilRelief::where('id', $_POST['main_filing_id'])->first();
 
-                $pdfHtml = $pdfEditor->createCivilReliefActPDF($pdfHtml, $evictionData->id);
+                $pdfHtml = $pdfEditor->createCivilReliefActPDF($pdfHtml, $civilFiling);
 
 
                 $options->setIsRemoteEnabled(true);

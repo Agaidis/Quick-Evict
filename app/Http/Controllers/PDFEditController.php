@@ -104,9 +104,8 @@ class PDFEditController extends Controller
     }
 
 
-    public function createCivilReliefActPDF($pdfHtml, $filingId) {
+    public function createCivilReliefActPDF($pdfHtml, $civilFiling) {
         try {
-            $civilFiling = CivilRelief::where('id', $filingId)->first();
 
             if ($civilFiling->military_awareness === 'military') {
                 $pdfHtml = str_replace('__military-checkbox__', '<input type="checkbox" checked/>', $pdfHtml);
