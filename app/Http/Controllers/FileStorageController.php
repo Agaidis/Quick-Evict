@@ -131,6 +131,10 @@ class FileStorageController extends Controller {
                 $errorMsg->save();
                 $civilFiling = CivilRelief::where('id', $_POST['main_filing_id'])->first();
 
+                $errorMsg = new ErrorLog();
+                $errorMsg->payload = serialize($civilFiling);
+
+                $errorMsg->save();
                 $pdfHtml = $pdfEditor->createCivilReliefActPDF($pdfHtml, $civilFiling);
 
 
