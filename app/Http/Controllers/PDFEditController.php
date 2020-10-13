@@ -108,21 +108,21 @@ class PDFEditController extends Controller
     public function createCivilReliefActPDF($pdfHtml, $civilFiling) {
         try {
 
-//            if ($civilFiling->military_awareness === 'military') {
-//                $pdfHtml = str_replace('__military-checkbox__', '<input type="checkbox" checked/>', $pdfHtml);
-//                $pdfHtml = str_replace('__not-military-checkbox__', '<input type="checkbox" />', $pdfHtml);
-//                $pdfHtml = str_replace('__unable-military-checkbox__', '<input type="checkbox" />', $pdfHtml);
-//            } else if ($civilFiling->military_awareness === 'not military') {
-//                $pdfHtml = str_replace('__military-checkbox__', '<input type="checkbox" />', $pdfHtml);
-//                $pdfHtml = str_replace('__not-military-checkbox__', '<input type="checkbox" checked/>', $pdfHtml);
-//                $pdfHtml = str_replace('__unable-military-checkbox__', '<input type="checkbox" />', $pdfHtml);
-//            } else {
-//                $pdfHtml = str_replace('__military-checkbox__', '<input type="checkbox" />', $pdfHtml);
-//                $pdfHtml = str_replace('__not-military-checkbox__', '<input type="checkbox" />', $pdfHtml);
-//                $pdfHtml = str_replace('__unable-military-checkbox__', '<input type="checkbox" checked/>', $pdfHtml);
-//            }
-//
-//            $pdfHtml = str_replace('__military-description__', $civilFiling->military_description, $pdfHtml);
+            if ($civilFiling->military_awareness === 'military') {
+                $pdfHtml = str_replace('__military-checkbox__', '<input type="checkbox" checked/>', $pdfHtml);
+                $pdfHtml = str_replace('__not-military-checkbox__', '<input type="checkbox" />', $pdfHtml);
+                $pdfHtml = str_replace('__unable-military-checkbox__', '<input type="checkbox" />', $pdfHtml);
+            } else if ($civilFiling->military_awareness === 'not military') {
+                $pdfHtml = str_replace('__military-checkbox__', '<input type="checkbox" />', $pdfHtml);
+                $pdfHtml = str_replace('__not-military-checkbox__', '<input type="checkbox" checked/>', $pdfHtml);
+                $pdfHtml = str_replace('__unable-military-checkbox__', '<input type="checkbox" />', $pdfHtml);
+            } else {
+                $pdfHtml = str_replace('__military-checkbox__', '<input type="checkbox" />', $pdfHtml);
+                $pdfHtml = str_replace('__not-military-checkbox__', '<input type="checkbox" />', $pdfHtml);
+                $pdfHtml = str_replace('__unable-military-checkbox__', '<input type="checkbox" checked/>', $pdfHtml);
+            }
+
+            $pdfHtml = str_replace('__military-description__', $civilFiling->military_description, $pdfHtml);
 
 
 
