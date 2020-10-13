@@ -122,7 +122,17 @@ class PDFEditController extends Controller
                 $pdfHtml = str_replace('__unable-military-checkbox__', '<input type="checkbox" checked/>', $pdfHtml);
             }
 
+            $errorMsg = new ErrorLog();
+            $errorMsg->payload = $signature;
+
+            $errorMsg->save();
+
             $pdfHtml = str_replace('__signature__', $signature, $pdfHtml);
+
+            $errorMsg = new ErrorLog();
+            $errorMsg->payload = $pdfHtml;
+
+            $errorMsg->save();
             $pdfHtml = str_replace('__military-description__', $civilFiling->military_description, $pdfHtml);
 
 
