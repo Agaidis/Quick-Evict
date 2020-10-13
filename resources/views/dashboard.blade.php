@@ -241,6 +241,7 @@
                             <input type="hidden" name="filing_id" id="filing_id"/>
                             <input type="hidden" name="filing_original_name" id="filing_original_name"/>
                             <input type="hidden" name="main_filing_id" id="main_filing_id" value="" />
+                            <input type="hidden" name="civil_relief_filing_id" id="civil_relief_filing_id" value="" />
                             <input type="hidden" name="file_type" id="file_type" value="" />
                             <input type="hidden" name="is_main_file" id="is_main_file" value="" />
                             <div class="modal fade" id="modal_get_filings">

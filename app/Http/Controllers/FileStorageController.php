@@ -122,9 +122,11 @@ class FileStorageController extends Controller {
 
                 $pdfHtml = PDF::where('name', 'affidavit')->value('html');
 
-                $civilFiling = CivilRelief::where('id', $_POST['main_filing_id'])->first();
+                $evictionData = Evictions::where('id', $_POST['main_filing_id'])->first();
+                $civilFiling = CivilRelief::where('id', $_POST['civil_relief_filing_id'])->first();
+                $signature = Signature::where('eviction_id', $evictionData->id)->value('signature');
 
-                $pdfHtml = $pdfEditor->createCivilReliefActPDF($pdfHtml, $civilFiling);
+                $pdfHtml = $pdfEditor->createCivilReliefActPDF($pdfHtml, $civilFiling, $signature);
 
                 $dompdf->loadHtml($pdfHtml);
 

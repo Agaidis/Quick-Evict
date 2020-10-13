@@ -105,7 +105,7 @@ class PDFEditController extends Controller
     }
 
 
-    public function createCivilReliefActPDF($pdfHtml, $civilFiling) {
+    public function createCivilReliefActPDF($pdfHtml, $civilFiling, $signature) {
         try {
 
             if ($civilFiling->military_awareness === 'military') {
@@ -122,8 +122,8 @@ class PDFEditController extends Controller
                 $pdfHtml = str_replace('__unable-military-checkbox__', '<input type="checkbox" checked/>', $pdfHtml);
             }
 
+            $pdfHtml = str_replace('__signature__', $signature, $pdfHtml);
             $pdfHtml = str_replace('__military-description__', $civilFiling->military_description, $pdfHtml);
-
 
 
             return $pdfHtml;
