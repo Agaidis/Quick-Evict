@@ -49730,7 +49730,7 @@ $(document).ready(function () {
 
         for (var _i = 0; _i < data.civilReliefFilings.length; _i++) {
           var fileNum = _i + 1;
-          tableRow += '<tr>' + '<td class="text-center">' + fileNum + '</td> ' + '<td class="text-center"><button type="submit" class="get_file btn btn-primary" id="civil_relief_file_' + data.civilReliefFilings[_i].id + '">' + data.civilReliefFilings[_i].name + '</button></td> ' + '</tr>';
+          tableRow += '<tr>' + '<td class="text-center">' + fileNum + '</td> ' + '<td class="text-center"><button type="submit" class="get_file btn btn-primary" id="civil_relief_' + data.civilReliefFilings[_i].id + '">' + data.civilReliefFilings[_i].name + '</button></td> ' + '</tr>';
         }
 
         $('.get_files_title').empty().text('Filings: ');
@@ -49797,15 +49797,17 @@ $(document).ready(function () {
     var id = $(this)[0].id;
     var splitId = id.split('_');
     var filingName = splitId[2];
-    console.log(filingName);
-    console.log(splitId);
 
     if (splitId[0] === 'main') {
       $('#main_filing_id').val(filingName);
+      $('#file_type').val('main');
+    } else if (splitId[0] === 'civil') {
+      $('#main_filing_id').val(filingName);
+      $('#file_type').val('civil');
     } else {
       $('#main_filing_id').val('');
-    } //
-
+      $('#file_type').val('file');
+    }
 
     $('#filing_original_name').val(filingName);
   });
