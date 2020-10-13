@@ -150,7 +150,7 @@ $(document).ready(function () {
                     let fileNum = i + 1;
                     tableRow += '<tr>' +
                         '<td class="text-center">' + fileNum + '</td> ' +
-                        '<td class="text-center"><button type="submit" class="get_file btn btn-primary" id="civil_relief_'+data.civilReliefFilings[i].id+'">Servicemember Affidavit: ' + fileNum+ '</button></td> ' +
+                        '<td class="text-center"><button type="submit" class="get_file btn btn-primary" id="civil_relief_'+data.civilReliefFilings[i].id+'">Servicemember Affidavit: ' +  data.civilReliefFilings[i].name + '</button></td> ' +
                         '</tr>';
                 }
 
