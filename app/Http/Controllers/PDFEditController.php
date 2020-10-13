@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\CivilRelief;
 use App\ErrorLog;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class PDFEditController extends Controller
 {
@@ -105,7 +106,7 @@ class PDFEditController extends Controller
     }
 
 
-    public function createCivilReliefActPDF($pdfHtml, $civilFiling, $signature) {
+    public function createCivilReliefActPDF($pdfHtml, $civilFiling, $evictionData, $signature) {
         try {
 
             if ($civilFiling->military_awareness === 'military') {
@@ -122,17 +123,14 @@ class PDFEditController extends Controller
                 $pdfHtml = str_replace('__unable-military-checkbox__', '<input type="checkbox" checked/>', $pdfHtml);
             }
 
-            $errorMsg = new ErrorLog();
-            $errorMsg->payload = $signature;
+            $userName = DB::table('users')->where('id', $evictionData->user_id)->value('name');
 
-            $errorMsg->save();
-
+            $pdfHtml = str_replace('__plaintiff__', $evictionData->plantiff_name, $pdfHtml);
+            $pdfHtml = str_replace('__defendant__', $evictionData->tenant_name, $pdfHtml);
+            $pdfHtml = str_replace('__court__', $evictionData->court_number, $pdfHtml);
+            $pdfHtml = str_replace('__print-name__', $userName, $pdfHtml);
             $pdfHtml = str_replace('__signature__', $signature, $pdfHtml);
 
-            $errorMsg = new ErrorLog();
-            $errorMsg->payload = $pdfHtml;
-
-            $errorMsg->save();
             $pdfHtml = str_replace('__military-description__', $civilFiling->military_description, $pdfHtml);
 
 
