@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\CivilRelief;
 use Illuminate\Http\Request;
 
 class PDFEditController extends Controller
@@ -100,5 +101,37 @@ class PDFEditController extends Controller
         }
 
         return $pdfHtml;
+    }
+
+
+    public function createCivilReliefActPDF($pdfHtml, $filingId) {
+        try {
+            $civilFiling = CivilRelief::where('id', $filingId)->first();
+
+            if ($civilFiling->military_awareness === 'military') {
+                $pdfHtml = str_replace('__military-checkbox__', '<input type="checkbox" checked/>', $pdfHtml);
+                $pdfHtml = str_replace('__not-military-checkbox__', '<input type="checkbox" />', $pdfHtml);
+                $pdfHtml = str_replace('__unable-military-checkbox__', '<input type="checkbox" />', $pdfHtml);
+            } else if ($civilFiling->military_awareness === 'not military') {
+                $pdfHtml = str_replace('__military-checkbox__', '<input type="checkbox" />', $pdfHtml);
+                $pdfHtml = str_replace('__not-military-checkbox__', '<input type="checkbox" checked/>', $pdfHtml);
+                $pdfHtml = str_replace('__unable-military-checkbox__', '<input type="checkbox" />', $pdfHtml);
+            } else {
+                $pdfHtml = str_replace('__military-checkbox__', '<input type="checkbox" />', $pdfHtml);
+                $pdfHtml = str_replace('__not-military-checkbox__', '<input type="checkbox" />', $pdfHtml);
+                $pdfHtml = str_replace('__unable-military-checkbox__', '<input type="checkbox" checked/>', $pdfHtml);
+            }
+
+            $pdfHtml = str_replace('__military-description__', $civilFiling->military_description, $pdfHtml);
+
+
+
+            return $pdfHtml;
+
+
+        } catch ( \Exception $e ) {
+
+        }
+
     }
 }

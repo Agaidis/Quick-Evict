@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\CivilRelief;
 use App\CivilUnique;
 use App\Classes\Mailer;
 use Exception;
@@ -293,7 +294,7 @@ class CivilComplaintController extends Controller
             $eviction->file_type = 'civil complaint';
             $eviction->civil_delivery_type = $_POST['delivery_type'];
             $eviction->filing_fee = $filingFee;
-            $eviction->is_extra_files = $_POST['is_extra_filing'];
+            $eviction->is_extra_files = 1;
             $eviction->is_online_filing = $isOnline;
 
             $eviction->save();
@@ -305,6 +306,17 @@ class CivilComplaintController extends Controller
             $signature->signature = $_POST['signature_source'];
 
             $signature->save();
+
+            for ($i = 1; $i <= count($_POST['tenant_name']); $i++) {
+                $civilRelief = new CivilRelief();
+
+                $civilRelief->name = $_POST['tenant_name'][$i - 1];
+                $civilRelief->filing_id = $evictionId;
+                $civilRelief->military_awareness = $_POST['tenant_military_' . $i];
+                $civilRelief->military_description = $_POST['tenant_military_explanation_' . $i];
+
+                $civilRelief->save();
+            }
 
             if (isset($_POST['file_address_ids'])) {
                 foreach ($_POST['file_address_ids'] as $fileAddressId) {

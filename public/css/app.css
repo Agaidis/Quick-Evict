@@ -11935,6 +11935,13 @@ form.eviction_form fieldset {
 }
 
 
+.is_military, .is_not_military, .unable_determine_military, .military_label {
+    margin-left:3%;
+}
+
+.tenant_explanation_div, .tenant_military_explanation {
+    margin-left: 5%;
+}
 /* Eviction Containers  */
 .tenant_num_container, .civil_delivery_type_container {
     border: 1px solid gainsboro;

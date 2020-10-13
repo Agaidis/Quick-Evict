@@ -143,6 +143,16 @@ $(document).ready(function () {
                         '<td class="text-center"><button type="submit" class="get_file btn btn-primary" id="file_address_'+data.filings[i].file_address+'">' + data.filings[i].original_file_name + '</button></td> ' +
                         '</tr>';
                 }
+
+                for (let i = 0; i < data.civilReliefFilings.length; i++) {
+                    let fileNum = i + 1;
+                    tableRow += '<tr>' +
+                        '<td class="text-center">' + fileNum + '</td> ' +
+                        '<td class="text-center"><button type="submit" class="get_file btn btn-primary" id="civil_relief_'+data.civilReliefFilings[i].id+'">'+ data.civilReliefFilings[i].name +'</button></td> ' +
+                        '</tr>';
+                }
+
+
                 $('.get_files_title').empty().text('Filings: ');
                 $('#filing_body').empty().append(tableRow);
             },
@@ -217,15 +227,19 @@ $(document).ready(function () {
          let id = $(this)[0].id;
          let splitId = id.split('_');
          let filingName = splitId[2];
-         console.log(filingName);
-         console.log(splitId);
-         if (splitId[0] === 'main') {
 
+         if (splitId[0] === 'main') {
              $('#main_filing_id').val(filingName);
+             $('#file_type').val('main');
+         } else if (splitId[0] === 'civil') {
+             $('#main_filing_id').val(filingName);
+             $('#file_type').val('civil');
          } else {
              $('#main_filing_id').val('');
+             $('#file_type').val('file');
+
          }
-//
+
          $('#filing_original_name').val(filingName);
      });
 });
