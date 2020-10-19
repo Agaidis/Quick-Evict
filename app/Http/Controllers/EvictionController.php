@@ -405,7 +405,7 @@ class EvictionController extends Controller
                 $eviction->verify_name = $verifyName;
                 $eviction->user_id = Auth::user()->id;
                 $eviction->file_type = 'eviction';
-                $eviction->is_extra_files = $_POST['is_extra_filing'];
+                $eviction->is_extra_files = 1;//$_POST['is_extra_filing'];
                 $eviction->is_online_filing = $isOnline;
 
                 $eviction->save();
