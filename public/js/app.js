@@ -49731,7 +49731,7 @@ $(document).ready(function () {
 
         for (var _i = 0; _i < data.civilReliefFilings.length; _i++) {
           var fileNum = _i + 1;
-          tableRow += '<tr>' + '<td class="text-center">' + fileNum + '</td> ' + '<td class="text-center"><button type="submit" class="get_file btn btn-primary" id="civil_relief_' + data.civilReliefFilings[_i].id + '">Servicemember Affidavit: ' + data.civilReliefFilings[_i].name + '</button></td> ' + '</tr>';
+          tableRow += '<tr>' + '<td class="text-center">' + fileNum + '</td> ' + '<td class="text-center"><button type="submit" class="get_file btn btn-primary" id="civil_relief_' + data.civilReliefFilings[_i].id + '_' + data.civilReliefFilings[_i].name + '">Servicemember Affidavit: ' + data.civilReliefFilings[_i].name + '</button></td> ' + '</tr>';
         }
 
         $('.get_files_title').empty().text('Filings: ');
@@ -49802,6 +49802,7 @@ $(document).ready(function () {
     if (splitId[0] === 'main') {
       $('#file_type').val('main');
     } else if (splitId[0] === 'civil') {
+      $('#civil_relief_name').val(splitId[3]);
       $('#civil_relief_filing_id').val(filingid);
       $('#file_type').val('civil');
     } else {

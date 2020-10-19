@@ -106,7 +106,7 @@ class PDFEditController extends Controller
     }
 
 
-    public function createCivilReliefActPDF($pdfHtml, $civilFiling, $evictionData, $signature) {
+    public function createCivilReliefActPDF($pdfHtml, $civilFiling, $name, $evictionData, $signature) {
         try {
 
             if ($civilFiling->military_awareness === 'military') {
@@ -126,7 +126,7 @@ class PDFEditController extends Controller
             $userName = DB::table('users')->where('id', $evictionData->user_id)->value('name');
 
             $pdfHtml = str_replace('__plaintiff__', $evictionData->plantiff_name, $pdfHtml);
-            $pdfHtml = str_replace('__defendant__', $evictionData->tenant_name, $pdfHtml);
+            $pdfHtml = str_replace('__defendant__', $name, $pdfHtml);
             $pdfHtml = str_replace('__court__', $evictionData->court_number, $pdfHtml);
             $pdfHtml = str_replace('__print-name__', $userName, $pdfHtml);
             $pdfHtml = str_replace('__signature__', $signature, $pdfHtml);

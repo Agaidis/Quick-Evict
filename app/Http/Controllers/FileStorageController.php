@@ -124,9 +124,10 @@ class FileStorageController extends Controller {
 
                 $evictionData = Evictions::where('id', $_POST['main_filing_id'])->first();
                 $civilFiling = CivilRelief::where('id', $_POST['civil_relief_filing_id'])->first();
+                $name = $_POST['civil_relief_name'];
                 $signature = Signature::where('eviction_id', $evictionData->id)->value('signature');
 
-                $pdfHtml = $pdfEditor->createCivilReliefActPDF($pdfHtml, $civilFiling, $evictionData, $signature);
+                $pdfHtml = $pdfEditor->createCivilReliefActPDF($pdfHtml, $civilFiling, $name, $evictionData, $signature);
 
                 $dompdf->loadHtml($pdfHtml);
 
