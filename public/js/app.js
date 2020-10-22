@@ -49579,10 +49579,15 @@ if (document.location.href.split('/')[3] === 'get-file-fee') {
           deliveryType: $('#send_method').val()
         },
         success: function success(data) {
-          $('#filing_fee').val(data['filingFee']).text(data['filingFee']);
-          $('#distance').val(data['distance']).text(data['distance']);
-          $('#calculated_fee').val(data['calculatedFee']).text(data['calculatedFee']);
           console.log(data);
+
+          if (fileType !== 'oop') {
+            $('#filing_fee').val(data['filingFee']).text(data['filingFee']);
+            $('#distance').val(data['distance']).text(data['distance']);
+            $('#calculated_fee').val(data['calculatedFee']).text(data['calculatedFee']);
+          } else {
+            $('#filing_fee').val(data).text(data);
+          }
         },
         error: function error(data) {
           console.log(data);
