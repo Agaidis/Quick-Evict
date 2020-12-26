@@ -493,7 +493,7 @@ if (document.location.href.split('/')[3] === 'new-file') {
 
         function upload(img) {
             let form_data = new FormData();
-            form_data.append('file', img.files[0]);
+            form_data.append('file', img.files);
             form_data.append('csrf-token', '{{csrf_token()}}');
 
             $.ajaxSetup({
