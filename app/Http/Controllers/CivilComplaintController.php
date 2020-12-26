@@ -169,7 +169,7 @@ class CivilComplaintController extends Controller
         try {
 
             $errorMsg = new ErrorLog();
-            $errorMsg->payload = $_POST['file_address_ids'];
+            $errorMsg->payload = serialize($_POST['file_address_ids']);
             $errorMsg->save();
 
 
