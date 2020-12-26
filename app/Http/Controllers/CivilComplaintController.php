@@ -168,6 +168,11 @@ class CivilComplaintController extends Controller
         $mailer = new Mailer();
         try {
 
+            $errorMsg = new ErrorLog();
+            $errorMsg->payload = $_POST['file_address_ids'];
+            $errorMsg->save();
+
+
             $removeValues = [' ', '$', ','];
             $magistrateId = str_replace('magistrate_' , '', $_POST['court_number']);
             $courtDetails = CourtDetails::where('magistrate_id', $magistrateId)->first();
