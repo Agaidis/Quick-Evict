@@ -484,20 +484,17 @@ if (document.location.href.split('/')[3] === 'new-file') {
             });
         });
 
-        $('.files').on('change', function() {
+        $('.file').on('change', function() {
+            console.log($(this));
             if ($(this).val() !== '') {
-                let name = $(this)[0].name;
-                console.log(name);
-                upload(name, this);
+                upload(this);
             }
         });
 
-        function upload(name, img) {
+        function upload(img) {
             let form_data = new FormData();
-            form_data.append(name, img.files);
+            form_data.append('file', img.files[0]);
             form_data.append('csrf-token', '{{csrf_token()}}');
-
-            console.log(form_data);
 
             $.ajaxSetup({
                 headers: {

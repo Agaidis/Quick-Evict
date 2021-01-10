@@ -125,8 +125,9 @@
                                     <div class="row">
                                         <h3 class="major_labels">Add File Attachment <span style="font-size:16px;"class="fa fa-question-circle" data-placement="right" data-toggle="tooltip" title="For example, if you are an attorney, you can upload your Entry of Appearance."></span></h3><br>
                                         <div class="col-md-12" id="file_container">
-                                            <input type="file" name="file1" class="files"><br><br>
-                                            <input type="file" name="file2" class="files">
+                                            <input type="file" name="file" class="file"><br><br>
+                                            <input type="file" name="file2" class="file"><br><br>
+                                            <input type="file" name="file3" class="file">
                                             <input type="hidden" name="file_addresses[]" id="file_addresses"/>
                                             <input type="hidden" name="is_extra_filing" id="is_extra_filing" value="0"/>
                                         </div>

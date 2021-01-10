@@ -158,10 +158,6 @@ class FileStorageController extends Controller {
 
     public function storeFile (Request $request) {
         try {
-            $errorMsg = new ErrorLog();
-            $errorMsg->payload = serialize($_POST);
-            $errorMsg->save();
-
             $md5Name = md5_file($request->file('file')->getRealPath());
             $guessExtension = $request->file('file')->guessExtension();
             $fileAddress = $request->file('file')->getClientOriginalName() .'-' . rand() . '-' .$md5Name.'.'.$guessExtension;
