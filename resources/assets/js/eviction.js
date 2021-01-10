@@ -514,6 +514,7 @@ if (document.location.href.split('/')[3] === 'new-file') {
                 contentType: false,
                 processData: false,
                 success: function (data) {
+                    console.log(data);
                     if (data !== '') {
                         $('#is_extra_filing').val(1);
                         $('#file_container').append($('<input type="hidden" name="file_address_ids[]" id="file_address_ids" value="'+data+'"/>'));
