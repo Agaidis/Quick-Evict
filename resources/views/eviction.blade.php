@@ -253,7 +253,7 @@
                                 <div class="row">
                                     <h3 class="major_labels">Add File Attachment</h3><br>
                                     <div class="col-md-12" id="file_container">
-                                        <input type="file" name="file" id="file"><br><br>
+                                        <input type="file" name="file" class="file"><br><br>
                                         <input type="file" name="file2" class="file"><br><br>
                                         <input type="file" name="file3" class="file">
                                         <input type="hidden" name="file_addresses[]" id="file_addresses"/>
