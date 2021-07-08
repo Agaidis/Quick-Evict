@@ -36,12 +36,7 @@
                                                     <h4 class="address_display_div"><b>Address</b>: <span id="display_address"></span></h4>
                                                 </div>
                                             </div>
-                                            <div class="row">
-                                                <div class="col-sm-3">
-                                                    <label class="labels" for="zipcode">Verify Zipcode: </label>
-                                                    <input type="text" class="form-control eviction_fields" placeholder="07753" id="zipcode" name="zipcode" maxlength="12"/>
-                                                </div>
-                                            </div>
+                                            <input type="hidden" id="zipcode" name="zipcode"/>
                                             <div class="row">
                                                 <div class="col-sm-4">
                                                     <label class="labels" for="unit_number">Additional Address Detail</label>
@@ -67,7 +62,7 @@
                                                 <div class="col-sm-6">
                                                     <div class="labels">Property Owner</div>
                                                     <input checked type="radio" id="rented_by_owner" value="rentedByOwner" name="rented_by">
-                                                    <label for="rented_by_owner">Owner self-filing this request</label><br>
+                                                    <label for="rented_by_owner">Owner self-filing</label><br>
                                                     <div id="rented_by_owner_div">
                                                         <div class="col-sm-8">
                                                             <label class="labels">Owner Address Line 1</label>
@@ -127,7 +122,7 @@
                                                         <div class="col-sm-8 tenant_num_container">
                                                             <div class="col-sm-6">
                                                                 <label for="tenant_num_select" class="labels">Number of Tenants</label>
-                                                                <span class="fa fa-question-circle" data-placement="right" data-toggle="tooltip" title="Select the number of tenants that are present, and put 1 name for each field that appears."></span>
+                                                                <span class="fa fa-question-circle" data-placement="right" data-toggle="tooltip" title="Select the Number of Tenants, and put 1 name in each field that appears."></span>
                                                                 <select class="form-control" id="tenant_num_select">
                                                                     <option value="" selected disabled>Select # of Tenants</option>
                                                                     <option value="1">1</option>
@@ -249,6 +244,17 @@
                                             </div>
                                         </div>
 
+                                    <div class="form-group filing_form_div">
+                                        <div class="row">
+                                            <h3 class="major_labels">Add File Attachment</h3><br>
+                                            <div class="col-md-12" id="file_container">
+                                                <input type="file" name="file" id="file">
+                                                <input type="hidden" name="file_addresses[]" id="file_addresses"/>
+                                                <input type="hidden" name="is_extra_filing" id="is_extra_filing" value="0"/>
+                                            </div>
+                                        </div>
+                                    </div>
+
                                     <div class="form-group">
                                         <div class="row">
                                             <div class="offset-4 col-sm-10">
@@ -277,6 +283,7 @@
                                     <input type="hidden" id="court_number" name="court_number"/>
                                     <input type="hidden" id="user_email" name="user_email" value="{{$userEmail}}"/>
                                     <input type="hidden" id="total_input" name="total"/>
+                                    <input type="hidden" name="distance_fee" id="distance_fee" />
                                 </div>
                             </form>
 
@@ -312,6 +319,7 @@
                                                     <h3 class="titles payment_title">Step 5:<br> Payment Information</h3>
                                                     <div class="price_ctr col-md-6">
                                                         <label>Court Filing Fee: $</label><span id="filing_fee_display"></span><br>
+                                                        <span id="distance_fee_container"><label>Calculated Distance Fee: $</label><span id="distance_fee_display"></span><br></span>
                                                         <label>CourtZip Filing Fee: </label><span> $16.99</span><br>
                                                         <label>Total: $</label><span id="total"></span>
 

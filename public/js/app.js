@@ -42914,6 +42914,7 @@ if (document.location.href.split('/')[3] === 'new-file') {
 
       if (isFound === false) {
         alert('Address is either in a different county or outside all zones. Please go back to step 1 and verify you selected the right county.');
+        alert('Address is either in a different county or outside all zones. Please go back to step 1 and verify you selected the right county.');
         $('.zipcode_div').css('display', 'none');
         $('.unit_number_div').css('display', 'none');
         $('.filing_form_div').css('display', 'none');
@@ -43076,6 +43077,9 @@ if (document.location.href.split('/')[3] === 'new-file') {
     var totalJudgment = '';
     var deliveryType = '';
     $('#finalize_document').on('click', function () {
+      var userAddress = houseNum + ' ' + streetName + ' ' + town + ' ' + 'PA ' + county + ', ' + zipcode;
+      console.log(userAddress);
+
       if ($('#file_type').val() === 'civil') {
         totalJudgment = $('#total_judgment').val();
         deliveryType = $("input[name=delivery_type]:checked").val();
@@ -43098,19 +43102,86 @@ if (document.location.href.split('/')[3] === 'new-file') {
           'damage_amt': $('#damage_amt').val(),
           'tenant_num': $('#tenant_num').val(),
           'total_judgment': totalJudgment,
-          'delivery_type': deliveryType
+          'delivery_type': deliveryType,
+          'userAddress': userAddress
         },
         success: function success(data) {
-          $('#filing_fee_display').text(data);
-          var total = 16.99 + parseFloat(data);
+          console.log(data);
+          var total = '';
+
+          if (data['calculatedFee'] !== '') {
+            total = 16.99 + parseFloat(data['filingFee']) + parseFloat(data['calculatedFee']);
+            $('#distance_fee_display').text(data['calculatedFee']);
+            $('#distance_fee').val(data['calculatedFee']);
+            $('#distance_fee_container').css('display', 'initial');
+          } else {
+            total = 16.99 + parseFloat(data['filingFee']);
+            $('#distance_fee_container').css('display', 'none');
+          }
+
+          $('#filing_fee_display').text(data['filingFee']);
           $('#total').text(total.toFixed(2));
           $('#total_input').val(total.toFixed(2));
         },
-        error: function error(data) {}
+        error: function error(data) {
+          console.log(data);
+        }
       });
     });
+    $('#file').on('change', function () {
+      console.log($(this));
+
+      if ($(this).val() !== '') {
+        upload(this);
+      }
+    });
+
+    function upload(img) {
+      var form_data = new FormData();
+      form_data.append('file', img.files[0]);
+      form_data.append('csrf-token', '{{csrf_token()}}');
+      $.ajaxSetup({
+        headers: {
+          'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+      });
+      $.ajax({
+        beforeSend: function beforeSend(xhr) {
+          xhr.setRequestHeader('X-CSRF-TOKEN', $("#token").attr('content'));
+        },
+        url: '/file-upload',
+        data: form_data,
+        type: 'POST',
+        contentType: false,
+        processData: false,
+        success: function success(data) {
+          if (data !== '') {
+            $('#is_extra_filing').val(1);
+            $('#file_container').append($('<input type="hidden" name="file_address_ids[]" id="file_address_ids" value="' + data + '"/>'));
+          }
+        },
+        error: function error(xhr, status, _error) {
+          console.log(_error);
+          console.log(status);
+        }
+      });
+    }
   });
 }
+
+/***/ }),
+
+/***/ "./resources/assets/js/generalAdmin.js":
+/*!*********************************************!*\
+  !*** ./resources/assets/js/generalAdmin.js ***!
+  \*********************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+/**
+ * Created by andrew on 10/8/18.
+ */
+$(document).ready(function () {});
 
 /***/ }),
 
@@ -43197,10 +43268,52 @@ $(document).ready(function () {
       });
     } else {}
   }).on('click', '.pdf_download_btn_dashboard', function () {
-    console.log('this is it' + $(this)[0].id);
+    var id = $(this)[0].id;
+    var splitId = id.split('_');
+    console.log(splitId);
+    $('#download_id').val(splitId[2]);
+  }).on('click', '.get_filings', function () {
     var id = $(this)[0].id;
     var splitId = id.split('_');
     $('#download_id').val(splitId[2]);
+    $.ajaxSetup({
+      headers: {
+        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+      }
+    });
+    $.ajax({
+      beforeSend: function beforeSend(xhr) {
+        xhr.setRequestHeader('X-CSRF-TOKEN', $("#token").attr('content'));
+      },
+      type: "POST",
+      url: '/get-filings',
+      data: {
+        id: splitId[2]
+      },
+      success: function success(data) {
+        var fileType = '';
+
+        if (data.mainFiling.file_type === 'oop') {
+          fileType = 'Order of Possession';
+        } else if (data.mainFiling.file_type === 'ltc') {
+          fileType = 'Eviction';
+        } else {
+          fileType = 'Civil Complaint';
+        }
+
+        var tableRow = '<tr>' + '<td class="text-center">' + data.mainFiling.id + '</td> ' + '<td class="text-center"><button type="submit" class="get_file btn btn-primary" id="main_file_' + data.mainFiling.id + '">' + fileType + '</button></td> ' + '</tr>';
+
+        for (var i = 0; i < data.filings.length; i++) {
+          tableRow += '<tr>' + '<td class="text-center">' + data.filings[i].id + '</td> ' + '<td class="text-center"><button type="submit" class="get_file btn btn-primary" id="file_address_' + data.filings[i].file_address + '">' + data.filings[i].original_file_name + '</button></td> ' + '</tr>';
+        }
+
+        $('.get_files_title').empty().text('Filings: ');
+        $('#filing_body').empty().append(tableRow);
+      },
+      error: function error(data) {
+        console.log(data);
+      }
+    });
   }).on('change', '.status_select', function () {
     var id = $(this)[0].id;
     var splitId = id.split('_');
@@ -43253,6 +43366,18 @@ $(document).ready(function () {
         console.log(data);
       }
     });
+  });
+  $('#filing_body').on('click', '.get_file', function () {
+    var id = $(this)[0].id;
+    var splitId = id.split('_');
+    var filingName = splitId[2];
+
+    if (splitId[0] === 'main') {
+      console.log(splitId);
+      $('#main_filing_id').val(filingName);
+    }
+
+    $('#filing_original_name').val(filingName);
   });
 });
 
@@ -43474,6 +43599,7 @@ if (!this.JSON) {
  * Created by andrew on 10/8/18.
  */
 $(document).ready(function () {
+  //      DIGITAL SIGNATURE
   $('#digital_signature').val(1);
   $('#is_digital_signature_allowed').on('change', function () {
     if (document.getElementById("is_digital_signature_allowed").checked == true) {
@@ -43485,6 +43611,22 @@ $(document).ready(function () {
   $('#edit_is_digital_signature_allowed').on('change', function () {
     $('#edit_digital_signature').val(document.getElementById("edit_is_digital_signature_allowed").checked);
   });
+  /*              END DIGITAL SIGNATURE           */
+  //      DRIVING FEE
+
+  $('#driving_fee').val(0);
+  $('#is_driving_fee_allowed').on('change', function () {
+    if (document.getElementById("is_driving_fee_allowed").checked == true) {
+      $('#driving_fee').val(1);
+    } else {
+      $('#driving_fee').val(0);
+    }
+  });
+  $('#edit_is_driving_fee_allowed').on('change', function () {
+    $('#edit_driving_fee').val(document.getElementById("edit_is_driving_fee_allowed").checked);
+  });
+  /*              END DRIVING FEE         */
+
   $('#magistrate_table').DataTable({
     "pagingType": "simple",
     "aaSorting": []
@@ -43493,7 +43635,7 @@ $(document).ready(function () {
     var splitId = id.split('_');
     var conf = confirm('Are you sure you want to Delete ' + splitId[2]);
 
-    if (conf == true) {
+    if (conf === true) {
       var magistrateId = splitId[2];
       $.ajax({
         beforeSend: function beforeSend(xhr) {
@@ -43507,13 +43649,13 @@ $(document).ready(function () {
         },
         success: function success(data) {
           console.log(data);
-          location.reload();
         },
         error: function error(data) {
           console.log(data);
         }
       });
-    } else {}
+      location.reload();
+    }
   }).on('click', '.magistrate-edit', function () {
     var id = $(this)[0].id;
     var splitId = id.split('_');
@@ -43535,6 +43677,7 @@ $(document).ready(function () {
       },
       success: function success(data) {
         console.log(data);
+        console.log(data[1].oop_additional_tenant_fee);
         $('#db_geo_id').val(data[0][0].id);
         $('#db_court_id').val(data[1].id);
         $('#edit_court_id').val(data[1].court_number);
@@ -43560,6 +43703,9 @@ $(document).ready(function () {
         $('#edit_additional_tenants').val(data[1].additional_tenant);
         $('#edit_geo_locations').val(data[0][0].geo_locations);
         $('#edit_online_submission').val(data[1].online_submission);
+        $('#edit_oop_additional_tenant_fee').val(data[1].oop_additional_tenant_fee);
+        $('#edit_civil_mail_additional_tenant_fee').val(data[1].civil_mail_additional_tenant_fee);
+        $('#edit_civil_constable_additional_tenant_fee').val(data[1].civil_constable_additional_tenant_fee);
 
         if (data[2] !== 'empty') {
           console.log('im in here');
@@ -43602,6 +43748,10 @@ $(document).ready(function () {
 
         if (data[1].digital_signature == 1) {
           $('#edit_is_digital_signature_allowed').prop('checked', true);
+        }
+
+        if (data[1].is_distance_fee == 1) {
+          $('#edit_is_driving_fee_allowed').prop('checked', true);
         }
       },
       error: function error(data) {
@@ -43650,6 +43800,12 @@ $(document).ready(function () {
       $('#edit_digital_signature').val(0);
     }
 
+    if (document.getElementById("edit_is_driving_fee_allowed").checked == true) {
+      $('#edit_driving_fee').val(1);
+    } else {
+      $('#edit_driving_fee').val(0);
+    }
+
     $.ajax({
       beforeSend: function beforeSend(xhr) {
         xhr.setRequestHeader('X-CSRF-TOKEN', $("#token").attr('content'));
@@ -43682,8 +43838,12 @@ $(document).ready(function () {
         threeOver4000: $('#edit_three_over_4000').val(),
         threeOOP: $('#edit_three_oop').val(),
         additionalTenant: $('#edit_additional_tenants').val(),
+        oopAdditionalTenant: $('#edit_oop_additional_tenant_fee').val(),
+        civilMailedAdditionalTenant: $('#edit_civil_mail_additional_tenant_fee').val(),
+        civilConstableAdditionalTenant: $('#edit_civil_constable_additional_tenant_fee').val(),
         geoLocations: $('#edit_geo_locations').val(),
         digitalSignature: $('#edit_digital_signature').val(),
+        drivingFee: $('#edit_driving_fee').val(),
         onlineSubmission: $('#edit_online_submission').val(),
         oneUnder500Mailed: $('#edit_one_under_500_mailed').val(),
         oneBtn500And2000: $('#edit_one_btn_500_2000_mailed').val(),
@@ -50291,9 +50451,9 @@ $(document).ready(function () {
 /***/ }),
 
 /***/ 0:
-/*!**************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** multi ./resources/assets/js/bootstrap.js ./resources/assets/js/json2.min.js ./resources/assets/js/timepicker.min.js ./resources/assets/js/datepicker-ui.min.js ./resources/assets/js/eviction.js ./resources/assets/js/datatables.min.js ./resources/assets/js/magistrateCreator.js ./resources/assets/js/userManagement.js ./resources/assets/js/numeric-1.2.6.min.js ./resources/assets/js/bezier.js ./resources/assets/js/signaturepad.js ./resources/assets/js/bootstrap-timepicker.min.js ./resources/assets/js/home.js ./resources/assets/js/newFile.js ./resources/assets/js/stripe.js ./resources/assets/sass/app.scss ***!
-  \**************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
+/*!****************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** multi ./resources/assets/js/bootstrap.js ./resources/assets/js/json2.min.js ./resources/assets/js/timepicker.min.js ./resources/assets/js/datepicker-ui.min.js ./resources/assets/js/eviction.js ./resources/assets/js/datatables.min.js ./resources/assets/js/magistrateCreator.js ./resources/assets/js/userManagement.js ./resources/assets/js/numeric-1.2.6.min.js ./resources/assets/js/bezier.js ./resources/assets/js/signaturepad.js ./resources/assets/js/bootstrap-timepicker.min.js ./resources/assets/js/home.js ./resources/assets/js/newFile.js ./resources/assets/js/stripe.js ./resources/assets/js/generalAdmin.js ./resources/assets/sass/app.scss ***!
+  \****************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -50312,6 +50472,7 @@ __webpack_require__(/*! /Users/andrewgaidis/projects/Quick-Evict/resources/asset
 __webpack_require__(/*! /Users/andrewgaidis/projects/Quick-Evict/resources/assets/js/home.js */"./resources/assets/js/home.js");
 __webpack_require__(/*! /Users/andrewgaidis/projects/Quick-Evict/resources/assets/js/newFile.js */"./resources/assets/js/newFile.js");
 __webpack_require__(/*! /Users/andrewgaidis/projects/Quick-Evict/resources/assets/js/stripe.js */"./resources/assets/js/stripe.js");
+__webpack_require__(/*! /Users/andrewgaidis/projects/Quick-Evict/resources/assets/js/generalAdmin.js */"./resources/assets/js/generalAdmin.js");
 module.exports = __webpack_require__(/*! /Users/andrewgaidis/projects/Quick-Evict/resources/assets/sass/app.scss */"./resources/assets/sass/app.scss");
 
 

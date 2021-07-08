@@ -62,7 +62,11 @@ class MagistrateController extends Controller
                 $courtDetails->three_defendant_greater_than_4000 = $request->three_over_4000;
                 $courtDetails->three_defendant_out_of_pocket = $request->three_oop;
                 $courtDetails->additional_tenant = $request->additional_tenants;
+                $courtDetails->oop_additional_tenant_fee = $request->oop_additional_tenant_fee;
+                $courtDetails->civil_mail_additional_tenant_fee = $request->civil_mail_additional_tenant_fee;
+                $courtDetails->civil_constable_additional_tenant_fee = $request->civil_constable_additional_tenant_fee;
                 $courtDetails->digital_signature = $request->digital_signature;
+                $courtDetails->is_distance_fee = $request->driving_fee;
                 $courtDetails->online_submission = $request->online_submission;
 
                 $courtDetails->mdj_name = $request->mdj_name;
@@ -191,7 +195,11 @@ class MagistrateController extends Controller
                 $courtDetails->three_defendant_greater_than_4000 = $request->threeOver4000;
                 $courtDetails->three_defendant_out_of_pocket = $request->threeOOP;
                 $courtDetails->additional_tenant = $request->additionalTenant;
+                $courtDetails->oop_additional_tenant_fee = $request->oopAdditionalTenant;
+                $courtDetails->civil_mail_additional_tenant_fee = $request->civilMailedAdditionalTenant;
+                $courtDetails->civil_constable_additional_tenant_fee = $request->civilConstableAdditionalTenant;
                 $courtDetails->digital_signature = $request->digitalSignature;
+                $courtDetails->is_distance_fee = $request->drivingFee;
                 $courtDetails->online_submission = $request->onlineSubmission;
                 $courtDetails->save();
 
@@ -267,10 +275,14 @@ class MagistrateController extends Controller
 
     public function delete(Request $request) {
         try {
-            $dbId = CourtDetails::where('magistrate_id', $request->id)->value('id');
-            CourtDetails::destroy($dbId);
+            $courtDetailsId = CourtDetails::where('magistrate_id', $request->id)->value('id');
+            $civilUniqueId = CivilUnique::where('court_details_id', $courtDetailsId)->value('id');
             $dbId = GeoLocation::where('magistrate_id', $request->id)->value('id');
+
+            CivilUnique::destroy($civilUniqueId);
             GeoLocation::destroy($dbId);
+            CourtDetails::destroy($courtDetailsId);
+
             return $dbId;
         } catch (\Exception $e) {
             $errorMsg = new ErrorLog();

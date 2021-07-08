@@ -9,7 +9,7 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'Eviction Tech') }}</title>
+    <title>{{ config('app.name', 'CourtZip') }}</title>
     <link rel="icon" href="https://quickevict.nyc3.digitaloceanspaces.com/ziplogo.png"/>
 
     <!-- Scripts -->
@@ -18,6 +18,15 @@
 
     <script>
         let environmentPath = '{!! env('APP_URL') !!}';
+    </script>
+
+    <script type="text/javascript">
+        function initMap(srcLocation, dstLocation){
+            srcLocation = new google.maps.LatLng(19.075984, 72.877656);
+            dstLocation = new google.maps.LatLng(12.971599, 77.594563);
+            var distance = google.maps.geometry.spherical.computeDistanceBetween(srcLocation, dstLocation)
+            console.log(distance/1000); // Distance in Kms.
+        }
     </script>
 
 
@@ -77,6 +86,7 @@
                             <div style="margin-left:-15px;" class="dropdown-menu" aria-labelledby="navbarDropdown">
                                 @if (Auth::user()->role == 'Administrator')
                                 <a class="dropdown-item" href="{{ url('magistrateCreator') }}" id="magistrate_btn">Magistrate Creator</a>
+                                    <a class="dropdown-item" href="{{ url('generalAdmin') }}" id="admin_btn">General Admin</a>
                                     <a class="dropdown-item" href="{{ url('userManagement') }}" id="user_management_btn">Manage Users</a>
                                 @endif
                                 <a class="dropdown-item" href="{{ route('logout') }}"
@@ -96,7 +106,7 @@
         <div class="row">
             <div id="new_filing_container" class="offset-4 col-md-4">
                 <div class="button_panel">
-                    @if (request()->path() != 'new-file' && request()->path() != 'login' && request()->path() != 'register')
+                    @if (request()->path() != 'new-file' && request()->path() != 'login' && request()->path() != 'register' && request()->path() != 'generalAdmin' && request()->path() != 'magistrateCreator' && request()->path() != 'userManagement')
                         <a href="{{ url('new-file') }}"><button type="button" class="btn btn-primary" id="new_file_btn">Start a new File</button></a><br>
                     @endif
                 </div>
