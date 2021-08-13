@@ -331,7 +331,7 @@ class CivilComplaintController extends Controller
             try {
                 $token = $_POST['stripeToken'];
 
-                if (strpos(Auth::user()->email, 'slatehousegroup') === false) {
+                if (strpos(Auth::user()->email, 'slatehousegroup') === false && strpos(Auth::user()->email, 'home365.co') === false) {
                     Stripe::setApiKey(env('STRIPE_SECRET_KEY'));
                     $amount = $filingFee + 16.99;
                 } else {
