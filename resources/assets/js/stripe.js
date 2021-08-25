@@ -15,7 +15,7 @@ if (document.location.href.split('/')[3] === 'new-file') {
     } else {
         stripe = Stripe('pk_test_FTcQeimeSasisJpDTYgHEMTh');
     }
-
+//
 
 // Create an instance of Elements.
     let elements = stripe.elements();
