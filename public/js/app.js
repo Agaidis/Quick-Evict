@@ -49041,7 +49041,7 @@ if (document.location.href.split('/')[3] === 'new-file') {
               $('#finalize_document').css('display', 'none');
             }
 
-            var validEmails = ['brc@saxtonstump.com', 'tiffanymitchell0202@gmail.com', 'sparkleclean85@gmail.com', 'andrew.gaidis@gmail.com', 'erin@courtzip.com'];
+            var validEmails = ['brc@saxtonstump.com', 'tiffanymitchell0202@gmail.com', 'sparkleclean85@gmail.com', 'andrew.gaidis@gmail.com', 'erin@courtzip.com', 'andrew@home365.co'];
 
             if (data[0].online_submission !== 'of' && quickEvict.userEmail.indexOf('slatehousegroup') === -1 && validEmails.includes(quickEvict.userEmail) === false) {
               alert('Sorry, but this magistrate is currently not accepting online submissions');
@@ -59294,11 +59294,12 @@ if (document.location.href.split('/')[3] === 'new-file') {
     signaturePad.clear();
   }); // Create a Stripe client.
 
-  if (isSlateHouse.indexOf('slatehousegroup') === -1 || isSlateHouse === 'erin@courtzip.com') {
+  if (isSlateHouse.indexOf('slatehousegroup') === -1 || isSlateHouse.indexOf('home365') === -1 || isSlateHouse === 'erin@courtzip.com') {
     stripe = Stripe('pk_live_FProm7L9gLEjNsFLawYCp32x');
   } else {
     stripe = Stripe('pk_test_FTcQeimeSasisJpDTYgHEMTh');
-  } // Create an instance of Elements.
+  } //
+  // Create an instance of Elements.
 
 
   var elements = stripe.elements(); // Custom styling can be passed to options when creating an Element.
