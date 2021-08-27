@@ -49043,7 +49043,7 @@ if (document.location.href.split('/')[3] === 'new-file') {
 
             var validEmails = ['brc@saxtonstump.com', 'tiffanymitchell0202@gmail.com', 'sparkleclean85@gmail.com', 'andrew.gaidis@gmail.com', 'erin@courtzip.com', 'andrew@home365.co'];
 
-            if (data[0].online_submission !== 'of' && quickEvict.userEmail.indexOf('slatehousegroup') === -1 && validEmails.includes(quickEvict.userEmail) === false) {
+            if (data[0].online_submission !== 'of' && quickEvict.userEmail.indexOf('slatehousegroup') === -1 && quickEvict.userEmail.indexOf('home365.co') === -1 && validEmails.includes(quickEvict.userEmail) === false) {
               alert('Sorry, but this magistrate is currently not accepting online submissions');
               window.location.replace("/dashboard");
             }
