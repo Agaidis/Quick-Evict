@@ -48912,6 +48912,7 @@ if (document.location.href.split('/')[3] === 'new-file') {
     var count = 0;
     $.each(quickEvict.geoData, function (key, value) {
       magId = 'magistrate_' + value.magistrate_id;
+      console.log(value.magistrate_id);
       var geoPoints = value.geo_locations.replace(/\s/g, '').replace(/},/g, '},dd').split(',dd');
       var obj = [];
 
