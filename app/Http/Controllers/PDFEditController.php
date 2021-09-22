@@ -128,7 +128,7 @@ class PDFEditController extends Controller
             $pdfHtml = str_replace('__plaintiff__', $evictionData->plantiff_name, $pdfHtml);
             $pdfHtml = str_replace('__defendant__', $name, $pdfHtml);
             $pdfHtml = str_replace('__court__', $evictionData->court_number, $pdfHtml);
-            $pdfHtml = str_replace('__print-name__', $userName, $pdfHtml);
+            $pdfHtml = str_replace('__print-name__', $evictionData->verify_name, $pdfHtml);
             $pdfHtml = str_replace('__signature__', $signature, $pdfHtml);
 
             $pdfHtml = str_replace('__military-description__', $civilFiling->military_description, $pdfHtml);
