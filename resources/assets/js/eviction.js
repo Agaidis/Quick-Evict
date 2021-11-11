@@ -154,8 +154,8 @@ if (document.location.href.split('/')[3] === 'new-file') {
             county = place.address_components[3].long_name;
             state = place.address_components[4].short_name;
 
-            if (place.address_components[6] !== null) {
-                if (place.address_components[6].short_name !== null) {
+            if (place.address_components[6] !== undefined) {
+                if (place.address_components[6].short_name !== undefined) {
                     zipcode = place.address_components[7].long_name;
                 } else {
                     zipcode = place.address_components[6].long_name;
