@@ -140,7 +140,15 @@ if (document.location.href.split('/')[3] === 'new-file') {
                 window.alert("Returned place contains no geometry");
                 return;
             }
-            console.log(place.address_components.toString())
+            console.log(place.address_components[0]);
+            console.log(place.address_components[1]);
+            console.log(place.address_components[2]);
+            console.log(place.address_components[3]);
+            console.log(place.address_components[4]);
+            console.log(place.address_components[5]);
+            console.log(place.address_components[6]);
+            console.log(place.address_components[7]);
+
 
             houseNum = place.address_components[0].long_name;
             streetName = place.address_components[1].long_name;
