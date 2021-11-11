@@ -48976,6 +48976,7 @@ if (document.location.href.split('/')[3] === 'new-file') {
         return;
       }
 
+      console.log(place.address_components.toString());
       houseNum = place.address_components[0].long_name;
       streetName = place.address_components[1].long_name;
 
