@@ -157,7 +157,11 @@ if (document.location.href.split('/')[3] === 'new-file') {
             console.log('Here are the place Components:', place.address_components);
             if (place.address_components[6] !== undefined) {
                 if (place.address_components[6].short_name !== undefined) {
-                    zipcode = place.address_components[7].long_name;
+                    if (place.address_components[7].long_name === undefined) {
+                        zipcode = place.address_components[6].long_name;
+                    } else {
+                        zipcode = place.address_components[6].long_name;
+                    }
                 } else {
                     zipcode = place.address_components[6].long_name;
                 }
