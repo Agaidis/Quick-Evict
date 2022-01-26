@@ -48987,6 +48987,7 @@ if (document.location.href.split('/')[3] === 'new-file') {
 
       county = place.address_components[3].long_name;
       state = place.address_components[4].short_name;
+      console.log('Here are the place Components:', place.address_components);
 
       if (place.address_components[6] !== undefined) {
         if (place.address_components[6].short_name !== undefined) {
