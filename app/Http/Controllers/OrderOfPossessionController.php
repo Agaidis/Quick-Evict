@@ -322,10 +322,10 @@ class OrderOfPossessionController extends Controller
 
                     if (strpos(Auth::user()->email, 'slatehousegroup') === false && strpos(Auth::user()->email, 'home365.co') === false) {
                         Stripe::setApiKey(env('STRIPE_SECRET_KEY'));
-                        $amount = $filingFee + 16.99;
+                        $amount = $filingFee + 17.99;
                     } else {
                         Stripe::setApiKey(env('STRIPE_SECRET_TEST_KEY'));
-                        $amount = $filingFee + 16.99;
+                        $amount = $filingFee + 17.99;
                     }
                     $stringAmt = strval($amount);
                     $stringAmt = str_replace('.', '', $stringAmt);

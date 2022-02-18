@@ -220,7 +220,7 @@ if (document.location.href.split('/')[3] === 'new-file') {
                         }
                          let validEmails = ['brc@saxtonstump.com', 'tiffanymitchell0202@gmail.com', 'sparkleclean85@gmail.com', 'andrew.gaidis@gmail.com', 'erin@courtzip.com', 'andrew@home365.co'];
 
-                        if (data[0].online_submission !== 'of' && ((quickEvict.userEmail.indexOf('slatehousegroup') === -1) && (quickEvict.userEmail.indexOf('home365.co') === -1) && validEmails.includes(quickEvict.userEmail) === false)) {
+                        if (data[0].online_submission !== 'of' && ((quickEvict.userEmail.indexOf('slatehousegroup') === -1) && (quickEvict.userEmail.indexOf('home365.co') === -1 && quickEvict.userEmail.indexOf('cnmhousingsolutions') === -1) && validEmails.includes(quickEvict.userEmail) === false)) {
                             alert('Sorry, but this magistrate is currently not accepting online submissions');
                             window.location.replace("/dashboard");
                         }
@@ -478,12 +478,12 @@ if (document.location.href.split('/')[3] === 'new-file') {
                     let total = '';
 
                     if (data['calculatedFee'] !== '' ) {
-                        total = 16.99 + parseFloat(data['filingFee']) + parseFloat(data['calculatedFee']);
+                        total = 17.99 + parseFloat(data['filingFee']) + parseFloat(data['calculatedFee']);
                         $('#distance_fee_display').text(data['calculatedFee']);
                         $('#distance_fee').val(data['calculatedFee']);
                         $('#distance_fee_container').css('display', 'initial');
                     } else {
-                        total = 16.99 + parseFloat(data['filingFee']);
+                        total = 17.99 + parseFloat(data['filingFee']);
                         $('#distance_fee_container').css('display', 'none');
                     }
 
