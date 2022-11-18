@@ -161,7 +161,7 @@
                                         </td>
                                         <td class="text-center">{{$eviction->id}}</td>
                                         @if (Auth::user()->role == 'PM Company Leader' || Auth::user()->role == 'Administrator')
-                                        <td class="text-center">{{$evictions->name}}</td>
+                                        <td class="text-center">{{$eviction->name}}</td>
                                         @endif
                                         <td class="text-center">{{$eviction->court_number}}</td>
                                         <td class="text-center">
