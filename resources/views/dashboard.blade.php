@@ -50,6 +50,9 @@
                                 <tr>
                                     <th style="width:18%;" class="text-center">Status</th>
                                     <th class="text-center">Id</th>
+                                    @if (Auth::user()->role == 'PM Company Leader' || Auth::user()->role == 'Administrator')
+                                    <th class="text-center">User</th>
+                                    @endif
                                     <th class="text-center" style="width:55px;">MDJ</th>
                                     <th>Download Status</th>
                                     <th class="text-center">Property Address</th>
@@ -157,6 +160,9 @@
                                             </select>
                                         </td>
                                         <td class="text-center">{{$eviction->id}}</td>
+                                        @if (Auth::user()->role == 'PM Company Leader' || Auth::user()->role == 'Administrator')
+                                        <td class="text-center">{{$evictions->name}}</td>
+                                        @endif
                                         <td class="text-center">{{$eviction->court_number}}</td>
                                         <td class="text-center">
                                             @if ($eviction->is_downloaded == 0)
