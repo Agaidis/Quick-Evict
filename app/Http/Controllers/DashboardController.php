@@ -43,14 +43,29 @@ class DashboardController extends Controller
             $counties = CourtDetails::distinct()->orderBy('county')->get(['county']);
 
             if (Auth::user()->role == 'Administrator' || Auth::user()->role == 'PM Company Leader') {
-                $evictions = DB::table('evictions')->select('id', 'property_address', 'status', 'file_type', 'is_downloaded', 'owner_name', 'tenant_name', 'court_date', 'total_judgement', 'filing_fee',  'created_at', 'is_extra_files', 'court_number')->orderBy('id', 'desc')->get();
+                $evictions = DB::table('evictions')
+                    ->select('id', 'user_id', 'property_address', 'status', 'file_type', 'is_downloaded', 'owner_name', 'tenant_name', 'court_date', 'total_judgement', 'filing_fee',  'created_at', 'is_extra_files', 'court_number')
+                    ->join('users', 'evictions.user_id', '=', 'users.id')
+                    ->orderBy('evictions.id', 'desc')
+                    ->take(1)
+                    ->get();
             } else if (Auth::user()->role == 'General User') {
                 $evictions = DB::select('select id, property_address, status, file_type, is_downloaded, owner_name, tenant_name, court_date, total_judgement, filing_fee,  created_at, is_extra_files, court_number from evictions WHERE user_id = '. $userId .' ORDER BY FIELD(status, "Created LTC", "LTC Mailed", "LTC Submitted Online", "Court Hearing Scheduled", "Court Hearing Extended", "Judgement Issued in Favor of Owner", "Judgement Denied by Court", "Tenant Filed Appeal", "OOP Mailed", "OOP Submitted Online", "Paid Judgement", "Locked Out Tenant"), id DESC');
             } else if (Auth::user()->role == 'Court') {
-                $evictions = DB::table('evictions')->select('id', 'property_address', 'status', 'file_type', 'is_downloaded', 'owner_name', 'tenant_name', 'court_date', 'total_judgement', 'filing_fee',  'created_at', 'is_extra_files', 'court_number')->where('court_number', $courtNumber )->where('is_online_filing', 1)->orderBy('id', 'desc')->get();
+                $evictions = DB::table('evictions')
+                    ->select('id', 'property_address', 'status', 'file_type', 'is_downloaded', 'owner_name', 'tenant_name', 'court_date', 'total_judgement', 'filing_fee',  'created_at', 'is_extra_files', 'court_number')
+                    ->where('court_number', $courtNumber )
+                    ->where('is_online_filing', 1)
+                    ->orderBy('id', 'desc')
+                    ->get();
             } else {
                 $evictions = DB::select('select id, property_address, status, file_type, is_downloaded, owner_name, tenant_name, court_date, total_judgement, filing_fee,  created_at, is_extra_files, court_number from evictions ORDER BY FIELD(status, "Created LTC", "LTC Mailed", "LTC Submitted Online", "Court Hearing Scheduled", "Court Hearing Extended", "Judgement Issued in Favor of Owner", "Judgement Denied by Court", "Tenant Filed Appeal", "OOP Mailed", "OOP Submitted Online", "Paid Judgement", "Locked Out Tenant"), id DESC');
             }
+
+            $errorMsg = new ErrorLog();
+            $errorMsg->payload = serialize($evictions);
+
+            $errorMsg->save();
 
             return view('dashboard' , compact('evictions', 'userRole', 'counties'));
         } catch (\Exception $e) {
