@@ -44,7 +44,7 @@ class DashboardController extends Controller
 
             if (Auth::user()->role == 'Administrator' || Auth::user()->role == 'PM Company Leader') {
                 $evictions = DB::table('evictions')
-                    ->select('id', 'user_id', 'property_address', 'status', 'file_type', 'is_downloaded', 'owner_name', 'tenant_name', 'court_date', 'total_judgement', 'filing_fee',  'created_at', 'is_extra_files', 'court_number')
+                    ->select('evictions.id', 'users.id', 'user_id', 'property_address', 'status', 'file_type', 'is_downloaded', 'owner_name', 'tenant_name', 'court_date', 'total_judgement', 'filing_fee',  'created_at', 'is_extra_files', 'court_number')
                     ->join('users', 'evictions.user_id', '=', 'users.id')
                     ->orderBy('evictions.id', 'desc')
                     ->take(1)
