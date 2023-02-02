@@ -2,7 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\CivilRelief;
+use App\ErrorLog;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class PDFEditController extends Controller
 {
@@ -100,5 +103,45 @@ class PDFEditController extends Controller
         }
 
         return $pdfHtml;
+    }
+
+
+    public function createCivilReliefActPDF($pdfHtml, $civilFiling, $name, $evictionData, $signature) {
+        try {
+
+            if ($civilFiling->military_awareness === 'military') {
+                $pdfHtml = str_replace('__military-checkbox__', '<input type="checkbox" checked/>', $pdfHtml);
+                $pdfHtml = str_replace('__not-military-checkbox__', '<input type="checkbox" />', $pdfHtml);
+                $pdfHtml = str_replace('__unable-military-checkbox__', '<input type="checkbox" />', $pdfHtml);
+            } else if ($civilFiling->military_awareness === 'not military') {
+                $pdfHtml = str_replace('__military-checkbox__', '<input type="checkbox" />', $pdfHtml);
+                $pdfHtml = str_replace('__not-military-checkbox__', '<input type="checkbox" checked/>', $pdfHtml);
+                $pdfHtml = str_replace('__unable-military-checkbox__', '<input type="checkbox" />', $pdfHtml);
+            } else {
+                $pdfHtml = str_replace('__military-checkbox__', '<input type="checkbox" />', $pdfHtml);
+                $pdfHtml = str_replace('__not-military-checkbox__', '<input type="checkbox" />', $pdfHtml);
+                $pdfHtml = str_replace('__unable-military-checkbox__', '<input type="checkbox" checked/>', $pdfHtml);
+            }
+
+            $userName = DB::table('users')->where('id', $evictionData->user_id)->value('name');
+
+            $pdfHtml = str_replace('__plaintiff__', $evictionData->plantiff_name, $pdfHtml);
+            $pdfHtml = str_replace('__defendant__', $name, $pdfHtml);
+            $pdfHtml = str_replace('__court__', $evictionData->court_number, $pdfHtml);
+            $pdfHtml = str_replace('__print-name__', $evictionData->verify_name, $pdfHtml);
+            $pdfHtml = str_replace('__signature__', $signature, $pdfHtml);
+
+            $pdfHtml = str_replace('__military-description__', $civilFiling->military_description, $pdfHtml);
+
+
+            return $pdfHtml;
+
+
+        } catch ( \Exception $e ) {
+            $errorMsg = new ErrorLog();
+            $errorMsg->payload = $e->getMessage() . ' Line #: ' . $e->getLine();
+
+            $errorMsg->save();
+        }
     }
 }

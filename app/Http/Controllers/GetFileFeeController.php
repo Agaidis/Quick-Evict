@@ -182,7 +182,9 @@ class GetFileFeeController extends Controller
 
                 $filingFee = number_format($filingFee, 2);
 
-                return $filingFee;
+                $returnArray = array('filingFee' => $filingFee, 'distance' => 0, 'calculatedFee' => 0);
+
+                return $returnArray;
             } else if ($request->fileType === 'civil') {
 
                 /*                  CIVIL COMPLAINT             */

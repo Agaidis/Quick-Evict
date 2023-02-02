@@ -71,7 +71,6 @@ If you forgot your password, please click "Forgot your password"<br>
 If you have any questions or issues, please call CourtZip customer service at 717-413-6976.<br><br>
 Thank you,<br><br>
 CourtZip Customer Service Team';
-            $this->mailer->sendMail('andrew.gaidis@gmail.com', $subject, $message, $html);
             if ($judgeEmail !== '' && $judgeEmail !== null) {
                 $this->mailer->sendMail($judgeEmail,  $subject, $message, $html);
             }

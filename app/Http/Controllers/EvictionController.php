@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\CivilRelief;
 use App\ErrorLog;
 use App\PDF;
 use Dompdf\Dompdf;
@@ -36,8 +37,6 @@ class EvictionController extends Controller
     }
 
     public function delete() {
-        Log::info('Deleting an Eviction');
-        Log::info(Auth::User()->id);
         try {
             $dbId = Evictions::where('id', $_POST['id'])->value('id');
             Evictions::destroy($dbId);
@@ -55,7 +54,7 @@ class EvictionController extends Controller
         $mailer = new Mailer();
 
         try {
-            $removeValues = ['$', ','];
+            $removeValues = ['$', ',', ' '];
             $magistrateId = str_replace('magistrate_' , '', $_POST['court_number']);
             $courtDetails = CourtDetails::where('magistrate_id', $magistrateId)->first();
             $geoDetails = GeoLocation::where('magistrate_id', $magistrateId)->first();
@@ -64,30 +63,16 @@ class EvictionController extends Controller
             $evictionData = new stdClass();
 
             $additionalRentAmt = str_replace($removeValues, '', $_POST['additional_rent_amt']);
-
-            //Attorney Fees
-            $attorneyFees = $_POST['attorney_fees'];
-            $attorneyFees = str_replace($removeValues, '', $attorneyFees);
-
-            $damageAmt = $_POST['damage_amt'];
-            $damageAmt = str_replace($removeValues, '', $damageAmt);
-
-            $dueRent = $_POST['due_rent'];
-            $dueRent = str_replace($removeValues, '', $dueRent);
-
-            $securityDeposit = $_POST['security_deposit'];
-            $securityDeposit = str_replace($removeValues, '', $securityDeposit);
-
-            $monthlyRent = $_POST['monthly_rent'];
-            $monthlyRent = str_replace($removeValues, '', $monthlyRent);
-
-            $unjustDamages = $_POST['unjust_damages'];
-            $unjustDamages = str_replace($removeValues, '', $unjustDamages);
+            $attorneyFees = str_replace($removeValues, '', $_POST['attorney_fees']);
+            $damageAmt = str_replace($removeValues, '', $_POST['damage_amt']);
+            $dueRent = str_replace($removeValues, '', $_POST['due_rent']);
+            $securityDeposit = str_replace($removeValues, '', $_POST['security_deposit']);
+            $monthlyRent = str_replace($removeValues, '', $_POST['monthly_rent']);
+            $unjustDamages = str_replace($removeValues, '', $_POST['unjust_damages']);
 
             $tenantName = implode(', ', $_POST['tenant_name']);
 
             $pmName = $_POST['pm_name'];
-            $ownerName = $_POST['owner_name'];
 
             if ($_POST['rented_by_val'] == 'rentedByOwner') {
                 $verifyName = $_POST['owner_name'];
@@ -130,64 +115,18 @@ class EvictionController extends Controller
                 $additionalTenantFee = (float)$additionalTenantAmt * $multiplyBy;
             }
 
-            $isIsResidential = false;
-            $isNoQuitNotice = false;
-            $isUnsatisfiedLease = false;
-            $isBreachedConditionsLease = false;
-            $isAmtGreaterThanZero = false;
-            $isLeaseEnded = false;
-            $isAdditionalRent = false;
-            $isAbandoned = false;
-            $isDeterminationRequest = false;
+            $isIsResidential = $_POST['lease_type'] == 'isResidential' ? true : false;
+            $isNoQuitNotice = $_POST['quit_notice'] == 'no_quit_notice' ? true : false;
+            $isUnsatisfiedLease = isset($_POST['unsatisfied_lease']) ? true : false;
+            $isBreachedConditionsLease = isset($_POST['breached_conditions_lease']) ? true : false;
+            $breachedDetails = isset($_POST['breached_details']) ? $_POST['breached_details'] : '';
+            $isLeaseEnded = isset($_POST['term_lease_ended']) ? true : false;
+            $isAdditionalRent = $_POST['addit_rent'] == 'yes' ? true : false;
+            $isDeterminationRequest = isset($_POST['is_determination_request']) ? true : false;
+            $isAbandoned = isset($_POST['is_abandoned']) ? true : false;
 
-            //Lease Type
-            $leaseType = $_POST['lease_type'];
-            if ($leaseType == 'isResidential') {
-                $isIsResidential = true;
-            }
+            $totalFees = (float)$additionalRentAmt + (float)$attorneyFees + (float)$dueRent + (float)$unjustDamages + (float)$damageAmt;
 
-            //Notice Status
-            $quitNotice = $_POST['quit_notice'];
-            if ($quitNotice == 'no_quit_notice') {
-                $isNoQuitNotice = true;
-            }
-
-            //Lease Status
-            if (isset($_POST['unsatisfied_lease'])) {
-                $isUnsatisfiedLease = true;
-            }
-            if (isset($_POST['breached_conditions_lease'])) {
-                $isBreachedConditionsLease = true;
-            }
-            if (isset($_POST['breached_details'])) {
-                $breachedDetails = $_POST['breached_details'];
-            } else {
-                $breachedDetails = '';
-            }
-
-            $propertyDamageDetails = $_POST['damages_details'];
-
-            if (isset($_POST['term_lease_ended'])) {
-                $isLeaseEnded = true;
-            }
-
-            if ($_POST['addit_rent'] == 'yes') {
-                $isAdditionalRent = true;
-            }
-
-            if (isset($_POST['is_determination_request'])) {
-                $isDeterminationRequest = true;
-            }
-
-            if (isset($_POST['is_abandoned'])) {
-                $isAbandoned = true;
-            }
-
-            if (is_numeric($_POST['additional_rent_amt'])) {
-                $totalFees = (float)$additionalRentAmt + (float)$attorneyFees + (float)$dueRent + (float)$unjustDamages + (float)$damageAmt;
-            } else {
-                $totalFees = (float)$attorneyFees + (float)$dueRent + (float)$unjustDamages + (float)$damageAmt;
-            }
 
             $noCommaTotalFees = str_replace(',','', $totalFees);
 
@@ -221,9 +160,8 @@ class EvictionController extends Controller
 
             $filingFee = number_format($filingFee, 2);
 
-            if ($noCommaTotalFees > 0) {
-                $isAmtGreaterThanZero = true;
-            }
+            $isAmtGreaterThanZero = $noCommaTotalFees > 0 ? true : false;
+
 
             $evictionData->id = '-1';
 
@@ -240,7 +178,7 @@ class EvictionController extends Controller
             $evictionData->security_deposit = $securityDeposit;
             $evictionData->monthly_rent = $monthlyRent;
             $evictionData->breached_details = $breachedDetails;
-            $evictionData->property_damage_details = $propertyDamageDetails;
+            $evictionData->property_damage_details = $_POST['damages_details'];
             $evictionData->verify_name = $verifyName;
             $evictionData->is_residential = $isIsResidential;
             $evictionData->is_abandoned = $isAbandoned;
@@ -285,7 +223,7 @@ class EvictionController extends Controller
     public function formulatePDF() {
         $mailer = new Mailer();
         try {
-            $removeValues = ['$', ','];
+            $removeValues = ['$', ',', ' '];
             $magistrateId = str_replace('magistrate_' , '', $_POST['court_number']);
             $courtDetails = CourtDetails::where('magistrate_id', $magistrateId)->first();
             $geoDetails = GeoLocation::where('magistrate_id', $magistrateId)->first();
@@ -308,32 +246,17 @@ class EvictionController extends Controller
             $courtAddressLine2 = $geoDetails->address_line_two;
 
             $additionalRentAmt = str_replace($removeValues, '', $_POST['additional_rent_amt']);
-
-            //Attorney Fees
-            $attorneyFees = $_POST['attorney_fees'];
-            $attorneyFees = str_replace($removeValues, '', $attorneyFees);
-
-            $damageAmt = $_POST['damage_amt'];
-            $damageAmt = str_replace($removeValues, '', $damageAmt);
-
-            $dueRent = $_POST['due_rent'];
-            $dueRent = str_replace($removeValues, '', $dueRent);
-
-            $securityDeposit = $_POST['security_deposit'];
-            $securityDeposit = str_replace($removeValues, '', $securityDeposit);
-
-            $monthlyRent = $_POST['monthly_rent'];
-            $monthlyRent = str_replace($removeValues, '', $monthlyRent);
-
-            $unjustDamages = $_POST['unjust_damages'];
-            $unjustDamages = str_replace($removeValues, '', $unjustDamages);
+            $attorneyFees = str_replace($removeValues, '', $_POST['attorney_fees']);
+            $damageAmt = str_replace($removeValues, '', $_POST['damage_amt']);
+            $dueRent = str_replace($removeValues, '', $_POST['due_rent']);
+            $securityDeposit = str_replace($removeValues, '', $_POST['security_deposit']);
+            $monthlyRent = str_replace($removeValues, '', $_POST['monthly_rent']);
+            $unjustDamages = str_replace($removeValues, '', $_POST['unjust_damages']);
 
             $tenantName = implode(', ', $_POST['tenant_name']);
 
             $pmName = $_POST['pm_name'];
             $ownerName = $_POST['owner_name'];
-
-
 
             if ($_POST['rented_by_val'] == 'rentedByOwner') {
                 $verifyName = $_POST['owner_name'];
@@ -376,67 +299,18 @@ class EvictionController extends Controller
                 $additionalTenantFee = (float)$additionalTenantAmt * $multiplyBy;
             }
 
-            $isIsResidential = false;
-            $isNoQuitNotice = false;
-            $isUnsatisfiedLease = false;
-            $isBreachedConditionsLease = false;
-            $isAmtGreaterThanZero = false;
-            $isLeaseEnded = false;
-            $isAdditionalRent = false;
-            $isAbandoned = false;
-            $isDeterminationRequest = false;
+            $isIsResidential = $_POST['lease_type'] == 'isResidential' ? true : false;
+            $isNoQuitNotice = $_POST['quit_notice'] == 'no_quit_notice' ? true : false;
+            $isUnsatisfiedLease = isset($_POST['unsatisfied_lease']) ? true : false;
+            $isBreachedConditionsLease = isset($_POST['breached_conditions_lease']) ? true : false;
+            $breachedDetails = isset($_POST['breached_details']) ? $_POST['breached_details'] : '';
+            $isLeaseEnded = isset($_POST['term_lease_ended']) ? true : false;
+            $isAdditionalRent = $_POST['addit_rent'] == 'yes' ? true : false;
+            $isDeterminationRequest = isset($_POST['is_determination_request']) ? true : false;
+            $isAbandoned = isset($_POST['is_abandoned']) ? true : false;
 
-            //Lease Type
-            $leaseType = $_POST['lease_type'];
-            if ($leaseType == 'isResidential') {
-                $isIsResidential = true;
-            }
+            $totalFees = (float)$additionalRentAmt + (float)$attorneyFees + (float)$dueRent + (float)$unjustDamages + (float)$damageAmt;
 
-            //Notice Status
-            $quitNotice = $_POST['quit_notice'];
-            if ($quitNotice == 'no_quit_notice') {
-                $isNoQuitNotice = true;
-            }
-
-            //Lease Status
-            if (isset($_POST['unsatisfied_lease'])) {
-                $isUnsatisfiedLease = true;
-            }
-            if (isset($_POST['breached_conditions_lease'])) {
-                $isBreachedConditionsLease = true;
-            }
-            if (isset($_POST['breached_details'])) {
-                $breachedDetails = $_POST['breached_details'];
-            } else {
-                $breachedDetails = '';
-            }
-
-            $propertyDamageDetails = $_POST['damages_details'];
-
-            if (isset($_POST['term_lease_ended'])) {
-                $isLeaseEnded = true;
-            }
-
-            if ($_POST['addit_rent'] == 'yes') {
-                $isAdditionalRent = true;
-            }
-
-            if (isset($_POST['is_determination_request'])) {
-                $isDeterminationRequest = true;
-            }
-
-            if (isset($_POST['is_abandoned'])) {
-                $isAbandoned = true;
-            }
-
-
-
-
-            if (is_numeric($_POST['additional_rent_amt'])) {
-                $totalFees = (float)$additionalRentAmt + (float)$attorneyFees + (float)$dueRent + (float)$unjustDamages + (float)$damageAmt;
-            } else {
-                $totalFees = (float)$attorneyFees + (float)$dueRent + (float)$unjustDamages + (float)$damageAmt;
-            }
 
             $noCommaTotalFees = str_replace(',','', $totalFees);
 
@@ -452,9 +326,7 @@ class EvictionController extends Controller
                 $filingFee = 'Didnt Work';
             }
 
-            if ($noCommaTotalFees > 0) {
-                $isAmtGreaterThanZero = true;
-            }
+            $isAmtGreaterThanZero = $noCommaTotalFees > 0 ? true : false;
 
             $filingFee = number_format($filingFee, 2);
 
@@ -508,7 +380,7 @@ class EvictionController extends Controller
                 $eviction->monthly_rent = $monthlyRent;
                 $eviction->unjust_damages = $unjustDamages;
                 $eviction->breached_details = $breachedDetails;
-                $eviction->property_damage_details = $propertyDamageDetails;
+                $eviction->property_damage_details = $_POST['damages_details'];
                 $eviction->is_residential = $isIsResidential;
                 $eviction->no_quit_notice = $isNoQuitNotice;
                 $eviction->unsatisfied_lease = $isUnsatisfiedLease;
@@ -533,7 +405,7 @@ class EvictionController extends Controller
                 $eviction->verify_name = $verifyName;
                 $eviction->user_id = Auth::user()->id;
                 $eviction->file_type = 'eviction';
-                $eviction->is_extra_files = $_POST['is_extra_filing'];
+                $eviction->is_extra_files = 1;//$_POST['is_extra_filing'];
                 $eviction->is_online_filing = $isOnline;
 
                 $eviction->save();
@@ -546,6 +418,17 @@ class EvictionController extends Controller
 
                 $signature->save();
 
+                for ($i = 1; $i <= count($_POST['tenant_name']); $i++) {
+                    $civilRelief = new CivilRelief();
+
+                    $civilRelief->name = $_POST['tenant_name'][$i - 1];
+                    $civilRelief->filing_id = $evictionId;
+                    $civilRelief->military_awareness = $_POST['tenant_military_' . $i];
+                    $civilRelief->military_description = $_POST['tenant_military_explanation_' . $i];
+
+                    $civilRelief->save();
+                }
+
                 if (isset($_POST['file_address_ids'])) {
                     foreach ($_POST['file_address_ids'] as $fileAddressId) {
                         DB::table('file_addresses')
@@ -557,17 +440,17 @@ class EvictionController extends Controller
                 try {
                     $token = $_POST['stripeToken'];
 
-                    if (strpos(Auth::user()->email, 'slatehousegroup') === false) {
+                    if (strpos(Auth::user()->email, 'slatehousegroup') === false && strpos(Auth::user()->email, 'home365.co') === false) {
                         Stripe::setApiKey(env('STRIPE_SECRET_KEY'));
-                        $amount = $filingFee + 16.99;
+                        $amount = $filingFee + 17.99;
                     } else {
                         Stripe::setApiKey(env('STRIPE_SECRET_TEST_KEY'));
-                        $amount = $filingFee + 16.99;
+                        $amount = $filingFee + 17.99;
                     }
                     $stringAmt = strval($amount);
                     $stringAmt = str_replace('.', '', $stringAmt);
                     $integerAmt = intval($stringAmt);
-
+//
                     \Stripe\Charge::create([
                         'amount' => $integerAmt,
                         'currency' => 'usd',

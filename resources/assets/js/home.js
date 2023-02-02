@@ -55,8 +55,14 @@ $(document).ready(function () {
 
     $('#eviction_table').DataTable( {
         "pagingType": "simple",
+        "pageLength": 50,
         "aaSorting": [],
-        "deferRender": true
+        "deferRender": true,
+        'processing': true,
+        'language': {
+            'loadingRecords': '&nbsp;',
+            'processing': '<i class="fa fa-spinner fa-spin fa-3x fa-fw"></i><span class="sr-only">Loading...</span>'
+        },
     }).on('click', '.eviction-remove', function () {
         var id = $(this)[0].id;
         var splitId = id.split('_');
@@ -127,6 +133,8 @@ $(document).ready(function () {
                      fileType = 'Civil Complaint';
                 }
 
+                $('#main_filing_id').val(data.mainFiling.id);
+
                 let tableRow = '<tr>' +
                     '<td class="text-center">' + data.mainFiling.id + '</td> ' +
                     '<td class="text-center"><button type="submit" class="get_file btn btn-primary" id="main_file_'+data.mainFiling.id+'">' + fileType + '</button></td> ' +
@@ -137,6 +145,16 @@ $(document).ready(function () {
                         '<td class="text-center"><button type="submit" class="get_file btn btn-primary" id="file_address_'+data.filings[i].file_address+'">' + data.filings[i].original_file_name + '</button></td> ' +
                         '</tr>';
                 }
+
+                for (let i = 0; i < data.civilReliefFilings.length; i++) {
+                    let fileNum = i + 1;
+                    tableRow += '<tr>' +
+                        '<td class="text-center">' + fileNum + '</td> ' +
+                        '<td class="text-center"><button type="submit" class="get_file btn btn-primary" id="civil_relief_'+data.civilReliefFilings[i].id+'_'+data.civilReliefFilings[i].name+'">Servicemember Affidavit: ' +  data.civilReliefFilings[i].name + '</button></td> ' +
+                        '</tr>';
+                }
+
+
                 $('.get_files_title').empty().text('Filings: ');
                 $('#filing_body').empty().append(tableRow);
             },
@@ -210,16 +228,18 @@ $(document).ready(function () {
      $('#filing_body').on('click', '.get_file', function() {
          let id = $(this)[0].id;
          let splitId = id.split('_');
-         let filingName = splitId[2];
-         console.log(filingName);
-         console.log(splitId);
-         if (splitId[0] === 'main') {
+         let filingid = splitId[2];
 
-             $('#main_filing_id').val(filingName);
+         if (splitId[0] === 'main') {
+             $('#file_type').val('main');
+         } else if (splitId[0] === 'civil') {
+             $('#civil_relief_name').val(splitId[3]);
+             $('#civil_relief_filing_id').val(filingid);
+             $('#file_type').val('civil');
          } else {
-             $('#main_filing_id').val('');
+             $('#file_type').val('file');
          }
-//
-         $('#filing_original_name').val(filingName);
+
+         $('#filing_original_name').val(filingid);
      });
 });

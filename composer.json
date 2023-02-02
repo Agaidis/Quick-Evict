@@ -17,16 +17,17 @@
         "fideloper/proxy": "^4.0",
         "kriswallsmith/buzz": "^1.0",
         "laracasts/utilities": "^3.0",
-        "laravel/cashier": "^9.0.1",
-        "laravel/framework": "^5.8.0",
+        "laravel/cashier": "^10.0",
+        "laravel/framework": "^5.8",
         "laravel/tinker": "^1.0",
         "league/flysystem-aws-s3-v3": "^1.0",
         "mailgun/mailgun-php": "^2.8",
         "nyholm/psr7": "^1.2",
-        "sociallydev/spaces-api": "dev-master"
+        "sociallydev/spaces-api": "dev-master",
+        "stripe/stripe-php": "^7.5"
     },
     "require-dev": {
-        "barryvdh/laravel-debugbar": "^3.3",
+        "barryvdh/laravel-debugbar": "^3.4",
         "filp/whoops": "^2.0",
         "fzaninotto/faker": "^1.4",
         "mockery/mockery": "^1.0",

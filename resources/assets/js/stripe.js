@@ -10,12 +10,12 @@ if (document.location.href.split('/')[3] === 'new-file') {
     });
 // Create a Stripe client.
 
-    if (isSlateHouse.indexOf('slatehousegroup') === -1 || isSlateHouse === 'erin@courtzip.com') {
+    if ((isSlateHouse.indexOf('slatehousegroup') === -1 && isSlateHouse.indexOf('home365') === -1) || isSlateHouse === 'erin@courtzip.com') {
         stripe = Stripe('pk_live_FProm7L9gLEjNsFLawYCp32x');
     } else {
         stripe = Stripe('pk_test_FTcQeimeSasisJpDTYgHEMTh');
     }
-
+//
 
 // Create an instance of Elements.
     let elements = stripe.elements();

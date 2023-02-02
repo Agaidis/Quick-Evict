@@ -48912,6 +48912,7 @@ if (document.location.href.split('/')[3] === 'new-file') {
     var count = 0;
     $.each(quickEvict.geoData, function (key, value) {
       magId = 'magistrate_' + value.magistrate_id;
+      console.log(value.magistrate_id);
       var geoPoints = value.geo_locations.replace(/\s/g, '').replace(/},/g, '},dd').split(',dd');
       var obj = [];
 
@@ -48986,11 +48987,22 @@ if (document.location.href.split('/')[3] === 'new-file') {
 
       county = place.address_components[3].long_name;
       state = place.address_components[4].short_name;
+      console.log('Here are the place Components:', place.address_components);
 
-      if (place.address_components[6].short_name === 'US') {
-        zipcode = place.address_components[7].long_name;
+      if (place.address_components[6] !== undefined) {
+        if (typeof place.address_components[6].short_name !== 'undefined') {
+          if (typeof place.address_components[7] !== 'undefined') {
+            zipcode = place.address_components[7].long_name;
+          } else {
+            zipcode = place.address_components[6].long_name;
+          }
+        } else {
+          zipcode = place.address_components[6].long_name;
+        }
       } else {
-        zipcode = place.address_components[6].long_name;
+        county = place.address_components[2].long_name;
+        state = place.address_components[3].short_name;
+        zipcode = place.address_components[5].long_name;
       }
 
       $('#state').val('PA');
@@ -49041,9 +49053,9 @@ if (document.location.href.split('/')[3] === 'new-file') {
               $('#finalize_document').css('display', 'none');
             }
 
-            var validEmails = ['brc@saxtonstump.com', 'tiffanymitchell0202@gmail.com', 'sparkleclean85@gmail.com', 'andrew.gaidis@gmail.com', 'erin@courtzip.com'];
+            var validEmails = ['brc@saxtonstump.com', 'tiffanymitchell0202@gmail.com', 'sparkleclean85@gmail.com', 'andrew.gaidis@gmail.com', 'erin@courtzip.com', 'andrew@home365.co'];
 
-            if (data[0].online_submission !== 'of' && quickEvict.userEmail.indexOf('slatehousegroup') === -1 && validEmails.includes(quickEvict.userEmail) === false) {
+            if (data[0].online_submission !== 'of' && quickEvict.userEmail.indexOf('slatehousegroup') === -1 && quickEvict.userEmail.indexOf('home365.co') === -1 && quickEvict.userEmail.indexOf('elite.team') === -1 && quickEvict.userEmail.indexOf('cnmhousingsolutions') === -1 && validEmails.includes(quickEvict.userEmail) === false) {
               alert('Sorry, but this magistrate is currently not accepting online submissions');
               window.location.replace("/dashboard");
             }
@@ -49208,9 +49220,9 @@ if (document.location.href.split('/')[3] === 'new-file') {
         var currentTenantObj = $('#tenant_name_' + i);
 
         if (currentTenantObj.length > 0) {
-          html += '<label class="labels" for="tenant_name_' + i + '" >Name ' + i + '</label><input class="form-control eviction_fields" placeholder="Name ' + i + '" type="text" id="tenant_name_' + i + '" name="tenant_name[]" value="' + currentTenantObj.val() + '"/><br>';
+          html += '<label class="labels" for="tenant_name_' + i + '" >Name ' + i + '</label>' + '<input class="form-control eviction_fields" placeholder="Name ' + i + '" type="text" id="tenant_name_' + i + '" name="tenant_name[]" value="' + currentTenantObj.val() + '"/><br>' + '<h5>Servicemembers Civil Relief Act Affidavit (link to website)</h5>' + '<input type="radio" class="is_military" id="is_military_' + i + '" name="tenant_military_' + i + '" value="military" />' + '<label class="military_label" for="is_military_' + i + '">I have personal knowledge that the defendant named above is in military service.</label><br> ' + '<input type="radio" class="is_not_military" id="is_not_military_' + i + '" name="tenant_military_' + i + '" value="not military" />' + '<label class="military_label" for="is_not_military_' + i + '">I have personal knowledge that the defendant named above is not in the military service.</label><br>' + '<input type="radio" class="unable_determine_military" id="unable_determine_military_' + i + '" name="tenant_military_' + i + '" value="unable determine military" />' + '<label class="military_label" for="unable_determine_military_' + i + '">I am unable to determine whether the defendant named above is in the military service.</label><br>' + '<div class="tenant_explanation_div">The following facts support the above statement (explain how you know the defendant is or is not in military service, or, if unable to make a determination, the steps you took to investigate the defendant\'s military status):</div>' + '<textarea class="form-control tenant_military_explanation" name="tenant_military_explanation_' + i + '" style="height:120px; width:70%;"></textarea><hr/>';
         } else {
-          html += '<label class="labels" for="tenant_name_' + i + '" >Name ' + i + '</label><input class="form-control eviction_fields" placeholder="Name ' + i + '" type="text" id="tenant_name_' + i + '" name="tenant_name[]" value=""/><br>';
+          html += '<label class="labels" for="tenant_name_' + i + '" >Name ' + i + '</label>' + '<input class="form-control eviction_fields" placeholder="Name ' + i + '" type="text" id="tenant_name_' + i + '" name="tenant_name[]" value=""/><br>' + '<h5>Servicemembers Civil Relief Act Affidavit (link to website)</h5>' + '<input type="radio" class="is_military" id="is_military_' + i + '" name="tenant_military_' + i + '" value="military" />' + '<label class="military_label" for="is_military_' + i + '">I have personal knowledge that the defendant named above is in military service.</label><br> ' + '<input type="radio" class="is_not_military" id="is_not_military_' + i + '" name="tenant_military_' + i + '" value="not military" />' + '<label class="military_label" for="is_not_military_' + i + '">I have personal knowledge that the defendant named above is not in the military service.</label><br>' + '<input type="radio" class="unable_determine_military" id="unable_determine_military_' + i + '" name="tenant_military_' + i + '" value="unable determine military" />' + '<label class="military_label" for="unable_determine_military_' + i + '">I am unable to determine whether the defendant named above is in the military service.</label><br>' + '<div class="tenant_explanation_div">The following facts support the above statement (explain how you know the defendant is or is not in military service, or, if unable to make a determination, the steps you took to investigate the defendant\'s military status):</div>' + '<textarea class="form-control tenant_military_explanation" name="tenant_military_explanation_' + i + '" style="height:120px; width:70%;"></textarea><hr/>';
         }
       }
 
@@ -49258,12 +49270,12 @@ if (document.location.href.split('/')[3] === 'new-file') {
           var total = '';
 
           if (data['calculatedFee'] !== '') {
-            total = 16.99 + parseFloat(data['filingFee']) + parseFloat(data['calculatedFee']);
+            total = 17.99 + parseFloat(data['filingFee']) + parseFloat(data['calculatedFee']);
             $('#distance_fee_display').text(data['calculatedFee']);
             $('#distance_fee').val(data['calculatedFee']);
             $('#distance_fee_container').css('display', 'initial');
           } else {
-            total = 16.99 + parseFloat(data['filingFee']);
+            total = 17.99 + parseFloat(data['filingFee']);
             $('#distance_fee_container').css('display', 'none');
           }
 
@@ -49276,7 +49288,7 @@ if (document.location.href.split('/')[3] === 'new-file') {
         }
       });
     });
-    $('#file').on('change', function () {
+    $('.file').on('change', function () {
       console.log($(this));
 
       if ($(this).val() !== '') {
@@ -49303,6 +49315,8 @@ if (document.location.href.split('/')[3] === 'new-file') {
         contentType: false,
         processData: false,
         success: function success(data) {
+          console.log(data);
+
           if (data !== '') {
             $('#is_extra_filing').val(1);
             $('#file_container').append($('<input type="hidden" name="file_address_ids[]" id="file_address_ids" value="' + data + '"/>'));
@@ -49648,8 +49662,14 @@ $(document).ready(function () {
   });
   $('#eviction_table').DataTable({
     "pagingType": "simple",
+    "pageLength": 50,
     "aaSorting": [],
-    "deferRender": true
+    "deferRender": true,
+    'processing': true,
+    'language': {
+      'loadingRecords': '&nbsp;',
+      'processing': '<i class="fa fa-spinner fa-spin fa-3x fa-fw"></i><span class="sr-only">Loading...</span>'
+    }
   }).on('click', '.eviction-remove', function () {
     var id = $(this)[0].id;
     var splitId = id.split('_');
@@ -49716,10 +49736,16 @@ $(document).ready(function () {
           fileType = 'Civil Complaint';
         }
 
+        $('#main_filing_id').val(data.mainFiling.id);
         var tableRow = '<tr>' + '<td class="text-center">' + data.mainFiling.id + '</td> ' + '<td class="text-center"><button type="submit" class="get_file btn btn-primary" id="main_file_' + data.mainFiling.id + '">' + fileType + '</button></td> ' + '</tr>';
 
         for (var i = 0; i < data.filings.length; i++) {
           tableRow += '<tr>' + '<td class="text-center">' + data.filings[i].id + '</td> ' + '<td class="text-center"><button type="submit" class="get_file btn btn-primary" id="file_address_' + data.filings[i].file_address + '">' + data.filings[i].original_file_name + '</button></td> ' + '</tr>';
+        }
+
+        for (var _i = 0; _i < data.civilReliefFilings.length; _i++) {
+          var fileNum = _i + 1;
+          tableRow += '<tr>' + '<td class="text-center">' + fileNum + '</td> ' + '<td class="text-center"><button type="submit" class="get_file btn btn-primary" id="civil_relief_' + data.civilReliefFilings[_i].id + '_' + data.civilReliefFilings[_i].name + '">Servicemember Affidavit: ' + data.civilReliefFilings[_i].name + '</button></td> ' + '</tr>';
         }
 
         $('.get_files_title').empty().text('Filings: ');
@@ -49785,18 +49811,19 @@ $(document).ready(function () {
   $('#filing_body').on('click', '.get_file', function () {
     var id = $(this)[0].id;
     var splitId = id.split('_');
-    var filingName = splitId[2];
-    console.log(filingName);
-    console.log(splitId);
+    var filingid = splitId[2];
 
     if (splitId[0] === 'main') {
-      $('#main_filing_id').val(filingName);
+      $('#file_type').val('main');
+    } else if (splitId[0] === 'civil') {
+      $('#civil_relief_name').val(splitId[3]);
+      $('#civil_relief_filing_id').val(filingid);
+      $('#file_type').val('civil');
     } else {
-      $('#main_filing_id').val('');
-    } //
+      $('#file_type').val('file');
+    }
 
-
-    $('#filing_original_name').val(filingName);
+    $('#filing_original_name').val(filingid);
   });
 });
 
@@ -59279,11 +59306,12 @@ if (document.location.href.split('/')[3] === 'new-file') {
     signaturePad.clear();
   }); // Create a Stripe client.
 
-  if (isSlateHouse.indexOf('slatehousegroup') === -1 || isSlateHouse === 'erin@courtzip.com') {
+  if (isSlateHouse.indexOf('slatehousegroup') === -1 && isSlateHouse.indexOf('home365') === -1 || isSlateHouse === 'erin@courtzip.com') {
     stripe = Stripe('pk_live_FProm7L9gLEjNsFLawYCp32x');
   } else {
     stripe = Stripe('pk_test_FTcQeimeSasisJpDTYgHEMTh');
-  } // Create an instance of Elements.
+  } //
+  // Create an instance of Elements.
 
 
   var elements = stripe.elements(); // Custom styling can be passed to options when creating an Element.

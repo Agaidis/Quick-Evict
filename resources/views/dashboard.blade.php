@@ -50,6 +50,10 @@
                                 <tr>
                                     <th style="width:18%;" class="text-center">Status</th>
                                     <th class="text-center">Id</th>
+                                    @if (Auth::user()->role == 'PM Company Leader' || Auth::user()->role == 'Administrator')
+                                    <th class="text-center">User</th>
+                                    @endif
+                                    <th class="text-center" style="width:55px;">MDJ</th>
                                     <th>Download Status</th>
                                     <th class="text-center">Property Address</th>
                                     <th class="text-center" style="width:80px;">Plaintiff</th>
@@ -77,7 +81,10 @@
                                         'Court Hearing Extended',
                                         'Court Hearing Rescheduled',
                                         'Judgement Issued in Favor of Owner',
-                                        'Judgement Denied by Court','Tenant Filed Appeal',
+                                        'Judgement Denied by Court',
+                                        'Tenant Filed Appeal',
+                                        'Waiting for Additional documents',
+                                        'Waiting for AOR',
                                         'OOP Submitted Online',
                                         'Paid Judgement',
                                         'Case Withdrawn');
@@ -90,6 +97,8 @@
                                         'OOP Submitted, $$ delivered',
                                         'OOP Submitted, $$ & file needs DEL',
                                         'OOP Submitted, $$ & file delivered',
+                                        'Waiting for Additional documents',
+                                        'Waiting for AOR',
                                         'Lockout Scheduled',
                                         'Locked Out Tenant',
                                         'Paid Judgement',
@@ -102,6 +111,8 @@
                                         'Civil Submitted, $$ delivered',
                                         'Civil Submitted, $$ & file needs DEL',
                                         'Civil Submitted, $$ & file delivered',
+                                        'Waiting for Additional documents',
+                                        'Waiting for AOR',
                                         'Civil Hearing Scheduled',
                                         'Civil Hearing Rescheduled',
                                         'Civil Hearing Extended',
@@ -149,6 +160,10 @@
                                             </select>
                                         </td>
                                         <td class="text-center">{{$eviction->id}}</td>
+                                        @if (Auth::user()->role == 'PM Company Leader' || Auth::user()->role == 'Administrator')
+                                        <td class="text-center">{{$eviction->name}}</td>
+                                        @endif
+                                        <td class="text-center">{{$eviction->court_number}}</td>
                                         <td class="text-center">
                                             @if ($eviction->is_downloaded == 0)
                                                 <span id="download_status_{{$eviction->id}}">No</span>
@@ -232,6 +247,9 @@
                             <input type="hidden" name="filing_id" id="filing_id"/>
                             <input type="hidden" name="filing_original_name" id="filing_original_name"/>
                             <input type="hidden" name="main_filing_id" id="main_filing_id" value="" />
+                            <input type="hidden" name="civil_relief_filing_id" id="civil_relief_filing_id" value="" />
+                            <input type="hidden" name="civil_relief_name" id="civil_relief_name" value="" />
+                            <input type="hidden" name="file_type" id="file_type" value="" />
                             <input type="hidden" name="is_main_file" id="is_main_file" value="" />
                             <div class="modal fade" id="modal_get_filings">
                                 <div class="modal-dialog" role="document">

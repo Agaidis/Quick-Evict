@@ -80,6 +80,7 @@ if (document.location.href.split('/')[3] === 'new-file') {
 
         $.each(quickEvict.geoData, function(key, value) {
              magId = 'magistrate_' + value.magistrate_id;
+             console.log(value.magistrate_id);
             let geoPoints = value.geo_locations.replace(/\s/g, '').replace(/},/g, '},dd').split(',dd');
             let obj = [];
 
@@ -140,6 +141,7 @@ if (document.location.href.split('/')[3] === 'new-file') {
                 return;
             }
 
+
             houseNum = place.address_components[0].long_name;
             streetName = place.address_components[1].long_name;
 
@@ -152,10 +154,22 @@ if (document.location.href.split('/')[3] === 'new-file') {
             county = place.address_components[3].long_name;
             state = place.address_components[4].short_name;
 
-            if (place.address_components[6].short_name === 'US') {
-                zipcode = place.address_components[7].long_name;
+            console.log('Here are the place Components:', place.address_components);
+            if (place.address_components[6] !== undefined) {
+                if (typeof place.address_components[6].short_name !== 'undefined') {
+                    if (typeof place.address_components[7] !== 'undefined') {
+                        zipcode = place.address_components[7].long_name;
+                    } else {
+                        zipcode = place.address_components[6].long_name;
+                    }
+                } else {
+                    zipcode = place.address_components[6].long_name;
+                }
             } else {
-                zipcode = place.address_components[6].long_name;
+                county = place.address_components[2].long_name;
+                state = place.address_components[3].short_name;
+                zipcode = place.address_components[5].long_name;
+
             }
 
             $('#state').val('PA');
@@ -204,9 +218,9 @@ if (document.location.href.split('/')[3] === 'new-file') {
                         if (data[0].digital_signature === 0) {
                             $('#finalize_document').css('display', 'none');
                         }
-                         let validEmails = ['brc@saxtonstump.com', 'tiffanymitchell0202@gmail.com', 'sparkleclean85@gmail.com', 'andrew.gaidis@gmail.com', 'erin@courtzip.com'];
+                         let validEmails = ['brc@saxtonstump.com', 'tiffanymitchell0202@gmail.com', 'sparkleclean85@gmail.com', 'andrew.gaidis@gmail.com', 'erin@courtzip.com', 'andrew@home365.co'];
 
-                        if (data[0].online_submission !== 'of' && ((quickEvict.userEmail.indexOf('slatehousegroup') === -1) && validEmails.includes(quickEvict.userEmail) === false)) {
+                        if (data[0].online_submission !== 'of' && (quickEvict.userEmail.indexOf('slatehousegroup') === -1 && (quickEvict.userEmail.indexOf('home365.co') === -1 && quickEvict.userEmail.indexOf('elite.team') === -1 && quickEvict.userEmail.indexOf('cnmhousingsolutions') === -1) && validEmails.includes(quickEvict.userEmail) === false)) {
                             alert('Sorry, but this magistrate is currently not accepting online submissions');
                             window.location.replace("/dashboard");
                         }
@@ -390,9 +404,29 @@ if (document.location.href.split('/')[3] === 'new-file') {
                 let currentTenantObj = $('#tenant_name_' + i);
 
                 if (currentTenantObj.length > 0) {
-                    html += '<label class="labels" for="tenant_name_'+ i +'" >Name '+ i +'</label><input class="form-control eviction_fields" placeholder="Name '+ i +'" type="text" id="tenant_name_'+ i +'" name="tenant_name[]" value="' + currentTenantObj.val() + '"/><br>';
+                    html += '<label class="labels" for="tenant_name_'+ i +'" >Name '+ i +'</label>' +
+                        '<input class="form-control eviction_fields" placeholder="Name '+ i +'" type="text" id="tenant_name_'+ i +'" name="tenant_name[]" value="' + currentTenantObj.val() + '"/><br>' +
+                        '<h5>Servicemembers Civil Relief Act Affidavit (link to website)</h5>' +
+                        '<input type="radio" class="is_military" id="is_military_' + i + '" name="tenant_military_' + i + '" value="military" />' +
+                        '<label class="military_label" for="is_military_' + i + '">I have personal knowledge that the defendant named above is in military service.</label><br> ' +
+                        '<input type="radio" class="is_not_military" id="is_not_military_' + i + '" name="tenant_military_' + i + '" value="not military" />' +
+                        '<label class="military_label" for="is_not_military_' + i + '">I have personal knowledge that the defendant named above is not in the military service.</label><br>' +
+                        '<input type="radio" class="unable_determine_military" id="unable_determine_military_' + i + '" name="tenant_military_' + i + '" value="unable determine military" />' +
+                        '<label class="military_label" for="unable_determine_military_' + i + '">I am unable to determine whether the defendant named above is in the military service.</label><br>' +
+                    '<div class="tenant_explanation_div">The following facts support the above statement (explain how you know the defendant is or is not in military service, or, if unable to make a determination, the steps you took to investigate the defendant\'s military status):</div>' +
+                    '<textarea class="form-control tenant_military_explanation" name="tenant_military_explanation_' + i + '" style="height:120px; width:70%;"></textarea><hr/>';
                 } else {
-                    html += '<label class="labels" for="tenant_name_'+ i +'" >Name '+ i +'</label><input class="form-control eviction_fields" placeholder="Name '+ i +'" type="text" id="tenant_name_'+ i +'" name="tenant_name[]" value=""/><br>';
+                    html += '<label class="labels" for="tenant_name_'+ i +'" >Name '+ i +'</label>' +
+                        '<input class="form-control eviction_fields" placeholder="Name '+ i +'" type="text" id="tenant_name_'+ i +'" name="tenant_name[]" value=""/><br>' +
+                        '<h5>Servicemembers Civil Relief Act Affidavit (link to website)</h5>' +
+                        '<input type="radio" class="is_military" id="is_military_' + i + '" name="tenant_military_' + i + '" value="military" />' +
+                        '<label class="military_label" for="is_military_' + i + '">I have personal knowledge that the defendant named above is in military service.</label><br> ' +
+                        '<input type="radio" class="is_not_military" id="is_not_military_' + i + '" name="tenant_military_' + i + '" value="not military" />' +
+                        '<label class="military_label" for="is_not_military_' + i + '">I have personal knowledge that the defendant named above is not in the military service.</label><br>' +
+                        '<input type="radio" class="unable_determine_military" id="unable_determine_military_' + i + '" name="tenant_military_' + i + '" value="unable determine military" />' +
+                        '<label class="military_label" for="unable_determine_military_' + i + '">I am unable to determine whether the defendant named above is in the military service.</label><br>' +
+                        '<div class="tenant_explanation_div">The following facts support the above statement (explain how you know the defendant is or is not in military service, or, if unable to make a determination, the steps you took to investigate the defendant\'s military status):</div>' +
+                        '<textarea class="form-control tenant_military_explanation" name="tenant_military_explanation_' + i + '" style="height:120px; width:70%;"></textarea><hr/>';
                 }
             }
 
@@ -444,12 +478,12 @@ if (document.location.href.split('/')[3] === 'new-file') {
                     let total = '';
 
                     if (data['calculatedFee'] !== '' ) {
-                        total = 16.99 + parseFloat(data['filingFee']) + parseFloat(data['calculatedFee']);
+                        total = 17.99 + parseFloat(data['filingFee']) + parseFloat(data['calculatedFee']);
                         $('#distance_fee_display').text(data['calculatedFee']);
                         $('#distance_fee').val(data['calculatedFee']);
                         $('#distance_fee_container').css('display', 'initial');
                     } else {
-                        total = 16.99 + parseFloat(data['filingFee']);
+                        total = 17.99 + parseFloat(data['filingFee']);
                         $('#distance_fee_container').css('display', 'none');
                     }
 
@@ -464,7 +498,7 @@ if (document.location.href.split('/')[3] === 'new-file') {
             });
         });
 
-        $('#file').on('change', function() {
+        $('.file').on('change', function() {
             console.log($(this));
             if ($(this).val() !== '') {
                 upload(this);
@@ -491,6 +525,7 @@ if (document.location.href.split('/')[3] === 'new-file') {
                 contentType: false,
                 processData: false,
                 success: function (data) {
+                    console.log(data);
                     if (data !== '') {
                         $('#is_extra_filing').val(1);
                         $('#file_container').append($('<input type="hidden" name="file_address_ids[]" id="file_address_ids" value="'+data+'"/>'));
