@@ -13,7 +13,7 @@
                     <div style="text-align:center;">The eviction process can be a confusing, time consuming, and expensive process.  CourtZip was created to simplify this process at a reasonable price.  We have built first party tech that automates much of this process and in some courts happens in real time eliminating wasted processing time in the mail.  We can simply assist in the filings or we can take it the whole way and deliver you a vacant secured property. The level of service is your choice</div>
 
                     <div style="padding:5px;">
-                    <h2 style="margin-top:3%; color: #D9B08C;">Step 1 - File the LandLord Tenant Complaint</h2>
+                    <h2 style="margin-top:3%; color: #7480bc;">Step 1 - File the LandLord Tenant Complaint</h2>
                     <div style="text-align:left;">(You can start this process for any tenant with a past due balance)</div>
 
                     <h4 style="margin-top:5%;">$25- Landlord Tenant Complaint Filing Only</h4>
@@ -28,7 +28,7 @@
                     </div>
 
                     <div style="padding:5px; margin-top:4%;">
-                    <h2 style="margin-top:3%; color: #D9B08C;">Step 2 - File the Order for Possession</h2>
+                    <h2 style="margin-top:3%; color: #7480bc;">Step 2 - File the Order for Possession</h2>
 
                     <div>(on 11th day after winning a judgment at the LT Hearing you will start this process if the tenant hasn’t paid the judgment)</div>
 
