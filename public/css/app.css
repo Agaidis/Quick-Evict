@@ -10709,7 +10709,7 @@ header.subhead{
     position:relative;
 
     background-size:cover;
-    padding-top:8rem;padding-bottom:8rem
+    padding-top:5rem;padding-bottom:8rem
 }header.subhead.overlay{
      position:absolute;
      background-color:#212529;
