@@ -12,7 +12,7 @@
                 <div>
                     <div style="text-align:center;">The eviction process can be a confusing, time consuming, and expensive process.  CourtZip was created to simplify this process at a reasonable price.  We have built first party tech that automates much of this process and in some courts happens in real time eliminating wasted processing time in the mail.  We can simply assist in the filings or we can take it the whole way and deliver you a vacant secured property. The level of service is your choice</div>
 
-                    <div style="background-color:lightgrey;">
+                    <div style="background-color:#ccccd2; border-radius: 2em;">
                     <h2 style="margin-top:3%; color: #D9B08C;">Step 1 - File the LandLord Tenant Complaint</h2>
                     <div style="text-align:left;">(You can start this process for any tenant with a past due balance)</div>
 
