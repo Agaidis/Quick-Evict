@@ -333,10 +333,10 @@ class CivilComplaintController extends Controller
 
                 if (strpos(Auth::user()->email, 'slatehousegroup') === false && strpos(Auth::user()->email, 'home365.co') === false) {
                     Stripe::setApiKey(env('STRIPE_SECRET_KEY'));
-                    $amount = $filingFee + 17.99;
+                    $amount = $filingFee + 25;
                 } else {
                     Stripe::setApiKey(env('STRIPE_SECRET_TEST_KEY'));
-                    $amount = $filingFee + 17.99;
+                    $amount = $filingFee + 25;
                 }
                 $stringAmt = strval($amount);
                 $stringAmt = str_replace('.', '', $stringAmt);

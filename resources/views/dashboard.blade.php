@@ -14,7 +14,7 @@
                                 <div class="form-group col-4">
                                     <select class="form-control" id="file_type_select" name="fileType">
                                         <option value="none">Select a File Type</option>
-                                        <option value="civil">Civil Complaint</option>
+{{--                                        <option value="civil">Civil Complaint</option>--}}
                                         <option value="ltc">Landlord Tenant-Complaint</option>
                                         <option value="oop">Request for Order of Possession</option>
 

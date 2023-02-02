@@ -49270,12 +49270,12 @@ if (document.location.href.split('/')[3] === 'new-file') {
           var total = '';
 
           if (data['calculatedFee'] !== '') {
-            total = 17.99 + parseFloat(data['filingFee']) + parseFloat(data['calculatedFee']);
+            total = 25 + parseFloat(data['filingFee']) + parseFloat(data['calculatedFee']);
             $('#distance_fee_display').text(data['calculatedFee']);
             $('#distance_fee').val(data['calculatedFee']);
             $('#distance_fee_container').css('display', 'initial');
           } else {
-            total = 17.99 + parseFloat(data['filingFee']);
+            total = 25 + parseFloat(data['filingFee']);
             $('#distance_fee_container').css('display', 'none');
           }
 

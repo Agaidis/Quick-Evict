@@ -56,7 +56,7 @@
                                         <option value="none">File type</option>
                                         <option value="ltc">Landlord Tenant-Complaint</option>
                                         <option value="oop">Request for Order of Possession</option>
-                                           <option value="civil">Civil Complaint</option>
+{{--                                           <option value="civil">Civil Complaint</option>--}}
                                     </select>
                                 </div>
                                 <div style="display:none;" class="send_method_container row col-sm-10">
