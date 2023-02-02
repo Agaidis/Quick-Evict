@@ -44,6 +44,7 @@
 
                             <div class="col-md-6">
                                 <select id="county" class="form-control{{ $errors->has('county') ? ' is-invalid' : '' }}" name="county" required>
+                                    <option value="">Select your County</option>
                                     <option value="Adams">Adams</option>
                                     <option value="Allegheny">Allegheny</option>
                                     <option value="Armstrong">Armstrong</option>
