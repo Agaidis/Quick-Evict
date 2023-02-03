@@ -23,8 +23,9 @@
                                     <select disabled class="form-control" id="file_type_select" name="fileType">
                                         <option value="none">Select a File Type</option>
                                         <option value="ltc">Landlord Tenant-Complaint</option>
+                                        <option disabled id="ltcA" value="ltcA">Landlord-Tenant Compalint, File AND Represent Plaintiff at Hearing</option>
                                         <option value="oop">Request for Order of Possession</option>
-
+                                        <option disabled id="oopA" value="oopA">Request for Order of Possession File AND attend lockout and complete lock change</option>
                                     </select>
                                 </div>
                                 <div class="form-group col-md-3">
