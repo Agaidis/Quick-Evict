@@ -43410,6 +43410,7 @@ $(document).ready(function () {
     var id = $(this)[0].id;
     var splitId = id.split('_');
     var county = splitId[4];
+    var isChecked = $('#in_person_complaint_toggle_' + county)[0].checked;
     console.log('county', county);
     $.ajaxSetup({
       headers: {
@@ -43423,7 +43424,8 @@ $(document).ready(function () {
       type: "POST",
       url: '/countyAdmin',
       data: {
-        county: county
+        county: county,
+        isChecked: isChecked
       },
       success: function success(data) {
         console.log(data);
