@@ -29,11 +29,13 @@
                                 @foreach ($counties as $county)
                                 <tr>
                                     <td style="text-align:center">{{$county->county}}</td>
+                                    <td style="text-align:center">
                                     @if ($county->is_allowed_in_person_complaint == 1)
-                                        <td style="text-align:center"><input type="checkbox" id="in_person_complaint_toggle_{{$county->county}}" class="in_person_complaint_toggle"/></td>
+                                        <input type="checkbox" id="in_person_complaint_toggle_{{$county->county}}" class="in_person_complaint_toggle"/>
                                     @else
-                                        <td style="text-align:center"><input type="checkbox" id="in_person_complaint_toggle_{{$county->county}}" class="in_person_complaint_toggle"/></td>
+                                        <input type="checkbox" id="in_person_complaint_toggle_{{$county->county}}" class="in_person_complaint_toggle"/>
                                     @endif
+                                    </td>
                                 </tr>
                                 @endforeach
                                 </tbody>
