@@ -364,9 +364,9 @@ class NewFileController extends Controller
 
             if ($fileType === 'civil') {
                 $mileage = number_format($mileage, 2) * 2;
-            } else if ($fileType === 'oop') {
+            } else if ($fileType === 'oop' || $fileType === 'oopA') {
                 $mileage = number_format($mileage, 2) * 4;
-            } else if ($fileType === 'ltc') {
+            } else if ($fileType === 'ltc' || $fileType === 'ltcA') {
                 $mileage = number_format($mileage, 2) * 2;
             }
 
