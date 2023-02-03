@@ -225,6 +225,28 @@ $(document).ready(function () {
         });
     });
 
+    $('#county_select').on('change', function() {
+        $.ajax({
+            beforeSend: function (xhr) {
+                xhr.setRequestHeader('X-CSRF-TOKEN', $("#token").attr('content'));
+            },
+            type: "GET",
+            url: '/dashboard/check-county',
+            dataType: 'json',
+            data: {
+                county: $('#county_select').val()
+            },
+
+            success: function (data) {
+
+                console.log('success', data);
+            },
+            error: function (data) {
+                console.log('error', data);
+            }
+        });
+    });
+
      $('#filing_body').on('click', '.get_file', function() {
          let id = $(this)[0].id;
          let splitId = id.split('_');

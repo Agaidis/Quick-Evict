@@ -198,6 +198,18 @@ class DashboardController extends Controller
         }
     }
 
+    public function getCountySettings(Request $request) {
+        try {
+            $isEnabled = DB::table('county_settings')->where('county', $request->county)->value('is_allowed_in_person_complaint');
+
+            return $isEnabled;
+        } catch ( Exception $e ) {
+            mail('andrew.gaidis@gmail.com', 'Error Getting File to Edit', $e->getMessage());
+            Log::info($e->getMessage());
+            return false;
+        }
+    }
+
     public function getFiles () {
         try {
 

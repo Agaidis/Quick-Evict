@@ -49850,6 +49850,25 @@ $(document).ready(function () {
       }
     });
   });
+  $('#county_select').on('change', function () {
+    $.ajax({
+      beforeSend: function beforeSend(xhr) {
+        xhr.setRequestHeader('X-CSRF-TOKEN', $("#token").attr('content'));
+      },
+      type: "GET",
+      url: '/dashboard/check-county',
+      dataType: 'json',
+      data: {
+        county: $('#county_select').val()
+      },
+      success: function success(data) {
+        console.log('success', data);
+      },
+      error: function error(data) {
+        console.log('error', data);
+      }
+    });
+  });
   $('#filing_body').on('click', '.get_file', function () {
     var id = $(this)[0].id;
     var splitId = id.split('_');
