@@ -7,6 +7,7 @@ use App\ErrorLog;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class CountyAdminController extends Controller
 {
@@ -32,6 +33,9 @@ class CountyAdminController extends Controller
 
     public function updateInPersonComplaint(Request $request) {
         try {
+            DB::table('county_settings')
+                ->where('county', $request->county)
+                ->update(['is_allowed_in_person_complaint' => 1]);
 
             $request->session()->flash('alert-success',  $request->county . ' County has been updated!');
             return 'success';
