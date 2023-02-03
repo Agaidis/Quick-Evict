@@ -34,7 +34,7 @@ class CountyAdminController extends Controller
     public function updateInPersonComplaint(Request $request) {
         try {
 
-            if ($request->isChecked === true) {
+            if ($request->isChecked === 'true') {
                 DB::table('county_settings')
                     ->where('county', $request->county)
                     ->update(['is_allowed_in_person_complaint' => 1]);
