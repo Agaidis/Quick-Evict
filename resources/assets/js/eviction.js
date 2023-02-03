@@ -478,7 +478,11 @@ if (document.location.href.split('/')[3] === 'new-file') {
                     let total = '';
 
                     if (data['calculatedFee'] !== '' ) {
+                        console.log('line 481', 'here');
+
                         if ($('#isComplaintFee').val() === 'yes') {
+                            console.log('line 484', 'here');
+
                             if ($('#file_type').val() === 'ltcA') {
                                 total = 25 + parseFloat(data['filingFee']) + parseFloat(data['calculatedFee']) + 200;
                             } else if ($('#file_type').val() === 'oopA') {
@@ -487,6 +491,8 @@ if (document.location.href.split('/')[3] === 'new-file') {
                                 total = 25 + parseFloat(data['filingFee']) + parseFloat(data['calculatedFee'])
                             }
                         } else {
+                            console.log('line 494', 'here');
+
                             total = 25 + parseFloat(data['filingFee']) + parseFloat(data['calculatedFee'])
                         }
 
@@ -494,7 +500,11 @@ if (document.location.href.split('/')[3] === 'new-file') {
                         $('#distance_fee').val(data['calculatedFee']);
                         $('#distance_fee_container').css('display', 'initial');
                     } else {
+                        console.log('line 499', 'here');
+
                         if ($('#isComplaintFee').val() === 'yes') {
+                            console.log('line 506', 'here');
+
                             if ($('#file_type').val() === 'ltcA') {
                                 total = 25 + parseFloat(data['filingFee']) + 200;
                             } else if ($('#file_type').val() === 'oopA') {
@@ -507,6 +517,7 @@ if (document.location.href.split('/')[3] === 'new-file') {
                         }
                         $('#distance_fee_container').css('display', 'none');
                     }
+                    console.log('total', total);
 
                     $('#filing_fee_display').text(data['filingFee']);
                     $('#total').text(total.toFixed(2));
