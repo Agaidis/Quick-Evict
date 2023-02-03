@@ -160,7 +160,7 @@
                                         </div>
                                     </div>
                                     <input type="hidden" id="tenant_num" name="tenant_num" />
-                                    <input type="hidden" id="file_type" value="{{$fileType}}"/>
+                                    <input type="hidden" id="file_type" name="file_type" value="{{$fileType}}"/>
                                     <div class="row">
                                         <div class="col-sm-10">
                                             <div class="labels">Lease Type:</div>

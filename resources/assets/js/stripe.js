@@ -74,9 +74,9 @@ if (document.location.href.split('/')[3] === 'new-file') {
                 mainForm.appendChild(hiddenInput);
 
                 let url = '';
-                if ($('#file_type').val() === 'oop') {
+                if ($('#file_type').val() === 'oop' || $('#file_type').val() === 'oopA') {
                     url = 'new-oop/pdf-data';
-                } else if ($('#file_type').val() === 'ltc') {
+                } else if ($('#file_type').val() === 'ltc' || $('#file_type').val() === 'ltcA') {
                     url = 'new-ltc/pdf-data';
                 } else if ($('#file_type').val() === 'civil') {
                     url = 'new-civil-complaint/pdf-data';
