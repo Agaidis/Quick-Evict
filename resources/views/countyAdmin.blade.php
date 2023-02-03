@@ -22,14 +22,14 @@
                                 <thead>
                                 <tr>
                                     <th class="text-center">County</th>
-                                    <th class="text-center" style="">Allow In Person Complaint</th>
+                                    <th class="text-center col-md-4" style="">Allow In Person Complaint</th>
                                 </tr>
                                 </thead>
                                 <tbody>
                                 @foreach ($counties as $county)
                                 <tr>
-                                    <td>{{$county->county}}</td>
-                                    <td><input type="checkbox" id="in_person_complaint_toggle_{{$county->county}}"/></td>
+                                    <td style="text-align:center">{{$county->county}}</td>
+                                    <td style="text-align:center"><input type="checkbox" id="in_person_complaint_toggle_{{$county->county}}"/></td>
                                 </tr>
                                 @endforeach
                                 </tbody>
