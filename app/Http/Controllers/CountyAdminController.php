@@ -34,7 +34,7 @@ class CountyAdminController extends Controller
         try {
 
             $request->session()->flash('alert-success',  $request->county . ' County has been updated!');
-            return back();
+            return 'success';
 
         } catch (Exception $e) {
             $errorMsg = new ErrorLog();
