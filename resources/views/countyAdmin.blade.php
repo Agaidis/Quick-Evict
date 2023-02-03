@@ -29,7 +29,7 @@
                                 @foreach ($counties as $county)
                                 <tr>
                                     <td style="text-align:center">{{$county->county}}</td>
-                                    <td style="text-align:center"><input type="checkbox" id="in_person_complaint_toggle_{{$county->county}}"/></td>
+                                    <td style="text-align:center"><input type="checkbox" id="in_person_complaint_toggle_{{$county->county}}" class="in_person_complaint_toggle"/></td>
                                 </tr>
                                 @endforeach
                                 </tbody>

@@ -78,7 +78,7 @@ Route::post('/file-upload', 'FileStorageController@storeFile')->middleware('auth
 
 /* County Admin */
 Route::get('/countyAdmin', 'CountyAdminController@index')->middleware('auth');
-
+Route::post('/countyAdmin', 'CountyAdminController@updateInPersonComplaint')->middleware('auth');
 
 
 /* General Admin */
