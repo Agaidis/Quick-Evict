@@ -31,7 +31,7 @@
                                     <td style="text-align:center">{{$county->county}}</td>
                                     <td style="text-align:center">
                                     @if ($county->is_allowed_in_person_complaint === 1)
-                                        <input type="checkbox" id="in_person_complaint_toggle_{{$county->county}}" class="in_person_complaint_toggle"/>
+                                        <input checked type="checkbox" id="in_person_complaint_toggle_{{$county->county}}" class="in_person_complaint_toggle"/>
                                     @else
                                         <input type="checkbox" id="in_person_complaint_toggle_{{$county->county}}" class="in_person_complaint_toggle"/>
                                     @endif

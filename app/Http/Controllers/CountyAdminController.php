@@ -17,7 +17,7 @@ class CountyAdminController extends Controller
             return view('/login');
         } else {
             try {
-                $counties = DB::table('county_settings')->orderBy('county', 'asc')->get(['county']);
+                $counties = DB::table('county_settings')->orderBy('county', 'asc')->get();
 
                 return view('countyAdmin', compact('counties'));
 
