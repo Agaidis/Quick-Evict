@@ -18,10 +18,10 @@
                                     <p class="alert alert-danger">{{ Session::get('alert-danger') }} <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a></p>
                                 @endif
                             </div> <!-- end .flash-message -->
-                            <table class="table table-hover table-bordered county_table" style="" id="county_table">
+                            <table class="table table-hover table-bordered county_table offset-3 col-md-6" style="" id="county_table">
                                 <thead>
                                 <tr>
-                                    <th class="text-center">County</th>
+                                    <th class="text-center col-md-6">County</th>
                                     <th class="text-center col-md-4" style="">Allow In Person Complaint</th>
                                 </tr>
                                 </thead>
