@@ -26,16 +26,16 @@
                                 </tr>
                                 </thead>
                                 <tbody>
-{{--                                @foreach ($counties as $county)--}}
-{{--                                <tr>--}}
-{{--                                    <td style="text-align:center">{{$county->county}}</td>--}}
+                                @foreach ($counties as $county)
+                                <tr>
+                                    <td style="text-align:center">{{$county->county}}</td>
 {{--                                    @if ($county->is_allowed_in_person_complaint == 1)--}}
 {{--                                        <td style="text-align:center"><input checked type="checkbox" id="in_person_complaint_toggle_{{$county->county}}" class="in_person_complaint_toggle"/></td>--}}
 {{--                                    @else--}}
 {{--                                        <td style="text-align:center"><input type="checkbox" id="in_person_complaint_toggle_{{$county->county}}" class="in_person_complaint_toggle"/></td>--}}
 {{--                                    @endif--}}
-{{--                                </tr>--}}
-{{--                                @endforeach--}}
+                                </tr>
+                                @endforeach
                                 </tbody>
                             </table>
                         </div>
