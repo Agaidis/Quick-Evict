@@ -49862,6 +49862,7 @@ $(document).ready(function () {
         county: $('#county_select').val()
       },
       success: function success(data) {
+        $('#file_type_select').prop('disabled', false);
         console.log('success', data);
       },
       error: function error(data) {

@@ -238,7 +238,7 @@ $(document).ready(function () {
             },
 
             success: function (data) {
-
+                $('#file_type_select').prop('disabled', false);
                 console.log('success', data);
             },
             error: function (data) {
