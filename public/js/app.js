@@ -43395,6 +43395,46 @@ if (token) {
 
 /***/ }),
 
+/***/ "./resources/assets/js/countyAdmin.js":
+/*!********************************************!*\
+  !*** ./resources/assets/js/countyAdmin.js ***!
+  \********************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+/**
+ * Created by andrew on 04/04/20.
+ */
+$(document).ready(function () {
+  $('.in_person_complaint_toggle').on('change', function () {
+    var id = $(this)[0].id;
+    var splitId = id.split('_');
+    var county = splitId[4];
+    console.log('county', county);
+    $.ajaxSetup({
+      headers: {
+        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+      }
+    });
+    $.ajax({
+      beforeSend: function beforeSend(xhr) {
+        xhr.setRequestHeader('X-CSRF-TOKEN', $("#token").attr('content'));
+      },
+      type: "POST",
+      url: '/countyAdmin',
+      data: {
+        county: county
+      },
+      success: function success(data) {
+        console.log(data);
+      },
+      error: function error(data) {}
+    });
+  });
+});
+
+/***/ }),
+
 /***/ "./resources/assets/js/datatables.min.js":
 /*!***********************************************!*\
   !*** ./resources/assets/js/datatables.min.js ***!
@@ -60131,9 +60171,9 @@ $(document).ready(function () {
 /***/ }),
 
 /***/ 0:
-/*!******************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** multi ./resources/assets/js/bootstrap.js ./resources/assets/js/json2.min.js ./node_modules/select2/dist/js/select2.js ./resources/assets/js/jquery.slim.min.js ./resources/assets/js/timepicker.min.js ./resources/assets/js/datepicker-ui.min.js ./resources/assets/js/eviction.js ./resources/assets/js/datatables.min.js ./resources/assets/js/magistrateCreator.js ./resources/assets/js/userManagement.js ./resources/assets/js/numeric-1.2.6.min.js ./resources/assets/js/bezier.js ./resources/assets/js/signaturepad.js ./resources/assets/js/bootstrap-timepicker.min.js ./resources/assets/js/home.js ./resources/assets/js/newFile.js ./resources/assets/js/getFileFee.js ./resources/assets/js/stripe.js ./resources/assets/js/generalAdmin.js ./resources/assets/js/feeDuplicator.js ./resources/assets/sass/app.scss ***!
-  \******************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
+/*!*******************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** multi ./resources/assets/js/bootstrap.js ./resources/assets/js/json2.min.js ./node_modules/select2/dist/js/select2.js ./resources/assets/js/jquery.slim.min.js ./resources/assets/js/timepicker.min.js ./resources/assets/js/datepicker-ui.min.js ./resources/assets/js/eviction.js ./resources/assets/js/datatables.min.js ./resources/assets/js/magistrateCreator.js ./resources/assets/js/userManagement.js ./resources/assets/js/numeric-1.2.6.min.js ./resources/assets/js/bezier.js ./resources/assets/js/signaturepad.js ./resources/assets/js/bootstrap-timepicker.min.js ./resources/assets/js/home.js ./resources/assets/js/newFile.js ./resources/assets/js/getFileFee.js ./resources/assets/js/stripe.js ./resources/assets/js/generalAdmin.js ./resources/assets/js/feeDuplicator.js ./resources/assets/js/countyAdmin.js ./resources/assets/sass/app.scss ***!
+  \*******************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -60157,6 +60197,7 @@ __webpack_require__(/*! /Users/andrewgaidis/projects/Quick-Evict/resources/asset
 __webpack_require__(/*! /Users/andrewgaidis/projects/Quick-Evict/resources/assets/js/stripe.js */"./resources/assets/js/stripe.js");
 __webpack_require__(/*! /Users/andrewgaidis/projects/Quick-Evict/resources/assets/js/generalAdmin.js */"./resources/assets/js/generalAdmin.js");
 __webpack_require__(/*! /Users/andrewgaidis/projects/Quick-Evict/resources/assets/js/feeDuplicator.js */"./resources/assets/js/feeDuplicator.js");
+__webpack_require__(/*! /Users/andrewgaidis/projects/Quick-Evict/resources/assets/js/countyAdmin.js */"./resources/assets/js/countyAdmin.js");
 module.exports = __webpack_require__(/*! /Users/andrewgaidis/projects/Quick-Evict/resources/assets/sass/app.scss */"./resources/assets/sass/app.scss");
 
 

@@ -8,6 +8,8 @@ $(document).ready(function () {
         let splitId = id.split('_');
         let county = splitId[4];
 
+        console.log('county', county);
+
         $.ajaxSetup({
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
