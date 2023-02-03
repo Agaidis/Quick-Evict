@@ -63,7 +63,7 @@ class NewFileController extends Controller
                     return view('eviction', compact('map', 'fileType', 'userEmail', 'isComplaintFee'));
                 } else if ($request->fileType == 'ltcA') {
                     $isComplaintFee = 'yes';
-                    return view('orderOfPossession', compact('map', 'fileType', 'userEmail', 'isComplaintFee'));
+                    return view('eviction', compact('map', 'fileType', 'userEmail', 'isComplaintFee'));
                 } else if ($request->fileType == 'oop') {
                     $isComplaintFee = 'no';
                     return view('orderOfPossession', compact('map', 'fileType', 'userEmail', 'isComplaintFee'));
