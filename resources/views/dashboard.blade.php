@@ -147,7 +147,7 @@
                                                             <option value="{{$status}}">{{$status}}</option>
                                                         @endif
                                                     @endforeach
-                                                @elseif ($eviction->file_type === 'oop')
+                                                @elseif ($eviction->file_type === 'oop' || $eviction->file_type === 'oopA')
                                                     @foreach ($oopStatusArray as $status)
                                                         @if ($status == $eviction->status)
                                                             <option value="{{$status}}" selected>{{$status}}</option>

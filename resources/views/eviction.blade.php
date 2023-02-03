@@ -10,6 +10,7 @@
                 <div class="col-md-12">
                     <form method="post" action="{{ action('EvictionController@showSamplePDF') }}" enctype="multipart/form-data" id="eviction_form" target="_blank">
                         <input type="hidden" name="_token" value="{{ Session::token() }}">
+                        <input type="hidden" id="isComplaintFee" value="{{$isComplaintFee}}" />
                         <h2 style="text-align:center;" class="titles fs-subtitle">Step 2:<br> Enter the address of the incident.</h2>
                         <div class="form-group">
                             <div class="row">

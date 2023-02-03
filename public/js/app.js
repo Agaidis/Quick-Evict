@@ -49312,12 +49312,34 @@ if (document.location.href.split('/')[3] === 'new-file') {
           var total = '';
 
           if (data['calculatedFee'] !== '') {
-            total = 25 + parseFloat(data['filingFee']) + parseFloat(data['calculatedFee']);
+            if ($('#isComplaintFee').val() === 'yes') {
+              if ($('#file_type').val() === 'ltcA') {
+                total = 25 + parseFloat(data['filingFee']) + parseFloat(data['calculatedFee']) + 200;
+              } else if ($('#file_type').val() === 'oopA') {
+                total = 25 + parseFloat(data['filingFee']) + parseFloat(data['calculatedFee']) + 250;
+              } else {
+                total = 25 + parseFloat(data['filingFee']) + parseFloat(data['calculatedFee']);
+              }
+            } else {
+              total = 25 + parseFloat(data['filingFee']) + parseFloat(data['calculatedFee']);
+            }
+
             $('#distance_fee_display').text(data['calculatedFee']);
             $('#distance_fee').val(data['calculatedFee']);
             $('#distance_fee_container').css('display', 'initial');
           } else {
-            total = 25 + parseFloat(data['filingFee']);
+            if ($('#isComplaintFee').val() === 'yes') {
+              if ($('#file_type').val() === 'ltcA') {
+                total = 25 + parseFloat(data['filingFee']) + 200;
+              } else if ($('#file_type').val() === 'oopA') {
+                total = 25 + parseFloat(data['filingFee']) + 250;
+              } else {
+                total = 25 + parseFloat(data['filingFee']);
+              }
+            } else {
+              total = 25 + parseFloat(data['filingFee']);
+            }
+
             $('#distance_fee_container').css('display', 'none');
           }
 

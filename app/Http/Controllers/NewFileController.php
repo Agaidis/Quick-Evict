@@ -53,11 +53,21 @@ class NewFileController extends Controller
                     'userEmail' => Auth::user()->email
                 ]);
                 $userEmail = Auth::user()->email;
+                $isComplaintFee = 'yes';
+
 
                 if ($request->fileType == 'ltc') {
-                    return view('eviction', compact('map', 'fileType', 'userEmail'));
+                    $isComplaintFee = 'no';
+                    return view('eviction', compact('map', 'fileType', 'userEmail', 'isComplaintFee'));
+                } else if ($request->fileType == 'ltcA') {
+                    $isComplaintFee = 'yes';
+                    return view('orderOfPossession', compact('map', 'fileType', 'userEmail', 'isComplaintFee'));
                 } else if ($request->fileType == 'oop') {
-                    return view('orderOfPossession', compact('map', 'fileType', 'userEmail'));
+                    $isComplaintFee = 'no';
+                    return view('orderOfPossession', compact('map', 'fileType', 'userEmail', 'isComplaintFee'));
+                } else if ($request->fileType == 'oopA') {
+                    $isComplaintFee = 'yes';
+                    return view('orderOfPossession', compact('map', 'fileType', 'userEmail', 'isComplaintFee'));
                 } else if ($request->fileType == 'civil') {
                     return view('civilComplaint', compact('map', 'fileType', 'userEmail'));
                 } else {
@@ -83,7 +93,7 @@ class NewFileController extends Controller
             $tenantNum = (int)$_GET['tenant_num'];
             $courtDetails = CourtDetails::where('magistrate_id', $courtNumber[1])->first();
 
-            if ($fileType == 'ltc') {
+            if ($fileType == 'ltc' || $fileType == 'ltcA') {
 
                 if ($courtDetails->is_distance_fee === 1) {
                     $geoData = GeoLocation::where('magistrate_id', $courtNumber[1])->first();
@@ -150,7 +160,7 @@ class NewFileController extends Controller
 
 
 
-            } else if ($fileType === 'oop') {
+            } else if ($fileType === 'oop' || $fileType === 'oopA') {
 
                 if ($courtDetails->oop_distance_fee === 1) {
                     $geoData = GeoLocation::where('magistrate_id', $courtNumber[1])->first();
