@@ -53,8 +53,6 @@ class NewFileController extends Controller
                     'userEmail' => Auth::user()->email
                 ]);
                 $userEmail = Auth::user()->email;
-                $isComplaintFee = 'yes';
-
 
                 if ($request->fileType == 'ltc') {
                     $isComplaintFee = 'no';
@@ -78,7 +76,7 @@ class NewFileController extends Controller
                 $errorMsg->payload = $e->getMessage() . ' Line #: ' . $e->getLine();
 
                 $errorMsg->save();
-                return 'failure';
+                return 'failure 11';
             }
     }
     public function getFilingFee() {
@@ -280,7 +278,7 @@ class NewFileController extends Controller
             $errorDetails .= PHP_EOL . 'Message ' . $e->getMessage();
             Log::error($errorDetails . PHP_EOL . 'Error Message: ' . $e->getMessage() . PHP_EOL . 'Trace: ' . $e->getTraceAsString());
             mail('andrew.gaidis@gmail.com', 'Get Filing Fee', $errorDetails);
-            return 'failure';
+            return 'failure 22';
         }
     }
 
