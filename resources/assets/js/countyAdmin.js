@@ -7,6 +7,7 @@ $(document).ready(function () {
         let id = $(this)[0].id;
         let splitId = id.split('_');
         let county = splitId[4];
+        let isChecked = $('#in_person_complaint_toggle_' + county)[0].checked;
 
         console.log('county', county);
 
@@ -23,7 +24,8 @@ $(document).ready(function () {
             type: "POST",
             url: '/countyAdmin',
             data: {
-                county: county
+                county: county,
+                isChecked: isChecked
             },
 
             success: function (data) {
