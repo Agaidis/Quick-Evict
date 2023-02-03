@@ -43410,8 +43410,7 @@ $(document).ready(function () {
     var id = $(this)[0].id;
     var splitId = id.split('_');
     var county = splitId[4];
-    var isChecked = ''; //$('#in_person_complaint_toggle_' + county)[0].checked;
-
+    var isChecked = $('#in_person_complaint_toggle_' + county)[0].checked;
     $.ajaxSetup({
       headers: {
         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
