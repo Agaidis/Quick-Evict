@@ -54,6 +54,10 @@ class NewFileController extends Controller
                 ]);
                 $userEmail = Auth::user()->email;
 
+                $errorMsg = new ErrorLog();
+                $errorMsg->payload = 'file type' . $request->fileType;
+                $errorMsg->save();
+
                 if ($request->fileType == 'ltc') {
                     $isComplaintFee = 'no';
                     return view('eviction', compact('map', 'fileType', 'userEmail', 'isComplaintFee'));
