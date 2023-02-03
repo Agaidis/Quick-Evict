@@ -33,6 +33,11 @@ class CountyAdminController extends Controller
 
     public function updateInPersonComplaint(Request $request) {
         try {
+            $errorMsg = new ErrorLog();
+            $errorMsg->payload = 'is checked: ' . $request->isChecked;
+
+            $errorMsg->save();
+
             if ($request->isChecked == 1) {
                 DB::table('county_settings')
                     ->where('county', $request->county)
