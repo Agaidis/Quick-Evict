@@ -43411,6 +43411,7 @@ $(document).ready(function () {
     var splitId = id.split('_');
     var county = splitId[4];
     var isChecked = $('#in_person_complaint_toggle_' + county)[0].checked;
+    console.log('isChecked', isChecked);
     $.ajaxSetup({
       headers: {
         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')

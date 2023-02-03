@@ -8,6 +8,7 @@ $(document).ready(function () {
         let splitId = id.split('_');
         let county = splitId[4];
         let isChecked = $('#in_person_complaint_toggle_' + county)[0].checked;
+        console.log('isChecked', isChecked);
 
         $.ajaxSetup({
             headers: {
