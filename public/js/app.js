@@ -49863,6 +49863,15 @@ $(document).ready(function () {
       },
       success: function success(data) {
         $('#file_type_select').prop('disabled', false);
+
+        if (data === 1) {
+          $('#ltcA').prop('disabled', false);
+          $('#oopA').prop('disabled', false);
+        } else {
+          $('#ltcA').prop('disabled', true);
+          $('#oopA').prop('disabled', true);
+        }
+
         console.log('success', data);
       },
       error: function error(data) {
