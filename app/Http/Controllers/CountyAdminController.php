@@ -17,7 +17,7 @@ class CountyAdminController extends Controller
             return view('/login');
         } else {
             try {
-                $counties = CourtDetails::distinct()->orderBy('county', 'asc')->get(['county']);
+                $counties = DB::table('county_settings')->orderBy('county', 'asc')->get(['county']);
 
                 return view('countyAdmin', compact('counties'));
 
@@ -38,7 +38,7 @@ class CountyAdminController extends Controller
                 ->update(['is_allowed_in_person_complaint' => 1]);
 
             $request->session()->flash('alert-success',  $request->county . ' County has been updated!');
-            return 'success';
+            return back();
 
         } catch (Exception $e) {
             $errorMsg = new ErrorLog();
