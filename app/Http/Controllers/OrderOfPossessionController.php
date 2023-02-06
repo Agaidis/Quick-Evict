@@ -319,14 +319,18 @@ class OrderOfPossessionController extends Controller
 
                 try {
                     $token = $_POST['stripeToken'];
+                    $errorMsg = new ErrorLog();
+                    $errorMsg->payload = serialize($_POST);
+
+                    $errorMsg->save();
 
                     if (strpos(Auth::user()->email, 'slatehousegroup') === false && strpos(Auth::user()->email, 'home365.co') === false) {
                         Stripe::setApiKey(env('STRIPE_SECRET_KEY'));
-                        if ($_POST['file_type'] == 'oopA') {
-                            $amount = $filingFee + 25 + 250;
-                        } else {
+//                        if (isset($_POST['file_type']) == 'oopA') {
+//                            $amount = $filingFee + 25 + 250;
+//                        } else {
                             $amount = $filingFee + 25;
-                        }
+                     //   }
                     } else {
                         Stripe::setApiKey(env('STRIPE_SECRET_TEST_KEY'));
                         $amount = $filingFee + 25;
