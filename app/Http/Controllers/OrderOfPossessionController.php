@@ -339,6 +339,10 @@ class OrderOfPossessionController extends Controller
                     $stringAmt = str_replace('.', '', $stringAmt);
                     $integerAmt = intval($stringAmt);
 
+                    $errorMsg = new ErrorLog();
+                    $errorMsg->payload ='Integer Amount OOP: ' . $integerAmt;
+                    $errorMsg->save();
+
                     \Stripe\Charge::create([
                         'amount' => $integerAmt,
                         'currency' => 'usd',

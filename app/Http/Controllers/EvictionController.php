@@ -442,11 +442,11 @@ class EvictionController extends Controller
 
                     if (strpos(Auth::user()->email, 'slatehousegroup') === false && strpos(Auth::user()->email, 'home365.co') === false) {
                         Stripe::setApiKey(env('STRIPE_SECRET_KEY'));
-                        if ($_POST['file_type'] == 'ltcA') {
-                            $amount = $filingFee + 25 + 225;
-                        } else {
+//                        if ($_POST['file_type'] == 'ltcA') {
+//                            $amount = $filingFee + 25 + 225;
+//                        } else {
                             $amount = $filingFee + 25;
-                        }
+                     //   }
                     } else {
                         Stripe::setApiKey(env('STRIPE_SECRET_TEST_KEY'));
                         $amount = $filingFee + 25;
@@ -454,6 +454,10 @@ class EvictionController extends Controller
                     $stringAmt = strval($amount);
                     $stringAmt = str_replace('.', '', $stringAmt);
                     $integerAmt = intval($stringAmt);
+
+                    $errorMsg = new ErrorLog();
+                    $errorMsg->payload ='Integer Amount LTC: ' . $integerAmt;
+                    $errorMsg->save();
 //
                     \Stripe\Charge::create([
                         'amount' => $integerAmt,
