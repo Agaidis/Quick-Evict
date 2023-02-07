@@ -286,6 +286,8 @@
                             <input type="hidden" id="street_name" name="streetName"/>
                             <input type="hidden" id="town" name="town"/>
                             <input type="hidden" id="zipcode" name="zipcode"/>
+                            <input type="hidden" id="file_type" name="file_type" value="{{$fileType}}"/>
+
 
                             <!-- RESIDED ADDRESS ELEMENTS -->
                             <input type="hidden" id="resided_state" name="residedState"/>
@@ -303,6 +305,7 @@
                     </form>
                     <form method="post" action="{{ action('EvictionController@formulatePDF') }}" enctype="multipart/form-data" id="submit_form">
                         <!-- PAY AND SIGN MODAL-->
+
                         <div class="modal fade" id="modal_signature">
                             <div class="modal-dialog" role="document">
                                 <div class="modal_signature modal-content">

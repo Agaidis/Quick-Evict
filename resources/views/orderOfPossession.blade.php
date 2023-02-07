@@ -24,7 +24,6 @@
                                     <div class="offset-1">
                                         <div id="map"></div>
                                     </div>
-                                    <input type="hidden" id="file_type" value="{{$fileType}}"/>
                                     <div class="col-md-12 offset-1 filing_form_div">
 
                                         <!-- ADDITIONAL INFORMATION ON PROPERTY -->
@@ -205,6 +204,8 @@
                                         <input type="hidden" id="user_email" name="user_email" value="{{$userEmail}}"/>
                                         <input type="hidden" id="total_input" name="total"/>
                                         <input type="hidden" name="distance_fee" id="distance_fee" />
+                                        <input type="hidden" id="file_type" name="file_type" value="{{$fileType}}"/>
+
                                     </div>
                                 </form>
 
