@@ -70,6 +70,7 @@ class DashboardController extends Controller
 
                 $evictions = DB::table('evictions')
                     ->select('evictions.id', 'users.name AS name', 'user_id', 'property_address', 'status', 'file_type', 'is_downloaded', 'owner_name', 'tenant_name', 'court_date', 'total_judgement', 'filing_fee',  'evictions.created_at', 'is_extra_files', 'court_number')
+                    ->whereIn('user_id', $userIdArr)
                     ->join('users', 'evictions.user_id', '=', 'users.id')
                     ->orderBy('evictions.id', 'desc')
                     ->take(500)
