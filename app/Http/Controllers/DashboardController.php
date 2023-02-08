@@ -53,14 +53,19 @@ class DashboardController extends Controller
                 $emailAddress = Auth::user()->email;
                 $splitEmailAddress = explode('@', $emailAddress);
                 $emailDomain = $splitEmailAddress[1];
+                $userIdArr = [];
 
                 $pmUseIds = DB::table('users')
                     ->select('users.id')
                     ->where('email','LIKE','%'.$emailDomain.'%')
                     ->get();
 
+                foreach ($pmUseIds as $userData) {
+                    array_push($userIdArr, $userData->id);
+                }
+
                 $errorMsg = new ErrorLog();
-                $errorMsg->payload = 'users: ' . serialize($pmUseIds);
+                $errorMsg->payload = 'users: ' . serialize($userIdArr);
                 $errorMsg->save();
 
                 $evictions = DB::table('evictions')
