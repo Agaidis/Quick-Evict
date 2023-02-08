@@ -449,13 +449,13 @@ class EvictionController extends Controller
                     if (strpos(Auth::user()->email, 'slatehousegroup') === false && strpos(Auth::user()->email, 'home365.co') === false) {
                         Stripe::setApiKey(env('STRIPE_SECRET_KEY'));
                         if ($_POST['file_type'] == 'ltcA') {
-                            $amount = $filingFee + 25 + 225;
+                            $amount = $filingFee + 250.00;
                         } else {
-                            $amount = $filingFee + 25;
+                            $amount = $filingFee + 25.00;
                         }
                     } else {
                         Stripe::setApiKey(env('STRIPE_SECRET_TEST_KEY'));
-                        $amount = $filingFee + 25;
+                        $amount = $filingFee + 25.00;
                     }
                     $stringAmt = strval($amount);
                     $stringAmt = str_replace('.', '', $stringAmt);
