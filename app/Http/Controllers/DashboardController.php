@@ -49,6 +49,31 @@ class DashboardController extends Controller
                     ->orderBy('evictions.id', 'desc')
                     ->take(500)
                     ->get();
+            } else if (Auth::user()->role == 'deusche') {
+                $emailAddress = Auth::user()->email;
+                $splitEmailAddress = explode('@', $emailAddress);
+                $emailDomain = $splitEmailAddress[1];
+
+                $pmUseIds = DB::table('users')
+                    ->select('users.id')
+                    ->where('email','LIKE','%'.$emailDomain.'%')
+                    ->get();
+
+                $errorMsg = new ErrorLog();
+                $errorMsg->payload = 'users: ' . serialize($pmUseIds);
+                $errorMsg->save();
+
+                $evictions = DB::table('evictions')
+                    ->select('evictions.id', 'users.name AS name', 'user_id', 'property_address', 'status', 'file_type', 'is_downloaded', 'owner_name', 'tenant_name', 'court_date', 'total_judgement', 'filing_fee',  'evictions.created_at', 'is_extra_files', 'court_number')
+                    ->join('users', 'evictions.user_id', '=', 'users.id')
+                    ->orderBy('evictions.id', 'desc')
+                    ->take(500)
+                    ->get();
+
+                $errorMsg = new ErrorLog();
+                $errorMsg->payload = 'email address: ' . $emailAddress;
+                $errorMsg->save();
+
             } else if (Auth::user()->role == 'General User') {
                 $evictions = DB::select('select id, property_address, status, file_type, is_downloaded, owner_name, tenant_name, court_date, total_judgement, filing_fee,  created_at, is_extra_files, court_number from evictions WHERE user_id = '. $userId .' ORDER BY FIELD(status, "Created LTC", "LTC Mailed", "LTC Submitted Online", "Court Hearing Scheduled", "Court Hearing Extended", "Judgement Issued in Favor of Owner", "Judgement Denied by Court", "Tenant Filed Appeal", "OOP Mailed", "OOP Submitted Online", "Paid Judgement", "Locked Out Tenant"), id DESC');
             } else if (Auth::user()->role == 'Court') {
@@ -67,7 +92,6 @@ class DashboardController extends Controller
         } catch (\Exception $e) {
             $errorMsg = new ErrorLog();
             $errorMsg->payload = $e->getMessage() . ' Line #: ' . $e->getLine();
-
             $errorMsg->save();
         }
 
