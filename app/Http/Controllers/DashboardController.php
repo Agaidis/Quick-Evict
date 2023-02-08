@@ -42,14 +42,14 @@ class DashboardController extends Controller
             $userRole = Auth::user()->role;
             $counties = CourtDetails::distinct()->orderBy('county')->get(['county']);
 
-            if (Auth::user()->role == 'Administrator' || Auth::user()->role == 'PM Company Leader') {
+            if (Auth::user()->role == 'Administrator') {
                 $evictions = DB::table('evictions')
                     ->select('evictions.id', 'users.name AS name', 'user_id', 'property_address', 'status', 'file_type', 'is_downloaded', 'owner_name', 'tenant_name', 'court_date', 'total_judgement', 'filing_fee',  'evictions.created_at', 'is_extra_files', 'court_number')
                     ->join('users', 'evictions.user_id', '=', 'users.id')
                     ->orderBy('evictions.id', 'desc')
                     ->take(500)
                     ->get();
-            } else if (Auth::user()->role == 'deusche') {
+            } else if (Auth::user()->role == 'PM Company Leader') {
                 $emailAddress = Auth::user()->email;
                 $splitEmailAddress = explode('@', $emailAddress);
                 $emailDomain = $splitEmailAddress[1];
@@ -64,10 +64,6 @@ class DashboardController extends Controller
                     array_push($userIdArr, $userData->id);
                 }
 
-                $errorMsg = new ErrorLog();
-                $errorMsg->payload = 'users: ' . serialize($userIdArr);
-                $errorMsg->save();
-
                 $evictions = DB::table('evictions')
                     ->select('evictions.id', 'users.name AS name', 'user_id', 'property_address', 'status', 'file_type', 'is_downloaded', 'owner_name', 'tenant_name', 'court_date', 'total_judgement', 'filing_fee',  'evictions.created_at', 'is_extra_files', 'court_number')
                     ->whereIn('user_id', $userIdArr)
@@ -75,10 +71,6 @@ class DashboardController extends Controller
                     ->orderBy('evictions.id', 'desc')
                     ->take(500)
                     ->get();
-
-                $errorMsg = new ErrorLog();
-                $errorMsg->payload = 'email address: ' . $emailAddress;
-                $errorMsg->save();
 
             } else if (Auth::user()->role == 'General User') {
                 $evictions = DB::select('select id, property_address, status, file_type, is_downloaded, owner_name, tenant_name, court_date, total_judgement, filing_fee,  created_at, is_extra_files, court_number from evictions WHERE user_id = '. $userId .' ORDER BY FIELD(status, "Created LTC", "LTC Mailed", "LTC Submitted Online", "Court Hearing Scheduled", "Court Hearing Extended", "Judgement Issued in Favor of Owner", "Judgement Denied by Court", "Tenant Filed Appeal", "OOP Mailed", "OOP Submitted Online", "Paid Judgement", "Locked Out Tenant"), id DESC');
