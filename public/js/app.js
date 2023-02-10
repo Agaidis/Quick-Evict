@@ -49318,15 +49318,15 @@ if (document.location.href.split('/')[3] === 'new-file') {
               console.log('line 484', 'here');
 
               if ($('#file_type').val() === 'ltcA') {
-                total = 25 + parseFloat(data['filingFee']) + parseFloat(data['calculatedFee']) + 200;
+                total = 25.00 + parseFloat(data['filingFee']) + parseFloat(data['calculatedFee']) + 200.00;
               } else if ($('#file_type').val() === 'oopA') {
-                total = 25 + parseFloat(data['filingFee']) + parseFloat(data['calculatedFee']) + 250;
+                total = 25.00 + parseFloat(data['filingFee']) + parseFloat(data['calculatedFee']) + 250.00;
               } else {
-                total = 25 + parseFloat(data['filingFee']) + parseFloat(data['calculatedFee']);
+                total = 25.00 + parseFloat(data['filingFee']) + parseFloat(data['calculatedFee']);
               }
             } else {
               console.log('line 494', 'here');
-              total = 25 + parseFloat(data['filingFee']) + parseFloat(data['calculatedFee']);
+              total = 25.00 + parseFloat(data['filingFee']) + parseFloat(data['calculatedFee']);
             }
 
             $('#distance_fee_display').text(data['calculatedFee']);
@@ -49339,14 +49339,14 @@ if (document.location.href.split('/')[3] === 'new-file') {
               console.log('line 506', 'here');
 
               if ($('#file_type').val() === 'ltcA') {
-                total = 25 + parseFloat(data['filingFee']) + 200;
+                total = 25.00 + parseFloat(data['filingFee']) + 200.00;
               } else if ($('#file_type').val() === 'oopA') {
-                total = 25 + parseFloat(data['filingFee']) + 250;
+                total = 25.00 + parseFloat(data['filingFee']) + 250.00;
               } else {
-                total = 25 + parseFloat(data['filingFee']);
+                total = 25.00 + parseFloat(data['filingFee']);
               }
             } else {
-              total = 25 + parseFloat(data['filingFee']);
+              total = 25.00 + parseFloat(data['filingFee']);
             }
 
             $('#distance_fee_container').css('display', 'none');
@@ -59470,9 +59470,9 @@ if (document.location.href.split('/')[3] === 'new-file') {
         mainForm.appendChild(hiddenInput);
         var url = '';
 
-        if ($('#file_type').val() === 'oop') {
+        if ($('#file_type').val() === 'oop' || $('#file_type').val() === 'oopA') {
           url = 'new-oop/pdf-data';
-        } else if ($('#file_type').val() === 'ltc') {
+        } else if ($('#file_type').val() === 'ltc' || $('#file_type').val() === 'ltcA') {
           url = 'new-ltc/pdf-data';
         } else if ($('#file_type').val() === 'civil') {
           url = 'new-civil-complaint/pdf-data';
