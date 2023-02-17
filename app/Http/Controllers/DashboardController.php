@@ -44,7 +44,7 @@ class DashboardController extends Controller
 
             if (Auth::user()->role == 'Administrator') {
                 $evictions = DB::table('evictions')
-                    ->select('evictions.id', 'users.name AS name', 'user_id', 'property_address', 'status', 'file_type', 'is_downloaded', 'owner_name', 'tenant_name', 'court_date', 'total_judgement', 'filing_fee',  'evictions.created_at', 'is_extra_files', 'court_number')
+                    ->select('evictions.id', 'users.name AS name', 'user_id', 'property_address', 'status', 'file_type', 'is_downloaded', 'owner_name', 'tenant_name', 'court_date', 'total_judgement', 'filing_fee',  'evictions.created_at', 'is_extra_files', 'court_number', 'is_in_person_filing')
                     ->join('users', 'evictions.user_id', '=', 'users.id')
                     ->orderBy('evictions.id', 'desc')
                     ->take(500)
@@ -65,7 +65,7 @@ class DashboardController extends Controller
                 }
 
                 $evictions = DB::table('evictions')
-                    ->select('evictions.id', 'users.name AS name', 'user_id', 'property_address', 'status', 'file_type', 'is_downloaded', 'owner_name', 'tenant_name', 'court_date', 'total_judgement', 'filing_fee',  'evictions.created_at', 'is_extra_files', 'court_number')
+                    ->select('evictions.id', 'users.name AS name', 'user_id', 'property_address', 'status', 'file_type', 'is_downloaded', 'owner_name', 'tenant_name', 'court_date', 'total_judgement', 'filing_fee',  'evictions.created_at', 'is_extra_files', 'court_number', 'is_in_person_filing')
                     ->whereIn('user_id', $userIdArr)
                     ->join('users', 'evictions.user_id', '=', 'users.id')
                     ->orderBy('evictions.id', 'desc')
@@ -73,7 +73,7 @@ class DashboardController extends Controller
                     ->get();
 
             } else if (Auth::user()->role == 'General User') {
-                $evictions = DB::select('select id, property_address, status, file_type, is_downloaded, owner_name, tenant_name, court_date, total_judgement, filing_fee,  created_at, is_extra_files, court_number from evictions WHERE user_id = '. $userId .' ORDER BY FIELD(status, "Created LTC", "LTC Mailed", "LTC Submitted Online", "Court Hearing Scheduled", "Court Hearing Extended", "Judgement Issued in Favor of Owner", "Judgement Denied by Court", "Tenant Filed Appeal", "OOP Mailed", "OOP Submitted Online", "Paid Judgement", "Locked Out Tenant"), id DESC');
+                $evictions = DB::select('select id, property_address, status, file_type, is_downloaded, owner_name, tenant_name, court_date, total_judgement, filing_fee,  created_at, is_extra_files, court_number, is_in_person_filing from evictions WHERE user_id = '. $userId .' ORDER BY FIELD(status, "Created LTC", "LTC Mailed", "LTC Submitted Online", "Court Hearing Scheduled", "Court Hearing Extended", "Judgement Issued in Favor of Owner", "Judgement Denied by Court", "Tenant Filed Appeal", "OOP Mailed", "OOP Submitted Online", "Paid Judgement", "Locked Out Tenant"), id DESC');
             } else if (Auth::user()->role == 'Court') {
                 $evictions = DB::table('evictions')
                     ->select('id', 'property_address', 'status', 'file_type', 'is_downloaded', 'owner_name', 'tenant_name', 'court_date', 'total_judgement', 'filing_fee',  'created_at', 'is_extra_files', 'court_number')
@@ -83,7 +83,7 @@ class DashboardController extends Controller
                     ->take(500)
                     ->get();
             } else {
-                $evictions = DB::select('select id, property_address, status, file_type, is_downloaded, owner_name, tenant_name, court_date, total_judgement, filing_fee,  created_at, is_extra_files, court_number from evictions ORDER BY FIELD(status, "Created LTC", "LTC Mailed", "LTC Submitted Online", "Court Hearing Scheduled", "Court Hearing Extended", "Judgement Issued in Favor of Owner", "Judgement Denied by Court", "Tenant Filed Appeal", "OOP Mailed", "OOP Submitted Online", "Paid Judgement", "Locked Out Tenant"), id DESC');
+                $evictions = DB::select('select id, property_address, status, file_type, is_downloaded, owner_name, tenant_name, court_date, total_judgement, filing_fee,  created_at, is_extra_files, court_number, is_in_person_filing from evictions ORDER BY FIELD(status, "Created LTC", "LTC Mailed", "LTC Submitted Online", "Court Hearing Scheduled", "Court Hearing Extended", "Judgement Issued in Favor of Owner", "Judgement Denied by Court", "Tenant Filed Appeal", "OOP Mailed", "OOP Submitted Online", "Paid Judgement", "Locked Out Tenant"), id DESC');
             }
 
             return view('dashboard' , compact('evictions', 'userRole', 'counties'));
