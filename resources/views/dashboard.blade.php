@@ -159,7 +159,7 @@
 
                                             </select>
                                         </td>
-                                        <td class="text-center">{{$eviction->id}}</td>
+                                        <td class="text-center">{{$eviction->id}}-{{$eviction->is_in_person_filing}}</td>
                                         @if (Auth::user()->role == 'PM Company Leader' || Auth::user()->role == 'Administrator')
                                         <td class="text-center">{{$eviction->name}}</td>
                                         @endif

@@ -298,6 +298,11 @@ class OrderOfPossessionController extends Controller
                 $eviction->file_type = 'oop';
                 $eviction->is_extra_files = $_POST['is_extra_filing'];
                 $eviction->is_online_filing = $isOnline;
+                if ($_POST['file_type'] == 'oopA') {
+                    $eviction->is_in_person_filing = 1;
+                } else {
+                    $eviction->is_in_person_filing = 0;
+                }
 
                 $eviction->save();
 

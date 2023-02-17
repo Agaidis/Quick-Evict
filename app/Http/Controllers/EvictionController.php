@@ -407,6 +407,11 @@ class EvictionController extends Controller
                 $eviction->file_type = 'eviction';
                 $eviction->is_extra_files = 1;//$_POST['is_extra_filing'];
                 $eviction->is_online_filing = $isOnline;
+                if ($_POST['file_type'] == 'ltcA') {
+                    $eviction->is_in_person_filing = 1;
+                } else {
+                    $eviction->is_in_person_filing = 0;
+                }
 
                 $eviction->save();
 
