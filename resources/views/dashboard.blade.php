@@ -49,7 +49,7 @@
                                 <thead>
                                 <tr>
                                     <th style="width:18%;" class="text-center">Status</th>
-                                    <th style="width:20%;" class="text-center">Id</th>
+                                    <th style="width:15%;" class="text-center">Id</th>
                                     @if (Auth::user()->role == 'PM Company Leader' || Auth::user()->role == 'Administrator')
                                     <th class="text-center">User</th>
                                     @endif
