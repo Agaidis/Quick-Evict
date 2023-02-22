@@ -47,7 +47,7 @@ class DashboardController extends Controller
                     ->select('evictions.id', 'users.name AS name', 'user_id', 'property_address', 'status', 'file_type', 'is_downloaded', 'owner_name', 'tenant_name', 'court_date', 'total_judgement', 'filing_fee',  'evictions.created_at', 'is_extra_files', 'court_number', 'is_in_person_filing')
                     ->join('users', 'evictions.user_id', '=', 'users.id')
                     ->orderBy('evictions.id', 'desc')
-                    ->take(500)
+                    ->take(200)
                     ->get();
             } else if (Auth::user()->role == 'PM Company Leader') {
                 $emailAddress = Auth::user()->email;
@@ -69,7 +69,7 @@ class DashboardController extends Controller
                     ->whereIn('user_id', $userIdArr)
                     ->join('users', 'evictions.user_id', '=', 'users.id')
                     ->orderBy('evictions.id', 'desc')
-                    ->take(500)
+                    ->take(200)
                     ->get();
 
             } else if (Auth::user()->role == 'General User') {
@@ -80,7 +80,7 @@ class DashboardController extends Controller
                     ->where('court_number', $courtNumber )
                     ->where('is_online_filing', 1)
                     ->orderBy('id', 'desc')
-                    ->take(500)
+                    ->take(200)
                     ->get();
             } else {
                 $evictions = DB::select('select id, property_address, status, file_type, is_downloaded, owner_name, tenant_name, court_date, total_judgement, filing_fee,  created_at, is_extra_files, court_number, is_in_person_filing from evictions ORDER BY FIELD(status, "Created LTC", "LTC Mailed", "LTC Submitted Online", "Court Hearing Scheduled", "Court Hearing Extended", "Judgement Issued in Favor of Owner", "Judgement Denied by Court", "Tenant Filed Appeal", "OOP Mailed", "OOP Submitted Online", "Paid Judgement", "Locked Out Tenant"), id DESC');
