@@ -451,7 +451,7 @@ class EvictionController extends Controller
                     $errorMsg->save();
 
 
-                    if (strpos(Auth::user()->email, 'slatehousegroup') === false && strpos(Auth::user()->email, 'home365.co') === false) {
+                    if (strpos(Auth::user()->email, 'slatehousegroup') === false && strpos(Auth::user()->email, 'home365.co') === false && strpos(Auth::user()->email, 'elite.team') === false) {
                         Stripe::setApiKey(env('STRIPE_SECRET_KEY'));
                         if ($_POST['file_type'] == 'ltcA') {
                             $amount = $filingFee + 250.00;
