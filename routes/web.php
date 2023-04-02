@@ -25,7 +25,7 @@ Route::post('/dashboard/statusChange', 'DashboardController@statusChange')->midd
 Route::post('/dashboard/delete', 'EvictionController@delete')->middleware('auth');
 Route::get('/dashboard/getCourtDate', 'DashboardController@getCourtDate')->middleware('auth');
 Route::post('/dashboard/storeCourtDate', 'DashboardController@storeCourtDate')->middleware('auth');
-Route::get('/dashboard/check-county', 'DashboardController@getCountySettings')->middleware('auth');
+Route::get('/dashboard/check-county', 'DashboardController@getCountySettings');
 
 Route::get('/dashboard/edit-file', 'DashboardController@getFileData')->middleware('auth');;
 Route::post('/dashboard/edit-oop', 'DashboardController@editOOP')->middleware('auth');;
