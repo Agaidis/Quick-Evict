@@ -364,6 +364,10 @@ class NewFileController extends Controller
             $mileage = $resp['rows'][0]['elements'][0]['distance']['text'];
             $mileage = str_replace(' mi', '', $mileage);
 
+            $errorMsg = new ErrorLog();
+            $errorMsg->payload = 'Mileage: ' . $mileage;
+            $errorMsg->save();
+
             if ($fileType === 'civil') {
                 $mileage = number_format($mileage, 2) * 2;
             } else if ($fileType === 'oop' || $fileType === 'oopA') {
@@ -372,6 +376,9 @@ class NewFileController extends Controller
                 $mileage = number_format($mileage, 2) * 2;
             }
 
+            $errorMsg = new ErrorLog();
+            $errorMsg->payload = 'Mileage 2: ' . $mileage;
+            $errorMsg->save();
 
             return $mileage;
 
