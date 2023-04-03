@@ -54,10 +54,22 @@ class NewFileController extends Controller
                 ]);
                 $userEmail = Auth::user()->email;
 
+                $errorMsg = new ErrorLog();
+                $errorMsg->payload = 'file type' . $request->fileType;
+                $errorMsg->save();
+
                 if ($request->fileType == 'ltc') {
-                    return view('eviction', compact('map', 'fileType', 'userEmail'));
+                    $isComplaintFee = 'no';
+                    return view('eviction', compact('map', 'fileType', 'userEmail', 'isComplaintFee'));
+                } else if ($request->fileType == 'ltcA') {
+                    $isComplaintFee = 'yes';
+                    return view('eviction', compact('map', 'fileType', 'userEmail', 'isComplaintFee'));
                 } else if ($request->fileType == 'oop') {
-                    return view('orderOfPossession', compact('map', 'fileType', 'userEmail'));
+                    $isComplaintFee = 'no';
+                    return view('orderOfPossession', compact('map', 'fileType', 'userEmail', 'isComplaintFee'));
+                } else if ($request->fileType == 'oopA') {
+                    $isComplaintFee = 'yes';
+                    return view('orderOfPossession', compact('map', 'fileType', 'userEmail', 'isComplaintFee'));
                 } else if ($request->fileType == 'civil') {
                     return view('civilComplaint', compact('map', 'fileType', 'userEmail'));
                 } else {
@@ -68,7 +80,7 @@ class NewFileController extends Controller
                 $errorMsg->payload = $e->getMessage() . ' Line #: ' . $e->getLine();
 
                 $errorMsg->save();
-                return 'failure';
+                return 'failure 11';
             }
     }
     public function getFilingFee() {
@@ -83,7 +95,7 @@ class NewFileController extends Controller
             $tenantNum = (int)$_GET['tenant_num'];
             $courtDetails = CourtDetails::where('magistrate_id', $courtNumber[1])->first();
 
-            if ($fileType == 'ltc') {
+            if ($fileType == 'ltc' || $fileType == 'ltcA') {
 
                 if ($courtDetails->is_distance_fee === 1) {
                     $geoData = GeoLocation::where('magistrate_id', $courtNumber[1])->first();
@@ -150,7 +162,7 @@ class NewFileController extends Controller
 
 
 
-            } else if ($fileType === 'oop') {
+            } else if ($fileType === 'oop' || $fileType === 'oopA') {
 
                 if ($courtDetails->oop_distance_fee === 1) {
                     $geoData = GeoLocation::where('magistrate_id', $courtNumber[1])->first();
@@ -270,7 +282,7 @@ class NewFileController extends Controller
             $errorDetails .= PHP_EOL . 'Message ' . $e->getMessage();
             Log::error($errorDetails . PHP_EOL . 'Error Message: ' . $e->getMessage() . PHP_EOL . 'Trace: ' . $e->getTraceAsString());
             mail('andrew.gaidis@gmail.com', 'Get Filing Fee', $errorDetails);
-            return 'failure';
+            return 'failure 22';
         }
     }
 
@@ -352,14 +364,21 @@ class NewFileController extends Controller
             $mileage = $resp['rows'][0]['elements'][0]['distance']['text'];
             $mileage = str_replace(' mi', '', $mileage);
 
+            $errorMsg = new ErrorLog();
+            $errorMsg->payload = 'Mileage: ' . $mileage;
+            $errorMsg->save();
+
             if ($fileType === 'civil') {
                 $mileage = number_format($mileage, 2) * 2;
-            } else if ($fileType === 'oop') {
+            } else if ($fileType === 'oop' || $fileType === 'oopA') {
                 $mileage = number_format($mileage, 2) * 4;
-            } else if ($fileType === 'ltc') {
+            } else if ($fileType === 'ltc' || $fileType === 'ltcA') {
                 $mileage = number_format($mileage, 2) * 2;
             }
 
+            $errorMsg = new ErrorLog();
+            $errorMsg->payload = 'Mileage 2: ' . $mileage;
+            $errorMsg->save();
 
             return $mileage;
 

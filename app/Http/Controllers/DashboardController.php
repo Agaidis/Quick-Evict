@@ -42,32 +42,56 @@ class DashboardController extends Controller
             $userRole = Auth::user()->role;
             $counties = CourtDetails::distinct()->orderBy('county')->get(['county']);
 
-            if (Auth::user()->role == 'Administrator' || Auth::user()->role == 'PM Company Leader') {
+            if (Auth::user()->role == 'Administrator') {
                 $evictions = DB::table('evictions')
-                    ->select('evictions.id', 'users.name AS name', 'user_id', 'property_address', 'status', 'file_type', 'is_downloaded', 'owner_name', 'tenant_name', 'court_date', 'total_judgement', 'filing_fee',  'evictions.created_at', 'is_extra_files', 'court_number')
+                    ->select('evictions.id', 'users.name AS name', 'user_id', 'property_address', 'status', 'file_type', 'is_downloaded', 'owner_name', 'tenant_name', 'court_date', 'total_judgement', 'filing_fee',  'evictions.created_at', 'is_extra_files', 'court_number', 'is_in_person_filing')
                     ->join('users', 'evictions.user_id', '=', 'users.id')
                     ->orderBy('evictions.id', 'desc')
-                    ->take(500)
+                    ->take(1000)
                     ->get();
-            } else if (Auth::user()->role == 'General User') {
-                $evictions = DB::select('select id, property_address, status, file_type, is_downloaded, owner_name, tenant_name, court_date, total_judgement, filing_fee,  created_at, is_extra_files, court_number from evictions WHERE user_id = '. $userId .' ORDER BY FIELD(status, "Created LTC", "LTC Mailed", "LTC Submitted Online", "Court Hearing Scheduled", "Court Hearing Extended", "Judgement Issued in Favor of Owner", "Judgement Denied by Court", "Tenant Filed Appeal", "OOP Mailed", "OOP Submitted Online", "Paid Judgement", "Locked Out Tenant"), id DESC');
-            } else if (Auth::user()->role == 'Court') {
+            } else if (Auth::user()->role == 'PM Company Leader') {
+                $emailAddress = Auth::user()->email;
+                $splitEmailAddress = explode('@', $emailAddress);
+                $emailDomain = $splitEmailAddress[1];
+                $userIdArr = [];
+
+                $pmUseIds = DB::table('users')
+                    ->select('users.id')
+                    ->where('email','LIKE','%'.$emailDomain.'%')
+                    ->get();
+
+                foreach ($pmUseIds as $userData) {
+                    array_push($userIdArr, $userData->id);
+                }
+
                 $evictions = DB::table('evictions')
-                    ->select('id', 'property_address', 'status', 'file_type', 'is_downloaded', 'owner_name', 'tenant_name', 'court_date', 'total_judgement', 'filing_fee',  'created_at', 'is_extra_files', 'court_number')
+                    ->select('evictions.id', 'users.name AS name', 'user_id', 'property_address', 'status', 'file_type', 'is_downloaded', 'owner_name', 'tenant_name', 'court_date', 'total_judgement', 'filing_fee',  'evictions.created_at', 'is_extra_files', 'court_number', 'is_in_person_filing')
+                    ->whereIn('user_id', $userIdArr)
+                    ->join('users', 'evictions.user_id', '=', 'users.id')
+                    ->orderBy('evictions.id', 'desc')
+                    ->take(1000)
+                    ->get();
+
+            } else if (Auth::user()->role == 'General User') {
+                $evictions = DB::select('select id, property_address, status, file_type, is_downloaded, owner_name, tenant_name, court_date, total_judgement, filing_fee,  created_at, is_extra_files, court_number, is_in_person_filing from evictions WHERE user_id = '. $userId .' ORDER BY FIELD(status, "Created LTC", "LTC Mailed", "LTC Submitted Online", "Court Hearing Scheduled", "Court Hearing Extended", "Judgement Issued in Favor of Owner", "Judgement Denied by Court", "Tenant Filed Appeal", "OOP Mailed", "OOP Submitted Online", "Paid Judgement", "Locked Out Tenant"), id DESC');
+            } else if (Auth::user()->role == 'Court') {
+
+                $evictions = DB::table('evictions')
+                    ->select('id', 'property_address', 'status', 'file_type', 'is_downloaded', 'owner_name', 'tenant_name', 'court_date', 'total_judgement', 'filing_fee',  'created_at', 'is_extra_files', 'court_number', 'is_in_person_filing')
                     ->where('court_number', $courtNumber )
                     ->where('is_online_filing', 1)
                     ->orderBy('id', 'desc')
-                    ->take(500)
+                    ->take(1000)
                     ->get();
+
             } else {
-                $evictions = DB::select('select id, property_address, status, file_type, is_downloaded, owner_name, tenant_name, court_date, total_judgement, filing_fee,  created_at, is_extra_files, court_number from evictions ORDER BY FIELD(status, "Created LTC", "LTC Mailed", "LTC Submitted Online", "Court Hearing Scheduled", "Court Hearing Extended", "Judgement Issued in Favor of Owner", "Judgement Denied by Court", "Tenant Filed Appeal", "OOP Mailed", "OOP Submitted Online", "Paid Judgement", "Locked Out Tenant"), id DESC');
+                $evictions = DB::select('select id, property_address, status, file_type, is_downloaded, owner_name, tenant_name, court_date, total_judgement, filing_fee,  created_at, is_extra_files, court_number, is_in_person_filing from evictions ORDER BY FIELD(status, "Created LTC", "LTC Mailed", "LTC Submitted Online", "Court Hearing Scheduled", "Court Hearing Extended", "Judgement Issued in Favor of Owner", "Judgement Denied by Court", "Tenant Filed Appeal", "OOP Mailed", "OOP Submitted Online", "Paid Judgement", "Locked Out Tenant"), id DESC');
             }
 
             return view('dashboard' , compact('evictions', 'userRole', 'counties'));
         } catch (\Exception $e) {
             $errorMsg = new ErrorLog();
             $errorMsg->payload = $e->getMessage() . ' Line #: ' . $e->getLine();
-
             $errorMsg->save();
         }
 
@@ -191,6 +215,18 @@ class DashboardController extends Controller
             $fileData = Evictions::where('id', $_GET['id'])->first();
 
             return $fileData;
+        } catch ( Exception $e ) {
+            mail('andrew.gaidis@gmail.com', 'Error Getting File to Edit', $e->getMessage());
+            Log::info($e->getMessage());
+            return false;
+        }
+    }
+
+    public function getCountySettings(Request $request) {
+        try {
+            $isEnabled = DB::table('county_settings')->where('county', $request->county)->value('is_allowed_in_person_complaint');
+
+            return $isEnabled;
         } catch ( Exception $e ) {
             mail('andrew.gaidis@gmail.com', 'Error Getting File to Edit', $e->getMessage());
             Log::info($e->getMessage());

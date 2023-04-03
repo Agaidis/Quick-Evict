@@ -61,18 +61,18 @@
                     @if (Auth::check())
 
                             <li><a href="{{ url('dashboard') }}" id="dashboard_btn">Dashboard</a></li>
+                            <li><a href="{{ url('services') }}" id="services_btn">Services</a></li>
                             <li><a href="{{ url('information') }}" id="eviction_info_btn">Information</a></li>
                             <li><a href="{{ url('FAQ') }}" id="faq_btn">FAQ</a></li>
                             <li><a href="{{ url('where-does-this-work') }}" id="where_work_btn">Where Does this Work?</a></li>
-                            <li><a href="{{ url('about-us') }}" id="about_us_btn">About Us</a></li>
                             @if (Auth::user()->role == 'Court' || Auth::user()->role == 'Administrator')
-                                <li><a href="{{ url('getFileFee') }}" id="about_us_btn">Fee Calculator</a></li>
+                                <li><a href="{{ url('getFileFee') }}">Fee Calculator</a></li>
                                 @endif
                     @else
+                            <li><a href="{{ url('services') }}" id="services_btn">Services</a></li>
                             <li><a href="{{ url('information') }}" id="eviction_info_btn">Information</a></li>
                             <li><a href="{{ url('FAQ') }}" id="faq_btn">FAQ</a></li>
                             <li><a href="{{ url('where-does-this-work') }}" id="where_work_btn">Where Does this Work?</a></li>
-                            <li><a href="{{ url('about-us') }}" id="about_us_btn">About Us</a></li>
                     @endif<!-- Authentication Links today -->
 
                     </ul>
@@ -91,6 +91,7 @@
                             <div style="margin-left:-15px;" class="dropdown-menu" aria-labelledby="navbarDropdown">
                                 @if (Auth::user()->role == 'Administrator')
                                     <a class="dropdown-item" href="{{ url('magistrateCreator') }}" id="magistrate_btn">Magistrate Creator</a>
+                                    <a class="dropdown-item" href="{{ url('countyAdmin') }}" id="county_btn">County Admin</a>
                                     <a class="dropdown-item" href="{{ url('feeDuplicator') }}" id="fee_duplicator_btn">Fee Duplicator</a>
                                     <a class="dropdown-item" href="{{ url('generalAdmin') }}" id="admin_btn">General Admin</a>
                                     <a class="dropdown-item" href="{{ url('userManagement') }}" id="user_management_btn">Manage Users</a>

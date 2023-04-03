@@ -33,7 +33,8 @@ let mix = require('laravel-mix');
      'resources/assets/js/getFileFee.js',
      'resources/assets/js/stripe.js',
      'resources/assets/js/generalAdmin.js',
-     'resources/assets/js/feeDuplicator.js'
+     'resources/assets/js/feeDuplicator.js',
+     'resources/assets/js/countyAdmin.js'
 
  ], 'public/js/app.js').version()
 //mix.js('resources/assets/js/app.js', 'public/js')

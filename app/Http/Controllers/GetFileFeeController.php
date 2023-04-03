@@ -109,7 +109,16 @@ class GetFileFeeController extends Controller
                 $distance = 0;
                 $calculatedFee = 0;
 
+                $errorMsg = new ErrorLog();
+                $errorMsg->payload = 'Court Details: ' . serialize($courtDetails);
+                $errorMsg->save();
+
                 if ($courtDetails->is_distance_fee === 1) {
+
+                    $errorMsg = new ErrorLog();
+                    $errorMsg->payload = 'atleast im here';
+                    $errorMsg->save();
+
                     $newFile = new NewFileController();
                     $geoData = GeoLocation::where('magistrate_id', $request->courtNumber)->first();
 

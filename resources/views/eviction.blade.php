@@ -10,6 +10,7 @@
                 <div class="col-md-12">
                     <form method="post" action="{{ action('EvictionController@showSamplePDF') }}" enctype="multipart/form-data" id="eviction_form" target="_blank">
                         <input type="hidden" name="_token" value="{{ Session::token() }}">
+                        <input type="hidden" id="isComplaintFee" value="{{$isComplaintFee}}" />
                         <h2 style="text-align:center;" class="titles fs-subtitle">Step 2:<br> Enter the address of the incident.</h2>
                         <div class="form-group">
                             <div class="row">
@@ -159,7 +160,7 @@
                                         </div>
                                     </div>
                                     <input type="hidden" id="tenant_num" name="tenant_num" />
-                                    <input type="hidden" id="file_type" value="{{$fileType}}"/>
+                                    <input type="hidden" id="file_type" name="file_type" value="{{$fileType}}"/>
                                     <div class="row">
                                         <div class="col-sm-10">
                                             <div class="labels">Lease Type:</div>
@@ -285,6 +286,8 @@
                             <input type="hidden" id="street_name" name="streetName"/>
                             <input type="hidden" id="town" name="town"/>
                             <input type="hidden" id="zipcode" name="zipcode"/>
+                            <input type="hidden" id="file_type" name="file_type" value="{{$fileType}}"/>
+
 
                             <!-- RESIDED ADDRESS ELEMENTS -->
                             <input type="hidden" id="resided_state" name="residedState"/>
@@ -302,6 +305,7 @@
                     </form>
                     <form method="post" action="{{ action('EvictionController@formulatePDF') }}" enctype="multipart/form-data" id="submit_form">
                         <!-- PAY AND SIGN MODAL-->
+
                         <div class="modal fade" id="modal_signature">
                             <div class="modal-dialog" role="document">
                                 <div class="modal_signature modal-content">
@@ -329,7 +333,7 @@
                                             <div class="price_ctr col-md-6">
                                                 <label>Court Filing Fee: $</label><span id="filing_fee_display"></span><br>
                                                 <span id="distance_fee_container"><label>Calculated Distance Fee: $</label><span id="distance_fee_display"></span><br></span>
-                                                <label>CourtZip Filing Fee: </label><span> $17.99</span><br>
+                                                <label>CourtZip Filing Fee: </label><span> $25</span><br>
                                                 <label>Total: $</label><span id="total"></span>
                                             </div>
                                             <div class="form-row">

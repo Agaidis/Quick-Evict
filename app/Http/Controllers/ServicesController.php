@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Exception;
 
-class AboutUsController extends Controller
+class ServicesController extends Controller
 {
             /**
      * Show the application dashboard.
@@ -17,7 +17,7 @@ class AboutUsController extends Controller
     public function index()
     {
         try {
-            return view('aboutUs');
+            return view('services');
         } catch ( Exception $e ) {
             $errorMsg = new ErrorLog();
             $errorMsg->payload = $e->getMessage() . ' Line #: ' . $e->getLine();

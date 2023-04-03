@@ -12,6 +12,7 @@
                             <div class="col-md-12">
                                 <form method="post" action="{{ action('OrderOfPossessionController@showSamplePDF') }}" enctype="multipart/form-data" id="eviction_form" target="_blank">
                                     <input type="hidden" name="_token" value="{{ Session::token() }}">
+                                    <input type="hidden" id="isComplaintFee" value="{{$isComplaintFee}}" />
                                     <h2 style="text-align:center;" class="titles fs-subtitle">Step 2:<br> Enter the address you plan on evicting.</h2>
                                     <div class="form-group">
                                         <div class="row">
@@ -23,7 +24,6 @@
                                     <div class="offset-1">
                                         <div id="map"></div>
                                     </div>
-                                    <input type="hidden" id="file_type" value="{{$fileType}}"/>
                                     <div class="col-md-12 offset-1 filing_form_div">
 
                                         <!-- ADDITIONAL INFORMATION ON PROPERTY -->
@@ -204,6 +204,8 @@
                                         <input type="hidden" id="user_email" name="user_email" value="{{$userEmail}}"/>
                                         <input type="hidden" id="total_input" name="total"/>
                                         <input type="hidden" name="distance_fee" id="distance_fee" />
+                                        <input type="hidden" id="file_type" name="file_type" value="{{$fileType}}"/>
+
                                     </div>
                                 </form>
 
@@ -243,7 +245,7 @@
                                                         <div class="price_ctr col-md-6">
                                                             <label>Court Filing Fee: $</label><span id="filing_fee_display"></span><br>
                                                             <span id="distance_fee_container"><label>Calculated Distance Fee: $</label><span id="distance_fee_display"></span><br></span>
-                                                            <label>CourtZip Filing Fee: </label><span> $17.99</span><br>
+                                                            <label>CourtZip Filing Fee: </label><span> $25</span><br>
                                                             <label>Total: $</label><span id="total"></span>
                                                         </div>
                                                         <div class="form-row">

@@ -407,6 +407,11 @@ class EvictionController extends Controller
                 $eviction->file_type = 'eviction';
                 $eviction->is_extra_files = 1;//$_POST['is_extra_filing'];
                 $eviction->is_online_filing = $isOnline;
+                if ($_POST['file_type'] == 'ltcA') {
+                    $eviction->is_in_person_filing = 1;
+                } else {
+                    $eviction->is_in_person_filing = 0;
+                }
 
                 $eviction->save();
 
@@ -440,16 +445,30 @@ class EvictionController extends Controller
                 try {
                     $token = $_POST['stripeToken'];
 
-                    if (strpos(Auth::user()->email, 'slatehousegroup') === false && strpos(Auth::user()->email, 'home365.co') === false) {
+                    $errorMsg = new ErrorLog();
+                    $errorMsg->payload = serialize($_POST);
+
+                    $errorMsg->save();
+
+
+                    if (strpos(Auth::user()->email, 'slatehousegroup') === false && strpos(Auth::user()->email, 'home365.co') === false && strpos(Auth::user()->email, 'elite.team') === false) {
                         Stripe::setApiKey(env('STRIPE_SECRET_KEY'));
-                        $amount = $filingFee + 17.99;
+                        if ($_POST['file_type'] == 'ltcA') {
+                            $amount = $filingFee + 250.00;
+                        } else {
+                            $amount = $filingFee + 25.00;
+                        }
                     } else {
                         Stripe::setApiKey(env('STRIPE_SECRET_TEST_KEY'));
-                        $amount = $filingFee + 17.99;
+                        $amount = $filingFee + 25.00;
                     }
                     $stringAmt = strval($amount);
                     $stringAmt = str_replace('.', '', $stringAmt);
                     $integerAmt = intval($stringAmt);
+
+                    $errorMsg = new ErrorLog();
+                    $errorMsg->payload ='Integer Amount LTC: ' . $integerAmt;
+                    $errorMsg->save();
 //
                     \Stripe\Charge::create([
                         'amount' => $integerAmt,

@@ -12,20 +12,20 @@
                             <h3>Start a new File</h3>
                             <div class="form-row">
                                 <div class="form-group col-4">
-                                    <select class="form-control" id="file_type_select" name="fileType">
-                                        <option value="none">Select a File Type</option>
-                                        <option value="civil">Civil Complaint</option>
-                                        <option value="ltc">Landlord Tenant-Complaint</option>
-                                        <option value="oop">Request for Order of Possession</option>
-
-                                    </select>
-                                </div>
-                                <div class="form-group col-4">
                                     <select class="form-control" id="county_select" name="county" style="padding-bottom: 5px;">
                                         <option value="none">Select the County</option>
                                         @foreach ($counties as $county)
                                             <option value="{{$county->county}}">{{$county->county}}</option>
                                         @endforeach
+                                    </select>
+                                </div>
+                                <div class="form-group col-4">
+                                    <select disabled class="form-control" id="file_type_select" name="fileType">
+                                        <option value="none">Select a File Type</option>
+                                        <option value="ltc">Landlord Tenant-Complaint</option>
+                                        <option disabled id="ltcA" value="ltcA">Landlord-Tenant Compalint, File AND Represent Plaintiff at Hearing</option>
+                                        <option value="oop">Request for Order of Possession</option>
+                                        <option disabled id="oopA" value="oopA">Request for Order of Possession File AND attend lockout and complete lock change</option>
                                     </select>
                                 </div>
                                 <div class="form-group col-md-3">
@@ -49,7 +49,7 @@
                                 <thead>
                                 <tr>
                                     <th style="width:18%;" class="text-center">Status</th>
-                                    <th class="text-center">Id</th>
+                                    <th style="width:5%;" class="text-center">Id</th>
                                     @if (Auth::user()->role == 'PM Company Leader' || Auth::user()->role == 'Administrator')
                                     <th class="text-center">User</th>
                                     @endif
@@ -147,7 +147,7 @@
                                                             <option value="{{$status}}">{{$status}}</option>
                                                         @endif
                                                     @endforeach
-                                                @elseif ($eviction->file_type === 'oop')
+                                                @elseif ($eviction->file_type === 'oop' || $eviction->file_type === 'oopA')
                                                     @foreach ($oopStatusArray as $status)
                                                         @if ($status == $eviction->status)
                                                             <option value="{{$status}}" selected>{{$status}}</option>
@@ -159,7 +159,7 @@
 
                                             </select>
                                         </td>
-                                        <td class="text-center">{{$eviction->id}}</td>
+                                        <td class="text-center">{{$eviction->id}}-{{$eviction->is_in_person_filing}}</td>
                                         @if (Auth::user()->role == 'PM Company Leader' || Auth::user()->role == 'Administrator')
                                         <td class="text-center">{{$eviction->name}}</td>
                                         @endif

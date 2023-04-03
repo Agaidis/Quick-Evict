@@ -25,6 +25,7 @@ Route::post('/dashboard/statusChange', 'DashboardController@statusChange')->midd
 Route::post('/dashboard/delete', 'EvictionController@delete')->middleware('auth');
 Route::get('/dashboard/getCourtDate', 'DashboardController@getCourtDate')->middleware('auth');
 Route::post('/dashboard/storeCourtDate', 'DashboardController@storeCourtDate')->middleware('auth');
+Route::get('/dashboard/check-county', 'DashboardController@getCountySettings');
 
 Route::get('/dashboard/edit-file', 'DashboardController@getFileData')->middleware('auth');;
 Route::post('/dashboard/edit-oop', 'DashboardController@editOOP')->middleware('auth');;
@@ -53,7 +54,7 @@ Route::get('/information', 'InfoController@index');
 Route::get('/FAQ', 'FAQController@index');
 Route::get('/where-does-this-work', 'WhereDoesThisWorkController@index');
 Route::post('/where-does-this-work', 'WhereDoesThisWorkController@store');
-Route::get('/about-us', 'AboutUsController@index');
+Route::get('/services', 'ServicesController@index');
 
 
 /* Magistrate Creator */
@@ -75,6 +76,11 @@ Route::get('/store', 'FileStorageController@testFile')->middleware('auth');
 Route::post('/get-filings', 'FileStorageController@getFilings')->middleware('auth');
 Route::post('/download-filings', 'FileStorageController@downloadFilings')->middleware('auth');
 Route::post('/file-upload', 'FileStorageController@storeFile')->middleware('auth');
+
+/* County Admin */
+Route::get('/countyAdmin', 'CountyAdminController@index')->middleware('auth');
+Route::post('/countyAdmin', 'CountyAdminController@updateInPersonComplaint')->middleware('auth');
+
 
 /* General Admin */
 Route::get('/generalAdmin', 'GeneralAdminController@index')->middleware('auth');
