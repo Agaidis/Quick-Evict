@@ -67,6 +67,8 @@ class GetFileFeeController extends Controller
             $tenantNum = (int)$request->numDefs;
             $additionalTenantAmt = 1;
             $additionalTenantFee = 0;
+            $distance = 0;
+            $calculatedFee = 0;
 
             if ($request->fileType == 'ltc') {
 
@@ -106,9 +108,6 @@ class GetFileFeeController extends Controller
                     $filingFee = 'Didnt Work';
                 }
 
-                $distance = 0;
-                $calculatedFee = 0;
-
                 $errorMsg = new ErrorLog();
                 $errorMsg->payload = 'Court Details: ' . serialize($courtDetails);
                 $errorMsg->save();
@@ -143,6 +142,10 @@ class GetFileFeeController extends Controller
             } else if ($request->fileType === 'oop') {
 
                 /*                      ORDER OF POSSESSION                 */
+
+                $errorMsg = new ErrorLog();
+                $errorMsg->payload = 'im in oop';
+                $errorMsg->save();
 
                 if ($tenantNum == 2) {
                     $oop = $courtDetails->two_defendant_out_of_pocket;
@@ -179,6 +182,11 @@ class GetFileFeeController extends Controller
                 $errorMsg->save();
 
                 if ($courtDetails->oop_distance_fee === 1) {
+
+                    $errorMsg = new ErrorLog();
+                    $errorMsg->payload = 'in oop distance fee';
+                    $errorMsg->save();
+
                     $newFile = new NewFileController();
                     $geoData = GeoLocation::where('magistrate_id', $request->courtNumber)->first();
 
@@ -188,9 +196,15 @@ class GetFileFeeController extends Controller
 
                     $distance = $newFile->getDistance( $courtAddress, $request->userAddress, $request->fileType );
 
+                    $errorMsg = new ErrorLog();
+                    $errorMsg->payload = 'Distance: ' . $distance;
+                    $errorMsg->save();
+
                     $mileFee = GeneralAdmin::where('name', 'mile_fee')->value('value');
 
-
+                    $errorMsg = new ErrorLog();
+                    $errorMsg->payload = 'mile fee: ' . $mileFee;
+                    $errorMsg->save();
 
                     $calculatedFee = $distance * $mileFee;
 
@@ -217,7 +231,7 @@ class GetFileFeeController extends Controller
 
                 $filingFee = number_format($filingFee, 2);
 
-                $returnArray = array('filingFee' => $filingFee, 'distance' => 0, 'calculatedFee' => 0);
+                $returnArray = array('filingFee' => $filingFee, 'distance' => $filingFee, 'calculatedFee' => $calculatedFee);
 
                 return $returnArray;
             } else if ($request->fileType === 'civil') {
