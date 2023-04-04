@@ -174,9 +174,17 @@ class GetFileFeeController extends Controller
                     $filingFee = 'Didnt Work';
                 }
 
+                $errorMsg = new ErrorLog();
+                $errorMsg->payload = 'Filing Fee 178: ' . $filingFee;
+                $errorMsg->save();
+
                 if ($courtDetails->oop_distance_fee === 1) {
                     $newFile = new NewFileController();
                     $geoData = GeoLocation::where('magistrate_id', $request->courtNumber)->first();
+
+                    $errorMsg = new ErrorLog();
+                    $errorMsg->payload = 'Inside oop distance fee. 186: ';
+                    $errorMsg->save();
 
                     $courtAddress = $geoData->address_line_one . ' ' . $geoData->address_line_two;
 
@@ -184,9 +192,35 @@ class GetFileFeeController extends Controller
 
                     $mileFee = GeneralAdmin::where('name', 'mile_fee')->value('value');
 
+                    $errorMsg = new ErrorLog();
+                    $errorMsg->payload = 'Mile Fee: ' . $mileFee;
+                    $errorMsg->save();
+
+                    $errorMsg = new ErrorLog();
+                    $errorMsg->payload = 'Distance: ' . $distance;
+                    $errorMsg->save();
+
                     $calculatedFee = $distance * $mileFee;
+
+                    $errorMsg = new ErrorLog();
+                    $errorMsg->payload = 'Calculated Fee: ' . $calculatedFee;
+                    $errorMsg->save();
+
                     $calculatedFee = number_format($calculatedFee, 2);
+
+                    $errorMsg = new ErrorLog();
+                    $errorMsg->payload = 'Calculated Fee 2: ' . $calculatedFee;
+                    $errorMsg->save();
+
+                    $errorMsg = new ErrorLog();
+                    $errorMsg->payload = 'filing Fee 1: ' . $filingFee;
+                    $errorMsg->save();
+
                     $filingFee = $filingFee + $calculatedFee;
+
+                    $errorMsg = new ErrorLog();
+                    $errorMsg->payload = 'filing Fee 2: ' . $filingFee;
+                    $errorMsg->save();
                 }
 
                 $filingFee = number_format($filingFee, 2);
