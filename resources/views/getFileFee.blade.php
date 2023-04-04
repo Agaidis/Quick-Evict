@@ -103,7 +103,7 @@
                                 </div>
                                 <div class="row">
                                     <div class="col-sm-4">
-                                        <label class="labels" for="total_judgment">Mileage</label>
+                                        <label class="labels" for="total_judgment">Mileage (Round Trip)</label>
                                         <input disabled type="text" class="form-control eviction_fields" id="distance"/>
                                     </div>
 
