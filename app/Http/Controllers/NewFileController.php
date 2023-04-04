@@ -165,6 +165,11 @@ class NewFileController extends Controller
             } else if ($fileType === 'oop' || $fileType === 'oopA') {
 
                 if ($courtDetails->oop_distance_fee === 1) {
+
+                    $errorMsg = new ErrorLog();
+                    $errorMsg->payload = 'Inside oop distance fee. 170: ';
+                    $errorMsg->save();
+
                     $geoData = GeoLocation::where('magistrate_id', $courtNumber[1])->first();
 
                     $courtAddress = $geoData->address_line_one . ' ' . $geoData->address_line_two;
@@ -173,10 +178,34 @@ class NewFileController extends Controller
 
                     $distance = $this->getDistance( $courtAddress, $userAddress, $_GET['fileType'] );
 
+
+                    $errorMsg = new ErrorLog();
+                    $errorMsg->payload = 'Distance: ' . $distance;
+                    $errorMsg->save();
+
+
                     $mileFee = GeneralAdmin::where('name', 'mile_fee')->value('value');
 
+                    $errorMsg = new ErrorLog();
+                    $errorMsg->payload = 'Mile Fee: ' . $mileFee;
+                    $errorMsg->save();
+
                     $calculatedFee = $distance * $mileFee;
+
+                    $errorMsg = new ErrorLog();
+                    $errorMsg->payload = 'Calculated Fee: ' . $calculatedFee;
+                    $errorMsg->save();
+
                     $calculatedFee = number_format($calculatedFee, 2);
+
+                    $errorMsg = new ErrorLog();
+                    $errorMsg->payload = 'Calculated Fee 2: ' . $calculatedFee;
+                    $errorMsg->save();
+
+                    $errorMsg = new ErrorLog();
+                    $errorMsg->payload = 'filing Fee 1: ' . $filingFee;
+                    $errorMsg->save();
+
                 } else {
                     $courtAddress = '';
                     $mileFee = '';
