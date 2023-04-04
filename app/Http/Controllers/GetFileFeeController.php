@@ -173,11 +173,12 @@ class GetFileFeeController extends Controller
                     $courtAddress = $geoData->address_line_one . ' ' . $geoData->address_line_two;
 
                     $distance = $newFile->getDistance( $courtAddress, $request->userAddress, $request->fileType );
-                    $distance = $distance / 2;
+
 
                     $mileFee = GeneralAdmin::where('name', 'mile_fee')->value('value');
 
                     $calculatedFee = $distance * $mileFee;
+                    $distance = $distance / 2;
 
                     $calculatedFee = number_format($calculatedFee, 2);
 
