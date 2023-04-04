@@ -55,7 +55,7 @@ class NewFileController extends Controller
                 $userEmail = Auth::user()->email;
 
                 $errorMsg = new ErrorLog();
-                $errorMsg->payload = 'file type' . $request->fileType;
+                $errorMsg->payload = 'file type: ' . $request->fileType . ' User: ' . $userEmail;
                 $errorMsg->save();
 
                 if ($request->fileType == 'ltc') {
@@ -166,10 +166,6 @@ class NewFileController extends Controller
 
                 if ($courtDetails->oop_distance_fee === 1) {
 
-                    $errorMsg = new ErrorLog();
-                    $errorMsg->payload = 'Inside oop distance fee. 170: ';
-                    $errorMsg->save();
-
                     $geoData = GeoLocation::where('magistrate_id', $courtNumber[1])->first();
 
                     $courtAddress = $geoData->address_line_one . ' ' . $geoData->address_line_two;
@@ -178,33 +174,12 @@ class NewFileController extends Controller
 
                     $distance = $this->getDistance( $courtAddress, $userAddress, $_GET['fileType'] );
 
-
-                    $errorMsg = new ErrorLog();
-                    $errorMsg->payload = 'Distance: ' . $distance;
-                    $errorMsg->save();
-
-
                     $mileFee = GeneralAdmin::where('name', 'mile_fee')->value('value');
-
-                    $errorMsg = new ErrorLog();
-                    $errorMsg->payload = 'Mile Fee: ' . $mileFee;
-                    $errorMsg->save();
 
                     $calculatedFee = $distance * $mileFee;
 
-                    $errorMsg = new ErrorLog();
-                    $errorMsg->payload = 'Calculated Fee: ' . $calculatedFee;
-                    $errorMsg->save();
-
                     $calculatedFee = number_format($calculatedFee, 2);
 
-                    $errorMsg = new ErrorLog();
-                    $errorMsg->payload = 'Calculated Fee 2: ' . $calculatedFee;
-                    $errorMsg->save();
-
-                    $errorMsg = new ErrorLog();
-                    $errorMsg->payload = 'filing Fee 1: ' . $filingFee;
-                    $errorMsg->save();
 
                 } else {
                     $courtAddress = '';
@@ -393,10 +368,6 @@ class NewFileController extends Controller
             $mileage = $resp['rows'][0]['elements'][0]['distance']['text'];
             $mileage = str_replace(' mi', '', $mileage);
 
-            $errorMsg = new ErrorLog();
-            $errorMsg->payload = 'Mileage: ' . $mileage;
-            $errorMsg->save();
-
             if ($fileType === 'civil') {
                 $mileage = number_format($mileage, 2) * 2;
             } else if ($fileType === 'oop' || $fileType === 'oopA') {
@@ -404,10 +375,6 @@ class NewFileController extends Controller
             } else if ($fileType === 'ltc' || $fileType === 'ltcA') {
                 $mileage = number_format($mileage, 2) * 2;
             }
-
-            $errorMsg = new ErrorLog();
-            $errorMsg->payload = 'Mileage 2: ' . $mileage;
-            $errorMsg->save();
 
             return $mileage;
 
