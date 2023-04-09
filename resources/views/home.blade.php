@@ -210,7 +210,7 @@
                 </form>
             @else
                 <div class="form-row">
-                    <button type="button" style="background-color:#283891; color:white;" class="btn btn-default offset-4" onclick="window.location='{{ url("register") }}'" id="create_an_account">Create an Account</button>
+                    <button type="button" style="background-color:#283891; color:white;" class="btn btn-default offset-5" onclick="window.location='{{ url("register") }}'" id="create_an_account">Create an Account</button>
                 </div>
             @endif
 
