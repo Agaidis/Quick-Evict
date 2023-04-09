@@ -49032,16 +49032,8 @@ if (document.location.href.split('/')[3] === 'new-file') {
       console.log('Here are the place Components: ', place.address_components);
       console.log('Length: ', place.address_components.length);
 
-      if (place.address_components[6] !== undefined) {
-        if (typeof place.address_components[6].short_name !== 'undefined') {
-          if (typeof place.address_components[7] !== 'undefined') {
-            zipcode = place.address_components[7].long_name;
-          } else {
-            zipcode = place.address_components[6].long_name;
-          }
-        } else {
-          zipcode = place.address_components[6].long_name;
-        }
+      if (place.address_components.length === 8) {
+        zipcode = place.address_components[6].long_name;
       } else {
         county = place.address_components[2].long_name;
         state = place.address_components[3].short_name;
