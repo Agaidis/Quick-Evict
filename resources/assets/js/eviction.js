@@ -159,11 +159,12 @@ if (document.location.href.split('/')[3] === 'new-file') {
 
             if (place.address_components.length === 8) {
                 zipcode = place.address_components[6].long_name;
+            } else if (place.address_components.length === 9) {
+                zipcode = place.address_components[7].long_name;
             } else {
                 county = place.address_components[2].long_name;
                 state = place.address_components[3].short_name;
                 zipcode = place.address_components[5].long_name;
-
             }
 
             $('#state').val('PA');
