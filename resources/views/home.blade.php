@@ -12,11 +12,12 @@
 
                     </div>
                     <div class="col-md-12 col-lg-8 col-xl-7 mx-auto">
-                        <form method="post" class="form-horizontal" action="{{ action('DashboardController@navToSignup') }}" id="new_file_form">
+                        <form method="post" class="form-horizontal" action="{{ route('DashboardController@navToSignup') }}" id="new_file_form">
                             <input type="hidden" name="_token" value="{{ Session::token() }}">
                             <h3>File online today!</h3>
                             <div class="form-row">
-                                <button type="submit" class="btn btn-success" id="create_an_account">Create an Account</button>
+                                <button type="submit" class="btn btn-success" onclick="window.location='{{ url("register") }}'" id="create_an_account">Create an Account</button>
+
                             </div>
                         </form>
                     </div>
