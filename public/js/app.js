@@ -49036,6 +49036,8 @@ if (document.location.href.split('/')[3] === 'new-file') {
         zipcode = place.address_components[6].long_name;
       } else if (place.address_components.length === 9) {
         zipcode = place.address_components[7].long_name;
+      } else if (place.address_components.length === 6) {
+        zipcode = place.address_components[5].long_name;
       } else {
         county = place.address_components[2].long_name;
         state = place.address_components[3].short_name;
