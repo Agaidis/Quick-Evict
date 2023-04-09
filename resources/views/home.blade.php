@@ -16,7 +16,7 @@
                             <input type="hidden" name="_token" value="{{ Session::token() }}">
                             <h3>File online today!</h3>
                             <div class="form-row">
-                                <button type="button" style="color:#595959;" class="btn offset-4" onclick="window.location='{{ url("register") }}'" id="create_an_account">Create an Account</button>
+                                <button type="button" style="color:#283891;" class="btn offset-4" onclick="window.location='{{ url("register") }}'" id="create_an_account">Create an Account</button>
 
                             </div>
                         </form>
