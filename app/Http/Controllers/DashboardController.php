@@ -97,6 +97,18 @@ class DashboardController extends Controller
 
     }
 
+    public function navToSignup() {
+        try {
+            return view('register' );
+
+        } catch(\Exception $e) {
+            $errorMsg = new ErrorLog();
+            $errorMsg->payload = $e->getMessage() . ' Line #: ' . $e->getLine();
+
+            $errorMsg->save();
+        }
+    }
+
     public function statusChange(Request $request) {
         try {
             $eviction = Evictions::find($request->id);

@@ -12,34 +12,11 @@
 
                     </div>
                     <div class="col-md-12 col-lg-8 col-xl-7 mx-auto">
-                        <form method="post" class="form-horizontal" action="{{ action('NewFileController@proceedToFileTypeWithSelectedCounty') }}" id="new_file_form">
+                        <form method="post" class="form-horizontal" action="{{ action('DashboardController@navToSignup') }}" id="new_file_form">
                             <input type="hidden" name="_token" value="{{ Session::token() }}">
                             <h3>File online today!</h3>
                             <div class="form-row">
-                                <div class="form-group col-4">
-                                    <select class="form-control" id="county_select" name="county" style="padding-bottom: 5px;">
-                                        <option value="none">Select the County</option>
-                                        @foreach ($counties as $county)
-                                            <option value="{{$county->county}}">{{$county->county}}</option>
-                                        @endforeach
-                                    </select>
-
-
-                                </div>
-                                <div class="form-group col-4">
-                                    <select disabled class="form-control" id="file_type_select" name="fileType">
-                                        <option value="none">Select a File Type</option>
-                                        <option value="ltc">Landlord Tenant-Complaint</option>
-                                        <option disabled id="ltcA" value="ltcA">Landlord-Tenant Compalint, File AND Represent Plaintiff at Hearing</option>
-                                        <option value="oop">Request for Order of Possession</option>
-                                        <option disabled id="oopA" value="oopA">Request for Order of Possession File AND attend lockout and complete lock change</option>
-
-                                    </select>
-                                </div>
-                                <div class="form-group col-md-3">
-                                    <button type="submit" class="btn btn-block btn-lg btn-primary">Go!</button>
-                                </div>
-                                <span id="file_type_error"></span>
+                                <button type="submit" class="btn btn-success" id="create_an_account">Create an Account</button>
                             </div>
                         </form>
                     </div>

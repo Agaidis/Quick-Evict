@@ -183,3 +183,10 @@ html, body {
 .yellow {
     background-color: #eee148;
 }
+
+.create_an_account {
+    box-shadow: 5px 10px #888888;
+    height: 45px;
+    margin-left: 200px;
+    margin-bottom: 15px;
+}
