@@ -15,6 +15,8 @@
                         <h3>File online today!</h3>
 
                     @if (Auth::check())
+                            <form method="post" class="form-horizontal" action="{{ action('NewFileController@proceedToFileTypeWithSelectedCounty') }}" id="new_file_form">
+                                <input type="hidden" name="_token" value="{{ Session::token() }}">
                             <div class="form-row">
                                 <div class="form-group col-4">
                                     <select class="form-control" id="county_select" name="county" style="padding-bottom: 5px;">
@@ -38,6 +40,7 @@
                                 </div>
                                 <span id="file_type_error"></span>
                             </div>
+                            </form>
                         @else
                             <div class="form-row">
                                 <button type="button" style="background-color:#283891; color:white;" class="btn btn-default offset-4" onclick="window.location='{{ url("register") }}'" id="create_an_account">Create an Account</button>
@@ -177,6 +180,7 @@
     <!-- Testimonials -->
     <section class="testimonials text-center">
         <div class="container">
+            @if (Auth::check())
                 <form method="post" class="form-horizontal" action="{{ action('NewFileController@proceedToFileTypeWithSelectedCounty') }}" id="new_file_form">
                     <input type="hidden" name="_token" value="{{ Session::token() }}">
                     <h3>File online today!</h3><br>
@@ -204,6 +208,12 @@
                         <span id="file_type_error"></span>
                     </div>
                 </form>
+            @else
+                <div class="form-row">
+                    <button type="button" style="background-color:#283891; color:white;" class="btn btn-default offset-4" onclick="window.location='{{ url("register") }}'" id="create_an_account">Create an Account</button>
+                </div>
+            @endif
+
 
         </div>
     </section>
