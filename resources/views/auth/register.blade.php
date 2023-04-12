@@ -126,8 +126,8 @@
 
                             <div class="col-md-6">
                                 <select id="company" class="form-control{{ $errors->has('company') ? ' is-invalid' : '' }}" name="company" required>
+                                    <option value="">Select a Company</option>
                                     @foreach ($companies as $company)
-                                        <option value="">Select a Company</option>
                                             <option value="{{$company->name}}">{{$company->name}}</option>
                                     @endforeach
                                 </select>
