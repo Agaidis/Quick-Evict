@@ -49690,9 +49690,11 @@ if (document.location.href.split('/')[3] === 'get-file-fee') {
  * Created by andrew on 11/11/18.
  */
 if (document.location.href.split('/')[3] === 'register') {
-  console.log('its running');
-  $('.company').select2({
-    placeholder: 'Select an option'
+  $('#company').select2({
+    placeholder: 'Select a Company'
+  });
+  $('#county').select2({
+    placeholder: 'Select a County'
   });
 }
 
