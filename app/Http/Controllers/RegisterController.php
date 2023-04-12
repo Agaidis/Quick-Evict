@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\ErrorLog;
 
 
-class DashboardController extends Controller
+class RegisterController extends Controller
 {
     public function index()
     {
