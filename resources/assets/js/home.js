@@ -1,6 +1,10 @@
 /**
  * Created by andrew on 11/11/18.
  */
+console.log('its running');
+$('.company').select2({
+    placeholder: 'Select an option'
+});
 $(document).ready(function () {
 
     $('#court_date').datepicker();
@@ -28,6 +32,8 @@ $(document).ready(function () {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             }
         });
+
+
 
         $.ajax({
             beforeSend: function (xhr) {
