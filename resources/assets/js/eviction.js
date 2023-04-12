@@ -1,7 +1,4 @@
-console.log('its running');
-$('#company').select2({
-    placeholder: 'Select an option'
-});
+
 if (document.location.href.split('/')[3] === 'new-file') {
     $(document).ready(function () {
 
