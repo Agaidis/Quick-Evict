@@ -14,6 +14,10 @@
 Auth::routes(['verify' => true]);
 
 
+Route::get('register', 'Auth\RegisterController@showRegistrationForm')->name('register');
+
+
+
 Route::get('/password/email', 'HomeController@index')->name('home');
 
 Route::get('/', 'HomeController@index')->name('home');
