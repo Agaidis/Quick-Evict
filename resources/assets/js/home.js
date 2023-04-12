@@ -1,10 +1,13 @@
 /**
  * Created by andrew on 11/11/18.
  */
-console.log('its running');
-$('.company').select2({
-    placeholder: 'Select an option'
-});
+if (document.location.href.split('/')[3] === 'register') {
+
+    console.log('its running');
+    $('.company').select2({
+        placeholder: 'Select an option'
+    });
+}
 $(document).ready(function () {
 
     $('#court_date').datepicker();
