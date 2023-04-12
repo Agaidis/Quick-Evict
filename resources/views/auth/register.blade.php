@@ -13,7 +13,7 @@
 
                         <div class="form-group row">
                             <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Name') }}</label>
-
+{{$companies}}
                             <div class="col-md-6">
                                 <input id="name" type="text" class="form-control{{ $errors->has('name') ? ' is-invalid' : '' }}" name="name" value="{{ old('name') }}" required autofocus>
 
@@ -112,6 +112,22 @@
                                     <option value="Westmoreland">Westmoreland</option>
                                     <option value="Wyoming">Wyoming</option>
                                     <option value="York">York</option>
+                                </select>
+
+                                @if ($errors->has('county'))
+                                    <span class="invalid-feedback">
+                                        <strong>{{ $errors->first('county') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label for="company" class="col-md-4 col-form-label text-md-right">{{ __('Company') }}</label>
+
+                            <div class="col-md-6">
+                                <select id="company" class="form-control" name="company" >
+
                                 </select>
 
                                 @if ($errors->has('county'))
