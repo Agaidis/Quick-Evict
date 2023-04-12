@@ -49691,7 +49691,8 @@ if (document.location.href.split('/')[3] === 'get-file-fee') {
  */
 if (document.location.href.split('/')[3] === 'register') {
   $('#company').select2({
-    placeholder: 'Select a Company'
+    placeholder: 'Select a Company',
+    tags: true
   });
   $('#county').select2({
     placeholder: 'Select a County'
