@@ -175,4 +175,10 @@
         </div>
     </div>
 </div>
+    <script>
+        console.log('its running');
+        $('.company').select2({
+            placeholder: 'Select an option'
+        });
+    </script>
 @endsection
