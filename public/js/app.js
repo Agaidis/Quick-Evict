@@ -49709,7 +49709,8 @@ $(document).ready(function () {
         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
       }
     });
-    $('#company').select2({
+    console.log('its running');
+    $('.company').select2({
       placeholder: 'Select an option'
     });
     $.ajax({
