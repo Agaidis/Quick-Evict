@@ -175,10 +175,6 @@
         </div>
     </div>
 </div>
-<script type="text/javascript">
-    console.log('its running');
-    $('.company').select2({
-        placeholder: 'Select an option'
-    });
-</script>
+<script src="{{ asset('js/app.js') }}"></script>
+
 @endsection
