@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Auth;
 
+use App\ErrorLog;
 use App\User;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\DB;
@@ -77,6 +78,20 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
+        $isNewCompany = DB::table('companies')
+            ->select('name')
+            ->where('name', $data['company'])
+            ->first();
+
+        if (is_null($isNewCompany)) {
+            DB::insert('insert into companies (name) values (?)', [$data['company']]);
+        }
+
+        $errorMsg = new ErrorLog();
+        $errorMsg->payload = $data['company'];
+        $errorMsg->save();
+
+
         return User::create([
             'name' => $data['name'],
             'email' => $data['email'],
