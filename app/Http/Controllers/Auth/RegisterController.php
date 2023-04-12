@@ -45,7 +45,7 @@ class RegisterController extends Controller
         $companies = 'haha';
 
 
-        return view('register', compact('companies'));
+        return view('auth/register', compact('companies'));
     }
 
     /**
