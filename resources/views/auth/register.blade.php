@@ -13,7 +13,6 @@
 
                         <div class="form-group row">
                             <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Name') }}</label>
-{{$companies}}
                             <div class="col-md-6">
                                 <input id="name" type="text" class="form-control{{ $errors->has('name') ? ' is-invalid' : '' }}" name="name" value="{{ old('name') }}" required autofocus>
 
@@ -127,10 +126,12 @@
 
                             <div class="col-md-6">
                                 <select id="company" class="form-control" name="company" >
-
+                                    @foreach ($companies as $company)
+                                            <option value="{{$company->name}}">{{$company->name}}</option>
+                                    @endforeach
                                 </select>
 
-                                @if ($errors->has('county'))
+                                @if ($errors->has('company'))
                                     <span class="invalid-feedback">
                                         <strong>{{ $errors->first('county') }}</strong>
                                     </span>
