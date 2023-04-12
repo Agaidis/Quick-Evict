@@ -44,7 +44,8 @@ class RegisterController extends Controller
     public function showRegistrationForm()
     {
         $companies =  DB::table('companies')
-            ->select('name')->asc()
+            ->select('name')
+            ->orderBy('name', 'asc')
             ->get();
 
 
