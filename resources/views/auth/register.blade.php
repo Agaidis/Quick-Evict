@@ -125,7 +125,7 @@
                             <label for="company" class="col-md-4 col-form-label text-md-right">{{ __('Company') }}</label>
 
                             <div class="col-md-6">
-                                <select id="company" class="form-control" name="company" >
+                                <select id="company" class="form-control{{ $errors->has('company') ? ' is-invalid' : '' }}" name="company" required>
                                     @foreach ($companies as $company)
                                         <option value="">Select a Company</option>
                                             <option value="{{$company->name}}">{{$company->name}}</option>
@@ -134,7 +134,7 @@
 
                                 @if ($errors->has('company'))
                                     <span class="invalid-feedback">
-                                        <strong>{{ $errors->first('county') }}</strong>
+                                        <strong>{{ $errors->first('company') }}</strong>
                                     </span>
                                 @endif
                             </div>
