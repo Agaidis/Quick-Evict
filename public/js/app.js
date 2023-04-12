@@ -49702,6 +49702,7 @@ $(document).ready(function () {
     step: 5,
     minuteStep: 5
   });
+  console.log('hey');
   $('.calendar_tooltip').tooltip();
   $('.court_calendar').on('click', function () {
     var id = $(this)[0].id.split('_');

@@ -15,6 +15,7 @@ $(document).ready(function () {
         step: 5,
         minuteStep: 5
     });
+    console.log('hey');
 
     $('.calendar_tooltip').tooltip();
 
