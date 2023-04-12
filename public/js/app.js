@@ -48883,8 +48883,17 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
 /*! no static exports found */
 /***/ (function(module, exports) {
 
+console.log('its running');
+$('.company').select2({
+  placeholder: 'Select an option'
+});
+
 if (document.location.href.split('/')[3] === 'new-file') {
   $(document).ready(function () {
+    console.log('its running');
+    $('.company').select2({
+      placeholder: 'Select an option'
+    });
     $('[data-toggle="tooltip"]').tooltip();
     var text_max = 500;
     $('#textarea_feedback').html(text_max + ' characters remaining');
