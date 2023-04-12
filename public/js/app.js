@@ -48884,16 +48884,12 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
 /***/ (function(module, exports) {
 
 console.log('its running');
-$('.company').select2({
+$('#company').select2({
   placeholder: 'Select an option'
 });
 
 if (document.location.href.split('/')[3] === 'new-file') {
   $(document).ready(function () {
-    console.log('its running');
-    $('.company').select2({
-      placeholder: 'Select an option'
-    });
     $('[data-toggle="tooltip"]').tooltip();
     var text_max = 500;
     $('#textarea_feedback').html(text_max + ' characters remaining');
@@ -49717,10 +49713,6 @@ $(document).ready(function () {
       headers: {
         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
       }
-    });
-    console.log('its running');
-    $('.company').select2({
-      placeholder: 'Select an option'
     });
     $.ajax({
       beforeSend: function beforeSend(xhr) {

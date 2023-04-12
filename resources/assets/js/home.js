@@ -29,11 +29,6 @@ $(document).ready(function () {
             }
         });
 
-        console.log('its running');
-        $('.company').select2({
-            placeholder: 'Select an option'
-        });
-
         $.ajax({
             beforeSend: function (xhr) {
                 xhr.setRequestHeader('X-CSRF-TOKEN', $("#token").attr('content'));
