@@ -60211,7 +60211,7 @@ $(document).ready(function () {
     });
     var conf = confirm('Are you sure you want to Delete ' + id[2] + ' ?');
 
-    if (conf == true) {
+    if (conf === true) {
       $.ajax({
         beforeSend: function beforeSend(xhr) {
           xhr.setRequestHeader('X-CSRF-TOKEN', $("#token").attr('content'));

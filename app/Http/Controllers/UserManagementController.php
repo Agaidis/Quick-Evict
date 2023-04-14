@@ -7,6 +7,7 @@
  */
 namespace App\Http\Controllers;
 
+use App\ErrorLog;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use App\User;
@@ -116,7 +117,15 @@ class UserManagementController extends Controller
     public function deleteUser(Request $request)
     {
         try {
-            User::destroy($request->id);
+            $errorMsg = new ErrorLog();
+            $errorMsg->payload = 'id: ' . $request->id;
+            $errorMsg->save();
+
+            $result = User::destroy($request->id);
+
+            $errorMsg = new ErrorLog();
+            $errorMsg->payload = $result;
+            $errorMsg->save();
 
             $request->session()->flash('alert-success', 'User has been Successfully Deleted!');
 

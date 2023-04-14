@@ -74,7 +74,7 @@ $(document).ready(function () {
 
 
     $('.user_remove').on('click', function() {
-        var id = $(this)[0].id.split('_');
+        let id = $(this)[0].id.split('_');
 
         $.ajaxSetup({
             headers: {
@@ -83,7 +83,7 @@ $(document).ready(function () {
         });
         var conf = confirm('Are you sure you want to Delete ' + id[2] + ' ?');
 
-        if (conf == true) {
+        if (conf === true) {
 
             $.ajax({
                 beforeSend: function (xhr) {
