@@ -21,8 +21,8 @@
                             <thead>
                             <tr>
                                 <th class="text-center">Id</th>
-                                <th class="text-center">User Name</th>
-                                <th class="text-center">Email</th>
+                                <th class="text-center">User Name/Email</th>
+                                <th class="text-center">Company</th>
                                 <th class="text-center">Role</th>
                                 <th class="text-center">Court Id</th>
                                 <th class="text-center">Delete</th>
@@ -38,8 +38,8 @@
                             @foreach ($users as $user)
                                 <tr>
                                     <td class="text-center">{{$user->id}}</td>
-                                    <td class="text-center">{{$user->name}}</td>
-                                    <td class="text-center">{{$user->email}}</td>
+                                    <td class="text-center">{{$user->name}} <br> {{$user->email}}</td>
+                                    <td class="text-center">{{$user->company}}</td>
                                     <td class="text-center"><select title="status" class="form-control role_select" id="user_role_{{$user->id}}">
                                             @foreach ($userRoles as $userRole)
                                                 @if ($userRole == $user->role)
