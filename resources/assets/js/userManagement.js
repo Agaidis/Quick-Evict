@@ -4,6 +4,11 @@
 
 $(document).ready(function () {
 
+    $('#user_table').DataTable({
+        "pagingType": "simple",
+        "pageLength": 50
+    });
+
     $('.role_select').on('change', function() {
         var id = $(this)[0].id.split('_');
         var selectedRole = $(this).find(":selected").text();

@@ -60145,6 +60145,10 @@ if (document.location.href.split('/')[3] === 'new-file') {
  * Created by andrewgaidis on 1/17/19.
  */
 $(document).ready(function () {
+  $('#user_table').DataTable({
+    "pagingType": "simple",
+    "pageLength": 50
+  });
   $('.role_select').on('change', function () {
     var id = $(this)[0].id.split('_');
     var selectedRole = $(this).find(":selected").text();
