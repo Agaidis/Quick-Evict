@@ -178,7 +178,7 @@ class DashboardController extends Controller
                     $defendantAddress2 = $evictionData->defendant_house_num . ' ' .$evictionData->defendant_street_name . ', ' . $evictionData->unit_num . ' ' . $evictionData->defendant_town .', '. $evictionData->defendant_state .' '. $evictionData->defendant_zipcode;
                     ;
                 } else {
-                    $defendantAddress2 = str_replace('-1', '<br>', $evictionData->resided_address);
+                 //   $defendantAddress2 = str_replace('-1', '<br>', $evictionData->resided_address);
                 }
 
                 $pdfHtml = $pdfEditor->globalHtmlAttributes($pdfHtml, $courtDetails, $plaintiffAddress, $defendantAddress, $signature, $evictionData);
