@@ -23,6 +23,7 @@
                                 <tr>
                                     <th class="text-center col-md-6">County</th>
                                     <th class="text-center col-md-4" style="">Allow In Person Complaint</th>
+                                    <th class="text-center col-md-2">Notes</th>
                                 </tr>
                                 </thead>
                                 <tbody>
@@ -36,6 +37,9 @@
                                         <input type="checkbox" id="in_person_complaint_toggle_{{$county->county}}" class="in_person_complaint_toggle"/>
                                     @endif
                                     </td>
+                                    <td style="text-align: center;"><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+                                            Add Note
+                                        </button></td>
                                 </tr>
                                 @endforeach
                                 </tbody>
@@ -44,6 +48,30 @@
                     </div>
                 </div>
             </div>
+
+            <!-- Modal -->
+            <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            ...
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                            <button type="button" class="btn btn-primary">Save changes</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+
         </div>
     </header>
 @endsection
