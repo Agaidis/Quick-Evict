@@ -35,7 +35,7 @@ $(document).ready(function () {
         });
     });
 
-    $('#county_table').on('click', '#add_note', function () {
+    $('#county_table').on('click', '.add_note_btn', function () {
         let note = $('#new_note').val();
         let id = $(this)[0].id;
         let splitId = id.split('_');

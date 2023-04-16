@@ -43433,7 +43433,7 @@ $(document).ready(function () {
       error: function error(data) {}
     });
   });
-  $('#county_table').on('click', '#add_note', function () {
+  $('#county_table').on('click', '.add_note_btn', function () {
     var note = $('#new_note').val();
     var id = $(this)[0].id;
     var splitId = id.split('_');
