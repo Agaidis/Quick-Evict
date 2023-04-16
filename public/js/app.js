@@ -43434,8 +43434,10 @@ $(document).ready(function () {
     });
   });
   $('#add_note').on('click', function () {
-    var county = $('#county').val();
     var note = $('#new_note').val();
+    var id = $(this)[0].id;
+    var splitId = id.split('_');
+    var county = splitId[3];
     $.ajaxSetup({
       headers: {
         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')

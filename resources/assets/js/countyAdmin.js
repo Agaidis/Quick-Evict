@@ -36,8 +36,10 @@ $(document).ready(function () {
     });
 
     $('#add_note').on('click', function () {
-        let county = $('#county').val();
         let note = $('#new_note').val();
+        let id = $(this)[0].id;
+        let splitId = id.split('_');
+        let county = splitId[3];
 
         $.ajaxSetup({
             headers: {
