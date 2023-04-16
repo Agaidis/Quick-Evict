@@ -43440,7 +43440,7 @@ $(document).ready(function () {
     var county = splitId[3];
     console.log('id', id);
     console.log('county', county);
-    console.lo('note', note);
+    console.log('note', note);
     $.ajaxSetup({
       headers: {
         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
