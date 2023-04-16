@@ -137,7 +137,7 @@ $(document).ready(function () {
         $('#delete_county_note_' + countyId).css('display', 'inherit');
     }).on('mouseleave', '.county_note', function () {
         $('.delete_county_note').css('display', 'none');
-        $('.county_note').css('background-color', '#F2EDD7FF');
+        $('.county_note').css('background-color', 'aliceblue');
     }).on('click', '.delete_county_note', function () {
         let id = $(this)[0].id;
         let splitId = id.split('_');
