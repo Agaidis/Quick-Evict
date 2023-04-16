@@ -84,6 +84,8 @@ Route::post('/file-upload', 'FileStorageController@storeFile')->middleware('auth
 /* County Admin */
 Route::get('/countyAdmin', 'CountyAdminController@index')->middleware('auth');
 Route::post('/countyAdmin', 'CountyAdminController@updateInPersonComplaint')->middleware('auth');
+
+Route::get('/get-notes', 'CountyAdminController@getNotes')->middleware('auth');
 Route::post('/add-note', 'CountyAdminController@addNote')->middleware('auth');
 Route::post('/update-note', 'CountyAdminController@updateNote')->middleware('auth');
 Route::post('/delete-note', 'CountyAdminController@deleteNote')->middleware('auth');

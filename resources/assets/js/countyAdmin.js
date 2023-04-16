@@ -42,7 +42,43 @@ $(document).ready(function () {
         let county = splitId[3];
         $('#county').val(county);
 
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
 
+        $.ajax({
+            beforeSend: function (xhr) {
+                xhr.setRequestHeader('X-CSRF-TOKEN', $("#token").attr('content'));
+            },
+            type: "GET",
+            url: '/get-notes',
+            data: {
+                county: county
+            },
+
+            success: function (data) {
+
+                if (data !== undefined && data !== '') {
+                    let updatedNotes = '';
+
+                    $.each(data, function (key, value) {
+                        updatedNotes += '<span>'+value.notes+'</span>';
+                    });
+                    updatedNotes = $('<span>' + updatedNotes + '</span>');
+
+                    $('#current_notes').empty().append(updatedNotes.html());
+                } else {
+                    $('#current_notes').empty();
+                }
+
+                console.log(data);
+
+            },
+            error: function (data) {
+            }
+        });
     });
 
     $('#notesModal').on('click', '#add_note', function () {

@@ -58,6 +58,20 @@ class CountyAdminController extends Controller
         }
     }
 
+    public function getNotes(Request $request) {
+        try {
+            $updatedCountyNotes = CountyNotes::where('county', $request->county)->orderBy('id', 'DESC')->get();
+
+            return $updatedCountyNotes;
+        } catch (Exception $e) {
+            $errorMsg = new ErrorLog();
+            $errorMsg->payload = $e->getMessage() . ' Line #: ' . $e->getLine();
+
+            $errorMsg->save();
+            return view('countyAdmin');
+        }
+    }
+
     public function addNote(Request $request) {
         try {
 
