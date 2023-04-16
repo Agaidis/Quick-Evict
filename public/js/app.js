@@ -43433,7 +43433,7 @@ $(document).ready(function () {
       error: function error(data) {}
     });
   });
-  $('#county_table').on('click', '.modal_note_btn', function () {
+  $('#notesModal').on('click', '.modal_note_btn', function () {
     var id = $(this)[0].id;
     var splitId = id.split('_');
     var county = splitId[3];
