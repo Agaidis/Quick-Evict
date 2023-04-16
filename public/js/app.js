@@ -49841,6 +49841,11 @@ $(document).ready(function () {
     $('#court_date').val('').datepicker('setDate', new Date(splitCourtDate[0]));
     $('#court_time').val('').timepicker('setTime', splitCourtDate[1] + splitCourtDate[2]);
   }).css('cursor', 'pointer');
+  $('.see_notes_dash').on('click', function () {
+    var id = $(this)[0].id;
+    var splitId = id.split('_');
+    console.log(splitId);
+  });
   $('#submit_date').on('click', function () {
     $.ajaxSetup({
       headers: {

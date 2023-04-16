@@ -33,7 +33,12 @@ $(document).ready(function () {
         $('#court_time').val('').timepicker('setTime', splitCourtDate[1] + splitCourtDate[2]);
     }).css( 'cursor', 'pointer' );
 
-    $('.see_notes_dash').on('click')
+    $('.see_notes_dash').on('click', function() {
+        let id = $(this)[0].id;
+        let splitId = id.split('_');
+
+        console.log(splitId);
+    });
 
 
     $('#submit_date').on('click', function () {
