@@ -34,4 +34,33 @@ $(document).ready(function () {
             }
         });
     });
+
+    $('#add_note').on('click', function () {
+        let county = $('#county').val();
+        let note = $('#new_note').val();
+
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+
+        $.ajax({
+            beforeSend: function (xhr) {
+                xhr.setRequestHeader('X-CSRF-TOKEN', $("#token").attr('content'));
+            },
+            type: "POST",
+            url: '/add-note',
+            data: {
+                county: county,
+                note: note
+            },
+
+            success: function (data) {
+                console.log(data);
+            },
+            error: function (data) {
+            }
+        });
+    });
 });

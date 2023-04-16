@@ -60,11 +60,14 @@
                             </button>
                         </div>
                         <div class="modal-body">
+                            <label for="new_note">New Note</label>
+                            <textarea id="new_note"></textarea>
+                            <input type="hidden" id="county"/>
 
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                            <button type="button" class="btn btn-primary">Save changes</button>
+                            <button type="button" class="btn btn-primary" id="add_note">Add Note</button>
                         </div>
                     </div>
                 </div>

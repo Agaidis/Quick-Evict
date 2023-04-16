@@ -43433,6 +43433,30 @@ $(document).ready(function () {
       error: function error(data) {}
     });
   });
+  $('#add_note').on('click', function () {
+    var county = $('#county').val();
+    var note = $('#new_note').val();
+    $.ajaxSetup({
+      headers: {
+        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+      }
+    });
+    $.ajax({
+      beforeSend: function beforeSend(xhr) {
+        xhr.setRequestHeader('X-CSRF-TOKEN', $("#token").attr('content'));
+      },
+      type: "POST",
+      url: '/add-note',
+      data: {
+        county: county,
+        note: note
+      },
+      success: function success(data) {
+        console.log(data);
+      },
+      error: function error(data) {}
+    });
+  });
 });
 
 /***/ }),
