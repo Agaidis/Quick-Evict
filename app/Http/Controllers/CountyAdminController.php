@@ -62,7 +62,7 @@ class CountyAdminController extends Controller
         try {
 
             $userName = Auth()->user()->name;
-            $date = date('m/d/Y h:m:s', strtotime('-4 hours + 40 minute'));
+            $date = date('m/d/Y h:m:s', strtotime('-4 hours + 30 minute'));
 
             $newCountyNote = new CountyNotes();
 
