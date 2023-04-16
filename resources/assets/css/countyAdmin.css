@@ -1,4 +1,15 @@
 #current_notes {
-    border: 1px solid black;
-    border-radius: 1px;
+    width: 100%;
+    border: 1px solid lightgrey;
+    overflow: auto;
+    padding: 2px;
+    resize: both;
+    background-color: aliceblue;
+    text-align:center;
+    border-radius: 1em;:
+}
+
+.previous_notes {
+    height: 160px;
+    background-color: #F2EDD7FF;
 }
