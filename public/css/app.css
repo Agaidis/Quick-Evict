@@ -11599,6 +11599,15 @@ footer.footer{
     background-color: #fff5df;
     height: 100px;
 }
+
+.delete_county_note {
+    display:none;
+    cursor:pointer;
+    color:red;
+    float:right;
+    margin-right:5%;
+    margin-top:5%;
+}
 #login-logo {
     height:auto;
     margin-left:20%;
