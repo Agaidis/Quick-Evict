@@ -41,7 +41,7 @@ $(document).ready(function () {
         let splitId = id.split('_');
         let county = splitId[3];
         $('#county').val(county);
-
+        $('.delete_county_note').css('display', 'none');
 
         $.ajaxSetup({
             headers: {
