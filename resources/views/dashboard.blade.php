@@ -168,7 +168,7 @@
 
                                         @if (Auth::user()->role == 'Administrator')
                                             @if (in_array($eviction->county, $notesArray))
-                                                <td class="text-center">{{$eviction->court_number}} <span style="color:red;"><i class="fa fa-exclamation-circle" aria-hidden="true"></i></span></td>
+                                                <td class="text-center">{{$eviction->court_number}} <button type="button" class="see_notes_dash" id="see_notes_dash_{{$eviction->county}}" data-toggle="modal" data-target="#seeNotesModal"><span style="color:red;"><i class="fa fa-exclamation-circle" aria-hidden="true"></i></span></button></td>
                                             @else
                                                 <td class="text-center">{{$eviction->court_number}}</td>
                                             @endif
@@ -335,6 +335,34 @@
                             </div>
                         </div>
                     </div>
+
+
+            <!-- Modal -->
+            <div class="modal fade" id="seeNotesModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Notes</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="row">
+                                <div class="offset-1 col-md-10">
+                                    <label style="text-align: left!important" for="current_notes">Current Notes: </label><br>
+                                    <div id="current_notes"></div>
+                                </div>
+
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                <button type="button" class="btn btn-primary" id="add_note">Add Note</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
 
         </div>

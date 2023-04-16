@@ -33,6 +33,8 @@ $(document).ready(function () {
         $('#court_time').val('').timepicker('setTime', splitCourtDate[1] + splitCourtDate[2]);
     }).css( 'cursor', 'pointer' );
 
+    $('.see_notes_dash').on('click')
+
 
     $('#submit_date').on('click', function () {
         $.ajaxSetup({
