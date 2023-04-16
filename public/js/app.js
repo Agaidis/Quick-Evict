@@ -43433,12 +43433,13 @@ $(document).ready(function () {
       error: function error(data) {}
     });
   });
-  $('#notesModal').on('click', '.modal_note_btn', function () {
+  $('#county_table').on('click', '.modal_note_btn', function () {
     var id = $(this)[0].id;
     var splitId = id.split('_');
     var county = splitId[3];
     $('#county').val(county);
-  }).on('click', '#add_note', function () {
+  });
+  $('#notesModal').on('click', '#add_note', function () {
     var note = $('#new_note').val();
     var county = $('#county').val();
     console.log('county', county);

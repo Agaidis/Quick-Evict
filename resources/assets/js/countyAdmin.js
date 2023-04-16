@@ -35,7 +35,7 @@ $(document).ready(function () {
         });
     });
 
-    $('#notesModal').on('click', '.modal_note_btn', function () {
+    $('#county_table').on('click', '.modal_note_btn', function () {
 
         let id = $(this)[0].id;
         let splitId = id.split('_');
@@ -43,7 +43,9 @@ $(document).ready(function () {
         $('#county').val(county);
 
 
-    }).on('click', '#add_note', function () {
+    });
+
+    $('#notesModal').on('click', '#add_note', function () {
         let note = $('#new_note').val();
         let county = $('#county').val();
 
