@@ -60,7 +60,12 @@
                             </button>
                         </div>
                         <div class="modal-body">
-                            <label for="new_note">New Note</label>
+                            <div class="row justify-content-center">
+                                <div class="col-md-6">
+
+                                </div>
+
+                            <label for="new_note">New Note: </label><br>
                             <textarea id="new_note"></textarea>
                             <input type="hidden" id="county"/>
 
