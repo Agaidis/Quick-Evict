@@ -38,6 +38,7 @@ $(document).ready(function () {
     $('#add_note').on('click', function () {
         let note = $('#new_note').val();
         let id = $(this)[0].id;
+        console.log(id);
         let splitId = id.split('_');
         let county = splitId[3];
         console.log(county);

@@ -43436,6 +43436,7 @@ $(document).ready(function () {
   $('#add_note').on('click', function () {
     var note = $('#new_note').val();
     var id = $(this)[0].id;
+    console.log(id);
     var splitId = id.split('_');
     var county = splitId[3];
     console.log(county);
