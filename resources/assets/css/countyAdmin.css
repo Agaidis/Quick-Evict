@@ -7,13 +7,12 @@
     background-color: aliceblue;
     text-align:center;
     border-radius: 1em;
-    height: 160px;
+    height: 80px;
 }
 
 #new_note {
     width: 100%;
     border: 1px solid lightgrey;
     background-color: #fff5df;
-    border-radius: 1em;
-    height: 160px;
+    height: 100px;
 }
