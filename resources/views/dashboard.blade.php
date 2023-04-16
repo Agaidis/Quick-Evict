@@ -54,7 +54,7 @@
                                     <th class="text-center">User</th>
                                     @endif
                                     <th class="text-center" style="width:55px;">MDJ</th>
-                                    <th>Download Status</th>
+                                    <th>D/L Status</th>
                                     <th class="text-center">Property Address</th>
                                     <th class="text-center" style="width:80px;">Plaintiff</th>
                                     <th class="text-center" style="width:80px;">Defendant</th>
