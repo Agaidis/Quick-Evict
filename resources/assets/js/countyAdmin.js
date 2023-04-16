@@ -41,7 +41,6 @@ $(document).ready(function () {
         let splitId = id.split('_');
         let county = splitId[3];
         $('#county').val(county);
-        document.getElementById('new_note').focus();
 
 
         $.ajaxSetup({
@@ -86,9 +85,6 @@ $(document).ready(function () {
     $('#notesModal').on('click', '#add_note', function () {
         let note = $('#new_note').val();
         let county = $('#county').val();
-
-        console.log('county', county);
-        console.log('note', note);
 
         $.ajaxSetup({
             headers: {

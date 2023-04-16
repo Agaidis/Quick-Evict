@@ -43438,7 +43438,6 @@ $(document).ready(function () {
     var splitId = id.split('_');
     var county = splitId[3];
     $('#county').val(county);
-    document.getElementById('new_note').focus();
     $.ajaxSetup({
       headers: {
         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -43473,8 +43472,6 @@ $(document).ready(function () {
   $('#notesModal').on('click', '#add_note', function () {
     var note = $('#new_note').val();
     var county = $('#county').val();
-    console.log('county', county);
-    console.log('note', note);
     $.ajaxSetup({
       headers: {
         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
