@@ -41,6 +41,7 @@ $(document).ready(function () {
         let splitId = id.split('_');
         let county = splitId[3];
         $('#county').val(county);
+        $('#new_note').focus();
 
         $.ajaxSetup({
             headers: {
