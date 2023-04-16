@@ -43513,8 +43513,9 @@ $(document).ready(function () {
     var id = $(this)[0].id;
     var splitId = id.split('_');
     var countyId = splitId[1];
+    console.log('making it');
     $('#' + id).css('background-color', 'lightgrey');
-    $('#delete_county_note_' + noteId).css('display', 'inherit');
+    $('#delete_county_note_' + countyId).css('display', 'inherit');
   }).on('mouseleave', '.county_note', function () {
     $('.delete_county_note_').css('display', 'none');
     $('.county_note').css('background-color', '#F2EDD7FF');
