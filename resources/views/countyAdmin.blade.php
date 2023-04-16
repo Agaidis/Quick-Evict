@@ -37,7 +37,7 @@
                                         <input type="checkbox" id="in_person_complaint_toggle_{{$county->county}}" class="in_person_complaint_toggle"/>
                                     @endif
                                     </td>
-                                    <td><button type="button" class="btn" data-toggle="modal" data-target="#notesModal">
+                                    <td style="text-align:center;"><button type="button" class="btn" data-toggle="modal" data-target="#notesModal">
                                             <i class="fas fa-sticky-note"></i>
                                         </button></td>
                                 </tr>
