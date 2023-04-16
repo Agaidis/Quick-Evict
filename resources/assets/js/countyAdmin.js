@@ -40,6 +40,7 @@ $(document).ready(function () {
         let id = $(this)[0].id;
         let splitId = id.split('_');
         let county = splitId[3];
+        console.log(county);
 
         $.ajaxSetup({
             headers: {

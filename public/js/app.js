@@ -43438,6 +43438,7 @@ $(document).ready(function () {
     var id = $(this)[0].id;
     var splitId = id.split('_');
     var county = splitId[3];
+    console.log(county);
     $.ajaxSetup({
       headers: {
         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
