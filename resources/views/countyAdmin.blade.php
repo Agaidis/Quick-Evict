@@ -62,13 +62,14 @@
                         <div class="modal-body">
                             <div class="row justify-content-center">
                                 <div class="col-md-6">
+                                    <div id="current_notes"></div>
 
                                 </div>
-
-                            <label for="new_note">New Note: </label><br>
-                            <textarea id="new_note"></textarea>
-                            <input type="hidden" id="county"/>
-
+                                <div class="col-md-6">
+                                    <label for="new_note">New Note: </label><br>
+                                    <textarea id="new_note"></textarea>
+                                    <input type="hidden" id="county"/>
+                                </div>
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
