@@ -62,6 +62,7 @@
                         <div class="modal-body">
                             <div class="row">
                                 <div class="offset-1 col-md-10">
+                                    <label style="text-align: left!important" for="current_notes">Current Notes: </label><br>
                                     <div id="current_notes"></div>
 
                                 </div>
