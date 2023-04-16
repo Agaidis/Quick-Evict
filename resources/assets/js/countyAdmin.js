@@ -85,7 +85,7 @@ $(document).ready(function () {
     $('#notesModal').on('click', '#add_note', function () {
         let note = $('#new_note').val();
         let county = $('#county').val();
-        $('.delete_permit_note').css('display', 'none');
+        $('.delete_county_note').css('display', 'none');
 
         $.ajaxSetup({
             headers: {

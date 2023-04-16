@@ -43472,7 +43472,7 @@ $(document).ready(function () {
   $('#notesModal').on('click', '#add_note', function () {
     var note = $('#new_note').val();
     var county = $('#county').val();
-    $('.delete_permit_note').css('display', 'none');
+    $('.delete_county_note').css('display', 'none');
     $.ajaxSetup({
       headers: {
         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
