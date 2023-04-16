@@ -35,13 +35,18 @@ $(document).ready(function () {
         });
     });
 
-    $('#county_table').on('click', '.add_note_btn', function () {
-        let note = $('#new_note').val();
+    $('#county_table').on('click', '.modal_note_btn', function () {
+
         let id = $(this)[0].id;
         let splitId = id.split('_');
         let county = splitId[3];
+        $('#county').val(county);
 
-        console.log('id', id);
+
+    }).on('click', '#add_note', function () {
+        let note = $('#new_note').val();
+        let county = $('#county').val();
+
         console.log('county', county);
         console.log('note', note);
 
@@ -54,7 +59,7 @@ $(document).ready(function () {
         $.ajax({
             beforeSend: function (xhr) {
                 xhr.setRequestHeader('X-CSRF-TOKEN', $("#token").attr('content'));
-                },
+            },
             type: "POST",
             url: '/add-note',
             data: {
@@ -64,7 +69,7 @@ $(document).ready(function () {
 
             success: function (data) {
                 console.log(data);
-                },
+            },
             error: function (data) {
             }
         });

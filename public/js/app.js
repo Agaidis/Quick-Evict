@@ -43433,12 +43433,14 @@ $(document).ready(function () {
       error: function error(data) {}
     });
   });
-  $('#county_table').on('click', '.add_note_btn', function () {
-    var note = $('#new_note').val();
+  $('#county_table').on('click', '.modal_note_btn', function () {
     var id = $(this)[0].id;
     var splitId = id.split('_');
     var county = splitId[3];
-    console.log('id', id);
+    $('#county').val(county);
+  }).on('click', '#add_note', function () {
+    var note = $('#new_note').val();
+    var county = $('#county').val();
     console.log('county', county);
     console.log('note', note);
     $.ajaxSetup({
