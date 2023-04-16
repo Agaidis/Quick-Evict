@@ -62,7 +62,7 @@ class PDFEditController extends Controller
         $pdfHtml = str_replace('__verify-name__', $evictionData->verify_name, $pdfHtml);
         $pdfHtml = str_replace('__attorney-fees__', $evictionData->attorney_fees, $pdfHtml);
         $pdfHtml = str_replace('__total-fees__', $evictionData->total_judgement, $pdfHtml);
-        $pdfHtml = str_replace('__defendant-address-2__', $defendantAddress2, $pdfHtml);
+        $pdfHtml = str_replace('__defendant-address-2__', 'apples', $pdfHtml);
 
         $isResidential = $evictionData->is_residential == true ? '<input type="checkbox" checked/>' : '<input type="checkbox"/>';
         $isNotResidential = $evictionData->is_residential == true ? '<input type="checkbox"/>' : '<input type="checkbox" checked/>';

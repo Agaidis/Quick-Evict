@@ -176,7 +176,7 @@ class DashboardController extends Controller
 
                 if ($evictionData->is_resided == 'yes' || $evictionData->is_resided == null) {
                     $defendantAddress2 = $evictionData->defendant_house_num . ' ' .$evictionData->defendant_street_name . ', ' . $evictionData->unit_num . ' ' . $evictionData->defendant_town .', '. $evictionData->defendant_state .' '. $evictionData->defendant_zipcode;
-                    ;
+
                 } else {
                  //   $defendantAddress2 = str_replace('-1', '<br>', $evictionData->resided_address);
                 }
