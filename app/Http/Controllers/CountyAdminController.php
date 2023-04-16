@@ -61,9 +61,6 @@ class CountyAdminController extends Controller
     public function addNote(Request $request) {
         try {
 
-            $errorMsg = new ErrorLog();
-            $errorMsg->payload = 'county: ' . $request->county . ' notes: ' . $request->note;
-            $errorMsg->save();
             $userName = Auth()->user()->name;
             $date = date('d/m/Y h:m:s', strtotime('-5 hours'));
 
