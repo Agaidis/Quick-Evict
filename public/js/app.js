@@ -49844,7 +49844,36 @@ $(document).ready(function () {
   $('.see_notes_dash').on('click', function () {
     var id = $(this)[0].id;
     var splitId = id.split('_');
-    console.log(splitId);
+    $.ajaxSetup({
+      headers: {
+        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+      }
+    });
+    $.ajax({
+      beforeSend: function beforeSend(xhr) {
+        xhr.setRequestHeader('X-CSRF-TOKEN', $("#token").attr('content'));
+      },
+      type: "GET",
+      url: '/get-notes',
+      data: {
+        county: splitId[4]
+      },
+      success: function success(data) {
+        if (data !== undefined && data !== '') {
+          var updatedNotes = '';
+          $.each(data, function (key, value) {
+            updatedNotes += '<span>' + value.notes + '</span>';
+          });
+          updatedNotes = $('<span>' + updatedNotes + '</span>');
+          $('#current_notes').empty().append(updatedNotes.html());
+        } else {
+          $('#current_notes').empty();
+        }
+
+        console.log(data);
+      },
+      error: function error(data) {}
+    });
   });
   $('#submit_date').on('click', function () {
     $.ajaxSetup({
