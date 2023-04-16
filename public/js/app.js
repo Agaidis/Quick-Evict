@@ -49844,6 +49844,7 @@ $(document).ready(function () {
   $('.see_notes_dash').on('click', function () {
     var id = $(this)[0].id;
     var splitId = id.split('_');
+    console.log(splitId[3]);
     $.ajaxSetup({
       headers: {
         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -49856,7 +49857,7 @@ $(document).ready(function () {
       type: "GET",
       url: '/get-notes',
       data: {
-        county: splitId[4]
+        county: splitId[3]
       },
       success: function success(data) {
         if (data !== undefined && data !== '') {
