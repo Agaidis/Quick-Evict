@@ -35,12 +35,13 @@ $(document).ready(function () {
         });
     });
 
-    $('#add_note').on('click', function () {
+    $('#county_table').on('click', '#add_note', function () {
         let note = $('#new_note').val();
         let id = $(this)[0].id;
-        console.log(id);
         let splitId = id.split('_');
         let county = splitId[3];
+
+        console.log(id);
         console.log(county);
 
         $.ajaxSetup({
@@ -52,7 +53,7 @@ $(document).ready(function () {
         $.ajax({
             beforeSend: function (xhr) {
                 xhr.setRequestHeader('X-CSRF-TOKEN', $("#token").attr('content'));
-            },
+                },
             type: "POST",
             url: '/add-note',
             data: {
@@ -62,7 +63,7 @@ $(document).ready(function () {
 
             success: function (data) {
                 console.log(data);
-            },
+                },
             error: function (data) {
             }
         });

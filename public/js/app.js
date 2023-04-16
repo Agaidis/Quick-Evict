@@ -43433,12 +43433,12 @@ $(document).ready(function () {
       error: function error(data) {}
     });
   });
-  $('#add_note').on('click', function () {
+  $('#county_table').on('click', '#add_note', function () {
     var note = $('#new_note').val();
     var id = $(this)[0].id;
-    console.log(id);
     var splitId = id.split('_');
     var county = splitId[3];
+    console.log(id);
     console.log(county);
     $.ajaxSetup({
       headers: {
