@@ -85,7 +85,7 @@ class CountyAdminController extends Controller
 
 
             CountyNotes::where('id', $newCountyNote->id)
-                ->update(['notes' => '<div class="county_note" id="county_'.$newCountyNote->id.'"><p style="font-size:14px; margin-bottom:0;"> '.$userName . ' | '. $date . '<span class="fas fa-trash delete_county_note" id="delete_county_note_'.$newCountyNote->id.'_'.$request->county.'" style="display:none; cursor:pointer; color:red;"></span></p>' . $request->note .'<hr></div>']);
+                ->update(['notes' => '<div class="county_note" id="county_'.$newCountyNote->id.'_'.$request->county.'"><p style="font-size:14px; margin-bottom:0;"> '.$userName . ' | '. $date . '<span class="fas fa-trash delete_county_note" id="delete_county_note_'.$newCountyNote->id.'_'.$request->county.'" style="display:none; cursor:pointer; color:red;"></span></p>' . $request->note .'<hr></div>']);
 
             $currentCountyNotes = CountyNotes::where('county', $request->county)->orderBy('id', 'DESC')->get();
 
