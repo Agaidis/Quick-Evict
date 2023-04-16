@@ -43,6 +43,7 @@ $(document).ready(function () {
 
         console.log('id', id);
         console.log('county', county);
+        console.lo('note', note);
 
         $.ajaxSetup({
             headers: {
