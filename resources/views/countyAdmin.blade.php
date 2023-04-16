@@ -62,15 +62,17 @@
                         <div class="modal-body">
                             <div class="row">
                                 <div class="offset-1 col-md-10">
-                                    <label style="text-align: left!important" for="current_notes">Current Notes: </label><br>
-                                    <div id="current_notes"></div>
-
-                                </div>
-                                <div class="offset-1 col-md-10">
                                     <label style="text-align: left!important" for="new_note">New Note: </label><br>
                                     <textarea id="new_note"></textarea>
                                     <input type="hidden" id="county"/>
                                 </div>
+
+                                <div class="offset-1 col-md-10">
+                                    <label style="text-align: left!important" for="current_notes">Current Notes: </label><br>
+                                    <div id="current_notes"></div>
+
+                                </div>
+
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
