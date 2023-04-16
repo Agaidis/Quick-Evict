@@ -43522,9 +43522,43 @@ $(document).ready(function () {
     var id = $(this)[0].id;
     var splitId = id.split('_');
     var noteId = splitId[3];
-    var permitId = splitId[4];
-    var response = confirm('Are you sure you want to delete this note?'); //  deleteNote(permitId, noteId, response);
+    var county = splitId[4];
+    var response = confirm('Are you sure you want to delete this note?');
+    deleteNote(noteId, county, response);
   });
+
+  function deleteNote(noteId, county, response) {
+    if (response) {
+      $.ajaxSetup({
+        headers: {
+          'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+      });
+      $.ajax({
+        beforeSend: function beforeSend(xhr) {
+          xhr.setRequestHeader('X-CSRF-TOKEN', $("#token").attr('content'));
+        },
+        type: "POST",
+        url: '/delete-note',
+        data: {
+          id: noteId,
+          county: county
+        },
+        success: function success(data) {
+          console.log(data);
+          var updatedNotes = '';
+          $.each(data, function (key, value) {
+            updatedNotes += '<span>' + value.notes + '</span>';
+          });
+          updatedNotes = $('<span>' + updatedNotes + '</span>');
+          $('#current_notes').empty().append(updatedNotes.html());
+        },
+        error: function error(data) {
+          console.log(data);
+        }
+      });
+    }
+  }
 });
 
 /***/ }),

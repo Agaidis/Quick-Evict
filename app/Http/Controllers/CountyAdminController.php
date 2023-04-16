@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\CourtDetails;
 use App\ErrorLog;
 use App\CountyNotes;
+use App\PermitNote;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -84,7 +85,7 @@ class CountyAdminController extends Controller
 
 
             CountyNotes::where('id', $newCountyNote->id)
-                ->update(['notes' => '<div class="county_note" id="county_'.$newCountyNote->id.'"><p style="font-size:14px; margin-bottom:0;"> '.$userName . ' | '. $date . '<span class="fas fa-trash delete_county_note" id="delete_county_note_'.$newCountyNote->id.'" style="display:none; cursor:pointer; color:red;"></span></p>' . $request->note .'<hr></div>']);
+                ->update(['notes' => '<div class="county_note" id="county_'.$newCountyNote->id.'"><p style="font-size:14px; margin-bottom:0;"> '.$userName . ' | '. $date . '<span class="fas fa-trash delete_county_note" id="delete_county_note_'.$newCountyNote->id.'_'.$request->county.'" style="display:none; cursor:pointer; color:red;"></span></p>' . $request->note .'<hr></div>']);
 
             $currentCountyNotes = CountyNotes::where('county', $request->county)->orderBy('id', 'DESC')->get();
 
@@ -102,7 +103,13 @@ class CountyAdminController extends Controller
     public function deleteNote(Request $request) {
         try {
 
-            return back();
+            $countyNote = CountyNotes::where('id', $request->id)->first();
+
+            CountyNotes::destroy($request->id);
+
+            $updatedPermitNotes = CountyNotes::where('county', $countyNote->county)->orderBy('id', 'DESC')->get();
+
+            return $updatedPermitNotes;
 
         } catch (Exception $e) {
             $errorMsg = new ErrorLog();
