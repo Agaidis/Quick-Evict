@@ -66,7 +66,7 @@
 
                                 </div>
                                 <div class="offset-1 col-md-10">
-                                    <label for="new_note">New Note: </label><br>
+                                    <label style="text-align: left!important" for="new_note">New Note: </label><br>
                                     <textarea id="new_note"></textarea>
                                     <input type="hidden" id="county"/>
                                 </div>
