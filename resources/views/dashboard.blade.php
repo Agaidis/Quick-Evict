@@ -164,7 +164,11 @@
                                         @if (Auth::user()->role == 'PM Company Leader' || Auth::user()->role == 'Administrator')
                                         <td class="text-center">{{$eviction->id}}-{{$eviction->is_in_person_filing}} <br> {{$eviction->name}} </td>
                                         @else
-                                        <td class="text-center">{{$eviction->name}}</td>
+                                        @endif
+                                        @if (Auth::user()->role == 'Administrator')
+                                            <td class="text-center">{{$eviction->name}}</td>
+                                        @else
+                                            <td class="text-center">{{$eviction->name}}</td>
                                         @endif
                                         <td class="text-center">{{$eviction->court_number}}</td>
                                         <td class="text-center">

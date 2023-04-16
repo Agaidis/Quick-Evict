@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\CountyNotes;
 use App\ErrorLog;
 use Illuminate\Http\Request;
 use App\Evictions;
@@ -41,8 +42,15 @@ class DashboardController extends Controller
             $courtNumber = Auth::user()->court_id;
             $userRole = Auth::user()->role;
             $counties = CourtDetails::distinct()->orderBy('county')->get(['county']);
+            $notes = '';
 
             if (Auth::user()->role == 'Administrator') {
+                $notes = DB::select('select county from county_notes');
+
+                $errorMsg = new ErrorLog();
+                $errorMsg->payload = serialize($notes);
+
+                $errorMsg->save();
                 $evictions = DB::table('evictions')
                     ->select('evictions.id', 'users.name AS name', 'user_id', 'property_address', 'status', 'file_type', 'is_downloaded', 'owner_name', 'tenant_name', 'court_date', 'total_judgement', 'filing_fee',  'evictions.created_at', 'is_extra_files', 'court_number', 'is_in_person_filing')
                     ->join('users', 'evictions.user_id', '=', 'users.id')
@@ -88,7 +96,7 @@ class DashboardController extends Controller
                 $evictions = DB::select('select id, property_address, status, file_type, is_downloaded, owner_name, tenant_name, court_date, total_judgement, filing_fee,  created_at, is_extra_files, court_number, is_in_person_filing from evictions ORDER BY FIELD(status, "Created LTC", "LTC Mailed", "LTC Submitted Online", "Court Hearing Scheduled", "Court Hearing Extended", "Judgement Issued in Favor of Owner", "Judgement Denied by Court", "Tenant Filed Appeal", "OOP Mailed", "OOP Submitted Online", "Paid Judgement", "Locked Out Tenant"), id DESC');
             }
 
-            return view('dashboard' , compact('evictions', 'userRole', 'counties'));
+            return view('dashboard' , compact('evictions', 'userRole', 'counties', 'notes'));
         } catch (\Exception $e) {
             $errorMsg = new ErrorLog();
             $errorMsg->payload = $e->getMessage() . ' Line #: ' . $e->getLine();
