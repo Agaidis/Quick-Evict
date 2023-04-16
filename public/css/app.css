@@ -11593,7 +11593,13 @@ footer.footer{
     height: 160px;
 }
 
-
+#new_note {
+    width: 100%;
+    border: 1px solid lightgrey;
+    background-color: #fff5df;
+    border-radius: 1em;
+    height: 160px;
+}
 #login-logo {
     height:auto;
     margin-left:20%;
