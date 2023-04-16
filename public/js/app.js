@@ -43438,6 +43438,7 @@ $(document).ready(function () {
     var splitId = id.split('_');
     var county = splitId[3];
     $('#county').val(county);
+    $('.delete_county_note').css('display', 'none');
     $.ajaxSetup({
       headers: {
         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
