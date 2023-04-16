@@ -63,7 +63,7 @@ class CountyAdminController extends Controller
             $errorMsg->payload = 'county: ' . $request->county . ' notes: ' . $request->note;
             $errorMsg->save();
 
-            DB::insert('insert into county_notes (county, notes) values (?, ?)', [$request->county, $request->notes]);
+            DB::insert('insert into county_notes (county, notes) values (?, ?)', [$request->county, $request->note]);
 
             return 'success';
 
