@@ -2,7 +2,7 @@
  * Created by andrew on 04/04/20.
  */
 $(document).ready(function () {
-    $('.in_person_complaint_toggle').on('change', function() {
+    $('.in_person_complaint_toggle').on('change', function () {
 
         let id = $(this)[0].id;
         let splitId = id.split('_');
@@ -29,7 +29,7 @@ $(document).ready(function () {
 
             success: function (data) {
                 console.log(data);
-                },
+            },
             error: function (data) {
             }
         });
@@ -66,7 +66,7 @@ $(document).ready(function () {
                     let updatedNotes = '';
 
                     $.each(data, function (key, value) {
-                        updatedNotes += '<span>'+value.notes+'</span>';
+                        updatedNotes += '<span>' + value.notes + '</span>';
                     });
                     updatedNotes = $('<span>' + updatedNotes + '</span>');
 
@@ -115,7 +115,7 @@ $(document).ready(function () {
                     let updatedNotes = '';
 
                     $.each(data, function (key, value) {
-                        updatedNotes += '<span>'+value.notes+'</span>';
+                        updatedNotes += '<span>' + value.notes + '</span>';
                     });
                     updatedNotes = $('<span>' + updatedNotes + '</span>');
 
@@ -130,5 +130,23 @@ $(document).ready(function () {
             error: function (data) {
             }
         });
+    }).on('mouseover', '.county_note', function () {
+        let id = $(this)[0].id;
+        let splitId = id.split('_');
+        let countyId = splitId[1];
+
+        $('#' + id).css('background-color', 'lightgrey');
+        $('#delete_county_note_' + noteId).css('display', 'inherit');
+    }).on('mouseleave', '.county_note', function () {
+        $('.delete_county_note_').css('display', 'none');
+        $('.county_note').css('background-color', '#F2EDD7FF');
+    }).on('click', '.delete_county_note_', function () {
+        let id = $(this)[0].id;
+        let splitId = id.split('_');
+        let noteId = splitId[3];
+        let permitId = splitId[4];
+        let response = confirm('Are you sure you want to delete this note?');
+
+        //  deleteNote(permitId, noteId, response);
     });
 });

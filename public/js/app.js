@@ -43509,6 +43509,21 @@ $(document).ready(function () {
       },
       error: function error(data) {}
     });
+  }).on('mouseover', '.county_note', function () {
+    var id = $(this)[0].id;
+    var splitId = id.split('_');
+    var countyId = splitId[1];
+    $('#' + id).css('background-color', 'lightgrey');
+    $('#delete_county_note_' + noteId).css('display', 'inherit');
+  }).on('mouseleave', '.county_note', function () {
+    $('.delete_county_note_').css('display', 'none');
+    $('.county_note').css('background-color', '#F2EDD7FF');
+  }).on('click', '.delete_county_note_', function () {
+    var id = $(this)[0].id;
+    var splitId = id.split('_');
+    var noteId = splitId[3];
+    var permitId = splitId[4];
+    var response = confirm('Are you sure you want to delete this note?'); //  deleteNote(permitId, noteId, response);
   });
 });
 
