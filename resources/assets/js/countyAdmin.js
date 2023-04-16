@@ -70,8 +70,21 @@ $(document).ready(function () {
             },
 
             success: function (data) {
-                $('#new_note').val('').test('');
+                $('#new_note').val('');
                 $('#current_notes').val()
+
+                if (data !== undefined && data !== '') {
+                    let updatedNotes = '';
+
+                    $.each(data, function (key, value) {
+                        updatedNotes += '<span>'+value.notes+'</span>';
+                    });
+                    updatedNotes = $('<span>' + updatedNotes + '</span>');
+
+                    $('#current_notes').empty().append(updatedNotes.html());
+                } else {
+                    $('#current_notes').empty();
+                }
 
                 console.log(data);
 
