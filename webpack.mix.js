@@ -46,6 +46,7 @@ let mix = require('laravel-mix');
         'resources/assets/css/landing-page.min.css',
         'resources/assets/css/simple-line-icons.css',
         'resources/assets/css/timepicker.min.css',
+        'resources/assets/css/countyAdmin.css',
         'resources/assets/css/dashboard.css',
         'resources/assets/css/datatables.min.css',
         'resources/assets/css/datepicker.structure.min.css',

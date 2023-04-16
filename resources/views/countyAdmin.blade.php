@@ -61,7 +61,7 @@
                         </div>
                         <div class="modal-body">
                             <div class="row justify-content-center">
-                                <div class="col-md-6">
+                                <div class="col-md-10">
                                     <div id="current_notes"></div>
 
                                 </div>
