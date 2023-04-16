@@ -131,7 +131,7 @@ $(document).ready(function () {
         let id = $(this)[0].id;
         let splitId = id.split('_');
         let countyId = splitId[1];
-        let county = splidId[2];
+        let county = splitId[2];
         console.log('making it');
 
         $('#' + id).css('background-color', 'lightgrey');

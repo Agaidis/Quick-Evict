@@ -43512,7 +43512,7 @@ $(document).ready(function () {
     var id = $(this)[0].id;
     var splitId = id.split('_');
     var countyId = splitId[1];
-    var county = splidId[2];
+    var county = splitId[2];
     console.log('making it');
     $('#' + id).css('background-color', 'lightgrey');
     $('#delete_county_note_' + countyId + '_' + county).css('display', 'inherit');
