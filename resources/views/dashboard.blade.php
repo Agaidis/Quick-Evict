@@ -168,7 +168,7 @@
 
                                         @if (Auth::user()->role == 'Administrator')
                                             @if (in_array($eviction->county, $notesArray))
-                                                <td class="text-center">{{$eviction->court_number}} ha!</td>
+                                                <td class="text-center">{{$eviction->court_number}} <span style="color:red;"><i class="fa-solid fa-exclamation"></i></span></td>
                                             @else
                                                 <td class="text-center">{{$eviction->court_number}}</td>
                                             @endif
