@@ -171,7 +171,6 @@
                                                 <td class="text-center">{{$eviction->court_number}} ha!</td>
                                             @else
                                                 <td class="text-center">{{$eviction->court_number}}</td>
-
                                             @endif
                                         @else
                                             <td class="text-center">{{$eviction->court_number}}</td>
