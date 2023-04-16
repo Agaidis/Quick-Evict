@@ -41,8 +41,8 @@ $(document).ready(function () {
         let splitId = id.split('_');
         let county = splitId[3];
 
-        console.log(id);
-        console.log(county);
+        console.log('id', id);
+        console.log('county', county);
 
         $.ajaxSetup({
             headers: {
