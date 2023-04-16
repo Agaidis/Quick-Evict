@@ -49,9 +49,11 @@
                                 <thead>
                                 <tr>
                                     <th style="width:18%;" class="text-center">Status</th>
-                                    <th style="width:5%;" class="text-center">Id</th>
+
                                     @if (Auth::user()->role == 'PM Company Leader' || Auth::user()->role == 'Administrator')
-                                    <th class="text-center">User</th>
+                                        <th class="text-center">Id <br> User</th>
+                                    @else
+                                        <th style="width:5%;" class="text-center">Id</th>
                                     @endif
                                     <th class="text-center" style="width:55px;">MDJ</th>
                                     <th>D/L Status</th>
@@ -159,8 +161,9 @@
 
                                             </select>
                                         </td>
-                                        <td class="text-center">{{$eviction->id}}-{{$eviction->is_in_person_filing}}</td>
                                         @if (Auth::user()->role == 'PM Company Leader' || Auth::user()->role == 'Administrator')
+                                        <td class="text-center">{{$eviction->id}}-{{$eviction->is_in_person_filing}} <br> {{$eviction->name}} </td>
+                                        @else
                                         <td class="text-center">{{$eviction->name}}</td>
                                         @endif
                                         <td class="text-center">{{$eviction->court_number}}</td>
