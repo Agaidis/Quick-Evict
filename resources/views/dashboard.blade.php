@@ -166,11 +166,7 @@
                                         @else
                                         @endif
                                         @if (Auth::user()->role == 'Administrator')
-                                            @if (in_array($eviction->county, $notesArray))
-                                                <td class="text-center">{{$eviction->name}} hey</td>
-                                            @else
-                                                <td class="text-center">{{$eviction->name}}</td>
-                                            @endif
+                                            <td class="text-center">{{$eviction->name}}</td>
                                         @else
                                             <td class="text-center">{{$eviction->name}}</td>
                                         @endif

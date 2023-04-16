@@ -44,21 +44,21 @@ class DashboardController extends Controller
             $counties = CourtDetails::distinct()->orderBy('county')->get(['county']);
             $notes = '';
 
-            $notesArray = array();
+      //      $notesArray = array();
             if (Auth::user()->role == 'Administrator') {
-                $notes = DB::select('select county from county_notes');
-                foreach ($notes as $note) {
-                    array_push($notesArray, $note->county);
-                }
+//                $notes = DB::select('select county from county_notes');
+//                foreach ($notes as $note) {
+//                    array_push($notesArray, $note->county);
+//                }
 
                 $errorMsg = new ErrorLog();
                 $errorMsg->payload = serialize($notes);
                 $errorMsg->save();
 
                 $evictions = DB::table('evictions')
-                    ->select('evictions.id', 'users.name AS name', 'user_id', 'property_address', 'status', 'court_details.county', 'file_type', 'is_downloaded', 'owner_name', 'tenant_name', 'court_date', 'total_judgement', 'filing_fee',  'evictions.created_at', 'is_extra_files', 'evictions.court_number', 'is_in_person_filing')
+                    ->select('evictions.id', 'users.name AS name', 'user_id', 'property_address', 'status', 'file_type', 'is_downloaded', 'owner_name', 'tenant_name', 'court_date', 'total_judgement', 'filing_fee',  'evictions.created_at', 'is_extra_files', 'evictions.court_number', 'is_in_person_filing')
                     ->join('users', 'evictions.user_id', '=', 'users.id')
-                    ->join('court_details', 'court_details.magistrate_id', '=', 'evictions.magistrate_id')
+                 //   ->join('court_details', 'court_details.magistrate_id', '=', 'evictions.magistrate_id')
                     ->orderBy('evictions.id', 'desc')
                     ->take(600)
                     ->get();
@@ -101,7 +101,7 @@ class DashboardController extends Controller
                 $evictions = DB::select('select id, property_address, status, file_type, is_downloaded, owner_name, tenant_name, court_date, total_judgement, filing_fee,  created_at, is_extra_files, court_number, is_in_person_filing from evictions ORDER BY FIELD(status, "Created LTC", "LTC Mailed", "LTC Submitted Online", "Court Hearing Scheduled", "Court Hearing Extended", "Judgement Issued in Favor of Owner", "Judgement Denied by Court", "Tenant Filed Appeal", "OOP Mailed", "OOP Submitted Online", "Paid Judgement", "Locked Out Tenant"), id DESC');
             }
 
-            return view('dashboard' , compact('evictions', 'userRole', 'counties', 'notesArray'));
+            return view('dashboard' , compact('evictions', 'userRole', 'counties'));
         } catch (\Exception $e) {
             $errorMsg = new ErrorLog();
             $errorMsg->payload = $e->getMessage() . ' Line #: ' . $e->getLine();
