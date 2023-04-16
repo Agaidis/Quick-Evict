@@ -43460,6 +43460,8 @@ $(document).ready(function () {
         note: note
       },
       success: function success(data) {
+        $('#new_note').val('').test('');
+        $('#current_notes').val();
         console.log(data);
       },
       error: function error(data) {}

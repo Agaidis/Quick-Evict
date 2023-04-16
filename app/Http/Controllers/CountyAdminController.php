@@ -4,10 +4,12 @@ namespace App\Http\Controllers;
 
 use App\CourtDetails;
 use App\ErrorLog;
+use App\CountyNotes;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+
 
 class CountyAdminController extends Controller
 {
@@ -62,10 +64,18 @@ class CountyAdminController extends Controller
             $errorMsg = new ErrorLog();
             $errorMsg->payload = 'county: ' . $request->county . ' notes: ' . $request->note;
             $errorMsg->save();
+            $userName = Auth()->user()->name;
+            $date = date('d/m/Y h:m:s', strtotime('-5 hours'));
 
-            DB::insert('insert into county_notes (county, notes) values (?, ?)', [$request->county, $request->note]);
+            $newCountyNote = new CountyNotes();
 
-            return 'success';
+            $newCountyNote->county = $request->permitId;
+            $newCountyNote->notes = '<div class="county_note" id="county_'.$newCountyNote->id.'"><p style="font-size:14px; margin-bottom:0;"> '.$userName . ' | '. $date . '<span class="fas fa-trash delete_county_note" id="delete_county_note_'.$newCountyNote->id.'" style="display:none; cursor:pointer; color:red; float:right;margin-right:5%;"></span></p>' . $request->note .'<hr></div>';
+            $newCountyNote->save();
+
+            $updatedCountyNotes = CountyNotes::where('county', $request->county)->orderBy('id', 'DESC')->get();
+
+            return $updatedCountyNotes;
 
         } catch (Exception $e) {
             $errorMsg = new ErrorLog();

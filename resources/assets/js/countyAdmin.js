@@ -70,6 +70,9 @@ $(document).ready(function () {
             },
 
             success: function (data) {
+                $('#new_note').val('').test('');
+                $('#current_notes').val()
+
                 console.log(data);
 
             },
