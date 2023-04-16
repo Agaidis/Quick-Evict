@@ -138,10 +138,10 @@ class EvictionController extends Controller
             //Tenant lives at incident address, do not change anything
             if ($_POST['does_tenant_reside'] === 'tenantResides') {
                 $defendantAddress = $tenantName . '<br>' . $_POST['houseNum'] . ' ' . $_POST['streetName'] . ', ' . $_POST['incident_addit_address_detail'] .'<br> '. $_POST['town'] .', '. $_POST['state'] .' '. $_POST['zipcode'];
-         //       $defendantAddress2 = $_POST['houseNum'] . ' ' . $_POST['streetName'] .' '. $_POST['incident_addit_address_detail'] . '<span style="position:absolute; margin-top:-10px;">'. $_POST['town'] .', ' . $_POST['state'] .' '. $_POST['zipcode'] . '</span>';
+                $defendantAddress2 = $_POST['houseNum'] . ' ' . $_POST['streetName'] .' '. $_POST['incident_addit_address_detail'] . '<br><br><span style="position:absolute; margin-top:-10px;">'. $_POST['town'] .', ' . $_POST['state'] .' '. $_POST['zipcode'] . '</span>';
             } else if ($_POST['does_tenant_reside'] === 'tenantDoesNotReside') {
                 $defendantAddress = $tenantName . '<br>' . $_POST['residedHouseNum'] . ' ' . $_POST['residedStreetName'] . ', ' . $_POST['tenant_addit_address_detail'] .'<br> '. $_POST['residedTown'] .', '. $_POST['residedState'] .' '. $_POST['residedZipcode'];
-          //      $defendantAddress2 = $_POST['houseNum'] . ' ' . $_POST['streetName'] .' '. $_POST['incident_addit_address_detail'] . '<span style="position:absolute; margin-top:-10px;">'. $_POST['town'] .', ' . $_POST['state'] .' '. $_POST['zipcode'] . '</span>';
+                $defendantAddress2 = $_POST['houseNum'] . ' ' . $_POST['streetName'] .' '. $_POST['incident_addit_address_detail'] . '<br><br><span style="position:absolute; margin-top:-10px;">'. $_POST['town'] .', ' . $_POST['state'] .' '. $_POST['zipcode'] . '</span>';
             }
 
             if ($noCommaTotalFees < 2000) {
