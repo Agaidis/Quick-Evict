@@ -43517,7 +43517,7 @@ $(document).ready(function () {
     $('#' + id).css('background-color', 'lightgrey');
     $('#delete_county_note_' + countyId).css('display', 'inherit');
   }).on('mouseleave', '.county_note', function () {
-    $('.delete_county_note_' + countyId).css('display', 'none');
+    $('.delete_county_note').css('display', 'none');
     $('.county_note').css('background-color', '#F2EDD7FF');
   }).on('click', '.delete_county_note', function () {
     var id = $(this)[0].id;
