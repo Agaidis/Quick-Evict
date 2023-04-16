@@ -61,11 +61,11 @@
                         </div>
                         <div class="modal-body">
                             <div class="row">
-                                <div class="col-md-10">
+                                <div class="offset-1 col-md-10">
                                     <div id="current_notes"></div>
 
                                 </div>
-                                <div class="col-md-6">
+                                <div class="offset-1 col-md-10">
                                     <label for="new_note">New Note: </label><br>
                                     <textarea id="new_note"></textarea>
                                     <input type="hidden" id="county"/>
