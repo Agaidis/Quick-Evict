@@ -61,7 +61,7 @@ class CountyAdminController extends Controller
 
     public function getCourtIds(Request $request) {
         try {
-            $courtIds = CourtDetails::where('county', $request->county)->orderBy('id', 'DESC')->distinct()->get();
+            $courtIds = CourtDetails::where('county', $request->county)->orderBy('id', 'DESC')->groupBy('court_number')->get();
 
             return $courtIds;
         } catch (Exception $e) {
