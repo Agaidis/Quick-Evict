@@ -122,11 +122,9 @@ class CountyAdminController extends Controller
     public function deleteNote(Request $request) {
         try {
 
-            $countyNote = CountyNotes::where('id', $request->id)->first();
-
             CountyNotes::destroy($request->id);
 
-            $updatedPermitNotes = CountyNotes::where('court_id', $countyNote->courtId)->orderBy('id', 'DESC')->get();
+            $updatedPermitNotes = CountyNotes::where('court_id', $request->courtId)->orderBy('id', 'DESC')->get();
 
             return $updatedPermitNotes;
 
