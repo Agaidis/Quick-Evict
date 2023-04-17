@@ -43454,7 +43454,7 @@ $(document).ready(function () {
         county: county
       },
       success: function success(data) {
-        var optionValues = ''; //Adding court ids
+        var optionValues = '<option value="">Select a Court Id</option>'; //Adding court ids
 
         $.each(data, function (key, value) {
           optionValues += '<option value="' + value.court_number + '">' + value.court_number + '</option>';
@@ -43482,7 +43482,7 @@ $(document).ready(function () {
         courtId: courtId
       },
       success: function success(data) {
-        var updatedNotes = '<option value="">Select a Court Id</option>'; // adding current notes
+        var updatedNotes = ''; // adding current notes
 
         if (data !== undefined && data !== '') {
           $.each(data[1], function (key, value) {
