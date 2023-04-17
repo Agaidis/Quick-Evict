@@ -65,7 +65,7 @@ $(document).ready(function () {
 
                 //Adding court ids
                 $.each(data[0], function (key, value) {
-                    optionValues += '<option value="' + value.court_id + '">' + value.court_id + '</option>';
+                    optionValues += '<option value="' + value.court_number + '">' + value.court_number + '</option>';
                 });
                 $('#court_id').empty().append($(optionValues));
 
