@@ -126,47 +126,53 @@ $(document).ready(function () {
         let courtId = $('#court_id').val();
         $('.delete_county_note').css('display', 'none');
 
-        $.ajaxSetup({
-            headers: {
-                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-            }
-        });
+        if (courtId === '') {
+            alert('Please select a court id');
+        } else {
 
-        $.ajax({
-            beforeSend: function (xhr) {
-                xhr.setRequestHeader('X-CSRF-TOKEN', $("#token").attr('content'));
-            },
-            type: "POST",
-            url: '/add-note',
-            data: {
-                county: county,
-                courtId: courtId,
-                note: note
-            },
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
 
-            success: function (data) {
-                $('#new_note').val('');
-                $('#current_notes').val()
+            $.ajax({
+                beforeSend: function (xhr) {
+                    xhr.setRequestHeader('X-CSRF-TOKEN', $("#token").attr('content'));
+                },
+                type: "POST",
+                url: '/add-note',
+                data: {
+                    county: county,
+                    courtId: courtId,
+                    note: note
+                },
 
-                if (data !== undefined && data !== '') {
-                    let updatedNotes = '';
+                success: function (data) {
+                    $('#new_note').val('');
+                    $('#current_notes').val();
 
-                    $.each(data, function (key, value) {
-                        updatedNotes += '<span>' + value.notes + '</span>';
-                    });
-                    updatedNotes = $('<span>' + updatedNotes + '</span>');
+                    if (data !== undefined && data !== '') {
+                        let updatedNotes = '';
 
-                    $('#current_notes').empty().append(updatedNotes.html());
-                } else {
-                    $('#current_notes').empty();
+                        $.each(data, function (key, value) {
+                            updatedNotes += '<span>' + value.notes + '</span>';
+                        });
+                        updatedNotes = $('<span>' + updatedNotes + '</span>');
+
+                        $('#current_notes').empty().append(updatedNotes.html());
+                    } else {
+                        $('#current_notes').empty();
+                    }
+
+                    console.log(data);
+
+                },
+                error: function (data) {
                 }
 
-                console.log(data);
-
-            },
-            error: function (data) {
-            }
-        });
+            });
+        }
     }).on('mouseover', '.county_note', function () {
         let id = $(this)[0].id;
         let splitId = id.split('_');
