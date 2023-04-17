@@ -49891,7 +49891,7 @@ $(document).ready(function () {
       type: "GET",
       url: '/get-notes',
       data: {
-        county: splitId[3]
+        courtId: splitId[3]
       },
       success: function success(data) {
         if (data !== undefined && data !== '') {

@@ -42,19 +42,17 @@ class DashboardController extends Controller
             $courtNumber = Auth::user()->court_id;
             $userRole = Auth::user()->role;
             $counties = CourtDetails::distinct()->orderBy('county')->get(['county']);
-            $notes = '';
             $notesArray = array();
 
             if (Auth::user()->role == 'Administrator') {
-                $notes = DB::select('select county from county_notes');
+                $notes = DB::select('select court_id from county_notes');
                 foreach ($notes as $note) {
-                    array_push($notesArray, $note->county);
+                    array_push($notesArray, $note->court_id);
                 }
 
                 $evictions = DB::table('evictions')
-                    ->select('evictions.id', 'users.name AS name', 'user_id', 'property_address', 'court_details.county', 'status', 'file_type', 'is_downloaded', 'owner_name', 'tenant_name', 'court_date', 'total_judgement', 'filing_fee',  'evictions.created_at', 'is_extra_files', 'evictions.court_number', 'is_in_person_filing')
+                    ->select('evictions.id', 'users.name AS name', 'user_id', 'property_address', 'status', 'file_type', 'is_downloaded', 'owner_name', 'tenant_name', 'court_date', 'total_judgement', 'filing_fee',  'evictions.created_at', 'is_extra_files', 'court_number', 'is_in_person_filing')
                     ->join('users', 'evictions.user_id', '=', 'users.id')
-                    ->join('court_details', 'court_details.magistrate_id', '=', 'evictions.magistrate_id')
                     ->orderBy('evictions.id', 'desc')
                     ->take(600)
                     ->get();
