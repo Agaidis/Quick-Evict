@@ -43494,8 +43494,6 @@ $(document).ready(function () {
         } else {
           $('#current_notes').empty();
         }
-
-        console.log(data);
       },
       error: function error(data) {}
     });
@@ -43539,8 +43537,6 @@ $(document).ready(function () {
           } else {
             $('#current_notes').empty();
           }
-
-          console.log(data);
         },
         error: function error(data) {}
       });
@@ -43549,10 +43545,9 @@ $(document).ready(function () {
     var id = $(this)[0].id;
     var splitId = id.split('_');
     var countyId = splitId[1];
-    var county = splitId[2];
-    console.log('making it');
+    var courtId = $('#court_id').val();
     $('#' + id).css('background-color', 'lightgrey');
-    $('#delete_county_note_' + countyId + '_' + county).css('display', 'inherit');
+    $('#delete_county_note_' + countyId + '_' + courtId).css('display', 'inherit');
   }).on('mouseleave', '.county_note', function () {
     $('.delete_county_note').css('display', 'none');
     $('.county_note').css('background-color', 'aliceblue');
@@ -43560,12 +43555,12 @@ $(document).ready(function () {
     var id = $(this)[0].id;
     var splitId = id.split('_');
     var noteId = splitId[3];
-    var county = splitId[4];
+    var courtId = splitId[4];
     var response = confirm('Are you sure you want to delete this note?');
-    deleteNote(noteId, county, response);
+    deleteNote(noteId, courtId, response);
   });
 
-  function deleteNote(noteId, county, response) {
+  function deleteNote(noteId, courtId, response) {
     if (response) {
       $.ajaxSetup({
         headers: {
@@ -43580,7 +43575,7 @@ $(document).ready(function () {
         url: '/delete-note',
         data: {
           id: noteId,
-          county: county
+          courtId: courtId
         },
         success: function success(data) {
           console.log(data);
