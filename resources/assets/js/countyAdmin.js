@@ -60,11 +60,18 @@ $(document).ready(function () {
             },
 
             success: function (data) {
+                let updatedNotes = '';
+                let optionValues = '';
 
-                if (data !== undefined && data !== '') {
-                    let updatedNotes = '';
+                //Adding court ids
+                $.each(data[0], function (key, value) {
+                    optionValues += '<option value="' + value.court_id + '">' + value.court_id + '</option>';
+                });
+                $('#court_id').empty().append($(optionValues));
 
-                    $.each(data, function (key, value) {
+                // adding current notes
+                if (data[1] !== undefined && data[1] !== '') {
+                    $.each(data[1], function (key, value) {
                         updatedNotes += '<span>' + value.notes + '</span>';
                     });
                     updatedNotes = $('<span>' + updatedNotes + '</span>');

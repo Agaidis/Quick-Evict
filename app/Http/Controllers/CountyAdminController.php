@@ -61,9 +61,12 @@ class CountyAdminController extends Controller
 
     public function getNotes(Request $request) {
         try {
+            $data = array();
+            $countIds = CourtDetails::where('county', $request->county)->orderBy('id', 'DESC')->get();
             $updatedCountyNotes = CountyNotes::where('county', $request->county)->orderBy('id', 'DESC')->get();
-
-            return $updatedCountyNotes;
+            $data[0] = $countIds;
+            $data[1] = $updatedCountyNotes;
+            return $data;
         } catch (Exception $e) {
             $errorMsg = new ErrorLog();
             $errorMsg->payload = $e->getMessage() . ' Line #: ' . $e->getLine();

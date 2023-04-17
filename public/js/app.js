@@ -43454,9 +43454,16 @@ $(document).ready(function () {
         county: county
       },
       success: function success(data) {
-        if (data !== undefined && data !== '') {
-          var updatedNotes = '';
-          $.each(data, function (key, value) {
+        var updatedNotes = '';
+        var optionValues = ''; //Adding court ids
+
+        $.each(data[0], function (key, value) {
+          optionValues += '<option value="' + value.court_id + '">' + value.court_id + '</option>';
+        });
+        $('#court_id').empty().append($(optionValues)); // adding current notes
+
+        if (data[1] !== undefined && data[1] !== '') {
+          $.each(data[1], function (key, value) {
             updatedNotes += '<span>' + value.notes + '</span>';
           });
           updatedNotes = $('<span>' + updatedNotes + '</span>');

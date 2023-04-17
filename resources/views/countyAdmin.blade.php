@@ -62,6 +62,10 @@
                         <div class="modal-body">
                             <div class="row">
                                 <div class="offset-1 col-md-10">
+                                    <label style="text-align: left!important" for="court_id">Court Id: </label><br>
+                                    <select id="court_id"></select>
+                                </div>
+                                <div class="offset-1 col-md-10">
                                     <label style="text-align: left!important" for="new_note">New Note: </label><br>
                                     <textarea id="new_note"></textarea>
                                     <input type="hidden" id="county"/>
