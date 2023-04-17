@@ -54,23 +54,52 @@ $(document).ready(function () {
                 xhr.setRequestHeader('X-CSRF-TOKEN', $("#token").attr('content'));
             },
             type: "GET",
-            url: '/get-notes',
+            url: '/get-court-ids',
             data: {
                 county: county
             },
 
             success: function (data) {
-                let updatedNotes = '';
                 let optionValues = '';
 
                 //Adding court ids
-                $.each(data[0], function (key, value) {
+                $.each(data, function (key, value) {
                     optionValues += '<option value="' + value.court_number + '">' + value.court_number + '</option>';
                 });
                 $('#court_id').empty().append($(optionValues));
 
+
+
+            },
+            error: function (data) {
+            }
+        });
+    });
+
+    $('#notesModal').on('change', '#court_id', function () {
+        let courtId = $(this)[0].value;
+        console.log(courtId);
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+
+        $.ajax({
+            beforeSend: function (xhr) {
+                xhr.setRequestHeader('X-CSRF-TOKEN', $("#token").attr('content'));
+            },
+            type: "GET",
+            url: '/get-notes',
+            data: {
+                courtId: courtId
+            },
+
+            success: function (data) {
+                let updatedNotes = '';
+
                 // adding current notes
-                if (data[1] !== undefined && data[1] !== '') {
+                if (data !== undefined && data !== '') {
                     $.each(data[1], function (key, value) {
                         updatedNotes += '<span>' + value.notes + '</span>';
                     });
@@ -83,15 +112,18 @@ $(document).ready(function () {
 
                 console.log(data);
 
+
             },
             error: function (data) {
             }
         });
+
     });
 
     $('#notesModal').on('click', '#add_note', function () {
         let note = $('#new_note').val();
         let county = $('#county').val();
+        let courtId = $('#court_id').val();
         $('.delete_county_note').css('display', 'none');
 
         $.ajaxSetup({
@@ -108,6 +140,7 @@ $(document).ready(function () {
             url: '/add-note',
             data: {
                 county: county,
+                courtId: courtId,
                 note: note
             },
 

@@ -43449,20 +43449,42 @@ $(document).ready(function () {
         xhr.setRequestHeader('X-CSRF-TOKEN', $("#token").attr('content'));
       },
       type: "GET",
-      url: '/get-notes',
+      url: '/get-court-ids',
       data: {
         county: county
       },
       success: function success(data) {
-        var updatedNotes = '';
         var optionValues = ''; //Adding court ids
 
-        $.each(data[0], function (key, value) {
+        $.each(data, function (key, value) {
           optionValues += '<option value="' + value.court_number + '">' + value.court_number + '</option>';
         });
-        $('#court_id').empty().append($(optionValues)); // adding current notes
+        $('#court_id').empty().append($(optionValues));
+      },
+      error: function error(data) {}
+    });
+  });
+  $('#notesModal').on('change', '#court_id', function () {
+    var courtId = $(this)[0].value;
+    console.log(courtId);
+    $.ajaxSetup({
+      headers: {
+        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+      }
+    });
+    $.ajax({
+      beforeSend: function beforeSend(xhr) {
+        xhr.setRequestHeader('X-CSRF-TOKEN', $("#token").attr('content'));
+      },
+      type: "GET",
+      url: '/get-notes',
+      data: {
+        courtId: courtId
+      },
+      success: function success(data) {
+        var updatedNotes = ''; // adding current notes
 
-        if (data[1] !== undefined && data[1] !== '') {
+        if (data !== undefined && data !== '') {
           $.each(data[1], function (key, value) {
             updatedNotes += '<span>' + value.notes + '</span>';
           });
@@ -43480,6 +43502,7 @@ $(document).ready(function () {
   $('#notesModal').on('click', '#add_note', function () {
     var note = $('#new_note').val();
     var county = $('#county').val();
+    var courtId = $('#court_id').val();
     $('.delete_county_note').css('display', 'none');
     $.ajaxSetup({
       headers: {
@@ -43494,6 +43517,7 @@ $(document).ready(function () {
       url: '/add-note',
       data: {
         county: county,
+        courtId: courtId,
         note: note
       },
       success: function success(data) {
