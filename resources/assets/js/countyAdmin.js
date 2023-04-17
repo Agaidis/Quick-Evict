@@ -60,7 +60,7 @@ $(document).ready(function () {
             },
 
             success: function (data) {
-                let optionValues = '';
+                let optionValues = '<option value="">Select a Court Id</option>';
 
                 //Adding court ids
                 $.each(data, function (key, value) {
@@ -96,7 +96,7 @@ $(document).ready(function () {
             },
 
             success: function (data) {
-                let updatedNotes = '<option value="">Select a Court Id</option>';
+                let updatedNotes = '';
 
                 // adding current notes
                 if (data !== undefined && data !== '') {
