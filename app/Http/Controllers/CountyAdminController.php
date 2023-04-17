@@ -96,7 +96,7 @@ class CountyAdminController extends Controller
 
             $newCountyNote = new CountyNotes();
             $newCountyNote->county = $request->county;
-            $newCountyNote->courtId = $request->courtId;
+            $newCountyNote->court_id = $request->courtId;
             $newCountyNote->save();
 
 
