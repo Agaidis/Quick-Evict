@@ -100,7 +100,7 @@ $(document).ready(function () {
 
                 // adding current notes
                 if (data !== undefined && data !== '') {
-                    $.each(data[1], function (key, value) {
+                    $.each(data, function (key, value) {
                         updatedNotes += '<span>' + value.notes + '</span>';
                     });
                     updatedNotes = $('<span>' + updatedNotes + '</span>');
