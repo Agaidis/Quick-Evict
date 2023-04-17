@@ -167,7 +167,7 @@
                                         @endif
 
                                         @if (Auth::user()->role == 'Administrator')
-                                            @if (in_array($eviction->county, $notesArray))
+                                            @if (in_array($eviction->court_number, $notesArray))
                                                 <td class="text-center">{{$eviction->court_number}} <button type="button" style="border:none; background-color:white;" class="see_notes_dash" id="see_notes_dash_{{$eviction->court_number}}" data-toggle="modal" data-target="#seeNotesModal"><span style="color:red;"><i class="fa fa-exclamation-circle" aria-hidden="true"></i></span></button></td>
                                             @else
                                                 <td class="text-center">{{$eviction->court_number}}</td>
