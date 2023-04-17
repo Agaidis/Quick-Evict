@@ -36,7 +36,7 @@ $(document).ready(function () {
     });
 
     $('#county_table').on('click', '.modal_note_btn', function () {
-
+        $('#current_notes').empty();
         let id = $(this)[0].id;
         let splitId = id.split('_');
         let county = splitId[3];

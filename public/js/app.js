@@ -43434,6 +43434,7 @@ $(document).ready(function () {
     });
   });
   $('#county_table').on('click', '.modal_note_btn', function () {
+    $('#current_notes').empty();
     var id = $(this)[0].id;
     var splitId = id.split('_');
     var county = splitId[3];
