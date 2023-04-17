@@ -64,7 +64,7 @@
                                 <div class="offset-2 col-md-8">
                                     <label style="text-align: left!important" for="court_id">Court Id: </label><br>
                                     <select class="form-control" id="court_id">
-                                        <option value="">Select a Court Id</option>
+
                                     </select>
                                 </div>
                                 <div class="offset-1 col-md-10">

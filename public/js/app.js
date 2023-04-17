@@ -43482,7 +43482,7 @@ $(document).ready(function () {
         courtId: courtId
       },
       success: function success(data) {
-        var updatedNotes = ''; // adding current notes
+        var updatedNotes = '<option value="">Select a Court Id</option>'; // adding current notes
 
         if (data !== undefined && data !== '') {
           $.each(data[1], function (key, value) {

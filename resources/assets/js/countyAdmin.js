@@ -96,7 +96,7 @@ $(document).ready(function () {
             },
 
             success: function (data) {
-                let updatedNotes = '';
+                let updatedNotes = '<option value="">Select a Court Id</option>';
 
                 // adding current notes
                 if (data !== undefined && data !== '') {
