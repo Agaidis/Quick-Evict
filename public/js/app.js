@@ -43561,6 +43561,8 @@ $(document).ready(function () {
   });
 
   function deleteNote(noteId, courtId, response) {
+    console.log('cuortId', courtId);
+
     if (response) {
       $.ajaxSetup({
         headers: {
