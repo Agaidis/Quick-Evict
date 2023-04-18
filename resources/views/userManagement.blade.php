@@ -70,10 +70,29 @@
                                     </td>
                                     <td class="text-center">
                                         <select class="form-control pay_type" id="pay_type_{{$user->id}}">
-                                            <option value="">Select Pay Type</option>
-                                            <option value="full_payment">Full Payment</option>
-                                            <option value="pay_court_fee">Pay Court Fee</option>
-                                            <option value="free">Free</option>
+                                            @if ($user->pay_type === 'full_payment')
+                                                <option value="">Select Pay Type</option>
+                                                <option selected value="full_payment">Full Payment</option>
+                                                <option value="pay_court_fee">Pay Court Fee</option>
+                                                <option value="free">Free</option>
+                                            @elseif ($user->pay_type === 'pay_court_fee')
+                                                <option value="">Select Pay Type</option>
+                                                <option value="full_payment">Full Payment</option>
+                                                <option selected value="pay_court_fee">Pay Court Fee</option>
+                                                <option value="free">Free</option>
+                                            @elseif ($user->pay_type === 'free')
+                                                <option value="">Select Pay Type</option>
+                                                <option value="full_payment">Full Payment</option>
+                                                <option value="pay_court_fee">Pay Court Fee</option>
+                                                <option selected value="free">Free</option>
+                                            @else
+                                                <option value="">Select Pay Type</option>
+                                                <option value="full_payment">Full Payment</option>
+                                                <option value="pay_court_fee">Pay Court Fee</option>
+                                                <option value="free">Free</option>
+                                            @endif
+
+
                                         </select>
                                     </td>
                                     <td class="text-center">
