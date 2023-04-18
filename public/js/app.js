@@ -60344,6 +60344,33 @@ $(document).ready(function () {
   $('#user_table').DataTable({
     "pagingType": "simple",
     "pageLength": 50
+  }).on('change', '.pay_type', function () {
+    var id = $(this)[0].id.split('_');
+    var payType = $(this)[0].value;
+    var userId = id[2];
+    console.log('userId', userId);
+    console.log('payType', payType);
+    $.ajaxSetup({
+      headers: {
+        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+      }
+    });
+    $.ajax({
+      beforeSend: function beforeSend(xhr) {
+        xhr.setRequestHeader('X-CSRF-TOKEN', $("#token").attr('content'));
+      },
+      type: "POST",
+      url: '/userManagement/pay-type',
+      dataType: 'json',
+      data: {
+        userId: userId,
+        payType: payType
+      },
+      success: function success(data) {
+        console.log(data);
+      },
+      error: function error(data) {}
+    });
   });
   $('.role_select').on('change', function () {
     var id = $(this)[0].id.split('_');
@@ -60391,34 +60418,6 @@ $(document).ready(function () {
       data: {
         id: id[2],
         court: selectedCourt
-      },
-      success: function success(data) {
-        console.log(data);
-      },
-      error: function error(data) {}
-    });
-  });
-  $('.pay_type').on('change', function () {
-    var id = $(this)[0].id.split('_');
-    var payType = $(this)[0].value;
-    var userId = id[2];
-    console.log('userId', userId);
-    console.log('payType', payType);
-    $.ajaxSetup({
-      headers: {
-        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-      }
-    });
-    $.ajax({
-      beforeSend: function beforeSend(xhr) {
-        xhr.setRequestHeader('X-CSRF-TOKEN', $("#token").attr('content'));
-      },
-      type: "POST",
-      url: '/userManagement/pay-type',
-      dataType: 'json',
-      data: {
-        userId: userId,
-        payType: payType
       },
       success: function success(data) {
         console.log(data);

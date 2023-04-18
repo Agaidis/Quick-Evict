@@ -7,7 +7,40 @@ $(document).ready(function () {
     $('#user_table').DataTable({
         "pagingType": "simple",
         "pageLength": 50
+    }).on('change', '.pay_type', function() {
+        let id = $(this)[0].id.split('_');
+        let payType = $(this)[0].value;
+        let userId = id[2];
+
+        console.log('userId', userId);
+        console.log('payType', payType);
+
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+
+        $.ajax({
+            beforeSend: function (xhr) {
+                xhr.setRequestHeader('X-CSRF-TOKEN', $("#token").attr('content'));},
+            type: "POST",
+            url: '/userManagement/pay-type',
+            dataType: 'json',
+            data: {
+                userId: userId,
+                payType: payType
+            },
+
+            success: function (data) {
+                console.log(data);
+            },
+
+            error: function (data) {
+            }
+        });
     });
+
 
     $('.role_select').on('change', function() {
         var id = $(this)[0].id.split('_');
@@ -72,39 +105,6 @@ $(document).ready(function () {
         });
     });
 
-    $('.pay_type').on('change', function() {
-        let id = $(this)[0].id.split('_');
-        let payType = $(this)[0].value;
-        let userId = id[2];
-
-        console.log('userId', userId);
-        console.log('payType', payType);
-
-        $.ajaxSetup({
-            headers: {
-                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-            }
-        });
-
-        $.ajax({
-            beforeSend: function (xhr) {
-                xhr.setRequestHeader('X-CSRF-TOKEN', $("#token").attr('content'));},
-            type: "POST",
-            url: '/userManagement/pay-type',
-            dataType: 'json',
-            data: {
-                userId: userId,
-                payType: payType
-            },
-
-            success: function (data) {
-                console.log(data);
-            },
-
-            error: function (data) {
-            }
-        });
-    });
 
 
 
