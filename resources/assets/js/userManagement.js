@@ -72,7 +72,7 @@ $(document).ready(function () {
         });
     });
 
-    $('.pay_type').on('click', function() {
+    $('.pay_type').on('change', function() {
         let id = $(this)[0].id.split('_');
         let payType = $(this)[0].value;
         let userId = id[2];

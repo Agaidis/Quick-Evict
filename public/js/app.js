@@ -60398,7 +60398,7 @@ $(document).ready(function () {
       error: function error(data) {}
     });
   });
-  $('.pay_type').on('click', function () {
+  $('.pay_type').on('change', function () {
     var id = $(this)[0].id.split('_');
     var payType = $(this)[0].value;
     var userId = id[2];
