@@ -69,11 +69,11 @@
                                         </select>
                                     </td>
                                     <td class="text-center">
-                                        <input type="radio" class="payType" id="payType1_{{$user->id}}" name="pay_type" value="payFull">
+                                        <input type="radio" class="payType" id="payType1_{{$user->id}}" name="pay_type_{{$user->id}}" value="payFull">
                                         <label for="payType1_{{$user->id}}">Full payment</label><br>
-                                        <input type="radio" class="payType" id="payType2_{{$user->id}}" name="pay_type" value="payCourt">
+                                        <input type="radio" class="payType" id="payType2_{{$user->id}}" name="pay_type_{{$user->id}}" value="payCourt">
                                         <label for="payType2_{{$user->id}}">Pay Court Fee</label><br>
-                                        <input type="radio" class="payType" id="payType3_{{$user->id}}" name="pay_type" value="free">
+                                        <input type="radio" class="payType" id="payType3_{{$user->id}}" name="pay_type_{{$user->id}}" value="free">
                                         <label for="payType3_{{$user->id}}">Free</label>
                                     </td>
                                     <td class="text-center">
