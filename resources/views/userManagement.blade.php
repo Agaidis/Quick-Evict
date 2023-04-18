@@ -69,7 +69,6 @@
                                         </select>
                                     </td>
                                     <td class="text-center">
-                                        <label for="pay_type_{{$user->id}}">Payment Type</label>
                                         <select class="form-control pay_type" id="pay_type_{{$user->id}}">
                                             <option value="">Select Pay Type</option>
                                             <option value="full_payment">Full Payment</option>
