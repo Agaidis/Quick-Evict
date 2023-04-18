@@ -116,8 +116,9 @@ class UserManagementController extends Controller
 
     public function updatePayType(Request $request) {
         try {
-
-
+            $user = User::find($request->userId);
+            $user->pay_type = $request->payType;
+            $user->save();
 
         } catch (\Exception $e) {
             $errorMsg = new ErrorLog();
