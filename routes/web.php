@@ -73,6 +73,8 @@ Route::get('/userManagement', 'UserManagementController@index')->middleware('aut
 Route::post('/userManagement/deleteUser', 'UserManagementController@deleteUser')->middleware('auth');
 Route::post('/userManagement/changeRole', 'UserManagementController@changeUserRole')->middleware('auth');
 Route::post('/userManagement/changeCourt', 'UserManagementController@changeCourt')->middleware('auth');
+Route::post('/userManagement/pay-type', 'UserManagementController@updatePayType')->middleware('auth');
+
 
 Route::post('/get-signature-type', 'EvictionController@getDigitalSignature')->middleware('auth');
 

@@ -45,7 +45,7 @@ class UserManagementController extends Controller
     /**
      * @param $request
      *
-     * @return string
+     * @return array
      *
      */
     public function changeUserRole(Request $request)
@@ -63,8 +63,10 @@ class UserManagementController extends Controller
 
             return $returnArray;
         } catch (\Exception $e) {
-            mail('andrew.gaidis@gmail.com', 'Admin Issue', 'There was an issue with changing a users role');
-            return 'failed';
+            $errorMsg = new ErrorLog();
+            $errorMsg->payload = $e->getMessage() . ' Line #: ' . $e->getLine();
+            $errorMsg->save();
+            return $returnArray;
         }
     }
 
@@ -83,7 +85,9 @@ class UserManagementController extends Controller
 
             return 'success';
         } catch (\Exception $e) {
-            mail('andrew.gaidis@gmail.com', 'Admin Issue', 'There was an issue with changing a users court');
+            $errorMsg = new ErrorLog();
+            $errorMsg->payload = $e->getMessage() . ' Line #: ' . $e->getLine();
+            $errorMsg->save();
             return 'failed';
         }
     }
@@ -103,7 +107,22 @@ class UserManagementController extends Controller
 
             return 'success';
         } catch (\Exception $e) {
-            mail('andrew.gaidis@gmail.com', 'Admin Issue', 'There was an issue with changing a users court_id');
+            $errorMsg = new ErrorLog();
+            $errorMsg->payload = $e->getMessage() . ' Line #: ' . $e->getLine();
+            $errorMsg->save();
+            return 'failed';
+        }
+    }
+
+    public function updatePayType(Request $request) {
+        try {
+
+
+
+        } catch (\Exception $e) {
+            $errorMsg = new ErrorLog();
+            $errorMsg->payload = $e->getMessage() . ' Line #: ' . $e->getLine();
+            $errorMsg->save();
             return 'failed';
         }
     }
@@ -117,21 +136,16 @@ class UserManagementController extends Controller
     public function deleteUser(Request $request)
     {
         try {
-            $errorMsg = new ErrorLog();
-            $errorMsg->payload = 'id: ' . $request->id;
-            $errorMsg->save();
 
-            $result = User::destroy($request->id);
+           User::destroy($request->id);
 
-            $errorMsg = new ErrorLog();
-            $errorMsg->payload = $result;
-            $errorMsg->save();
-
-            $request->session()->flash('alert-success', 'User has been Successfully Deleted!');
+           $request->session()->flash('alert-success', 'User has been Successfully Deleted!');
 
             return 'success';
         } catch (\Exception $e) {
-            mail('andrew.gaidis@gmail.com', 'Admin Issue', 'There was an issue with deleting a user');
+            $errorMsg = new ErrorLog();
+            $errorMsg->payload = $e->getMessage() . ' Line #: ' . $e->getLine();
+            $errorMsg->save();
             return 'failed';
         }
     }
