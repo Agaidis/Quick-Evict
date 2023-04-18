@@ -25,6 +25,7 @@
                                 <th class="text-center">Company</th>
                                 <th class="text-center">Role</th>
                                 <th class="text-center">Court Id</th>
+                                <th class="text-center">Pay Type</th>
                                 <th class="text-center">Delete</th>
                             </tr>
                             </thead>
@@ -66,6 +67,14 @@
                                                     @endif
                                                 @endforeach
                                         </select>
+                                    </td>
+                                    <td class="text-center">
+                                        <input type="radio" id="payType1" name="pay_type" value="payFull">
+                                        <label for="payType1">Full payment</label>
+                                        <input type="radio" id="payType2" name="pay_type" value="payCourt">
+                                        <label for="payType2">Pay Court Fee</label>
+                                        <input type="radio" id="payType3" name="pay_type" value="free">
+                                        <label for="payType3">Free</label>
                                     </td>
                                     <td class="text-center">
                                         <button type="button" id="id_{{$user->id}}_{{$user->name}}" class="fa fa-trash btn-sm btn-danger user_remove"></button>
