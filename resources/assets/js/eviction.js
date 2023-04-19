@@ -407,7 +407,7 @@ if (document.location.href.split('/')[3] === 'new-file') {
                         '<h5>Servicemembers Civil Relief Act Affidavit (link to website)</h5>' +
                         '<input type="radio" class="is_military" id="is_military_' + i + '" name="tenant_military_' + i + '" value="military" />' +
                         '<label class="military_label" for="is_military_' + i + '">I have personal knowledge that the defendant named above is in military service.</label><br> ' +
-                        '<input type="radio" class="is_not_military" id="is_not_military_' + i + '" name="tenant_military_' + i + '" value="not military" />' +
+                        '<input type="radio" checked class="is_not_military" id="is_not_military_' + i + '" name="tenant_military_' + i + '" value="not military" />' +
                         '<label class="military_label" for="is_not_military_' + i + '">I have personal knowledge that the defendant named above is not in the military service.</label><br>' +
                         '<input type="radio" class="unable_determine_military" id="unable_determine_military_' + i + '" name="tenant_military_' + i + '" value="unable determine military" />' +
                         '<label class="military_label" for="unable_determine_military_' + i + '">I am unable to determine whether the defendant named above is in the military service.</label><br>' +
@@ -419,7 +419,7 @@ if (document.location.href.split('/')[3] === 'new-file') {
                         '<h5>Servicemembers Civil Relief Act Affidavit (link to website)</h5>' +
                         '<input type="radio" class="is_military" id="is_military_' + i + '" name="tenant_military_' + i + '" value="military" />' +
                         '<label class="military_label" for="is_military_' + i + '">I have personal knowledge that the defendant named above is in military service.</label><br> ' +
-                        '<input type="radio" class="is_not_military" id="is_not_military_' + i + '" name="tenant_military_' + i + '" value="not military" />' +
+                        '<input type="radio" checked class="is_not_military" id="is_not_military_' + i + '" name="tenant_military_' + i + '" value="not military" />' +
                         '<label class="military_label" for="is_not_military_' + i + '">I have personal knowledge that the defendant named above is not in the military service.</label><br>' +
                         '<input type="radio" class="unable_determine_military" id="unable_determine_military_' + i + '" name="tenant_military_' + i + '" value="unable determine military" />' +
                         '<label class="military_label" for="unable_determine_military_' + i + '">I am unable to determine whether the defendant named above is in the military service.</label><br>' +
