@@ -292,7 +292,13 @@ class EvictionController extends Controller
                 }
             }
 
+
+
             $tenantNum = (int)$_POST['tenant_num'];
+
+            $errorMsg = new ErrorLog();
+            $errorMsg->payload = 'tenant num: ' . $tenantNum;
+            $errorMsg->save();
 
             if ($tenantNum > 3) {
                 $multiplyBy = $tenantNum - 3;
@@ -324,6 +330,10 @@ class EvictionController extends Controller
                 $filingFee = $greaterThan4000 + $additionalTenantFee;
             } else {
                 $filingFee = 'Didnt Work';
+            }
+
+            if (isset($_POST['distance_fee'])) {
+                $filingFee = $filingFee + (float)$_POST['distance_fee'];
             }
 
             $isAmtGreaterThanZero = $noCommaTotalFees > 0 ? true : false;
