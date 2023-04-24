@@ -59660,61 +59660,111 @@ if (document.location.href.split('/')[3] === 'new-file') {
   var form = document.getElementById('pay_sign_submit');
   form.addEventListener('click', function (event) {
     $('#rented_by_val').val($('input[name=rented_by]:checked').val());
-    stripe.createToken(card).then(function (result) {
-      if (result.error) {
-        // Inform the user if there was an error.
-        var errorElement = document.getElementById('card-errors');
-        errorElement.textContent = result.error.message;
+
+    if ($('#user_pay_type').val() === 'free') {
+      var url = '';
+
+      if ($('#file_type').val() === 'oop' || $('#file_type').val() === 'oopA') {
+        url = 'new-oop/pdf-data';
+      } else if ($('#file_type').val() === 'ltc' || $('#file_type').val() === 'ltcA') {
+        url = 'new-ltc/pdf-data';
+      } else if ($('#file_type').val() === 'civil') {
+        url = 'new-civil-complaint/pdf-data';
       } else {
-        // Send the token to your server.
-        var mainForm = document.getElementById('eviction_form');
-        var hiddenInput = document.createElement('input');
-        hiddenInput.setAttribute('type', 'hidden');
-        hiddenInput.setAttribute('name', 'stripeToken');
-        hiddenInput.setAttribute('value', result.token.id);
-        mainForm.appendChild(hiddenInput);
-        var url = '';
-
-        if ($('#file_type').val() === 'oop' || $('#file_type').val() === 'oopA') {
-          url = 'new-oop/pdf-data';
-        } else if ($('#file_type').val() === 'ltc' || $('#file_type').val() === 'ltcA') {
-          url = 'new-ltc/pdf-data';
-        } else if ($('#file_type').val() === 'civil') {
-          url = 'new-civil-complaint/pdf-data';
-        } else {
-          alert('Error with finding File Type. Contact Support');
-        }
-
-        if ($('#legal_checkbox').is(':checked')) {
-          $('#modal_signature').modal('toggle');
-          var $body = $("body");
-          $body.addClass("loading");
-          var dataURL = signaturePad.toDataURL(); // save image as PNG
-
-          $('#signature_source').val(dataURL);
-          var formData = $('#eviction_form').serialize();
-          $.ajaxSetup({
-            headers: {
-              'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-            }
-          });
-          $.ajax({
-            beforeSend: function beforeSend(xhr) {
-              xhr.setRequestHeader('X-CSRF-TOKEN', $("#token").attr('content'));
-            },
-            url: url,
-            type: 'POST',
-            data: formData,
-            success: function success(data) {
-              window.location.href = environmentPath + '/dashboard';
-            },
-            error: function error(data) {}
-          });
-        } else {
-          alert('You need to check the Signature checkbox above to agree to the digital terms in order to continue.');
-        }
+        alert('Error with finding File Type. Contact Support');
       }
-    });
+
+      if ($('#legal_checkbox').is(':checked')) {
+        $('#modal_signature').modal('toggle');
+        var $body = $("body");
+        $body.addClass("loading");
+        var dataURL = signaturePad.toDataURL(); // save image as PNG
+
+        $('#signature_source').val(dataURL);
+        var formData = $('#eviction_form').serialize();
+        $.ajaxSetup({
+          headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+          }
+        });
+        $.ajax({
+          beforeSend: function beforeSend(xhr) {
+            xhr.setRequestHeader('X-CSRF-TOKEN', $("#token").attr('content'));
+          },
+          url: url,
+          type: 'POST',
+          data: formData,
+          success: function success(data) {
+            window.location.href = environmentPath + '/dashboard';
+          },
+          error: function error(data) {}
+        });
+      } else {
+        alert('You need to check the Signature checkbox above to agree to the digital terms in order to continue.');
+      }
+    } else {
+      stripe.createToken(card).then(function (result) {
+        if (result.error) {
+          // Inform the user if there was an error.
+          var errorElement = document.getElementById('card-errors');
+          errorElement.textContent = result.error.message;
+        } else {
+          // Send the token to your server.
+          var mainForm = document.getElementById('eviction_form');
+          var hiddenInput = document.createElement('input');
+          hiddenInput.setAttribute('type', 'hidden');
+          hiddenInput.setAttribute('name', 'stripeToken');
+          hiddenInput.setAttribute('value', result.token.id);
+          mainForm.appendChild(hiddenInput);
+          var _url = '';
+
+          if ($('#file_type').val() === 'oop' || $('#file_type').val() === 'oopA') {
+            _url = 'new-oop/pdf-data';
+          } else if ($('#file_type').val() === 'ltc' || $('#file_type').val() === 'ltcA') {
+            _url = 'new-ltc/pdf-data';
+          } else if ($('#file_type').val() === 'civil') {
+            _url = 'new-civil-complaint/pdf-data';
+          } else {
+            alert('Error with finding File Type. Contact Support');
+          }
+
+          if ($('#legal_checkbox').is(':checked')) {
+            $('#modal_signature').modal('toggle');
+
+            var _$body = $("body");
+
+            _$body.addClass("loading");
+
+            var _dataURL = signaturePad.toDataURL(); // save image as PNG
+
+
+            $('#signature_source').val(_dataURL);
+
+            var _formData = $('#eviction_form').serialize();
+
+            $.ajaxSetup({
+              headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+              }
+            });
+            $.ajax({
+              beforeSend: function beforeSend(xhr) {
+                xhr.setRequestHeader('X-CSRF-TOKEN', $("#token").attr('content'));
+              },
+              url: _url,
+              type: 'POST',
+              data: _formData,
+              success: function success(data) {
+                window.location.href = environmentPath + '/dashboard';
+              },
+              error: function error(data) {}
+            });
+          } else {
+            alert('You need to check the Signature checkbox above to agree to the digital terms in order to continue.');
+          }
+        }
+      });
+    }
   });
 }
 
