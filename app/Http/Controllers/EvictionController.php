@@ -332,13 +332,25 @@ class EvictionController extends Controller
                 $filingFee = 'Didnt Work';
             }
 
+            $errorMsg = new ErrorLog();
+            $errorMsg->payload = 'filing fee 336:' . $filingFee;
+            $errorMsg->save();
+
             if (isset($_POST['distance_fee'])) {
                 $filingFee = $filingFee + (float)$_POST['distance_fee'];
             }
 
+            $errorMsg = new ErrorLog();
+            $errorMsg->payload = 'filing Fee 344: ' . $filingFee;
+            $errorMsg->save();
+
             $isAmtGreaterThanZero = $noCommaTotalFees > 0 ? true : false;
 
             $filingFee = number_format($filingFee, 2);
+
+            $errorMsg = new ErrorLog();
+            $errorMsg->payload = 'filing Fee 352: ' . $filingFee;
+            $errorMsg->save();
 
             $defendantState = $_POST['state'];
             $defendantZipCode = $_POST['zipcode'];
