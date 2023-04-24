@@ -446,7 +446,7 @@ class EvictionController extends Controller
                     $token = $_POST['stripeToken'];
 
                     $errorMsg = new ErrorLog();
-                    $errorMsg->payload = 'USER: ' . serialize(Auth::user());
+                    $errorMsg->payload = 'USER: ' . serialize(Auth::user()->pay_type);
                     $errorMsg->save();
 
                     if (strpos(Auth::user()->email, 'slatehousegroup') === false && strpos(Auth::user()->email, 'home365.co') === false && strpos(Auth::user()->email, 'elite.team') === false) {
