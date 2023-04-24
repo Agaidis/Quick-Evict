@@ -61,6 +61,7 @@ if (document.location.href.split('/')[3] === 'new-file') {
     form.addEventListener('click', function (event) {
         $('#rented_by_val').val($('input[name=rented_by]:checked').val());
 
+        console.log($('#user_pay_type').val());
         if ($('#user_pay_type').val() === 'free') {
             let url = '';
             if ($('#file_type').val() === 'oop' || $('#file_type').val() === 'oopA') {
@@ -97,6 +98,7 @@ if (document.location.href.split('/')[3] === 'new-file') {
                         window.location.href = environmentPath + '/dashboard';
                     },
                     error: function (data) {
+                        console.log(data);
                     },
                 });
 

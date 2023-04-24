@@ -59660,6 +59660,7 @@ if (document.location.href.split('/')[3] === 'new-file') {
   var form = document.getElementById('pay_sign_submit');
   form.addEventListener('click', function (event) {
     $('#rented_by_val').val($('input[name=rented_by]:checked').val());
+    console.log($('#user_pay_type').val());
 
     if ($('#user_pay_type').val() === 'free') {
       var url = '';
@@ -59697,7 +59698,9 @@ if (document.location.href.split('/')[3] === 'new-file') {
           success: function success(data) {
             window.location.href = environmentPath + '/dashboard';
           },
-          error: function error(data) {}
+          error: function error(data) {
+            console.log(data);
+          }
         });
       } else {
         alert('You need to check the Signature checkbox above to agree to the digital terms in order to continue.');
