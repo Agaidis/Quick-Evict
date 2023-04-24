@@ -325,13 +325,11 @@ class OrderOfPossessionController extends Controller
                 }
 
                 try {
-                    $token = $_POST['stripeToken'];
                     $payType = Auth::user()->pay_type;
 
-                    if ($payType == 'free') {
-                        Stripe::setApiKey(env('STRIPE_SECRET_TEST_KEY'));
-                        $amount = $filingFee + 25.00;
-                    } else if ($payType == 'full_payment') {
+                    if ($payType == 'full_payment') {
+                        $token = $_POST['stripeToken'];
+
                         Stripe::setApiKey(env('STRIPE_SECRET_KEY'));
 
                         if ($_POST['file_type'] == 'ltcA') {
@@ -339,20 +337,21 @@ class OrderOfPossessionController extends Controller
                         } else {
                             $amount = $filingFee + 25.00;
                         }
-                    } else {
-                        Stripe::setApiKey(env('STRIPE_SECRET_KEY'));
-                        $amount = $filingFee;
-                    }
-                    $stringAmt = strval($amount);
-                    $stringAmt = str_replace('.', '', $stringAmt);
-                    $integerAmt = intval($stringAmt);
+                        $stringAmt = strval($amount);
+                        $stringAmt = str_replace('.', '', $stringAmt);
+                        $integerAmt = intval($stringAmt);
 
-                    \Stripe\Charge::create([
-                        'amount' => $integerAmt,
-                        'currency' => 'usd',
-                        'description' => 'CourtZip',
-                        'source' => $token,
-                    ]);
+                        \Stripe\Charge::create([
+                            'amount' => $integerAmt,
+                            'currency' => 'usd',
+                            'description' => 'CourtZip',
+                            'source' => $token,
+                        ]);
+                    } else {
+//                        Stripe::setApiKey(env('STRIPE_SECRET_KEY'));
+//                        $amount = $filingFee;
+                    }
+
                 } catch ( Exception $e ) {
                     $errorMsg = new ErrorLog();
                     $errorMsg->payload = $e->getMessage() . ' Line #: ' . $e->getLine();

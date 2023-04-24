@@ -448,12 +448,12 @@ class EvictionController extends Controller
                 }
 
                 try {
-                    $token = $_POST['stripeToken'];
 
                     $payType = Auth::user()->pay_type;
 
                      if ($payType == 'full_payment') {
-                        Stripe::setApiKey(env('STRIPE_SECRET_KEY'));
+                         $token = $_POST['stripeToken'];
+                         Stripe::setApiKey(env('STRIPE_SECRET_KEY'));
 
                         if ($_POST['file_type'] == 'ltcA') {
                             $amount = $filingFee + 250.00;
@@ -472,19 +472,19 @@ class EvictionController extends Controller
                             'source' => $token,
                         ]);
                     } else {
-                        Stripe::setApiKey(env('STRIPE_SECRET_KEY'));
-                        $amount = $filingFee;
-
-                        $stringAmt = strval($amount);
-                        $stringAmt = str_replace('.', '', $stringAmt);
-                        $integerAmt = intval($stringAmt);
-
-                        \Stripe\Charge::create([
-                            'amount' => $integerAmt,
-                            'currency' => 'usd',
-                            'description' => 'CourtZip',
-                            'source' => $token,
-                        ]);
+//                        Stripe::setApiKey(env('STRIPE_SECRET_KEY'));
+//                        $amount = $filingFee;
+//
+//                        $stringAmt = strval($amount);
+//                        $stringAmt = str_replace('.', '', $stringAmt);
+//                        $integerAmt = intval($stringAmt);
+//
+//                        \Stripe\Charge::create([
+//                            'amount' => $integerAmt,
+//                            'currency' => 'usd',
+//                            'description' => 'CourtZip',
+//                            'source' => $token,
+//                        ]);
                     }
 
 
