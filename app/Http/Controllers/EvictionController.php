@@ -445,21 +445,24 @@ class EvictionController extends Controller
                 try {
                     $token = $_POST['stripeToken'];
 
-                    $errorMsg = new ErrorLog();
-                    $errorMsg->payload = 'USER: ' . serialize(Auth::user()->pay_type);
-                    $errorMsg->save();
+                    $payType = Auth::user()->pay_type;
 
-                    if (strpos(Auth::user()->email, 'slatehousegroup') === false && strpos(Auth::user()->email, 'home365.co') === false && strpos(Auth::user()->email, 'elite.team') === false) {
+                    if ($payType == 'free') {
+                        Stripe::setApiKey(env('STRIPE_SECRET_TEST_KEY'));
+                        $amount = $filingFee + 25.00;
+                    } else if ($payType == 'full_payment') {
                         Stripe::setApiKey(env('STRIPE_SECRET_KEY'));
+
                         if ($_POST['file_type'] == 'ltcA') {
                             $amount = $filingFee + 250.00;
                         } else {
                             $amount = $filingFee + 25.00;
                         }
                     } else {
-                        Stripe::setApiKey(env('STRIPE_SECRET_TEST_KEY'));
-                        $amount = $filingFee + 25.00;
+                        Stripe::setApiKey(env('STRIPE_SECRET_KEY'));
+                        $amount = $filingFee;
                     }
+
                     $stringAmt = strval($amount);
                     $stringAmt = str_replace('.', '', $stringAmt);
                     $integerAmt = intval($stringAmt);
