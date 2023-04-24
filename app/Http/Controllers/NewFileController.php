@@ -39,6 +39,8 @@ class NewFileController extends Controller
                 $geoData = GeoLocation::where('county', $request->county)->orderBy('magistrate_id', 'ASC')->get();
                 $map = new GMaps;
                 $fileType = $request->fileType;
+                $payType = Auth::user()->pay_type;
+
 
                 foreach ($geoData as $geo) {
                     $township = CourtDetails::where('magistrate_id', $geo['magistrate_id'])->value('township');
@@ -50,7 +52,8 @@ class NewFileController extends Controller
                 JavaScript::put([
                     'geoData' => $geoData,
                     'userId' => Auth::user()->role,
-                    'userEmail' => Auth::user()->email
+                    'userEmail' => Auth::user()->email,
+                    'payType' => Auth::user()->pay_type
                 ]);
                 $userEmail = Auth::user()->email;
 
@@ -60,18 +63,18 @@ class NewFileController extends Controller
 
                 if ($request->fileType == 'ltc') {
                     $isComplaintFee = 'no';
-                    return view('eviction', compact('map', 'fileType', 'userEmail', 'isComplaintFee'));
+                    return view('eviction', compact('map', 'fileType', 'userEmail', 'payType', 'isComplaintFee'));
                 } else if ($request->fileType == 'ltcA') {
                     $isComplaintFee = 'yes';
-                    return view('eviction', compact('map', 'fileType', 'userEmail', 'isComplaintFee'));
+                    return view('eviction', compact('map', 'fileType', 'userEmail', 'payType', 'isComplaintFee'));
                 } else if ($request->fileType == 'oop') {
                     $isComplaintFee = 'no';
-                    return view('orderOfPossession', compact('map', 'fileType', 'userEmail', 'isComplaintFee'));
+                    return view('orderOfPossession', compact('map', 'fileType', 'userEmail', 'payType', 'isComplaintFee'));
                 } else if ($request->fileType == 'oopA') {
                     $isComplaintFee = 'yes';
-                    return view('orderOfPossession', compact('map', 'fileType', 'userEmail', 'isComplaintFee'));
+                    return view('orderOfPossession', compact('map', 'fileType', 'userEmail', 'payType', 'isComplaintFee'));
                 } else if ($request->fileType == 'civil') {
-                    return view('civilComplaint', compact('map', 'fileType', 'userEmail'));
+                    return view('civilComplaint', compact('map', 'fileType', 'userEmail', 'payType' ));
                 } else {
                     return view('dashboard');
                 }

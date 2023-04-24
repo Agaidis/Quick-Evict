@@ -2,6 +2,7 @@ if (document.location.href.split('/')[3] === 'new-file') {
     let canvas = document.querySelector("canvas");
     let signaturePad = new SignaturePad(canvas, {});
     let isSlateHouse = $('#user_email').val();
+    let payType = $('#user_pay_type').val();
 
 //Clear button to remove signature drawing
     $('.clear_signature').on('click', function () {
@@ -10,10 +11,11 @@ if (document.location.href.split('/')[3] === 'new-file') {
     });
 // Create a Stripe client.
 
-    if ((isSlateHouse.indexOf('slatehousegroup') === -1 && isSlateHouse.indexOf('home365') === -1 && isSlateHouse.indexOf('elite.team') === -1) || isSlateHouse === 'erin@courtzip.com') {
-        stripe = Stripe('pk_live_FProm7L9gLEjNsFLawYCp32x');
-    } else {
+    console.log('User in stripe js', payType);
+    if (payType === 'free') {
         stripe = Stripe('pk_test_FTcQeimeSasisJpDTYgHEMTh');
+    } else if (payType === 'full_payment') {
+        stripe = Stripe('pk_live_FProm7L9gLEjNsFLawYCp32x');
     }
 //
 

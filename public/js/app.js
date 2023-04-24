@@ -59604,17 +59604,20 @@ function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterat
 if (document.location.href.split('/')[3] === 'new-file') {
   var canvas = document.querySelector("canvas");
   var signaturePad = new SignaturePad(canvas, {});
-  var isSlateHouse = $('#user_email').val(); //Clear button to remove signature drawing
+  var isSlateHouse = $('#user_email').val();
+  var payType = $('#user_pay_type').val(); //Clear button to remove signature drawing
 
   $('.clear_signature').on('click', function () {
     // Clears the canvas
     signaturePad.clear();
   }); // Create a Stripe client.
 
-  if (isSlateHouse.indexOf('slatehousegroup') === -1 && isSlateHouse.indexOf('home365') === -1 && isSlateHouse.indexOf('elite.team') === -1 || isSlateHouse === 'erin@courtzip.com') {
-    stripe = Stripe('pk_live_FProm7L9gLEjNsFLawYCp32x');
-  } else {
+  console.log('User in stripe js', payType);
+
+  if (payType === 'free') {
     stripe = Stripe('pk_test_FTcQeimeSasisJpDTYgHEMTh');
+  } else if (payType === 'full_payment') {
+    stripe = Stripe('pk_live_FProm7L9gLEjNsFLawYCp32x');
   } //
   // Create an instance of Elements.
 
