@@ -49472,17 +49472,17 @@ if (document.location.href.split('/')[3] === 'new-file') {
           if (data['calculatedFee'] !== '') {
             if ($('#isComplaintFee').val() === 'yes') {
               if ($('#file_type').val() === 'ltcA') {
-                $('#courtzip_filing_fee').text('225.00');
+                $('#courtzip_filing_fee').text(' $225.00');
                 total = parseFloat(data['filingFee']) + parseFloat(data['calculatedFee']) + 225.00;
               } else if ($('#file_type').val() === 'oopA') {
-                $('#courtzip_filing_fee').text('275.00');
+                $('#courtzip_filing_fee').text(' $275.00');
                 total = parseFloat(data['filingFee']) + parseFloat(data['calculatedFee']) + 275.00;
               } else {
-                $('#courtzip_filing_fee').text('25.00');
+                $('#courtzip_filing_fee').text(' $25.00');
                 total = 25.00 + parseFloat(data['filingFee']) + parseFloat(data['calculatedFee']);
               }
             } else {
-              $('#courtzip_filing_fee').text('25.00');
+              $('#courtzip_filing_fee').text(' $25.00');
               total = 25.00 + parseFloat(data['filingFee']) + parseFloat(data['calculatedFee']);
             }
 
@@ -49492,17 +49492,17 @@ if (document.location.href.split('/')[3] === 'new-file') {
           } else {
             if ($('#isComplaintFee').val() === 'yes') {
               if ($('#file_type').val() === 'ltcA') {
-                $('#courtzip_filing_fee').text('225.00');
+                $('#courtzip_filing_fee').text(' $225.00');
                 total = parseFloat(data['filingFee']) + 225.00;
               } else if ($('#file_type').val() === 'oopA') {
-                $('#courtzip_filing_fee').text('275.00');
+                $('#courtzip_filing_fee').text(' $275.00');
                 total = parseFloat(data['filingFee']) + 275.00;
               } else {
-                $('#courtzip_filing_fee').text('25.00');
+                $('#courtzip_filing_fee').text(' $25.00');
                 total = 25.00 + parseFloat(data['filingFee']);
               }
             } else {
-              $('#courtzip_filing_fee').text('25.00');
+              $('#courtzip_filing_fee').text(' $25.00');
               total = 25.00 + parseFloat(data['filingFee']);
             }
 
