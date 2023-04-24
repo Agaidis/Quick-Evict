@@ -254,23 +254,13 @@ class OrderOfPossessionController extends Controller
                 $docketNumber2 = '0' . $docketNumber2;
             }
 
-            $errorMsg = new ErrorLog();
-            $errorMsg->payload = 'Filing Fee LINE 262: '  . $filingFee;
-            $errorMsg->save();
-
             if (isset($_POST['distance_fee'])) {
                 $filingFee = $filingFee + (float)$_POST['distance_fee'];
             }
 
-            $errorMsg = new ErrorLog();
-            $errorMsg->payload = 'Filing Fee LINE 266: '  . $filingFee;
-            $errorMsg->save();
-
             $filingFee = number_format($filingFee, 2);
 
-            $errorMsg = new ErrorLog();
-            $errorMsg->payload = 'Filing Fee LINE 273: '  . $filingFee;
-            $errorMsg->save();
+
 
             try {
                 $eviction = new Evictions();

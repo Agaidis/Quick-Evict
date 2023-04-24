@@ -446,15 +446,8 @@ class EvictionController extends Controller
                     $token = $_POST['stripeToken'];
 
                     $errorMsg = new ErrorLog();
-                    $errorMsg->payload = 'SERIALIZED LINE 449: '  . serialize($_POST);
+                    $errorMsg->payload = 'USER: ' . serialize(Auth::user());
                     $errorMsg->save();
-
-                    $errorMsg = new ErrorLog();
-                    $errorMsg->payload = 'SERIALIZED LINE 453: '  . serialize($_POST['distance_fee']);
-                    $errorMsg->save();
-
-
-
 
                     if (strpos(Auth::user()->email, 'slatehousegroup') === false && strpos(Auth::user()->email, 'home365.co') === false && strpos(Auth::user()->email, 'elite.team') === false) {
                         Stripe::setApiKey(env('STRIPE_SECRET_KEY'));
@@ -471,10 +464,6 @@ class EvictionController extends Controller
                     $stringAmt = str_replace('.', '', $stringAmt);
                     $integerAmt = intval($stringAmt);
 
-                    $errorMsg = new ErrorLog();
-                    $errorMsg->payload ='Integer Amount LTC: ' . $integerAmt;
-                    $errorMsg->save();
-//
                     \Stripe\Charge::create([
                         'amount' => $integerAmt,
                         'currency' => 'usd',
@@ -499,8 +488,8 @@ class EvictionController extends Controller
                 } catch ( Exception $e) {
                     $errorMsg = new ErrorLog();
                     $errorMsg->payload = $e->getMessage() . ' Line #: ' . $e->getLine();
-
                     $errorMsg->save();
+
                     $mailer->sendMail('andrew.gaidis@gmail.com', 'Notification Error' . Auth::user()->id, $e->getMessage(),  $e->getMessage());
                 }
 
@@ -512,13 +501,11 @@ class EvictionController extends Controller
             } catch ( \Exception $e) {
                 $errorMsg = new ErrorLog();
                 $errorMsg->payload = $e->getMessage() . ' Line #: ' . $e->getLine();
-
                 $errorMsg->save();
             }
         } catch ( \Exception $e) {
             $errorMsg = new ErrorLog();
             $errorMsg->payload = $e->getMessage() . ' Line #: ' . $e->getLine();
-
             $errorMsg->save();
         }
     }
@@ -531,7 +518,6 @@ class EvictionController extends Controller
         } catch ( Exception $e ) {
             $errorMsg = new ErrorLog();
             $errorMsg->payload = $e->getMessage() . ' Line #: ' . $e->getLine();
-
             $errorMsg->save();
         }
     }
