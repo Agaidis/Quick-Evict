@@ -471,7 +471,17 @@ class EvictionController extends Controller
                         }
 
                         $stringAmt = strval($amount);
+
+                         $errorMsg = new ErrorLog();
+                         $errorMsg->payload = 'string Amt 1: ' . $stringAmt;
+                         $errorMsg->save();
+
                         $stringAmt = str_replace('.', '', $stringAmt);
+
+                         $errorMsg = new ErrorLog();
+                         $errorMsg->payload = 'string Amt 2: ' . $stringAmt;
+                         $errorMsg->save();
+
                         $integerAmt = intval($stringAmt);
 
 
