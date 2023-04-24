@@ -351,7 +351,7 @@
                                             </div><br><br>
                                         </div>
                                         @else
-                                            <div class="payment_section" style="display:none">
+                                            <div class="payment_section" style="display:none!important">
                                                 <h3 class="titles payment_title">Step 5:<br> Payment Information</h3>
                                                 <div class="price_ctr col-md-6">
                                                     <label>Court Filing Fee: $</label><span id="filing_fee_display"></span><br>
