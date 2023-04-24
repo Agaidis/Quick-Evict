@@ -456,6 +456,10 @@ class EvictionController extends Controller
 
                     $payType = Auth::user()->pay_type;
 
+                    $errorMsg = new ErrorLog();
+                    $errorMsg->payload = 'filing fee: ' . $filingFee;
+                    $errorMsg->save();
+
                      if ($payType == 'full_payment') {
                          $token = $_POST['stripeToken'];
                          Stripe::setApiKey(env('STRIPE_SECRET_KEY'));
@@ -469,6 +473,11 @@ class EvictionController extends Controller
                         $stringAmt = strval($amount);
                         $stringAmt = str_replace('.', '', $stringAmt);
                         $integerAmt = intval($stringAmt);
+
+
+                         $errorMsg = new ErrorLog();
+                         $errorMsg->payload = 'integer Amt: ' . $integerAmt;
+                         $errorMsg->save();
 
                         \Stripe\Charge::create([
                             'amount' => $integerAmt,
