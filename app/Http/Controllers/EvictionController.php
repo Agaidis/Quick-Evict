@@ -439,6 +439,11 @@ class EvictionController extends Controller
                     $civilRelief->save();
                 }
 
+                $errorMsg = new ErrorLog();
+                $errorMsg->payload = serialize($_POST['tenant_name']);
+
+                $errorMsg->save();
+
                 if (isset($_POST['file_address_ids'])) {
                     foreach ($_POST['file_address_ids'] as $fileAddressId) {
                         DB::table('file_addresses')
@@ -471,22 +476,7 @@ class EvictionController extends Controller
                             'description' => 'CourtZip',
                             'source' => $token,
                         ]);
-                    } else {
-//                        Stripe::setApiKey(env('STRIPE_SECRET_KEY'));
-//                        $amount = $filingFee;
-//
-//                        $stringAmt = strval($amount);
-//                        $stringAmt = str_replace('.', '', $stringAmt);
-//                        $integerAmt = intval($stringAmt);
-//
-//                        \Stripe\Charge::create([
-//                            'amount' => $integerAmt,
-//                            'currency' => 'usd',
-//                            'description' => 'CourtZip',
-//                            'source' => $token,
-//                        ]);
                     }
-
 
                 } catch ( Exception $e ) {
                     $errorMsg = new ErrorLog();

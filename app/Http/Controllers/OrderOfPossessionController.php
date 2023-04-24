@@ -347,9 +347,6 @@ class OrderOfPossessionController extends Controller
                             'description' => 'CourtZip',
                             'source' => $token,
                         ]);
-                    } else {
-//                        Stripe::setApiKey(env('STRIPE_SECRET_KEY'));
-//                        $amount = $filingFee;
                     }
 
                 } catch ( Exception $e ) {
