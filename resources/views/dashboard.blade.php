@@ -202,8 +202,8 @@
                                         </td>
                                         <td class="text-center">{{$eviction->total_judgement}}</td>
                                         <td class="text-center">{{$eviction->filing_fee}}</td>
-                                        <td class="text-center">{{date('M j, Y', strtotime('-5 hour', strtotime($eviction->created_at)))}}<br>
-                                            {{date('h:i A', strtotime('-5 hour', strtotime($eviction->created_at)))}}</td>
+                                        <td class="text-center">{{date('M j, Y', strtotime('-4 hour', strtotime($eviction->created_at)))}}<br>
+                                            {{date('h:i A', strtotime('-4 hour', strtotime($eviction->created_at)))}}</td>
                                         <td class="text-center">
                                             @if ($eviction->is_extra_files === 1)
                                                 <button type="button" id="get_filings_{{$eviction->id}}" data-target="#modal_get_filings" data-toggle="modal" class="get_filings btn-sm btn-primary fas fa-cloud-download-alt"></button>
