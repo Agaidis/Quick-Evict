@@ -417,6 +417,11 @@ class EvictionController extends Controller
 
                 $evictionId = $eviction->id;
 
+                $errorMsg = new ErrorLog();
+                $errorMsg->payload = 'Eviction Id: ' . $evictionId;
+
+                $errorMsg->save();
+
                 $signature = new Signature();
                 $signature->eviction_id = $evictionId;
                 $signature->signature = $_POST['signature_source'];
@@ -447,10 +452,7 @@ class EvictionController extends Controller
 
                     $payType = Auth::user()->pay_type;
 
-                    if ($payType == 'free') {
-                        Stripe::setApiKey(env('STRIPE_SECRET_TEST_KEY'));
-                        $amount = $filingFee + 25.00;
-                    } else if ($payType == 'full_payment') {
+                     if ($payType == 'full_payment') {
                         Stripe::setApiKey(env('STRIPE_SECRET_KEY'));
 
                         if ($_POST['file_type'] == 'ltcA') {
@@ -458,21 +460,34 @@ class EvictionController extends Controller
                         } else {
                             $amount = $filingFee + 25.00;
                         }
+
+                        $stringAmt = strval($amount);
+                        $stringAmt = str_replace('.', '', $stringAmt);
+                        $integerAmt = intval($stringAmt);
+
+                        \Stripe\Charge::create([
+                            'amount' => $integerAmt,
+                            'currency' => 'usd',
+                            'description' => 'CourtZip',
+                            'source' => $token,
+                        ]);
                     } else {
                         Stripe::setApiKey(env('STRIPE_SECRET_KEY'));
                         $amount = $filingFee;
+
+                        $stringAmt = strval($amount);
+                        $stringAmt = str_replace('.', '', $stringAmt);
+                        $integerAmt = intval($stringAmt);
+
+                        \Stripe\Charge::create([
+                            'amount' => $integerAmt,
+                            'currency' => 'usd',
+                            'description' => 'CourtZip',
+                            'source' => $token,
+                        ]);
                     }
 
-                    $stringAmt = strval($amount);
-                    $stringAmt = str_replace('.', '', $stringAmt);
-                    $integerAmt = intval($stringAmt);
 
-                    \Stripe\Charge::create([
-                        'amount' => $integerAmt,
-                        'currency' => 'usd',
-                        'description' => 'CourtZip',
-                        'source' => $token,
-                    ]);
                 } catch ( Exception $e ) {
                     $errorMsg = new ErrorLog();
                     $errorMsg->payload = $e->getMessage() . ' Line #: ' . $e->getLine();

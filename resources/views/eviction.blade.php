@@ -329,6 +329,7 @@
                                                 <span id="terms_of_agreement_error_msg"></span>
                                             </div>
                                         </div><br><hr><br>
+                                        @if ($payType === 'full_payment')
                                         <div class="payment_section">
                                             <h3 class="titles payment_title">Step 5:<br> Payment Information</h3>
                                             <div class="price_ctr col-md-6">
@@ -349,10 +350,20 @@
                                                 <div id="card-errors" role="alert"></div>
                                             </div><br><br>
                                         </div>
+                                        @else
+
+                                        @endif
+
                                     </div>
+                                    @if ($payType === 'full_payment')
                                     <div class="pay_submit_section modal-footer">
                                         <button type="button" class="btn btn-success pay_sign_submit" id="pay_sign_submit" data-action="save-png">Pay and Submit Document</button>
                                     </div>
+                                    @else
+                                        <div class="pay_submit_section modal-footer">
+                                            <button type="button" class="btn btn-success pay_sign_submit" id="pay_sign_submit" data-action="save-png">Complete Document</button>
+                                        </div>
+                                    @endif
                                 </div>
                             </div>
                         </div>
