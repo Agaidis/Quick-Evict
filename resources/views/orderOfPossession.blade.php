@@ -263,8 +263,27 @@
                                                             <div id="card-errors" role="alert"></div>
                                                         </div><br><br>
                                                     </div>
-                                                        @else
-
+                                                    @else
+                                                        <div class="payment_section" style="display:none!important">
+                                                            <h3 class="titles payment_title">Step 5:<br> Payment Information</h3>
+                                                            <div class="price_ctr col-md-6">
+                                                                <label>Court Filing Fee: $</label><span id="filing_fee_display"></span><br>
+                                                                <span id="distance_fee_container"><label>Calculated Distance Fee: $</label><span id="distance_fee_display"></span><br></span>
+                                                                <label>CourtZip Filing Fee: </label><span id="courtzip_filing_fee"> </span><br>
+                                                                <label>Total: $</label><span id="total"></span>
+                                                            </div>
+                                                            <div class="form-row">
+                                                                <label for="card-element">
+                                                                    <span class="credit_debit">Credit or debit card</span>
+                                                                    <img style="margin-left:70px;" alt="Credit Card Logos" title="Credit Card Logos" src="https://www.credit-card-logos.com/images/multiple_credit-card-logos-1/credit_card_logos_10.gif" width="236" height="30" border="0" />
+                                                                </label>
+                                                                <div id="card-element">
+                                                                    <!-- A Stripe Element will be inserted here. -->
+                                                                </div>
+                                                                <!-- Used to display form errors. -->
+                                                                <div id="card-errors" role="alert"></div>
+                                                            </div><br><br>
+                                                        </div>
                                                     @endif
                                                 </div>
                                                 @if ($payType === 'full_payment')
