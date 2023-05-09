@@ -363,7 +363,6 @@
                                                     <label>Total: $</label><span id="total"></span>
                                                 </div>
                                                 <div class="form-row">
-                                                    <div class="h-captcha" data-sitekey="80e9f3c6-160d-467d-bff7-bf2d89a8e28b"></div>
 
                                                     <label for="card-element">
                                                         <span class="credit_debit">Credit or debit card</span>
