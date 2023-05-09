@@ -228,26 +228,28 @@ class EvictionController extends Controller
         $mailer = new Mailer();
         try {
 
-            $data = array(
-                'secret' => "0xeCB96921f42C7E0b64ec07D6B143F990A7F6B7a7",
-                'response' => $_POST['h-captcha-response']
-            );
-            $verify = curl_init();
-            curl_setopt($verify, CURLOPT_URL,   "https://hcaptcha.com/siteverify");
-            curl_setopt($verify, CURLOPT_POST, true);
-            curl_setopt($verify, CURLOPT_POSTFIELDS, http_build_query($data));
-            curl_setopt($verify, CURLOPT_RETURNTRANSFER, true);
-            $verifyResponse = curl_exec($verify);
-            $responseData = json_decode($verifyResponse);
+            if (isset($_POST['h-captcha-response'])) {
+                $data = array(
+                    'secret' => "0xeCB96921f42C7E0b64ec07D6B143F990A7F6B7a7",
+                    'response' => $_POST['h-captcha-response']
+                );
+                $verify = curl_init();
+                curl_setopt($verify, CURLOPT_URL, "https://hcaptcha.com/siteverify");
+                curl_setopt($verify, CURLOPT_POST, true);
+                curl_setopt($verify, CURLOPT_POSTFIELDS, http_build_query($data));
+                curl_setopt($verify, CURLOPT_RETURNTRANSFER, true);
+                $verifyResponse = curl_exec($verify);
+                $responseData = json_decode($verifyResponse);
 
-            if($responseData->success) {
-                $errorMsg = new ErrorLog();
-                $errorMsg->payload = 'success! ' . serialize($verifyResponse);
-                $errorMsg->save();
-            } else {
-                Session::flash('status', 'The captcha was not filled correctly and therefore the filing was not processed.');
+                if ($responseData->success) {
+                    $errorMsg = new ErrorLog();
+                    $errorMsg->payload = 'success! ' . serialize($verifyResponse);
+                    $errorMsg->save();
+                } else {
+                    Session::flash('status', 'The captcha was not filled correctly and therefore the filing was not processed.');
 
-                return 'success';
+                    return 'success';
+                }
             }
 
             $removeValues = ['$', ',', ' '];
