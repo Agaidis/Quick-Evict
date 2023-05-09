@@ -39,10 +39,12 @@ class NewFileController extends Controller
             try {
 
                 $client = new Client();
-                $verifyResponse = $client->post('https://hcaptcha.com/siteverify?secret=0xeCB96921f42C7E0b64ec07D6B143F990A7F6B7a7&response='.$_POST['h-captcha-response'], ['headers' => ['Content-Type' => 'application/json']]);
+                $verifyResponse = $client->post('https://hcaptcha.com/siteverify?secret=0xeCB96921f42C7E0b64ec07D6B143F990A7F6B7a7&response='.$_POST['h-captcha-response'], ['headers' => ['Content-Type' => 'text/html;charset=UTF-8']]);
+
                 $errorMsg = new ErrorLog();
                 $errorMsg->payload = 'shit!' . serialize($verifyResponse);
                 $errorMsg->save();
+
                 if($verifyResponse->success)
                 {
                     $errorMsg = new ErrorLog();
