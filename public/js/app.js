@@ -49564,15 +49564,6 @@ if (document.location.href.split('/')[3] === 'new-file') {
         }
       });
     }
-
-    $("#submit_form").submit(function (event) {
-      var hcaptchaVal = $('[name=h-captcha-response]').value;
-
-      if (hcaptchaVal === "") {
-        event.preventDefault();
-        alert("Please complete the hCaptcha");
-      }
-    });
   });
 }
 
@@ -59674,9 +59665,14 @@ if (document.location.href.split('/')[3] === 'new-file') {
 
   var form = document.getElementById('pay_sign_submit');
   form.addEventListener('click', function (event) {
-    console.log('user 62', $('#user_pay_type').val());
+    var hcaptchaVal = $('[name=h-captcha-response]').value;
+
+    if (hcaptchaVal === "") {
+      event.preventDefault();
+      alert("Please complete the hCaptcha");
+    }
+
     $('#rented_by_val').val($('input[name=rented_by]:checked').val());
-    console.log('user 65', $('#user_pay_type').val());
 
     if ($('#user_pay_type').val() === 'free') {
       var url = '';
