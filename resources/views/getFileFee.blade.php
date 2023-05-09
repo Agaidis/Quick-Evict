@@ -12,7 +12,6 @@
 
                             <input type="hidden" name="_token" value="{{ Session::token() }}">
                             <div id="get_file_Fee_container">
-                                <div class="h-captcha" data-sitekey="80e9f3c6-160d-467d-bff7-bf2d89a8e28b"></div>
                                 <div class="col-md-12">
                                     <label class="labels" for="county_select">Choose a County</label>
                                     <select class="form-control" id="county_select" name="county">

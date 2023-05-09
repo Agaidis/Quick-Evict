@@ -49564,6 +49564,15 @@ if (document.location.href.split('/')[3] === 'new-file') {
         }
       });
     }
+
+    $("#submit_form").submit(function (event) {
+      var hcaptchaVal = $('[name=h-captcha-response]').value;
+
+      if (hcaptchaVal === "") {
+        event.preventDefault();
+        alert("Please complete the hCaptcha");
+      }
+    });
   });
 }
 

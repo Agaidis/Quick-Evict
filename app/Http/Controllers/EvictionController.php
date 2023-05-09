@@ -228,7 +228,28 @@ class EvictionController extends Controller
         $mailer = new Mailer();
         try {
 
-            $_POST['h-captcha-response'];
+            $data = array(
+                'secret' => "0xeCB96921f42C7E0b64ec07D6B143F990A7F6B7a7",
+                'response' => $_POST['h-captcha-response']
+            );
+            $verify = curl_init();
+            curl_setopt($verify, CURLOPT_URL,   "https://hcaptcha.com/siteverify");
+            curl_setopt($verify, CURLOPT_POST, true);
+            curl_setopt($verify, CURLOPT_POSTFIELDS, http_build_query($data));
+            curl_setopt($verify, CURLOPT_RETURNTRANSFER, true);
+            $verifyResponse = curl_exec($verify);
+            $responseData = json_decode($verifyResponse);
+
+            if($responseData->success) {
+                $errorMsg = new ErrorLog();
+                $errorMsg->payload = 'success! ' . serialize($verifyResponse);
+                $errorMsg->save();
+            } else {
+                Session::flash('status', 'The captcha was not filled correctly and therefore the filing was not processed.');
+
+                return 'success';
+            }
+
             $removeValues = ['$', ',', ' '];
             $magistrateId = str_replace('magistrate_' , '', $_POST['court_number']);
             $courtDetails = CourtDetails::where('magistrate_id', $magistrateId)->first();
@@ -297,14 +318,7 @@ class EvictionController extends Controller
                     $additionalTenantAmt = $courtDetails->additional_tenant;
                 }
             }
-
-
-
             $tenantNum = (int)$_POST['tenant_num'];
-
-            $errorMsg = new ErrorLog();
-            $errorMsg->payload = 'tenant num: ' . $tenantNum;
-            $errorMsg->save();
 
             if ($tenantNum > 3) {
                 $multiplyBy = $tenantNum - 3;
@@ -338,25 +352,13 @@ class EvictionController extends Controller
                 $filingFee = 'Didnt Work';
             }
 
-            $errorMsg = new ErrorLog();
-            $errorMsg->payload = 'filing fee 336:' . $filingFee;
-            $errorMsg->save();
-
             if (isset($_POST['distance_fee'])) {
                 $filingFee = $filingFee + (float)$_POST['distance_fee'];
             }
 
-            $errorMsg = new ErrorLog();
-            $errorMsg->payload = 'filing Fee 344: ' . $filingFee;
-            $errorMsg->save();
-
             $isAmtGreaterThanZero = $noCommaTotalFees > 0 ? true : false;
 
             $filingFee = number_format($filingFee, 2);
-
-            $errorMsg = new ErrorLog();
-            $errorMsg->payload = 'filing Fee 352: ' . $filingFee;
-            $errorMsg->save();
 
             $defendantState = $_POST['state'];
             $defendantZipCode = $_POST['zipcode'];
@@ -445,11 +447,6 @@ class EvictionController extends Controller
 
                 $evictionId = $eviction->id;
 
-                $errorMsg = new ErrorLog();
-                $errorMsg->payload = 'Eviction Id: ' . $evictionId;
-
-                $errorMsg->save();
-
                 $signature = new Signature();
                 $signature->eviction_id = $evictionId;
                 $signature->signature = $_POST['signature_source'];
@@ -467,10 +464,7 @@ class EvictionController extends Controller
                     $civilRelief->save();
                 }
 
-                $errorMsg = new ErrorLog();
-                $errorMsg->payload = serialize($_POST['tenant_name']);
 
-                $errorMsg->save();
 
                 if (isset($_POST['file_address_ids'])) {
                     foreach ($_POST['file_address_ids'] as $fileAddressId) {
@@ -483,10 +477,6 @@ class EvictionController extends Controller
                 try {
 
                     $payType = Auth::user()->pay_type;
-
-                    $errorMsg = new ErrorLog();
-                    $errorMsg->payload = 'filing fee: ' . $filingFee;
-                    $errorMsg->save();
 
                      if ($payType == 'full_payment') {
                          $token = $_POST['stripeToken'];
