@@ -45,7 +45,9 @@ class NewFileController extends Controller
                 $errorMsg->payload = 'shit!' . serialize($verifyResponse);
                 $errorMsg->save();
 
-                if($verifyResponse->success)
+                $response = json_decode($verifyResponse);
+
+                if($response->success)
                 {
                     $errorMsg = new ErrorLog();
                     $errorMsg->payload = 'success!';
