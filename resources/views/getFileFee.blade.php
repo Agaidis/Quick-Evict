@@ -9,6 +9,7 @@
                     <div class="offset-1 col-md-4">
                         <h2 class="titles">Step 1: Select a County</h2>
                         <form method="post" action="{{ action('GetFileFeeController@index') }}" enctype="multipart/form-data" id="dashboard_form">
+
                             <input type="hidden" name="_token" value="{{ Session::token() }}">
                             <div id="get_file_Fee_container">
                                 <div class="col-md-12">

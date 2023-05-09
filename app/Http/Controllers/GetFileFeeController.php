@@ -13,6 +13,7 @@ use Exception;
 use JavaScript;
 use GMaps;
 use Illuminate\Support\Facades\Log;
+use GuzzleHttp\Client;
 
 
 class GetFileFeeController extends Controller
@@ -37,6 +38,30 @@ class GetFileFeeController extends Controller
             return view('/login');
         } else {
             try {
+
+                $client = new Client();
+                $verifyResponse = $client->post('https://hcaptcha.com/siteverify?secret=0xeCB96921f42C7E0b64ec07D6B143F990A7F6B7a7&response='.$_POST['h-captcha-response'], ['headers' => ['Content-Type' => 'text/html;charset=UTF-8']]);
+
+                $errorMsg = new ErrorLog();
+                $errorMsg->payload = 'shit!' . serialize($verifyResponse);
+                $errorMsg->save();
+
+                $response = json_decode($verifyResponse);
+
+                if($response->success)
+                {
+                    $errorMsg = new ErrorLog();
+                    $errorMsg->payload = 'success!';
+                    $errorMsg->save();
+                }
+                else
+                {
+                    $errorMsg = new ErrorLog();
+                    $errorMsg->payload = 'shit!' . serialize($verifyResponse);
+                    $errorMsg->save();
+                }
+
+
                 $isStep2 = true;
                 $selectedCounty = $request->county;
                 $counties = CourtDetails::distinct()->orderBy('county')->get(['county']);
