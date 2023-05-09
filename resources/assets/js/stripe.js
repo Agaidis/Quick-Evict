@@ -62,7 +62,7 @@ if (document.location.href.split('/')[3] === 'new-file') {
 
         let hcaptchaVal = $('[name=h-captcha-response]').value;
             console.log('hcaptchaval', hcaptchaVal);
-        if (hcaptchaVal === "") {
+        if (hcaptchaVal === "" || hcaptchaVal === undefined) {
             event.preventDefault();
             alert("Please complete the hCaptcha");
         }
