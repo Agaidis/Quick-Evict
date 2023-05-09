@@ -356,6 +356,8 @@
                                             </div><br><br>
                                         </div>
                                         @else
+                                            <div class="offset-2 h-captcha" data-sitekey="80e9f3c6-160d-467d-bff7-bf2d89a8e28b"></div><br><br>
+
                                             <div class="payment_section" style="display:none!important">
                                                 <h3 class="titles payment_title">Step 5:<br> Payment Information</h3>
                                                 <div class="price_ctr col-md-6">
