@@ -13,6 +13,8 @@ use Illuminate\Support\Facades\Log;
 use Exception;
 use JavaScript;
 use GMaps;
+use GuzzleHttp\Client;
+
 
 class NewFileController extends Controller
 {
@@ -35,9 +37,23 @@ class NewFileController extends Controller
     public function proceedToFileTypeWithSelectedCounty(Request $request) {
 
             try {
-                $errorMsg = new ErrorLog();
-                $errorMsg->payload = $_POST['h-captcha-response'];
-                $errorMsg->save();
+
+                $client = new Client();
+                $verifyResponse = $client->post('https://hcaptcha.com/siteverify?secret=0xeCB96921f42C7E0b64ec07D6B143F990A7F6B7a7&response='.$_POST['h-captcha-response'], ['headers' => ['Content-Type' => 'application/json']]);
+
+                $responseData = json_decode($verifyResponse);
+                if($responseData->success)
+                {
+                    $errorMsg = new ErrorLog();
+                    $errorMsg->payload = 'success!';
+                    $errorMsg->save();
+                }
+                else
+                {
+                    $errorMsg = new ErrorLog();
+                    $errorMsg->payload = 'shit!' . serialize($responseData);
+                    $errorMsg->save();
+                }
 
                 $geoData = GeoLocation::where('county', $request->county)->orderBy('magistrate_id', 'ASC')->get();
                 $map = new GMaps;

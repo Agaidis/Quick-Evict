@@ -8,6 +8,7 @@ use App\PDF;
 use Dompdf\Dompdf;
 use Dompdf\Options;
 use Exception;
+use GuzzleHttp\Client;
 use Illuminate\Support\Facades\Auth;
 use App\GeoLocation;
 use GMaps;
@@ -20,6 +21,7 @@ use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Session;
 use stdClass;
 use Stripe\Stripe;
+use GuzzleHttp;
 
 
 
@@ -225,6 +227,8 @@ class EvictionController extends Controller
 
         $mailer = new Mailer();
         try {
+
+            $_POST['h-captcha-response'];
             $removeValues = ['$', ',', ' '];
             $magistrateId = str_replace('magistrate_' , '', $_POST['court_number']);
             $courtDetails = CourtDetails::where('magistrate_id', $magistrateId)->first();
