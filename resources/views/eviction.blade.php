@@ -362,6 +362,7 @@
                                                     <label>CourtZip Filing Fee: </label><span id="courtzip_filing_fee"> </span><br>
                                                     <label>Total: $</label><span id="total"></span>
                                                 </div>
+                                                <div class="h-captcha" data-sitekey="80e9f3c6-160d-467d-bff7-bf2d89a8e28b"></div>
                                                 <div class="form-row">
                                                     <label for="card-element">
                                                         <span class="credit_debit">Credit or debit card</span>
