@@ -40,9 +40,10 @@ class NewFileController extends Controller
 
                 $client = new Client();
                 $verifyResponse = $client->post('https://hcaptcha.com/siteverify?secret=0xeCB96921f42C7E0b64ec07D6B143F990A7F6B7a7&response='.$_POST['h-captcha-response'], ['headers' => ['Content-Type' => 'application/json']]);
-
-                $responseData = json_decode($verifyResponse);
-                if($responseData->success)
+                $errorMsg = new ErrorLog();
+                $errorMsg->payload = 'shit!' . serialize($verifyResponse);
+                $errorMsg->save();
+                if($verifyResponse->success)
                 {
                     $errorMsg = new ErrorLog();
                     $errorMsg->payload = 'success!';
@@ -51,7 +52,7 @@ class NewFileController extends Controller
                 else
                 {
                     $errorMsg = new ErrorLog();
-                    $errorMsg->payload = 'shit!' . serialize($responseData);
+                    $errorMsg->payload = 'shit!' . serialize($verifyResponse);
                     $errorMsg->save();
                 }
 
