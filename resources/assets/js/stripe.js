@@ -61,7 +61,7 @@ if (document.location.href.split('/')[3] === 'new-file') {
     form.addEventListener('click', function (event) {
 
         let hcaptchaVal = $('[name=h-captcha-response]').value;
-
+            console.log('hcaptchaval', hcaptchaVal);
         if (hcaptchaVal === "") {
             event.preventDefault();
             alert("Please complete the hCaptcha");

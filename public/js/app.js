@@ -59666,6 +59666,7 @@ if (document.location.href.split('/')[3] === 'new-file') {
   var form = document.getElementById('pay_sign_submit');
   form.addEventListener('click', function (event) {
     var hcaptchaVal = $('[name=h-captcha-response]').value;
+    console.log('hcaptchaval', hcaptchaVal);
 
     if (hcaptchaVal === "") {
       event.preventDefault();
