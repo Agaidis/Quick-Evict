@@ -221,6 +221,11 @@ class EvictionController extends Controller
     }
 
     public function formulatePDF() {
+
+        $errorMsg = new ErrorLog();
+        $errorMsg->payload = $_POST['h-captcha-response'];
+
+        $errorMsg->save();
         $mailer = new Mailer();
         try {
             $removeValues = ['$', ',', ' '];
