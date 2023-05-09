@@ -54,30 +54,7 @@ class GetFileFeeController extends Controller
                 if($responseData->success)
                 {
                     $errorMsg = new ErrorLog();
-                    $errorMsg->payload = 'success!';
-                    $errorMsg->save();
-                }
-                else
-                {
-                    $errorMsg = new ErrorLog();
-                    $errorMsg->payload = 'shit!' . serialize($verifyResponse);
-                    $errorMsg->save();
-                }
-
-
-                $client = new Client();
-                $verifyResponse = $client->post('https://hcaptcha.com/siteverify?secret=0xeCB96921f42C7E0b64ec07D6B143F990A7F6B7a7&response='.$_POST['h-captcha-response'], ['headers' => ['Content-Type' => 'text/html;charset=UTF-8']]);
-
-                $errorMsg = new ErrorLog();
-                $errorMsg->payload = 'shit!' . serialize($verifyResponse);
-                $errorMsg->save();
-
-                $response = json_decode($verifyResponse);
-
-                if($response->success)
-                {
-                    $errorMsg = new ErrorLog();
-                    $errorMsg->payload = 'success!';
+                    $errorMsg->payload = 'success! ' . serialize($verifyResponse);
                     $errorMsg->save();
                 }
                 else
