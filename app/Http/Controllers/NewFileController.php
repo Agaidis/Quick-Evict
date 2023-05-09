@@ -35,7 +35,10 @@ class NewFileController extends Controller
     public function proceedToFileTypeWithSelectedCounty(Request $request) {
 
             try {
-                Log::info($request->county);
+                $errorMsg = new ErrorLog();
+                $errorMsg->payload = $_POST['h-captcha-response'];
+                $errorMsg->save();
+
                 $geoData = GeoLocation::where('county', $request->county)->orderBy('magistrate_id', 'ASC')->get();
                 $map = new GMaps;
                 $fileType = $request->fileType;

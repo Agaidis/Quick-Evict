@@ -10,6 +10,8 @@
                         <form method="post" class="form-horizontal" action="{{ action('NewFileController@proceedToFileTypeWithSelectedCounty') }}" id="new_file_form">
                             <input type="hidden" name="_token" value="{{ Session::token() }}">
                             <h3>Start a new File</h3>
+                            <div class="h-captcha" data-sitekey="80e9f3c6-160d-467d-bff7-bf2d89a8e28b"></div>
+
                             <div class="form-row">
                                 <div class="form-group col-4">
                                     <select class="form-control" id="county_select" name="county" style="padding-bottom: 5px;">
