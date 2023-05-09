@@ -60,7 +60,7 @@ if (document.location.href.split('/')[3] === 'new-file') {
     let form = document.getElementById('pay_sign_submit');
     form.addEventListener('click', function (event) {
 
-        let hcaptchaVal = $('[name=h-captcha-response]').value;
+        let hcaptchaVal = $('[name=h-captcha-response]').val();
             console.log('hcaptchaval', hcaptchaVal);
         if (hcaptchaVal === "" || hcaptchaVal === undefined) {
             event.preventDefault();
