@@ -150,6 +150,11 @@ class DashboardController extends Controller
 
             $courtNotif->save();
 
+            $errorMsg = new ErrorLog();
+            $errorMsg->payload = serialize($courtNotif);
+
+            $errorMsg->save();
+
             $request->session()->flash('alert-success', 'Date has been successfully set!');
 
             return 'success';
