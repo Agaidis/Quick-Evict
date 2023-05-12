@@ -45,7 +45,7 @@ class CourtNotify extends Command
             $errorMsg->save();
 
         } catch( \Exception $e) {
-            mail('agaidis@moneymappress.com', 'Daily Log Time Error', $e->getMessage() . ' Code: ' . $e->getCode() . ' File Line: ' . $e->getLine());
+            mail('andrew.gaidis@gmail.com', 'Court Notifications Error', $e->getMessage() . ' Code: ' . $e->getCode() . ' File Line: ' . $e->getLine());
 
             $errorMsg = new ErrorLog();
             $errorMsg->payload = $e->getMessage() . ' Line #: ' . $e->getLine();
