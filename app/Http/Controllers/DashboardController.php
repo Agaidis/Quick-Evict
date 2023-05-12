@@ -146,7 +146,7 @@ class DashboardController extends Controller
 
             $courtNotif->court_number = $eviction->court_number;
             $courtNotif->court_date = $eviction->court_date;
-            $courtNotif->court_user_id = $eviction->user_id;
+            $courtNotif->user_id = $eviction->user_id;
 
             $courtNotif->save();
 
