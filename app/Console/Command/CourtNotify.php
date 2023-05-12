@@ -42,7 +42,7 @@ class CourtNotify extends Command
     {
 
         try {
-            $courtDetails = CourtNotification::where('', '')->first();
+          //  $courtDetails = CourtNotification::where('', '')->first();
 
             $errorMsg = new ErrorLog();
             $errorMsg->payload = 'testing from the planet Court Notifications!';
