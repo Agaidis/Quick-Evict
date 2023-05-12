@@ -2,6 +2,8 @@
 
 namespace App\Console\Command;
 
+use App\CourtDetails;
+use App\CourtNotification;
 use Illuminate\Console\Command;
 use App\ErrorLog;
 
@@ -40,6 +42,8 @@ class CourtNotify extends Command
     {
 
         try {
+            $courtDetails = CourtNotification::where('', '')->first();
+
             $errorMsg = new ErrorLog();
             $errorMsg->payload = 'testing from the planet Court Notifications!';
             $errorMsg->save();
