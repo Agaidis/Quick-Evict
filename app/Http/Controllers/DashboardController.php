@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\CountyNotes;
+use App\CourtNotification;
 use App\ErrorLog;
 use Illuminate\Http\Request;
 use App\Evictions;
@@ -140,6 +141,14 @@ class DashboardController extends Controller
             $eviction = Evictions::find($request->id);
             $eviction->court_date = $courtDateTime;
             $eviction->save();
+
+            $courtNotif = new CourtNotification();
+
+            $courtNotif->court_number = $eviction->court_number;
+            $courtNotif->court_number = $eviction->court_date;
+            $courtNotif->court_number = $eviction->user_id;
+
+            $courtNotif->save();
 
             $request->session()->flash('alert-success', 'Date has been successfully set!');
 
