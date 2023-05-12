@@ -2,7 +2,7 @@
 
 namespace App\Console;
 
-use App\Console\Commands\CourtNotify;
+use App\Console\Command\CourtNotify;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
 
