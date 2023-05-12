@@ -206,7 +206,11 @@ class OrderOfPossessionController extends Controller
             $courtAddressLine1 = $geoDetails->address_line_one;
             $courtAddressLine2 = $geoDetails->address_line_two;
 
-            $tenantName = implode(', ', $_POST['tenant_name']);
+            if (isset($_POST['tenant_name'])) {
+                $tenantName = implode(', ', $_POST['tenant_name']);
+            } else {
+                $tenantName = '';
+            }
 
             $additionalTenantAmt = 1;
             $additionalTenantFee = 0;
