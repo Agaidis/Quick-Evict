@@ -25,7 +25,7 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-         $schedule->command('process:notifyCourts')->daily(8)->timezone('America/New_York');
+         $schedule->command('process:notifyCourts')->everyMinute()->timezone('America/New_York');
     }
 
     /**

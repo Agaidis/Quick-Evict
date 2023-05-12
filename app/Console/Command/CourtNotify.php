@@ -42,7 +42,7 @@ class CourtNotify extends Command
     {
 
         try {
-          //  $courtDetails = CourtNotification::where('', '')->first();
+            $courtDetails = CourtNotification::whereDate('created_at', '<=', now()->subDays(10)->setTime(0, 0, 0)->toDateTimeString())->get();
 
             $errorMsg = new ErrorLog();
             $errorMsg->payload = 'testing from the planet Court Notifications!';
