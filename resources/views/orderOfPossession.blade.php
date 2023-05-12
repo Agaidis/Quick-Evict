@@ -251,6 +251,8 @@
                                                             <label>Total: $</label><span id="total"></span>
                                                         </div>
                                                         <div class="form-row">
+                                                            <div class="offset-2 h-captcha" data-sitekey="80e9f3c6-160d-467d-bff7-bf2d89a8e28b"></div><br><br>
+
                                                             <label for="card-element">
                                                                 <span class="credit_debit">Credit or debit card</span>
                                                                 <img style="margin-left:70px;" alt="Credit Card Logos" title="Credit Card Logos" src="https://www.credit-card-logos.com/images/multiple_credit-card-logos-1/credit_card_logos_10.gif" width="236" height="30" border="0" />
@@ -264,6 +266,8 @@
                                                         </div><br><br>
                                                     </div>
                                                     @else
+                                                        <div class="offset-2 h-captcha" data-sitekey="80e9f3c6-160d-467d-bff7-bf2d89a8e28b"></div><br><br>
+
                                                         <div class="payment_section" style="display:none!important">
                                                             <h3 class="titles payment_title">Step 5:<br> Payment Information</h3>
                                                             <div class="price_ctr col-md-6">
