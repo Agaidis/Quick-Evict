@@ -61,7 +61,7 @@ class CourtNotify extends Command
                     $errorMsg->payload = 'made it in here!';
                     $errorMsg->save();
 
-                    mail('andrew.gaidis@gmail.com', 'CourtZip 10 day Order ', 'Hello,
+                   $results = mail('andrew.gaidis@gmail.com', 'CourtZip 10 day Order ', 'Hello,
 
 It has been 10 days since your Landlord-Tenant Complaint Hearing for property address _________________ and tenant(s) ___________________ . You are now eligible to file an Order for Possession via CourtZip.  Alternatively, If the tenant has satisfied the judgement, vacated the property or filed an appeal,you can change the status in the CourtZip Dashboard to "Paid Judgement".
 
@@ -82,6 +82,9 @@ If you have any questions, please let us know - we hope you find this alert help
 Sincerely,
 
 CourtZip');
+                    $errorMsg = new ErrorLog();
+                    $errorMsg->payload = 'mailing results: ' . serialize($results);
+                    $errorMsg->save();
                 }
 
             }
