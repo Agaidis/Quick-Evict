@@ -149,10 +149,15 @@ class DashboardController extends Controller
             $dbCourtDate = date("Y-m-d H:i:s", $timestamp );
 
             CourtNotification::updateOrCreate(
-                ['eviction_id' => $request->id],
-                ['court_number' => $eviction->court_number],
-                ['court_date' => $dbCourtDate],
-                ['user_id' => $eviction->user_id]);
+                [
+                    'eviction_id' => $request->id
+                ],
+                [
+                    'court_number' => $eviction->court_number,
+                    'court_date' => $dbCourtDate,
+                    'user_id' => $eviction->user_id
+                ]
+            );
 
             $request->session()->flash('alert-success', 'Date has been successfully set!');
 
