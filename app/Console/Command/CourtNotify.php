@@ -58,7 +58,7 @@ class CourtNotify extends Command
                 if ($eviction->status == 'Judgement Issued in Favor of Owner') {
 
                     $mailer = new Mailer();
-                    $mailer->sendMail('cgallagher10@gmail.com', 'CourtZip 10 day Order','Hello,
+                    $mailer->sendMail($userEmail, 'CourtZip 10 day Order','Hello,
 
 It has been 10 days since your Landlord-Tenant Complaint Hearing for property address ' . $propertyAddress . ' and tenant(s) ' . $tenantName . '. You are now eligible to file an Order for Possession via CourtZip.  Alternatively, If the tenant has satisfied the judgement, vacated the property or filed an appeal,you can change the status in the CourtZip Dashboard to "Paid Judgement".
 
@@ -100,9 +100,7 @@ CourtZip', '<p>Hello,</p>
 
 <p>CourtZip</p>');
 
-
                 }
-
             }
 
         } catch( \Exception $e) {
