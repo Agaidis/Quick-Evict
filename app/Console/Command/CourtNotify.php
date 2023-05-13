@@ -48,25 +48,19 @@ class CourtNotify extends Command
         try {
             $courtDetails = CourtNotification::whereDate('court_date', '<=', now()->subDays(10)->setTime(0, 0, 0)->toDateTimeString())->get();
 
-            $errorMsg = new ErrorLog();
-            $errorMsg->payload = 'test: ' . serialize($courtDetails);
-            $errorMsg->save();
-
             foreach ($courtDetails as $courtDetail) {
                 $eviction = Evictions::find($courtDetail->eviction_id);
                 $userData = User::find($eviction->user_id);
+                $propertyAddress = str_replace('-1', ', ', $eviction->property_address );
+                $tenantName = $eviction->tenant_name;
                 $userEmail = $userData->email;
 
                 if ($eviction->status == 'Judgement Issued in Favor of Owner') {
 
-                    $errorMsg = new ErrorLog();
-                    $errorMsg->payload = 'made it in here!';
-                    $errorMsg->save();
-
                     $mailer = new Mailer();
                     $mailer->sendMail('andrew.gaidis@gmail.com', 'CourtZip 10 day Order','Hello,
 
-It has been 10 days since your Landlord-Tenant Complaint Hearing for property address _________________ and tenant(s) ___________________ . You are now eligible to file an Order for Possession via CourtZip.  Alternatively, If the tenant has satisfied the judgement, vacated the property or filed an appeal,you can change the status in the CourtZip Dashboard to "Paid Judgement".
+It has been 10 days since your Landlord-Tenant Complaint Hearing for property address ' . $propertyAddress . ' and tenant(s) ' . $tenantName . '. You are now eligible to file an Order for Possession via CourtZip.  Alternatively, If the tenant has satisfied the judgement, vacated the property or filed an appeal,you can change the status in the CourtZip Dashboard to "Paid Judgement".
 
 You can file the Order for Possession directly at www.CourtZip.com.
 
@@ -86,7 +80,7 @@ Sincerely,
 
 CourtZip', '<p>Hello,</p>
 
-<p>It has been 10 days since your Landlord-Tenant Complaint Hearing for property address _________________ and tenant(s) ___________________ . You are now eligible to file an Order for Possession via CourtZip.  Alternatively, If the tenant has satisfied the judgement, vacated the property or filed an appeal,you can change the status in the CourtZip Dashboard to "Paid Judgement".</p>
+<p>It has been 10 days since your Landlord-Tenant Complaint Hearing for property address  ' . $propertyAddress . '  and tenant(s)  ' . $tenantName . '  . You are now eligible to file an Order for Possession via CourtZip.  Alternatively, If the tenant has satisfied the judgement, vacated the property or filed an appeal,you can change the status in the CourtZip Dashboard to "Paid Judgement".</p>
 
 <p>You can file the Order for Possession directly at www.CourtZip.com.</p>
 
