@@ -4,8 +4,10 @@ namespace App\Console\Command;
 
 use App\CourtDetails;
 use App\CourtNotification;
+use App\Evictions;
 use Illuminate\Console\Command;
 use App\ErrorLog;
+use App\User;
 
 class CourtNotify extends Command
 {
@@ -42,9 +44,36 @@ class CourtNotify extends Command
     {
 
         try {
-            $courtDetails = CourtNotification::whereDate('created_at', '<=', now()->subDays(10)->setTime(0, 0, 0)->toDateTimeString())->get();
+            $courtDetails = CourtNotification::whereDate('court_date', '<=', now()->subDays(10)->setTime(0, 0, 0)->toDateTimeString())->get();
 
             foreach ($courtDetails as $courtDetail) {
+                $eviction = Evictions::find($courtDetail->eviction_id);
+                $userData = User::find($eviction->user_id);
+                $userEmail = $userData->email;
+
+                if ($eviction->status == 'Judgement Issued in Favor of Owner') {
+                    mail('andrew.gaidis@gmail.com', 'CourtZip 10 day Order ', 'Hello,
+
+It has been 10 days since your Landlord-Tenant Complaint Hearing for property address _________________ and tenant(s) ___________________ . You are now eligible to file an Order for Possession via CourtZip.  Alternatively, If the tenant has satisfied the judgement, vacated the property or filed an appeal,you can change the status in the CourtZip Dashboard to "Paid Judgement".
+
+You can file the Order for Possession directly at www.CourtZip.com.
+
+A few common reasons an Order for Possession should not or can not be filed:
+
+-Tenant(s) have vacated the property.
+
+-Tenant(s) have paid the judgement in full.
+
+-Tenant(s) have applied for assistance which states Order for Possession can not be filed.
+
+-Tenant has filed an appeal.
+
+If you have any questions, please let us know - we hope you find this alert helpful!
+
+Sincerely,
+
+CourtZip');
+                }
 
             }
 

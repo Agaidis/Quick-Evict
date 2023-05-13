@@ -139,21 +139,23 @@ class DashboardController extends Controller
             $courtDateTime = $request->courtDate . ' ' . $request->courtTime;
 
             $eviction = Evictions::find($request->id);
+
             $eviction->court_date = $courtDateTime;
+
             $eviction->save();
+
+            $courtDate = $courtDateTime;
+            $timestamp = strtotime($courtDate); //convert to Unix timestamp
+            $dbCourtDate = date("Y-m-d H:i:s", $timestamp );
 
             $courtNotif = new CourtNotification();
 
+            $courtNotif->eviction_id = $request->id;
             $courtNotif->court_number = $eviction->court_number;
-            $courtNotif->court_date = $eviction->court_date;
+            $courtNotif->court_date = $dbCourtDate;
             $courtNotif->user_id = $eviction->user_id;
 
             $courtNotif->save();
-
-            $errorMsg = new ErrorLog();
-            $errorMsg->payload = serialize($courtNotif);
-
-            $errorMsg->save();
 
             $request->session()->flash('alert-success', 'Date has been successfully set!');
 

@@ -72,7 +72,11 @@ class EvictionController extends Controller
             $monthlyRent = str_replace($removeValues, '', $_POST['monthly_rent']);
             $unjustDamages = str_replace($removeValues, '', $_POST['unjust_damages']);
 
-            $tenantName = implode(', ', $_POST['tenant_name']);
+            if (isset($_POST['tenant_name'])) {
+                $tenantName = implode(', ', $_POST['tenant_name']);
+            } else {
+                $tenantName = '';
+            }
 
             $pmName = $_POST['pm_name'];
 
