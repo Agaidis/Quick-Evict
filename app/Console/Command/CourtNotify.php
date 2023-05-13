@@ -2,12 +2,14 @@
 
 namespace App\Console\Command;
 
+use App\Classes\Mailer;
 use App\CourtDetails;
 use App\CourtNotification;
 use App\Evictions;
 use Illuminate\Console\Command;
 use App\ErrorLog;
 use App\User;
+use Illuminate\Support\Facades\Auth;
 
 class CourtNotify extends Command
 {
@@ -61,7 +63,8 @@ class CourtNotify extends Command
                     $errorMsg->payload = 'made it in here!';
                     $errorMsg->save();
 
-                   $results = mail('andrew.gaidis@gmail.com', 'CourtZip 10 day Order ', 'Hello,
+                    $mailer = new Mailer();
+                    $mailer->sendMail('andrew.gaidis@gmail.com', 'CourtZip 10 day Order','Hello,
 
 It has been 10 days since your Landlord-Tenant Complaint Hearing for property address _________________ and tenant(s) ___________________ . You are now eligible to file an Order for Possession via CourtZip.  Alternatively, If the tenant has satisfied the judgement, vacated the property or filed an appeal,you can change the status in the CourtZip Dashboard to "Paid Judgement".
 
@@ -81,10 +84,29 @@ If you have any questions, please let us know - we hope you find this alert help
 
 Sincerely,
 
-CourtZip');
-                    $errorMsg = new ErrorLog();
-                    $errorMsg->payload = 'mailing results: ' . serialize($results);
-                    $errorMsg->save();
+CourtZip', '<p>Hello</p>,
+
+<p>It has been 10 days since your Landlord-Tenant Complaint Hearing for property address _________________ and tenant(s) ___________________ . You are now eligible to file an Order for Possession via CourtZip.  Alternatively, If the tenant has satisfied the judgement, vacated the property or filed an appeal,you can change the status in the CourtZip Dashboard to "Paid Judgement".</p>
+
+<p>You can file the Order for Possession directly at www.CourtZip.com.</p>
+
+<p>A few common reasons an Order for Possession should not or can not be filed:</p>
+
+<p>-Tenant(s) have vacated the property.</p>
+
+<p>-Tenant(s) have paid the judgement in full.</p>
+
+<p>-Tenant(s) have applied for assistance which states Order for Possession can not be filed.</p>
+
+<p>-Tenant has filed an appeal.</p>
+
+<p>If you have any questions, please let us know - we hope you find this alert helpful!</p>
+
+<p>Sincerely,</p>
+
+<p>CourtZip</p>');
+
+
                 }
 
             }
