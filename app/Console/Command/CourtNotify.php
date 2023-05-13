@@ -46,7 +46,7 @@ class CourtNotify extends Command
     {
 
         try {
-            $courtDetails = CourtNotification::whereDate('court_date', '<=', now()->subDays(10)->setTime(0, 0, 0)->toDateTimeString())->get();
+            $courtDetails = CourtNotification::whereDate('court_date', '<=', now()->subDays(11)->setTime(0, 0, 0)->toDateTimeString())->get();
 
             foreach ($courtDetails as $courtDetail) {
                 $eviction = Evictions::find($courtDetail->eviction_id);
