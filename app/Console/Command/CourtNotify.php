@@ -84,7 +84,7 @@ If you have any questions, please let us know - we hope you find this alert help
 
 Sincerely,
 
-CourtZip', '<p>Hello</p>,
+CourtZip', '<p>Hello,</p>
 
 <p>It has been 10 days since your Landlord-Tenant Complaint Hearing for property address _________________ and tenant(s) ___________________ . You are now eligible to file an Order for Possession via CourtZip.  Alternatively, If the tenant has satisfied the judgement, vacated the property or filed an appeal,you can change the status in the CourtZip Dashboard to "Paid Judgement".</p>
 
