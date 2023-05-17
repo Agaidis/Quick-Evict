@@ -60438,8 +60438,7 @@ $(document).ready(function () {
       },
       error: function error(data) {}
     });
-  });
-  $('.role_select').on('change', function () {
+  }).on('change', '.role_select', function () {
     var id = $(this)[0].id.split('_');
     var selectedRole = $(this).find(":selected").text();
     console.log('id', id);
@@ -60468,8 +60467,7 @@ $(document).ready(function () {
       },
       error: function error(data) {}
     });
-  });
-  $('.court_select').on('change', function () {
+  }).on('change', '.court_select', function () {
     var id = $(this)[0].id.split('_');
     var selectedCourt = $(this).find(":selected").text();
     $.ajaxSetup({
@@ -60493,8 +60491,7 @@ $(document).ready(function () {
       },
       error: function error(data) {}
     });
-  });
-  $('.user_remove').on('click', function () {
+  }).on('click', '.user_remove', function () {
     var id = $(this)[0].id.split('_');
     $.ajaxSetup({
       headers: {
