@@ -60518,7 +60518,7 @@ $(document).ready(function () {
       });
       location.reload();
     }
-  }).css('cursor', 'pointer');
+  });
 });
 
 /***/ }),
