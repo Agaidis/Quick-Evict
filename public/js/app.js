@@ -60442,6 +60442,8 @@ $(document).ready(function () {
   $('.role_select').on('change', function () {
     var id = $(this)[0].id.split('_');
     var selectedRole = $(this).find(":selected").text();
+    console.log('id', id);
+    console.log('selected role', selectedRole);
     $.ajaxSetup({
       headers: {
         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
