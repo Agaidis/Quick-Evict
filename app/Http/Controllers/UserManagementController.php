@@ -53,6 +53,10 @@ class UserManagementController extends Controller
         $returnArray = array();
 
         try {
+            $errorMsg = new ErrorLog();
+            $errorMsg->payload = $request->id . ' ' . $request->role;
+            $errorMsg->save();
+
             $user = User::find($request->id);
             $user->role = $request->role;
             $user->save();
