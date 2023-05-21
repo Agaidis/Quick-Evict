@@ -483,7 +483,7 @@ if (document.location.href.split('/')[3] === 'new-file') {
             } else if ($('#due_rent').val() === '') {
                 alert('Rent Due at Filing Date is required.');
             } else if (emptyName !== '') {
-                alert('Tenant Name ' + emptyName + 'cannot be blank.');
+                alert('Tenant Name ' + emptyName + ' cannot be blank.');
             } else {
                  $('#modal_signature').modal('show');
 
