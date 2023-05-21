@@ -449,24 +449,20 @@ if (document.location.href.split('/')[3] === 'new-file') {
 
             if ($('#owner_name').val() === '' ) {
                 alert('Owner Name is a required field.')
-            } else if ($('#rented_by_owner')[0].checked) {
-                if ($('#owner_address_1').val() === '') {
-                    alert('Owner Address Line 1 is a required field.')
-                } else if ( $('#owner_address_2').val() === '') {
-                    alert('Owner Address Line 2 is a required field.')
-                }
-            } else if ($('#rented_by_other')[0].checked) {
-                if ($('#other_name').val() === '') {
+            } else if ($('#rented_by_owner')[0].checked && $('#owner_address_1').val() === '') {
+                alert('Owner Address Line 1 is a required field.')
+            } else if ($('#rented_by_owner')[0].checked && $('#owner_address_2').val() === '') {
+                alert('Owner Address Line 2 is a required field.')
+            } else if ($('#rented_by_other')[0].checked && $('#other_name').val() === '') {
                     alert('Property Management Company Name is required.');
-                } else if ($('#pm_name').val() === '') {
+            } else if ($('#rented_by_other')[0].checked && $('#pm_name').val() === '') {
                     alert('Property Manager Name is required.');
-                } else if ($('#pm_phone').val() === '') {
+            } else if ($('#rented_by_other')[0].checked && $('#pm_phone').val() === '') {
                     alert('Property Manager Phone Number is required.');
-                } else if ($('#pm_address_1').val() === '') {
+            } else if ($('#rented_by_other')[0].checked && $('#pm_address_1').val() === '') {
                     alert('Property Manager Address is required.');
-                } else if ($('#pm_address_2').val() === '') {
+            } else if ($('#rented_by_other')[0].checked && $('#pm_address_2').val() === '') {
                     alert('Property Manager Address is required.');
-                }
             } else if ($('#security_deposit').val() === '') {
                 alert('Security Deposit is required.');
             } else if ($('#monthly_rent').val() === '') {
