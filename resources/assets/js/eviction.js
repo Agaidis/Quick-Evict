@@ -447,6 +447,7 @@ if (document.location.href.split('/')[3] === 'new-file') {
         let deliveryType = '';
         $('#finalize_document').on('click', function() {
             let emptyName = '';
+            let fileType = $('#file_type').val();
 
             if ($('#tenant_num_select').val() != null) {
                 $.each($('.tenant_names'), function (key, value) {
@@ -458,7 +459,7 @@ if (document.location.href.split('/')[3] === 'new-file') {
                     }
                 });
             }
-            if ($('#owner_name').val() === '') {
+            if ((fileType === 'ltc' || fileType === 'ltcA') && $('#owner_name').val() === '') {
                 alert('Owner Name is a required field.')
             } else if ($('#rented_by_owner')[0].checked && $('#owner_address_1').val() === '') {
                 alert('Owner Address Line 1 is a required field.')
