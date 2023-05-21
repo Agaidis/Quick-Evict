@@ -27,7 +27,7 @@
                                         <option disabled id="ltcA" value="ltcA">Landlord-Tenant Complaint, File AND Represent Plaintiff at Hearing</option>
                                         <option value="oop">Request for Order of Possession</option>
                                         <option disabled id="oopA" value="oopA">Request for Order of Possession File AND attend lockout and complete lock change</option>
-                                        <option value="civil">Civil Complaint</option>
+{{--                                        <option value="civil">Civil Complaint</option>--}}
                                     </select>
                                 </div>
                                 <div class="form-group col-md-3">
