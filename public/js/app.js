@@ -49487,6 +49487,10 @@ if (document.location.href.split('/')[3] === 'new-file') {
         alert('Docket Number 2 is required.');
       } else if ((fileType === 'oop' || fileType === 'oopA') && $('#docket_number_3').val() === '') {
         alert('Docket Number 3 is required.');
+      } else if ((fileType === 'oop' || fileType === 'oopA') && $('#judgment_amount').val() === '') {
+        alert('Judgement amount is required.');
+      } else if ((fileType === 'oop' || fileType === 'oopA') && $('#costs_original_lt_proceeding').val() === '') {
+        alert('Filing fees in original proceeding is required.');
       } else if ($('#tenant_num_select').val() === null) {
         alert('You have to select the number of tenants and add their name.');
       } else if (emptyName !== '') {
