@@ -191,24 +191,64 @@
                                                     <span id="terms_of_agreement_error_msg"></span>
                                                 </div>
                                             </div><br><hr><br>
-                                            <div class="payment_section">
-                                                <h3 class="titles payment_title">Step 5:<br> Payment Information</h3>
-                                                <div class="form-row">
-                                                    <label for="card-element">
-                                                        <span class="credit_debit">Credit or debit card</span>
-                                                        <img style="margin-left:70px;" alt="Credit Card Logos" title="Credit Card Logos" src="https://www.credit-card-logos.com/images/multiple_credit-card-logos-1/credit_card_logos_10.gif" width="236" height="30" border="0" />
-                                                    </label>
-                                                    <div id="card-element">
-                                                        <!-- A Stripe Element will be inserted here. -->
+                                            @if ($payType === 'full_payment')
+                                                <div class="payment_section">
+                                                    <h3 class="titles payment_title">Step 5:<br> Payment Information</h3>
+                                                    <div class="price_ctr col-md-6">
+                                                        <label>Court Filing Fee: $</label><span id="filing_fee_display"></span><br>
+                                                        <span id="distance_fee_container"><label>Calculated Distance Fee: $</label><span id="distance_fee_display"></span><br></span>
+                                                        <label>CourtZip Filing Fee: </label><span id="courtzip_filing_fee"> </span><br>
+                                                        <label>Total: $</label><span id="total"></span>
                                                     </div>
-                                                    <!-- Used to display form errors. -->
-                                                    <div id="card-errors" role="alert"></div>
-                                                </div><br><br>
+                                                    <div class="form-row">
+                                                        <div class="offset-2 h-captcha" data-sitekey="80e9f3c6-160d-467d-bff7-bf2d89a8e28b"></div><br><br>
+
+                                                        <label for="card-element">
+                                                            <span class="credit_debit">Credit or debit card</span>
+                                                            <img style="margin-left:70px;" alt="Credit Card Logos" title="Credit Card Logos" src="https://www.credit-card-logos.com/images/multiple_credit-card-logos-1/credit_card_logos_10.gif" width="236" height="30" border="0" />
+                                                        </label>
+                                                        <div id="card-element">
+                                                            <!-- A Stripe Element will be inserted here. -->
+                                                        </div>
+
+                                                        <!-- Used to display form errors. -->
+                                                        <div id="card-errors" role="alert"></div>
+                                                    </div><br><br>
+                                                </div>
+                                            @else
+                                                <div class="offset-2 h-captcha" data-sitekey="80e9f3c6-160d-467d-bff7-bf2d89a8e28b"></div><br><br>
+
+                                                <div class="payment_section" style="display:none!important">
+                                                    <h3 class="titles payment_title">Step 5:<br> Payment Information</h3>
+                                                    <div class="price_ctr col-md-6">
+                                                        <label>Court Filing Fee: $</label><span id="filing_fee_display"></span><br>
+                                                        <span id="distance_fee_container"><label>Calculated Distance Fee: $</label><span id="distance_fee_display"></span><br></span>
+                                                        <label>CourtZip Filing Fee: </label><span id="courtzip_filing_fee"> </span><br>
+                                                        <label>Total: $</label><span id="total"></span>
+                                                    </div>
+                                                    <div class="form-row">
+                                                        <label for="card-element">
+                                                            <span class="credit_debit">Credit or debit card</span>
+                                                            <img style="margin-left:70px;" alt="Credit Card Logos" title="Credit Card Logos" src="https://www.credit-card-logos.com/images/multiple_credit-card-logos-1/credit_card_logos_10.gif" width="236" height="30" border="0" />
+                                                        </label>
+                                                        <div id="card-element">
+                                                            <!-- A Stripe Element will be inserted here. -->
+                                                        </div>
+                                                        <!-- Used to display form errors. -->
+                                                        <div id="card-errors" role="alert"></div>
+                                                    </div><br><br>
+                                                </div>
+                                            @endif
+                                        </div>
+                                        @if ($payType === 'full_payment')
+                                            <div class="pay_submit_section modal-footer">
+                                                <button type="button" class="btn btn-success pay_sign_submit" id="pay_sign_submit" data-action="save-png">Pay and Submit Document</button>
                                             </div>
-                                        </div>
-                                        <div class="pay_submit_section modal-footer">
-                                            <button type="button" class="btn btn-success pay_sign_submit" id="pay_sign_submit" data-action="save-png">Pay and Submit Document</button>
-                                        </div>
+                                        @else
+                                            <div class="pay_submit_section modal-footer">
+                                                <button type="button" class="btn btn-success pay_sign_submit" id="pay_sign_submit" data-action="save-png">Complete Document</button>
+                                            </div>
+                                        @endif
                                     </div>
                                 </div>
                             </div>
