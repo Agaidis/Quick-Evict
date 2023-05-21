@@ -447,94 +447,97 @@ if (document.location.href.split('/')[3] === 'new-file') {
         let deliveryType = '';
         $('#finalize_document').on('click', function() {
 
-            $('#modal_signature').modal('show');
+            if ($('#owner_name').val() === '' ) {
+                alert('Owner Name is a required field.')
+            } else {
+                $('#modal_signature').modal('show');
 
 
+                let userAddress = houseNum + ' ' + streetName + ' ' + town + ' ' + 'PA ' + county + ', ' + zipcode;
 
-            let userAddress = houseNum + ' ' + streetName + ' ' + town + ' ' + 'PA ' + county + ', ' + zipcode;
+                if ($('#file_type').val() === 'civil') {
+                    totalJudgment = $('#total_judgment').val();
+                    deliveryType = $("input[name=delivery_type]:checked").val()
+                }
 
-            if ($('#file_type').val() === 'civil') {
-                totalJudgment = $('#total_judgment').val();
-                deliveryType = $("input[name=delivery_type]:checked").val()
-            }
+                $.ajax({
+                    beforeSend: function (xhr) {
+                        xhr.setRequestHeader('X-CSRF-TOKEN', $("#token").attr('content'));
+                    },
+                    url: '/new-file/get-court-fee',
+                    type: 'GET',
+                    data: {
+                        'court_number': $('#court_number').val(),
+                        'tenant_num_select': $('#tenant_num_select').val(),
+                        'fileType': $('#file_type').val(),
+                        'additional_rent_amt': $('#additional_rent_amt').val(),
+                        'attorney_fees': $('#attorney_fees').val(),
+                        'due_rent': $('#due_rent').val(),
+                        'unjust_damages': $('#unjust_damages').val(),
+                        'damage_amt': $('#damage_amt').val(),
+                        'tenant_num': $('#tenant_num').val(),
+                        'total_judgment': totalJudgment,
+                        'delivery_type': deliveryType,
+                        'userAddress': userAddress
 
-            $.ajax({
-                beforeSend: function (xhr) {
-                    xhr.setRequestHeader('X-CSRF-TOKEN', $("#token").attr('content'));
-                },
-                url : '/new-file/get-court-fee',
-                type : 'GET',
-                data : {
-                    'court_number' : $('#court_number').val(),
-                    'tenant_num_select': $('#tenant_num_select').val(),
-                    'fileType': $('#file_type').val(),
-                    'additional_rent_amt': $('#additional_rent_amt').val(),
-                    'attorney_fees': $('#attorney_fees').val(),
-                    'due_rent': $('#due_rent').val(),
-                    'unjust_damages': $('#unjust_damages').val(),
-                    'damage_amt': $('#damage_amt').val(),
-                    'tenant_num': $('#tenant_num').val(),
-                    'total_judgment': totalJudgment,
-                    'delivery_type': deliveryType,
-                    'userAddress': userAddress
+                    },
+                    success: function (data) {
+                        console.log(data);
+                        let total = '';
 
-                },
-                success : function(data) {
-                    console.log(data);
-                    let total = '';
+                        if (data['calculatedFee'] !== '') {
 
-                    if (data['calculatedFee'] !== '' ) {
+                            if ($('#isComplaintFee').val() === 'yes') {
 
-                        if ($('#isComplaintFee').val() === 'yes') {
-
-                            if ($('#file_type').val() === 'ltcA') {
-                                $('#courtzip_filing_fee').text(' $225.00');
-                                total = parseFloat(data['filingFee']) + parseFloat(data['calculatedFee']) + 225.00;
-                            } else if ($('#file_type').val() === 'oopA') {
-                                $('#courtzip_filing_fee').text(' $275.00');
-                                total = parseFloat(data['filingFee']) + parseFloat(data['calculatedFee']) + 275.00;
+                                if ($('#file_type').val() === 'ltcA') {
+                                    $('#courtzip_filing_fee').text(' $225.00');
+                                    total = parseFloat(data['filingFee']) + parseFloat(data['calculatedFee']) + 225.00;
+                                } else if ($('#file_type').val() === 'oopA') {
+                                    $('#courtzip_filing_fee').text(' $275.00');
+                                    total = parseFloat(data['filingFee']) + parseFloat(data['calculatedFee']) + 275.00;
+                                } else {
+                                    $('#courtzip_filing_fee').text(' $25.00');
+                                    total = 25.00 + parseFloat(data['filingFee']) + parseFloat(data['calculatedFee'])
+                                }
                             } else {
                                 $('#courtzip_filing_fee').text(' $25.00');
                                 total = 25.00 + parseFloat(data['filingFee']) + parseFloat(data['calculatedFee'])
                             }
+
+                            $('#distance_fee_display').text(data['calculatedFee']);
+                            $('#distance_fee').val(data['calculatedFee']);
+                            $('#distance_fee_container').css('display', 'initial');
                         } else {
-                            $('#courtzip_filing_fee').text(' $25.00');
-                            total = 25.00 + parseFloat(data['filingFee']) + parseFloat(data['calculatedFee'])
-                        }
 
-                        $('#distance_fee_display').text(data['calculatedFee']);
-                        $('#distance_fee').val(data['calculatedFee']);
-                        $('#distance_fee_container').css('display', 'initial');
-                    } else {
+                            if ($('#isComplaintFee').val() === 'yes') {
 
-                        if ($('#isComplaintFee').val() === 'yes') {
-
-                            if ($('#file_type').val() === 'ltcA') {
-                                $('#courtzip_filing_fee').text(' $225.00');
-                                total = parseFloat(data['filingFee']) + 225.00;
-                            } else if ($('#file_type').val() === 'oopA') {
-                                $('#courtzip_filing_fee').text(' $275.00');
-                                total = parseFloat(data['filingFee']) + 275.00;
+                                if ($('#file_type').val() === 'ltcA') {
+                                    $('#courtzip_filing_fee').text(' $225.00');
+                                    total = parseFloat(data['filingFee']) + 225.00;
+                                } else if ($('#file_type').val() === 'oopA') {
+                                    $('#courtzip_filing_fee').text(' $275.00');
+                                    total = parseFloat(data['filingFee']) + 275.00;
+                                } else {
+                                    $('#courtzip_filing_fee').text(' $25.00');
+                                    total = 25.00 + parseFloat(data['filingFee']);
+                                }
                             } else {
                                 $('#courtzip_filing_fee').text(' $25.00');
                                 total = 25.00 + parseFloat(data['filingFee']);
                             }
-                        } else {
-                            $('#courtzip_filing_fee').text(' $25.00');
-                            total = 25.00 + parseFloat(data['filingFee']);
+                            $('#distance_fee_container').css('display', 'none');
                         }
-                        $('#distance_fee_container').css('display', 'none');
-                    }
 
-                    $('#filing_fee_display').text(data['filingFee']);
-                    $('#total').text(total.toFixed(2));
-                    $('#total_input').val(total.toFixed(2));
+                        $('#filing_fee_display').text(data['filingFee']);
+                        $('#total').text(total.toFixed(2));
+                        $('#total_input').val(total.toFixed(2));
 
-                },
-                error : function(data) {
-                    console.log(data)
-                },
-            });
+                    },
+                    error: function (data) {
+                        console.log(data)
+                    },
+                });
+            }
         });
 
         $('.file').on('change', function() {
