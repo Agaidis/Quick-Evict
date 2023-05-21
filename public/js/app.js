@@ -49426,9 +49426,9 @@ if (document.location.href.split('/')[3] === 'new-file') {
         var currentTenantObj = $('#tenant_name_' + i);
 
         if (currentTenantObj.length > 0) {
-          html += '<label class="labels" for="tenant_name_' + i + '" >Name ' + i + '</label>' + '<input class="form-control eviction_fields" placeholder="Name ' + i + '" type="text" id="tenant_name_' + i + '" name="tenant_name[]" value="' + currentTenantObj.val() + '"/><br>' + '<h5>Servicemembers Civil Relief Act Affidavit (link to website)</h5>' + '<input type="radio" class="is_military" id="is_military_' + i + '" name="tenant_military_' + i + '" value="military" />' + '<label class="military_label" for="is_military_' + i + '">I have personal knowledge that the defendant named above is in military service.</label><br> ' + '<input type="radio" checked class="is_not_military" id="is_not_military_' + i + '" name="tenant_military_' + i + '" value="not military" />' + '<label class="military_label" for="is_not_military_' + i + '">I have personal knowledge that the defendant named above is not in the military service.</label><br>' + '<input type="radio" class="unable_determine_military" id="unable_determine_military_' + i + '" name="tenant_military_' + i + '" value="unable determine military" />' + '<label class="military_label" for="unable_determine_military_' + i + '">I am unable to determine whether the defendant named above is in the military service.</label><br>' + '<div class="tenant_explanation_div">The following facts support the above statement (explain how you know the defendant is or is not in military service, or, if unable to make a determination, the steps you took to investigate the defendant\'s military status):</div>' + '<textarea class="form-control tenant_military_explanation" name="tenant_military_explanation_' + i + '" style="height:120px; width:70%;"></textarea><hr/>';
+          html += '<label class="labels" for="tenant_name_' + i + '" >Name ' + i + '</label>' + '<input class="form-control eviction_fields tenant_names" placeholder="Name ' + i + '" type="text" id="tenant_name_' + i + '" name="tenant_name[]" value="' + currentTenantObj.val() + '"/><br>' + '<h5>Servicemembers Civil Relief Act Affidavit (link to website)</h5>' + '<input type="radio" class="is_military" id="is_military_' + i + '" name="tenant_military_' + i + '" value="military" />' + '<label class="military_label" for="is_military_' + i + '">I have personal knowledge that the defendant named above is in military service.</label><br> ' + '<input type="radio" checked class="is_not_military" id="is_not_military_' + i + '" name="tenant_military_' + i + '" value="not military" />' + '<label class="military_label" for="is_not_military_' + i + '">I have personal knowledge that the defendant named above is not in the military service.</label><br>' + '<input type="radio" class="unable_determine_military" id="unable_determine_military_' + i + '" name="tenant_military_' + i + '" value="unable determine military" />' + '<label class="military_label" for="unable_determine_military_' + i + '">I am unable to determine whether the defendant named above is in the military service.</label><br>' + '<div class="tenant_explanation_div">The following facts support the above statement (explain how you know the defendant is or is not in military service, or, if unable to make a determination, the steps you took to investigate the defendant\'s military status):</div>' + '<textarea class="form-control tenant_military_explanation" name="tenant_military_explanation_' + i + '" style="height:120px; width:70%;"></textarea><hr/>';
         } else {
-          html += '<label class="labels" for="tenant_name_' + i + '" >Name ' + i + '</label>' + '<input class="form-control eviction_fields" placeholder="Name ' + i + '" type="text" id="tenant_name_' + i + '" name="tenant_name[]" value=""/><br>' + '<h5>Servicemembers Civil Relief Act Affidavit (link to website)</h5>' + '<input type="radio" class="is_military" id="is_military_' + i + '" name="tenant_military_' + i + '" value="military" />' + '<label class="military_label" for="is_military_' + i + '">I have personal knowledge that the defendant named above is in military service.</label><br> ' + '<input type="radio" checked class="is_not_military" id="is_not_military_' + i + '" name="tenant_military_' + i + '" value="not military" />' + '<label class="military_label" for="is_not_military_' + i + '">I have personal knowledge that the defendant named above is not in the military service.</label><br>' + '<input type="radio" class="unable_determine_military" id="unable_determine_military_' + i + '" name="tenant_military_' + i + '" value="unable determine military" />' + '<label class="military_label" for="unable_determine_military_' + i + '">I am unable to determine whether the defendant named above is in the military service.</label><br>' + '<div class="tenant_explanation_div">The following facts support the above statement (explain how you know the defendant is or is not in military service, or, if unable to make a determination, the steps you took to investigate the defendant\'s military status):</div>' + '<textarea class="form-control tenant_military_explanation" name="tenant_military_explanation_' + i + '" style="height:120px; width:70%;"></textarea><hr/>';
+          html += '<label class="labels" for="tenant_name_' + i + '" >Name ' + i + '</label>' + '<input class="form-control eviction_fields tenant_names" placeholder="Name ' + i + '" type="text" id="tenant_name_' + i + '" name="tenant_name[]" value=""/><br>' + '<h5>Servicemembers Civil Relief Act Affidavit (link to website)</h5>' + '<input type="radio" class="is_military" id="is_military_' + i + '" name="tenant_military_' + i + '" value="military" />' + '<label class="military_label" for="is_military_' + i + '">I have personal knowledge that the defendant named above is in military service.</label><br> ' + '<input type="radio" checked class="is_not_military" id="is_not_military_' + i + '" name="tenant_military_' + i + '" value="not military" />' + '<label class="military_label" for="is_not_military_' + i + '">I have personal knowledge that the defendant named above is not in the military service.</label><br>' + '<input type="radio" class="unable_determine_military" id="unable_determine_military_' + i + '" name="tenant_military_' + i + '" value="unable determine military" />' + '<label class="military_label" for="unable_determine_military_' + i + '">I am unable to determine whether the defendant named above is in the military service.</label><br>' + '<div class="tenant_explanation_div">The following facts support the above statement (explain how you know the defendant is or is not in military service, or, if unable to make a determination, the steps you took to investigate the defendant\'s military status):</div>' + '<textarea class="form-control tenant_military_explanation" name="tenant_military_explanation_' + i + '" style="height:120px; width:70%;"></textarea><hr/>';
         }
       }
 
@@ -49446,6 +49446,32 @@ if (document.location.href.split('/')[3] === 'new-file') {
     $('#finalize_document').on('click', function () {
       if ($('#owner_name').val() === '') {
         alert('Owner Name is a required field.');
+      } else if ($('#rented_by_owner')[0].checked) {
+        if ($('#owner_address_1').val() === '') {
+          alert('Owner Address Line 1 is a required field.');
+        } else if ($('#owner_address_2').val('') === '') {
+          alert('Owner Address Line 2 is a required field.');
+        }
+      } else if ($('#rented_by_other')[0].checked) {
+        if ($('#other_name').val() === '') {
+          alert('Property Management Company Name is required.');
+        } else if ($('#pm_name').val() === '') {
+          alert('Property Manager Name is required.');
+        } else if ($('#pm_phone').val() === '') {
+          alert('Property Manager Phone Number is required.');
+        } else if ($('#pm_address_1').val() === '') {
+          alert('Property Manager Address is required.');
+        } else if ($('#pm_address_2').val() === '') {
+          alert('Property Manager Address is required.');
+        }
+      } else if ($('#security_deposit').val() === '') {
+        alert('Security Deposit is required.');
+      } else if ($('#monthly_rent').val() === '') {
+        alert('Monthly Rent is required.');
+      } else if ($('#tenant_num_select').val() === null) {
+        alert('You have to select the number of tenants and add their name.');
+      } else if ($('.tenant_names')) {} else if ($('#due_rent').val() === '') {
+        alert('Rent Due at Filing Date is required.');
       } else {
         $('#modal_signature').modal('show');
         var userAddress = houseNum + ' ' + streetName + ' ' + town + ' ' + 'PA ' + county + ', ' + zipcode;

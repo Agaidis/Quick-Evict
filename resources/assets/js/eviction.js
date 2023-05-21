@@ -407,7 +407,7 @@ if (document.location.href.split('/')[3] === 'new-file') {
 
                 if (currentTenantObj.length > 0) {
                     html += '<label class="labels" for="tenant_name_'+ i +'" >Name '+ i +'</label>' +
-                        '<input class="form-control eviction_fields" placeholder="Name '+ i +'" type="text" id="tenant_name_'+ i +'" name="tenant_name[]" value="' + currentTenantObj.val() + '"/><br>' +
+                        '<input class="form-control eviction_fields tenant_names" placeholder="Name '+ i +'" type="text" id="tenant_name_'+ i +'" name="tenant_name[]" value="' + currentTenantObj.val() + '"/><br>' +
                         '<h5>Servicemembers Civil Relief Act Affidavit (link to website)</h5>' +
                         '<input type="radio" class="is_military" id="is_military_' + i + '" name="tenant_military_' + i + '" value="military" />' +
                         '<label class="military_label" for="is_military_' + i + '">I have personal knowledge that the defendant named above is in military service.</label><br> ' +
@@ -419,7 +419,7 @@ if (document.location.href.split('/')[3] === 'new-file') {
                     '<textarea class="form-control tenant_military_explanation" name="tenant_military_explanation_' + i + '" style="height:120px; width:70%;"></textarea><hr/>';
                 } else {
                     html += '<label class="labels" for="tenant_name_'+ i +'" >Name '+ i +'</label>' +
-                        '<input class="form-control eviction_fields" placeholder="Name '+ i +'" type="text" id="tenant_name_'+ i +'" name="tenant_name[]" value=""/><br>' +
+                        '<input class="form-control eviction_fields tenant_names" placeholder="Name '+ i +'" type="text" id="tenant_name_'+ i +'" name="tenant_name[]" value=""/><br>' +
                         '<h5>Servicemembers Civil Relief Act Affidavit (link to website)</h5>' +
                         '<input type="radio" class="is_military" id="is_military_' + i + '" name="tenant_military_' + i + '" value="military" />' +
                         '<label class="military_label" for="is_military_' + i + '">I have personal knowledge that the defendant named above is in military service.</label><br> ' +
@@ -449,6 +449,34 @@ if (document.location.href.split('/')[3] === 'new-file') {
 
             if ($('#owner_name').val() === '' ) {
                 alert('Owner Name is a required field.')
+            } else if ($('#rented_by_owner')[0].checked) {
+                if ($('#owner_address_1').val() === '') {
+                    alert('Owner Address Line 1 is a required field.')
+                } else if ( $('#owner_address_2').val('') === '') {
+                    alert('Owner Address Line 2 is a required field.')
+                }
+            } else if ($('#rented_by_other')[0].checked) {
+                if ($('#other_name').val() === '') {
+                    alert('Property Management Company Name is required.');
+                } else if ($('#pm_name').val() === '') {
+                    alert('Property Manager Name is required.');
+                } else if ($('#pm_phone').val() === '') {
+                    alert('Property Manager Phone Number is required.');
+                } else if ($('#pm_address_1').val() === '') {
+                    alert('Property Manager Address is required.');
+                } else if ($('#pm_address_2').val() === '') {
+                    alert('Property Manager Address is required.');
+                }
+            } else if ($('#security_deposit').val() === '') {
+                alert('Security Deposit is required.');
+            } else if ($('#monthly_rent').val() === '') {
+                alert('Monthly Rent is required.');
+            } else if ($('#tenant_num_select').val() === null) {
+                alert('You have to select the number of tenants and add their name.');
+            } else if ($('.tenant_names')) {
+
+            } else if ($('#due_rent').val() === '') {
+                alert('Rent Due at Filing Date is required.');
             } else {
                 $('#modal_signature').modal('show');
 
