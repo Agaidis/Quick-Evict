@@ -275,7 +275,7 @@
                             <div class="form-group">
                                 <div class="row">
                                     <div class="offset-4 col-sm-10">
-                                        <button type="button" id="finalize_document" class="btn btn-primary">Sign and Payment</button>
+                                        <button type="button" id="finalize_document" data-target="#modal_signature" data-toggle="modal" class="btn btn-primary">Sign and Payment</button>
                                     </div>
                                 </div>
                             </div>
