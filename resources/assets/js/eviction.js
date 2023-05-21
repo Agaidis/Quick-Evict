@@ -446,41 +446,45 @@ if (document.location.href.split('/')[3] === 'new-file') {
         let totalJudgment = '';
         let deliveryType = '';
         $('#finalize_document').on('click', function() {
+            let emptyName = '';
 
-         if ($('#tenant_num_select').val() != null) {
-                $.each($('.tenant_names'), function(key, value) {
+            if ($('#tenant_num_select').val() != null) {
+                $.each($('.tenant_names'), function (key, value) {
                     let name = value.value;
                     let tenantNum = key + 1;
                     if (name === '') {
-                        alert('Tenant Name ' + tenantNum + ' cannot be blank.');
+                        emptyName = tenantNum;
+                        return false;
                     }
                 });
+            }
+            if ($('#owner_name').val() === '') {
+                alert('Owner Name is a required field.')
+            } else if ($('#rented_by_owner')[0].checked && $('#owner_address_1').val() === '') {
+                alert('Owner Address Line 1 is a required field.')
+            } else if ($('#rented_by_owner')[0].checked && $('#owner_address_2').val() === '') {
+                alert('Owner Address Line 2 is a required field.')
+            } else if ($('#rented_by_other')[0].checked && $('#other_name').val() === '') {
+                alert('Property Management Company Name is required.');
+            } else if ($('#rented_by_other')[0].checked && $('#pm_name').val() === '') {
+                alert('Property Manager Name is required.');
+            } else if ($('#rented_by_other')[0].checked && $('#pm_phone').val() === '') {
+                alert('Property Manager Phone Number is required.');
+            } else if ($('#rented_by_other')[0].checked && $('#pm_address_1').val() === '') {
+                alert('Property Manager Address is required.');
+            } else if ($('#rented_by_other')[0].checked && $('#pm_address_2').val() === '') {
+                alert('Property Manager Address is required.');
+            } else if ($('#security_deposit').val() === '') {
+                alert('Security Deposit is required.');
+            } else if ($('#monthly_rent').val() === '') {
+                alert('Monthly Rent is required.');
+            } else if ($('#tenant_num_select').val() === null) {
+                alert('You have to select the number of tenants and add their name.');
+            } else if ($('#due_rent').val() === '') {
+                alert('Rent Due at Filing Date is required.');
+            } else if (emptyName !== '') {
+                alert('Tenant Name ' + emptyName + 'cannot be blank.');
             } else {
-             if ($('#owner_name').val() === '') {
-                 alert('Owner Name is a required field.')
-             } else if ($('#rented_by_owner')[0].checked && $('#owner_address_1').val() === '') {
-                 alert('Owner Address Line 1 is a required field.')
-             } else if ($('#rented_by_owner')[0].checked && $('#owner_address_2').val() === '') {
-                 alert('Owner Address Line 2 is a required field.')
-             } else if ($('#rented_by_other')[0].checked && $('#other_name').val() === '') {
-                 alert('Property Management Company Name is required.');
-             } else if ($('#rented_by_other')[0].checked && $('#pm_name').val() === '') {
-                 alert('Property Manager Name is required.');
-             } else if ($('#rented_by_other')[0].checked && $('#pm_phone').val() === '') {
-                 alert('Property Manager Phone Number is required.');
-             } else if ($('#rented_by_other')[0].checked && $('#pm_address_1').val() === '') {
-                 alert('Property Manager Address is required.');
-             } else if ($('#rented_by_other')[0].checked && $('#pm_address_2').val() === '') {
-                 alert('Property Manager Address is required.');
-             } else if ($('#security_deposit').val() === '') {
-                 alert('Security Deposit is required.');
-             } else if ($('#monthly_rent').val() === '') {
-                 alert('Monthly Rent is required.');
-             } else if ($('#tenant_num_select').val() === null) {
-                 alert('You have to select the number of tenants and add their name.');
-             } else if ($('#due_rent').val() === '') {
-                 alert('Rent Due at Filing Date is required.');
-             } else {
                  $('#modal_signature').modal('show');
 
 
@@ -569,7 +573,6 @@ if (document.location.href.split('/')[3] === 'new-file') {
                      },
                  });
              }
-         }
         });
 
         $('.file').on('change', function() {
@@ -602,7 +605,7 @@ if (document.location.href.split('/')[3] === 'new-file') {
                     console.log(data);
                     if (data !== '') {
                         $('#is_extra_filing').val(1);
-                        $('#file_container').append($('<input type="hidden" name="file_address_ids[]" id="file_address_ids" value="'+data+'"/>'));
+                        $('#file_container').append($('<input type="hidden" name="file_address_ids[]" id="file_address_ids" value="' + data + '"/>'));
                     }
                 },
                 error: function (xhr, status, error) {
