@@ -49444,31 +49444,7 @@ if (document.location.href.split('/')[3] === 'new-file') {
     var totalJudgment = '';
     var deliveryType = '';
     $('#finalize_document').on('click', function () {
-      if ($('#owner_name').val() === '') {
-        alert('Owner Name is a required field.');
-      } else if ($('#rented_by_owner')[0].checked && $('#owner_address_1').val() === '') {
-        alert('Owner Address Line 1 is a required field.');
-      } else if ($('#rented_by_owner')[0].checked && $('#owner_address_2').val() === '') {
-        alert('Owner Address Line 2 is a required field.');
-      } else if ($('#rented_by_other')[0].checked && $('#other_name').val() === '') {
-        alert('Property Management Company Name is required.');
-      } else if ($('#rented_by_other')[0].checked && $('#pm_name').val() === '') {
-        alert('Property Manager Name is required.');
-      } else if ($('#rented_by_other')[0].checked && $('#pm_phone').val() === '') {
-        alert('Property Manager Phone Number is required.');
-      } else if ($('#rented_by_other')[0].checked && $('#pm_address_1').val() === '') {
-        alert('Property Manager Address is required.');
-      } else if ($('#rented_by_other')[0].checked && $('#pm_address_2').val() === '') {
-        alert('Property Manager Address is required.');
-      } else if ($('#security_deposit').val() === '') {
-        alert('Security Deposit is required.');
-      } else if ($('#monthly_rent').val() === '') {
-        alert('Monthly Rent is required.');
-      } else if ($('#tenant_num_select').val() === null) {
-        alert('You have to select the number of tenants and add their name.');
-      } else if ($('#due_rent').val() === '') {
-        alert('Rent Due at Filing Date is required.');
-      } else if ($('#tenant_num_select').val() != null) {
+      if ($('#tenant_num_select').val() != null) {
         $.each($('.tenant_names'), function (key, value) {
           var name = value.value;
           var tenantNum = key + 1;
@@ -49478,86 +49454,112 @@ if (document.location.href.split('/')[3] === 'new-file') {
           }
         });
       } else {
-        $('#modal_signature').modal('show');
-        var userAddress = houseNum + ' ' + streetName + ' ' + town + ' ' + 'PA ' + county + ', ' + zipcode;
+        if ($('#owner_name').val() === '') {
+          alert('Owner Name is a required field.');
+        } else if ($('#rented_by_owner')[0].checked && $('#owner_address_1').val() === '') {
+          alert('Owner Address Line 1 is a required field.');
+        } else if ($('#rented_by_owner')[0].checked && $('#owner_address_2').val() === '') {
+          alert('Owner Address Line 2 is a required field.');
+        } else if ($('#rented_by_other')[0].checked && $('#other_name').val() === '') {
+          alert('Property Management Company Name is required.');
+        } else if ($('#rented_by_other')[0].checked && $('#pm_name').val() === '') {
+          alert('Property Manager Name is required.');
+        } else if ($('#rented_by_other')[0].checked && $('#pm_phone').val() === '') {
+          alert('Property Manager Phone Number is required.');
+        } else if ($('#rented_by_other')[0].checked && $('#pm_address_1').val() === '') {
+          alert('Property Manager Address is required.');
+        } else if ($('#rented_by_other')[0].checked && $('#pm_address_2').val() === '') {
+          alert('Property Manager Address is required.');
+        } else if ($('#security_deposit').val() === '') {
+          alert('Security Deposit is required.');
+        } else if ($('#monthly_rent').val() === '') {
+          alert('Monthly Rent is required.');
+        } else if ($('#tenant_num_select').val() === null) {
+          alert('You have to select the number of tenants and add their name.');
+        } else if ($('#due_rent').val() === '') {
+          alert('Rent Due at Filing Date is required.');
+        } else {
+          $('#modal_signature').modal('show');
+          var userAddress = houseNum + ' ' + streetName + ' ' + town + ' ' + 'PA ' + county + ', ' + zipcode;
 
-        if ($('#file_type').val() === 'civil') {
-          totalJudgment = $('#total_judgment').val();
-          deliveryType = $("input[name=delivery_type]:checked").val();
-        }
+          if ($('#file_type').val() === 'civil') {
+            totalJudgment = $('#total_judgment').val();
+            deliveryType = $("input[name=delivery_type]:checked").val();
+          }
 
-        $.ajax({
-          beforeSend: function beforeSend(xhr) {
-            xhr.setRequestHeader('X-CSRF-TOKEN', $("#token").attr('content'));
-          },
-          url: '/new-file/get-court-fee',
-          type: 'GET',
-          data: {
-            'court_number': $('#court_number').val(),
-            'tenant_num_select': $('#tenant_num_select').val(),
-            'fileType': $('#file_type').val(),
-            'additional_rent_amt': $('#additional_rent_amt').val(),
-            'attorney_fees': $('#attorney_fees').val(),
-            'due_rent': $('#due_rent').val(),
-            'unjust_damages': $('#unjust_damages').val(),
-            'damage_amt': $('#damage_amt').val(),
-            'tenant_num': $('#tenant_num').val(),
-            'total_judgment': totalJudgment,
-            'delivery_type': deliveryType,
-            'userAddress': userAddress
-          },
-          success: function success(data) {
-            console.log(data);
-            var total = '';
+          $.ajax({
+            beforeSend: function beforeSend(xhr) {
+              xhr.setRequestHeader('X-CSRF-TOKEN', $("#token").attr('content'));
+            },
+            url: '/new-file/get-court-fee',
+            type: 'GET',
+            data: {
+              'court_number': $('#court_number').val(),
+              'tenant_num_select': $('#tenant_num_select').val(),
+              'fileType': $('#file_type').val(),
+              'additional_rent_amt': $('#additional_rent_amt').val(),
+              'attorney_fees': $('#attorney_fees').val(),
+              'due_rent': $('#due_rent').val(),
+              'unjust_damages': $('#unjust_damages').val(),
+              'damage_amt': $('#damage_amt').val(),
+              'tenant_num': $('#tenant_num').val(),
+              'total_judgment': totalJudgment,
+              'delivery_type': deliveryType,
+              'userAddress': userAddress
+            },
+            success: function success(data) {
+              console.log(data);
+              var total = '';
 
-            if (data['calculatedFee'] !== '') {
-              if ($('#isComplaintFee').val() === 'yes') {
-                if ($('#file_type').val() === 'ltcA') {
-                  $('#courtzip_filing_fee').text(' $225.00');
-                  total = parseFloat(data['filingFee']) + parseFloat(data['calculatedFee']) + 225.00;
-                } else if ($('#file_type').val() === 'oopA') {
-                  $('#courtzip_filing_fee').text(' $275.00');
-                  total = parseFloat(data['filingFee']) + parseFloat(data['calculatedFee']) + 275.00;
+              if (data['calculatedFee'] !== '') {
+                if ($('#isComplaintFee').val() === 'yes') {
+                  if ($('#file_type').val() === 'ltcA') {
+                    $('#courtzip_filing_fee').text(' $225.00');
+                    total = parseFloat(data['filingFee']) + parseFloat(data['calculatedFee']) + 225.00;
+                  } else if ($('#file_type').val() === 'oopA') {
+                    $('#courtzip_filing_fee').text(' $275.00');
+                    total = parseFloat(data['filingFee']) + parseFloat(data['calculatedFee']) + 275.00;
+                  } else {
+                    $('#courtzip_filing_fee').text(' $25.00');
+                    total = 25.00 + parseFloat(data['filingFee']) + parseFloat(data['calculatedFee']);
+                  }
                 } else {
                   $('#courtzip_filing_fee').text(' $25.00');
                   total = 25.00 + parseFloat(data['filingFee']) + parseFloat(data['calculatedFee']);
                 }
-              } else {
-                $('#courtzip_filing_fee').text(' $25.00');
-                total = 25.00 + parseFloat(data['filingFee']) + parseFloat(data['calculatedFee']);
-              }
 
-              $('#distance_fee_display').text(data['calculatedFee']);
-              $('#distance_fee').val(data['calculatedFee']);
-              $('#distance_fee_container').css('display', 'initial');
-            } else {
-              if ($('#isComplaintFee').val() === 'yes') {
-                if ($('#file_type').val() === 'ltcA') {
-                  $('#courtzip_filing_fee').text(' $225.00');
-                  total = parseFloat(data['filingFee']) + 225.00;
-                } else if ($('#file_type').val() === 'oopA') {
-                  $('#courtzip_filing_fee').text(' $275.00');
-                  total = parseFloat(data['filingFee']) + 275.00;
+                $('#distance_fee_display').text(data['calculatedFee']);
+                $('#distance_fee').val(data['calculatedFee']);
+                $('#distance_fee_container').css('display', 'initial');
+              } else {
+                if ($('#isComplaintFee').val() === 'yes') {
+                  if ($('#file_type').val() === 'ltcA') {
+                    $('#courtzip_filing_fee').text(' $225.00');
+                    total = parseFloat(data['filingFee']) + 225.00;
+                  } else if ($('#file_type').val() === 'oopA') {
+                    $('#courtzip_filing_fee').text(' $275.00');
+                    total = parseFloat(data['filingFee']) + 275.00;
+                  } else {
+                    $('#courtzip_filing_fee').text(' $25.00');
+                    total = 25.00 + parseFloat(data['filingFee']);
+                  }
                 } else {
                   $('#courtzip_filing_fee').text(' $25.00');
                   total = 25.00 + parseFloat(data['filingFee']);
                 }
-              } else {
-                $('#courtzip_filing_fee').text(' $25.00');
-                total = 25.00 + parseFloat(data['filingFee']);
+
+                $('#distance_fee_container').css('display', 'none');
               }
 
-              $('#distance_fee_container').css('display', 'none');
+              $('#filing_fee_display').text(data['filingFee']);
+              $('#total').text(total.toFixed(2));
+              $('#total_input').val(total.toFixed(2));
+            },
+            error: function error(data) {
+              console.log(data);
             }
-
-            $('#filing_fee_display').text(data['filingFee']);
-            $('#total').text(total.toFixed(2));
-            $('#total_input').val(total.toFixed(2));
-          },
-          error: function error(data) {
-            console.log(data);
-          }
-        });
+          });
+        }
       }
     });
     $('.file').on('change', function () {
