@@ -459,21 +459,21 @@ if (document.location.href.split('/')[3] === 'new-file') {
                     }
                 });
             }
-            if ($('#owner_name').val() === '') {
+            if ((fileType === 'ltc' || fileType === 'ltcA' || fileType === 'oop'|| fileType === 'oopA') && $('#owner_name').val() === '') {
                 alert('Owner Name is a required field.')
-            } else if ($('#rented_by_owner')[0].checked && $('#owner_address_1').val() === '') {
+            } else if ((fileType === 'ltc' || fileType === 'ltcA' || fileType === 'oop'|| fileType === 'oopA') && $('#rented_by_owner')[0].checked && $('#owner_address_1').val() === '') {
                 alert('Owner Address Line 1 is a required field.')
-            } else if ($('#rented_by_owner')[0].checked && $('#owner_address_2').val() === '') {
+            } else if ((fileType === 'ltc' || fileType === 'ltcA' || fileType === 'oop'|| fileType === 'oopA') && $('#rented_by_owner')[0].checked && $('#owner_address_2').val() === '') {
                 alert('Owner Address Line 2 is a required field.')
-            } else if ($('#rented_by_other')[0].checked && $('#other_name').val() === '') {
+            } else if ((fileType === 'ltc' || fileType === 'ltcA' || fileType === 'oop'|| fileType === 'oopA') && $('#rented_by_other')[0].checked && $('#other_name').val() === '') {
                 alert('Property Management Company Name is required.');
-            } else if ($('#rented_by_other')[0].checked && $('#pm_name').val() === '') {
+            } else if ((fileType === 'ltc' || fileType === 'ltcA' || fileType === 'oop'|| fileType === 'oopA') && $('#rented_by_other')[0].checked && $('#pm_name').val() === '') {
                 alert('Property Manager Name is required.');
-            } else if ($('#rented_by_other')[0].checked && $('#pm_phone').val() === '') {
+            } else if ((fileType === 'ltc' || fileType === 'ltcA' || fileType === 'oop'|| fileType === 'oopA') && $('#rented_by_other')[0].checked && $('#pm_phone').val() === '') {
                 alert('Property Manager Phone Number is required.');
-            } else if ($('#rented_by_other')[0].checked && $('#pm_address_1').val() === '') {
+            } else if ((fileType === 'ltc' || fileType === 'ltcA' || fileType === 'oop'|| fileType === 'oopA') && $('#rented_by_other')[0].checked && $('#pm_address_1').val() === '') {
                 alert('Property Manager Address is required.');
-            } else if ($('#rented_by_other')[0].checked && $('#pm_address_2').val() === '') {
+            } else if ((fileType === 'ltc' || fileType === 'ltcA' || fileType === 'oop'|| fileType === 'oopA') && $('#rented_by_other')[0].checked && $('#pm_address_2').val() === '') {
                 alert('Property Manager Address is required.');
             } else if ((fileType === 'ltc' || fileType === 'ltcA') && $('#security_deposit').val() === '') {
                 alert('Security Deposit is required.');
@@ -491,9 +491,9 @@ if (document.location.href.split('/')[3] === 'new-file') {
                 alert('Judgement amount is required.');
             } else if ((fileType === 'oop' || fileType === 'oopA') && $('#costs_original_lt_proceeding').val() === '') {
                 alert('Filing fees in original proceeding is required.');
-            } else if ($('#tenant_num_select').val() === null) {
+            } else if ((fileType === 'ltc' || fileType === 'ltcA' || fileType === 'oop'|| fileType === 'oopA') && $('#tenant_num_select').val() === null) {
                 alert('You have to select the number of tenants and add their name.');
-            } else if (emptyName !== '') {
+            } else if ((fileType === 'ltc' || fileType === 'ltcA' || fileType === 'oop'|| fileType === 'oopA') && emptyName !== '') {
                 alert('Tenant Name ' + emptyName + ' cannot be blank.');
             } else {
                  $('#modal_signature').modal('show');
