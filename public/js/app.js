@@ -49449,7 +49449,7 @@ if (document.location.href.split('/')[3] === 'new-file') {
       } else if ($('#rented_by_owner')[0].checked) {
         if ($('#owner_address_1').val() === '') {
           alert('Owner Address Line 1 is a required field.');
-        } else if ($('#owner_address_2').val('') === '') {
+        } else if ($('#owner_address_2').val() === '') {
           alert('Owner Address Line 2 is a required field.');
         }
       } else if ($('#rented_by_other')[0].checked) {
