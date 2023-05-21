@@ -473,10 +473,16 @@ if (document.location.href.split('/')[3] === 'new-file') {
                 alert('Monthly Rent is required.');
             } else if ($('#tenant_num_select').val() === null) {
                 alert('You have to select the number of tenants and add their name.');
-            } else if ($('.tenant_names')) {
-
             } else if ($('#due_rent').val() === '') {
                 alert('Rent Due at Filing Date is required.');
+            } else if ($('#tenant_num_select').val() != null) {
+                $.each($('.tenant_names'), function(key, value) {
+                    let name = value.value;
+                    let tenantNum = key + 1;
+                    if (name === '') {
+                        alert('Tenant Name ' + tenantNum + ' cannot be blank.');
+                    }
+                });
             } else {
                 $('#modal_signature').modal('show');
 
