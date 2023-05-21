@@ -15,7 +15,7 @@
     <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
 
     <!-- Scripts -->
-    <script src="https://js.stripe.com/v3/"></script>
+    <script src="https://js.stripe.com/v3/" defer></script>
     <script src="{{ mix('js/app.js') }}" defer></script>
 
     <script>
