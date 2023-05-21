@@ -30,7 +30,7 @@
             console.log(distance/1000); // Distance in Kms.
         }
     </script>
-    <script src='https://www.hCaptcha.com/1/api.js' async defer></script>
+    <script src='https://js.hcaptcha.com/1/api.js' async defer></script>
 
 
 
