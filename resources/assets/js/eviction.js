@@ -459,7 +459,7 @@ if (document.location.href.split('/')[3] === 'new-file') {
                     }
                 });
             }
-            if ((fileType === 'ltc' || fileType === 'ltcA') && $('#owner_name').val() === '') {
+            if ($('#owner_name').val() === '') {
                 alert('Owner Name is a required field.')
             } else if ($('#rented_by_owner')[0].checked && $('#owner_address_1').val() === '') {
                 alert('Owner Address Line 1 is a required field.')
@@ -475,14 +475,20 @@ if (document.location.href.split('/')[3] === 'new-file') {
                 alert('Property Manager Address is required.');
             } else if ($('#rented_by_other')[0].checked && $('#pm_address_2').val() === '') {
                 alert('Property Manager Address is required.');
-            } else if ($('#security_deposit').val() === '') {
+            } else if ((fileType === 'ltc' || fileType === 'ltcA') && $('#security_deposit').val() === '') {
                 alert('Security Deposit is required.');
-            } else if ($('#monthly_rent').val() === '') {
+            } else if ((fileType === 'ltc' || fileType === 'ltcA') && $('#monthly_rent').val() === '') {
                 alert('Monthly Rent is required.');
+            } else if ((fileType === 'ltc' || fileType === 'ltcA') && $('#due_rent').val() === '') {
+                alert('Rent Due at Filing Date is required.');
+            } else if ((fileType === 'oop' || fileType === 'oopA') && $('#docket_number_1').val() === '') {
+                alert('Docket Number 1 is required.');
+            } else if ((fileType === 'oop' || fileType === 'oopA') && $('#docket_number_2').val() === '') {
+                alert('Docket Number 2 is required.');
+            } else if ((fileType === 'oop' || fileType === 'oopA') && $('#docket_number_3').val() === '') {
+                alert('Docket Number 3 is required.');
             } else if ($('#tenant_num_select').val() === null) {
                 alert('You have to select the number of tenants and add their name.');
-            } else if ($('#due_rent').val() === '') {
-                alert('Rent Due at Filing Date is required.');
             } else if (emptyName !== '') {
                 alert('Tenant Name ' + emptyName + ' cannot be blank.');
             } else {
