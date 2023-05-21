@@ -49444,6 +49444,7 @@ if (document.location.href.split('/')[3] === 'new-file') {
     var totalJudgment = '';
     var deliveryType = '';
     $('#finalize_document').on('click', function () {
+      $('#modal_signature').modal('show');
       var userAddress = houseNum + ' ' + streetName + ' ' + town + ' ' + 'PA ' + county + ', ' + zipcode;
 
       if ($('#file_type').val() === 'civil') {

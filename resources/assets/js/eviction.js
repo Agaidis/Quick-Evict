@@ -447,6 +447,10 @@ if (document.location.href.split('/')[3] === 'new-file') {
         let deliveryType = '';
         $('#finalize_document').on('click', function() {
 
+            $('#modal_signature').modal('show');
+
+
+
             let userAddress = houseNum + ' ' + streetName + ' ' + town + ' ' + 'PA ' + county + ', ' + zipcode;
 
             if ($('#file_type').val() === 'civil') {
