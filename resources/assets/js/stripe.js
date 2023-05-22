@@ -1,5 +1,6 @@
 if (document.location.href.split('/')[3] === 'new-file') {
-    $( document ).load(function() {
+    window.addEventListener('load', function () {
+
         let canvas = document.querySelector("canvas");
         let signaturePad = new SignaturePad(canvas, {});
         let isSlateHouse = $('#user_email').val();

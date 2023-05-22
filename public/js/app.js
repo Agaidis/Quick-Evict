@@ -59608,7 +59608,7 @@ function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterat
 /***/ (function(module, exports) {
 
 if (document.location.href.split('/')[3] === 'new-file') {
-  $(document).load(function () {
+  window.addEventListener('load', function () {
     var canvas = document.querySelector("canvas");
     var signaturePad = new SignaturePad(canvas, {});
     var isSlateHouse = $('#user_email').val();
