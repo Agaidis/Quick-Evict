@@ -1,5 +1,4 @@
 if (document.location.href.split('/')[3] === 'new-file') {
-    window.addEventListener('load', function () {
 
         let canvas = document.querySelector("canvas");
         let signaturePad = new SignaturePad(canvas, {});
@@ -175,5 +174,4 @@ if (document.location.href.split('/')[3] === 'new-file') {
                 }
             }
         });
-    });
 }
