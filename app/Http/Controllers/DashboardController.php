@@ -152,6 +152,11 @@ class DashboardController extends Controller
             $timestamp = strtotime($courtDate); //convert to Unix timestamp
             $dbCourtDate = date("Y-m-d H:i:s", $timestamp );
 
+            $errorMsg = new ErrorLog();
+            $errorMsg->payload = 'testing date storage. ' . $userEmail . ' ' . $dbCourtDate;
+
+            $errorMsg->save();
+
             $emailCourtDate = explode(' ', $dbCourtDate);
             $mailer = new Mailer();
             $mailer->sendMail($userEmail->email, 'CourtZip Filing Update: Court Date and Time Created','Hello,
