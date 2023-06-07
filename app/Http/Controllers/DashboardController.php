@@ -165,14 +165,14 @@ class DashboardController extends Controller
             $mailer = new Mailer();
             $mailer->sendMail($userEmail->email, 'CourtZip Filing Update: Court Date and Time Created','Hello,
 The court date and time for your Landlord-Tenant magistrate hearing for property ' . $propertyAddress . ' has been set for '. date("F j", $timestamp ) .' at 
-' . date("h:i", $timestamp ) . '. You can always check all upcoming court dates and statuses in your dashboard at CourtZip.com. If you have any questions, 
+' . date("h:i", $timestamp ) . '.. You can always check all upcoming court dates and statuses in your dashboard at CourtZip.com. If you have any questions, 
 please reach out to CourtZip at info@CourtZip.com.
 
 Thanks,
 
 CourtZip Team', '<p>Hello,</p>
 <p>The court date and time for your Landlord-Tenant magistrate hearing for property ' . $propertyAddress . ' has been set for '. date("F j", $timestamp ) .'  at</p>
-<p>' . date("h:i", $timestamp ) . ' You can always check all upcoming court dates and statuses in your dashboard at CourtZip.com. If you have any questions,</p>
+<p>' . date("h:i", $timestamp ) . '. You can always check all upcoming court dates and statuses in your dashboard at CourtZip.com. If you have any questions,</p>
 <p>please reach out to CourtZip at info@CourtZip.com.</p>
 
 <p>Thanks,</p>
