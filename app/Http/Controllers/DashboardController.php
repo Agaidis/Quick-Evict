@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Classes\Mailer;
 use App\CountyNotes;
 use App\CourtNotification;
 use App\ErrorLog;
+use App\User;
 use Illuminate\Http\Request;
 use App\Evictions;
 use Dompdf\Options;
@@ -144,9 +146,29 @@ class DashboardController extends Controller
 
             $eviction->save();
 
+            $userEmail = User::find($eviction->user_id);
+
             $courtDate = $courtDateTime;
             $timestamp = strtotime($courtDate); //convert to Unix timestamp
             $dbCourtDate = date("Y-m-d H:i:s", $timestamp );
+
+            $emailCourtDate = explode(' ', $dbCourtDate);
+            $mailer = new Mailer();
+            $mailer->sendMail($userEmail->email, 'CourtZip Filing Update: Court Date and Time Created','Hello,
+The court date and time for your Landlord-Tenant magistrate hearing for property ' . $eviction->property_address . ' has been set for '. $emailCourtDate[0] .' at 
+' . $emailCourtDate[1] . '. You can always check all upcoming court dates and statuses in your dashboard at CourtZip.com. If you have any questions, 
+please reach out to CourtZip at info@CourtZip.com.
+
+Thanks,
+
+CourtZip Team', '<p>Hello,</p>
+<p>The court date and time for your Landlord-Tenant magistrate hearing for property ' . $eviction->property_address . ' has been set for '. $emailCourtDate[0] .'  at</p>
+<p>' . $emailCourtDate[1] . ' You can always check all upcoming court dates and statuses in your dashboard at CourtZip.com. If you have any questions,</p>
+<p>please reach out to CourtZip at info@CourtZip.com.</p>
+
+<p>Thanks,</p>
+
+<p>CourtZip Team</p>');
 
             CourtNotification::updateOrCreate(
                 [
