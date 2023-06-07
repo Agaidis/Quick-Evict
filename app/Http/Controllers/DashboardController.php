@@ -157,17 +157,19 @@ class DashboardController extends Controller
 
             $errorMsg->save();
 
+            $propertyAddress = str_replace('-1', '', $eviction->property_address);
+
             $emailCourtDate = explode(' ', $dbCourtDate);
             $mailer = new Mailer();
             $mailer->sendMail($userEmail->email, 'CourtZip Filing Update: Court Date and Time Created','Hello,
-The court date and time for your Landlord-Tenant magistrate hearing for property ' . $eviction->property_address . ' has been set for '. $emailCourtDate[0] .' at 
+The court date and time for your Landlord-Tenant magistrate hearing for property ' . $propertyAddress . ' has been set for '. $emailCourtDate[0] .' at 
 ' . $emailCourtDate[1] . '. You can always check all upcoming court dates and statuses in your dashboard at CourtZip.com. If you have any questions, 
 please reach out to CourtZip at info@CourtZip.com.
 
 Thanks,
 
 CourtZip Team', '<p>Hello,</p>
-<p>The court date and time for your Landlord-Tenant magistrate hearing for property ' . $eviction->property_address . ' has been set for '. $emailCourtDate[0] .'  at</p>
+<p>The court date and time for your Landlord-Tenant magistrate hearing for property ' . $propertyAddress . ' has been set for '. $emailCourtDate[0] .'  at</p>
 <p>' . $emailCourtDate[1] . ' You can always check all upcoming court dates and statuses in your dashboard at CourtZip.com. If you have any questions,</p>
 <p>please reach out to CourtZip at info@CourtZip.com.</p>
 
