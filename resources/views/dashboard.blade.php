@@ -75,8 +75,8 @@
                                     <?php
                                     $ltcStatusArray = array('Created LTC',
                                         'LTC Submitted Online',
-                                        'LTC, to be Mailed',
-                                        'LTC Mailed',
+                                        'LTC, to be Sent',
+                                        'LTC Sent',
                                         'LTC Submitted, $$ needs del',
                                         'LTC Submitted, $$ delivered',
                                         'LTC Submitted, $$ & file needs DEL',
@@ -95,8 +95,8 @@
 
                                     $oopStatusArray = array('Created OOP',
                                         'OOP Submitted Online',
-                                        'OOP, to be Mailed',
-                                        'OOP Mailed',
+                                        'OOP, to be Sent',
+                                        'OOP Sent',
                                         'OOP Submitted, $$ needs del',
                                         'OOP Submitted, $$ delivered',
                                         'OOP Submitted, $$ & file needs DEL',
@@ -109,8 +109,8 @@
                                         'Case Withdrawn');
 
                                     $civilStatusArray = array('Civil Filed Online',
-                                        'Civil, to be Mailed',
-                                        'Civil Mailed',
+                                        'Civil, to be Sent',
+                                        'Civil Sent',
                                         'Civil Submitted, $$ needs del',
                                         'Civil Submitted, $$ delivered',
                                         'Civil Submitted, $$ & file needs DEL',
