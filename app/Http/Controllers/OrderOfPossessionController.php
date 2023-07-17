@@ -119,7 +119,7 @@ class OrderOfPossessionController extends Controller
             $evictionData->cost_this_proceeding = $oop;
             $evictionData->costs_original_lt_proceeding = $_POST['costs_original_lt_proceeding'];
 
-            $pdfHtml = $pdfEditor->globalHtmlAttributes($pdfHtml, $courtDetails, $plaintiffAddress, $defendantAddress, $_POST['signature_source'], $evictionData);
+            $pdfHtml = $pdfEditor->globalHtmlAttributes($pdfHtml, $courtDetails, $plaintiffAddress, $defendantAddress, $_POST['signature_source'], $evictionData, $evictionData->is_in_person_filing);
             $pdfHtml = $pdfEditor->localOOPAttributes($pdfHtml, $evictionData, $defendantAddress2, $btmPlaintiffName);
             $pdfHtml = $pdfEditor->addSampleWatermark($pdfHtml, true);
             $domPdf = new Dompdf();
