@@ -236,14 +236,16 @@ CourtZip Team', '<p>Hello,</p>
                     $defendantAddress2 = str_replace('-1', '<br>', $evictionData->resided_address);
                 }
 
-                $pdfHtml = $pdfEditor->globalHtmlAttributes($pdfHtml, $courtDetails, $plaintiffAddress, $defendantAddress, $signature, $evictionData);
+
+
+                $pdfHtml = $pdfEditor->globalHtmlAttributes($pdfHtml, $courtDetails, $plaintiffAddress, $defendantAddress, $signature, $evictionData,  $evictionData->is_in_person_filing);
                 $pdfHtml = $pdfEditor->localLTCAttributes($pdfHtml, $evictionData, $defendantAddress2);
                 $pdfHtml = $pdfEditor->addSampleWatermark($pdfHtml, false);
 
                 $dompdf->loadHtml($pdfHtml);
             } else if ($evictionData->file_type == 'oop') {
                 $pdfHtml = PDF::where('name', 'oop')->value('html');
-                $pdfHtml = $pdfEditor->globalHtmlAttributes($pdfHtml, $courtDetails, $plaintiffAddress, $defendantAddress, $signature, $evictionData);
+                $pdfHtml = $pdfEditor->globalHtmlAttributes($pdfHtml, $courtDetails, $plaintiffAddress, $defendantAddress, $signature, $evictionData, $evictionData->is_in_person_filing);
                 $btmPlaintiffName = $evictionData->pm_name . ',<br>' . $evictionData->pm_company_name . ',<br>' . 'On behalf of ' . $evictionData->owner_name . '<br>' . $evictionData->pm_phone;
                 $defendantAddress2 = $evictionData->defendant_house_num . ' ' . $evictionData->defendant_street_name .' '. $evictionData->unit_num . '<br><br><span style="position:absolute; margin-top:-10px;">'. $evictionData->defendant_town .', ' . $evictionData->defendant_state .' '.$evictionData->defendant_zipcode;
                 $pdfHtml = $pdfEditor->localOOPAttributes($pdfHtml, $evictionData, $defendantAddress2, $btmPlaintiffName);
@@ -252,7 +254,7 @@ CourtZip Team', '<p>Hello,</p>
                 $dompdf->loadHtml($pdfHtml);
             } else if ($evictionData->file_type == 'civil complaint') {
                 $pdfHtml = PDF::where('name', 'civil')->value('html');
-                $pdfHtml = $pdfEditor->globalHtmlAttributes($pdfHtml, $courtDetails, $plaintiffAddress, $civilDefendantAddress, $signature, $evictionData);
+                $pdfHtml = $pdfEditor->globalHtmlAttributes($pdfHtml, $courtDetails, $plaintiffAddress, $civilDefendantAddress, $signature, $evictionData, $evictionData->is_in_person_filing);
                 $pdfHtml = $pdfEditor->localCivilAttributes($pdfHtml, $evictionData);
                 $pdfHtml = $pdfEditor->addSampleWatermark($pdfHtml, false);
 

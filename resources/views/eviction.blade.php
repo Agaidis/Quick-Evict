@@ -182,7 +182,7 @@
                                             <label for="term_lease_ended">Term of lease has ended</label><br>
                                         </div>
                                         <div class="col-sm-10">
-                                            <input type="checkbox" id="unsatisfied_lease" name="unsatisfied_lease">
+                                            <input type="checkbox" checked id="unsatisfied_lease" name="unsatisfied_lease">
                                             <label for="unsatisfied_lease">Rent Reserved and due has, upon demand, remained unsatisfied</label>
                                         </div>
                                         <!-- Breached Conditions Container -->

@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\DB;
 
 class PDFEditController extends Controller
 {
-    public function globalHtmlAttributes ($pdfHtml, $courtDetails, $plaintiffAddress, $defendantAddress, $signature, $evictionData) {
+    public function globalHtmlAttributes ($pdfHtml, $courtDetails, $plaintiffAddress, $defendantAddress, $signature, $evictionData, $filingType) {
 
         $pdfHtml = str_replace('__str-upper-county__', strtoupper($courtDetails->county), $pdfHtml);
         $pdfHtml = str_replace('__court-number__', $courtDetails->court_number, $pdfHtml);
@@ -21,7 +21,13 @@ class PDFEditController extends Controller
         $pdfHtml = str_replace('__court-address-two__', $evictionData->court_address_line_2, $pdfHtml);
         $pdfHtml = str_replace('__phone-number__', $courtDetails->phone_number, $pdfHtml);
         $pdfHtml = str_replace('__date__', date("m/d/Y"), $pdfHtml);
-        $pdfHtml = str_replace('__signature__', $signature, $pdfHtml);
+
+        if ($filingType == 1) {
+            $pdfHtml = str_replace('__signature__', '', $pdfHtml);
+        } else {
+            $pdfHtml = str_replace('__signature__', $signature, $pdfHtml);
+        }
+
         $pdfHtml = str_replace('__eviction-id__', $evictionData->id, $pdfHtml);
         $pdfHtml = str_replace('__filing-fee__', $evictionData->filing_fee, $pdfHtml);
 

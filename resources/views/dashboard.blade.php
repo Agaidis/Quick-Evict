@@ -62,7 +62,7 @@
                                     <th class="text-center">Property Address</th>
                                     <th class="text-center" style="width:80px;">Plaintiff</th>
                                     <th class="text-center" style="width:80px;">Defendant</th>
-                                    <th class="text-center">Court Date</th>
+                                    <th class="text-center">Court Date /<br> Possession Ordered</th>
                                     <th class="text-center">Total<br> Claim<br> Amount</th>
                                     <th class="text-center">Court Filing $</th>
                                     <th class="text-center">Submission Date</th>
@@ -233,7 +233,7 @@
                                 <div class="modal-dialog" role="document">
                                     <div class="set_court_date_modal modal-content">
                                         <div class="modal-header">
-                                            <h4 class="set_court_date_title">Court Date: </h4>
+                                            <h4 class="set_court_date_title">Court Date /<br> Possession Ordered: </h4>
                                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                 <span aria-hidden="true">&times;</span>
                                             </button>
