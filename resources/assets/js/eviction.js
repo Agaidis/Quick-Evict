@@ -50,7 +50,7 @@ if (document.location.href.split('/')[3] === 'new-file') {
 
         map = new google.maps.Map(document.getElementById('map'), {
             center: {lat: 40.144128, lng: -76.311420},
-            zoom: 8,
+            zoom: 6,
             scaleControl: true
         });
         function ResizeMap() {

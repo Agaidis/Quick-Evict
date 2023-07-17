@@ -49090,7 +49090,7 @@ if (document.location.href.split('/')[3] === 'new-file') {
         lat: 40.144128,
         lng: -76.311420
       },
-      zoom: 8,
+      zoom: 6,
       scaleControl: true
     });
 
