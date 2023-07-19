@@ -195,6 +195,7 @@ class EvictionController extends Controller
             $evictionData->breached_conditions_lease = $isBreachedConditionsLease;
             $evictionData->lease_ended = $isLeaseEnded;
             $evictionData->is_determination_request = $isDeterminationRequest;
+            $evictionData->is_in_person_filing = 0;
 
             $pdfHtml = $pdfEditor->globalHtmlAttributes($pdfHtml, $courtDetails, $plaintiffAddress, $defendantAddress, $_POST['signature_source'], $evictionData, $evictionData->is_in_person_filing);
             $pdfHtml = $pdfEditor->localLTCAttributes($pdfHtml, $evictionData, $defendantAddress2);
