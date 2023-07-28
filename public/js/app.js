@@ -49200,10 +49200,10 @@ if (document.location.href.split('/')[3] === 'new-file') {
       console.log('Length: ', place.address_components.length);
 
       if (place.address_components.length === 8) {
-        if (place.address_components[5] === 'United States') {
-          zipcode = place.address_components[6].long_name;
-        } else {
+        if (place.address_components[6] === 'United States') {
           zipcode = place.address_components[7].long_name;
+        } else {
+          zipcode = place.address_components[6].long_name;
         }
 
         zipcode = place.address_components[6].long_name;
