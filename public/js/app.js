@@ -49203,6 +49203,7 @@ if (document.location.href.split('/')[3] === 'new-file') {
         console.log('test', place.address_components[6].long_name);
 
         if (place.address_components[6].long_name == 'United States') {
+          console.log('IM IN HERE ASSOHLE FIRST IF');
           zipcode = place.address_components[7].long_name;
         } else {
           zipcode = place.address_components[6].long_name;
