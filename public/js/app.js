@@ -49194,6 +49194,7 @@ if (document.location.href.split('/')[3] === 'new-file') {
         town = place.address_components[3].long_name;
       }
 
+      console.log('before zipcode', zipcode);
       county = place.address_components[3].long_name;
       state = place.address_components[4].short_name;
       console.log('Here are the place Components: ', place.address_components);
@@ -49220,6 +49221,7 @@ if (document.location.href.split('/')[3] === 'new-file') {
         zipcode = place.address_components[5].long_name;
       }
 
+      console.log('zipcode', zipcode);
       $('#state').val('PA');
       $('#zipcode').val(zipcode);
       $('#county').val(county);
