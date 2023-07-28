@@ -49206,11 +49206,10 @@ if (document.location.href.split('/')[3] === 'new-file') {
         if (place.address_components[6].long_name == 'United States') {
           console.log('IM IN HERE ASSOHLE FIRST IF');
           zipcode = place.address_components[7].long_name;
+          console.log('IM IN HERE ASSOHLE second IF', zipcode);
         } else {
           zipcode = place.address_components[6].long_name;
         }
-
-        zipcode = place.address_components[6].long_name;
       } else if (place.address_components.length === 9) {
         zipcode = place.address_components[7].long_name;
       } else if (place.address_components.length === 6) {
