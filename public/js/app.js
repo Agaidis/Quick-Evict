@@ -50205,6 +50205,35 @@ $(document).ready(function () {
     var splitId = id.split('_');
     var evictionId = splitId[2];
     $('#eviction_id').val(evictionId);
+    $.ajaxSetup({
+      headers: {
+        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+      }
+    });
+    $.ajax({
+      beforeSend: function beforeSend(xhr) {
+        xhr.setRequestHeader('X-CSRF-TOKEN', $("#token").attr('content'));
+      },
+      type: "GET",
+      url: '/get-eviction-notes',
+      data: {
+        eviction_id: evictionId
+      },
+      success: function success(data) {
+        var updatedNotes = ''; // adding current notes
+
+        if (data !== undefined && data !== '') {
+          $.each(data, function (key, value) {
+            updatedNotes += '<span>' + value.note + '</span>';
+          });
+          updatedNotes = $('<span>' + updatedNotes + '</span>');
+          $('#current_eviction_notes').empty().append(updatedNotes.html());
+        } else {
+          $('#current_eviction_notes').empty();
+        }
+      },
+      error: function error(data) {}
+    });
   });
   $('#submit_details').on('click', function () {
     $.ajaxSetup({
