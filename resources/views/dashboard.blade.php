@@ -218,6 +218,7 @@
 
                                                 @if ($userRole != 'Court')
                                                     <button type="button" id="id_{{$eviction->id}}_{{$propertyAddressArray[0]}}" class="fa fa-trash btn-sm btn-danger eviction-remove"></button>
+                                                    <button type="button" id="eviction_details_{{$eviction->id}}" data-target="#seeFilingDetailsModal" data-toggle="modal" class="fa-regular fa-note-sticky eviction_details"></button>
                                                 @endif
                                         </td>
 
@@ -366,6 +367,50 @@
                     </div>
                 </div>
             </div>
+
+            <!-- Modal -->
+            <div class="modal fade" id="seeFilingDetailsModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Filing Details</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="row">
+                                <div class="offset-1 col-md-10">
+                                    <label style="text-align: left!important" for="current_notes">Notes: </label><br>
+                                    <div id="hearing_notes"></div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="offset-1 col-md-10">
+                                    <div class="row">
+                                        <div class="col-sm-4">
+                                            <label class="labels" for="docket_number">Docket Number</label><br>
+                                            <div class="docket_number_ctr">
+                                                <span class="docket_disabled">MJ-</span>
+                                                <input type="text" class="docket_enabled form-control" placeholder="" id="docket_number_1" name="docket_number_1" maxlength="5"/>
+                                                <span class="docket_disabled">-LT-</span>
+                                                <input type="text" class="docket_enabled form-control" placeholder="" id="docket_number_2" name="docket_number_2" maxlength="7"/>
+                                                <span class="docket_disabled">-</span>
+                                                <input type="text" class="docket_enabled form-control" placeholder="" id="docket_number_3" name="docket_number_3" maxlength="4"/>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" id="submit_details" class="approve-btn btn btn-success" data-dismiss="modal">Update Details</button>
+                                <button type="button" id="cancel_details" class="approve-btn btn btn-primary" data-dismiss="modal" >Cancel</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
 
 
         </div>
