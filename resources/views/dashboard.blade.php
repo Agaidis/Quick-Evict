@@ -381,38 +381,41 @@
                         <div class="modal-body">
                             <div class="row">
                                 <div class="offset-1 col-md-10">
-                                    <label style="text-align: left!important" for="current_notes">Notes: </label><br>
-                                    <div id="hearing_notes"></div>
+                                    <label style="text-align: left!important" for="new_note">New Note: </label><br>
+                                    <textarea id="new_note"></textarea>
+                                    <input type="hidden" id="county"/>
+                                    <input type="hidden" id="new_note"/>
+                                </div>
+                                <div class="offset-1 col-md-10">
+                                    <label style="text-align: left!important" for="current_notes">Current Notes: </label><br>
+                                    <div id="current_notes"></div>
                                 </div>
                             </div>
-                            <div class="row">
-                                <div class="offset-1 col-md-10">
-                                    <div class="row">
-                                        <div class="col-sm-4">
-                                            <label class="labels" for="docket_number">Docket Number</label><br>
-                                            <div class="docket_number_ctr">
-                                                <span class="docket_disabled">MJ-</span>
-                                                <input type="text" class="docket_enabled form-control" placeholder="" id="docket_number_1" name="docket_number_1" maxlength="5"/>
-                                                <span class="docket_disabled">-LT-</span>
-                                                <input type="text" class="docket_enabled form-control" placeholder="" id="docket_number_2" name="docket_number_2" maxlength="7"/>
-                                                <span class="docket_disabled">-</span>
-                                                <input type="text" class="docket_enabled form-control" placeholder="" id="docket_number_3" name="docket_number_3" maxlength="4"/>
-                                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="offset-1 col-md-10">
+                                <div class="row">
+                                    <div class="col-sm-4">
+                                        <label class="labels" for="docket_number">Docket Number</label><br>
+                                        <div class="docket_number_ctr">
+                                            <span class="docket_disabled">MJ-</span>
+                                            <input type="text" class="docket_enabled form-control" placeholder="" id="docket_number_1" name="docket_number_1" maxlength="5"/>
+                                            <span class="docket_disabled">-LT-</span>
+                                            <input type="text" class="docket_enabled form-control" placeholder="" id="docket_number_2" name="docket_number_2" maxlength="7"/>
+                                            <span class="docket_disabled">-</span>
+                                            <input type="text" class="docket_enabled form-control" placeholder="" id="docket_number_3" name="docket_number_3" maxlength="4"/>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                            <div class="modal-footer">
-                                <button type="button" id="submit_details" class="approve-btn btn btn-success" data-dismiss="modal">Update Details</button>
-                                <button type="button" id="cancel_details" class="approve-btn btn btn-primary" data-dismiss="modal" >Cancel</button>
-                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" id="submit_details" class="approve-btn btn btn-success" data-dismiss="modal">Update Details</button>
+                            <button type="button" id="cancel_details" class="approve-btn btn btn-primary" data-dismiss="modal" >Cancel</button>
                         </div>
                     </div>
                 </div>
             </div>
-
-
-
         </div>
     </div>
     </header>
