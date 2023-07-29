@@ -209,3 +209,11 @@ html, body {
     background-color: #fff5df;
     height: 90px;
 }
+.delete_county_note {
+    display:none;
+    cursor:pointer;
+    color:red;
+    float:right;
+    margin-right:5%;
+    margin-top:5%;
+}

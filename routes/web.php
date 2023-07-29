@@ -90,8 +90,13 @@ Route::post('/countyAdmin', 'CountyAdminController@updateInPersonComplaint')->mi
 Route::get('/get-court-ids', 'CountyAdminController@getCourtIds')->middleware('auth');
 Route::get('/get-notes', 'CountyAdminController@getNotes')->middleware('auth');
 Route::post('/add-note', 'CountyAdminController@addNote')->middleware('auth');
-Route::post('/update-note', 'CountyAdminController@updateNote')->middleware('auth');
 Route::post('/delete-note', 'CountyAdminController@deleteNote')->middleware('auth');
+
+Route::get('/get-eviction-notes', 'DashboardController@getEvictionNotes')->middleware('auth');
+Route::post('/add-eviction-note', 'DashboardController@addEvictionNote')->middleware('auth');
+Route::post('/delete-eviction-note', 'DashboardController@deleteEvictionNote')->middleware('auth');
+
+Route::post('/update-docket-number', 'DashboardController@updateDocketNumbers')->middleware('auth');
 
 
 

@@ -18,6 +18,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
 use App\PDF;
 use Exception;
+use App\EvictionNote;
 
 class DashboardController extends Controller
 {
@@ -340,6 +341,87 @@ CourtZip Team', '<p>Hello,</p>
         } catch ( Exception $e ) {
             mail('andrew.gaidis@gmail.com', 'Error editing CIVIL', $e->getMessage());
             Log::info($e->getMessage());
+        }
+    }
+
+    public function getEvictionNotes(Request $request) {
+        try {
+            $errorMsg = new ErrorLog();
+            $errorMsg->payload = $request->eviction_id;
+            $errorMsg->save();
+
+            $updatedEvictionNotes = EvictionNote::where('eviction_id', $request->eviction_id)->orderBy('id', 'DESC')->get();
+
+            return $updatedEvictionNotes;
+        } catch (Exception $e) {
+            $errorMsg = new ErrorLog();
+            $errorMsg->payload = $e->getMessage() . ' Line #: ' . $e->getLine();
+            $errorMsg->save();
+
+            return view('dashboard');
+        }
+    }
+
+    public function addEvictionNote(Request $request) {
+        try {
+
+            $userName = Auth()->user()->name;
+            $date = date('m/d/Y h:i:s', strtotime('-4 hours'));
+
+            $newEvictionNote = new EvictionNote();
+            $newEvictionNote->eviction_id = $request->eviction_id;
+            $newEvictionNote->save();
+
+
+            EvictionNote::where('id', $newEvictionNote->id)
+                ->update(['notes' => '<div class="eviction_note" id="eviction_note_'.$newEvictionNote->id.'"><p style="font-size:14px; margin-bottom:0;"> '.$userName . ' | '. $date . '<span class="fas fa-trash delete_eviction_note" id="delete_eviction_note_'.$newEvictionNote->id.'" style="display:none; cursor:pointer; color:red;"></span></p>' . $request->note .'<hr></div>']);
+
+            $currentEvictionNotes = EvictionNote::where('eviction_id', $request->eviction_id)->orderBy('id', 'DESC')->get();
+
+            return $currentEvictionNotes;
+
+        } catch (Exception $e) {
+            $errorMsg = new ErrorLog();
+            $errorMsg->payload = $e->getMessage() . ' Line #: ' . $e->getLine();
+
+            $errorMsg->save();
+            return view('dashboard');
+        }
+    }
+
+    public function deleteEvictionNote(Request $request) {
+        try {
+
+            EvictionNote::destroy($request->id);
+
+            $updatedEvictionNotes = EvictionNote::where('eviction_id', $request->evictionId)->orderBy('id', 'DESC')->get();
+
+            return $updatedEvictionNotes;
+
+        } catch (Exception $e) {
+            $errorMsg = new ErrorLog();
+            $errorMsg->payload = $e->getMessage() . ' Line #: ' . $e->getLine();
+
+            $errorMsg->save();
+            return view('dashboard');
+        }
+    }
+
+    public function updateDocketNumbers(Request $request) {
+        try {
+            $errorMsg = new ErrorLog();
+            $errorMsg->payload = 'made it to docket numbers';
+            $errorMsg->save();
+
+
+            return 'success';
+
+        } catch (Exception $e) {
+            $errorMsg = new ErrorLog();
+            $errorMsg->payload = $e->getMessage() . ' Line #: ' . $e->getLine();
+
+            $errorMsg->save();
+            return view('dashboard');
         }
     }
 }

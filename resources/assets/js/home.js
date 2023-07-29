@@ -51,7 +51,7 @@ $(document).ready(function () {
                 xhr.setRequestHeader('X-CSRF-TOKEN', $("#token").attr('content'));
             },
             type: "GET",
-            url: '/get-notes',
+            url: '/get-eviction-notes',
             data: {
                 courtId: splitId[3]
             },
@@ -333,12 +333,48 @@ $(document).ready(function () {
          $('#filing_original_name').val(filingid);
      });
 
+     $('.eviction_details').on('click', function() {
+         let id = $(this)[0].id;
+         let splitId = id.split('_');
+         let evictionId = splitId[2];
+         $('#eviction_id').val(evictionId);
+     });
 
-    $('#submit_details').on('click', function () {
-        let note = $('#new_note').val();
-        let id = $('#county').val();
+     $('#submit_details').on('click', function() {
+         $.ajaxSetup({
+             headers: {
+                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+             }
+         });
 
-        $('.delete_county_note').css('display', 'none');
+         $.ajax({
+             beforeSend: function (xhr) {
+                 xhr.setRequestHeader('X-CSRF-TOKEN', $("#token").attr('content'));
+             },
+             type: "POST",
+             url: '/update-docket-number',
+             data: {
+                 id: $('#eviction_id').val(),
+                 docket1: $('#docket_number_1').val(),
+                 docket2: $('#docket_number_2').val(),
+                 docket3: $('#docket_number_3').val(),
+
+             },
+
+             success: function (data) {
+                 console.log(data);
+             },
+             error: function (data) {
+                 console.log(data);
+             }
+         });
+     });
+
+    $('#submit_eviction_note').on('click', function () {
+        let note = $('#new_eviction_note').val();
+        let id = $('#eviction_id').val();
+
+        $('.delete_eviction_note').css('display', 'none');
 
             $.ajaxSetup({
                 headers: {
@@ -353,13 +389,12 @@ $(document).ready(function () {
                 type: "POST",
                 url: '/add-eviction-note',
                 data: {
-                    id: id,
+                    eviction_id: id,
                     note: note
                 },
 
                 success: function (data) {
-                    $('#new_note').val('');
-                    $('#current_notes').val();
+                    $('#new_eviction_note').val('');
 
                     if (data !== undefined && data !== '') {
                         let updatedNotes = '';
@@ -369,13 +404,67 @@ $(document).ready(function () {
                         });
                         updatedNotes = $('<span>' + updatedNotes + '</span>');
 
-                        $('#current_notes').empty().append(updatedNotes.html());
+                        $('#current_eviction_notes').empty().append(updatedNotes.html());
                     } else {
-                        $('#current_notes').empty();
+                        $('#current_eviction_notes').empty();
                     }
                 },
                 error: function (data) {
                 }
             });
-    })
+    }).on('mouseover', '.eviction_note', function () {
+        let id = $(this)[0].id;
+        let splitId = id.split('_');
+        let evictionId = splitId[2];
+
+        $('#' + id).css('background-color', 'lightgrey');
+        $('#delete_eviction_note_' + evictionId).css('display', 'inherit');
+    }).on('mouseleave', '.eviction_note', function () {
+        $('.delete_eviction_note').css('display', 'none');
+        $('.eviction_note').css('background-color', 'aliceblue');
+    }).on('click', '.delete_eviction_note', function () {
+        let id = $(this)[0].id;
+        let splitId = id.split('_');
+        let noteId = splitId[3];
+        let evictionId = splitId[4];
+        let response = confirm('Are you sure you want to delete this note?');
+
+        deleteNote(noteId, evictionId, response);
+    });
+
+    function deleteNote(noteId, evictionId, response ) {
+        console.log('evictionId', evictionId);
+        if (response) {
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+            $.ajax({
+                beforeSend: function beforeSend(xhr) {
+                    xhr.setRequestHeader('X-CSRF-TOKEN', $("#token").attr('content'));
+                },
+                type: "POST",
+                url: '/delete-eviction-note',
+                data: {
+                    id: noteId,
+                    evictionId: evictionId
+                },
+                success: function success(data) {
+                    console.log(data);
+                    let updatedNotes = '';
+
+                    $.each(data, function (key, value) {
+                        updatedNotes += '<span>'+value.notes+'</span>';
+                    });
+                    updatedNotes = $('<span>' + updatedNotes + '</span>');
+
+                    $('#current_notes').empty().append(updatedNotes.html());
+                },
+                error: function error(data) {
+                    console.log(data);
+                }
+            });
+        }
+    }
 });

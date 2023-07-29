@@ -381,10 +381,10 @@
                         <div class="modal-body">
                             <div class="row">
                                 <div class="offset-1 col-md-10">
-                                    <label class="labels" for="new_note">New Note: </label><br>
+                                    <label class="labels" for="new_eviction_note">New Note: </label><br>
                                     <textarea id="new_eviction_note"></textarea>
-                                    <input type="hidden" id="county"/>
-                                    <input type="hidden" id="new_note"/>
+                                    <input type="hidden" id="eviction_id" value=""/>
+                                    <button type="button" id="submit_eviction_note" class="approve-btn btn btn-success" data-dismiss="modal">Add Note</button>
                                 </div>
                                 <div class="offset-1 col-md-10">
                                     <label class="labels" for="current_eviction_notes">Current Notes: </label><br>
