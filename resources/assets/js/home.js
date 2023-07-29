@@ -451,10 +451,11 @@ $(document).ready(function () {
     $('#seeFilingDetailsModal').on('mouseover', '.eviction_note', function () {
         let id = $(this)[0].id;
         let splitId = id.split('_');
-        let evictionId = splitId[2];
+        let noteId = splitId[2];
+        let evictionId = splitId[3];
 
         $('#' + id).css('background-color', 'lightgrey');
-        $('#delete_eviction_note_' + evictionId).css('display', 'inherit');
+        $('#delete_eviction_note_' + noteId + '_' + evictionId).css('display', 'inherit');
     }).on('mouseleave', '.eviction_note', function () {
         $('.delete_eviction_note').css('display', 'none');
         $('.eviction_note').css('background-color', 'aliceblue');

@@ -50300,9 +50300,10 @@ $(document).ready(function () {
   $('#seeFilingDetailsModal').on('mouseover', '.eviction_note', function () {
     var id = $(this)[0].id;
     var splitId = id.split('_');
-    var evictionId = splitId[2];
+    var noteId = splitId[2];
+    var evictionId = splitId[3];
     $('#' + id).css('background-color', 'lightgrey');
-    $('#delete_eviction_note_' + evictionId).css('display', 'inherit');
+    $('#delete_eviction_note_' + noteId + '_' + evictionId).css('display', 'inherit');
   }).on('mouseleave', '.eviction_note', function () {
     $('.delete_eviction_note').css('display', 'none');
     $('.eviction_note').css('background-color', 'aliceblue');
