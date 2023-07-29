@@ -381,13 +381,13 @@
                         <div class="modal-body">
                             <div class="row">
                                 <div class="offset-1 col-md-10">
-                                    <div style="text-center:left!important">New Note: </div>
+                                    <label class="labels" for="new_note">New Note: </label><br>
                                     <textarea id="new_note"></textarea>
                                     <input type="hidden" id="county"/>
                                     <input type="hidden" id="new_note"/>
                                 </div>
                                 <div class="offset-1 col-md-10">
-                                    <div style="text-center:left!important">Current Notes: </div>
+                                    <label class="labels" for="current_eviction_notes">Current Notes: </label><br>
                                     <div id="current_eviction_notes"></div>
                                 </div>
                             </div>
@@ -396,7 +396,7 @@
                             <div class="offset-1 col-md-10">
                                 <div class="row">
                                     <div class="col-sm-4">
-                                        <div>Docket Number</div>
+                                        <label class="labels">Docket Number</label><br>
                                         <div class="docket_number_ctr">
                                             <span class="docket_disabled">MJ-</span>
                                             <input type="text" class="docket_enabled form-control" placeholder="" id="docket_number_1" name="docket_number_1" maxlength="5"/>
