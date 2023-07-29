@@ -50257,7 +50257,7 @@ $(document).ready(function () {
         if (data !== undefined && data !== '') {
           var updatedNotes = '';
           $.each(data, function (key, value) {
-            updatedNotes += '<span>' + value.notes + '</span>';
+            updatedNotes += '<span>' + value.note + '</span>';
           });
           updatedNotes = $('<span>' + updatedNotes + '</span>');
           $('#current_eviction_notes').empty().append(updatedNotes.html());
@@ -50308,7 +50308,7 @@ $(document).ready(function () {
           console.log(data);
           var updatedNotes = '';
           $.each(data, function (key, value) {
-            updatedNotes += '<span>' + value.notes + '</span>';
+            updatedNotes += '<span>' + value.note + '</span>';
           });
           updatedNotes = $('<span>' + updatedNotes + '</span>');
           $('#current_notes').empty().append(updatedNotes.html());

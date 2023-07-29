@@ -400,7 +400,7 @@ $(document).ready(function () {
                         let updatedNotes = '';
 
                         $.each(data, function (key, value) {
-                            updatedNotes += '<span>' + value.notes + '</span>';
+                            updatedNotes += '<span>' + value.note + '</span>';
                         });
                         updatedNotes = $('<span>' + updatedNotes + '</span>');
 
@@ -455,7 +455,7 @@ $(document).ready(function () {
                     let updatedNotes = '';
 
                     $.each(data, function (key, value) {
-                        updatedNotes += '<span>'+value.notes+'</span>';
+                        updatedNotes += '<span>'+value.note+'</span>';
                     });
                     updatedNotes = $('<span>' + updatedNotes + '</span>');
 
