@@ -409,10 +409,16 @@ CourtZip Team', '<p>Hello,</p>
 
     public function updateDocketNumbers(Request $request) {
         try {
-            $errorMsg = new ErrorLog();
-            $errorMsg->payload = 'made it to docket numbers';
-            $errorMsg->save();
 
+            $docketNumber2 = $request->docket_number_2;
+
+            while (strlen($docketNumber2) < 7) {
+                $docketNumber2 = '0' . $docketNumber2;
+            }
+            $docket_number = 'MJ-' . $request->docket_number_1 . '-LT-' . $docketNumber2 . '-' . $request->docket_number_3;
+
+            Evictions::where('id', $request->id)
+                ->update(['docket_number' => $docket_number]);
 
             return 'success';
 
