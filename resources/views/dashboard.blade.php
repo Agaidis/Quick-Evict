@@ -391,20 +391,16 @@
                                     <div id="current_eviction_notes"></div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="row">
-                            <div class="offset-1 col-md-10">
-                                <div class="row">
-                                    <div class="col-sm-4">
-                                        <label class="labels">Docket Number</label><br>
-                                        <div class="docket_number_ctr">
-                                            <span class="docket_disabled">MJ-</span>
-                                            <input type="text" class="docket_enabled form-control" placeholder="" id="docket_number_1" name="docket_number_1" maxlength="5"/>
-                                            <span class="docket_disabled">-LT-</span>
-                                            <input type="text" class="docket_enabled form-control" placeholder="" id="docket_number_2" name="docket_number_2" maxlength="7"/>
-                                            <span class="docket_disabled">-</span>
-                                            <input type="text" class="docket_enabled form-control" placeholder="" id="docket_number_3" name="docket_number_3" maxlength="4"/>
-                                        </div>
+                            <div class="row">
+                                <div class="offset-1 col-md-10">
+                                    <label class="labels">Docket Number</label><br>
+                                    <div class="docket_number_ctr">
+                                        <span class="docket_disabled">MJ-</span>
+                                        <input type="text" class="docket_enabled form-control" placeholder="" id="docket_number_1" name="docket_number_1" maxlength="5"/>
+                                        <span class="docket_disabled">-LT-</span>
+                                        <input type="text" class="docket_enabled form-control" placeholder="" id="docket_number_2" name="docket_number_2" maxlength="7"/>
+                                        <span class="docket_disabled">-</span>
+                                        <input type="text" class="docket_enabled form-control" placeholder="" id="docket_number_3" name="docket_number_3" maxlength="4"/>
                                     </div>
                                 </div>
                             </div>
