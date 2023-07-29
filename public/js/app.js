@@ -50342,7 +50342,7 @@ $(document).ready(function () {
             updatedNotes += '<span>' + value.note + '</span>';
           });
           updatedNotes = $('<span>' + updatedNotes + '</span>');
-          $('#current_notes').empty().append(updatedNotes.html());
+          $('#current_eviction_notes').empty().append(updatedNotes.html());
         },
         error: function error(data) {
           console.log(data);
