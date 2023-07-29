@@ -396,11 +396,11 @@
                                     <label class="labels">Docket Number</label><br>
                                     <div class="docket_number_ctr">
                                         <span class="docket_disabled">MJ-</span>
-                                        <input type="text" class="docket_enabled form-control" placeholder="" id="docket_number_1" name="docket_number_1" maxlength="5"/>
+                                        <input type="text" class="docket_enabled form-control" style="width:30%;" placeholder="" id="docket_number_1" name="docket_number_1" maxlength="5"/>
                                         <span class="docket_disabled">-LT-</span>
-                                        <input type="text" class="docket_enabled form-control" placeholder="" id="docket_number_2" name="docket_number_2" maxlength="7"/>
+                                        <input type="text" class="docket_enabled form-control" style="width:35%;" placeholder="" id="docket_number_2" name="docket_number_2" maxlength="7"/>
                                         <span class="docket_disabled">-</span>
-                                        <input type="text" class="docket_enabled form-control" placeholder="" id="docket_number_3" name="docket_number_3" maxlength="4"/>
+                                        <input type="text" class="docket_enabled form-control" style="width:30%;" placeholder="" id="docket_number_3" name="docket_number_3" maxlength="4"/>
                                     </div>
                                 </div>
                             </div>
