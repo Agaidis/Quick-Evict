@@ -218,7 +218,7 @@
 
                                                 @if ($userRole != 'Court')
                                                     <button type="button" id="id_{{$eviction->id}}_{{$propertyAddressArray[0]}}" class="fa fa-trash btn-sm btn-danger eviction-remove"></button>
-                                                    <button type="button" style="margin-top:10px; float:left; padding:9px;" id="eviction_details_{{$eviction->id}}" data-target="#seeFilingDetailsModal" data-toggle="modal" class="eviction_details btn-sm btn-light fa fa-newspaper"></button>
+                                                    <button type="button" style="margin-top:10px; float:left; padding:9px;" id="eviction_details_{{$eviction->id}}" data-target="#seeFilingDetailsModal" data-toggle="modal" class="eviction_details btn btn-info fa fa-newspaper"></button>
                                                 @endif
                                         </td>
 
