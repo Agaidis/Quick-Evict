@@ -50200,6 +50200,43 @@ $(document).ready(function () {
 
     $('#filing_original_name').val(filingid);
   });
+  $('#submit_details').on('click', function () {
+    var note = $('#new_note').val();
+    var id = $('#county').val();
+    $('.delete_county_note').css('display', 'none');
+    $.ajaxSetup({
+      headers: {
+        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+      }
+    });
+    $.ajax({
+      beforeSend: function beforeSend(xhr) {
+        xhr.setRequestHeader('X-CSRF-TOKEN', $("#token").attr('content'));
+      },
+      type: "POST",
+      url: '/add-eviction-note',
+      data: {
+        id: id,
+        note: note
+      },
+      success: function success(data) {
+        $('#new_note').val('');
+        $('#current_notes').val();
+
+        if (data !== undefined && data !== '') {
+          var updatedNotes = '';
+          $.each(data, function (key, value) {
+            updatedNotes += '<span>' + value.notes + '</span>';
+          });
+          updatedNotes = $('<span>' + updatedNotes + '</span>');
+          $('#current_notes').empty().append(updatedNotes.html());
+        } else {
+          $('#current_notes').empty();
+        }
+      },
+      error: function error(data) {}
+    });
+  });
 });
 
 /***/ }),
