@@ -9,7 +9,7 @@
             <div class="col-md-12 col-lg-8 col-xl-7 mx-auto">
                         <form method="post" class="form-horizontal" action="{{ action('NewFileController@proceedToFileTypeWithSelectedCounty') }}" id="new_file_form">
                             <input type="hidden" name="_token" value="{{ Session::token() }}">
-                            <h3 style="text-center:center;">Start a new File</h3>
+                            <h3 style="text-align:center;">Start a new File</h3>
 
                             <div class="form-row">
                                 <div class="form-group col-4">
