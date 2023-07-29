@@ -2,14 +2,14 @@
 @section('content')
     <meta name="csrf-token" id="token" content="{{ csrf_token() }}">
     <input type="hidden" id="user_role" value="{{ $userRole }}"/>
-    <header style="padding:2%;" class="text-center">
+    <header style="padding:2%;">
         <div class="overlay"></div>
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-md-12 col-lg-8 col-xl-7 mx-auto">
                         <form method="post" class="form-horizontal" action="{{ action('NewFileController@proceedToFileTypeWithSelectedCounty') }}" id="new_file_form">
                             <input type="hidden" name="_token" value="{{ Session::token() }}">
-                            <h3>Start a new File</h3>
+                            <h3 style="text-center:center;">Start a new File</h3>
 
                             <div class="form-row">
                                 <div class="form-group col-4">
@@ -58,7 +58,7 @@
                                         <th style="width:5%;" class="text-center">Id</th>
                                     @endif
                                     <th class="text-center" style="width:55px;">MDJ</th>
-                                    <th>D/L Status</th>
+                                    <th class="text-center">D/L Status</th>
                                     <th class="text-center">Property Address</th>
                                     <th class="text-center" style="width:80px;">Plaintiff</th>
                                     <th class="text-center" style="width:80px;">Defendant</th>
