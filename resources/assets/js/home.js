@@ -447,7 +447,8 @@ $(document).ready(function () {
                 error: function (data) {
                 }
             });
-    }).on('mouseover', '.eviction_note', function () {
+    });
+    $('#seeFilingDetailsModal').on('mouseover', '.eviction_note', function () {
         let id = $(this)[0].id;
         let splitId = id.split('_');
         let evictionId = splitId[2];

@@ -50296,7 +50296,8 @@ $(document).ready(function () {
       },
       error: function error(data) {}
     });
-  }).on('mouseover', '.eviction_note', function () {
+  });
+  $('#seeFilingDetailsModal').on('mouseover', '.eviction_note', function () {
     var id = $(this)[0].id;
     var splitId = id.split('_');
     var evictionId = splitId[2];
