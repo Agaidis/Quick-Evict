@@ -374,7 +374,7 @@ CourtZip Team', '<p>Hello,</p>
 
 
             EvictionNote::where('id', $newEvictionNote->id)
-                ->update(['note' => '<div class="eviction_note" id="eviction_note_'.$newEvictionNote->id.'"><p style="font-size:14px; margin-bottom:0;"> '.$userName . ' | '. $date . '<span class="fas fa-trash delete_eviction_note" id="delete_eviction_note_'.$newEvictionNote->id.'_'.$request->eviction_id.'" style="display:none; cursor:pointer; color:red; float:right; margin:10px"></span></p>' . $request->note .'<hr></div>']);
+                ->update(['note' => '<div class="eviction_note" id="eviction_note_'.$newEvictionNote->id.'_'.$request->eviction_id.'"><p style="font-size:14px; margin-bottom:0;"> '.$userName . ' | '. $date . '<span class="fas fa-trash delete_eviction_note" id="delete_eviction_note_'.$newEvictionNote->id.'_'.$request->eviction_id.'" style="display:none; cursor:pointer; color:red; float:right; margin:10px"></span></p>' . $request->note .'<hr></div>']);
 
             $currentEvictionNotes = EvictionNote::where('eviction_id', $request->eviction_id)->orderBy('id', 'DESC')->get();
 
