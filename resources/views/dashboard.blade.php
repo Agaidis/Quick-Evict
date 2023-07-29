@@ -381,13 +381,13 @@
                         <div class="modal-body">
                             <div class="row">
                                 <div class="offset-1 col-md-10">
-                                    <div>New Note: </div>
+                                    <div style="text-center:left!important">New Note: </div>
                                     <textarea id="new_note"></textarea>
                                     <input type="hidden" id="county"/>
                                     <input type="hidden" id="new_note"/>
                                 </div>
                                 <div class="offset-1 col-md-10">
-                                    <div>Current Notes: </div>
+                                    <div style="text-center:left!important">Current Notes: </div>
                                     <div id="current_eviction_notes"></div>
                                 </div>
                             </div>
