@@ -52,7 +52,7 @@
     margin-left:3%;
 }
 }
-.pdf_download_btn_dashboard, .eviction-remove {
+.pdf_download_btn_dashboard, .eviction-remove, .eviction_details {
     cursor:pointer;
 }
 
