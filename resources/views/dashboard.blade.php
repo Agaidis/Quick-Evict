@@ -382,7 +382,7 @@
                             <div class="row">
                                 <div class="offset-1 col-md-10">
                                     <label class="labels" for="new_note">New Note: </label><br>
-                                    <textarea id="new_note"></textarea>
+                                    <textarea id="new_eviction_note"></textarea>
                                     <input type="hidden" id="county"/>
                                     <input type="hidden" id="new_note"/>
                                 </div>
