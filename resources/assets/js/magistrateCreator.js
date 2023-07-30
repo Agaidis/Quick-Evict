@@ -66,6 +66,8 @@ $(document).ready(function () {
                 $('#edit_county').val(data[1].county);
                 $('#edit_mdj_name').val(data[1].mdj_name);
                 $('#edit_court_number').val(data[1].phone_number);
+                $('#edit_fax_number').val(data[1].fax_number);
+                $('#edit_email').val(data[1].email);
                 $('#edit_court_address_one').val(data[0][0].address_line_one);
                 $('#edit_court_address_two').val(data[0][0].address_line_two);
                 $('#edit_one_under_2000').val(data[1].one_defendant_up_to_2000);
@@ -203,6 +205,8 @@ $(document).ready(function () {
                 county: $('#edit_county').val(),
                 mdjName: $('#edit_mdj_name').val(),
                 courtNumber: $('#edit_court_number').val(),
+                email: $('#edit_email').val(),
+                faxNumber: $('#edit_fax_number').val(),
                 addressOne: $('#edit_court_address_one').val(),
                 addressTwo: $('#edit_court_address_two').val(),
                 oneUnder2000: $('#edit_one_under_2000').val(),

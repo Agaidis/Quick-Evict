@@ -73,6 +73,8 @@ class MagistrateController extends Controller
 
                 $courtDetails->mdj_name = $request->mdj_name;
                 $courtDetails->phone_number = $request->court_number;
+                $courtDetails->fax_number = $request->faxNumber;
+                $courtDetails->email = $request->email;
                 $courtDetails->save();
 
                 $civilUnique = new CivilUnique();
@@ -179,6 +181,8 @@ class MagistrateController extends Controller
                 $courtDetails = CourtDetails::find($request->dbCourtId);
                 $courtDetails->court_number = $request->courtId;
                 $courtDetails->phone_number = $request->courtNumber;
+                $courtDetails->fax_number = $request->faxNumber;
+                $courtDetails->email = $request->email;
                 $courtDetails->magistrate_id = $request->magistrateId;
                 $courtDetails->township = $request->township;
                 $courtDetails->county = $request->county;
