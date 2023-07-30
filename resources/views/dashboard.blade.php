@@ -131,7 +131,7 @@
                                             <td>Testing</td>
                                     @else
                                         <tr>
-                                            @endif
+                                    @endif
 
                                         <td>
                                             <input type="hidden" id="docket_number_{{$eviction->id}}" value="{{$eviction->docket_number}}"/>
