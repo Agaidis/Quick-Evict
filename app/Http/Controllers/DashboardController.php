@@ -359,7 +359,9 @@ CourtZip Team', '<p>Hello,</p>
                 $d2 = $docketArr[3];
                 $d3 = $docketArr[4];
                 if (!$updatedEvictionNotes->isEmpty()) {
-
+                    $errorMsg = new ErrorLog();
+                    $errorMsg->payload = 'im in here instead ' . $d1;
+                    $errorMsg->save();
 
                     $updatedEvictionNotes[0]->d1 = $d1;
                     $updatedEvictionNotes[0]->d2 = $d2;
