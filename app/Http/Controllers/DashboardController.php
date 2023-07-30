@@ -372,7 +372,9 @@ CourtZip Team', '<p>Hello,</p>
                     $errorMsg->save();
                     $newObj = new stdClass();
                     $newObj[0]->d1 = 'test';
-
+                    $errorMsg = new ErrorLog();
+                    $errorMsg->payload = 'it made the object';
+                    $errorMsg->save();
                     return $newObj;
                 }
             }
