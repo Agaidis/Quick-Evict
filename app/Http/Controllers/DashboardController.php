@@ -371,7 +371,7 @@ CourtZip Team', '<p>Hello,</p>
                     $errorMsg->payload = 'im in here ' . $d1;
                     $errorMsg->save();
                     $newObj = new stdClass();
-                    $newObj[0]->d1 = 'test';
+                    $newObj->d1 = $d1;
                     $errorMsg = new ErrorLog();
                     $errorMsg->payload = 'it made the object';
                     $errorMsg->save();
