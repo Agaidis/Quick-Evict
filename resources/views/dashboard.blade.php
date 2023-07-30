@@ -131,8 +131,6 @@
                                             <td>Testing</td>
                                     @else
                                         <tr>
-                                            <td>Testin g</td>
-
                                             @endif
 
                                         <td>
