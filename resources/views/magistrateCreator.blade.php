@@ -383,6 +383,14 @@
                                                                 <label for="mdj_name">Court Phone Number</label>
                                                                 <input placeholder="(000)-000-0000" type="text" class="form-control" id="edit_court_number" name="edit_court_number" value="" />
                                                             </div>
+                                                            <div class="col-sm-6">
+                                                                <label for="mdj_name">Court Fax Number</label>
+                                                                <input placeholder="(000)-000-0000" type="text" class="form-control" id="edit_fax_number" name="edit_fax_number" value="" />
+                                                            </div>
+                                                            <div class="col-sm-6">
+                                                                <label for="mdj_name">Court Email</label>
+                                                                <input placeholder="andrew.gaidis@gmail.com" type="text" class="form-control" id="edit_email" name="edit_email" value="" />
+                                                            </div>
                                                         </div>
                                                     </div>
                                                 </div>

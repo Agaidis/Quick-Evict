@@ -73,7 +73,7 @@ class MagistrateController extends Controller
 
                 $courtDetails->mdj_name = $request->mdj_name;
                 $courtDetails->phone_number = $request->court_number;
-                $courtDetails->fax_number = $request->faxNumber;
+                $courtDetails->fax_number = $request->fax_number;
                 $courtDetails->email = $request->email;
                 $courtDetails->save();
 
