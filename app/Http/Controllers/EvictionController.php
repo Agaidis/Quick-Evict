@@ -23,6 +23,7 @@ use Illuminate\Support\Facades\Session;
 use stdClass;
 use Stripe\Stripe;
 use GuzzleHttp;
+use Illuminate\Http\Request;
 
 
 
@@ -42,6 +43,9 @@ class EvictionController extends Controller
     public function delete(Request $request) {
         try {
 
+            $errorMsg = new ErrorLog();
+            $errorMsg->payload = 'IN HERE';
+            $errorMsg->save();
             $evictionData = Evictions::where('id', $request->id)->first();
             $magData = CourtDetails::where('magistrate_id', $evictionData->magistrate_id)->first();
             $mailer = new Mailer();
@@ -61,8 +65,12 @@ Magistrate Phone # is ' . $magData->phone_number, '
 <p>Magistrate # is ' . $evictionData->magistrate_id .',</p>
 <p>Magistrate Phone # is ' . $magData->phone_number .'</p>');
 
-            Evictions::where('id', $request->id)
+            $result = Evictions::where('id', $request->id)
                 ->update(['is_withdrawn' => 1]);
+
+            $errorMsg = new ErrorLog();
+            $errorMsg->payload = $result;
+            $errorMsg->save();
         } catch (\Exception $e) {
             $errorMsg = new ErrorLog();
             $errorMsg->payload = $e->getMessage() . ' Line #: ' . $e->getLine();
