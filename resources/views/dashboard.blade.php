@@ -125,7 +125,13 @@
                                     ?>
                                 @foreach ($evictions as $eviction)
                                     <?php $propertyAddressArray = explode('-1', $eviction->property_address); ?>
-                                    <tr>
+
+                                    @if ($eviction->is_withdrawn === 1 && $eviction->status != 'Case Withdrawn')
+                                        <tr style="background-color:darkorange;">
+                                    @else
+                                        <tr>
+                                    @endif
+
                                         <td>
                                             <input type="hidden" id="docket_number_{{$eviction->id}}" value="{{$eviction->docket_number}}"/>
 

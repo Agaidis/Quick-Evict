@@ -38,8 +38,27 @@ class EvictionController extends Controller
         $this->middleware('auth');
     }
 
-    public function delete() {
+    public function delete(Request $request) {
         try {
+
+            $evictionData = Evictions::where('id', $request->id)->first();
+            $magData = CourtDetails::where('magistrate_id', $evictionData->magistrate_id)->first();
+            $mailer = new Mailer();
+            $mailer->sendMail('withdrawal@courtzip.com', 'Please Withdrawal Case (Case #) for user ' . Auth::user()->name,'Email Title: Withdraw 7071-1 (the case #)
+
+Filed Date / Time is ' . $evictionData->created_at .',
+Court Date is ' . $evictionData->court_date .',
+Property Address is ' . $evictionData->property_address .',
+Docket # is ' . $evictionData->docket_numbere .',
+Magistrate # is ' . $evictionData->magistrate_id .',
+Magistrate Phone # is ' . $magData->phone_number, '
+
+<p>Filed Date / Time is ' . $evictionData->created_at .',</p>
+<p>Court Date is ' . $evictionData->court_date .',</p>
+<p>Property Address is ' . $evictionData->property_address .',</p>
+<p>Docket # is ' . $evictionData->docket_numbere .',</p>
+<p>Magistrate # is ' . $evictionData->magistrate_id .',</p>
+<p>Magistrate Phone # is ' . $magData->phone_number .'</p>');
 
 
         } catch (\Exception $e) {
