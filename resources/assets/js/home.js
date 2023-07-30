@@ -333,7 +333,7 @@ $(document).ready(function () {
          $('#filing_original_name').val(filingid);
      });
 
-     $('.eviction_details').on('click', function() {
+     $('.eviction_table').on('click', '.eviction_details', function() {
          let id = $(this)[0].id;
          let splitId = id.split('_');
          let evictionId = splitId[2];

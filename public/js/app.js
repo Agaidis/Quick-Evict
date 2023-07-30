@@ -50200,7 +50200,7 @@ $(document).ready(function () {
 
     $('#filing_original_name').val(filingid);
   });
-  $('.eviction_details').on('click', function () {
+  $('.eviction_table').on('click', '.eviction_details', function () {
     var id = $(this)[0].id;
     var splitId = id.split('_');
     var evictionId = splitId[2];
@@ -50221,7 +50221,7 @@ $(document).ready(function () {
       },
       success: function success(data) {
         var updatedNotes = '';
-        console.log(data);
+        console.log('data', data);
 
         if (data.length > 0) {
           $('#docket_number_1').val(data[0].d1);
@@ -50244,7 +50244,9 @@ $(document).ready(function () {
           $('#current_eviction_notes').empty();
         }
       },
-      error: function error(data) {}
+      error: function error(data) {
+        console.log(data);
+      }
     });
   });
   $('#submit_details').on('click', function () {
