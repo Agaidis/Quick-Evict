@@ -346,11 +346,19 @@ CourtZip Team', '<p>Hello,</p>
 
     public function getEvictionNotes(Request $request) {
         try {
-            $errorMsg = new ErrorLog();
-            $errorMsg->payload = $request->eviction_id;
-            $errorMsg->save();
 
             $updatedEvictionNotes = EvictionNote::where('eviction_id', $request->eviction_id)->orderBy('id', 'DESC')->get();
+
+            $docketNumber = Evictions::where('id', $request->eviction_id)->value('docket_number');
+            $docketArr = explode('-', $docketNumber);
+            $d1 = $docketArr[1];
+            $d2 = $docketArr[3];
+            $d3 = $docketArr[4];
+
+            $updatedEvictionNotes[0]->d1 = $d1;
+            $updatedEvictionNotes[0]->d2 = $d2;
+            $updatedEvictionNotes[0]->d3 = $d3;
+
 
             return $updatedEvictionNotes;
         } catch (Exception $e) {

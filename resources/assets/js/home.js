@@ -358,6 +358,17 @@ $(document).ready(function () {
              success: function (data) {
                  let updatedNotes = '';
 
+                 if (data[0].d1 !== '' && data[0].d1 !== 'undefined') {
+
+                     $('#docket_number_1').val(data[0].d1);
+                     $('#docket_number_2').val(data[0].d2);
+                     $('#docket_number_3').val(data[0].d3);
+                 } else {
+                     $('#docket_number_1').val('');
+                     $('#docket_number_2').val('');
+                     $('#docket_number_3').val('');
+                 }
+
                  // adding current notes
                  if (data !== undefined && data !== '') {
                      $.each(data, function (key, value) {
