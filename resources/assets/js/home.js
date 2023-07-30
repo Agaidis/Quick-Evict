@@ -358,7 +358,7 @@ $(document).ready(function () {
              success: function (data) {
                  let updatedNotes = '';
 
-                 console.log(data);
+                 console.log('data', data);
 
                  if (data.length > 0) {
 
@@ -384,6 +384,7 @@ $(document).ready(function () {
                  }
              },
              error: function (data) {
+                 console.log(data);
              }
          });
      });

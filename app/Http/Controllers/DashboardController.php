@@ -19,6 +19,7 @@ use Illuminate\Support\Facades\Log;
 use App\PDF;
 use Exception;
 use App\EvictionNote;
+use stdClass;
 
 class DashboardController extends Controller
 {
@@ -351,15 +352,24 @@ CourtZip Team', '<p>Hello,</p>
 
             $docketNumber = Evictions::where('id', $request->eviction_id)->value('docket_number');
 
-            if ($docketNumber !== '' && $docketNumber !== null) {
-                $docketArr = explode('-', $docketNumber);
-                $d1 = $docketArr[1];
-                $d2 = $docketArr[3];
-                $d3 = $docketArr[4];
 
-                $updatedEvictionNotes[0]->d1 = $d1;
-                $updatedEvictionNotes[0]->d2 = $d2;
-                $updatedEvictionNotes[0]->d3 = $d3;
+            if ($docketNumber !== '' && $docketNumber !== null) {
+                if (!$updatedEvictionNotes->isEmpty()) {
+                    $docketArr = explode('-', $docketNumber);
+                    $d1 = $docketArr[1];
+                    $d2 = $docketArr[3];
+                    $d3 = $docketArr[4];
+
+                    $updatedEvictionNotes[0]->d1 = $d1;
+                    $updatedEvictionNotes[0]->d2 = $d2;
+                    $updatedEvictionNotes[0]->d3 = $d3;
+                } else {
+                    $errorMsg = new ErrorLog();
+                    $errorMsg->payload = 'im in here';
+                    $errorMsg->save();
+                    $newObj = new stdClass();
+                    $newObj[0]->d1 = 'test';
+                }
             }
 
             $errorMsg = new ErrorLog();
