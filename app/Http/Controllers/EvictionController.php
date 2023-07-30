@@ -40,9 +40,8 @@ class EvictionController extends Controller
 
     public function delete() {
         try {
-            $dbId = Evictions::where('id', $_POST['id'])->value('id');
-            Evictions::destroy($dbId);
-            return $dbId;
+
+
         } catch (\Exception $e) {
             $errorMsg = new ErrorLog();
             $errorMsg->payload = $e->getMessage() . ' Line #: ' . $e->getLine();
