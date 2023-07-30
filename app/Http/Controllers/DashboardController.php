@@ -408,12 +408,12 @@ CourtZip Team', '<p>Hello,</p>
     public function updateDocketNumbers(Request $request) {
         try {
 
-            $docketNumber2 = $request->docket_number_2;
+            $docketNumber2 = $request->docket2;
 
             while (strlen($docketNumber2) < 7) {
                 $docketNumber2 = '0' . $docketNumber2;
             }
-            $docket_number = 'MJ-' . $request->docket_number_1 . '-LT-' . $docketNumber2 . '-' . $request->docket_number_3;
+            $docket_number = 'MJ-' . $request->docket1 . '-LT-' . $docketNumber2 . '-' . $request->docket3;
             $errorMsg = new ErrorLog();
             $errorMsg->payload = 'docket number ' . $docket_number;
 
