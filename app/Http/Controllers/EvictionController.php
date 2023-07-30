@@ -49,7 +49,7 @@ class EvictionController extends Controller
             $evictionData = Evictions::where('id', $request->id)->first();
             $magData = CourtDetails::where('magistrate_id', $evictionData->magistrate_id)->first();
             $mailer = new Mailer();
-            $mailer->sendMail('chad@courtzip.com', 'Please Withdrawal Case (Case #) for user ' . Auth::user()->name,'Email Title: Withdraw 7071-1 (the case #)
+            $mailer->sendMail('withdrawal@courtzip.com', 'Please Withdrawal Case (Case #) for user ' . Auth::user()->name,'Email Title: Withdraw 7071-1 (the case #)
 
 Filed Date / Time is ' . $evictionData->created_at .',
 Court Date is ' . $evictionData->court_date .',
