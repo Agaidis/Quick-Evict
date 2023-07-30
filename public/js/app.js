@@ -50272,6 +50272,7 @@ $(document).ready(function () {
       },
       success: function success(data) {
         console.log(data);
+        $('#docket_number_' + $('#eviction_id').val()).val('MJ-' + $('#docket_number_1').val() + '-LT-' + $('#docket_number_2').val() + '-' + $('#docket_number_3').val());
       },
       error: function error(data) {
         console.log(data);
