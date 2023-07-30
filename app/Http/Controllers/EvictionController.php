@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\CivilRelief;
 use App\ErrorLog;
+use App\EvictionNote;
 use App\PDF;
 use Dompdf\Dompdf;
 use Dompdf\Options;
@@ -60,7 +61,8 @@ Magistrate Phone # is ' . $magData->phone_number, '
 <p>Magistrate # is ' . $evictionData->magistrate_id .',</p>
 <p>Magistrate Phone # is ' . $magData->phone_number .'</p>');
 
-
+            Evictions::where('id', $request->id)
+                ->update(['is_withdrawn' => 1]);
         } catch (\Exception $e) {
             $errorMsg = new ErrorLog();
             $errorMsg->payload = $e->getMessage() . ' Line #: ' . $e->getLine();
