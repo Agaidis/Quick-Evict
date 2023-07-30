@@ -355,7 +355,7 @@ CourtZip Team', '<p>Hello,</p>
             $errorMsg->payload = $docketNumber;
             $errorMsg->save();
 
-            if ($docketNumber !== '') {
+            if ($docketNumber !== '' && $docketNumber !== null) {
                 $docketArr = explode('-', $docketNumber);
                 $d1 = $docketArr[1];
                 $d2 = $docketArr[3];
