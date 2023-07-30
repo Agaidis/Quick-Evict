@@ -414,7 +414,10 @@ CourtZip Team', '<p>Hello,</p>
                 $docketNumber2 = '0' . $docketNumber2;
             }
             $docket_number = 'MJ-' . $request->docket_number_1 . '-LT-' . $docketNumber2 . '-' . $request->docket_number_3;
+            $errorMsg = new ErrorLog();
+            $errorMsg->payload = 'docket number ' . $docket_number;
 
+            $errorMsg->save();
             Evictions::where('id', $request->id)
                 ->update(['docket_number' => $docket_number]);
 

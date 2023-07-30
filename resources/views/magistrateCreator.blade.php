@@ -97,8 +97,16 @@
                                             <input placeholder="Tom Pietro" type="text" class="form-control" id="mdj_name" name="mdj_name" value="" />
                                         </div>
                                         <div class="col-sm-6">
-                                            <label for="mdj_name">Court Phone Number</label>
+                                            <label for="court_number">Court Phone Number</label>
                                             <input placeholder="(000)-000-0000" type="text" class="form-control" id="court_number" name="court_number" value="" />
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <label for="fax_number">Court Fax Number</label>
+                                            <input placeholder="(000)-000-0000" type="text" class="form-control" id="fax_number" name="fax_number" value="" />
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <label for="email">Court Email</label>
+                                            <input placeholder="andre.gaidis@gmail.com" type="text" class="form-control" id="email" name="email" value="" />
                                         </div>
                                     </div>
                                 </div>
