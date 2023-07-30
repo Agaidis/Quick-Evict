@@ -125,10 +125,11 @@
                                     ?>
                                 @foreach ($evictions as $eviction)
                                     <?php $propertyAddressArray = explode('-1', $eviction->property_address); ?>
-                                    <input type="hidden" id="docket_number_{{$eviction->id}}" value="{{$eviction->docket_number}}"/>
                                     <tr>
                                         <td>
-                                            @if ($eviction->status == 'LTC Submitted, $$ needs del' || $eviction->status == 'LTC Submitted, $$ & file needs DEL' || $eviction->status == 'OOP Submitted, $$ needs del' || $eviction->status == 'OOP Submitted, $$ & file needs DEL' || $eviction->status == 'Civil Submitted, $$ needs del' || $eviction->status == 'Civil Submitted, $$ & file needs DEL')
+                                            <input id="docket_number_{{$eviction->id}}" value="{{$eviction->docket_number}}"/>
+
+                                        @if ($eviction->status == 'LTC Submitted, $$ needs del' || $eviction->status == 'LTC Submitted, $$ & file needs DEL' || $eviction->status == 'OOP Submitted, $$ needs del' || $eviction->status == 'OOP Submitted, $$ & file needs DEL' || $eviction->status == 'Civil Submitted, $$ needs del' || $eviction->status == 'Civil Submitted, $$ & file needs DEL')
                                                 <select title="status" class="form-control status_select orange" id="status_{{$eviction->id}}">
                                             @elseif ($eviction->status == 'LTC, to be Mailed' || $eviction->status == 'OOP, to be Mailed' || $eviction->status == 'Civil, to be Mailed')
                                                 <select title="status" class="form-control status_select yellow" id="status_{{$eviction->id}}">
