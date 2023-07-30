@@ -50221,8 +50221,9 @@ $(document).ready(function () {
       },
       success: function success(data) {
         var updatedNotes = '';
+        console.log(data);
 
-        if (data[0].d1 !== '' && data[0].d1 !== 'undefined') {
+        if (data[0].d1 !== '' && data[0].d1 !== undefined) {
           $('#docket_number_1').val(data[0].d1);
           $('#docket_number_2').val(data[0].d2);
           $('#docket_number_3').val(data[0].d3);

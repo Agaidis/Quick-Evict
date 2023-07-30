@@ -358,7 +358,9 @@ $(document).ready(function () {
              success: function (data) {
                  let updatedNotes = '';
 
-                 if (data[0].d1 !== '' && data[0].d1 !== 'undefined') {
+                 console.log(data);
+
+                 if (data[0].d1 !== '' && data[0].d1 !== undefined) {
 
                      $('#docket_number_1').val(data[0].d1);
                      $('#docket_number_2').val(data[0].d2);
