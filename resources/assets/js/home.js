@@ -338,6 +338,7 @@ $(document).ready(function () {
          let splitId = id.split('_');
          let evictionId = splitId[2];
          $('#eviction_id').val(evictionId);
+         console.log('docket_number_', $('#docket_number_' + evictionId).val());
 
          $.ajaxSetup({
              headers: {
@@ -359,17 +360,6 @@ $(document).ready(function () {
                  let updatedNotes = '';
 
                  console.log('data', data);
-
-                 if (data.length > 0) {
-
-                     $('#docket_number_1').val(data[0].d1);
-                     $('#docket_number_2').val(data[0].d2);
-                     $('#docket_number_3').val(data[0].d3);
-                 } else {
-                     $('#docket_number_1').val('');
-                     $('#docket_number_2').val('');
-                     $('#docket_number_3').val('');
-                 }
 
                  // adding current notes
                  if (data !== undefined && data !== '') {

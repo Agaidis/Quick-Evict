@@ -125,6 +125,7 @@
                                     ?>
                                 @foreach ($evictions as $eviction)
                                     <?php $propertyAddressArray = explode('-1', $eviction->property_address); ?>
+                                    <input type="hidden" id="docket_number_{{$eviction->id}}" />
                                     <tr>
                                         <td>
                                             @if ($eviction->status == 'LTC Submitted, $$ needs del' || $eviction->status == 'LTC Submitted, $$ & file needs DEL' || $eviction->status == 'OOP Submitted, $$ needs del' || $eviction->status == 'OOP Submitted, $$ & file needs DEL' || $eviction->status == 'Civil Submitted, $$ needs del' || $eviction->status == 'Civil Submitted, $$ & file needs DEL')
