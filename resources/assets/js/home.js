@@ -360,7 +360,7 @@ $(document).ready(function () {
 
                  console.log(data);
 
-                 if (data[0].d1 !== '' && data[0].d1 !== undefined) {
+                 if (data.length > 0) {
 
                      $('#docket_number_1').val(data[0].d1);
                      $('#docket_number_2').val(data[0].d2);
