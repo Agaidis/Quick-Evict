@@ -351,6 +351,10 @@ CourtZip Team', '<p>Hello,</p>
 
             $docketNumber = Evictions::where('id', $request->eviction_id)->value('docket_number');
 
+            $errorMsg = new ErrorLog();
+            $errorMsg->payload = $docketNumber;
+            $errorMsg->save();
+
             if ($docketNumber !== '') {
                 $docketArr = explode('-', $docketNumber);
                 $d1 = $docketArr[1];
