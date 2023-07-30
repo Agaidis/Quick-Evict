@@ -338,6 +338,7 @@ $(document).ready(function () {
          let splitId = id.split('_');
          let evictionId = splitId[2];
          $('#eviction_id').val(evictionId);
+         console.log(evictionId);
          console.log('docket_number_', $('#docket_number_' + evictionId).val());
 
          $.ajaxSetup({

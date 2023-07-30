@@ -50205,6 +50205,8 @@ $(document).ready(function () {
     var splitId = id.split('_');
     var evictionId = splitId[2];
     $('#eviction_id').val(evictionId);
+    console.log(evictionId);
+    console.log('docket_number_', $('#docket_number_' + evictionId).val());
     $.ajaxSetup({
       headers: {
         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -50221,18 +50223,7 @@ $(document).ready(function () {
       },
       success: function success(data) {
         var updatedNotes = '';
-        console.log('data', data);
-
-        if (data.length > 0) {
-          $('#docket_number_1').val(data[0].d1);
-          $('#docket_number_2').val(data[0].d2);
-          $('#docket_number_3').val(data[0].d3);
-        } else {
-          $('#docket_number_1').val('');
-          $('#docket_number_2').val('');
-          $('#docket_number_3').val('');
-        } // adding current notes
-
+        console.log('data', data); // adding current notes
 
         if (data !== undefined && data !== '') {
           $.each(data, function (key, value) {
