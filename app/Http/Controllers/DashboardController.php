@@ -362,6 +362,10 @@ CourtZip Team', '<p>Hello,</p>
                 $updatedEvictionNotes[0]->d3 = $d3;
             }
 
+            $errorMsg = new ErrorLog();
+            $errorMsg->payload = serialize($updatedEvictionNotes);
+            $errorMsg->save();
+
 
             return $updatedEvictionNotes;
         } catch (Exception $e) {
