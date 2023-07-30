@@ -127,7 +127,7 @@
                                     <?php $propertyAddressArray = explode('-1', $eviction->property_address); ?>
                                     <tr>
                                         <td>
-                                            <input id="docket_number_{{$eviction->id}}" value="{{$eviction->docket_number}}"/>
+                                            <input type="hidden" id="docket_number_{{$eviction->id}}" value="{{$eviction->docket_number}}"/>
 
                                         @if ($eviction->status == 'LTC Submitted, $$ needs del' || $eviction->status == 'LTC Submitted, $$ & file needs DEL' || $eviction->status == 'OOP Submitted, $$ needs del' || $eviction->status == 'OOP Submitted, $$ & file needs DEL' || $eviction->status == 'Civil Submitted, $$ needs del' || $eviction->status == 'Civil Submitted, $$ & file needs DEL')
                                                 <select title="status" class="form-control status_select orange" id="status_{{$eviction->id}}">

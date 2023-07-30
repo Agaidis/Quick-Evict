@@ -338,8 +338,18 @@ $(document).ready(function () {
          let splitId = id.split('_');
          let evictionId = splitId[2];
          $('#eviction_id').val(evictionId);
-         console.log(evictionId);
-         console.log('docket_number_', $('#docket_number_' + evictionId).val());
+         let docketNumber = $('#docket_number_' + evictionId).val();
+
+         if (docketNumber !== '') {
+             let splitDocket = docketNumber.split('-');
+             $('#docket_number_1').val(splitDocket[1]);
+             $('#docket_number_2').val(splitDocket[3]);
+             $('#docket_number_3').val(splitDocket[4]);
+         } else {
+             $('#docket_number_1').val('');
+             $('#docket_number_2').val('');
+             $('#docket_number_3').val('');
+         }
 
          $.ajaxSetup({
              headers: {
