@@ -350,14 +350,17 @@ CourtZip Team', '<p>Hello,</p>
             $updatedEvictionNotes = EvictionNote::where('eviction_id', $request->eviction_id)->orderBy('id', 'DESC')->get();
 
             $docketNumber = Evictions::where('id', $request->eviction_id)->value('docket_number');
-            $docketArr = explode('-', $docketNumber);
-            $d1 = $docketArr[1];
-            $d2 = $docketArr[3];
-            $d3 = $docketArr[4];
 
-            $updatedEvictionNotes[0]->d1 = $d1;
-            $updatedEvictionNotes[0]->d2 = $d2;
-            $updatedEvictionNotes[0]->d3 = $d3;
+            if ($docketNumber !== '') {
+                $docketArr = explode('-', $docketNumber);
+                $d1 = $docketArr[1];
+                $d2 = $docketArr[3];
+                $d3 = $docketArr[4];
+
+                $updatedEvictionNotes[0]->d1 = $d1;
+                $updatedEvictionNotes[0]->d2 = $d2;
+                $updatedEvictionNotes[0]->d3 = $d3;
+            }
 
 
             return $updatedEvictionNotes;
