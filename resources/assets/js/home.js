@@ -125,6 +125,7 @@ $(document).ready(function () {
             'processing': '<i class="fa fa-spinner fa-spin fa-3x fa-fw"></i><span class="sr-only">Loading...</span>'
         },
     }).on('click', '.eviction-revert', function () {
+        console.log('im in hehre');
         var id = $(this)[0].id;
         var splitId = id.split('_');
         var conf = confirm('Are you sure you want to Withdraw filing ' + splitId[2] + ' ?');

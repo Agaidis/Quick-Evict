@@ -11662,7 +11662,7 @@ footer.footer{
     margin-left:3%;
 }
 }
-.pdf_download_btn_dashboard, .eviction-remove, .eviction_details {
+.pdf_download_btn_dashboard, .eviction-revert, .eviction_details {
     cursor:pointer;
 }
 
