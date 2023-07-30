@@ -219,7 +219,7 @@
                                             @endif
 
                                                 @if ($userRole != 'Court')
-                                                    <button type="button" id="id_{{$eviction->id}}_{{$propertyAddressArray[0]}}" class="fa-thin fa-clock-rotate-left btn-sm btn-warning eviction-revert"></button>
+                                                    <button type="button" id="id_{{$eviction->id}}_{{$propertyAddressArray[0]}}" class=" eviction-revert"><link rel="icon" href="https://quickevict.nyc3.cdn.digitaloceanspaces.com/reverse.png"/></button>
                                                     <button type="button" style="margin-top:10px; margin-left: 1px; float:left;" id="eviction_details_{{$eviction->id}}" data-target="#seeFilingDetailsModal" data-toggle="modal" class="eviction_details btn-sm btn-info fas fa-newspaper"></button>
                                                 @endif
                                         </td>
