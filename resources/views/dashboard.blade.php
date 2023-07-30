@@ -126,7 +126,7 @@
                                 @foreach ($evictions as $eviction)
                                     <?php $propertyAddressArray = explode('-1', $eviction->property_address); ?>
 
-                                    @if (isset($eviction->is_withdrawn) && $eviction->is_withdrawn == 1 && $eviction->status != 'Case Withdrawn')
+                                    @if ($eviction->is_withdrawn == 1)
                                         <tr style="background-color:darkorange!important;">
                                             <td>Testing</td>
                                     @else
