@@ -89,7 +89,7 @@ class DashboardController extends Controller
             } else if (Auth::user()->role == 'Court') {
 
                 $evictions = DB::table('evictions')
-                    ->select('id', 'property_address', 'status', 'file_type', 'is_downloaded', 'owner_name', 'tenant_name', 'court_date', 'total_judgement', 'filing_fee',  'created_at', 'is_extra_files', 'court_number', 'is_in_person_filing', 'is_withdrawn')
+                    ->select('id', 'property_address', 'status', 'docket_number', 'file_type', 'is_downloaded', 'owner_name', 'tenant_name', 'court_date', 'total_judgement', 'filing_fee',  'created_at', 'is_extra_files', 'court_number', 'is_in_person_filing', 'is_withdrawn')
                     ->where('court_number', $courtNumber )
                     ->where('is_online_filing', 1)
                     ->orderBy('id', 'desc')
