@@ -24,8 +24,12 @@ class PDFEditController extends Controller
 
         if ($filingType == 1) {
             $pdfHtml = str_replace('__signature__', '', $pdfHtml);
+            $pdfHtml = str_replace('__plaintiff-name__', '', $pdfHtml);
+
         } else {
             $pdfHtml = str_replace('__signature__', $signature, $pdfHtml);
+            $pdfHtml = str_replace('__plaintiff-name__', $evictionData->plantiff_name, $pdfHtml);
+
         }
 
         $pdfHtml = str_replace('__eviction-id__', $evictionData->id, $pdfHtml);
