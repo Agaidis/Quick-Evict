@@ -14,7 +14,7 @@ class PDFEditController extends Controller
         $pdfHtml = str_replace('__str-upper-county__', strtoupper($courtDetails->county), $pdfHtml);
         $pdfHtml = str_replace('__court-number__', $courtDetails->court_number, $pdfHtml);
         $pdfHtml = str_replace('__mdj-name__', $courtDetails->mdj_name, $pdfHtml);
-        //$pdfHtml = str_replace('__plaintiff-name__', $evictionData->plantiff_name, $pdfHtml);
+        $pdfHtml = str_replace('__plaintiff-name__', $evictionData->plantiff_name, $pdfHtml);
         $pdfHtml = str_replace('__plaintiff-address__', $plaintiffAddress, $pdfHtml);
         $pdfHtml = str_replace('__defendant-address__', $defendantAddress, $pdfHtml);
         $pdfHtml = str_replace('__court-address-one__', $evictionData->court_address_line_1, $pdfHtml);
@@ -24,12 +24,8 @@ class PDFEditController extends Controller
 
         if ($filingType == 1) {
             $pdfHtml = str_replace('__signature__', '', $pdfHtml);
-            $pdfHtml = str_replace('__plaintiff-name__', '', $pdfHtml);
-
         } else {
             $pdfHtml = str_replace('__signature__', $signature, $pdfHtml);
-            $pdfHtml = str_replace('__plaintiff-name__', $evictionData->plantiff_name, $pdfHtml);
-
         }
 
         $pdfHtml = str_replace('__eviction-id__', $evictionData->id, $pdfHtml);
@@ -60,7 +56,7 @@ class PDFEditController extends Controller
         return $pdfHtml;
     }
 
-    public function localLTCAttributes ($pdfHtml, $evictionData, $defendantAddress2) {
+    public function localLTCAttributes ($pdfHtml, $evictionData, $defendantAddress2, $filingType) {
         $pdfHtml = str_replace('[due-rent]', $evictionData->due_rent, $pdfHtml);
         $pdfHtml = str_replace('[damage-amt]', $evictionData->damage_amt, $pdfHtml);
         $pdfHtml = str_replace('[unjust-damages]', $evictionData->unjust_damages, $pdfHtml);
@@ -69,10 +65,15 @@ class PDFEditController extends Controller
         $pdfHtml = str_replace('__monthly-rent__', $evictionData->monthly_rent, $pdfHtml);
         $pdfHtml = str_replace('__breached-details__', $evictionData->breached_details, $pdfHtml);
         $pdfHtml = str_replace('__property-damage-details__', $evictionData->property_damage_details, $pdfHtml);
-        $pdfHtml = str_replace('__verify-name__', $evictionData->verify_name, $pdfHtml);
         $pdfHtml = str_replace('__attorney-fees__', $evictionData->attorney_fees, $pdfHtml);
         $pdfHtml = str_replace('__total-fees__', $evictionData->total_judgement, $pdfHtml);
         $pdfHtml = str_replace('__defendant-address-2__', $defendantAddress2, $pdfHtml);
+
+        if ($filingType == 1) {
+            $pdfHtml = str_replace('__verify-name__', '', $pdfHtml);
+        } else {
+            $pdfHtml = str_replace('__verify-name__', $evictionData->verify_name, $pdfHtml);
+        }
 
         $isResidential = $evictionData->is_residential == true ? '<input type="checkbox" checked/>' : '<input type="checkbox"/>';
         $isNotResidential = $evictionData->is_residential == true ? '<input type="checkbox"/>' : '<input type="checkbox" checked/>';

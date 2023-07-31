@@ -241,7 +241,7 @@ CourtZip Team', '<p>Hello,</p>
 
 
                 $pdfHtml = $pdfEditor->globalHtmlAttributes($pdfHtml, $courtDetails, $plaintiffAddress, $defendantAddress, $signature, $evictionData, $evictionData->is_in_person_filing);
-                $pdfHtml = $pdfEditor->localLTCAttributes($pdfHtml, $evictionData, $defendantAddress2);
+                $pdfHtml = $pdfEditor->localLTCAttributes($pdfHtml, $evictionData, $defendantAddress2, $evictionData->is_in_person_filing);
                 $pdfHtml = $pdfEditor->addSampleWatermark($pdfHtml, false);
 
                 $dompdf->loadHtml($pdfHtml);
