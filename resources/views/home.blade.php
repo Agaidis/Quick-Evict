@@ -93,6 +93,9 @@
                         </div>
                     </div>
                 </div>
+                <div class="row">
+                    <h4>Contact us at info@courtzip.com</h4>
+                </div>
             </div>
         </section>
 
