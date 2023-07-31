@@ -70,7 +70,7 @@ class PDFEditController extends Controller
         $pdfHtml = str_replace('__defendant-address-2__', $defendantAddress2, $pdfHtml);
 
         if ($filingType == 1) {
-            $pdfHtml = str_replace('__verify-name__', '', $pdfHtml);
+            $pdfHtml = str_replace('__verify-name__', '___________________', $pdfHtml);
         } else {
             $pdfHtml = str_replace('__verify-name__', $evictionData->verify_name, $pdfHtml);
         }
