@@ -44,9 +44,14 @@ class EvictionController extends Controller
         try {
 
             $errorMsg = new ErrorLog();
-            $errorMsg->payload = 'IN HERE';
+            $errorMsg->payload = 'IN HERE: ' . $request->id;
             $errorMsg->save();
             $evictionData = Evictions::where('id', $request->id)->first();
+
+            $errorMsg = new ErrorLog();
+            $errorMsg->payload = 'eviction Data: ' .serialize($evictionData);
+            $errorMsg->save();
+
             $magData = CourtDetails::where('magistrate_id', $evictionData->magistrate_id)->first();
             $mailer = new Mailer();
             $mailer->sendMail('withdrawal@courtzip.com', 'Please Withdrawal Case ('.$evictionData->id.') for user ' . Auth::user()->name,'
