@@ -172,7 +172,7 @@ if (document.location.href.split('/')[3] === 'new-file') {
             } else if (place.address_components.length === 9) {
                 if (place.address_components[7].long_name === 'United States') {
                     zipcode = place.address_components[8].long_name;
-                    streetName = place.address_components[2].long_name + '' + place.address_components[0].long_name;
+                    streetName = place.address_components[2].long_name + ' ' + place.address_components[0].long_name;
                     houseNum = place.address_components[1].long_name;
                 } else {
                     zipcode = place.address_components[7].long_name;
