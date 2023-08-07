@@ -49207,7 +49207,11 @@ if (document.location.href.split('/')[3] === 'new-file') {
           zipcode = place.address_components[6].long_name;
         }
       } else if (place.address_components.length === 9) {
-        zipcode = place.address_components[7].long_name;
+        if (place.address_components[7].long_name === 'United States') {
+          zipcode = place.address_components[8].long_name;
+        } else {
+          zipcode = place.address_components[7].long_name;
+        }
       } else if (place.address_components.length === 6) {
         zipcode = place.address_components[5].long_name;
       } else if (place.address_components.length === 7) {
