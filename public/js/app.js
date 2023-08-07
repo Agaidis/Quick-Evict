@@ -49201,12 +49201,8 @@ if (document.location.href.split('/')[3] === 'new-file') {
       console.log('Length: ', place.address_components.length);
 
       if (place.address_components.length === 8) {
-        console.log('test', place.address_components[6].long_name);
-
-        if (place.address_components[6].long_name == 'United States') {
-          console.log('IM IN HERE ASSOHLE FIRST IF');
+        if (place.address_components[6].long_name === 'United States') {
           zipcode = place.address_components[7].long_name;
-          console.log('IM IN HERE ASSOHLE second IF', zipcode);
         } else {
           zipcode = place.address_components[6].long_name;
         }
@@ -49214,6 +49210,8 @@ if (document.location.href.split('/')[3] === 'new-file') {
         zipcode = place.address_components[7].long_name;
       } else if (place.address_components.length === 6) {
         zipcode = place.address_components[5].long_name;
+      } else if (place.address_components.length === 7) {
+        zipcode = place.address_components[6].long_name;
       } else {
         county = place.address_components[2].long_name;
         state = place.address_components[3].short_name;
@@ -59901,9 +59899,7 @@ if (document.location.href.split('/')[3] === 'new-file') {
 
   var form = document.getElementById('pay_sign_submit');
   form.addEventListener('click', function (event) {
-    console.log('hey again');
     var hcaptchaVal = $('[name=h-captcha-response]').val();
-    console.log('hcaptchaval', hcaptchaVal);
 
     if (hcaptchaVal === "" || hcaptchaVal === undefined) {
       event.preventDefault();
