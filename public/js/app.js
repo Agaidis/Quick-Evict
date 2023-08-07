@@ -49225,7 +49225,7 @@ if (document.location.href.split('/')[3] === 'new-file') {
       $('#house_num').val(houseNum);
       $('#street_name').val(streetName);
       $('#town').val(town);
-      $('#incident_display_address').html(houseNum + ' ' + streetName + '<br><span id="incident_second_line" style="margin-left:43%;"> ' + town + ', ' + 'PA' + ' ' + zipcode + '</span>');
+      $('#incident_display_address').html(houseNum + ' ' + streetName + '<br><span id="incident_second_line" style="margin-left:31.5%;"> ' + town + ', ' + 'PA' + ' ' + zipcode + '</span>');
       marker.setPosition(place.geometry.location);
       marker.setMap(map);
       newBounds.extend(place.geometry.location);
@@ -49294,7 +49294,7 @@ if (document.location.href.split('/')[3] === 'new-file') {
       if ($(this)[0].id === 'tenant_resides') {
         $('#incident_address_descriptor').text('Incident/Tenant Address: ');
         $('#tenant_resides_other_address_div').css('display', 'none');
-        $('#incident_display_address').html(houseNum + ' ' + streetName + '<br><span id="incident_second_line" style="margin-left:43%;"> ' + town + ', ' + 'PA' + ' ' + zipcode + '</span>');
+        $('#incident_display_address').html(houseNum + ' ' + streetName + '<br><span id="incident_second_line" style="margin-left:31.5%;"> ' + town + ', ' + 'PA' + ' ' + zipcode + '</span>');
       } else {
         $('#incident_address_descriptor').text('Incident Address: ');
         $('#incident_second_line').css('margin-left', '30%');

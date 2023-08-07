@@ -30,7 +30,7 @@
                             <div id="additional_info_container">
                                 <div class="form-group">
                                     <div class="row">
-                                        <div class="col-sm-6 offset-4">
+                                        <div class="col-sm-8 offset-4">
                                             <h4 class="incident_address_display_div"><span id="incident_address_descriptor">Incident/Tenant Address:</span> <span style="font-weight:normal;" id="incident_display_address"></span> </h4>
                                         </div>
                                     </div>
