@@ -59885,11 +59885,15 @@ if (document.location.href.split('/')[3] === 'new-file') {
       color: '#fa755a',
       iconColor: '#fa755a'
     }
+  };
+  var options = {
+    layout: {
+      type: 'tabs',
+      defaultCollapsed: false
+    }
   }; // Create an instance of the card Element.
 
-  var card = elements.create('card', {
-    style: style
-  }); // Add an instance of the card Element into the `card-element` <div>.
+  var card = elements.create('payment', options); // Add an instance of the card Element into the `card-element` <div>.
 
   card.mount('#card-element'); // Handle real-time validation errors from the card Element.
 

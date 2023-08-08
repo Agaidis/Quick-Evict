@@ -41,8 +41,15 @@ if (document.location.href.split('/')[3] === 'new-file') {
             }
         };
 
+    const options = {
+        layout: {
+            type: 'tabs',
+            defaultCollapsed: false,
+        }
+    };
+
 // Create an instance of the card Element.
-        let card = elements.create('card', {style: style});
+        let card = elements.create('payment', options);
 
 // Add an instance of the card Element into the `card-element` <div>.
         card.mount('#card-element');
