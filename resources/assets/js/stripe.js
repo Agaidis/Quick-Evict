@@ -49,7 +49,7 @@ if (document.location.href.split('/')[3] === 'new-file') {
     };
 
 // Create an instance of the card Element.
-        let card = elements.create('payment', options);
+        let card = elements.create('card', {style: style});
 
 // Add an instance of the card Element into the `card-element` <div>.
         card.mount('#card-element');
