@@ -133,7 +133,7 @@ class CivilComplaintController extends Controller
             $evictionData->court_address_line_2 = $geoDetails->address_line_two;
             $evictionData->claim_description = $_POST['claim_description'];
 
-            $pdfHtml = $pdfEditor->globalHtmlAttributes($pdfHtml, $courtDetails, $plaintiffAddress, $defendantAddress, $_POST['signature_source'], $evictionData);
+            $pdfHtml = $pdfEditor->globalHtmlAttributes($pdfHtml, $courtDetails, $plaintiffAddress, $defendantAddress, $_POST['signature_source'], $evictionData, 0, $evictionData->plantiff_name);
             $pdfHtml = $pdfEditor->localCivilAttributes($pdfHtml, $evictionData);
             $domPdf = new Dompdf();
             $options = new Options();

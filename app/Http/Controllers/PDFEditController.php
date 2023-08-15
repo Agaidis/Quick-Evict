@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\DB;
 
 class PDFEditController extends Controller
 {
-    public function globalHtmlAttributes ($pdfHtml, $courtDetails, $plaintiffAddress, $defendantAddress, $signature, $evictionData, $filingType) {
+    public function globalHtmlAttributes ($pdfHtml, $courtDetails, $plaintiffAddress, $defendantAddress, $signature, $evictionData, $filingType, $plaintiffName) {
 
         $pdfHtml = str_replace('__str-upper-county__', strtoupper($courtDetails->county), $pdfHtml);
         $pdfHtml = str_replace('__court-number__', $courtDetails->court_number, $pdfHtml);
@@ -24,11 +24,11 @@ class PDFEditController extends Controller
 
         if ($filingType == 1) {
             $pdfHtml = str_replace('__signature__', '', $pdfHtml);
-            $CZAddress = '800 New Holland Ave, 2nd Floor' .'<br>'. 'Lancaster, PA 17602' .'<br>'. '717-220-3323' .'<br>';
+            $CZAddress = $plaintiffName . '<br>' . '800 New Holland Ave, 2nd Floor' .'<br>'. 'Lancaster, PA 17602' .'<br>'. '717-220-3323' .'<br>';
 
         } else {
             $pdfHtml = str_replace('__signature__', $signature, $pdfHtml);
-            $CZAddress = '800 New Holland Ave, 2nd Floor' .'<br>'. 'Lancaster, PA 17602' .'<br>'. '717-220-3323' .'<br>';
+            $CZAddress = $plaintiffName . '<br>' . '800 New Holland Ave, 2nd Floor' .'<br>'. 'Lancaster, PA 17602' .'<br>'. '717-220-3323' .'<br>';
         }
 
         $pdfHtml = str_replace('__plaintiff-address__', $CZAddress, $pdfHtml);

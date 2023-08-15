@@ -229,7 +229,8 @@ Magistrate Phone # is ' . $magData->phone_number, '
             $evictionData->is_determination_request = $isDeterminationRequest;
             $evictionData->is_in_person_filing = 0;
 
-            $pdfHtml = $pdfEditor->globalHtmlAttributes($pdfHtml, $courtDetails, $plaintiffAddress, $defendantAddress, $_POST['signature_source'], $evictionData, $evictionData->is_in_person_filing);
+
+            $pdfHtml = $pdfEditor->globalHtmlAttributes($pdfHtml, $courtDetails, $plaintiffAddress, $defendantAddress, $_POST['signature_source'], $evictionData, $evictionData->is_in_person_filing, $plaintiffName);
             $pdfHtml = $pdfEditor->localLTCAttributes($pdfHtml, $evictionData, $defendantAddress2, $evictionData->is_in_person_filing);
             $pdfHtml = $pdfEditor->addSampleWatermark($pdfHtml, true);
             $domPdf = new Dompdf();
