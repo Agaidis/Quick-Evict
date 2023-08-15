@@ -51,7 +51,7 @@ $(document).ready(function () {
                 xhr.setRequestHeader('X-CSRF-TOKEN', $("#token").attr('content'));
             },
             type: "GET",
-            url: '/get-eviction-notes',
+            url: '/get-notes',
             data: {
                 courtId: splitId[3]
             },
