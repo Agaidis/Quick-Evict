@@ -15,7 +15,7 @@ class PDFEditController extends Controller
         $pdfHtml = str_replace('__court-number__', $courtDetails->court_number, $pdfHtml);
         $pdfHtml = str_replace('__mdj-name__', $courtDetails->mdj_name, $pdfHtml);
         $pdfHtml = str_replace('__plaintiff-name__', $evictionData->plantiff_name, $pdfHtml);
-        $pdfHtml = str_replace('__plaintiff-address__', $plaintiffAddress, $pdfHtml);
+       // $pdfHtml = str_replace('__plaintiff-address__', $plaintiffAddress, $pdfHtml);
         $pdfHtml = str_replace('__defendant-address__', $defendantAddress, $pdfHtml);
         $pdfHtml = str_replace('__court-address-one__', $evictionData->court_address_line_1, $pdfHtml);
         $pdfHtml = str_replace('__court-address-two__', $evictionData->court_address_line_2, $pdfHtml);
@@ -24,10 +24,14 @@ class PDFEditController extends Controller
 
         if ($filingType == 1) {
             $pdfHtml = str_replace('__signature__', '', $pdfHtml);
+            $CZAddress = '800 New Holland Ave, 2nd Floor' .'<br>'. 'Lancaster, PA 17602' .'<br>'. '717-220-3323' .'<br>';
+
         } else {
             $pdfHtml = str_replace('__signature__', $signature, $pdfHtml);
+            $CZAddress = '800 New Holland Ave, 2nd Floor' .'<br>'. 'Lancaster, PA 17602' .'<br>'. '717-220-3323' .'<br>';
         }
 
+        $pdfHtml = str_replace('__plaintiff-address__', $CZAddress, $pdfHtml);
         $pdfHtml = str_replace('__eviction-id__', $evictionData->id, $pdfHtml);
         $pdfHtml = str_replace('__filing-fee__', $evictionData->filing_fee, $pdfHtml);
 
