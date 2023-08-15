@@ -49949,7 +49949,7 @@ $(document).ready(function () {
   $('.see_notes_dash').on('click', function () {
     var id = $(this)[0].id;
     var splitId = id.split('_');
-    console.log(splitId[3]);
+    console.log('see notes dashs', splitId[3]);
     $.ajaxSetup({
       headers: {
         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -49965,7 +49965,7 @@ $(document).ready(function () {
         courtId: splitId[3]
       },
       success: function success(data) {
-        console.log('data', data);
+        console.log('notes data', data);
 
         if (data !== undefined && data !== '') {
           var updatedNotes = '';
@@ -49981,7 +49981,7 @@ $(document).ready(function () {
         console.log(data);
       },
       error: function error(data) {
-        console.log('data error ', data);
+        console.log('notes data error ', data);
       }
     });
   });

@@ -37,7 +37,7 @@ $(document).ready(function () {
         let id = $(this)[0].id;
         let splitId = id.split('_');
 
-        console.log(splitId[3]);
+        console.log('see notes dashs', splitId[3]);
 
 
         $.ajaxSetup({
@@ -58,7 +58,7 @@ $(document).ready(function () {
 
             success: function (data) {
 
-                console.log('data', data);
+                console.log('notes data', data);
 
                 if (data !== undefined && data !== '') {
                     let updatedNotes = '';
@@ -77,7 +77,7 @@ $(document).ready(function () {
 
             },
             error: function (data) {
-                console.log('data error ', data);
+                console.log('notes data error ', data);
 
             }
         });
