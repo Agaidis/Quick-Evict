@@ -352,6 +352,10 @@ CourtZip Team', '<p>Hello,</p>
             $errorMsg->save();
             $updatedEvictionNotes = EvictionNote::where('eviction_id', $request->eviction_id)->orderBy('id', 'DESC')->get();
 
+            $errorMsg = new ErrorLog();
+            $errorMsg->payload = serialize($updatedEvictionNotes);
+            $errorMsg->save();
+
             return $updatedEvictionNotes;
         } catch (Exception $e) {
             $errorMsg = new ErrorLog();
