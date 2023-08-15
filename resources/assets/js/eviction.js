@@ -233,9 +233,9 @@ if (document.location.href.split('/')[3] === 'new-file') {
                          'courtNumber' : $('#court_number').val()
                      },
                      success : function(data) {
-                        if (data[0].digital_signature === 0) {
-                            $('#finalize_document').css('display', 'none');
-                        }
+                        // if (data[0].digital_signature === 0) {
+                        //     $('#finalize_document').css('display', 'none');
+                        // }
                          let validEmails = ['brc@saxtonstump.com', 'tiffanymitchell0202@gmail.com', 'sparkleclean85@gmail.com', 'andrew.gaidis@gmail.com', 'erin@courtzip.com', 'andrew@home365.co'];
 
                         if (data[0].online_submission !== 'of' && (quickEvict.userEmail.indexOf('slatehousegroup') === -1 && (quickEvict.userEmail.indexOf('home365.co') === -1 && quickEvict.userEmail.indexOf('elite.team') === -1 && quickEvict.userEmail.indexOf('cnmhousingsolutions') === -1) && validEmails.includes(quickEvict.userEmail) === false)) {

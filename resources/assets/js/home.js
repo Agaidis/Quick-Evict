@@ -58,6 +58,8 @@ $(document).ready(function () {
 
             success: function (data) {
 
+                console.log('data', data);
+
                 if (data !== undefined && data !== '') {
                     let updatedNotes = '';
 
@@ -75,6 +77,8 @@ $(document).ready(function () {
 
             },
             error: function (data) {
+                console.log('data error ', data);
+
             }
         });
 
