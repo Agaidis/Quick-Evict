@@ -347,7 +347,9 @@ CourtZip Team', '<p>Hello,</p>
 
     public function getEvictionNotes(Request $request) {
         try {
-
+            $errorMsg = new ErrorLog();
+            $errorMsg->payload = 'shit';
+            $errorMsg->save();
             $updatedEvictionNotes = EvictionNote::where('eviction_id', $request->eviction_id)->orderBy('id', 'DESC')->get();
 
             return $updatedEvictionNotes;
