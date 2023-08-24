@@ -363,9 +363,9 @@ class OrderOfPossessionController extends Controller
                         Stripe::setApiKey(env('STRIPE_SECRET_KEY'));
 
                         if ($_POST['file_type'] == 'ltcA') {
-                            $amount = $filingFee + 270.00;
+                            $amount = $filingFee + 269.99;
                         } else {
-                            $amount = $filingFee + 25.00;
+                            $amount = $filingFee + 24.99;
                         }
                         $stringAmt = strval($amount);
                         $stringAmt = str_replace('.', '', $stringAmt);
