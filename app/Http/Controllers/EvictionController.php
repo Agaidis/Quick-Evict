@@ -377,10 +377,22 @@ Magistrate Phone # is ' . $magData->phone_number, '
 
             $totalFees = (float)$additionalRentAmt + (float)$attorneyFees + (float)$dueRent + (float)$unjustDamages + (float)$damageAmt;
 
+            $errorMsg = new ErrorLog();
+            $errorMsg->payload = 'starting total fees: ' . $totalFees;
+            $errorMsg->save();
+
 
             $noCommaTotalFees = str_replace(',','', $totalFees);
 
+            $errorMsg = new ErrorLog();
+            $errorMsg->payload = 'remove comma total fees: ' . $noCommaTotalFees;
+            $errorMsg->save();
+
             $totalFees = number_format($totalFees, 2);
+
+            $errorMsg = new ErrorLog();
+            $errorMsg->payload = 'total fees: ' . $totalFees;
+            $errorMsg->save();
 
             if ($noCommaTotalFees < 2000) {
                 $filingFee = $upTo2000 + $additionalTenantFee;
@@ -523,9 +535,9 @@ Magistrate Phone # is ' . $magData->phone_number, '
                          Stripe::setApiKey(env('STRIPE_SECRET_KEY'));
 
                         if ($_POST['file_type'] == 'ltcA') {
-                            $amount = $filingFee + 250.00;
+                            $amount = $filingFee + 249.99;
                         } else {
-                            $amount = $filingFee + 25.00;
+                            $amount = $filingFee + 24.99;
                         }
 
                         $stringAmt = strval($amount);
