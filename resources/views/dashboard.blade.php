@@ -146,9 +146,17 @@
                                                 @if ($eviction->file_type == 'eviction')
                                                     @foreach ($ltcStatusArray as $status)
                                                         @if ($status == $eviction->status)
-                                                            <option value="{{$status}}" selected>{{$status}}</option>
+                                                            @if ( Auth::user()->role == 'Administrator')
+                                                                <option value="{{$status}}" selected>{{$status}}</option>
+                                                            @else
+                                                                <option value="{{$status}}" disabled selected>{{$status}}</option>
+                                                            @endif
                                                         @else
-                                                            <option value="{{$status}}">{{$status}}</option>
+                                                            @if ( Auth::user()->role == 'Administrator')
+                                                                <option value="{{$status}}">{{$status}}</option>
+                                                            @else
+                                                                <option disabled value="{{$status}}">{{$status}}</option>
+                                                            @endif
                                                         @endif
                                                     @endforeach
                                                 @elseif ($eviction->file_type === 'civil complaint')
@@ -161,11 +169,19 @@
                                                     @endforeach
                                                 @elseif ($eviction->file_type === 'oop' || $eviction->file_type === 'oopA')
                                                     @foreach ($oopStatusArray as $status)
-                                                        @if ($status == $eviction->status)
-                                                            <option value="{{$status}}" selected>{{$status}}</option>
-                                                        @else
-                                                            <option value="{{$status}}">{{$status}}</option>
-                                                        @endif
+                                                                    @if ($status == $eviction->status)
+                                                                        @if ( Auth::user()->role == 'Administrator')
+                                                                            <option value="{{$status}}" selected>{{$status}}</option>
+                                                                        @else
+                                                                            <option value="{{$status}}" disabled selected>{{$status}}</option>
+                                                                        @endif
+                                                                    @else
+                                                                        @if ( Auth::user()->role == 'Administrator')
+                                                                            <option value="{{$status}}">{{$status}}</option>
+                                                                        @else
+                                                                            <option disabled value="{{$status}}">{{$status}}</option>
+                                                                        @endif
+                                                                    @endif
                                                     @endforeach
                                                 @endif
 
