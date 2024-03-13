@@ -14,6 +14,7 @@ if (document.location.href.split('/')[3] === 'get-file-fee') {
 
         let center = new google.maps.LatLng(40.149660, -76.306370);
         //Create the areas for magistrates
+        const { AdvancedMarkerElement } = google.maps.importLibrary("marker");
 
         map = new google.maps.Map(document.getElementById('map'), {
             center: {lat: 40.144128, lng: -76.311420},
@@ -21,6 +22,14 @@ if (document.location.href.split('/')[3] === 'get-file-fee') {
             scaleControl: true,
             mapId: "DEMO_MAP_ID"
         });
+
+        marker = new google.maps.marker.AdvancedMarkerElement({
+            position: center
+        });
+
+
+
+
         function ResizeMap() {
             google.maps.event.trigger(map, "resize");
         }
@@ -34,9 +43,8 @@ if (document.location.href.split('/')[3] === 'get-file-fee') {
 
             bounds = map.getBounds();
         });
-        marker = new google.maps.marker.AdvancedMarkerElement({
-            position: center
-        });
+
+
 
 
         let input = /** @type {!HTMLInputElement} */(
