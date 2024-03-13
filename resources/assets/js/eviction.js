@@ -66,7 +66,7 @@ if (document.location.href.split('/')[3] === 'new-file') {
 
             bounds = map.getBounds();
         });
-        marker = new google.maps.Marker({
+        marker = new google.maps.marker.AdvancedMarkerElement({
             position: center
         });
 
