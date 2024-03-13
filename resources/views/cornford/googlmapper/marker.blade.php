@@ -23,7 +23,7 @@
 
 var markerPosition_{!! $id !!} = new google.maps.LatLng({!! $options['latitude'] !!}, {!! $options['longitude'] !!});
 
-var marker_{!! $id !!} = new google.maps.Marker({
+var marker_{!! $id !!} = new google.maps.marker.AdvancedMarkerElement({
 	position: markerPosition_{!! $id !!},
 	@if ($options['place'])
 		place: {
