@@ -49091,7 +49091,8 @@ if (document.location.href.split('/')[3] === 'new-file') {
         lng: -76.311420
       },
       zoom: 6,
-      scaleControl: true
+      scaleControl: true,
+        mapId: "DEMO_MAP_ID"
     });
 
     function ResizeMap() {
@@ -49729,7 +49730,8 @@ if (document.location.href.split('/')[3] === 'get-file-fee') {
         lng: -76.311420
       },
       zoom: 8,
-      scaleControl: true
+      scaleControl: true,
+        mapId: "DEMO_MAP_ID"
     });
 
     function ResizeMap() {

@@ -18,7 +18,8 @@ if (document.location.href.split('/')[3] === 'get-file-fee') {
         map = new google.maps.Map(document.getElementById('map'), {
             center: {lat: 40.144128, lng: -76.311420},
             zoom: 8,
-            scaleControl: true
+            scaleControl: true,
+            mapId: "DEMO_MAP_ID"
         });
         function ResizeMap() {
             google.maps.event.trigger(map, "resize");
