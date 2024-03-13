@@ -49105,7 +49105,7 @@ if (document.location.href.split('/')[3] === 'new-file') {
     google.maps.event.addListenerOnce(map, 'tilesloaded', function (evt) {
       bounds = map.getBounds();
     });
-    marker = new google.maps.Marker({
+    marker = new google.maps.marker.AdvancedMarkerElement({
       position: center
     });
     var input =

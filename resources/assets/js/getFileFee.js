@@ -33,7 +33,7 @@ if (document.location.href.split('/')[3] === 'get-file-fee') {
 
             bounds = map.getBounds();
         });
-        marker = new google.maps.Marker({
+        marker = new google.maps.marker.AdvancedMarkerElement({
             position: center
         });
 
