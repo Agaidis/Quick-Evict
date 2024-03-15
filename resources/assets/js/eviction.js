@@ -45,214 +45,218 @@ if (document.location.href.split('/')[3] === 'new-file') {
         let zipcode;
         let state;
 
-        let center = new google.maps.LatLng(40.149660, -76.306370);
-        //Create the areas for magistrates
-        const { AdvancedMarkerElement } = google.maps.importLibrary("marker");
+        async function initMap() {
+            let center = new google.maps.LatLng(40.149660, -76.306370);
+            //Create the areas for magistrates
+            const {AdvancedMarkerElement} = await google.maps.importLibrary("marker");
 
 
-        map = new google.maps.Map(document.getElementById('map'), {
-            center: {lat: 40.144128, lng: -76.311420},
-            zoom: 6,
-            scaleControl: true,
-            mapId: "DEMO_MAP_ID"
-        });
-        function ResizeMap() {
-            google.maps.event.trigger(map, "resize");
+            map = new google.maps.Map(document.getElementById('map'), {
+                center: {lat: 40.144128, lng: -76.311420},
+                zoom: 6,
+                scaleControl: true,
+                mapId: "DEMO_MAP_ID"
+            });
+
+            function ResizeMap() {
+                google.maps.event.trigger(map, "resize");
+            }
+
+            $("#VehicleMovementModal").on('shown', function () {
+                ResizeMap();
+            });
+
+            bounds = new google.maps.LatLngBounds();
+            google.maps.event.addListenerOnce(map, 'tilesloaded', function (evt) {
+
+                bounds = map.getBounds();
+            });
+            marker = new google.maps.marker.AdvancedMarkerElement({
+                position: center
+            });
+
+
+            let input = /** @type {!HTMLInputElement} */(
+                document.getElementById('pac-input'));
+            let types = document.getElementById('type-selector');
+            map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
+            map.controls[google.maps.ControlPosition.TOP_LEFT].push(types);
+
+            let autocomplete = new google.maps.places.Autocomplete(input);
+            let magArray = [];
+            let objArray = [];
+            let magNamesArray = [];
+            let count = 0;
+
+            $.each(quickEvict.geoData, function (key, value) {
+                magId = 'magistrate_' + value.magistrate_id;
+                console.log(value.magistrate_id);
+                let geoPoints = value.geo_locations.replace(/\s/g, '').replace(/},/g, '},dd').split(',dd');
+                let obj = [];
+
+                for (let i in geoPoints) {
+                    obj.push(JSON.parse(geoPoints[i]));
+                }
+                magNamesArray.push(magId);
+                objArray.push(obj);
+                magArray.push(magId);
+                if (quickEvict.userId === 'Administrator') {
+                    magArray[count] = new google.maps.Polygon({
+                        path: obj,
+                        geodesic: true,
+                        strokeColor: '#091096',
+                        strokeOpacity: 1.0,
+                        strokeWeight: 2,
+                        fillColor: '#B1AAA9',
+                        fillOpacity: 0.35,
+                        areaName: magId,
+                        courtId: value.court_number,
+                        county: value.county,
+                        township: value.township
+                    });
+                } else {
+                    magArray[count] = new google.maps.Polygon({
+                        path: obj,
+                        geodesic: true,
+                        areaName: magId,
+                        courtId: value.court_number,
+                        county: value.county,
+                        township: value.township
+                    });
+                }
+                magArray[count].setMap(map);
+
+                if (quickEvict.userId === 'Administrator') {
+                    google.maps.event.addListener(magArray[count], 'mouseover', function (e) {
+                        let magistrateId = $(this)[0].areaName.split('magistrate_');
+                        injectTooltip(e, magistrateId[1] + '<br>' + $(this)[0].county + '<br>' + $(this)[0].township);
+                    });
+
+                    google.maps.event.addListener(magArray[count], 'mousemove', function (e) {
+                        moveTooltip(e);
+                    });
+
+                    google.maps.event.addListener(magArray[count], 'mouseout', function (e) {
+                        deleteTooltip(e);
+                    });
+                }
+                count++;
+            });
+            autocomplete.addListener('place_changed', function () {
+                marker.setMap(null);
+                let place = autocomplete.getPlace();
+                newBounds = bounds;
+                if (!place.geometry) {
+                    window.alert("Returned place contains no geometry");
+                    return;
+                }
+
+
+                houseNum = place.address_components[0].long_name;
+                streetName = place.address_components[1].long_name;
+
+                if (place.address_components[3].types[0].indexOf('administrative') >= 0) {
+                    town = place.address_components[2].long_name;
+                } else {
+                    town = place.address_components[3].long_name;
+                }
+                console.log('before zipcode', zipcode);
+
+                county = place.address_components[3].long_name;
+                state = place.address_components[4].short_name;
+
+                console.log('Here are the place Components: ', place.address_components);
+                console.log('Length: ', place.address_components.length);
+
+                if (place.address_components.length === 8) {
+                    if (place.address_components[6].long_name === 'United States') {
+                        zipcode = place.address_components[7].long_name;
+                    } else {
+                        zipcode = place.address_components[6].long_name;
+                    }
+                } else if (place.address_components.length === 9) {
+                    if (place.address_components[7].long_name === 'United States') {
+                        zipcode = place.address_components[8].long_name;
+                        streetName = place.address_components[2].long_name;
+                        houseNum = place.address_components[1].long_name + '-' + place.address_components[0].long_name;
+                    } else {
+                        zipcode = place.address_components[7].long_name;
+                    }
+                } else if (place.address_components.length === 6) {
+                    zipcode = place.address_components[5].long_name;
+                } else if (place.address_components.length === 7) {
+                    zipcode = place.address_components[6].long_name;
+
+                } else {
+                    county = place.address_components[2].long_name;
+                    state = place.address_components[3].short_name;
+                    zipcode = place.address_components[5].long_name;
+                }
+
+                console.log('zipcode', zipcode);
+
+                $('#state').val('PA');
+                $('#zipcode').val(zipcode);
+                $('#county').val(county);
+                $('#house_num').val(houseNum);
+                $('#street_name').val(streetName);
+                $('#town').val(town);
+                $('#incident_display_address').html(houseNum + ' ' + streetName + '<br><span id="incident_second_line" style="margin-left:31.5%;"> ' + town + ', ' + 'PA' + ' ' + zipcode + '</span>');
+
+                marker.setPosition(place.geometry.location);
+                marker.setMap(map);
+                newBounds.extend(place.geometry.location);
+                map.fitBounds(newBounds);
+                let isFound = false;
+                for (let k = 0; k < magArray.length; k++) {
+                    if (google.maps.geometry.poly.containsLocation(place.geometry.location, magArray[k])) {
+                        $('#court_number').val(magArray[k].areaName);
+                        isFound = true;
+                    }
+                }
+                if (isFound === false) {
+                    alert('Address is either in a different county or outside all zones. Please go back to step 1 and verify you selected the right county.');
+                    $('.zipcode_div').css('display', 'none');
+                    $('.unit_number_div').css('display', 'none');
+                    $('.filing_form_div').css('display', 'none');
+                } else {
+                    $('.zipcode_div').css('display', 'block');
+                    $('.unit_number_div').css('display', 'block');
+                    $('.filing_form_div').css('display', 'block');
+                    $.ajaxSetup({
+                        headers: {
+                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                        }
+                    });
+                    $.ajax({
+                        beforeSend: function (xhr) {
+                            xhr.setRequestHeader('X-CSRF-TOKEN', $("#token").attr('content'));
+                        },
+                        url: '/get-signature-type',
+                        type: 'POST',
+                        data: {
+                            'courtNumber': $('#court_number').val()
+                        },
+                        success: function (data) {
+                            // if (data[0].digital_signature === 0) {
+                            //     $('#finalize_document').css('display', 'none');
+                            // }
+                            let validEmails = ['brc@saxtonstump.com', 'tiffanymitchell0202@gmail.com', 'sparkleclean85@gmail.com', 'andrew.gaidis@gmail.com', 'erin@courtzip.com', 'andrew@home365.co'];
+
+                            if (data[0].online_submission !== 'of' && (quickEvict.userEmail.indexOf('slatehousegroup') === -1 && (quickEvict.userEmail.indexOf('home365.co') === -1 && quickEvict.userEmail.indexOf('elite.team') === -1 && quickEvict.userEmail.indexOf('cnmhousingsolutions') === -1) && validEmails.includes(quickEvict.userEmail) === false)) {
+                                alert('Sorry, but this magistrate is currently not accepting online submissions');
+                                window.location.replace("/dashboard");
+                            }
+                        },
+                        error: function (data) {
+
+                        },
+                    });
+                }
+            });
         }
 
-        $("#VehicleMovementModal").on('shown', function () {
-            ResizeMap();
-        });
-
-        bounds = new google.maps.LatLngBounds();
-        google.maps.event.addListenerOnce(map, 'tilesloaded', function (evt) {
-
-            bounds = map.getBounds();
-        });
-        marker = new google.maps.marker.AdvancedMarkerElement({
-            position: center
-        });
-
-
-        let input = /** @type {!HTMLInputElement} */(
-            document.getElementById('pac-input'));
-        let types = document.getElementById('type-selector');
-        map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
-        map.controls[google.maps.ControlPosition.TOP_LEFT].push(types);
-
-        let autocomplete = new google.maps.places.Autocomplete(input);
-        let magArray = [];
-        let objArray = [];
-        let magNamesArray = [];
-        let count = 0;
-
-        $.each(quickEvict.geoData, function(key, value) {
-             magId = 'magistrate_' + value.magistrate_id;
-             console.log(value.magistrate_id);
-            let geoPoints = value.geo_locations.replace(/\s/g, '').replace(/},/g, '},dd').split(',dd');
-            let obj = [];
-
-            for (let i in geoPoints) {
-                obj.push(JSON.parse(geoPoints[i]));
-            }
-            magNamesArray.push(magId);
-            objArray.push(obj);
-            magArray.push(magId);
-            if (quickEvict.userId === 'Administrator') {
-                magArray[count] = new google.maps.Polygon({
-                    path: obj,
-                    geodesic: true,
-                    strokeColor: '#091096',
-                    strokeOpacity: 1.0,
-                    strokeWeight: 2,
-                    fillColor: '#B1AAA9',
-                    fillOpacity: 0.35,
-                    areaName: magId,
-                    courtId: value.court_number,
-                    county: value.county,
-                    township: value.township
-                });
-            } else {
-                magArray[count] = new google.maps.Polygon({
-                    path: obj,
-                    geodesic: true,
-                    areaName: magId,
-                    courtId: value.court_number,
-                    county: value.county,
-                    township: value.township
-                });
-            }
-            magArray[count].setMap(map);
-
-            if (quickEvict.userId === 'Administrator') {
-                google.maps.event.addListener(magArray[count], 'mouseover', function (e) {
-                    let magistrateId = $(this)[0].areaName.split('magistrate_');
-                    injectTooltip(e, magistrateId[1] + '<br>' + $(this)[0].county + '<br>' + $(this)[0].township);
-                });
-
-                google.maps.event.addListener(magArray[count], 'mousemove', function (e) {
-                    moveTooltip(e);
-                });
-
-                google.maps.event.addListener(magArray[count], 'mouseout', function (e) {
-                    deleteTooltip(e);
-                });
-            }
-            count++;
-        });
-        autocomplete.addListener('place_changed', function () {
-            marker.setMap(null);
-            let place = autocomplete.getPlace();
-            newBounds = bounds;
-            if (!place.geometry) {
-                window.alert("Returned place contains no geometry");
-                return;
-            }
-
-
-            houseNum = place.address_components[0].long_name;
-            streetName = place.address_components[1].long_name;
-
-            if (place.address_components[3].types[0].indexOf('administrative') >= 0) {
-                town = place.address_components[2].long_name;
-            } else {
-                town = place.address_components[3].long_name;
-            }
-            console.log('before zipcode', zipcode);
-
-            county = place.address_components[3].long_name;
-            state = place.address_components[4].short_name;
-
-            console.log('Here are the place Components: ', place.address_components);
-            console.log('Length: ', place.address_components.length);
-
-            if (place.address_components.length === 8) {
-                if (place.address_components[6].long_name === 'United States') {
-                    zipcode = place.address_components[7].long_name;
-                } else {
-                    zipcode = place.address_components[6].long_name;
-                }
-            } else if (place.address_components.length === 9) {
-                if (place.address_components[7].long_name === 'United States') {
-                    zipcode = place.address_components[8].long_name;
-                    streetName = place.address_components[2].long_name;
-                    houseNum = place.address_components[1].long_name + '-' + place.address_components[0].long_name;
-                } else {
-                    zipcode = place.address_components[7].long_name;
-                }
-            } else if (place.address_components.length === 6) {
-                zipcode = place.address_components[5].long_name;
-            } else if (place.address_components.length === 7) {
-                zipcode = place.address_components[6].long_name;
-
-            } else {
-                county = place.address_components[2].long_name;
-                state = place.address_components[3].short_name;
-                zipcode = place.address_components[5].long_name;
-            }
-
-            console.log('zipcode', zipcode);
-
-            $('#state').val('PA');
-            $('#zipcode').val(zipcode);
-            $('#county').val(county);
-            $('#house_num').val(houseNum);
-            $('#street_name').val(streetName);
-            $('#town').val(town);
-            $('#incident_display_address').html(houseNum + ' ' + streetName + '<br><span id="incident_second_line" style="margin-left:31.5%;"> ' + town + ', ' + 'PA' + ' ' + zipcode + '</span>');
-
-            marker.setPosition(place.geometry.location);
-            marker.setMap(map);
-            newBounds.extend(place.geometry.location);
-            map.fitBounds(newBounds);
-            let isFound = false;
-            for (let k = 0; k < magArray.length; k++) {
-                if (google.maps.geometry.poly.containsLocation(place.geometry.location, magArray[k])) {
-                    $('#court_number').val(magArray[k].areaName);
-                    isFound = true;
-                }
-            }
-            if (isFound === false) {
-                alert('Address is either in a different county or outside all zones. Please go back to step 1 and verify you selected the right county.');
-                $('.zipcode_div').css('display', 'none');
-                $('.unit_number_div').css('display', 'none');
-                $('.filing_form_div').css('display', 'none');
-            } else {
-                $('.zipcode_div').css('display', 'block');
-                $('.unit_number_div').css('display', 'block');
-                $('.filing_form_div').css('display', 'block');
-                $.ajaxSetup({
-                    headers: {
-                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                    }
-                });
-                 $.ajax({
-                     beforeSend: function (xhr) {
-                         xhr.setRequestHeader('X-CSRF-TOKEN', $("#token").attr('content'));
-                     },
-                     url : '/get-signature-type',
-                     type : 'POST',
-                     data : {
-                         'courtNumber' : $('#court_number').val()
-                     },
-                     success : function(data) {
-                        // if (data[0].digital_signature === 0) {
-                        //     $('#finalize_document').css('display', 'none');
-                        // }
-                         let validEmails = ['brc@saxtonstump.com', 'tiffanymitchell0202@gmail.com', 'sparkleclean85@gmail.com', 'andrew.gaidis@gmail.com', 'erin@courtzip.com', 'andrew@home365.co'];
-
-                        if (data[0].online_submission !== 'of' && (quickEvict.userEmail.indexOf('slatehousegroup') === -1 && (quickEvict.userEmail.indexOf('home365.co') === -1 && quickEvict.userEmail.indexOf('elite.team') === -1 && quickEvict.userEmail.indexOf('cnmhousingsolutions') === -1) && validEmails.includes(quickEvict.userEmail) === false)) {
-                            alert('Sorry, but this magistrate is currently not accepting online submissions');
-                            window.location.replace("/dashboard");
-                        }
-                     },
-                     error : function(data)
-                     {
-
-                     },
-                 });
-            }
-        });
+        initMap();
 
 
         $(window).keydown(function (event) {
