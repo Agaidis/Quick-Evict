@@ -48590,7 +48590,8 @@ if (document.location.href.split('/')[3] === 'new-file') {
     var state;
     var center = new google.maps.LatLng(40.149660, -76.306370);
     //Create the areas for magistrates
-
+    var _google$maps$importLi = google.maps.importLibrary("marker"),
+      AdvancedMarkerElement = _google$maps$importLi.AdvancedMarkerElement;
     map = new google.maps.Map(document.getElementById('map'), {
       center: {
         lat: 40.144128,
