@@ -45,6 +45,7 @@ if (document.location.href.split('/')[3] === 'new-file') {
         let zipcode;
         let state;
         let center;
+        let autocomplete;
 
 
         async function initMap() {
@@ -68,6 +69,15 @@ if (document.location.href.split('/')[3] === 'new-file') {
             marker = new google.maps.marker.AdvancedMarkerElement({
                 position: center
             });
+
+
+            let input = /** @type {!HTMLInputElement} */(
+                document.getElementById('pac-input'));
+            let types = document.getElementById('type-selector');
+            map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
+            map.controls[google.maps.ControlPosition.TOP_LEFT].push(types);
+
+             autocomplete = new google.maps.places.Autocomplete(input);
         }
 
         initMap();
@@ -84,13 +94,6 @@ if (document.location.href.split('/')[3] === 'new-file') {
         });
 
 
-            let input = /** @type {!HTMLInputElement} */(
-                document.getElementById('pac-input'));
-            let types = document.getElementById('type-selector');
-            map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
-            map.controls[google.maps.ControlPosition.TOP_LEFT].push(types);
-
-            let autocomplete = new google.maps.places.Autocomplete(input);
             let magArray = [];
             let objArray = [];
             let magNamesArray = [];

@@ -48593,12 +48593,13 @@ if (document.location.href.split('/')[3] === 'new-file') {
     var zipcode;
     var state;
     var center;
+    var autocomplete;
     function initMap() {
       return _initMap.apply(this, arguments);
     }
     function _initMap() {
       _initMap = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee() {
-        var _yield$google$maps$im, AdvancedMarkerElement;
+        var _yield$google$maps$im, AdvancedMarkerElement, input, types;
         return _regeneratorRuntime().wrap(function _callee$(_context) {
           while (1) switch (_context.prev = _context.next) {
             case 0:
@@ -48625,7 +48626,13 @@ if (document.location.href.split('/')[3] === 'new-file') {
               marker = new google.maps.marker.AdvancedMarkerElement({
                 position: center
               });
-            case 9:
+              input = /** @type {!HTMLInputElement} */
+              document.getElementById('pac-input');
+              types = document.getElementById('type-selector');
+              map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
+              map.controls[google.maps.ControlPosition.TOP_LEFT].push(types);
+              autocomplete = new google.maps.places.Autocomplete(input);
+            case 14:
             case "end":
               return _context.stop();
           }
@@ -48640,12 +48647,6 @@ if (document.location.href.split('/')[3] === 'new-file') {
     $("#VehicleMovementModal").on('shown', function () {
       ResizeMap();
     });
-    var input = /** @type {!HTMLInputElement} */
-    document.getElementById('pac-input');
-    var types = document.getElementById('type-selector');
-    map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
-    map.controls[google.maps.ControlPosition.TOP_LEFT].push(types);
-    var autocomplete = new google.maps.places.Autocomplete(input);
     var magArray = [];
     var objArray = [];
     var magNamesArray = [];
@@ -48819,8 +48820,8 @@ if (document.location.href.split('/')[3] === 'new-file') {
       } else {
         $('#incident_address_descriptor').text('Incident Address: ');
         $('#incident_second_line').css('margin-left', '30%');
-        var _input = document.getElementById('reside_address');
-        var autocompleteResideAddress = new google.maps.places.Autocomplete(_input);
+        var input = document.getElementById('reside_address');
+        var autocompleteResideAddress = new google.maps.places.Autocomplete(input);
         autocompleteResideAddress.addListener('place_changed', function () {
           var residedPlace = autocompleteResideAddress.getPlace();
           residedHouseNum = residedPlace.address_components[0].long_name;
