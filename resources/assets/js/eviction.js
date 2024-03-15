@@ -44,9 +44,11 @@ if (document.location.href.split('/')[3] === 'new-file') {
         let county;
         let zipcode;
         let state;
+        let center;
+
 
         async function initMap() {
-            let center = new google.maps.LatLng(40.149660, -76.306370);
+             center = new google.maps.LatLng(40.149660, -76.306370);
             //Create the areas for magistrates
             const {AdvancedMarkerElement} = await google.maps.importLibrary("marker");
 
@@ -58,14 +60,6 @@ if (document.location.href.split('/')[3] === 'new-file') {
                 mapId: "DEMO_MAP_ID"
             });
 
-            function ResizeMap() {
-                google.maps.event.trigger(map, "resize");
-            }
-
-            $("#VehicleMovementModal").on('shown', function () {
-                ResizeMap();
-            });
-
             bounds = new google.maps.LatLngBounds();
             google.maps.event.addListenerOnce(map, 'tilesloaded', function (evt) {
 
@@ -74,6 +68,20 @@ if (document.location.href.split('/')[3] === 'new-file') {
             marker = new google.maps.marker.AdvancedMarkerElement({
                 position: center
             });
+        }
+
+        initMap();
+
+
+
+
+        function ResizeMap() {
+            google.maps.event.trigger(map, "resize");
+        }
+
+        $("#VehicleMovementModal").on('shown', function () {
+            ResizeMap();
+        });
 
 
             let input = /** @type {!HTMLInputElement} */(
@@ -254,9 +262,9 @@ if (document.location.href.split('/')[3] === 'new-file') {
                     });
                 }
             });
-        }
 
-        initMap();
+
+
 
 
         $(window).keydown(function (event) {
