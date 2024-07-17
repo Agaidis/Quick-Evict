@@ -47,7 +47,7 @@ if (document.location.href.split('/')[3] === 'new-file') {
         let center;
 
 
-        async function initMap() {
+        
              center = new google.maps.LatLng(40.149660, -76.306370);
             //Create the areas for magistrates
     
@@ -57,9 +57,9 @@ if (document.location.href.split('/')[3] === 'new-file') {
                 scaleControl: true,
                 mapId: "DEMO_MAP_ID"
             });
-        };
+        
 
-        initMap();
+  
         
         function ResizeMap() {
             google.maps.event.trigger(map, "resize");
