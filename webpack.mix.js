@@ -20,7 +20,6 @@ let mix = require('laravel-mix');
      'resources/assets/js/jquery.slim.min.js',
      'resources/assets/js/timepicker.min.js',
      'resources/assets/js/datepicker-ui.min.js',
-     'resources/assets/js/eviction.js',
      'resources/assets/js/datatables.min.js',
      'resources/assets/js/magistrateCreator.js',
      'resources/assets/js/userManagement.js',
@@ -34,7 +33,8 @@ let mix = require('laravel-mix');
      'resources/assets/js/stripe.js',
      'resources/assets/js/generalAdmin.js',
      'resources/assets/js/feeDuplicator.js',
-     'resources/assets/js/countyAdmin.js'
+     'resources/assets/js/countyAdmin.js',
+     'resources/assets/js/eviction.js',
 
  ], 'public/js/app.js').version()
 //mix.js('resources/assets/js/app.js', 'public/js')
