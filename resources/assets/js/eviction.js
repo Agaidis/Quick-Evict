@@ -1,6 +1,6 @@
 
 if (document.location.href.split('/')[3] === 'new-file') {
-    $(document).ready(function () {
+    $(document).load(function () {
 
         $('[data-toggle="tooltip"]').tooltip();
 
