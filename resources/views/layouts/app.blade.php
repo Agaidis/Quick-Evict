@@ -21,6 +21,7 @@
     <script>
         let environmentPath = '{!! env('APP_URL') !!}';
     </script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAfPLSbGAHZkEd-8DDB0FcGSlhrV9LQMGM&libraries=places&loading=async" defer></script>
 
     <script type="text/javascript">
         function initMap(srcLocation, dstLocation){
@@ -119,7 +120,6 @@
      @extends('layouts.footer')
 
 
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAfPLSbGAHZkEd-8DDB0FcGSlhrV9LQMGM&libraries=places&loading=async" defer></script>
     <script src="https://cdn.jsdelivr.net/npm/signature_pad@2.3.2/dist/signature_pad.min.js"></script>
 </body>
 </html>
