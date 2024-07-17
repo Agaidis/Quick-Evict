@@ -24,12 +24,7 @@
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAfPLSbGAHZkEd-8DDB0FcGSlhrV9LQMGM&libraries=places&loading=async" defer></script>
 
     <script type="text/javascript">
-        function initMap(srcLocation, dstLocation){
-            srcLocation = new google.maps.LatLng(19.075984, 72.877656);
-            dstLocation = new google.maps.LatLng(12.971599, 77.594563);
-            var distance = google.maps.geometry.spherical.computeDistanceBetween(srcLocation, dstLocation)
-            console.log(distance/1000); // Distance in Kms.
-        }
+       
     </script>
     <script src='https://js.hcaptcha.com/1/api.js' async defer></script>
 
