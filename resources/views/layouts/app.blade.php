@@ -21,7 +21,7 @@
     <script>
         let environmentPath = '{!! env('APP_URL') !!}';
     </script>
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAfPLSbGAHZkEd-8DDB0FcGSlhrV9LQMGM&libraries=places&callback=initMap&loading=async" async defer></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAfPLSbGAHZkEd-8DDB0FcGSlhrV9LQMGM&libraries=places&loading=async" async defer></script>
 
     <script type="text/javascript">
        
