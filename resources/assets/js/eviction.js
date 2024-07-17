@@ -1,4 +1,5 @@
 
+function initMap() {
 if (document.location.href.split('/')[3] === 'new-file') {
     $(function() {
 
@@ -650,4 +651,5 @@ if (document.location.href.split('/')[3] === 'new-file') {
             });
         }
     });
+}
 }
