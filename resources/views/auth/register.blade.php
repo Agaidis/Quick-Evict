@@ -121,6 +121,14 @@
                             </div>
                         </div>
 
+
+                            <div class="form-group row">
+                                <label for="phone_number" class="col-md-4 col-form-label text-md-right">Phone Number</label>
+                             <div class="col-md-6">
+                                <input type="text" id="phone_number" class="form-control" name="phone_number" placeholder="(000)-000-0000"/>   
+                            </div>
+                            </div>
+
                         <div class="form-group row">
                             <label for="company" class="col-md-4 col-form-label text-md-right">{{ __('Company') }}</label>
 
@@ -139,12 +147,6 @@
                                 @endif
                             </div>
 
-                            <div class="form-group row">
-                                <label for="phone_number" class="col-md-4 col-form-label text-md-right">Phone Number</label>
-                             <div class="col-md-6">
-                                <input type="text" id="phone_number" class="form-control" name="phone_number" placeholder="(000)-000-0000"/>   
-                            </div>
-                        </div>
 
                         <div class="form-group row">
                             <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('Password') }}</label>
