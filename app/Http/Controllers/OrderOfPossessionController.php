@@ -89,7 +89,9 @@ class OrderOfPossessionController extends Controller
                 $additionalTenantFee = (float)$additionalTenantAmt * $multiplyBy;
             }
 
-            $totalFees = (float)$_POST['judgment_amount'] + (float)$_POST['costs_original_lt_proceeding'] + $oop + (float)$_POST['attorney_fees'];
+            $judgmentAmount = str_replace( ',', '', $_POST['judgment_amount'] );
+
+            $totalFees = (float)$judgmentAmount + (float)$_POST['costs_original_lt_proceeding'] + $oop + (float)$_POST['attorney_fees'];
 
             $noCommaTotalFees = str_replace(',','', $totalFees);
 
@@ -115,7 +117,7 @@ class OrderOfPossessionController extends Controller
             $evictionData->filing_fee = number_format($filingFee, 2);
             $evictionData->docket_number = 'MJ-' . $_POST['docket_number_1'] . '-LT-' . $docketNumber2 . '-' . $_POST['docket_number_3'];
             $evictionData->attorney_fees = $_POST['attorney_fees'];
-            $evictionData->judgment_amount = $_POST['judgment_amount'];
+            $evictionData->judgment_amount = $judgmentAmount;
             $evictionData->cost_this_proceeding = $oop;
             $evictionData->costs_original_lt_proceeding = $_POST['costs_original_lt_proceeding'];
             $evictionData->is_in_person_filing = 0;
@@ -258,7 +260,9 @@ class OrderOfPossessionController extends Controller
             $defendantStreetName = $_POST['streetName'];
             $defendantTown = $_POST['town'];
 
-            $totalFees = (float)$_POST['judgment_amount'] + (float)$_POST['costs_original_lt_proceeding'] + $oop + (float)$_POST['attorney_fees'];
+            $judgmentAmount = str_replace( ',', '', $_POST['judgment_amount'] );
+
+            $totalFees = (float)$judgmentAmount + (float)$_POST['costs_original_lt_proceeding'] + $oop + (float)$_POST['attorney_fees'];
 
             $noCommaTotalFees = str_replace(',','', $totalFees);
 
@@ -296,7 +300,7 @@ class OrderOfPossessionController extends Controller
                 $eviction = new Evictions();
                 $eviction->status = $status;
                 $eviction->total_judgement = $totalFees;
-                $eviction->judgment_amount = $_POST['judgment_amount'];
+                $eviction->judgment_amount = $judgmentAmount;
                 $eviction->costs_original_lt_proceeding = $_POST['costs_original_lt_proceeding'];
                 $eviction->cost_this_proceeding = $oop;
                 $eviction->attorney_fees = $_POST['attorney_fees'];
