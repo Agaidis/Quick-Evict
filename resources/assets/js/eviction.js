@@ -154,7 +154,7 @@ if (document.location.href.split('/')[3] === 'new-file') {
                 window.alert("Returned place contains no geometry");
                 return;
             }
-
+console.log('components', place.address_components);
 
             houseNum = place.address_components[0].long_name;
             streetName = place.address_components[1].long_name;
