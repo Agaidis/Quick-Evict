@@ -133,19 +133,19 @@ class NewFileController extends Controller
                 $damageAmt = str_replace($removeValues, '', $_GET['damage_amt']);
 
                 if ($tenantNum == 1) {
-                    $upTo2000 = $courtDetails->one_defendant_up_to_2000;
-                    $btn20014000 = $courtDetails->one_defendant_between_2001_4000;
-                    $greaterThan4000 = $courtDetails->one_defendant_greater_than_4000;
+                    $upTo2000 = str_replace($removeValues, '', $courtDetails->one_defendant_up_to_2000);
+                    $btn20014000 = str_replace($removeValues, '', $courtDetails->one_defendant_between_2001_4000);
+                    $greaterThan4000 = str_replace($removeValues, '', $courtDetails->one_defendant_greater_than_4000);
                 } else if ($tenantNum == 2) {
-                    $upTo2000 = $courtDetails->two_defendant_up_to_2000;
-                    $btn20014000 = $courtDetails->two_defendant_between_2001_4000;
-                    $greaterThan4000 = $courtDetails->two_defendant_greater_than_4000;
+                    $upTo2000 = str_replace($removeValues, '', $courtDetails->two_defendant_up_to_2000);
+                    $btn20014000 = str_replace($removeValues, '', $courtDetails->two_defendant_between_2001_4000);
+                    $greaterThan4000 = str_replace($removeValues, '', $courtDetails->two_defendant_greater_than_4000);
                 } else {
-                    $upTo2000 = $courtDetails->three_defendant_up_to_2000;
-                    $btn20014000 = $courtDetails->three_defendant_between_2001_4000;
-                    $greaterThan4000 = $courtDetails->three_defendant_greater_than_4000;
+                    $upTo2000 = str_replace($removeValues, '', $courtDetails->three_defendant_up_to_2000);
+                    $btn20014000 = str_replace($removeValues, '', $courtDetails->three_defendant_between_2001_4000);
+                    $greaterThan4000 = str_replace($removeValues, '', $courtDetails->three_defendant_greater_than_4000);
                     if ($courtDetails->additional_tenant != '' && $courtDetails->additional_tenant != 0 ) {
-                        $additionalTenantAmt = $courtDetails->additional_tenant;
+                        $additionalTenantAmt = str_replace($removeValues, '', $courtDetails->additional_tenant);
                     }
                 }
                 if ($tenantNum > 3) {
