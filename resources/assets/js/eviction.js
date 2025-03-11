@@ -164,13 +164,12 @@ console.log('components', place.address_components);
             } else {
                 town = place.address_components[3].long_name;
             }
-            console.log('before zipcode', zipcode);
 
             county = place.address_components[3].long_name;
             state = place.address_components[4].short_name;
 
-            console.log('Here are the place Components: ', place.address_components);
-            console.log('Length: ', place.address_components.length);
+            // console.log('Here are the place Components: ', place.address_components);
+            // console.log('Length: ', place.address_components.length);
 
             if (place.address_components.length === 8) {
                 if (place.address_components[6].long_name === 'United States') {
@@ -553,7 +552,7 @@ console.log('components', place.address_components);
 
                      },
                      success: function (data) {
-                         console.log(data);
+                         console.log('am i mking it in here', data);
                          let total = '';
 
                          if (data['calculatedFee'] !== '') {
