@@ -101,7 +101,10 @@ class NewFileController extends Controller
             $removeValues = [' ', '$', ','];
             $tenantNum = (int)$_GET['tenant_num'];
             $courtDetails = CourtDetails::where('magistrate_id', $courtNumber[1])->first();
+            $errorMsg = new ErrorLog();
+            $errorMsg->payload = 'coourt number: ' . $courtNumber[1];
 
+            $errorMsg->save();
             if ($fileType == 'ltc' || $fileType == 'ltcA') {
 
                 if ($courtDetails->is_distance_fee === 1) {
