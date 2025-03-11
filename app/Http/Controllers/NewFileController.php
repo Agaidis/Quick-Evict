@@ -293,7 +293,7 @@ class NewFileController extends Controller
             $errorDetails .= PHP_EOL . 'Message ' . $e->getMessage();
             Log::error($errorDetails . PHP_EOL . 'Error Message: ' . $e->getMessage() . PHP_EOL . 'Trace: ' . $e->getTraceAsString());
             mail('andrew.gaidis@gmail.com', 'Get Filing Fee', $errorDetails);
-            return 'failure 22';
+            return $errorDetails;
         }
     }
 
