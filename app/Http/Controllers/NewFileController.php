@@ -390,7 +390,7 @@ class NewFileController extends Controller
 
         } catch( Exception $e ) {
             $errorMsg = new ErrorLog();
-            $errorMsg->payload = $e->getMessage() . ' Line #: ' . $e->getLine();
+            $errorMsg->payload = 'this one 2: ' . $e->getMessage() . ' Line #: ' . $e->getLine();
 
             $errorMsg->save();
         }
