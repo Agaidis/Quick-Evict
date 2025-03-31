@@ -287,7 +287,7 @@ class NewFileController extends Controller
 
         } catch ( Exception $e ) {
             $errorMsg = new ErrorLog();
-            $errorMsg->payload = $e->getMessage() . ' Line #: ' . $e->getLine();
+            $errorMsg->payload = 'this one: ' . $e->getMessage() . ' Line #: ' . $e->getLine();
 
             $errorMsg->save();
             $errorDetails = 'NewFileController - error in getFilingFee() method when attempting to get filing fee';
