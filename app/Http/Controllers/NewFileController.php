@@ -84,8 +84,7 @@ class NewFileController extends Controller
                 }
             } catch (Exception $e) {
                 $errorMsg = new ErrorLog();
-                $errorMsg->payload = 'this one 3: ' $e->getMessage() . ' Line #: ' . $e->getLine();
-
+                $errorMsg->payload =  'this oneadsfas: ' . $e->getMessage() . ' Line #: ' . $e->getLine();
                 $errorMsg->save();
                 return 'failure 11';
             }
@@ -352,7 +351,7 @@ class NewFileController extends Controller
             }
         } catch ( Exception $e ) {
             $errorMsg = new ErrorLog();
-            $errorMsg->payload = 'this one 4: ' $e->getMessage() . ' Line #: ' . $e->getLine();
+            $errorMsg->payload = 'this one 4: ' . $e->getMessage() . ' Line #: ' . $e->getLine();
 
             $errorMsg->save();
         }
