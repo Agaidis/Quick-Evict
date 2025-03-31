@@ -154,7 +154,7 @@ class PDFEditController extends Controller
 
         } catch ( \Exception $e ) {
             $errorMsg = new ErrorLog();
-            $errorMsg->payload = $e->getMessage() . ' Line #: ' . $e->getLine();
+            $errorMsg->payload = 'dsfgsdgf: ' . $e->getMessage() . ' Line #: ' . $e->getLine();
 
             $errorMsg->save();
         }

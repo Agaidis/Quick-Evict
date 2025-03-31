@@ -55,7 +55,7 @@ class GetFileFeeController extends Controller
 
             } catch (Exception $e) {
                 $errorMsg = new ErrorLog();
-                $errorMsg->payload = $e->getMessage() . ' Line #: ' . $e->getLine();
+                $errorMsg->payload = 'sdfgfsd' . $e->getMessage() . ' Line #: ' . $e->getLine();
 
                 $errorMsg->save();
                 return view('dashboard');
@@ -277,7 +277,7 @@ class GetFileFeeController extends Controller
             return 'success';
         } catch ( Exception $e ) {
             $errorMsg = new ErrorLog();
-            $errorMsg->payload = $e->getMessage() . ' Line #: ' . $e->getLine();
+            $errorMsg->payload = 'asfafafaf' . $e->getMessage() . ' Line #: ' . $e->getLine();
 
             $errorMsg->save();
             return 'error';

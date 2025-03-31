@@ -77,7 +77,7 @@ Magistrate Phone # is ' . $magData->phone_number, '
             $errorMsg->save();
         } catch (\Exception $e) {
             $errorMsg = new ErrorLog();
-            $errorMsg->payload = $e->getMessage() . ' Line #: ' . $e->getLine();
+            $errorMsg->payload = 'ertertert:' . $e->getMessage() . ' Line #: ' . $e->getLine();
 
             $errorMsg->save();
             return 'failed';
@@ -252,7 +252,7 @@ Magistrate Phone # is ' . $magData->phone_number, '
         } catch ( Exception $e) {
 
             $errorMsg = new ErrorLog();
-            $errorMsg->payload = $e->getMessage() . ' Line #: ' . $e->getLine();
+            $errorMsg->payload = 'tetete:' . $e->getMessage() . ' Line #: ' . $e->getLine();
 
             $errorMsg->save();
 
@@ -554,7 +554,7 @@ Magistrate Phone # is ' . $magData->phone_number, '
 
                 } catch ( Exception $e ) {
                     $errorMsg = new ErrorLog();
-                    $errorMsg->payload = $e->getMessage() . ' Line #: ' . $e->getLine();
+                    $errorMsg->payload = 'dfdfsdfs' . $e->getMessage() . ' Line #: ' . $e->getLine();
 
                     $errorMsg->save();
                     $mailer->sendMail('andrew.gaidis@gmail.com', 'LTC Error', $e->getMessage(),  $e->getMessage() );
@@ -569,7 +569,7 @@ Magistrate Phone # is ' . $magData->phone_number, '
                     $notify->notifyMaker();
                 } catch ( Exception $e) {
                     $errorMsg = new ErrorLog();
-                    $errorMsg->payload = $e->getMessage() . ' Line #: ' . $e->getLine();
+                    $errorMsg->payload = 'sfsfsf' . $e->getMessage() . ' Line #: ' . $e->getLine();
                     $errorMsg->save();
 
                     $mailer->sendMail('andrew.gaidis@gmail.com', 'Notification Error' . Auth::user()->id, $e->getMessage(),  $e->getMessage());
@@ -582,12 +582,12 @@ Magistrate Phone # is ' . $magData->phone_number, '
 
             } catch ( \Exception $e) {
                 $errorMsg = new ErrorLog();
-                $errorMsg->payload = $e->getMessage() . ' Line #: ' . $e->getLine();
+                $errorMsg->payload = 'tttt' . $e->getMessage() . ' Line #: ' . $e->getLine();
                 $errorMsg->save();
             }
         } catch ( \Exception $e) {
             $errorMsg = new ErrorLog();
-            $errorMsg->payload = $e->getMessage() . ' Line #: ' . $e->getLine();
+            $errorMsg->payload = 'asdfs' . $e->getMessage() . ' Line #: ' . $e->getLine();
             $errorMsg->save();
         }
     }
@@ -599,7 +599,7 @@ Magistrate Phone # is ' . $magData->phone_number, '
             return $isDigitalSignature;
         } catch ( Exception $e ) {
             $errorMsg = new ErrorLog();
-            $errorMsg->payload = $e->getMessage() . ' Line #: ' . $e->getLine();
+            $errorMsg->payload = 'werwe' . $e->getMessage() . ' Line #: ' . $e->getLine();
             $errorMsg->save();
         }
     }
