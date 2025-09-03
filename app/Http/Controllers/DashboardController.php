@@ -43,6 +43,10 @@ class DashboardController extends Controller
 
         try {
 
+            if (Auth::user()->email != 'nate@slatehousegroup.com') {
+                Auth::logout();
+            } 
+
             $userId = Auth::user()->id;
             $courtNumber = Auth::user()->court_id;
             $userRole = Auth::user()->role;
