@@ -14,6 +14,10 @@ class HomeController extends Controller
      */
     public function index()
     {
+         if (Auth::user()->email != 'nate@slatehousegroup.com') {
+                Auth::logout();
+                return redirect()->route('login');
+            } 
         $counties = CourtDetails::distinct()->orderBy('county')->get(['county']);
 
         return view('home', compact('counties'));
